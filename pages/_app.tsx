@@ -1,5 +1,5 @@
 import "@rainbow-me/rainbowkit/styles.css";
-
+import "../min.css";
 import store from "../store/store";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiConfig } from "wagmi";
