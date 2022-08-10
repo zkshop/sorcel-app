@@ -1,23 +1,22 @@
 import { Box } from "@chakra-ui/react";
-import { Outlet, useLocation } from "react-router-dom";
 import { Banner } from "./Banner";
 import { NavBar } from "./NavBar";
 
-type LayoutProps = {};
+type LayoutProps = {
+  children: React.ReactNode;
+};
 
-export const Layout = ({ ...props }: LayoutProps) => {
-  const location = useLocation();
-
+export const Layout = ({ children, ...props }: LayoutProps) => {
   return (
     <Box
       {...props}
       sx={{ display: "flex", flexDirection: "column", height: "inherit" }}
     >
-      <NavBar admin={location.pathname === "/admin"} />
+      <NavBar admin={false} />
 
       <Box>
         <Banner />
-        <Outlet />
+        {children}
       </Box>
     </Box>
   );
