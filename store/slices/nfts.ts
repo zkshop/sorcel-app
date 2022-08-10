@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getEveryNftOfWallet, NFT } from "../../clients/alchemy";
+import { Nft } from "alchemy-sdk";
+import { getEveryNftOfWallet } from "../../pages/api/nft";
 
 export const fetchNFTS = createAsyncThunk(
   "nfts/fetch",
   async (walletAddress: string) =>
-    (await getEveryNftOfWallet(walletAddress)) as NFT[]
+    (await getEveryNftOfWallet(walletAddress))
 );
 
-const initialState: NFT[] = [];
+const initialState: Nft[] = [];
 
 export const balancesSlice = createSlice({
   name: "nfts",
