@@ -1,4 +1,4 @@
-import { ChakraProvider, theme } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 import { themes } from ".";
 import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";

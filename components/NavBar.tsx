@@ -35,14 +35,14 @@ export const NavBar = ({ admin }: { admin: boolean }) => {
           <DrawerHeader borderBottomWidth="1px">ZkShop</DrawerHeader>
           <DrawerBody display={"flex"} flexDirection={"column"}>
             <Box mt={6}>
-              <Button as={Link} href="/" onClick={onClose}>
-                Misfitwear Shop
+              <Button onClick={onClose}>
+                <Link href="/">Misfitwear Shop</Link>
               </Button>
             </Box>
 
             <Box mt={4}>
-              <Button as={Link} href="/admin" onClick={onClose}>
-                Admin
+              <Button onClick={onClose}>
+                <Link href="/admin">Admin</Link>
               </Button>
             </Box>
           </DrawerBody>

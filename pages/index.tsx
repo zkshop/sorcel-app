@@ -1,10 +1,10 @@
 import { SimpleGrid, Box } from "@chakra-ui/react";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { useAccount } from "wagmi";
-import { ShopCard } from "../src/components/ShopCard";
-import useGetAppProducts from "../src/hooks/useGetAppProducts";
-import useUpdateThemeOnConnection from "../src/hooks/useUpdateThemeOnConnection";
-import { useAppSelector } from "../src/store/store";
+import { ShopCard } from "../components/ShopCard";
+import useGetAppProducts from "../hooks/useGetAppProducts";
+import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";
+import { useAppSelector } from "../store/store";
 
 const Marketplace = () => {
   const {} = useUpdateThemeOnConnection();

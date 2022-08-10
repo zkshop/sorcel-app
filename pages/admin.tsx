@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import AdminForm from "../src/components/AdminForm";
-import useGetAppProducts from "../src/hooks/useGetAppProducts";
+import AdminForm from "../components/AdminForm";
+import useGetAppProducts from "../hooks/useGetAppProducts";
 
 const Admin = () => {
   const { app, refresh } = useGetAppProducts("ukwyvv9vMiB66hiEaoRF");
