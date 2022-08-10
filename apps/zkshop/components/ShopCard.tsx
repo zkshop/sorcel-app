@@ -115,7 +115,7 @@ export const ShopCard = ({
       )}
       <Box padding="8px">
         <Box borderRadius="10px">
-          <Image height="200px" width="100%" src={srcItem} />
+          <Image alt="product" height="200px" width="100%" src={srcItem} />
         </Box>
         <Text
           fontWeight="bold"

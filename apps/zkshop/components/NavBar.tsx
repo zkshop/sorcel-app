@@ -49,7 +49,7 @@ export const NavBar = ({ admin }: { admin: boolean }) => {
         </DrawerContent>
       </Drawer>
 
-      <Image src="/svg/vite.svg" mr="2" />
+      <Image alt="logo" src="/svg/vite.svg" mr="2" />
 
       <Text as="h1" fontSize="5xl">
         ZkShop

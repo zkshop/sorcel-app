@@ -1,14 +1,15 @@
 import { SimpleGrid, Box } from "@chakra-ui/react";
+import { DocumentData } from "firebase/firestore";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { useAccount } from "wagmi";
+import { getAppData } from "../clients/firebase";
+import { AdminFormValues } from "../components/AdminForm";
 import { ShopCard } from "../components/ShopCard";
-import useGetAppProducts from "../hooks/useGetAppProducts";
 import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";
 import { useAppSelector } from "../store/store";
 
-const Marketplace = () => {
+const Marketplace = ({ app }: { app: AdminFormValues | undefined }) => {
   const {} = useUpdateThemeOnConnection();
-  const { app } = useGetAppProducts("ukwyvv9vMiB66hiEaoRF");
   const { isConnected } = useAccount();
   const nfts = useAppSelector((state) => state.nfts);
   const collections = nfts.map((nft) => nft.contract.address);
@@ -52,3 +53,11 @@ const Marketplace = () => {
 };
 
 export default Marketplace;
+
+export async function getStaticProps() {
+  const app = await getAppData("ukwyvv9vMiB66hiEaoRF");
+
+  return {
+    props: { app },
+  };
+}
