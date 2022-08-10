@@ -1,5 +1,5 @@
 import { Box, Text, Button, Image } from "@chakra-ui/react";
-import addButton from "../assets/add-button.png";
+import StaticImage from "next/image";
 
 interface ShopCardProps {
   srcItem: string;
@@ -114,7 +114,9 @@ export const ShopCard = ({
         </>
       )}
       <Box padding="8px">
-        <Image height="200px" width="100%" borderRadius="10px" src={srcItem} />
+        <Box borderRadius="10px">
+          <Image height="200px" width="100%" src={srcItem} />
+        </Box>
         <Text
           fontWeight="bold"
           fontSize="12px"
@@ -192,12 +194,13 @@ export const ShopCard = ({
               >
                 Buy
               </Text>
-              <Image
-                height="20px"
-                width="20px"
-                borderRadius="10px"
-                src={addButton}
-              />
+              <Box borderRadius="10px">
+                <StaticImage
+                  height="20"
+                  width="20"
+                  src="/images/addButton.svg"
+                />
+              </Box>
             </Box>
           </Button>
         </Box>

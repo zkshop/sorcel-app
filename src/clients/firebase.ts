@@ -1,10 +1,7 @@
 import { initializeApp } from "firebase/app";
 import {
-  addDoc,
   getFirestore,
   collection,
-  query,
-  where,
   doc,
   getDoc,
   updateDoc,
@@ -12,7 +9,7 @@ import {
 import { AdminFormValues } from "../components/AdminForm";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  apiKey: process.env.VITE_FIREBASE_API_KEY,
   authDomain: "ethcc-72c6f.firebaseapp.com",
   projectId: "ethcc-72c6f",
   storageBucket: "ethcc-72c6f.appspot.com",

@@ -14,14 +14,14 @@ import {
 } from "@chakra-ui/react";
 import ConnectWalletButton from "./ConnectWalletButton";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { NavLink } from "react-router-dom";
+
 import SismoBanner from "./SismoBanner";
 import useGetAppProducts from "../hooks/useGetAppProducts";
-import { useEffect } from "react";
+import Link from "next/link";
 
 export const NavBar = ({ admin }: { admin: boolean }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { app, refresh } = useGetAppProducts("ukwyvv9vMiB66hiEaoRF");
+  const { app } = useGetAppProducts("ukwyvv9vMiB66hiEaoRF");
 
   return (
     <HStack h={24} px={2} as="header">
@@ -35,13 +35,13 @@ export const NavBar = ({ admin }: { admin: boolean }) => {
           <DrawerHeader borderBottomWidth="1px">ZkShop</DrawerHeader>
           <DrawerBody display={"flex"} flexDirection={"column"}>
             <Box mt={6}>
-              <Button as={NavLink} to="/" onClick={onClose}>
+              <Button as={Link} href="/" onClick={onClose}>
                 Misfitwear Shop
               </Button>
             </Box>
 
             <Box mt={4}>
-              <Button as={NavLink} to="/admin" onClick={onClose}>
+              <Button as={Link} href="/admin" onClick={onClose}>
                 Admin
               </Button>
             </Box>
@@ -49,7 +49,7 @@ export const NavBar = ({ admin }: { admin: boolean }) => {
         </DrawerContent>
       </Drawer>
 
-      <Image src="vite.svg" mr="2" />
+      <Image src="/svg/vite.svg" mr="2" />
 
       <Text as="h1" fontSize="5xl">
         ZkShop
