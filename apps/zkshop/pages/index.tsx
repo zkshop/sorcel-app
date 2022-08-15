@@ -30,13 +30,13 @@ const Marketplace = ({ app }: { app: GetProductsQueryResult }) => {
       <Box padding="100px">
         <SimpleGrid columns={4} spacingX="0" spacingY="50px">
           {app.data?.product.map(
-            ({ image, name, discount, price, collection, curation }) => {
+            ({ image, name, discount, price, collection, curation, id }) => {
               const isTransparent =
                 curation && !collections.includes(curation.toLowerCase());
 
               return (
                 <ShopCard
-                  key={`products-${name}`}
+                  key={`products-${id}`}
                   srcItem={image}
                   title={name}
                   discount={isAnHolder && discount ? discount : undefined}
@@ -44,6 +44,7 @@ const Marketplace = ({ app }: { app: GetProductsQueryResult }) => {
                   collection={collection}
                   isTransparent={isTransparent || false}
                   isEligible={curation && isAnHolder}
+                  id={id}
                 />
               );
             }
