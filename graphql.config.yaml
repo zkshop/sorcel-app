@@ -1,0 +1,2 @@
+schema: "apps/zkshop/introspection.json"
+documents: "apps/zkshop/libs/apollo/documents/**/*.graphql"

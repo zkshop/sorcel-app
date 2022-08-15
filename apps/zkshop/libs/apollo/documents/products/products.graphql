@@ -1,0 +1,12 @@
+query GetProducts {
+  product {
+    app_id
+    collection
+    curation
+    id
+    discount
+    image
+    name
+    price
+  }
+}

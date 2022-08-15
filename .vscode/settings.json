@@ -1,0 +1,10 @@
+{
+    "yaml.schemas": {
+        "file:///Users/sinane/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
+        "https://unpkg.com/graphql-config/config-schema.json": [
+            "file:///Users/sinane/zkshop-app/apps/zkshop/graphql.config.yaml",
+            "file:///Users/sinane/zkshop-app/graphql.config.yaml"
+        ],
+        "https://www.graphql-code-generator.com/config.schema.json": "file:///Users/sinane/zkshop-app/apps/zkshop/codegen.yaml"
+    }
+}
