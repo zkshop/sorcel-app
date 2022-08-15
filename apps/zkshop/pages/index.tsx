@@ -1,56 +1,35 @@
-import { SimpleGrid, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { useAccount } from "wagmi";
-import { ShopCard } from "../components/ShopCard";
+import { ProductCardList } from "../components/ProductCardList/ProductCardList";
 import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";
 import client from "../libs/apollo/client";
 import {
   GetProductsDocument,
   GetProductsQueryResult,
 } from "../libs/apollo/generated";
-import { useAppSelector } from "../store/store";
 
-const Marketplace = ({ app }: { app: GetProductsQueryResult }) => {
+type MarketplaceProps = {
+  productsQueryResult: GetProductsQueryResult;
+};
+
+const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
   const {} = useUpdateThemeOnConnection();
   const { isConnected } = useAccount();
-  const nfts = useAppSelector((state) => state.nfts);
-  const collections = nfts.map((nft) => nft.contract.address);
 
-  if (app.loading) {
+  if (productsQueryResult.loading) {
     return <div>Loading...</div>;
   }
 
-  const isAnHolder = app.data?.product.some((product) =>
-    collections.includes(product.curation.toLowerCase())
-  );
+  if (!productsQueryResult.data || productsQueryResult.error) {
+    return null;
+  }
 
   return (
     <Box id="main">
       <ReactCanvasConfetti fire={isConnected} className="canvas" />
-      <Box padding="100px">
-        <SimpleGrid columns={4} spacingX="0" spacingY="50px">
-          {app.data?.product.map(
-            ({ image, name, discount, price, collection, curation, id }) => {
-              const isTransparent =
-                curation && !collections.includes(curation.toLowerCase());
 
-              return (
-                <ShopCard
-                  key={`products-${id}`}
-                  srcItem={image}
-                  title={name}
-                  discount={isAnHolder && discount ? discount : undefined}
-                  price={price}
-                  collection={collection}
-                  isTransparent={isTransparent || false}
-                  isEligible={curation && isAnHolder}
-                  id={id}
-                />
-              );
-            }
-          )}
-        </SimpleGrid>
-      </Box>
+      <ProductCardList products={productsQueryResult.data?.product} />
     </Box>
   );
 };
@@ -58,11 +37,11 @@ const Marketplace = ({ app }: { app: GetProductsQueryResult }) => {
 export default Marketplace;
 
 export async function getServerSideProps() {
-  const app = await client.query({
+  const productsQueryResult = await client.query({
     query: GetProductsDocument,
   });
 
   return {
-    props: { app },
+    props: { productsQueryResult },
   };
 }

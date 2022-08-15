@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Banner } from "./Banner";
+import { GridLayout } from "./GridLayout";
 import { NavBar } from "./NavBar";
 
 type LayoutProps = {
@@ -14,10 +15,9 @@ export const Layout = ({ children, ...props }: LayoutProps) => {
     >
       <NavBar admin={false} />
 
-      <Box>
-        <Banner />
-        {children}
-      </Box>
+      <Banner />
+
+      <GridLayout>{children}</GridLayout>
     </Box>
   );
 };

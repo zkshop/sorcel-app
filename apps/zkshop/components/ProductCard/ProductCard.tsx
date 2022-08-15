@@ -2,9 +2,10 @@ import { Box, Text, Button, Image } from "@chakra-ui/react";
 import StaticImage from "next/image";
 import Link from "next/link";
 
-import addButton from "../public/images/add-button.png";
+import addButton from "../../public/images/add-button.png";
+import { CollectionBadge } from "./CollectionBadge";
 
-interface ShopCardProps {
+interface ProductCardProps {
   id?: string;
   srcItem: string;
   title: string;
@@ -15,7 +16,7 @@ interface ShopCardProps {
   isEligible: boolean | string;
 }
 
-export const ShopCard = ({
+export const ProductCard = ({
   srcItem,
   title,
   discount,
@@ -24,7 +25,7 @@ export const ShopCard = ({
   isTransparent,
   isEligible,
   id,
-}: ShopCardProps) => {
+}: ProductCardProps) => {
   const princeNumber = parseInt(price);
   const discountNumber = discount ? parseInt(discount) : 0;
 
@@ -39,7 +40,7 @@ export const ShopCard = ({
         cursor="pointer"
         boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
         bg="white"
-        width="200px"
+        width="100%"
         borderRadius="10px"
         position={"relative"}
         _before={
@@ -106,23 +107,12 @@ export const ShopCard = ({
               Connect your {collection || "Misfitwear"} wallet to unlock
             </Text>
 
-            <Box
-              position={"absolute"}
-              right={-2}
-              top={-2}
-              bgColor={"white"}
-              opacity={0.9}
-              borderRadius="md"
-              p={1}
-              boxShadow="rgba(0, 0, 0, 0.8) 0px 5px 15px"
-            >
-              {collection || "Misfitwear"}
-            </Box>
+            <CollectionBadge CollectionName={collection || "Misfitwear"} />
           </>
         )}
         <Box padding="8px">
-          <Box borderRadius="10px">
-            <Image alt="product" height="200px" width="100%" src={srcItem} />
+          <Box borderRadius="10px" height="200px">
+            <Image alt="product" height="100%" width="100%" src={srcItem} />
           </Box>
           <Text
             fontWeight="bold"
