@@ -7,13 +7,15 @@ type ProductCardListProps = {
 };
 
 type Product = {
-  image: string;
+  __typename?: "product" | undefined;
+  app_id: any;
+  collection?: any;
+  curation?: any;
+  id: any;
+  discount?: any;
+  image?: any;
   name: string;
-  discount: string;
-  price: string;
-  collection: string;
-  curation: string;
-  id: string;
+  price: any;
 };
 
 export const ProductCardList = ({ products }: ProductCardListProps) => {

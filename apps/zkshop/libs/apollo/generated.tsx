@@ -14,7 +14,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   bpchar: any;
-  money: any;
+  numeric: any;
   smallint: any;
   uuid: any;
 };
@@ -91,10 +91,9 @@ export type App_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "app" */
-export enum App_Constraint {
+export type App_Constraint =
   /** unique or primary key constraint on columns "id" */
-  AppsPkey = 'apps_pkey'
-}
+  | 'apps_pkey';
 
 /** input type for inserting data into table "app" */
 export type App_Insert_Input = {
@@ -144,12 +143,11 @@ export type App_Pk_Columns_Input = {
 };
 
 /** select columns of table "app" */
-export enum App_Select_Column {
+export type App_Select_Column =
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Name = 'name'
-}
+  | 'name';
 
 /** input type for updating data in table "app" */
 export type App_Set_Input = {
@@ -158,12 +156,11 @@ export type App_Set_Input = {
 };
 
 /** update columns of table "app" */
-export enum App_Update_Column {
+export type App_Update_Column =
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Name = 'name'
-}
+  | 'name';
 
 export type App_Updates = {
   /** sets the columns of the filtered rows to the given values */
@@ -202,19 +199,6 @@ export type Bpchar_Comparison_Exp = {
   _regex?: InputMaybe<Scalars['bpchar']>;
   /** does the column match the given SQL regular expression */
   _similar?: InputMaybe<Scalars['bpchar']>;
-};
-
-/** Boolean expression to compare columns of type "money". All fields are combined with logical 'AND'. */
-export type Money_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['money']>;
-  _gt?: InputMaybe<Scalars['money']>;
-  _gte?: InputMaybe<Scalars['money']>;
-  _in?: InputMaybe<Array<Scalars['money']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['money']>;
-  _lte?: InputMaybe<Scalars['money']>;
-  _neq?: InputMaybe<Scalars['money']>;
-  _nin?: InputMaybe<Array<Scalars['money']>>;
 };
 
 /** mutation root */
@@ -344,21 +328,33 @@ export type Mutation_RootUpdate_Product_ManyArgs = {
   updates: Array<Product_Updates>;
 };
 
+/** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
+export type Numeric_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['numeric']>;
+  _gt?: InputMaybe<Scalars['numeric']>;
+  _gte?: InputMaybe<Scalars['numeric']>;
+  _in?: InputMaybe<Array<Scalars['numeric']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['numeric']>;
+  _lte?: InputMaybe<Scalars['numeric']>;
+  _neq?: InputMaybe<Scalars['numeric']>;
+  _nin?: InputMaybe<Array<Scalars['numeric']>>;
+};
+
 /** column ordering options */
-export enum Order_By {
+export type Order_By =
   /** in ascending order, nulls last */
-  Asc = 'asc',
+  | 'asc'
   /** in ascending order, nulls first */
-  AscNullsFirst = 'asc_nulls_first',
+  | 'asc_nulls_first'
   /** in ascending order, nulls last */
-  AscNullsLast = 'asc_nulls_last',
+  | 'asc_nulls_last'
   /** in descending order, nulls first */
-  Desc = 'desc',
+  | 'desc'
   /** in descending order, nulls first */
-  DescNullsFirst = 'desc_nulls_first',
+  | 'desc_nulls_first'
   /** in descending order, nulls last */
-  DescNullsLast = 'desc_nulls_last'
-}
+  | 'desc_nulls_last';
 
 /** columns and relationships of "product" */
 export type Product = {
@@ -370,7 +366,7 @@ export type Product = {
   id: Scalars['uuid'];
   image?: Maybe<Scalars['bpchar']>;
   name: Scalars['String'];
-  price: Scalars['money'];
+  price: Scalars['numeric'];
 };
 
 /** aggregated selection of "product" */
@@ -422,19 +418,18 @@ export type Product_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<Bpchar_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
-  price?: InputMaybe<Money_Comparison_Exp>;
+  price?: InputMaybe<Numeric_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "product" */
-export enum Product_Constraint {
+export type Product_Constraint =
   /** unique or primary key constraint on columns "id" */
-  ProductPkey = 'product_pkey'
-}
+  | 'product_pkey';
 
 /** input type for incrementing numeric columns in table "product" */
 export type Product_Inc_Input = {
   discount?: InputMaybe<Scalars['smallint']>;
-  price?: InputMaybe<Scalars['money']>;
+  price?: InputMaybe<Scalars['numeric']>;
 };
 
 /** input type for inserting data into table "product" */
@@ -446,7 +441,7 @@ export type Product_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['bpchar']>;
   name?: InputMaybe<Scalars['String']>;
-  price?: InputMaybe<Scalars['money']>;
+  price?: InputMaybe<Scalars['numeric']>;
 };
 
 /** aggregate max on columns */
@@ -459,7 +454,7 @@ export type Product_Max_Fields = {
   id?: Maybe<Scalars['uuid']>;
   image?: Maybe<Scalars['bpchar']>;
   name?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['money']>;
+  price?: Maybe<Scalars['numeric']>;
 };
 
 /** aggregate min on columns */
@@ -472,7 +467,7 @@ export type Product_Min_Fields = {
   id?: Maybe<Scalars['uuid']>;
   image?: Maybe<Scalars['bpchar']>;
   name?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['money']>;
+  price?: Maybe<Scalars['numeric']>;
 };
 
 /** response of any mutation on the table "product" */
@@ -509,24 +504,23 @@ export type Product_Pk_Columns_Input = {
 };
 
 /** select columns of table "product" */
-export enum Product_Select_Column {
+export type Product_Select_Column =
   /** column name */
-  AppId = 'app_id',
+  | 'app_id'
   /** column name */
-  Collection = 'collection',
+  | 'collection'
   /** column name */
-  Curation = 'curation',
+  | 'curation'
   /** column name */
-  Discount = 'discount',
+  | 'discount'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Image = 'image',
+  | 'image'
   /** column name */
-  Name = 'name',
+  | 'name'
   /** column name */
-  Price = 'price'
-}
+  | 'price';
 
 /** input type for updating data in table "product" */
 export type Product_Set_Input = {
@@ -537,7 +531,7 @@ export type Product_Set_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['bpchar']>;
   name?: InputMaybe<Scalars['String']>;
-  price?: InputMaybe<Scalars['money']>;
+  price?: InputMaybe<Scalars['numeric']>;
 };
 
 /** aggregate stddev on columns */
@@ -565,28 +559,27 @@ export type Product_Stddev_Samp_Fields = {
 export type Product_Sum_Fields = {
   __typename?: 'product_sum_fields';
   discount?: Maybe<Scalars['smallint']>;
-  price?: Maybe<Scalars['money']>;
+  price?: Maybe<Scalars['numeric']>;
 };
 
 /** update columns of table "product" */
-export enum Product_Update_Column {
+export type Product_Update_Column =
   /** column name */
-  AppId = 'app_id',
+  | 'app_id'
   /** column name */
-  Collection = 'collection',
+  | 'collection'
   /** column name */
-  Curation = 'curation',
+  | 'curation'
   /** column name */
-  Discount = 'discount',
+  | 'discount'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Image = 'image',
+  | 'image'
   /** column name */
-  Name = 'name',
+  | 'name'
   /** column name */
-  Price = 'price'
-}
+  | 'price';
 
 export type Product_Updates = {
   /** increments the numeric columns with given value of the filtered values */
