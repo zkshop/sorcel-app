@@ -1,30 +1,17 @@
 import { Box } from "@chakra-ui/react";
-import AdminForm from "../components/AdminForm";
+import VerticalMenu from "../components/VerticalMenu";
+
 import useGetAppProducts from "../hooks/useGetAppProducts";
 
 const Admin = () => {
-  const { app, refresh } = useGetAppProducts("ukwyvv9vMiB66hiEaoRF");
-  if (!app || !app.appname || !app.logo) return <div>Loading...</div>;
+  const items = [
+    { title: "General", content: <div>General</div> },
+    { title: "Products", content: <div>Products</div> },
+  ];
 
   return (
-    <Box
-      id="main"
-      mt={10}
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      flex={1}
-    >
-      {app?.products.length !== 0 && (
-        <AdminForm
-          refresh={refresh}
-          appname={app.appname}
-          logo={app.logo}
-          products={app.products}
-          id="ukwyvv9vMiB66hiEaoRF"
-          sismo={app.sismo}
-        />
-      )}
+    <Box>
+      <VerticalMenu items={items} />
     </Box>
   );
 };

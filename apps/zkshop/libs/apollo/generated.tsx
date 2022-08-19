@@ -767,61 +767,12 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-export type Product_By_PkQueryVariables = Exact<{
-  id: Scalars['uuid'];
-}>;
-
-
-export type Product_By_PkQuery = { __typename?: 'query_root', product_by_pk?: { __typename?: 'product', app_id: any, collection?: any | null, curation?: any | null, discount?: any | null, id: any, image?: any | null, name: string, price: any } | null };
-
 export type GetProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetProductsQuery = { __typename?: 'query_root', product: Array<{ __typename?: 'product', app_id: any, collection?: any | null, curation?: any | null, id: any, discount?: any | null, image?: any | null, name: string, price: any }> };
 
 
-export const Product_By_PkDocument = gql`
-    query Product_by_pk($id: uuid!) {
-  product_by_pk(id: $id) {
-    app_id
-    collection
-    curation
-    discount
-    id
-    image
-    name
-    price
-  }
-}
-    `;
-
-/**
- * __useProduct_By_PkQuery__
- *
- * To run a query within a React component, call `useProduct_By_PkQuery` and pass it any options that fit your needs.
- * When your component renders, `useProduct_By_PkQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useProduct_By_PkQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useProduct_By_PkQuery(baseOptions: Apollo.QueryHookOptions<Product_By_PkQuery, Product_By_PkQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<Product_By_PkQuery, Product_By_PkQueryVariables>(Product_By_PkDocument, options);
-      }
-export function useProduct_By_PkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Product_By_PkQuery, Product_By_PkQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<Product_By_PkQuery, Product_By_PkQueryVariables>(Product_By_PkDocument, options);
-        }
-export type Product_By_PkQueryHookResult = ReturnType<typeof useProduct_By_PkQuery>;
-export type Product_By_PkLazyQueryHookResult = ReturnType<typeof useProduct_By_PkLazyQuery>;
-export type Product_By_PkQueryResult = Apollo.QueryResult<Product_By_PkQuery, Product_By_PkQueryVariables>;
 export const GetProductsDocument = gql`
     query GetProducts {
   product {
