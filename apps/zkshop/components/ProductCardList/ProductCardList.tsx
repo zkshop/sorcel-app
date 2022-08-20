@@ -28,7 +28,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
   return (
     <Box py={8}>
       <Grid
-        gap={16}
+        gap={8}
         sx={{
           gridTemplateColumns: {
             xs: "repeat(2, 1fr)",
