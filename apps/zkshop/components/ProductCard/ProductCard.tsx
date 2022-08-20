@@ -35,7 +35,7 @@ export const ProductCard = ({
     : 0;
 
   return (
-    <Link href={`products/${id}`}>
+    <Link href={`product/${id}`}>
       <Box
         cursor="pointer"
         boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"

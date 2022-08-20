@@ -24,7 +24,7 @@ export const NavBar = ({ admin }: { admin: boolean }) => {
   const { app } = useGetAppProducts("ukwyvv9vMiB66hiEaoRF");
 
   return (
-    <HStack h={24} px={2} as="header">
+    <HStack as="header" sx={{ h: 24, px: { xs: 2, md: 4, lg: 6 } }}>
       <Button mr={4} bgColor="white" onClick={onOpen}>
         <HamburgerIcon w={8} h={8} />
       </Button>

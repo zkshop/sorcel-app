@@ -1,7 +1,6 @@
-import { Box, Text, Button, Image } from "@chakra-ui/react";
-import StaticImage from "next/image";
-
-import addButton from "../public/images/add-button.png";
+import { TriangleUpIcon } from "@chakra-ui/icons";
+import { Box, Text, Button, Image, HStack, VStack } from "@chakra-ui/react";
+import { SizeSelector } from "../SizeSelector";
 
 interface ProductDetailsProps {
   id?: string;
@@ -35,11 +34,11 @@ export const ProductDetails = ({
 
   return (
     <Box
-      boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
+      position="relative"
+      width="780px"
       bg="white"
-      width="550px"
-      borderRadius="10px"
-      position={"relative"}
+      boxShadow="rgba(0, 0, 0, 0.2) 0px 2px 4px"
+      marginTop="32px !important"
       _before={
         isEligible
           ? {
@@ -118,31 +117,36 @@ export const ProductDetails = ({
           </Box>
         </>
       )}
-      <Box padding="8px" display="flex" flexDirection="row" gap={2}>
-        <Box borderRadius="10px" flex={1}>
-          <Image alt="product" height="350px" src={srcItem} />
+
+      <HStack alignItems={"stretch"}>
+        <Box>
+          <Image alt="product" height="450px" src={srcItem} />
         </Box>
-        <Box
-          flex={1}
-          display="flex"
-          flexDirection="column"
-          justifyContent="space-between"
-        >
-          <Box display="flex" flexDirection="column" gap={1}>
-            <Text
-              fontWeight="bold"
-              fontSize="24px"
-              color="black"
-              marginTop="4px"
-              padding="2px"
-            >
-              {title}
-            </Text>
-            <Text fontSize="14px" color="black" padding="2px">
+
+        <VStack flex={1} justifyContent="space-between">
+          <VStack flex={1}>
+            <Box alignSelf={"flex-start"}>
+              <Text
+                fontWeight="bold"
+                fontSize="24px"
+                color="black"
+                mt={1}
+                p={1}
+                background={"#EEEEEF"}
+                textTransform="capitalize"
+                width={"fit-content"}
+              >
+                {title}
+              </Text>
+            </Box>
+
+            <Text sx={{ fontsize: "14px", color: "black", p: 1 }}>
               {description}
             </Text>
-          </Box>
-          <Box>
+          </VStack>
+
+          <Box flex={1} width={"100%"} p={2}>
+            <SizeSelector />
             <Box
               display="flex"
               justifyContent="space-between"
@@ -195,12 +199,13 @@ export const ProductDetails = ({
                 )}
               </Box>
             </Box>
+
             <Box mt={2}>
               <Button
-                height="40px"
+                height="48px"
                 width="100%"
                 borderRadius="10px"
-                padding="2px"
+                p={1}
                 isDisabled={isTransparent}
                 bg="#DF00FF"
                 _hover={{ bg: "#FF5F1F" }}
@@ -212,21 +217,22 @@ export const ProductDetails = ({
                 >
                   <Text
                     fontWeight="bold"
-                    fontSize="14px"
+                    fontSize="16px"
                     color="white"
-                    marginRight="4px"
+                    mr={1}
+                    textTransform={"uppercase"}
                   >
-                    ADD TO CART
+                    Add to cart
                   </Text>
                   <Box borderRadius="10px" display="flex">
-                    <StaticImage height="20" width="20" src={addButton} />
+                    <TriangleUpIcon ml={2} color={"white"} />
                   </Box>
                 </Box>
               </Button>
             </Box>
           </Box>
-        </Box>
-      </Box>
+        </VStack>
+      </HStack>
     </Box>
   );
 };
