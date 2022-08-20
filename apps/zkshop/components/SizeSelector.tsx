@@ -56,7 +56,7 @@ export const SizeSelector = () => {
               alignItems: "center",
               minWidth: "48px",
               height: "40px",
-              border: id == 3 ? "2px solid black" : "1px solid #EEEEEF",
+              border: id == 3 ? "2px solid black" : "1px solid #dedde0",
             }}
           >
             <Text fontWeight="bold" fontSize="14px" color="black" padding="2px">

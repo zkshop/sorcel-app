@@ -1,5 +1,6 @@
 import { TriangleUpIcon } from "@chakra-ui/icons";
 import { Box, Text, Button, Image, HStack, VStack } from "@chakra-ui/react";
+import { CollectionBadge } from "../ProductCard/CollectionBadge";
 import { SizeSelector } from "../SizeSelector";
 
 interface ProductDetailsProps {
@@ -70,11 +71,12 @@ export const ProductDetails = ({
               bottom: 0,
               left: 0,
               background: "inherit",
-              borderRadius: "inherit",
             }
           : {}
       }
     >
+      {collection && <CollectionBadge CollectionName={collection} />}
+
       {isTransparent && (
         <>
           <Box
@@ -85,13 +87,12 @@ export const ProductDetails = ({
               bottom: 0,
               right: 0,
               opacity: 0.4,
-              borderRadius: "10px",
             }}
             display="flex"
             justifyContent="center"
             flexDirection="column"
             alignItems="center"
-            bgGradient="linear(to-r, #0987A0, #805AD5)"
+            bgColor="black"
           />
           <Text
             px={1}
@@ -105,19 +106,6 @@ export const ProductDetails = ({
           >
             Connect your {collection || "Misfitwear"} wallet to unlock
           </Text>
-
-          <Box
-            position={"absolute"}
-            right={-2}
-            top={-2}
-            bgColor={"white"}
-            opacity={0.9}
-            borderRadius="md"
-            p={1}
-            boxShadow="rgba(0, 0, 0, 0.8) 0px 5px 15px"
-          >
-            {collection || "Misfitwear"}
-          </Box>
         </>
       )}
 
@@ -157,7 +145,7 @@ export const ProductDetails = ({
             >
               {discount ? (
                 <Box
-                  border="1px gray solid"
+                  border="1px #dedde0 solid"
                   width="50px"
                   borderRadius="10px"
                   padding="2px"
@@ -227,6 +215,7 @@ export const ProductDetails = ({
                   >
                     Add to cart
                   </Text>
+
                   <Box borderRadius="10px" display="flex">
                     <TriangleUpIcon ml={2} color={"white"} />
                   </Box>

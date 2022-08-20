@@ -21,7 +21,7 @@ type ProductPageProps = {
 };
 
 export const ProductPage = ({ product }: ProductPageProps) => {
-  const { curation, id, image, name, price, collection } = product;
+  const { curation, id, image, name, price, discount, collection } = product;
   const nfts = useAppSelector((state) => state.nfts);
   const collections = nfts.map((nft) => nft.contract.address);
   const isTransparent =
@@ -37,7 +37,7 @@ export const ProductPage = ({ product }: ProductPageProps) => {
         id={id}
         srcItem={image}
         title={name}
-        discount={"40"}
+        discount={discount}
         price={price}
         collections={collections}
         collection={collection}

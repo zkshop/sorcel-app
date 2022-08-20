@@ -1,4 +1,4 @@
-import { Box, Text, Button, Image } from "@chakra-ui/react";
+import { Box, Text, Button, Image, VStack, HStack } from "@chakra-ui/react";
 import StaticImage from "next/image";
 import Link from "next/link";
 
@@ -49,10 +49,10 @@ export const ProductCard = ({
                 content: '""',
                 zIndex: -1,
                 position: "absolute",
-                top: "-12px",
-                right: "-12px",
-                bottom: "-12px",
-                left: "-12px",
+                top: "-6px",
+                right: "-6px",
+                bottom: "-6px",
+                left: "-6px",
                 background:
                   "linear-gradient(to right, var(--chakra-colors-bannerLeft) , var(--chakra-colors-bannerRight))",
                 transition: "opacity 0.3s",
@@ -78,6 +78,8 @@ export const ProductCard = ({
             : {}
         }
       >
+        {collection && <CollectionBadge CollectionName={collection} />}
+
         {isTransparent && (
           <>
             <Box
@@ -87,14 +89,14 @@ export const ProductCard = ({
                 left: 0,
                 bottom: 0,
                 right: 0,
-                opacity: 0.4,
+                opacity: 0.5,
                 borderRadius: "10px",
               }}
               display="flex"
               justifyContent="center"
               flexDirection="column"
               alignItems="center"
-              bgGradient="linear(to-r, #0987A0, #805AD5)"
+              bgColor="black"
             />
             <Text
               px={1}
@@ -106,8 +108,6 @@ export const ProductCard = ({
             >
               Connect your {collection || "Misfitwear"} wallet to unlock
             </Text>
-
-            <CollectionBadge CollectionName={collection || "Misfitwear"} />
           </>
         )}
         <Box padding="8px">
@@ -116,91 +116,65 @@ export const ProductCard = ({
           </Box>
           <Text
             fontWeight="bold"
-            fontSize="12px"
+            fontSize="14px"
             color="black"
             marginTop="4px"
             padding="2px"
+            textTransform="capitalize"
           >
             {title}
           </Text>
-          {discount ? (
-            <Box
-              border="1px gray solid"
-              width="50px"
-              borderRadius="10px"
-              padding="2px"
-              marginTop="4px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Text
-                fontWeight="bold"
-                fontSize="12px"
-                color="black"
-                padding="2px"
-              >
-                {`-${discount}%`}
-              </Text>
-            </Box>
-          ) : (
-            <Box height="32px" />
-          )}
+
           <Box
             display="flex"
             justifyContent="space-between"
-            alignItems="flex-end"
-            marginTop="8px"
+            alignItems="center"
+            mt={4}
           >
-            <Box display="flex">
+            <HStack px={1}>
               <Text
                 fontWeight="bold"
                 fontSize="14px"
                 color="black"
-                padding="2px"
                 textDecoration={discount ? "line-through" : "none"}
                 marginRight={discount ? "2px" : "none"}
               >
                 {`${price}$`}
               </Text>
+
               {discount && (
                 <Text
                   fontWeight="bold"
                   fontSize="14px"
                   color="#FF5F1F"
-                  padding="2px"
+                  marginLeft="0 !important"
                 >
                   {`${priceReduced}$`}
                 </Text>
               )}
-            </Box>
-            <Button
-              height="30px"
-              width="70px"
-              borderRadius="10px"
-              padding="2px"
-              isDisabled={isTransparent}
-              bg="#DF00FF"
-              _hover={{ bg: "#FF5F1F" }}
-            >
+            </HStack>
+
+            {discount && (
               <Box
+                border="1px gray solid"
+                width="50px"
+                borderRadius="10px"
+                padding="2px"
+                marginTop="4px"
                 display="flex"
-                justifyContent="space-between"
                 alignItems="center"
+                justifyContent="center"
               >
                 <Text
                   fontWeight="bold"
-                  fontSize="14px"
-                  color="white"
-                  marginRight="4px"
+                  fontSize="12px"
+                  color="black"
+                  padding="2px"
                 >
-                  Buy
+                  {`-${discount}%`}
                 </Text>
-                <Box borderRadius="10px" display="flex">
-                  <StaticImage height="20" width="20" src={addButton} />
-                </Box>
               </Box>
-            </Button>
+            )}
           </Box>
         </Box>
       </Box>

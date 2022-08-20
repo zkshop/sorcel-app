@@ -32,7 +32,21 @@ export const NavBar = ({ admin }: { admin: boolean }) => {
       <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">ZkShop</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">
+            <Text fontSize={"24px"} textTransform="uppercase">
+              <span
+                style={{
+                  background: "-webkit-linear-gradient(#0987A0, #805AD5)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  fontSize: "26px",
+                }}
+              >
+                CLub
+              </span>{" "}
+              Shop
+            </Text>
+          </DrawerHeader>
           <DrawerBody display={"flex"} flexDirection={"column"}>
             <Box mt={6}>
               <Button onClick={onClose}>
@@ -49,10 +63,17 @@ export const NavBar = ({ admin }: { admin: boolean }) => {
         </DrawerContent>
       </Drawer>
 
-      <Image alt="logo" src="/svg/vite.svg" mr="2" />
-
-      <Text as="h1" fontSize="5xl">
-        ZkShop
+      <Text as="h1" fontSize="5xl" textTransform="uppercase">
+        <span
+          style={{
+            background: "-webkit-linear-gradient(#0987A0, #805AD5)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          CLub
+        </span>{" "}
+        Shop
       </Text>
 
       <Spacer />
