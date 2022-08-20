@@ -12,6 +12,7 @@ interface ProductDetailsProps {
   isTransparent: boolean;
   isEligible: boolean | string;
   description?: string;
+  collections: string[];
 }
 
 export const ProductDetails = ({
@@ -95,10 +96,12 @@ export const ProductDetails = ({
           <Text
             px={1}
             position={"absolute"}
-            top={90}
+            top={190}
             textAlign="center"
             color={"white"}
             fontWeight="bold"
+            fontSize="2xl"
+            width="100%"
           >
             Connect your {collection || "Misfitwear"} wallet to unlock
           </Text>

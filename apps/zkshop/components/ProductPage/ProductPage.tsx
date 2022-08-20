@@ -1,4 +1,5 @@
 import { Box, VStack } from "@chakra-ui/react";
+import { useAppSelector } from "../../store/store";
 import { BackButton } from "../BackButton";
 import { ProductDetails } from "./ProductDetails";
 
@@ -20,20 +21,28 @@ type ProductPageProps = {
 };
 
 export const ProductPage = ({ product }: ProductPageProps) => {
+  const { curation, id, image, name, price, collection } = product;
+  const nfts = useAppSelector((state) => state.nfts);
+  const collections = nfts.map((nft) => nft.contract.address);
+  const isTransparent =
+    curation && !collections.includes(curation.toLowerCase());
+  const isAnHolder = collections.includes(product.curation.toLowerCase());
+
   return (
     <VStack pt={4}>
       <BackButton text={"Go back"} />
 
       <ProductDetails
-        key={`products-${product.id}`}
-        srcItem={product.image}
-        title={product.name}
+        key={`products-${id}`}
+        id={id}
+        srcItem={image}
+        title={name}
         discount={"40"}
-        price={product.price}
-        collection={product.collection}
-        isTransparent={false}
-        isEligible={false}
-        id={product.id}
+        price={price}
+        collections={collections}
+        collection={collection}
+        isTransparent={isTransparent}
+        isEligible={curation && isAnHolder}
         description="
     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
     "
