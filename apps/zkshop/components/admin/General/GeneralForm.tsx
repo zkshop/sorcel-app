@@ -15,7 +15,7 @@ const GeneralForm = () => {
 
   return (
     <Box>
-      <Heading as="h3">General Form</Heading>
+      <Heading as="h3">General</Heading>
       <Box my={4}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormField
