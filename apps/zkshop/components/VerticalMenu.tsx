@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs";
 
 type HorizontalMenuItem = {
@@ -12,17 +13,21 @@ type HorizontalMenuProps = {
 const HorizontalMenu = ({ items }: HorizontalMenuProps) => {
   return (
     <Tabs orientation="vertical">
-      <TabList>
-        {items.map((item) => (
-          <Tab key={`tab-${item.title}`}>{item.title}</Tab>
-        ))}
-      </TabList>
+      <Box>
+        <TabList>
+          {items.map((item) => (
+            <Tab key={`tab-${item.title}`}>{item.title}</Tab>
+          ))}
+        </TabList>
+      </Box>
 
-      <TabPanels>
-        {items.map((item) => (
-          <TabPanel>{item.content}</TabPanel>
-        ))}
-      </TabPanels>
+      <Box>
+        <TabPanels>
+          {items.map((item) => (
+            <TabPanel>{item.content}</TabPanel>
+          ))}
+        </TabPanels>
+      </Box>
     </Tabs>
   );
 };

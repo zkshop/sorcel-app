@@ -1,9 +1,10 @@
 import { Box } from "@chakra-ui/react";
+import GeneralForm from "./GeneralForm";
 
 const General = () => {
   return (
     <Box>
-      <h1>General</h1>
+      <GeneralForm />
     </Box>
   );
 };

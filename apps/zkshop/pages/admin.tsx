@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import General from "../components/admin/General";
+import General from "../components/admin/General/General";
 import VerticalMenu from "../components/VerticalMenu";
 
 const Admin = () => {
