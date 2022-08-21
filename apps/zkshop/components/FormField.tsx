@@ -5,7 +5,7 @@ type FormFieldProps = {
   label: string;
   name: string;
   placeholder?: string;
-  register: UseFormRegister<any>;
+  register?: UseFormRegister<any>;
   maxWidth?: string | number;
 };
 
@@ -23,7 +23,7 @@ const FormField = ({
         maxWidth={maxWidth}
         type="text"
         placeholder={placeholder}
-        {...register(name)}
+        {...register?.(name)}
       />
     </Box>
   );

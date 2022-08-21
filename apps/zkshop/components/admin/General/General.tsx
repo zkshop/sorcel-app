@@ -1,10 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import GeneralForm from "./GeneralForm";
 
-const General = () => {
+type GeneralProps = {
+  app: { name: string };
+};
+
+const General = ({ app }: GeneralProps) => {
   return (
     <Box>
-      <GeneralForm />
+      <GeneralForm defaultValues={app} />
     </Box>
   );
 };

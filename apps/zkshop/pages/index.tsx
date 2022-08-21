@@ -40,7 +40,7 @@ export async function getServerSideProps() {
   const productsQueryResult = await client.query({
     query: GetProductsDocument,
   });
-
+  
   return {
     props: { productsQueryResult },
   };

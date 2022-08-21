@@ -157,6 +157,20 @@ export type App_Set_Input = {
   name?: InputMaybe<Scalars['String']>;
 };
 
+/** Streaming cursor of the table "app" */
+export type App_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: App_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type App_Stream_Cursor_Value_Input = {
+  id?: InputMaybe<Scalars['uuid']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
 /** update columns of table "app" */
 export enum App_Update_Column {
   /** column name */
@@ -203,6 +217,14 @@ export type Bpchar_Comparison_Exp = {
   /** does the column match the given SQL regular expression */
   _similar?: InputMaybe<Scalars['bpchar']>;
 };
+
+/** ordering argument of a cursor */
+export enum Cursor_Ordering {
+  /** ascending ordering of the cursor */
+  Asc = 'ASC',
+  /** descending ordering of the cursor */
+  Desc = 'DESC'
+}
 
 /** mutation root */
 export type Mutation_Root = {
@@ -561,6 +583,26 @@ export type Product_Stddev_Samp_Fields = {
   price?: Maybe<Scalars['Float']>;
 };
 
+/** Streaming cursor of the table "product" */
+export type Product_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Product_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Product_Stream_Cursor_Value_Input = {
+  app_id?: InputMaybe<Scalars['uuid']>;
+  collection?: InputMaybe<Scalars['bpchar']>;
+  curation?: InputMaybe<Scalars['bpchar']>;
+  discount?: InputMaybe<Scalars['smallint']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  image?: InputMaybe<Scalars['bpchar']>;
+  name?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['numeric']>;
+};
+
 /** aggregate sum on columns */
 export type Product_Sum_Fields = {
   __typename?: 'product_sum_fields';
@@ -700,12 +742,16 @@ export type Subscription_Root = {
   app_aggregate: App_Aggregate;
   /** fetch data from the table: "app" using primary key columns */
   app_by_pk?: Maybe<App>;
+  /** fetch data from the table in a streaming manner : "app" */
+  app_stream: Array<App>;
   /** fetch data from the table: "product" */
   product: Array<Product>;
   /** fetch aggregated fields from the table: "product" */
   product_aggregate: Product_Aggregate;
   /** fetch data from the table: "product" using primary key columns */
   product_by_pk?: Maybe<Product>;
+  /** fetch data from the table in a streaming manner : "product" */
+  product_stream: Array<Product>;
 };
 
 
@@ -732,6 +778,13 @@ export type Subscription_RootApp_By_PkArgs = {
 };
 
 
+export type Subscription_RootApp_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<App_Stream_Cursor_Input>>;
+  where?: InputMaybe<App_Bool_Exp>;
+};
+
+
 export type Subscription_RootProductArgs = {
   distinct_on?: InputMaybe<Array<Product_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -754,6 +807,13 @@ export type Subscription_RootProduct_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
+
+export type Subscription_RootProduct_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Product_Stream_Cursor_Input>>;
+  where?: InputMaybe<Product_Bool_Exp>;
+};
+
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
 export type Uuid_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['uuid']>;
@@ -767,12 +827,164 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type GetAdminQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAdminQuery = { __typename?: 'query_root', app?: { __typename?: 'app', id: any, name: string } | null, products: Array<{ __typename?: 'product', collection?: any | null, curation?: any | null, discount?: any | null, id: any, image?: any | null, name: string, price: any }> };
+
+export type UpdateAppMutationVariables = Exact<{
+  newName: Scalars['String'];
+}>;
+
+
+export type UpdateAppMutation = { __typename?: 'mutation_root', update_app?: { __typename?: 'app_mutation_response', returning: Array<{ __typename?: 'app', id: any, name: string }> } | null };
+
+export type App_Mutation_ResponseFragmentFragment = { __typename?: 'app_mutation_response', returning: Array<{ __typename?: 'app', id: any, name: string }> };
+
+export type Product_By_PkQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type Product_By_PkQuery = { __typename?: 'query_root', product_by_pk?: { __typename?: 'product', app_id: any, collection?: any | null, curation?: any | null, discount?: any | null, id: any, image?: any | null, name: string, price: any } | null };
+
 export type GetProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetProductsQuery = { __typename?: 'query_root', product: Array<{ __typename?: 'product', app_id: any, collection?: any | null, curation?: any | null, id: any, discount?: any | null, image?: any | null, name: string, price: any }> };
 
+export const App_Mutation_ResponseFragmentFragmentDoc = gql`
+    fragment app_mutation_responseFragment on app_mutation_response {
+  returning {
+    id
+    name
+  }
+}
+    `;
+export const GetAdminDocument = gql`
+    query getAdmin {
+  app: app_by_pk(id: "7c0623b1-5715-4e77-8db3-cf71204bdb80") {
+    id
+    name
+  }
+  products: product(
+    where: {app_id: {_eq: "7c0623b1-5715-4e77-8db3-cf71204bdb80"}}
+  ) {
+    collection
+    curation
+    discount
+    id
+    image
+    name
+    price
+  }
+}
+    `;
 
+/**
+ * __useGetAdminQuery__
+ *
+ * To run a query within a React component, call `useGetAdminQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAdminQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAdminQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAdminQuery(baseOptions?: Apollo.QueryHookOptions<GetAdminQuery, GetAdminQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAdminQuery, GetAdminQueryVariables>(GetAdminDocument, options);
+      }
+export function useGetAdminLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAdminQuery, GetAdminQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAdminQuery, GetAdminQueryVariables>(GetAdminDocument, options);
+        }
+export type GetAdminQueryHookResult = ReturnType<typeof useGetAdminQuery>;
+export type GetAdminLazyQueryHookResult = ReturnType<typeof useGetAdminLazyQuery>;
+export type GetAdminQueryResult = Apollo.QueryResult<GetAdminQuery, GetAdminQueryVariables>;
+export const UpdateAppDocument = gql`
+    mutation UpdateApp($newName: String!) {
+  update_app(
+    where: {id: {_eq: "7c0623b1-5715-4e77-8db3-cf71204bdb80"}}
+    _set: {name: $newName}
+  ) {
+    ...app_mutation_responseFragment
+  }
+}
+    ${App_Mutation_ResponseFragmentFragmentDoc}`;
+export type UpdateAppMutationFn = Apollo.MutationFunction<UpdateAppMutation, UpdateAppMutationVariables>;
+
+/**
+ * __useUpdateAppMutation__
+ *
+ * To run a mutation, you first call `useUpdateAppMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateAppMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateAppMutation, { data, loading, error }] = useUpdateAppMutation({
+ *   variables: {
+ *      newName: // value for 'newName'
+ *   },
+ * });
+ */
+export function useUpdateAppMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAppMutation, UpdateAppMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateAppMutation, UpdateAppMutationVariables>(UpdateAppDocument, options);
+      }
+export type UpdateAppMutationHookResult = ReturnType<typeof useUpdateAppMutation>;
+export type UpdateAppMutationResult = Apollo.MutationResult<UpdateAppMutation>;
+export type UpdateAppMutationOptions = Apollo.BaseMutationOptions<UpdateAppMutation, UpdateAppMutationVariables>;
+export const Product_By_PkDocument = gql`
+    query Product_by_pk($id: uuid!) {
+  product_by_pk(id: $id) {
+    app_id
+    collection
+    curation
+    discount
+    id
+    image
+    name
+    price
+  }
+}
+    `;
+
+/**
+ * __useProduct_By_PkQuery__
+ *
+ * To run a query within a React component, call `useProduct_By_PkQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProduct_By_PkQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProduct_By_PkQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProduct_By_PkQuery(baseOptions: Apollo.QueryHookOptions<Product_By_PkQuery, Product_By_PkQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Product_By_PkQuery, Product_By_PkQueryVariables>(Product_By_PkDocument, options);
+      }
+export function useProduct_By_PkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Product_By_PkQuery, Product_By_PkQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Product_By_PkQuery, Product_By_PkQueryVariables>(Product_By_PkDocument, options);
+        }
+export type Product_By_PkQueryHookResult = ReturnType<typeof useProduct_By_PkQuery>;
+export type Product_By_PkLazyQueryHookResult = ReturnType<typeof useProduct_By_PkLazyQuery>;
+export type Product_By_PkQueryResult = Apollo.QueryResult<Product_By_PkQuery, Product_By_PkQueryVariables>;
 export const GetProductsDocument = gql`
     query GetProducts {
   product {

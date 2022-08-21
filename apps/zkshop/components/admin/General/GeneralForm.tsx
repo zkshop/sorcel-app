@@ -1,16 +1,34 @@
 import { Box, Button, Heading, Input } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { useUpdateAppMutation } from "../../../libs/apollo/generated";
+
 import FormField from "../../FormField";
 
 type GeneralFormValues = {
   name: string;
 };
 
-const GeneralForm = () => {
-  const { handleSubmit, register } = useForm<GeneralFormValues>();
+type GeneralFormProps = {
+  defaultValues: GeneralFormValues;
+};
 
-  const onSubmit = (data: GeneralFormValues) => {
-    console.log(data);
+const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
+  const { handleSubmit, register } = useForm<GeneralFormValues>({
+    defaultValues,
+  });
+
+  const [updateApp, { loading }] = useUpdateAppMutation();
+
+  const onSubmit = async (data: GeneralFormValues) => {
+    try {
+      const res = await updateApp({
+        variables: {
+          newName: data.name,
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -24,7 +42,9 @@ const GeneralForm = () => {
             maxWidth={32}
             register={register}
           />
-          <Button type="submit" mt={2}>Update</Button>
+          <Button type="submit" mt={2}>
+            Update
+          </Button>
         </form>
       </Box>
     </Box>
