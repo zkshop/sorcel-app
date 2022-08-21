@@ -59,6 +59,12 @@ export const NavBar = ({ admin }: { admin: boolean }) => {
                 <Link href="/admin">Admin</Link>
               </Button>
             </Box>
+
+            <Box mt={4}>
+              <Button onClick={onClose}>
+                <Link href="/iframe">iframe</Link>
+              </Button>
+            </Box>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
