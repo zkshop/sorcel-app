@@ -1,11 +1,10 @@
 import { Box } from "@chakra-ui/react";
+import General from "../components/admin/General";
 import VerticalMenu from "../components/VerticalMenu";
-
-import useGetAppProducts from "../hooks/useGetAppProducts";
 
 const Admin = () => {
   const items = [
-    { title: "General", content: <div>General</div> },
+    { title: "General", content: <General /> },
     { title: "Products", content: <div>Products</div> },
   ];
 
