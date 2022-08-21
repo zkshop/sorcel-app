@@ -1,6 +1,7 @@
 import { TriangleUpIcon } from "@chakra-ui/icons";
 import { Box, Text, Button, Image, HStack, VStack } from "@chakra-ui/react";
 import { CollectionBadge } from "../ProductCard/CollectionBadge";
+import useTransaction from "../../hooks/useTransaction";
 import { SizeSelector } from "../SizeSelector";
 
 interface ProductDetailsProps {
@@ -26,13 +27,15 @@ export const ProductDetails = ({
   isEligible,
   description,
 }: ProductDetailsProps) => {
-  const princeNumber = parseInt(price);
+  const priceNumber = parseInt(price);
   const discountNumber = discount ? parseInt(discount) : 0;
 
   const promoPercent = discount ? discountNumber / 100 : 0;
-  const priceReduced = discount
-    ? princeNumber - princeNumber * promoPercent
-    : 0;
+  const priceReduced = discount ? priceNumber - priceNumber * promoPercent : 0;
+
+  const { sendTransaction } = useTransaction(
+    discount ? priceReduced : priceNumber
+  );
 
   return (
     <Box
@@ -193,6 +196,9 @@ export const ProductDetails = ({
 
             <Box mt={2}>
               <Button
+                onClick={() => {
+                  sendTransaction?.();
+                }}
                 height="48px"
                 width="100%"
                 borderRadius="10px"
@@ -213,7 +219,7 @@ export const ProductDetails = ({
                     mr={1}
                     textTransform={"uppercase"}
                   >
-                    Add to cart
+                    Pay in eth
                   </Text>
 
                   <Box borderRadius="10px" display="flex">
