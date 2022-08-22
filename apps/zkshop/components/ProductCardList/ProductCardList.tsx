@@ -35,6 +35,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
           src="/images/misfitwear.jpg"
           alt="misfitwear"
         />
+        {/* */}
       </VStack>
 
       <Grid
