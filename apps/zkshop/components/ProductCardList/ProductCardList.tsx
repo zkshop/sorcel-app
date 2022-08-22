@@ -23,7 +23,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
   const nfts = useAppSelector((state) => state.nfts);
   const collections = nfts.map((nft) => nft.contract.address);
   const isAnHolder = products.some((product: Product) =>
-    collections.includes(product.curation.toLowerCase())
+    collections.includes(product?.curation?.toLowerCase())
   );
 
   return (
@@ -35,7 +35,6 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
           src="/images/misfitwear.jpg"
           alt="misfitwear"
         />
-        {/* */}
       </VStack>
 
       <Grid
