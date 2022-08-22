@@ -114,7 +114,7 @@ export const ProductDetails = ({
 
       <HStack alignItems={"stretch"}>
         <Box>
-          <Image alt="product" height="450px" src={srcItem} />
+          <Image alt="product" height="500px" src={srcItem} />
         </Box>
 
         <VStack flex={1} justifyContent="space-between">
@@ -196,16 +196,13 @@ export const ProductDetails = ({
 
             <Box mt={2}>
               <Button
-                onClick={() => {
-                  sendTransaction?.();
-                }}
                 height="48px"
                 width="100%"
                 borderRadius="10px"
                 p={1}
                 isDisabled={isTransparent}
-                bg="#DF00FF"
-                _hover={{ bg: "#FF5F1F" }}
+                bg="#4473c3"
+                _hover={{ bg: "#5686d8" }}
               >
                 <Box
                   display="flex"
@@ -219,7 +216,42 @@ export const ProductDetails = ({
                     mr={1}
                     textTransform={"uppercase"}
                   >
-                    Pay in eth
+                    Pay in fiat
+                  </Text>
+
+                  <Box borderRadius="10px" display="flex">
+                    <TriangleUpIcon ml={2} color={"white"} />
+                  </Box>
+                </Box>
+              </Button>
+            </Box>
+
+            <Box mt={2}>
+              <Button
+                onClick={() => {
+                  sendTransaction?.();
+                }}
+                height="48px"
+                width="100%"
+                borderRadius="10px"
+                p={1}
+                isDisabled={isTransparent}
+                bg="#e89938"
+                _hover={{ bg: "#f7ad54" }}
+              >
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Text
+                    fontWeight="bold"
+                    fontSize="16px"
+                    color="white"
+                    mr={1}
+                    textTransform={"uppercase"}
+                  >
+                    Pay in crypto
                   </Text>
 
                   <Box borderRadius="10px" display="flex">

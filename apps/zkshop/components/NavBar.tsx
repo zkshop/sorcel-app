@@ -42,7 +42,7 @@ export const NavBar = ({ admin }: { admin: boolean }) => {
                   fontSize: "26px",
                 }}
               >
-                CLub
+                Zk
               </span>{" "}
               Shop
             </Text>
@@ -77,7 +77,7 @@ export const NavBar = ({ admin }: { admin: boolean }) => {
             WebkitTextFillColor: "transparent",
           }}
         >
-          CLub
+          Zk
         </span>{" "}
         Shop
       </Text>

@@ -1,6 +1,7 @@
-import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Grid, GridItem, VStack } from "@chakra-ui/react";
 import { useAppSelector } from "../../store/store";
 import { ProductCard } from "../ProductCard/ProductCard";
+import Image from "next/image";
 
 type ProductCardListProps = {
   products: Product[];
@@ -27,6 +28,15 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
 
   return (
     <Box py={8}>
+      <VStack pb={8}>
+        <Image
+          height={80}
+          width={750}
+          src="/images/misfitwear.jpg"
+          alt="misfitwear"
+        />
+      </VStack>
+
       <Grid
         gap={8}
         sx={{

@@ -1,8 +1,6 @@
-import { Box, Text, Button, Image, VStack, HStack } from "@chakra-ui/react";
-import StaticImage from "next/image";
+import { Box, Text, Image, HStack } from "@chakra-ui/react";
 import Link from "next/link";
 
-import addButton from "../../public/images/add-button.png";
 import { CollectionBadge } from "./CollectionBadge";
 
 interface ProductCardProps {
