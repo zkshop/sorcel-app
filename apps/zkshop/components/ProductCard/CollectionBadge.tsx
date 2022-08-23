@@ -9,18 +9,21 @@ type CollectionBadgeProps = {
 export const CollectionBadge = ({ CollectionName }: CollectionBadgeProps) => {
   return (
     <Box
-      zIndex={1}
-      position={"absolute"}
-      top={-2}
-      right={-1}
-      bgGradient="linear(to-r, #0987A0, #805AD5)"
-      borderRadius={"0px 12px"}
-      p={1}
-      boxShadow="rgba(0, 0, 0, 0.8) 0px 5px 15px"
-      color="white"
-      fontSize={"14px"}
-      fontWeight={"bold"}
-      textTransform={"capitalize"}
+      sx={{
+        zIndex: 1,
+        position: "absolute",
+        top: -2,
+        right: -1,
+        bgGradient: "linear(to-r, #0987A0, #805AD5)",
+        borderRadius: "0px 12px",
+        p: 1,
+        boxShadow: "rgba(0, 0, 0, 0.8) 0px 5px 15px",
+        color: "white",
+        fontSize: "14px",
+        fontWeight: "bold",
+        textTransform: "capitalize",
+        padding: "6px 12px 4px",
+      }}
       _after={{
         content: "''",
         position: "absolute",

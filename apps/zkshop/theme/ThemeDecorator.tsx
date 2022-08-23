@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 
-import { themes } from "./custom";
+import { themes } from ".";
 import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";
 import { useAppSelector } from "../store/store";
 

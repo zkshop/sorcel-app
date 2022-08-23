@@ -1,9 +1,10 @@
 import { extendTheme } from "@chakra-ui/react";
-import { base } from './base'
+import { common } from '../common/common'
 
 export const vanilla = extendTheme({
-  ...base,
+  ...common,
   colors: {
+    ...common.colors,
     bannerLeft: "grey",
     bannerRight: "black",
     super: "#ff6600"
