@@ -1,36 +1,62 @@
-import { useRouter } from "next/router";
+import { VStack } from "@chakra-ui/react";
+import { GetServerSidePropsContext } from "next";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { useAccount } from "wagmi";
-import { ProductPage } from "../../components/ProductPage/ProductPage";
+import { BackButton } from "../../components/BackButton";
+import { Product, ProductPage } from "../../components/ProductPage/ProductPage";
 import client from "../../libs/apollo/client";
-import {
-  GetProductsDocument,
-  GetProductsQueryResult,
-} from "../../libs/apollo/generated";
+import { Product_By_PkDocument } from "../../libs/apollo/generated";
 
-const ProductDetailsPage = ({ app }: { app: GetProductsQueryResult }) => {
-  const router = useRouter();
+type ProductDetailsPage = {
+  product: Product;
+};
+
+const ProductDetailsPage = ({ product }: ProductDetailsPage) => {
   const { isConnected } = useAccount();
 
-  const { id } = router.query;
-  const product = app.data?.product.find((product) => product.id === id);
-
   return (
-    <>
+    <VStack pt={4}>
       <ReactCanvasConfetti fire={isConnected} className="canvas" />
-      {product && <ProductPage product={product} />}
-    </>
+
+      <BackButton text={"Go back"} />
+
+      {product ? (
+        <ProductPage product={product} />
+      ) : (
+        <div> No corresponding product </div>
+      )}
+    </VStack>
   );
 };
 
 export default ProductDetailsPage;
 
-export async function getServerSideProps() {
-  const app = await client.query({
-    query: GetProductsDocument,
-  });
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { params } = context;
+
+  try {
+    if (params?.id) {
+      const { id } = params;
+      const res = await client.query({
+        query: Product_By_PkDocument,
+        variables: {
+          id,
+        },
+      });
+
+      return {
+        props: { product: res.data?.product_by_pk },
+      };
+    }
+  } catch {
+    return {
+      props: {},
+    };
+  }
 
   return {
-    props: { app },
+    props: {},
   };
-}
+};

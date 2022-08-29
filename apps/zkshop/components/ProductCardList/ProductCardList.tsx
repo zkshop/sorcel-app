@@ -34,6 +34,9 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
           width={750}
           src="/images/misfitwear.jpg"
           alt="misfitwear"
+          style={{
+            borderRadius: "16px",
+          }}
         />
       </VStack>
 

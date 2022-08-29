@@ -91,9 +91,10 @@ export type App_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "app" */
-export type App_Constraint =
+export enum App_Constraint {
   /** unique or primary key constraint on columns "id" */
-  | 'apps_pkey';
+  AppsPkey = 'apps_pkey'
+}
 
 /** input type for inserting data into table "app" */
 export type App_Insert_Input = {
@@ -143,11 +144,12 @@ export type App_Pk_Columns_Input = {
 };
 
 /** select columns of table "app" */
-export type App_Select_Column =
+export enum App_Select_Column {
   /** column name */
-  | 'id'
+  Id = 'id',
   /** column name */
-  | 'name';
+  Name = 'name'
+}
 
 /** input type for updating data in table "app" */
 export type App_Set_Input = {
@@ -156,11 +158,12 @@ export type App_Set_Input = {
 };
 
 /** update columns of table "app" */
-export type App_Update_Column =
+export enum App_Update_Column {
   /** column name */
-  | 'id'
+  Id = 'id',
   /** column name */
-  | 'name';
+  Name = 'name'
+}
 
 export type App_Updates = {
   /** sets the columns of the filtered rows to the given values */
@@ -342,19 +345,20 @@ export type Numeric_Comparison_Exp = {
 };
 
 /** column ordering options */
-export type Order_By =
+export enum Order_By {
   /** in ascending order, nulls last */
-  | 'asc'
+  Asc = 'asc',
   /** in ascending order, nulls first */
-  | 'asc_nulls_first'
+  AscNullsFirst = 'asc_nulls_first',
   /** in ascending order, nulls last */
-  | 'asc_nulls_last'
+  AscNullsLast = 'asc_nulls_last',
   /** in descending order, nulls first */
-  | 'desc'
+  Desc = 'desc',
   /** in descending order, nulls first */
-  | 'desc_nulls_first'
+  DescNullsFirst = 'desc_nulls_first',
   /** in descending order, nulls last */
-  | 'desc_nulls_last';
+  DescNullsLast = 'desc_nulls_last'
+}
 
 /** columns and relationships of "product" */
 export type Product = {
@@ -422,9 +426,10 @@ export type Product_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "product" */
-export type Product_Constraint =
+export enum Product_Constraint {
   /** unique or primary key constraint on columns "id" */
-  | 'product_pkey';
+  ProductPkey = 'product_pkey'
+}
 
 /** input type for incrementing numeric columns in table "product" */
 export type Product_Inc_Input = {
@@ -504,23 +509,24 @@ export type Product_Pk_Columns_Input = {
 };
 
 /** select columns of table "product" */
-export type Product_Select_Column =
+export enum Product_Select_Column {
   /** column name */
-  | 'app_id'
+  AppId = 'app_id',
   /** column name */
-  | 'collection'
+  Collection = 'collection',
   /** column name */
-  | 'curation'
+  Curation = 'curation',
   /** column name */
-  | 'discount'
+  Discount = 'discount',
   /** column name */
-  | 'id'
+  Id = 'id',
   /** column name */
-  | 'image'
+  Image = 'image',
   /** column name */
-  | 'name'
+  Name = 'name',
   /** column name */
-  | 'price';
+  Price = 'price'
+}
 
 /** input type for updating data in table "product" */
 export type Product_Set_Input = {
@@ -563,23 +569,24 @@ export type Product_Sum_Fields = {
 };
 
 /** update columns of table "product" */
-export type Product_Update_Column =
+export enum Product_Update_Column {
   /** column name */
-  | 'app_id'
+  AppId = 'app_id',
   /** column name */
-  | 'collection'
+  Collection = 'collection',
   /** column name */
-  | 'curation'
+  Curation = 'curation',
   /** column name */
-  | 'discount'
+  Discount = 'discount',
   /** column name */
-  | 'id'
+  Id = 'id',
   /** column name */
-  | 'image'
+  Image = 'image',
   /** column name */
-  | 'name'
+  Name = 'name',
   /** column name */
-  | 'price';
+  Price = 'price'
+}
 
 export type Product_Updates = {
   /** increments the numeric columns with given value of the filtered values */
@@ -760,12 +767,61 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type Product_By_PkQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type Product_By_PkQuery = { __typename?: 'query_root', product_by_pk?: { __typename?: 'product', app_id: any, collection?: any | null, curation?: any | null, discount?: any | null, id: any, image?: any | null, name: string, price: any } | null };
+
 export type GetProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetProductsQuery = { __typename?: 'query_root', product: Array<{ __typename?: 'product', app_id: any, collection?: any | null, curation?: any | null, id: any, discount?: any | null, image?: any | null, name: string, price: any }> };
 
 
+export const Product_By_PkDocument = gql`
+    query Product_by_pk($id: uuid!) {
+  product_by_pk(id: $id) {
+    app_id
+    collection
+    curation
+    discount
+    id
+    image
+    name
+    price
+  }
+}
+    `;
+
+/**
+ * __useProduct_By_PkQuery__
+ *
+ * To run a query within a React component, call `useProduct_By_PkQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProduct_By_PkQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProduct_By_PkQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProduct_By_PkQuery(baseOptions: Apollo.QueryHookOptions<Product_By_PkQuery, Product_By_PkQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Product_By_PkQuery, Product_By_PkQueryVariables>(Product_By_PkDocument, options);
+      }
+export function useProduct_By_PkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Product_By_PkQuery, Product_By_PkQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Product_By_PkQuery, Product_By_PkQueryVariables>(Product_By_PkDocument, options);
+        }
+export type Product_By_PkQueryHookResult = ReturnType<typeof useProduct_By_PkQuery>;
+export type Product_By_PkLazyQueryHookResult = ReturnType<typeof useProduct_By_PkLazyQuery>;
+export type Product_By_PkQueryResult = Apollo.QueryResult<Product_By_PkQuery, Product_By_PkQueryVariables>;
 export const GetProductsDocument = gql`
     query GetProducts {
   product {
