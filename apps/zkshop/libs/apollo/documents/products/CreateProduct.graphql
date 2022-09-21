@@ -1,0 +1,29 @@
+mutation CreateProduct(
+  $price: numeric
+  $name: String
+  $image: bpchar
+  $discount: smallint
+  $curation: bpchar
+  $collection: bpchar
+) {
+  insert_product_one(
+    object: {
+      app_id: "7c0623b1-5715-4e77-8db3-cf71204bdb80"
+      discount: $discount
+      image: $image
+      name: $name
+      price: $price
+      curation: $curation
+      collection: $collection
+    }
+  ) {
+    app_id
+    collection
+    curation
+    discount
+    id
+    image
+    name
+    price
+  }
+}

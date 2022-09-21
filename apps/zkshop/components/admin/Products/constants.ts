@@ -1,4 +1,8 @@
 export const PRODUCTS_FIELDS = {
+  image: {
+    name: "image",
+    label: "Image",
+  },
   name: {
     name: "name",
     label: "Name",
@@ -6,10 +10,6 @@ export const PRODUCTS_FIELDS = {
   price: {
     name: "price",
     label: "Price",
-  },
-  image: {
-    name: "image",
-    label: "Image",
   },
   discount: {
     name: "discount",
@@ -24,3 +24,12 @@ export const PRODUCTS_FIELDS = {
     label: "Collection",
   },
 };
+
+export const PRODUCT_ATTRIBUTES = [
+  "Image",
+  "Name",
+  "Price",
+  "Discount",
+  "Curation",
+  "Collection",
+];

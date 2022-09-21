@@ -841,6 +841,18 @@ export type UpdateAppMutation = { __typename?: 'mutation_root', update_app?: { _
 
 export type App_Mutation_ResponseFragmentFragment = { __typename?: 'app_mutation_response', returning: Array<{ __typename?: 'app', id: any, name: string }> };
 
+export type CreateProductMutationVariables = Exact<{
+  price?: InputMaybe<Scalars['numeric']>;
+  name?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['bpchar']>;
+  discount?: InputMaybe<Scalars['smallint']>;
+  curation?: InputMaybe<Scalars['bpchar']>;
+  collection?: InputMaybe<Scalars['bpchar']>;
+}>;
+
+
+export type CreateProductMutation = { __typename?: 'mutation_root', insert_product_one?: { __typename?: 'product', app_id: any, collection?: any | null, curation?: any | null, discount?: any | null, id: any, image?: any | null, name: string, price: any } | null };
+
 export type Product_By_PkQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
@@ -851,7 +863,7 @@ export type Product_By_PkQuery = { __typename?: 'query_root', product_by_pk?: { 
 export type GetProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProductsQuery = { __typename?: 'query_root', product: Array<{ __typename?: 'product', app_id: any, collection?: any | null, curation?: any | null, id: any, discount?: any | null, image?: any | null, name: string, price: any }> };
+export type GetProductsQuery = { __typename?: 'query_root', products: Array<{ __typename?: 'product', app_id: any, collection?: any | null, curation?: any | null, id: any, discount?: any | null, image?: any | null, name: string, price: any }> };
 
 export const App_Mutation_ResponseFragmentFragmentDoc = gql`
     fragment app_mutation_responseFragment on app_mutation_response {
@@ -943,6 +955,53 @@ export function useUpdateAppMutation(baseOptions?: Apollo.MutationHookOptions<Up
 export type UpdateAppMutationHookResult = ReturnType<typeof useUpdateAppMutation>;
 export type UpdateAppMutationResult = Apollo.MutationResult<UpdateAppMutation>;
 export type UpdateAppMutationOptions = Apollo.BaseMutationOptions<UpdateAppMutation, UpdateAppMutationVariables>;
+export const CreateProductDocument = gql`
+    mutation CreateProduct($price: numeric, $name: String, $image: bpchar, $discount: smallint, $curation: bpchar, $collection: bpchar) {
+  insert_product_one(
+    object: {app_id: "7c0623b1-5715-4e77-8db3-cf71204bdb80", discount: $discount, image: $image, name: $name, price: $price, curation: $curation, collection: $collection}
+  ) {
+    app_id
+    collection
+    curation
+    discount
+    id
+    image
+    name
+    price
+  }
+}
+    `;
+export type CreateProductMutationFn = Apollo.MutationFunction<CreateProductMutation, CreateProductMutationVariables>;
+
+/**
+ * __useCreateProductMutation__
+ *
+ * To run a mutation, you first call `useCreateProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createProductMutation, { data, loading, error }] = useCreateProductMutation({
+ *   variables: {
+ *      price: // value for 'price'
+ *      name: // value for 'name'
+ *      image: // value for 'image'
+ *      discount: // value for 'discount'
+ *      curation: // value for 'curation'
+ *      collection: // value for 'collection'
+ *   },
+ * });
+ */
+export function useCreateProductMutation(baseOptions?: Apollo.MutationHookOptions<CreateProductMutation, CreateProductMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateProductMutation, CreateProductMutationVariables>(CreateProductDocument, options);
+      }
+export type CreateProductMutationHookResult = ReturnType<typeof useCreateProductMutation>;
+export type CreateProductMutationResult = Apollo.MutationResult<CreateProductMutation>;
+export type CreateProductMutationOptions = Apollo.BaseMutationOptions<CreateProductMutation, CreateProductMutationVariables>;
 export const Product_By_PkDocument = gql`
     query Product_by_pk($id: uuid!) {
   product_by_pk(id: $id) {
@@ -987,7 +1046,7 @@ export type Product_By_PkLazyQueryHookResult = ReturnType<typeof useProduct_By_P
 export type Product_By_PkQueryResult = Apollo.QueryResult<Product_By_PkQuery, Product_By_PkQueryVariables>;
 export const GetProductsDocument = gql`
     query GetProducts {
-  product {
+  products: product {
     app_id
     collection
     curation

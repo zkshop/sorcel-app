@@ -12,7 +12,7 @@ type HorizontalMenuProps = {
 
 const HorizontalMenu = ({ items }: HorizontalMenuProps) => {
   return (
-    <Tabs orientation="vertical">
+    <Tabs orientation="vertical" justifyContent={'space-between'}>
       <Box>
         <TabList>
           {items.map((item) => (
