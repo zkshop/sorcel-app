@@ -1,4 +1,4 @@
-import { Box, Spinner } from "@chakra-ui/react";
+import { Spinner } from "@chakra-ui/react";
 import General from "../components/admin/General/General";
 import Products from "../components/admin/Products/ProductList";
 import { GridLayout } from "../components/GridLayout";
@@ -14,7 +14,7 @@ const Admin = ({}: AdminProps) => {
   if (loading) return <Spinner />;
 
   if (!data || !data.app) {
-    return <div>Error</div>;
+    return <div> Error </div>;
   }
 
   const items = [

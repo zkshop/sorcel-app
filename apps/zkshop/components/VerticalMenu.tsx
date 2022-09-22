@@ -1,27 +1,36 @@
 import { Box } from "@chakra-ui/react";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs";
 
-type HorizontalMenuItem = {
+type VerticalMenuItem = {
   title: string;
   content: React.ReactNode;
 };
 
-type HorizontalMenuProps = {
-  items: HorizontalMenuItem[];
+type VerticalMenuProps = {
+  items: VerticalMenuItem[];
 };
 
-const HorizontalMenu = ({ items }: HorizontalMenuProps) => {
+const VerticalMenu = ({ items }: VerticalMenuProps) => {
   return (
-    <Tabs orientation="vertical" justifyContent={'space-between'}>
+    <Tabs orientation="vertical" justifyContent="flex-start">
       <Box>
         <TabList>
           {items.map((item) => (
-            <Tab key={`tab-${item.title}`}>{item.title}</Tab>
+            <Tab
+              key={`tab-${item.title}`}
+              fontSize="lg"
+              fontWeight="bold"
+              textAlign="left"
+              justifyContent="flex-start"
+              w="120px"
+            >
+              {item.title}
+            </Tab>
           ))}
         </TabList>
       </Box>
 
-      <Box>
+      <Box ml="2">
         <TabPanels>
           {items.map((item) => (
             <TabPanel>{item.content}</TabPanel>
@@ -32,4 +41,4 @@ const HorizontalMenu = ({ items }: HorizontalMenuProps) => {
   );
 };
 
-export default HorizontalMenu;
+export default VerticalMenu;
