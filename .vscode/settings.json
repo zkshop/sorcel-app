@@ -6,5 +6,8 @@
             "file:///Users/sinane/zkshop-app/graphql.config.yaml"
         ],
         "https://www.graphql-code-generator.com/config.schema.json": "file:///Users/sinane/zkshop-app/apps/zkshop/codegen.yaml"
-    }
+    },
+    "conventionalCommits.scopes": [
+        "admin"
+    ]
 }

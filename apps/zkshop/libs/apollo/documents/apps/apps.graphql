@@ -1,0 +1,32 @@
+query getAdmin {
+  app: app_by_pk(id: "7c0623b1-5715-4e77-8db3-cf71204bdb80") {
+    id
+    name
+  }
+
+  products: product(
+    where: { app_id: { _eq: "7c0623b1-5715-4e77-8db3-cf71204bdb80" } }
+  ) {
+    collection
+    curation
+    discount
+    id
+    image
+    name
+    price
+  }
+}
+
+mutation UpdateApp($newName: String!) {
+  update_app(where: {id: {_eq: "7c0623b1-5715-4e77-8db3-cf71204bdb80"}}, _set: {name: $newName}) {
+    ...app_mutation_responseFragment
+  }
+}
+
+fragment app_mutation_responseFragment on app_mutation_response {
+  returning {
+    id
+    name
+  }
+}
+

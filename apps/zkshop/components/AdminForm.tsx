@@ -44,17 +44,9 @@ type AdminFormProps = {
   logo: string;
   products: ProductFieldsType[];
   sismo?: boolean;
-  refresh: Function;
 };
 
-function AdminForm({
-  appname,
-  logo,
-  products,
-  id,
-  sismo,
-  refresh,
-}: AdminFormProps) {
+function AdminForm({ appname, logo, products, id, sismo }: AdminFormProps) {
   const {
     isOpen: isAddProductFormOpen,
     onOpen: setIsAddProductFormOpen,
@@ -71,7 +63,6 @@ function AdminForm({
 
   const toggleSismo = async () => {
     await enableSismoBadge({ appname, logo, products, sismo }, id);
-    refresh();
   };
 
   const { fields, append } = useFieldArray({

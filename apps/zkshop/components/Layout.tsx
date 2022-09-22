@@ -12,15 +12,12 @@ export const Layout = ({ children, ...props }: LayoutProps) => {
   const { asPath } = useRouter();
 
   return (
-    <Box
-      {...props}
-      sx={{ display: "flex", flexDirection: "column", height: "inherit" }}
-    >
+    <Box {...props}>
       <NavBar admin={asPath === "/admin"} />
 
       <Banner />
 
-      <GridLayout> {children} </GridLayout>
+      {children}
     </Box>
   );
 };

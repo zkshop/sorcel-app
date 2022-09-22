@@ -1,31 +1,34 @@
-import { Box } from "@chakra-ui/react";
-import AdminForm from "../components/AdminForm";
-import useGetAppProducts from "../hooks/useGetAppProducts";
+import { Box, Spinner } from "@chakra-ui/react";
+import General from "../components/admin/General/General";
+import Products from "../components/admin/Products/ProductList";
+import { GridLayout } from "../components/GridLayout";
+import VerticalMenu from "../components/VerticalMenu";
 
-const Admin = () => {
-  const { app, refresh } = useGetAppProducts("ukwyvv9vMiB66hiEaoRF");
-  if (!app || !app.appname || !app.logo) return <div>Loading...</div>;
+import { useGetAdminQuery } from "../libs/apollo/generated";
+
+type AdminProps = {};
+
+const Admin = ({}: AdminProps) => {
+  const { data, loading } = useGetAdminQuery();
+
+  if (loading) return <Spinner />;
+
+  if (!data || !data.app) {
+    return <div>Error</div>;
+  }
+
+  const items = [
+    {
+      title: "General",
+      content: <General app={{ name: data.app.name || "" }} />,
+    },
+    { title: "Products", content: <Products /> },
+  ];
 
   return (
-    <Box
-      id="main"
-      mt={10}
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      flex={1}
-    >
-      {app?.products.length !== 0 && (
-        <AdminForm
-          refresh={refresh}
-          appname={app.appname}
-          logo={app.logo}
-          products={app.products}
-          id="ukwyvv9vMiB66hiEaoRF"
-          sismo={app.sismo}
-        />
-      )}
-    </Box>
+    <GridLayout sx={{ py: { xs: 4, md: 8, lg: 8 }, px: 0, margin: 0 }}>
+      <VerticalMenu items={items} />
+    </GridLayout>
   );
 };
 

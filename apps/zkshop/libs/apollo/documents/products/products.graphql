@@ -1,5 +1,5 @@
 query GetProducts {
-  product {
+  products: product {
     app_id
     collection
     curation
