@@ -14,12 +14,13 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useGetProductsQuery } from "../../../libs/apollo/generated";
 import { PRODUCT_ATTRIBUTES } from "./constants";
 
 const Products = () => {
   const { data, error, loading } = useGetProductsQuery();
-
+  const router = useRouter();
   if (loading) return <Spinner />;
 
   if (error || !data) {
@@ -50,26 +51,28 @@ const Products = () => {
 
             <Tbody>
               {data.products.map((product) => (
-                <Tr>
-                  <Td>
-                    <Box>
-                      <Image
-                        width={16}
-                        height={16}
-                        src={product.image}
-                        alt={product.name}
-                      />
-                    </Box>
-                  </Td>
-                  <Td>{product.name}</Td>
-                  <Td>{product.price}</Td>
-                  <Td>{product.discount}</Td>
-                  <Td>
-                    {product.curation?.slice(0, 3)}...
-                    {product.curation?.slice(-3)}
-                  </Td>
-                  <Td>{product.collection}</Td>
-                </Tr>
+                <Link href={`/admin/product/edit/${product.id}`}>
+                  <Tr>
+                    <Td>
+                      <Box>
+                        <Image
+                          width={16}
+                          height={16}
+                          src={product.image}
+                          alt={product.name}
+                        />
+                      </Box>
+                    </Td>
+                    <Td>{product.name}</Td>
+                    <Td>{product.price}</Td>
+                    <Td>{product.discount}</Td>
+                    <Td>
+                      {product.curation?.slice(0, 3)}...
+                      {product.curation?.slice(-3)}
+                    </Td>
+                    <Td>{product.collection}</Td>
+                  </Tr>
+                </Link>
               ))}
             </Tbody>
           </Table>

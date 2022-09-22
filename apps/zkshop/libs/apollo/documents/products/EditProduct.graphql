@@ -1,0 +1,31 @@
+mutation EditProduct(
+  $id: uuid
+  $collection: bpchar
+  $curation: bpchar
+  $discount: smallint
+  $image: bpchar
+  $name: String
+  $price: numeric
+) {
+  update_product(
+    _set: {
+      collection: $collection
+      curation: $curation
+      discount: $discount
+      image: $image
+      name: $name
+      price: $price
+    }
+    where: { id: { _eq: $id} }
+  ) {
+    returning {
+      collection
+      curation
+      discount
+      id
+      image
+      name
+      price
+    }
+  }
+}

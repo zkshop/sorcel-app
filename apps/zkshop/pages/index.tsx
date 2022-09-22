@@ -8,29 +8,29 @@ import client from "../libs/apollo/client";
 import {
   GetProductsDocument,
   GetProductsQueryResult,
+  useGetProductsQuery,
 } from "../libs/apollo/generated";
 
-type MarketplaceProps = {
-  productsQueryResult: GetProductsQueryResult;
-};
+type MarketplaceProps = {};
 
-const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
+const Marketplace = ({}: MarketplaceProps) => {
   const {} = useUpdateThemeOnConnection();
   const { isConnected } = useAccount();
+  const { data, loading, error } = useGetProductsQuery();
 
-  if (productsQueryResult.loading) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!productsQueryResult.data || productsQueryResult.error) {
+  if (!data || error) {
     return null;
   }
 
   return (
-    <GridLayout id="main">
+    <GridLayout>
       <ReactCanvasConfetti fire={isConnected} className="canvas" />
 
-      <ProductCardList products={productsQueryResult.data?.products} />
+      <ProductCardList products={data?.products} />
     </GridLayout>
   );
 };
@@ -41,7 +41,7 @@ export async function getServerSideProps() {
   const productsQueryResult = await client.query({
     query: GetProductsDocument,
   });
-  
+
   return {
     props: { productsQueryResult },
   };

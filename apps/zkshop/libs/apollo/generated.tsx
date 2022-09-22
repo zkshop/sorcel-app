@@ -853,6 +853,19 @@ export type CreateProductMutationVariables = Exact<{
 
 export type CreateProductMutation = { __typename?: 'mutation_root', insert_product_one?: { __typename?: 'product', app_id: any, collection?: any | null, curation?: any | null, discount?: any | null, id: any, image?: any | null, name: string, price: any } | null };
 
+export type EditProductMutationVariables = Exact<{
+  id?: InputMaybe<Scalars['uuid']>;
+  collection?: InputMaybe<Scalars['bpchar']>;
+  curation?: InputMaybe<Scalars['bpchar']>;
+  discount?: InputMaybe<Scalars['smallint']>;
+  image?: InputMaybe<Scalars['bpchar']>;
+  name?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['numeric']>;
+}>;
+
+
+export type EditProductMutation = { __typename?: 'mutation_root', update_product?: { __typename?: 'product_mutation_response', returning: Array<{ __typename?: 'product', collection?: any | null, curation?: any | null, discount?: any | null, id: any, image?: any | null, name: string, price: any }> } | null };
+
 export type Product_By_PkQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
@@ -1002,6 +1015,56 @@ export function useCreateProductMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateProductMutationHookResult = ReturnType<typeof useCreateProductMutation>;
 export type CreateProductMutationResult = Apollo.MutationResult<CreateProductMutation>;
 export type CreateProductMutationOptions = Apollo.BaseMutationOptions<CreateProductMutation, CreateProductMutationVariables>;
+export const EditProductDocument = gql`
+    mutation EditProduct($id: uuid, $collection: bpchar, $curation: bpchar, $discount: smallint, $image: bpchar, $name: String, $price: numeric) {
+  update_product(
+    _set: {collection: $collection, curation: $curation, discount: $discount, image: $image, name: $name, price: $price}
+    where: {id: {_eq: $id}}
+  ) {
+    returning {
+      collection
+      curation
+      discount
+      id
+      image
+      name
+      price
+    }
+  }
+}
+    `;
+export type EditProductMutationFn = Apollo.MutationFunction<EditProductMutation, EditProductMutationVariables>;
+
+/**
+ * __useEditProductMutation__
+ *
+ * To run a mutation, you first call `useEditProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editProductMutation, { data, loading, error }] = useEditProductMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      collection: // value for 'collection'
+ *      curation: // value for 'curation'
+ *      discount: // value for 'discount'
+ *      image: // value for 'image'
+ *      name: // value for 'name'
+ *      price: // value for 'price'
+ *   },
+ * });
+ */
+export function useEditProductMutation(baseOptions?: Apollo.MutationHookOptions<EditProductMutation, EditProductMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EditProductMutation, EditProductMutationVariables>(EditProductDocument, options);
+      }
+export type EditProductMutationHookResult = ReturnType<typeof useEditProductMutation>;
+export type EditProductMutationResult = Apollo.MutationResult<EditProductMutation>;
+export type EditProductMutationOptions = Apollo.BaseMutationOptions<EditProductMutation, EditProductMutationVariables>;
 export const Product_By_PkDocument = gql`
     query Product_by_pk($id: uuid!) {
   product_by_pk(id: $id) {
