@@ -1,20 +1,48 @@
-import { Box, Text } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/react";
+import ReactCanvasConfetti from "react-canvas-confetti";
+import { useAccount } from "wagmi";
+import { GridLayout } from "../components/GridLayout";
+import { ProductCardList } from "../components/ProductCardList/ProductCardList";
+import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";
+import client from "../libs/apollo/client";
+import {
+  GetProductsDocument,
+  GetProductsQueryResult,
+} from "../libs/apollo/generated";
 
-const IframePage = () => {
+type MarketplaceProps = {
+  productsQueryResult: GetProductsQueryResult;
+};
+
+const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
+  const {} = useUpdateThemeOnConnection();
+  const { isConnected } = useAccount();
+
+  if (productsQueryResult.loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!productsQueryResult.data || productsQueryResult.error) {
+    return null;
+  }
+
   return (
-    <Box m={3} height="85vh" display="flex" flexDirection="column">
-      <Text fontSize="26px" p={2} textAlign="center" fontWeight={500}>
-        Exemple of the app integrated in an iframe
-      </Text>
-      <iframe
-        src="https://zkshop.vercel.app/"
-        title="the app in an iframe"
-        width="100%"
-        height="100%"
-        id="iframe-zkshop"
-      />
-    </Box>
+    <GridLayout id="main">
+      <ReactCanvasConfetti fire={isConnected} className="canvas" />
+
+      <ProductCardList products={productsQueryResult.data?.products} />
+    </GridLayout>
   );
 };
 
-export default IframePage;
+export default Marketplace;
+
+export async function getServerSideProps() {
+  const productsQueryResult = await client.query({
+    query: GetProductsDocument,
+  });
+
+  return {
+    props: { productsQueryResult },
+  };
+}

@@ -52,7 +52,7 @@ export const MenuDrawer = ({ isOpen, onOpen, onClose }: MenuDrawerProps) => {
 
           <Box mt={4}>
             <Button onClick={onClose}>
-              <Link href="/iframe">iframe</Link>
+              <Link href="/iframe-example">iframe</Link>
             </Button>
           </Box>
         </DrawerBody>
