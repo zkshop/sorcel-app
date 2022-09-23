@@ -10,35 +10,33 @@ type VerticalMenuProps = {
   items: VerticalMenuItem[];
 };
 
-const VerticalMenu = ({ items }: VerticalMenuProps) => {
-  return (
-    <Tabs orientation="vertical" justifyContent="flex-start">
-      <Box>
-        <TabList>
-          {items.map((item) => (
-            <Tab
-              key={`tab-${item.title}`}
-              fontSize="lg"
-              fontWeight="bold"
-              textAlign="left"
-              justifyContent="flex-start"
-              w="120px"
-            >
-              {item.title}
-            </Tab>
-          ))}
-        </TabList>
-      </Box>
+const VerticalMenu = ({ items }: VerticalMenuProps) => (
+  <Tabs orientation="vertical" justifyContent="flex-start">
+    <Box>
+      <TabList>
+        {items.map((item) => (
+          <Tab
+            key={`tab-${item.title}`}
+            fontSize="lg"
+            fontWeight="bold"
+            textAlign="left"
+            justifyContent="flex-start"
+            w="120px"
+          >
+            {item.title}
+          </Tab>
+        ))}
+      </TabList>
+    </Box>
 
-      <Box ml="2">
-        <TabPanels>
-          {items.map((item) => (
-            <TabPanel>{item.content}</TabPanel>
-          ))}
-        </TabPanels>
-      </Box>
-    </Tabs>
-  );
-};
+    <Box ml="2">
+      <TabPanels>
+        {items.map((item, i) => (
+          <TabPanel key={i}>{item.content}</TabPanel>
+        ))}
+      </TabPanels>
+    </Box>
+  </Tabs>
+);
 
 export default VerticalMenu;

@@ -1,10 +1,10 @@
 import { Box, Text } from "@chakra-ui/layout";
+
 import { GridLayout } from "../components/GridLayout";
 
 // https://zkshop.vercel.app
 
-const IframePage = () => {
-  return (
+const IframePage = () => (
     <GridLayout>
       <Box m={3} height="85vh" display="flex" flexDirection="column">
         <Text fontSize="26px" p={2} textAlign="center" fontWeight={500}>
@@ -21,6 +21,5 @@ const IframePage = () => {
       </Box>
     </GridLayout>
   );
-};
 
 export default IframePage;

@@ -1,8 +1,9 @@
 import { Box } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+
 import { Banner } from "./Banner";
 import { GridLayout } from "./GridLayout";
 import { NavBar } from "./NavBar";
-import { useRouter } from "next/router";
 
 type LayoutProps = {
   children: React.ReactNode;

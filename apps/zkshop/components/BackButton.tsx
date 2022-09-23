@@ -1,13 +1,12 @@
-import { HStack, Text } from "@chakra-ui/react";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
+import { HStack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 
 type BackButtonProps = {
   text: string;
 };
 
-export const BackButton = ({ text }: BackButtonProps) => {
-  return (
+export const BackButton = ({ text }: BackButtonProps) => (
     <Link href="/">
       <HStack sx={{ w: "100%", cursor: "pointer" }}>
         <ArrowLeftIcon mr={2} />
@@ -16,4 +15,3 @@ export const BackButton = ({ text }: BackButtonProps) => {
       </HStack>
     </Link>
   );
-};

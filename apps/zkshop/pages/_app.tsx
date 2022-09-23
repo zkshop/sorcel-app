@@ -1,16 +1,17 @@
 import "@rainbow-me/rainbowkit/styles.css";
 import "../min.css";
 
-import store from "../store/store";
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { WagmiConfig } from "wagmi";
-import { wagmiClient, chains } from "../clients/wagmi";
-import { Provider as ReduxProvider } from "react-redux";
-import ThemeDecorator from "../theme/ThemeDecorator";
-import { AppProps } from "next/app";
-import { Layout } from "../components/Layout";
 import { ApolloProvider } from "@apollo/client";
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { AppProps } from "next/app";
+import { Provider as ReduxProvider } from "react-redux";
+import { WagmiConfig } from "wagmi";
+
+import { wagmiClient, chains } from "../clients/wagmi";
+import { Layout } from "../components/Layout";
 import client from "../libs/apollo/client";
+import store from "../store/store";
+import ThemeDecorator from "../theme/ThemeDecorator";
 
 function App({ Component, pageProps }: AppProps) {
   return (

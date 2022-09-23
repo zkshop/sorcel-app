@@ -7,6 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "eslint --max-warnings=0 --ext .ts,.tsx,.js,.jsx .",
+    "lint:fix": "yarn lint --fix",
     "generate:graphql": "graphql-codegen --config codegen.yaml -r dotenv/config"
   },
   "dependencies": {
@@ -34,6 +36,7 @@
     "wagmi": "^0.6.4"
   },
   "devDependencies": {
+    "eslint-config-custom": "*",
     "@graphql-codegen/cli": "^2.11.6",
     "@graphql-codegen/introspection": "^2.2.1",
     "@graphql-codegen/typescript": "^2.7.3",

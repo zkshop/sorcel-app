@@ -1,8 +1,9 @@
-import { AddProductForm } from "./../../../components/admin/Products/AddProductForm";
 
 import { useForm } from "react-hook-form";
 
 import { useCreateProductMutation } from "../../../libs/apollo/generated";
+
+import { AddProductForm } from "./../../../components/admin/Products/AddProductForm";
 
 export type AddProductFormValues = {
   price: number;

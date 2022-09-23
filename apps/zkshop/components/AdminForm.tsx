@@ -17,7 +17,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { enableSismoBadge, updateAppFromDB } from "../clients/firebase";
+
 import ProductFields from "./ProductFields";
 import ProductForm from "./ProductForm";
 import TextInput from "./TextInput";
@@ -79,7 +79,7 @@ function AdminForm({ appname, logo, products, id, sismo }: AdminFormProps) {
   };
 
   return (
-    <Box w={"full"} px={8}>
+    <Box w="full" px={8}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Accordion defaultIndex={[0]} allowMultiple>
           <AccordionItem>
@@ -110,15 +110,13 @@ function AdminForm({ appname, logo, products, id, sismo }: AdminFormProps) {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              {fields.map((field, index) => {
-                return (
-                  <ProductFields
-                    index={index}
-                    key={field.id}
-                    register={register}
-                  />
-                );
-              })}
+              {fields.map((field, index) => (
+                <ProductFields
+                  index={index}
+                  key={field.id}
+                  register={register}
+                />
+              ))}
 
               <VStack align="flex-start">
                 <Button mt={4} type="submit">

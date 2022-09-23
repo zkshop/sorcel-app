@@ -33,14 +33,13 @@ export const sizesList = [
   },
 ];
 
-export const SizeSelector = () => {
-  return (
+export const SizeSelector = () => (
     <Box py={6}>
       <Text
         fontWeight="bold"
         color="black"
-        background={"#EEEEEF"}
-        width={"fit-content"}
+        background="#EEEEEF"
+        width="fit-content"
       >
         Size
       </Text>
@@ -67,4 +66,3 @@ export const SizeSelector = () => {
       </HStack>
     </Box>
   );
-};

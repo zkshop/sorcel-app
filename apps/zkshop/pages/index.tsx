@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { useAccount } from "wagmi";
+
 import { GridLayout } from "../components/GridLayout";
 import { ProductCardList } from "../components/ProductCardList/ProductCardList";
 import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";

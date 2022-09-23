@@ -1,7 +1,8 @@
 import { Box, Grid, GridItem, VStack } from "@chakra-ui/react";
+import Image from "next/image";
+
 import { useAppSelector } from "../../store/store";
 import { ProductCard } from "../ProductCard/ProductCard";
-import Image from "next/image";
 
 type ProductCardListProps = {
   products: Product[];
@@ -64,9 +65,12 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
               curation && !collections.includes(curation.toLowerCase());
 
             return (
-              <GridItem display={"flex"} justifyContent={"center"}>
+              <GridItem
+                key={`products-${id}`}
+                display="flex"
+                justifyContent="center"
+              >
                 <ProductCard
-                  key={`products-${id}`}
                   id={id}
                   srcItem={image}
                   title={name}

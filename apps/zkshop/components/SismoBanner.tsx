@@ -22,7 +22,7 @@ export const SismoBanner = ({ admin, enable }: SismoBannerProps) => {
         <HStack>
           <Image height={20} width={20} src="/images/sismo.jpeg" alt="Sismo" />
 
-          <Text as="u" fontSize={"14px"} fontWeight={"bold"}>
+          <Text as="u" fontSize="14px" fontWeight="bold">
             ZkProof with Sismo
           </Text>
         </HStack>

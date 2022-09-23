@@ -40,7 +40,7 @@ export const ProductCard = ({
         bg="white"
         width="100%"
         borderRadius="10px"
-        position={"relative"}
+        position="relative"
         _before={
           isEligible
             ? {
@@ -98,10 +98,10 @@ export const ProductCard = ({
             />
             <Text
               px={1}
-              position={"absolute"}
+              position="absolute"
               top={90}
               textAlign="center"
-              color={"white"}
+              color="white"
               fontWeight="bold"
             >
               Connect your {collection || "Misfitwear"} wallet to unlock

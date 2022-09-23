@@ -1,3 +1,4 @@
+import { HamburgerIcon } from "@chakra-ui/icons";
 import {
   Box,
   VStack,
@@ -7,12 +8,10 @@ import {
   useDisclosure,
   Flex,
 } from "@chakra-ui/react";
-import ConnectWalletButton from "./ConnectWalletButton";
-import { HamburgerIcon } from "@chakra-ui/icons";
 
-import { SismoBanner } from "./SismoBanner";
-import useGetAppProducts from "../hooks/useGetAppProducts";
+import ConnectWalletButton from "./ConnectWalletButton";
 import { MenuDrawer } from "./MenuDrawer";
+import { SismoBanner } from "./SismoBanner";
 
 type NavBarProps = {
   admin: boolean;
@@ -20,7 +19,6 @@ type NavBarProps = {
 
 export const NavBar = ({ admin }: NavBarProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { app } = useGetAppProducts("ukwyvv9vMiB66hiEaoRF");
 
   return (
     <VStack as="header" sx={{ px: { xs: 2, md: 4, lg: 6 } }}>
@@ -53,7 +51,7 @@ export const NavBar = ({ admin }: NavBarProps) => {
         </HStack>
       </HStack>
 
-      <SismoBanner admin={admin} enable={!!app?.sismo} />
+      <SismoBanner admin={admin} enable={false} />
     </VStack>
   );
 };

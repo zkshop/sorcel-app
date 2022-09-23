@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAccount } from "wagmi";
+
 import { fetchNFTS, reset } from "../store/slices/nfts";
 import { update } from "../store/slices/theme";
 import { useAppDispatch, useAppSelector } from "../store/store";
@@ -9,16 +10,16 @@ const useUpdateThemeOnConnection = () => {
   const nfts = useAppSelector((state) => state.nfts);
   const dispatch = useAppDispatch();
 
-  const setVanillaTheme = () => dispatch(update("vanilla"));
-  const setFirstTheme = () => dispatch(update("first"));
-
-  async function getNfts() {
+  const getNfts = useCallback(async () => {
     if (address) {
       dispatch(fetchNFTS(address));
     }
-  }
+  }, [address, dispatch])
 
   useEffect(() => {
+    const setVanillaTheme = () => dispatch(update("vanilla"));
+    const setFirstTheme = () => dispatch(update("first"));
+
     if (isConnected) {
     setFirstTheme();
     }
@@ -26,14 +27,14 @@ const useUpdateThemeOnConnection = () => {
     setVanillaTheme();
     dispatch(reset());
     }
-  }, [isConnected, isDisconnected]);
+  }, [dispatch, isConnected, isDisconnected]);
 
 
   useEffect(() => {
     if (address) {
       getNfts();
     }
-  }, [address]);
+  }, [address, getNfts]);
 
   return { nfts };
 };

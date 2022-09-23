@@ -8,7 +8,6 @@ import {
   DrawerOverlay,
   Text,
 } from "@chakra-ui/react";
-
 import Link from "next/link";
 
 type MenuDrawerProps = {
@@ -17,13 +16,12 @@ type MenuDrawerProps = {
   onClose: () => void;
 };
 
-export const MenuDrawer = ({ isOpen, onOpen, onClose }: MenuDrawerProps) => {
-  return (
-    <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>
+export const MenuDrawer = ({ isOpen, onOpen, onClose }: MenuDrawerProps) => (
+    <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />
       <DrawerContent>
         <DrawerHeader borderBottomWidth="1px">
-          <Text fontSize={"24px"} textTransform="uppercase">
+          <Text fontSize="24px" textTransform="uppercase">
             <span
               style={{
                 background: "-webkit-linear-gradient(#0987A0, #805AD5)",
@@ -37,7 +35,7 @@ export const MenuDrawer = ({ isOpen, onOpen, onClose }: MenuDrawerProps) => {
             Shop
           </Text>
         </DrawerHeader>
-        <DrawerBody display={"flex"} flexDirection={"column"}>
+        <DrawerBody display="flex" flexDirection="column">
           <Box mt={6}>
             <Button onClick={onClose}>
               <Link href="/">Misfitwear Shop</Link>
@@ -59,4 +57,3 @@ export const MenuDrawer = ({ isOpen, onOpen, onClose }: MenuDrawerProps) => {
       </DrawerContent>
     </Drawer>
   );
-};

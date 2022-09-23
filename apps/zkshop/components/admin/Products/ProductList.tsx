@@ -15,7 +15,9 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+
 import { useGetProductsQuery } from "../../../libs/apollo/generated";
+
 import { PRODUCT_ATTRIBUTES } from "./constants";
 
 const Products = () => {
@@ -50,8 +52,8 @@ const Products = () => {
             </Thead>
 
             <Tbody>
-              {data.products.map((product) => (
-                <Link href={`/admin/product/edit/${product.id}`}>
+              {data.products.map((product, i) => (
+                <Link key={i} href={`/admin/product/edit/${product.id}`}>
                   <Tr>
                     <Td>
                       <Box>

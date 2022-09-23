@@ -11,11 +11,12 @@ import {
   Button,
   Box,
 } from "@chakra-ui/react";
-
 import React from "react";
 import { UseFormRegister } from "react-hook-form";
+
 import { AddProductFormValues } from "../../../pages/admin/product/add";
 import { GridLayout } from "../../GridLayout";
+
 import { PRODUCTS_FIELDS } from "./constants";
 
 type AddProductFormProps = {

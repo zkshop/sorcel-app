@@ -1,4 +1,5 @@
 import { useAppSelector } from "../../store/store";
+
 import { ProductDetails } from "./ProductDetails";
 
 // TODO: Use generated types

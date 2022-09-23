@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Nft } from "alchemy-sdk";
+
 import { getEveryNftOfWallet } from "../../pages/api/nft";
 
 export const fetchNFTS = createAsyncThunk(
@@ -17,9 +18,7 @@ export const balancesSlice = createSlice({
     reset: () => [],
   },
   extraReducers(builder) {
-    builder.addCase(fetchNFTS.fulfilled, (state, action) => {
-      return action.payload;
-    });
+    builder.addCase(fetchNFTS.fulfilled, (state, action) => action.payload);
   },
 });
 

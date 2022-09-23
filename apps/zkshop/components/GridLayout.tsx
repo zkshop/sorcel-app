@@ -9,8 +9,7 @@ export const GridLayout = ({
   children,
   sx,
   ...props
-}: GridLayoutProps) => {
-  return (
+}: GridLayoutProps) => (
     <Box
       sx={{
         m: "0 auto",
@@ -24,4 +23,3 @@ export const GridLayout = ({
       {children}
     </Box>
   );
-};

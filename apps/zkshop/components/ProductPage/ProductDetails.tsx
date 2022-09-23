@@ -1,7 +1,8 @@
 import { TriangleUpIcon } from "@chakra-ui/icons";
 import { Box, Text, Button, Image, HStack, VStack } from "@chakra-ui/react";
-import { CollectionBadge } from "../ProductCard/CollectionBadge";
+
 import useTransaction from "../../hooks/useTransaction";
+import { CollectionBadge } from "../ProductCard/CollectionBadge";
 import { SizeSelector } from "../SizeSelector";
 
 interface ProductDetailsProps {
@@ -99,10 +100,10 @@ export const ProductDetails = ({
           />
           <Text
             px={1}
-            position={"absolute"}
+            position="absolute"
             top={190}
             textAlign="center"
-            color={"white"}
+            color="white"
             fontWeight="bold"
             fontSize="2xl"
             width="100%"
@@ -112,23 +113,23 @@ export const ProductDetails = ({
         </>
       )}
 
-      <HStack alignItems={"stretch"}>
+      <HStack alignItems="stretch">
         <Box>
           <Image alt="product" height="500px" src={srcItem} />
         </Box>
 
         <VStack flex={1} justifyContent="space-between">
           <VStack flex={1}>
-            <Box alignSelf={"flex-start"}>
+            <Box alignSelf="flex-start">
               <Text
                 fontWeight="bold"
                 fontSize="24px"
                 color="black"
                 mt={1}
                 p={1}
-                background={"#EEEEEF"}
+                background="#EEEEEF"
                 textTransform="capitalize"
-                width={"fit-content"}
+                width="fit-content"
               >
                 {title}
               </Text>
@@ -139,7 +140,7 @@ export const ProductDetails = ({
             </Text>
           </VStack>
 
-          <Box flex={1} width={"100%"} p={2}>
+          <Box flex={1} width="100%" p={2}>
             <SizeSelector />
             <Box
               display="flex"
@@ -214,13 +215,13 @@ export const ProductDetails = ({
                     fontSize="16px"
                     color="white"
                     mr={1}
-                    textTransform={"uppercase"}
+                    textTransform="uppercase"
                   >
                     Pay in fiat
                   </Text>
 
                   <Box borderRadius="10px" display="flex">
-                    <TriangleUpIcon ml={2} color={"white"} />
+                    <TriangleUpIcon ml={2} color="white" />
                   </Box>
                 </Box>
               </Button>
@@ -249,13 +250,13 @@ export const ProductDetails = ({
                     fontSize="16px"
                     color="white"
                     mr={1}
-                    textTransform={"uppercase"}
+                    textTransform="uppercase"
                   >
                     Pay in crypto
                   </Text>
 
                   <Box borderRadius="10px" display="flex">
-                    <TriangleUpIcon ml={2} color={"white"} />
+                    <TriangleUpIcon ml={2} color="white" />
                   </Box>
                 </Box>
               </Button>

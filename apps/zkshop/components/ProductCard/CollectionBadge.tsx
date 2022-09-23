@@ -6,8 +6,7 @@ type CollectionBadgeProps = {
   CollectionName: string;
 };
 
-export const CollectionBadge = ({ CollectionName }: CollectionBadgeProps) => {
-  return (
+export const CollectionBadge = ({ CollectionName }: CollectionBadgeProps) => (
     <Box
       sx={{
         zIndex: 1,
@@ -40,4 +39,3 @@ export const CollectionBadge = ({ CollectionName }: CollectionBadgeProps) => {
       {CollectionName}
     </Box>
   );
-};

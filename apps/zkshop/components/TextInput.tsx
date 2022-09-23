@@ -7,13 +7,11 @@ type TextInputProps = {
   register: UseFormRegister<any>;
 };
 
-const TextInput = ({ name, label, register }: TextInputProps) => {
-  return (
-    <Box w={"full"}>
+const TextInput = ({ name, label, register }: TextInputProps) => (
+    <Box w="full">
       <FormLabel textAlign="left">{label}</FormLabel>
       <Input type="text" {...register(name)} />
     </Box>
   );
-};
 
 export default TextInput;

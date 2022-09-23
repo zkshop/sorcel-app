@@ -1,5 +1,6 @@
 import { HStack, VStack } from "@chakra-ui/react";
 import { UseFormRegister } from "react-hook-form";
+
 import TextInput from "./TextInput";
 
 type ProductFieldsType = {

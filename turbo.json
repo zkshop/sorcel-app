@@ -2,14 +2,25 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**"
+      ]
     },
     "lint": {
       "outputs": []
     },
+    "lint:fix": {
+      "outputs": []
+    },
     "dev": {
-      "dependsOn": ["$HASURA_API_URL", "$HASURA_API_KEY"],
+      "dependsOn": [
+        "$HASURA_API_URL",
+        "$HASURA_API_KEY"
+      ],
       "cache": false
     }
   }

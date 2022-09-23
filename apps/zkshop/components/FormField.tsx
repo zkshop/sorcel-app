@@ -15,8 +15,7 @@ const FormField = ({
   placeholder,
   register,
   maxWidth,
-}: FormFieldProps) => {
-  return (
+}: FormFieldProps) => (
     <Box>
       <FormLabel>{label}</FormLabel>
       <Input
@@ -27,6 +26,5 @@ const FormField = ({
       />
     </Box>
   );
-};
 
 export default FormField;

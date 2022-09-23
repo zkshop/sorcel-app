@@ -1,15 +1,16 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
 import { UseFormRegister } from "react-hook-form";
+
 import FormField from "../../FormField";
+
 import { PRODUCTS_FIELDS } from "./constants";
 
 type ProductFormFieldProps = {
   register: UseFormRegister<any>;
 };
 
-const ProductsFormFields = ({ register }: ProductFormFieldProps) => {
-  return (
+const ProductsFormFields = ({ register }: ProductFormFieldProps) => (
     <Grid templateColumns="repeat(3, 1fr)" gap={4} my={2}>
       <GridItem>
         <FormField register={register} {...PRODUCTS_FIELDS.name} />
@@ -25,6 +26,5 @@ const ProductsFormFields = ({ register }: ProductFormFieldProps) => {
       </GridItem>
     </Grid>
   );
-};
 
 export default ProductsFormFields;

@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+
 import nftsReducer from "./slices/nfts";
 import themeReducer from "./slices/theme";
 
