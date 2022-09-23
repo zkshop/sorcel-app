@@ -9,5 +9,38 @@
     },
     "conventionalCommits.scopes": [
         "admin"
-    ]
+    ],
+    "js/ts.implicitProjectConfig.checkJs": true,
+    // More space
+    "formattingToggle.affects": [
+        "eslint.enable"
+    ],
+    "javascript.validate.enable": false,
+    "breadcrumbs.enabled": true,
+    // Extensions
+    "discord.enabled": true,
+    "standard.enable": false,
+    "files.associations": {
+        "*.env.local": "env",
+    },
+    // UI
+    // "workbench.activityBar.visible": false,
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "Fira Code",
+    "workbench.colorCustomizations": {
+        "statusBar.border": "#cb0300c5"
+    },
+    // Action on save
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+    },
+    "stylelint.enable": true,
+    "stylelint.validate": [
+        "css",
+        "scss",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
 }

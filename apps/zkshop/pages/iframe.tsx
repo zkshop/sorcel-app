@@ -27,7 +27,7 @@ const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
   }
 
   return (
-    <GridLayout id="main">
+    <GridLayout>
       <ReactCanvasConfetti fire={isConnected} className="canvas" />
 
       <ProductCardList products={productsQueryResult.data?.products} />
