@@ -1,9 +1,8 @@
+import { FormProvider, useForm } from "react-hook-form";
 
-import { useForm } from "react-hook-form";
-
+import { ProductForm } from "../../../components/admin/Products/ProductForm";
 import { useCreateProductMutation } from "../../../libs/apollo/generated";
 
-import { AddProductForm } from "./../../../components/admin/Products/AddProductForm";
 
 export type AddProductFormValues = {
   price: number;
@@ -15,12 +14,12 @@ export type AddProductFormValues = {
 };
 
 const AddProductPage = () => {
-  const { handleSubmit, register } = useForm<AddProductFormValues>();
+  const methods = useForm<AddProductFormValues>();
+  const { handleSubmit } = methods;
+  
   const [createProduct] = useCreateProductMutation();
 
   const onSubmit = async (data: AddProductFormValues) => {
-    console.log({ data });
-
     await createProduct({
       variables: {
         ...data,
@@ -29,11 +28,9 @@ const AddProductPage = () => {
   };
 
   return (
-    <AddProductForm
-      handleSubmit={handleSubmit}
-      onSubmit={onSubmit}
-      register={register}
-    />
+    <FormProvider {...methods}>
+      <ProductForm handleSubmit={handleSubmit} onSubmit={onSubmit} />;
+    </FormProvider>
   );
 };
 
