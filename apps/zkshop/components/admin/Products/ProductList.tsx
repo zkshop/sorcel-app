@@ -17,6 +17,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { useGetProductsQuery } from "../../../libs/apollo/generated";
+import Header from "../../Header";
 
 import { PRODUCT_ATTRIBUTES } from "./constants";
 
@@ -31,14 +32,11 @@ const Products = () => {
 
   return (
     <Box>
-      <Heading as="h3">
-        <HStack justifyContent="space-between">
-          <span>Products</span>
-          <Link href="/admin/product/add">
-            <Button>+ New Product</Button>
-          </Link>
-        </HStack>
-      </Heading>
+      <Header title="Products">
+        <Link href="/admin/product/add">
+          <Button>+ New Product</Button>
+        </Link>
+      </Header>
 
       <Box my={4}>
         <TableContainer>

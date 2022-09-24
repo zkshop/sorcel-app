@@ -19,7 +19,7 @@ const EditProductPage = ({ product }: EditProductPageProps) => {
     defaultValues: product,
   });
   const { handleSubmit } = methods;
-  
+
   const [editProduct] = useEditProductMutation();
 
   const onSubmit = async (data: AddProductFormValues) => {
