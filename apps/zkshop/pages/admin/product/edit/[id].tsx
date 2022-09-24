@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext } from "next";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
-import { AddProductForm } from "../../../../components/admin/Products/AddProductForm";
+import { ProductForm } from "../../../../components/admin/Products/ProductForm";
 import client from "../../../../libs/apollo/client";
 import {
   Product,
@@ -15,22 +15,21 @@ type EditProductPageProps = {
 };
 
 const EditProductPage = ({ product }: EditProductPageProps) => {
-  const { register, handleSubmit } = useForm<AddProductFormValues>({
+  const methods = useForm<AddProductFormValues>({
     defaultValues: product,
   });
-
-  const [editProduct, { loading }] = useEditProductMutation();
+  const { handleSubmit } = methods;
+  
+  const [editProduct] = useEditProductMutation();
 
   const onSubmit = async (data: AddProductFormValues) => {
     editProduct({ variables: { ...data, id: product.id } });
   };
 
   return (
-    <AddProductForm
-      handleSubmit={handleSubmit}
-      register={register}
-      onSubmit={onSubmit}
-    />
+    <FormProvider {...methods}>
+      <ProductForm handleSubmit={handleSubmit} onSubmit={onSubmit} />;
+    </FormProvider>
   );
 };
 
