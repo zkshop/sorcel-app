@@ -12,13 +12,13 @@ import { OnChainDataFields } from "./OnChainDataFields";
 type AddProductFormProps = {
   handleSubmit: Function;
   onSubmit(data: AddProductFormValues): Promise<void>;
-  canBeDeleted?: boolean;
+  onOpen?(): void;
 };
 
 export function ProductForm({
   handleSubmit,
   onSubmit,
-  canBeDeleted,
+  onOpen,
 }: AddProductFormProps) {
   return (
     <GridLayout>
@@ -26,6 +26,16 @@ export function ProductForm({
         <Header title="Add new product">
           <ButtonGroup>
             <Button type="submit">Save</Button>
+            {onOpen && (
+              <Button
+                onClick={onOpen}
+                type="button"
+                backgroundColor="red"
+                color="white"
+              >
+                Delete
+              </Button>
+            )}
           </ButtonGroup>
         </Header>
 

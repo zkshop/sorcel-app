@@ -1,0 +1,7 @@
+mutation DeleteProduct($id: uuid) {
+  delete_product(where: { id: { _eq: $id } }) {
+    returning {
+      app_id
+    }
+  }
+}
