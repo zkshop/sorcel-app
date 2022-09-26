@@ -19,6 +19,7 @@ interface ProductDetailsProps {
 }
 
 export const ProductDetails = ({
+  id,
   srcItem,
   title,
   discount,
@@ -197,6 +198,7 @@ export const ProductDetails = ({
 
             <Box mt={2}>
               <Button
+                as="a"
                 height="48px"
                 width="100%"
                 borderRadius="10px"
@@ -204,6 +206,7 @@ export const ProductDetails = ({
                 isDisabled={isTransparent}
                 bg="#4473c3"
                 _hover={{ bg: "#5686d8" }}
+                href={`/checkout/${id}`}
               >
                 <Box
                   display="flex"

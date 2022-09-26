@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { useAccount } from "wagmi";
 
@@ -8,7 +7,6 @@ import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";
 import client from "../libs/apollo/client";
 import {
   GetProductsDocument,
-  GetProductsQueryResult,
   useGetProductsQuery,
 } from "../libs/apollo/generated";
 

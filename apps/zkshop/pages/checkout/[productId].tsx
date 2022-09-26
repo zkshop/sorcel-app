@@ -1,16 +1,20 @@
 import { Box } from "@chakra-ui/react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { GetServerSidePropsContext } from "next";
 import { useState, useEffect } from "react";
 
-import { formatAmountForStripe } from "../clients/stripe/helpers";
-import { CheckoutForm } from "../components/CheckoutForm";
+import { CheckoutForm } from "../../components/CheckoutForm";
 
 const stripePromise = loadStripe(
   "pk_test_51IKmYzFoww6uficXIeMaweCQ90YNSJayTLBoeUxNbHBQ0nm8UZ5PnnDsNjpmj48ax9lKBzNtUmmpwjywBepb0IsB0072RMe4A9"
 );
 
-const Checkout = () => {
+type CheckoutProps = {
+  productId: string;
+};
+
+const Checkout = ({ productId }: CheckoutProps) => {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
 
   useEffect(() => {
@@ -18,13 +22,12 @@ const Checkout = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        productId: "2ce540cb-a57b-4594-9124-0afe0e7120c0",
+        productId,
       }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
-  }, []);
-  console.log(clientSecret);
+  }, [productId]);
 
   return (
     <Box width={200} height={800}>
@@ -41,3 +44,11 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { params } = context;
+
+  return { props: { productId: params?.productId } };
+};
