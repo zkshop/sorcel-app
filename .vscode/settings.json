@@ -8,7 +8,8 @@
         "https://www.graphql-code-generator.com/config.schema.json": "file:///Users/sinane/zkshop-app/apps/zkshop/codegen.yaml"
     },
     "conventionalCommits.scopes": [
-        "admin"
+        "admin",
+        "marketplace"
     ],
     "js/ts.implicitProjectConfig.checkJs": true,
     // More space
