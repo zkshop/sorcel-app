@@ -1,52 +1,36 @@
-import { Heading, HStack, Button, Box, ButtonGroup } from "@chakra-ui/react";
-import React from "react";
-
-import { GeneralInformationsField } from "./GeneralInformationsField";
-import { MediaFields } from "./MediaFields";
-import { OnChainDataFields } from "./OnChainDataFields";
-
 import { GridLayout } from "components/GridLayout";
-import Header from "components/Header";
-import { AddProductFormValues } from "pages/admin/product/add";
+import { ProductFormHeader } from "./ProductFormHeader";
+import {
+  GeneralInformationsFields,
+  MediaFields,
+  OnChainDataFields,
+} from "./Sections";
+import { AddProductFormValues } from "./types";
 
 type AddProductFormProps = {
   handleSubmit: Function;
   onSubmit(data: AddProductFormValues): Promise<void>;
   onOpen?(): void;
+  isLoading: boolean;
 };
 
-export function ProductForm({
+export const ProductForm = ({
   handleSubmit,
   onSubmit,
   onOpen,
-}: AddProductFormProps) {
+  isLoading,
+}: AddProductFormProps) => {
   return (
     <GridLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Header title="Add new product">
-          <ButtonGroup>
-            <Button type="submit">Save</Button>
-            {onOpen && (
-              <Button
-                onClick={onOpen}
-                type="button"
-                backgroundColor="red"
-                color="white"
-              >
-                Delete
-              </Button>
-            )}
-          </ButtonGroup>
-        </Header>
+        <ProductFormHeader isLoading={isLoading} onOpen={onOpen} />
 
-        <Box>
-          <GeneralInformationsField />
+        <GeneralInformationsFields />
 
-          <MediaFields />
+        <MediaFields />
 
-          <OnChainDataFields />
-        </Box>
+        <OnChainDataFields />
       </form>
     </GridLayout>
   );
-}
+};

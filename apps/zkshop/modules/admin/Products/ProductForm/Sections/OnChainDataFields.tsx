@@ -12,7 +12,7 @@ import { useFormContext } from "react-hook-form";
 
 import { Section } from "components/Section";
 
-export function OnChainDataFields({}) {
+export const OnChainDataFields = () => {
   const { register } = useFormContext();
 
   return (

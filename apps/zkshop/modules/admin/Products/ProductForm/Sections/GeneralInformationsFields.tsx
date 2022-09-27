@@ -10,11 +10,11 @@ import {
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-import { PRODUCTS_FIELDS } from "../constants";
+import { PRODUCTS_FIELDS } from "../../constants";
 
 import { Section } from "components/Section";
 
-export function GeneralInformationsField() {
+export const GeneralInformationsFields = () => {
   const { register } = useFormContext();
 
   return (
@@ -85,4 +85,4 @@ export function GeneralInformationsField() {
       </FormControl>
     </Section>
   );
-}
+};
