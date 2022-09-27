@@ -2,11 +2,6 @@ import { Box, Text } from "@chakra-ui/layout";
 
 import { GridLayout } from "../components/GridLayout";
 
-const iframeSrc =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:3004/iframe"
-    : "https://zkshop.vercel.app/iframe";
-
 const IframePage = () => (
   <GridLayout>
     <Box m={3} height="85vh" display="flex" flexDirection="column">
@@ -15,7 +10,7 @@ const IframePage = () => (
       </Text>
 
       <iframe
-        src={iframeSrc}
+        src="/iframe"
         title="the app in an iframe"
         width="100%"
         height="100%"

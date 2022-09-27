@@ -5,7 +5,7 @@ import { useAccount } from "wagmi";
 
 import { BackButton } from "../../components/BackButton";
 import { Product, ProductPage } from "../../components/ProductPage/ProductPage";
-import client from "../../libs/apollo/client";
+import { addApolloState, initializeApollo } from "../../libs/apollo/client";
 import { Product_By_PkDocument } from "../../libs/apollo/generated";
 
 type ProductDetailsPage = {
@@ -36,28 +36,29 @@ export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   const { params } = context;
+  const apolloClient = initializeApollo();
 
   try {
     if (params?.id) {
       const { id } = params;
-      const res = await client.query({
+      const res = await apolloClient.query({
         query: Product_By_PkDocument,
         variables: {
           id,
         },
       });
 
-      return {
+      return addApolloState(apolloClient, {
         props: { product: res.data?.product_by_pk },
-      };
+      });
     }
   } catch {
-    return {
+    return addApolloState(apolloClient, {
       props: {},
-    };
+    });
   }
 
-  return {
+  return addApolloState(apolloClient, {
     props: {},
-  };
+  });
 };

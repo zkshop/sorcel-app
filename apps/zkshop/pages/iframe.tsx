@@ -4,7 +4,7 @@ import { useAccount } from "wagmi";
 import { GridLayout } from "../components/GridLayout";
 import { ProductCardList } from "../components/ProductCardList/ProductCardList";
 import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";
-import client from "../libs/apollo/client";
+import { addApolloState, initializeApollo } from "../libs/apollo/client";
 import {
   GetProductsDocument,
   GetProductsQueryResult,
@@ -38,11 +38,12 @@ const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
 export default Marketplace;
 
 export async function getServerSideProps() {
-  const productsQueryResult = await client.query({
+  const apolloClient = initializeApollo();
+  const productsQueryResult = await apolloClient.query({
     query: GetProductsDocument,
   });
 
-  return {
+  return addApolloState(apolloClient, {
     props: { productsQueryResult },
-  };
+  });
 }

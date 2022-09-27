@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
 
 import { formatAmountForStripe } from "../../clients/stripe/helpers";
-import client from "../../libs/apollo/client";
+import { initializeApollo } from "../../libs/apollo/client";
 import {
   Product_By_PkDocument,
   Product_By_PkQuery,
@@ -17,7 +17,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { data } = await client.query<
+  const apolloClient = initializeApollo();
+  const { data } = await apolloClient.query<
     Product_By_PkQuery,
     Product_By_PkQueryVariables
   >({

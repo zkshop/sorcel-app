@@ -15,7 +15,10 @@ import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ProductForm } from "../../../../components/admin/Products/ProductForm";
-import client from "../../../../libs/apollo/client";
+import {
+  addApolloState,
+  initializeApollo,
+} from "../../../../libs/apollo/client";
 import {
   Product,
   Product_By_PkDocument,
@@ -95,19 +98,20 @@ export default EditProductPage;
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
+  const apolloClient = initializeApollo();
   const { params } = context;
 
   if (params?.id) {
     const { id } = params;
-    const res = await client.query({
+    const res = await apolloClient.query({
       query: Product_By_PkDocument,
       variables: {
         id,
       },
     });
 
-    return {
+    return addApolloState(apolloClient, {
       props: { product: res.data?.product_by_pk },
-    };
+    });
   }
 };

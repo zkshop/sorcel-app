@@ -6,6 +6,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   env: {
+    HOSTNAME: process.env.HOSTNAME,
     HASURA_API_URL: process.env.HASURA_API_URL,
     HASURA_API_KEY: process.env.HASURA_API_KEY,
   },

@@ -9,14 +9,16 @@ import { WagmiConfig } from "wagmi";
 
 import { wagmiClient, chains } from "../clients/wagmi";
 import { Layout } from "../components/Layout";
-import client from "../libs/apollo/client";
+import { useApollo } from "../libs/apollo/client";
 import store from "../store/store";
 import ThemeDecorator from "../theme/ThemeDecorator";
 
 function App({ Component, pageProps }: AppProps) {
+  const apolloClient = useApollo(pageProps);
+
   return (
     <WagmiConfig client={wagmiClient}>
-      <ApolloProvider client={client}>
+      <ApolloProvider client={apolloClient}>
         <RainbowKitProvider chains={chains}>
           <ReduxProvider store={store}>
             <ThemeDecorator>

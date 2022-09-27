@@ -1,21 +1,26 @@
+import { QueryResult } from "@apollo/client";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { useAccount } from "wagmi";
 
 import { GridLayout } from "../components/GridLayout";
 import { ProductCardList } from "../components/ProductCardList/ProductCardList";
 import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";
-import client from "../libs/apollo/client";
+import { initializeApollo, addApolloState } from "../libs/apollo/client";
 import {
   GetProductsDocument,
+  GetProductsQuery,
   useGetProductsQuery,
 } from "../libs/apollo/generated";
 
-type MarketplaceProps = {};
+type MarketplaceProps = {
+  productsQueryResult: QueryResult<GetProductsQuery>;
+};
 
-const Marketplace = ({}: MarketplaceProps) => {
+const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
+  console.log(process.env.HOSTNAME);
+  const { data, loading, error } = productsQueryResult;
   const {} = useUpdateThemeOnConnection();
   const { isConnected } = useAccount();
-  const { data, loading, error } = useGetProductsQuery();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -37,11 +42,12 @@ const Marketplace = ({}: MarketplaceProps) => {
 export default Marketplace;
 
 export async function getServerSideProps() {
-  const productsQueryResult = await client.query({
+  const apolloClient = initializeApollo();
+  const productsQueryResult = await apolloClient.query({
     query: GetProductsDocument,
   });
 
-  return {
+  return addApolloState(apolloClient, {
     props: { productsQueryResult },
-  };
+  });
 }
