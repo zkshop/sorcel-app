@@ -9,6 +9,7 @@ const nextConfig = {
     HOSTNAME: process.env.HOSTNAME,
     HASURA_API_URL: process.env.HASURA_API_URL,
     HASURA_API_KEY: process.env.HASURA_API_KEY,
+    PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
   },
   images: {
     domains: ["https://firebasestorage.googleapis.com"],
