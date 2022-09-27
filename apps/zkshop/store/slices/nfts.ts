@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Nft } from "alchemy-sdk";
 
-import { getEveryNftOfWallet } from "../../pages/api/nft";
+import { getEveryNftOfWallet } from "pages/api/nft";
 
 export const fetchNFTS = createAsyncThunk(
   "nfts/fetch",

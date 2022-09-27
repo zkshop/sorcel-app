@@ -1,14 +1,15 @@
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { useAccount } from "wagmi";
 
-import { GridLayout } from "../components/GridLayout";
-import { ProductCardList } from "../components/ProductCardList/ProductCardList";
 import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";
-import { addApolloState, initializeApollo } from "../libs/apollo/client";
+
+import { GridLayout } from "components/GridLayout";
+import { ProductCardList } from "components/ProductCardList/ProductCardList";
+import { addApolloState, initializeApollo } from "libs/apollo/client";
 import {
   GetProductsDocument,
   GetProductsQueryResult,
-} from "../libs/apollo/generated";
+} from "libs/apollo/generated";
 
 type MarketplaceProps = {
   productsQueryResult: GetProductsQueryResult;

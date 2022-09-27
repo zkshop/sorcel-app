@@ -6,8 +6,9 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 
-import getETHUSDprice from "../pages/api/getETHUSDPrice";
 import convertUSDToETH from "../utils/convertUSDToETH";
+
+import getETHUSDprice from "pages/api/getETHUSDPrice";
 
 const SHOP_WALLET = "0xDdB12A8AaD6549b4cAe70bF598Cc2B94dCB11d26";
 

@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-import { Section } from "../../../Section";
+import { Section } from "components/Section";
 
 export function MediaFields({}) {
   const { register } = useFormContext();

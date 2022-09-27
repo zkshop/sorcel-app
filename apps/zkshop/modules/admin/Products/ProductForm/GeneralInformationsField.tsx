@@ -10,8 +10,9 @@ import {
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-import { Section } from "../../../Section";
 import { PRODUCTS_FIELDS } from "../constants";
+
+import { Section } from "components/Section";
 
 export function GeneralInformationsField() {
   const { register } = useFormContext();

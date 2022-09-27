@@ -2,9 +2,9 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
 import { UseFormRegister } from "react-hook-form";
 
-import FormField from "../../FormField";
-
 import { PRODUCTS_FIELDS } from "./constants";
+
+import FormField from "components/FormField";
 
 type ProductFormFieldProps = {
   register: UseFormRegister<any>;

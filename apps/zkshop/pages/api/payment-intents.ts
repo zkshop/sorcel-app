@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
 
-import { formatAmountForStripe } from "../../clients/stripe/helpers";
-import { initializeApollo } from "../../libs/apollo/client";
+import { formatAmountForStripe } from "clients/stripe/helpers";
+import { initializeApollo } from "libs/apollo/client";
 import {
   Product_By_PkDocument,
   Product_By_PkQuery,
   Product_By_PkQueryVariables,
-} from "../../libs/apollo/generated";
+} from "libs/apollo/generated";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
   apiVersion: "2022-08-01",

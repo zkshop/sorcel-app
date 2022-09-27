@@ -1,7 +1,7 @@
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ProductForm } from "../../../components/admin/Products/ProductForm";
-import { useCreateProductMutation } from "../../../libs/apollo/generated";
+import { useCreateProductMutation } from "libs/apollo/generated";
+import { ProductForm } from "modules/admin/Products/ProductForm";
 
 export type AddProductFormValues = {
   price: number;

@@ -3,10 +3,10 @@ import { GetServerSidePropsContext } from "next";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { useAccount } from "wagmi";
 
-import { BackButton } from "../../components/BackButton";
-import { Product, ProductPage } from "../../components/ProductPage/ProductPage";
-import { addApolloState, initializeApollo } from "../../libs/apollo/client";
-import { Product_By_PkDocument } from "../../libs/apollo/generated";
+import { BackButton } from "components/BackButton";
+import { addApolloState, initializeApollo } from "libs/apollo/client";
+import { Product_By_PkDocument } from "libs/apollo/generated";
+import { Product, ProductPage } from "modules/product-page/ProductPage";
 
 type ProductDetailsPage = {
   product: Product;

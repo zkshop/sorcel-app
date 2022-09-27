@@ -1,13 +1,13 @@
 import { Heading, HStack, Button, Box, ButtonGroup } from "@chakra-ui/react";
 import React from "react";
 
-import { AddProductFormValues } from "../../../../pages/admin/product/add";
-import { GridLayout } from "../../../GridLayout";
-import Header from "../../../Header";
-
 import { GeneralInformationsField } from "./GeneralInformationsField";
 import { MediaFields } from "./MediaFields";
 import { OnChainDataFields } from "./OnChainDataFields";
+
+import { GridLayout } from "components/GridLayout";
+import Header from "components/Header";
+import { AddProductFormValues } from "pages/admin/product/add";
 
 type AddProductFormProps = {
   handleSubmit: Function;

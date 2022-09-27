@@ -4,7 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { GetServerSidePropsContext } from "next";
 import { useState, useEffect } from "react";
 
-import { CheckoutForm } from "../../components/CheckoutForm";
+import { CheckoutForm } from "modules/checkout/CheckoutForm";
 
 const stripePromise = loadStripe(
   "pk_test_51IKmYzFoww6uficXIeMaweCQ90YNSJayTLBoeUxNbHBQ0nm8UZ5PnnDsNjpmj48ax9lKBzNtUmmpwjywBepb0IsB0072RMe4A9"

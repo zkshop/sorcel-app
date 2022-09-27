@@ -14,18 +14,16 @@ import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ProductForm } from "../../../../components/admin/Products/ProductForm";
-import {
-  addApolloState,
-  initializeApollo,
-} from "../../../../libs/apollo/client";
+import { AddProductFormValues } from "../add";
+
+import { addApolloState, initializeApollo } from "libs/apollo/client";
 import {
   Product,
   Product_By_PkDocument,
   useDeleteProductMutation,
   useEditProductMutation,
-} from "../../../../libs/apollo/generated";
-import { AddProductFormValues } from "../add";
+} from "libs/apollo/generated";
+import { ProductForm } from "modules/admin/Products/ProductForm";
 
 type EditProductPageProps = {
   product: Product;

@@ -1,6 +1,5 @@
 import {
   Box,
-  Heading,
   Spinner,
   Table,
   TableContainer,
@@ -11,19 +10,16 @@ import {
   Tr,
   Image,
   Button,
-  HStack,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
-
-import { useGetProductsQuery } from "../../../libs/apollo/generated";
-import Header from "../../Header";
 
 import { PRODUCT_ATTRIBUTES } from "./constants";
 
+import Header from "components/Header";
+import { useGetProductsQuery } from "libs/apollo/generated";
+
 const Products = () => {
   const { data, error, loading } = useGetProductsQuery();
-  const router = useRouter();
   if (loading) return <Spinner />;
 
   if (error || !data) {
