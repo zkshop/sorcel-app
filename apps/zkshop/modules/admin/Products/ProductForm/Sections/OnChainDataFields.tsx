@@ -52,4 +52,4 @@ export const OnChainDataFields = () => {
       </FormControl>
     </Section>
   );
-}
+};

@@ -1,14 +1,16 @@
 import { useDisclosure } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useForm, FormProvider } from "react-hook-form";
+
+import { DeleteProductModal } from "./DeleteProductModal";
+import { ProductForm } from "./ProductForm";
+import { AddProductFormValues } from "./types";
+
 import {
   Product,
   useDeleteProductMutation,
   useEditProductMutation,
 } from "libs/apollo/generated";
-import { useRouter } from "next/router";
-import { useForm, FormProvider } from "react-hook-form";
-import { DeleteProductModal } from "./DeleteProductModal";
-import { ProductForm } from "./ProductForm";
-import { AddProductFormValues } from "./types";
 
 type EditProductFormContainerProps = {
   product: Product;

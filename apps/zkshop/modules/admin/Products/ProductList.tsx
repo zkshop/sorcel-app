@@ -4,16 +4,15 @@ import {
   Table,
   TableContainer,
   Tbody,
-  Td,
   Th,
   Thead,
   Tr,
-  Image,
-  Button,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { Button } from "ui";
 
 import { PRODUCT_ATTRIBUTES } from "./constants";
+import { ProductListItem } from "./ProductListItem";
 
 import Header from "components/Header";
 import { useGetProductsQuery } from "libs/apollo/generated";
@@ -34,7 +33,15 @@ export const Products = () => {
         </Link>
       </Header>
 
-      <Box my={4}>
+      <Box
+        my={4}
+        sx={{
+          bg: "white",
+          borderRadius: "8px",
+          p: 8,
+          border: "1px solid lightgrey",
+        }}
+      >
         <TableContainer>
           <Table>
             <Thead>
@@ -46,30 +53,28 @@ export const Products = () => {
             </Thead>
 
             <Tbody>
-              {data.products.map((product, i) => (
-                <Link key={i} href={`/admin/product/edit/${product.id}`}>
-                  <Tr>
-                    <Td>
-                      <Box>
-                        <Image
-                          width={16}
-                          height={16}
-                          src={product.image}
-                          alt={product.name}
-                        />
-                      </Box>
-                    </Td>
-                    <Td>{product.name}</Td>
-                    <Td>{product.price}</Td>
-                    <Td>{product.discount}</Td>
-                    <Td>
-                      {product.curation?.slice(0, 3)}...
-                      {product.curation?.slice(-3)}
-                    </Td>
-                    <Td>{product.collection}</Td>
-                  </Tr>
-                </Link>
-              ))}
+              {data.products.map(
+                ({
+                  id,
+                  image,
+                  name,
+                  price,
+                  discount,
+                  collection,
+                  curation,
+                }) => (
+                  <ProductListItem
+                    key={id}
+                    id={id}
+                    image={image}
+                    name={name}
+                    price={price}
+                    discount={discount}
+                    collection={collection}
+                    collectionAddress={curation}
+                  />
+                )
+              )}
             </Tbody>
           </Table>
         </TableContainer>

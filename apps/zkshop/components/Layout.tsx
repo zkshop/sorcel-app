@@ -9,7 +9,7 @@ type LayoutProps = {
   children: React.ReactNode;
 };
 
-const pageWithOutGridLayout = ["/iframe", "/admin"];
+const pageWithOutGridLayout = ["/iframe"];
 
 export const Layout = ({ children, ...props }: LayoutProps) => {
   const { asPath } = useRouter();

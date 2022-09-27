@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs";
 
 type VerticalMenuItem = {
@@ -11,31 +10,27 @@ type VerticalMenuProps = {
 };
 
 const VerticalMenu = ({ items }: VerticalMenuProps) => (
-  <Tabs orientation="vertical" justifyContent="flex-start">
-    <Box>
-      <TabList>
-        {items.map((item) => (
-          <Tab
-            key={`tab-${item.title}`}
-            fontSize="lg"
-            fontWeight="bold"
-            textAlign="left"
-            justifyContent="flex-start"
-            w="120px"
-          >
-            {item.title}
-          </Tab>
-        ))}
-      </TabList>
-    </Box>
+  <Tabs defaultIndex={1}>
+    <TabList>
+      {items.map((item) => (
+        <Tab
+          key={`tab-${item.title}`}
+          fontSize="lg"
+          fontWeight="bold"
+          textAlign="left"
+          justifyContent="flex-start"
+          w="120px"
+        >
+          {item.title}
+        </Tab>
+      ))}
+    </TabList>
 
-    <Box ml="2">
-      <TabPanels>
-        {items.map((item, i) => (
-          <TabPanel key={i}>{item.content}</TabPanel>
-        ))}
-      </TabPanels>
-    </Box>
+    <TabPanels mt={4}>
+      {items.map((item, i) => (
+        <TabPanel key={i}>{item.content}</TabPanel>
+      ))}
+    </TabPanels>
   </Tabs>
 );
 

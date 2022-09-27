@@ -35,4 +35,4 @@ export const MediaFields = () => {
       </FormControl>
     </Section>
   );
-}
+};

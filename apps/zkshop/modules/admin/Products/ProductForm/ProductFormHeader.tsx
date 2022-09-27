@@ -1,28 +1,31 @@
-import { ButtonGroup, Button } from "@chakra-ui/react";
-import Header from "components/Header";
+import { ButtonGroup } from "@chakra-ui/react";
 import React from "react";
+import { Button } from "ui";
+
+import Header from "components/Header";
 
 type ProductFormHeaderProps = { isLoading: boolean; onOpen?(): void };
 
-export const ProductFormHeader = ({ isLoading, onOpen }: ProductFormHeaderProps) => {
-  return (
-    <Header title={onOpen ? "Edit product" : "Add new product"}>
-      <ButtonGroup>
-        <Button isLoading={isLoading} type="submit">
-          Save
+export const ProductFormHeader = ({
+  isLoading,
+  onOpen,
+}: ProductFormHeaderProps) => (
+  <Header title={onOpen ? "Edit product" : "Add new product"}>
+    <ButtonGroup>
+      <Button isLoading={isLoading} type="submit">
+        Save
+      </Button>
+      {onOpen && (
+        <Button
+          onClick={onOpen}
+          type="button"
+          backgroundColor="red"
+          color="white"
+          isDisabled={isLoading}
+        >
+          Delete
         </Button>
-        {onOpen && (
-          <Button
-            onClick={onOpen}
-            type="button"
-            backgroundColor="red"
-            color="white"
-            isDisabled={isLoading}
-          >
-            Delete
-          </Button>
-        )}
-      </ButtonGroup>
-    </Header>
-  );
-};
+      )}
+    </ButtonGroup>
+  </Header>
+);

@@ -1,4 +1,5 @@
 import { GetServerSidePropsContext } from "next";
+import { BackButton } from "ui";
 
 import { addApolloState, initializeApollo } from "libs/apollo/client";
 import { Product, Product_By_PkDocument } from "libs/apollo/generated";
@@ -9,7 +10,10 @@ type EditProductPageProps = {
 };
 
 const EditProductPage = ({ product }: EditProductPageProps) => (
-  <EditProductFormContainer product={product} />
+  <>
+    <BackButton href="/admin" />
+    <EditProductFormContainer product={product} />
+  </>
 );
 
 export default EditProductPage;

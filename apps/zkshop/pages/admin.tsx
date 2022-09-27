@@ -23,9 +23,9 @@ const Admin = () => {
   ];
 
   return (
-    <GridLayout sx={{ py: { xs: 4, md: 8, lg: 8 }, px: 0, margin: 0 }}>
+    <>
       <VerticalMenu items={items} />
-    </GridLayout>
+    </>
   );
 };
 

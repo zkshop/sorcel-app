@@ -1,5 +1,12 @@
+import { BackButton } from "ui";
+
 import { AddProductFormContainer } from "modules";
 
-const AddProductPage = () => <AddProductFormContainer />;
+const AddProductPage = () => (
+  <>
+    <BackButton href="/admin" />
+    <AddProductFormContainer />
+  </>
+);
 
 export default AddProductPage;

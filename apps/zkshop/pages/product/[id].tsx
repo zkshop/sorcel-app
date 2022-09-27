@@ -1,9 +1,9 @@
 import { VStack } from "@chakra-ui/react";
 import { GetServerSidePropsContext } from "next";
 import ReactCanvasConfetti from "react-canvas-confetti";
+import { BackButton } from "ui";
 import { useAccount } from "wagmi";
 
-import { BackButton } from "components/BackButton";
 import { addApolloState, initializeApollo } from "libs/apollo/client";
 import { Product_By_PkDocument } from "libs/apollo/generated";
 import { Product, ProductPage } from "modules/product-page/ProductPage";
@@ -19,7 +19,7 @@ const ProductDetailsPage = ({ product }: ProductDetailsPage) => {
     <VStack pt={4}>
       <ReactCanvasConfetti fire={isConnected} className="canvas" />
 
-      <BackButton text="Go back" />
+      <BackButton text="Go back" href="/" />
 
       {product ? (
         <ProductPage product={product} />

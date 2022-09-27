@@ -8,6 +8,7 @@ import {
   useDisclosure,
   Flex,
 } from "@chakra-ui/react";
+import Link from "next/link";
 
 import ConnectWalletButton from "./ConnectWalletButton";
 import { MenuDrawer } from "./MenuDrawer";
@@ -30,18 +31,27 @@ export const NavBar = ({ admin }: NavBarProps) => {
         <MenuDrawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
 
         <HStack justifyContent="space-between" flex={1}>
-          <Text as="h1" fontSize="5xl" textTransform="uppercase">
-            <span
-              style={{
-                background: "-webkit-linear-gradient(#0987A0, #805AD5)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+          <Link href="/">
+            <Text
+              as="h1"
+              sx={{
+                fontSize: "5xl",
+                textTransform: "uppercase",
+                cursor: "pointer",
               }}
             >
-              Zk
-            </span>
-            Shop
-          </Text>
+              <span
+                style={{
+                  background: "-webkit-linear-gradient(#0987A0, #805AD5)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Zk
+              </span>
+              Shop
+            </Text>
+          </Link>
 
           {!admin && (
             <Box display="flex" alignItems="center" flexDirection="column">

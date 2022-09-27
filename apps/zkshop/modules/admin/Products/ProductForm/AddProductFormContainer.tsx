@@ -1,8 +1,10 @@
-import { useCreateProductMutation } from "libs/apollo/generated";
 import { useRouter } from "next/router";
 import { useForm, FormProvider } from "react-hook-form";
+
 import { ProductForm } from "./ProductForm";
 import { AddProductFormValues } from "./types";
+
+import { useCreateProductMutation } from "libs/apollo/generated";
 
 export const AddProductFormContainer = () => {
   const methods = useForm<AddProductFormValues>();
