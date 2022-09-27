@@ -2,6 +2,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { useCreateProductMutation } from "libs/apollo/generated";
 import { ProductForm } from "modules/admin/Products/ProductForm";
+import { useRouter } from "next/router";
 
 export type AddProductFormValues = {
   price: number;
@@ -16,19 +17,31 @@ const AddProductPage = () => {
   const methods = useForm<AddProductFormValues>();
   const { handleSubmit } = methods;
 
-  const [createProduct] = useCreateProductMutation();
+  const router = useRouter();
+
+  const [createProduct, { loading: isLoading }] = useCreateProductMutation();
 
   const onSubmit = async (data: AddProductFormValues) => {
-    await createProduct({
-      variables: {
-        ...data,
-      },
-    });
+    try {
+      await createProduct({
+        variables: {
+          ...data,
+        },
+      });
+
+      router.push("/admin");
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
     <FormProvider {...methods}>
-      <ProductForm handleSubmit={handleSubmit} onSubmit={onSubmit} />;
+      <ProductForm
+        isLoading={isLoading}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+      />
     </FormProvider>
   );
 };
