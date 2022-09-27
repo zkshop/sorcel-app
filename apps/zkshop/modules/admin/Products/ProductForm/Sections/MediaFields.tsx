@@ -12,7 +12,7 @@ import { useFormContext } from "react-hook-form";
 
 import { Section } from "components/Section";
 
-export function MediaFields({}) {
+export const MediaFields = () => {
   const { register } = useFormContext();
   return (
     <Section>
