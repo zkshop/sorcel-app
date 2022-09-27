@@ -3,12 +3,9 @@ import { Spinner } from "@chakra-ui/react";
 import { GridLayout } from "components/GridLayout";
 import VerticalMenu from "components/VerticalMenu";
 import { useGetAdminQuery } from "libs/apollo/generated";
-import General from "modules/admin/General/General";
-import Products from "modules/admin/Products/ProductList";
+import { General, Products } from "modules";
 
-type AdminProps = {};
-
-const Admin = ({}: AdminProps) => {
+const Admin = () => {
   const { data, loading } = useGetAdminQuery();
 
   if (loading) return <Spinner />;

@@ -12,7 +12,7 @@ type GeneralFormProps = {
   defaultValues: GeneralFormValues;
 };
 
-const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
+export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
   const { handleSubmit, register } = useForm<GeneralFormValues>({
     defaultValues,
   });
@@ -61,5 +61,3 @@ const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
     </Box>
   );
 };
-
-export default GeneralForm;

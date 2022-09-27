@@ -1,8 +1,11 @@
-import ProductFormHeader from "./ProductFormHeader";
-
 import { GridLayout } from "components/GridLayout";
-import { AddProductFormValues } from "pages/admin/product/add";
-import { GeneralInformationsFields, MediaFields, OnChainDataFields } from "./Sections";
+import { ProductFormHeader } from "./ProductFormHeader";
+import {
+  GeneralInformationsFields,
+  MediaFields,
+  OnChainDataFields,
+} from "./Sections";
+import { AddProductFormValues } from "./types";
 
 type AddProductFormProps = {
   handleSubmit: Function;
@@ -11,12 +14,12 @@ type AddProductFormProps = {
   isLoading: boolean;
 };
 
-export function ProductForm({
+export const ProductForm = ({
   handleSubmit,
   onSubmit,
   onOpen,
   isLoading,
-}: AddProductFormProps) {
+}: AddProductFormProps) => {
   return (
     <GridLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -30,4 +33,4 @@ export function ProductForm({
       </form>
     </GridLayout>
   );
-}
+};

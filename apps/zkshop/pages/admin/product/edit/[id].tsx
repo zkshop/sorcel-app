@@ -2,15 +2,14 @@ import { GetServerSidePropsContext } from "next";
 
 import { addApolloState, initializeApollo } from "libs/apollo/client";
 import { Product, Product_By_PkDocument } from "libs/apollo/generated";
-
-import ProductFormContainer from "modules/admin/Products/ProductForm/ProductFormContainer";
+import { EditProductFormContainer } from "modules";
 
 type EditProductPageProps = {
   product: Product;
 };
 
 const EditProductPage = ({ product }: EditProductPageProps) => (
-  <ProductFormContainer product={product} />
+  <EditProductFormContainer product={product} />
 );
 
 export default EditProductPage;

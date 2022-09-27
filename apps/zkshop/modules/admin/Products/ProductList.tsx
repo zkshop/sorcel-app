@@ -18,7 +18,7 @@ import { PRODUCT_ATTRIBUTES } from "./constants";
 import Header from "components/Header";
 import { useGetProductsQuery } from "libs/apollo/generated";
 
-const Products = () => {
+export const Products = () => {
   const { data, error, loading } = useGetProductsQuery();
   if (loading) return <Spinner />;
 
@@ -77,5 +77,3 @@ const Products = () => {
     </Box>
   );
 };
-
-export default Products;

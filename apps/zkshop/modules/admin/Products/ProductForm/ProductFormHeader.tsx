@@ -4,7 +4,7 @@ import React from "react";
 
 type ProductFormHeaderProps = { isLoading: boolean; onOpen?(): void };
 
-const ProductFormHeader = ({ isLoading, onOpen }: ProductFormHeaderProps) => {
+export const ProductFormHeader = ({ isLoading, onOpen }: ProductFormHeaderProps) => {
   return (
     <Header title={onOpen ? "Edit product" : "Add new product"}>
       <ButtonGroup>
@@ -26,5 +26,3 @@ const ProductFormHeader = ({ isLoading, onOpen }: ProductFormHeaderProps) => {
     </Header>
   );
 };
-
-export default ProductFormHeader;

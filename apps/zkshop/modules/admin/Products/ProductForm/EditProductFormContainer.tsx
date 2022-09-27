@@ -1,4 +1,3 @@
-import { DeleteProductModal } from "./DeleteProductModal/DeleteProductModal";
 import { useDisclosure } from "@chakra-ui/react";
 import {
   Product,
@@ -6,15 +5,18 @@ import {
   useEditProductMutation,
 } from "libs/apollo/generated";
 import { useRouter } from "next/router";
-import { AddProductFormValues } from "pages/admin/product/add";
 import { useForm, FormProvider } from "react-hook-form";
+import { DeleteProductModal } from "./DeleteProductModal";
 import { ProductForm } from "./ProductForm";
+import { AddProductFormValues } from "./types";
 
-type ProductFormContainerProps = {
+type EditProductFormContainerProps = {
   product: Product;
 };
 
-const ProductFormContainer = ({ product }: ProductFormContainerProps) => {
+export const EditProductFormContainer = ({
+  product,
+}: EditProductFormContainerProps) => {
   const methods = useForm<AddProductFormValues>({
     defaultValues: product,
   });
@@ -64,5 +66,3 @@ const ProductFormContainer = ({ product }: ProductFormContainerProps) => {
     </FormProvider>
   );
 };
-
-export default ProductFormContainer;
