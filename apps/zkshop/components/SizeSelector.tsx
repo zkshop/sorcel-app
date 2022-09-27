@@ -34,35 +34,35 @@ export const sizesList = [
 ];
 
 export const SizeSelector = () => (
-    <Box py={6}>
-      <Text
-        fontWeight="bold"
-        color="black"
-        background="#EEEEEF"
-        width="fit-content"
-      >
-        Size
-      </Text>
+  <Box py={6}>
+    <Text
+      fontWeight="bold"
+      color="black"
+      background="#EEEEEF"
+      width="fit-content"
+    >
+      Size
+    </Text>
 
-      <HStack spacing={2} mt={2}>
-        {sizesList.map(({ id, name }) => (
-          <Box
-            key={id}
-            role="button"
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              minWidth: "48px",
-              height: "40px",
-              border: id == 3 ? "2px solid black" : "1px solid #dedde0",
-            }}
-          >
-            <Text fontWeight="bold" fontSize="14px" color="black" padding="2px">
-              {name}
-            </Text>
-          </Box>
-        ))}
-      </HStack>
-    </Box>
-  );
+    <HStack spacing={2} mt={2}>
+      {sizesList.map(({ id, name }) => (
+        <Box
+          key={id}
+          role="button"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minWidth: "48px",
+            height: "40px",
+            border: id == 3 ? "2px solid black" : "1px solid #dedde0",
+          }}
+        >
+          <Text fontWeight="bold" fontSize="14px" color="black" padding="2px">
+            {name}
+          </Text>
+        </Box>
+      ))}
+    </HStack>
+  </Box>
+);

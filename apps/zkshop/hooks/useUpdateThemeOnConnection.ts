@@ -14,21 +14,20 @@ const useUpdateThemeOnConnection = () => {
     if (address) {
       dispatch(fetchNFTS(address));
     }
-  }, [address, dispatch])
+  }, [address, dispatch]);
 
   useEffect(() => {
     const setVanillaTheme = () => dispatch(update("vanilla"));
     const setFirstTheme = () => dispatch(update("first"));
 
     if (isConnected) {
-    setFirstTheme();
+      setFirstTheme();
     }
     if (isDisconnected) {
-    setVanillaTheme();
-    dispatch(reset());
+      setVanillaTheme();
+      dispatch(reset());
     }
   }, [dispatch, isConnected, isDisconnected]);
-
 
   useEffect(() => {
     if (address) {

@@ -1,5 +1,11 @@
 module.exports = {
-  extends: ["next", "turbo", "prettier"],
+  extends: [
+    "next",
+    "turbo", 
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier"
+],
   rules: {
     'import/no-anonymous-default-export': 'off',
     'import/order': [

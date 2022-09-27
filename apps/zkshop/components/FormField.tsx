@@ -16,15 +16,15 @@ const FormField = ({
   register,
   maxWidth,
 }: FormFieldProps) => (
-    <Box>
-      <FormLabel>{label}</FormLabel>
-      <Input
-        maxWidth={maxWidth}
-        type="text"
-        placeholder={placeholder}
-        {...register?.(name)}
-      />
-    </Box>
-  );
+  <Box>
+    <FormLabel>{label}</FormLabel>
+    <Input
+      maxWidth={maxWidth}
+      type="text"
+      placeholder={placeholder}
+      {...register?.(name)}
+    />
+  </Box>
+);
 
 export default FormField;

@@ -8,10 +8,10 @@ type TextInputProps = {
 };
 
 const TextInput = ({ name, label, register }: TextInputProps) => (
-    <Box w="full">
-      <FormLabel textAlign="left">{label}</FormLabel>
-      <Input type="text" {...register(name)} />
-    </Box>
-  );
+  <Box w="full">
+    <FormLabel textAlign="left">{label}</FormLabel>
+    <Input type="text" {...register(name)} />
+  </Box>
+);
 
 export default TextInput;

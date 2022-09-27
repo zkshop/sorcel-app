@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { useAccount } from "wagmi";
 

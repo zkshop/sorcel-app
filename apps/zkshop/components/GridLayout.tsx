@@ -5,21 +5,17 @@ type GridLayoutProps = {
   sx?: any;
 };
 
-export const GridLayout = ({
-  children,
-  sx,
-  ...props
-}: GridLayoutProps) => (
-    <Box
-      sx={{
-        m: "0 auto",
-        width: "100%",
-        maxWidth: 1024, // TODO: change to 1440px
-        p: { xs: 4, md: 8, lg: 8 },
-        ...sx,
-      }}
-      {...props}
-    >
-      {children}
-    </Box>
-  );
+export const GridLayout = ({ children, sx, ...props }: GridLayoutProps) => (
+  <Box
+    sx={{
+      m: "0 auto",
+      width: "100%",
+      maxWidth: 1024, // TODO: change to 1440px
+      p: { xs: 4, md: 8, lg: 8 },
+      ...sx,
+    }}
+    {...props}
+  >
+    {children}
+  </Box>
+);

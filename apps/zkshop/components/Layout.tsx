@@ -9,10 +9,14 @@ type LayoutProps = {
   children: React.ReactNode;
 };
 
+const pageWithOutGridLayout = ["/iframe", "/admin"];
+
 export const Layout = ({ children, ...props }: LayoutProps) => {
   const { asPath } = useRouter();
+  const withLayout = asPath == "/iframe";
+  const withGridLayout = !pageWithOutGridLayout.includes(asPath);
 
-  if (asPath == "/iframe") {
+  if (withLayout) {
     return <> {children} </>;
   }
 
@@ -22,7 +26,7 @@ export const Layout = ({ children, ...props }: LayoutProps) => {
 
       <Banner />
 
-      {children}
+      {withGridLayout ? <GridLayout> {children} </GridLayout> : children}
     </Box>
   );
 };

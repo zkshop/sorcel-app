@@ -1,10 +1,8 @@
-import { alchemy } from '../../clients/alchemy';
+import { alchemy } from "../../clients/alchemy";
 
-export async function getEveryNftOfWallet(
-  walletAddress: string
-){
+export async function getEveryNftOfWallet(walletAddress: string) {
   try {
-    const result = await alchemy.nft.getNftsForOwner(walletAddress)
+    const result = await alchemy.nft.getNftsForOwner(walletAddress);
     return result.ownedNfts;
   } catch (e) {
     console.error(e);
@@ -12,4 +10,3 @@ export async function getEveryNftOfWallet(
 
   return [];
 }
-

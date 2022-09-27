@@ -11,7 +11,7 @@ export function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [message, setMessage] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

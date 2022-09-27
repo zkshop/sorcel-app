@@ -11,20 +11,20 @@ type ProductFormFieldProps = {
 };
 
 const ProductsFormFields = ({ register }: ProductFormFieldProps) => (
-    <Grid templateColumns="repeat(3, 1fr)" gap={4} my={2}>
-      <GridItem>
-        <FormField register={register} {...PRODUCTS_FIELDS.name} />
-        <FormField register={register} {...PRODUCTS_FIELDS.image} />
-      </GridItem>
-      <GridItem>
-        <FormField register={register} {...PRODUCTS_FIELDS.price} />
-        <FormField register={register} {...PRODUCTS_FIELDS.discount} />
-      </GridItem>
-      <GridItem>
-        <FormField register={register} {...PRODUCTS_FIELDS.curation} />
-        <FormField register={register} {...PRODUCTS_FIELDS.collection} />
-      </GridItem>
-    </Grid>
-  );
+  <Grid templateColumns="repeat(3, 1fr)" gap={4} my={2}>
+    <GridItem>
+      <FormField register={register} {...PRODUCTS_FIELDS.name} />
+      <FormField register={register} {...PRODUCTS_FIELDS.image} />
+    </GridItem>
+    <GridItem>
+      <FormField register={register} {...PRODUCTS_FIELDS.price} />
+      <FormField register={register} {...PRODUCTS_FIELDS.discount} />
+    </GridItem>
+    <GridItem>
+      <FormField register={register} {...PRODUCTS_FIELDS.curation} />
+      <FormField register={register} {...PRODUCTS_FIELDS.collection} />
+    </GridItem>
+  </Grid>
+);
 
 export default ProductsFormFields;

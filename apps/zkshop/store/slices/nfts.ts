@@ -5,8 +5,7 @@ import { getEveryNftOfWallet } from "../../pages/api/nft";
 
 export const fetchNFTS = createAsyncThunk(
   "nfts/fetch",
-  async (walletAddress: string) =>
-    (await getEveryNftOfWallet(walletAddress))
+  async (walletAddress: string) => await getEveryNftOfWallet(walletAddress)
 );
 
 const initialState: Nft[] = [];

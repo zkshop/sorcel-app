@@ -1,8 +1,16 @@
 import { Box, Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
-import { ProductFieldsType } from "./AdminForm";
 import ProductFields from "./ProductFields";
+
+export type ProductFieldsType = {
+  name: string;
+  image: string;
+  price: string;
+  collection: string;
+  discount: string;
+  curation: string;
+};
 
 type ProductFormProps = {
   onSubmit: (values: ProductFieldsType) => void;

@@ -3,7 +3,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import { ProductForm } from "../../../components/admin/Products/ProductForm";
 import { useCreateProductMutation } from "../../../libs/apollo/generated";
 
-
 export type AddProductFormValues = {
   price: number;
   discount: number;
@@ -16,7 +15,7 @@ export type AddProductFormValues = {
 const AddProductPage = () => {
   const methods = useForm<AddProductFormValues>();
   const { handleSubmit } = methods;
-  
+
   const [createProduct] = useCreateProductMutation();
 
   const onSubmit = async (data: AddProductFormValues) => {

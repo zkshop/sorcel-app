@@ -30,7 +30,7 @@ const Checkout = ({ productId }: CheckoutProps) => {
   }, [productId]);
 
   return (
-    <Box width={200} height={800}>
+    <Box>
       {clientSecret && (
         <Elements
           options={{ appearance: { theme: "stripe" }, clientSecret }}

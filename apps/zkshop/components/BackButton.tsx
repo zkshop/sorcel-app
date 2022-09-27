@@ -7,11 +7,11 @@ type BackButtonProps = {
 };
 
 export const BackButton = ({ text }: BackButtonProps) => (
-    <Link href="/">
-      <HStack sx={{ w: "100%", cursor: "pointer" }}>
-        <ArrowLeftIcon mr={2} />
+  <Link href="/">
+    <HStack sx={{ w: "100%", cursor: "pointer" }}>
+      <ArrowLeftIcon mr={2} />
 
-        <Text>{text}</Text>
-      </HStack>
-    </Link>
-  );
+      <Text>{text}</Text>
+    </HStack>
+  </Link>
+);
