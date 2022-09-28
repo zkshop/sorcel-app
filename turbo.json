@@ -22,7 +22,7 @@
         "$HOSTNAME",
         "$HASURA_API_URL",
         "$HASURA_API_KEY",
-        "$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+        "$PUBLIC_STRIPE_PUBLISHABLE_KEY",
         "$STRIPE_SECRET_KEY"
       ],
       "cache": false

@@ -1,4 +1,4 @@
-import { Box, FormLabel, Input, VStack } from "@chakra-ui/react";
+import { Box, FormLabel, Input } from "@chakra-ui/react";
 import { UseFormRegister } from "react-hook-form";
 
 type TextInputProps = {
@@ -7,7 +7,7 @@ type TextInputProps = {
   register: UseFormRegister<any>;
 };
 
-const TextInput = ({ name, label, register }: TextInputProps) => (
+export const TextInput = ({ name, label, register }: TextInputProps) => (
   <Box w="full">
     <FormLabel textAlign="left">{label}</FormLabel>
     <Input type="text" {...register(name)} />

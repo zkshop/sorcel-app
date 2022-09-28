@@ -1,3 +1,5 @@
+import { GridLayout } from "ui";
+
 import { ProductFormHeader } from "./ProductFormHeader";
 import {
   GeneralInformationsFields,
@@ -5,8 +7,6 @@ import {
   OnChainDataFields,
 } from "./Sections";
 import { AddProductFormValues } from "./types";
-
-import { GridLayout } from "components/GridLayout";
 
 type AddProductFormProps = {
   handleSubmit: Function;

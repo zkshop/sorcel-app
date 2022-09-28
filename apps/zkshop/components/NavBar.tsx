@@ -6,13 +6,11 @@ import {
   Text,
   Button,
   useDisclosure,
-  Flex,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { SismoBanner, MenuDrawer } from "ui";
 
 import ConnectWalletButton from "./ConnectWalletButton";
-import { MenuDrawer } from "./MenuDrawer";
-import { SismoBanner } from "./SismoBanner";
 
 type NavBarProps = {
   admin: boolean;

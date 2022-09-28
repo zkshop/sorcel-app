@@ -1,7 +1,6 @@
 import { Spinner } from "@chakra-ui/react";
+import { VerticalMenu } from "ui";
 
-import { GridLayout } from "components/GridLayout";
-import VerticalMenu from "components/VerticalMenu";
 import { useGetAdminQuery } from "libs/apollo/generated";
 import { General, Products } from "modules";
 

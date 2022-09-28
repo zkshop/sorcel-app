@@ -1,10 +1,8 @@
 import { TriangleUpIcon } from "@chakra-ui/icons";
 import { Box, Text, Button, Image, HStack, VStack } from "@chakra-ui/react";
+import { CollectionBadge, SizeSelector } from "ui";
 
 import useTransaction from "../../hooks/useTransaction";
-
-import { CollectionBadge } from "components/ProductCard/CollectionBadge";
-import { SizeSelector } from "components/SizeSelector";
 
 interface ProductDetailsProps {
   id?: string;

@@ -5,12 +5,13 @@ import {
   HStack,
   Input,
 } from "@chakra-ui/react";
-
-import { Section } from "components/Section";
-import { ShippingFormValues } from "modules";
 import { useFormContext } from "react-hook-form";
 import { Button } from "ui";
+import { Section } from "ui";
+
 import { SHIPPING_FIELDS } from "../constants";
+
+import { ShippingFormValues } from "modules";
 
 type ShippingFormProps = {
   handleSubmit: Function;

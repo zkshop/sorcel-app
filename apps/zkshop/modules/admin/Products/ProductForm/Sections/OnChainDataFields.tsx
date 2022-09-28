@@ -9,8 +9,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-
-import { Section } from "components/Section";
+import { Section } from "ui";
 
 export const OnChainDataFields = () => {
   const { register } = useFormContext();

@@ -1,6 +1,5 @@
 import { Box, Text } from "@chakra-ui/layout";
-
-import { GridLayout } from "components/GridLayout";
+import { GridLayout } from "ui";
 
 const IframePage = () => (
   <GridLayout>

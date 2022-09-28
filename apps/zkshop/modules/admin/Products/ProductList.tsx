@@ -10,11 +10,11 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { Button } from "ui";
+import { Header } from "ui";
 
 import { PRODUCT_ATTRIBUTES } from "./constants";
 import { ProductListItem } from "./ProductListItem";
 
-import Header from "components/Header";
 import { useGetProductsQuery } from "libs/apollo/generated";
 
 export const Products = () => {

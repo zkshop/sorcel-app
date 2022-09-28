@@ -9,7 +9,7 @@ type VerticalMenuProps = {
   items: VerticalMenuItem[];
 };
 
-const VerticalMenu = ({ items }: VerticalMenuProps) => (
+export const VerticalMenu = ({ items }: VerticalMenuProps) => (
   <Tabs defaultIndex={1}>
     <TabList>
       {items.map((item) => (
@@ -33,5 +33,3 @@ const VerticalMenu = ({ items }: VerticalMenuProps) => (
     </TabPanels>
   </Tabs>
 );
-
-export default VerticalMenu;

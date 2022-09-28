@@ -1,6 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import { collection } from "firebase/firestore";
-import React from "react";
 
 type CollectionBadgeProps = {
   CollectionName: string;

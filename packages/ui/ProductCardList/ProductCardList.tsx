@@ -1,8 +1,8 @@
 import { Box, Grid, GridItem, VStack } from "@chakra-ui/react";
 import Image from "next/image";
+import { ProductCard } from "ui";
 
-import { useAppSelector } from "../../store/store";
-import { ProductCard } from "../ProductCard/ProductCard";
+import { useAppSelector } from "../../../apps/zkshop/store/store";
 
 type ProductCardListProps = {
   products: Product[];

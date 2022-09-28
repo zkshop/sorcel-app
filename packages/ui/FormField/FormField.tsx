@@ -1,5 +1,5 @@
 import { Box, FormLabel, Input } from "@chakra-ui/react";
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
 
 type FormFieldProps = {
   label: string;
@@ -9,7 +9,7 @@ type FormFieldProps = {
   maxWidth?: string | number;
 };
 
-const FormField = ({
+export const FormField = ({
   label,
   name,
   placeholder,
@@ -26,5 +26,3 @@ const FormField = ({
     />
   </Box>
 );
-
-export default FormField;

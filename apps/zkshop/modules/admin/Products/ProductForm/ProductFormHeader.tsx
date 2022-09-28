@@ -1,8 +1,6 @@
 import { ButtonGroup } from "@chakra-ui/react";
 import React from "react";
-import { Button } from "ui";
-
-import Header from "components/Header";
+import { Button, Header } from "ui";
 
 type ProductFormHeaderProps = { isLoading: boolean; onOpen?(): void };
 

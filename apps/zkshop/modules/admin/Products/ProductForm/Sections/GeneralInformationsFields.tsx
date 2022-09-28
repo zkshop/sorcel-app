@@ -9,10 +9,9 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { Section } from "ui";
 
 import { PRODUCTS_FIELDS } from "../../constants";
-
-import { Section } from "components/Section";
 
 export const GeneralInformationsFields = () => {
   const { register } = useFormContext();

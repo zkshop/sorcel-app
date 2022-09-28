@@ -3,8 +3,8 @@ import { Elements } from "@stripe/react-stripe-js";
 import { GetServerSidePropsContext } from "next";
 import { useState, useEffect } from "react";
 
-import { CheckoutForm } from "modules/checkout/CheckoutForm";
 import { getPaymentIntent, getStripeObject } from "clients/stripe";
+import { CheckoutForm } from "modules/checkout/CheckoutForm";
 
 type CheckoutProps = {
   productId: string;

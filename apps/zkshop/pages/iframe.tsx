@@ -1,10 +1,10 @@
 import ReactCanvasConfetti from "react-canvas-confetti";
+import { ProductCardList } from "ui";
+import { GridLayout } from "ui";
 import { useAccount } from "wagmi";
 
 import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";
 
-import { GridLayout } from "components/GridLayout";
-import { ProductCardList } from "components/ProductCardList/ProductCardList";
 import { addApolloState, initializeApollo } from "libs/apollo/client";
 import {
   GetProductsDocument,
