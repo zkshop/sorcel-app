@@ -5,6 +5,8 @@ import { ProductForm } from "./ProductForm";
 import { AddProductFormValues } from "./types";
 
 import { useCreateProductMutation } from "libs/apollo/generated";
+import { getAddProductSuccessMessage } from "libs/messages";
+import { useToast } from "@chakra-ui/react";
 
 export const AddProductFormContainer = () => {
   const methods = useForm<AddProductFormValues>();
@@ -14,12 +16,15 @@ export const AddProductFormContainer = () => {
 
   const [createProduct, { loading: isLoading }] = useCreateProductMutation();
 
+  const toast = useToast();
+
   const onSubmit = async (data: AddProductFormValues) => {
     try {
       await createProduct({
         variables: {
           ...data,
         },
+        onCompleted: () => toast(getAddProductSuccessMessage(data.name)),
       });
 
       router.push("/admin");
