@@ -207,7 +207,7 @@ export const ProductDetails = ({
                 isDisabled={isTransparent}
                 bg="#4473c3"
                 _hover={{ bg: "#5686d8" }}
-                href={`/checkout/${id}`}
+                href={`/shipping/${id}`}
               >
                 <Box
                   display="flex"
