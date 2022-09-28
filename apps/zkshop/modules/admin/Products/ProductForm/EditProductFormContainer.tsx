@@ -1,4 +1,4 @@
-import { useDisclosure } from "@chakra-ui/react";
+import { useDisclosure, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useForm, FormProvider } from "react-hook-form";
 
@@ -11,6 +11,7 @@ import {
   useDeleteProductMutation,
   useEditProductMutation,
 } from "libs/apollo/generated";
+import { ERROR_MESSAGE, getDeleteProductSuccessMessage, getEditProductSuccessMessage } from "libs/messages";
 
 type EditProductFormContainerProps = {
   product: Product;
@@ -26,6 +27,7 @@ export const EditProductFormContainer = ({
 
   const router = useRouter();
 
+  const toast = useToast();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   const [deleteProduct, { loading: isDeleteLoading }] =
@@ -38,6 +40,8 @@ export const EditProductFormContainer = ({
         variables: {
           id: product.id,
         },
+        onCompleted: () => toast(getDeleteProductSuccessMessage(product.name)),
+        onError: () => toast(ERROR_MESSAGE),
       });
       router.push("/admin");
     } catch (e) {
@@ -46,7 +50,11 @@ export const EditProductFormContainer = ({
   };
 
   const onSubmit = async (data: AddProductFormValues) => {
-    editProduct({ variables: { ...data, id: product.id } });
+    editProduct({
+      variables: { ...data, id: product.id },
+      onCompleted: () => toast(getEditProductSuccessMessage(data.name)),
+      onError: () => toast(ERROR_MESSAGE),
+    });
   };
 
   return (

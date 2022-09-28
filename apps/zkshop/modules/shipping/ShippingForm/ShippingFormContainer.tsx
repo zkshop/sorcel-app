@@ -5,7 +5,7 @@ import { ShippingFormValues } from "./types";
 
 export const ShippingFormContainer = () => {
   const methods = useForm<ShippingFormValues>();
-  const { handleSubmit, register } = methods;
+  const { handleSubmit } = methods;
 
   const router = useRouter();
 
