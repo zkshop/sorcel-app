@@ -2,6 +2,7 @@ import { Stack } from "@chakra-ui/react";
 
 type FormStackProps = {
   children: React.ReactNode;
+  width?: string;
 };
 
 const sx = {
@@ -11,8 +12,8 @@ const sx = {
   border: "1px solid lightgrey",
 };
 
-export const Section = ({ children }: FormStackProps) => (
-  <Stack mt={8} spacing={3} sx={sx}>
+export const Section = ({ children, width }: FormStackProps) => (
+  <Stack width={width} mt={8} spacing={3} sx={sx}>
     {children}
   </Stack>
 );
