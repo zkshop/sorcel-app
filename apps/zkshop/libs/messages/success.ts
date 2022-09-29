@@ -10,19 +10,19 @@ export const getEditProductSuccessMessage = (
 });
 
 export const getDeleteProductSuccessMessage = (
-    productName: string
-  ): UseToastOptions => ({
-    title: "Product Deleted",
-    description: `${productName} has been deleted successfully.`,
-    status: "success",
-    duration: 3000,
-  });
+  productName: string
+): UseToastOptions => ({
+  title: "Product Deleted",
+  description: `${productName} has been deleted successfully.`,
+  status: "success",
+  duration: 3000,
+});
 
-  export const getAddProductSuccessMessage = (
-    productName: string
-  ): UseToastOptions => ({
-    title: "Product Created",
-    description: `${productName} has been created successfully.`,
-    status: "success",
-    duration: 3000,
-  });
+export const getAddProductSuccessMessage = (
+  productName: string
+): UseToastOptions => ({
+  title: "Product Created",
+  description: `${productName} has been created successfully.`,
+  status: "success",
+  duration: 3000,
+});

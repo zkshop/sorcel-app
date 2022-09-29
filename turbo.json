@@ -26,6 +26,14 @@
         "$STRIPE_SECRET_KEY"
       ],
       "cache": false
+    },
+    "storybook": {
+      "cache": false
+    },
+    "build-storybook": {
+      "outputs": [
+        "storybook-static/**"
+      ]
     }
   }
 }

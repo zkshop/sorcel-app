@@ -5,7 +5,8 @@
   "types": "./index.tsx",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint *.ts*"
+    "lint": "eslint --max-warnings=0 --ext .ts,.tsx,.js,.jsx .",
+    "lint:fix": "yarn lint --fix"
   },
   "devDependencies": {
     "@types/react": "^17.0.37",

@@ -11,7 +11,11 @@ import {
   useDeleteProductMutation,
   useEditProductMutation,
 } from "libs/apollo/generated";
-import { ERROR_MESSAGE, getDeleteProductSuccessMessage, getEditProductSuccessMessage } from "libs/messages";
+import {
+  ERROR_MESSAGE,
+  getDeleteProductSuccessMessage,
+  getEditProductSuccessMessage,
+} from "libs/messages";
 
 type EditProductFormContainerProps = {
   product: Product;

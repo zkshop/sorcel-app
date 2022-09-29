@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useForm, FormProvider } from "react-hook-form";
 
@@ -6,7 +7,6 @@ import { AddProductFormValues } from "./types";
 
 import { useCreateProductMutation } from "libs/apollo/generated";
 import { getAddProductSuccessMessage } from "libs/messages";
-import { useToast } from "@chakra-ui/react";
 
 export const AddProductFormContainer = () => {
   const methods = useForm<AddProductFormValues>();

@@ -1,33 +1,33 @@
 module.exports = {
   extends: [
     "next",
-    "turbo", 
+    "turbo",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
-    "prettier"
-],
+    "prettier",
+  ],
   rules: {
-    'import/no-anonymous-default-export': 'off',
-    'import/order': [
-      'error',
+    "import/no-anonymous-default-export": "off",
+    "import/order": [
+      "error",
       {
         alphabetize: {
           caseInsensitive: true,
-          order: 'asc',
+          order: "asc",
         },
-        'newlines-between': 'always',
+        "newlines-between": "always",
       },
     ],
-    'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'react/jsx-curly-brace-presence': [
-      'error',
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-curly-brace-presence": [
+      "error",
       {
-        props: 'never',
-        children: 'never',
+        props: "never",
+        children: "never",
       },
     ],
-    'arrow-body-style': ['error', 'as-needed'],
-    'linebreak-style': ['error', 'unix'],
+    "arrow-body-style": ["error", "as-needed"],
+    "linebreak-style": ["error", "unix"],
   },
 };
