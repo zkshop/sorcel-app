@@ -28,8 +28,8 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
   );
 
   return (
-    <Box py={8}>
-      <VStack pb={8}>
+    <Box>
+      {/* <VStack pb={8}>
         <Image
           height={80}
           width={750}
@@ -39,7 +39,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
             borderRadius: "16px",
           }}
         />
-      </VStack>
+      </VStack> */}
 
       <Grid
         gap={8}

@@ -32,11 +32,11 @@ const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
   }
 
   return (
-    <GridLayout>
+    <>
       <ReactCanvasConfetti fire={isConnected} className="canvas" />
 
       <ProductCardList products={data?.products} />
-    </GridLayout>
+    </>
   );
 };
 

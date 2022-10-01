@@ -16,7 +16,7 @@ const ProductDetailsPage = ({ product }: ProductDetailsPage) => {
   const { isConnected } = useAccount();
 
   return (
-    <VStack pt={4}>
+    <VStack>
       <ReactCanvasConfetti fire={isConnected} className="canvas" />
 
       <BackButton text="Go back" href="/" />

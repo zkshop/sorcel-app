@@ -108,7 +108,7 @@ export const ProductCard = ({
             </Text>
           </>
         )}
-        <Box padding="8px">
+        <Box p={2}>
           <Box borderRadius="10px" height="200px">
             <Image alt="product" height="100%" width="100%" src={srcItem} />
           </Box>

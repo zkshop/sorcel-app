@@ -1,4 +1,4 @@
-import { ArrowLeftIcon } from "@chakra-ui/icons";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { HStack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ export const BackButton = ({ text = "Go back", href }: BackButtonProps) => (
     <HStack
       sx={{ w: "100%", cursor: "pointer", mb: 4, textDecoration: "underline" }}
     >
-      <ArrowLeftIcon mr={2} />
+      <ChevronLeftIcon fontSize="24px" />
 
       <Text fontSize="14px" fontWeight="bold">
         {text}
