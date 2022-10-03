@@ -49,6 +49,22 @@ export const OnChainDataFields = () => {
           <Input placeholder="Collection Address" {...register("curation")} />
         </InputGroup>
       </FormControl>
+
+      <FormControl>
+        <FormLabel> Poap Id </FormLabel>
+
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            color="gray.300"
+            fontSize="1.2em"
+          >
+            <BsCollection />
+          </InputLeftElement>
+
+          <Input type="number" placeholder="Poap ID" {...register("poapId")} />
+        </InputGroup>
+      </FormControl>
     </Section>
   );
 };

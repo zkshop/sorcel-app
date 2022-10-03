@@ -18,10 +18,13 @@ type Product = {
   image?: any;
   name: string;
   price: any;
+  poapId?: any;
 };
 
 export const ProductCardList = ({ products }: ProductCardListProps) => {
   const nfts = useAppSelector((state) => state.nfts);
+  const poaps = useAppSelector((state) => state.poap);
+  const poapIds = poaps.map((poap: any) => poap.event.id);
   const collections = nfts.map((nft) => nft.contract.address);
   const isAnHolder = products.some((product: Product) =>
     collections.includes(product?.curation?.toLowerCase())
@@ -60,9 +63,12 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
             collection,
             curation,
             id,
+            poapId,
           }: Product) => {
             const isTransparent =
-              curation && !collections.includes(curation.toLowerCase());
+              (curation || poapId) &&
+              !collections.includes(curation.toLowerCase()) &&
+              !poapIds.includes(poapId);
 
             return (
               <GridItem

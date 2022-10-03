@@ -383,6 +383,7 @@ export type Product = {
   id: Scalars["uuid"];
   image?: Maybe<Scalars["bpchar"]>;
   name: Scalars["String"];
+  poapId?: Maybe<Scalars["numeric"]>;
   price: Scalars["numeric"];
 };
 
@@ -419,6 +420,7 @@ export type Product_Aggregate_FieldsCountArgs = {
 export type Product_Avg_Fields = {
   __typename?: "product_avg_fields";
   discount?: Maybe<Scalars["Float"]>;
+  poapId?: Maybe<Scalars["Float"]>;
   price?: Maybe<Scalars["Float"]>;
 };
 
@@ -434,6 +436,7 @@ export type Product_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<Bpchar_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  poapId?: InputMaybe<Numeric_Comparison_Exp>;
   price?: InputMaybe<Numeric_Comparison_Exp>;
 };
 
@@ -446,6 +449,7 @@ export enum Product_Constraint {
 /** input type for incrementing numeric columns in table "product" */
 export type Product_Inc_Input = {
   discount?: InputMaybe<Scalars["smallint"]>;
+  poapId?: InputMaybe<Scalars["numeric"]>;
   price?: InputMaybe<Scalars["numeric"]>;
 };
 
@@ -458,6 +462,7 @@ export type Product_Insert_Input = {
   id?: InputMaybe<Scalars["uuid"]>;
   image?: InputMaybe<Scalars["bpchar"]>;
   name?: InputMaybe<Scalars["String"]>;
+  poapId?: InputMaybe<Scalars["numeric"]>;
   price?: InputMaybe<Scalars["numeric"]>;
 };
 
@@ -471,6 +476,7 @@ export type Product_Max_Fields = {
   id?: Maybe<Scalars["uuid"]>;
   image?: Maybe<Scalars["bpchar"]>;
   name?: Maybe<Scalars["String"]>;
+  poapId?: Maybe<Scalars["numeric"]>;
   price?: Maybe<Scalars["numeric"]>;
 };
 
@@ -484,6 +490,7 @@ export type Product_Min_Fields = {
   id?: Maybe<Scalars["uuid"]>;
   image?: Maybe<Scalars["bpchar"]>;
   name?: Maybe<Scalars["String"]>;
+  poapId?: Maybe<Scalars["numeric"]>;
   price?: Maybe<Scalars["numeric"]>;
 };
 
@@ -512,6 +519,7 @@ export type Product_Order_By = {
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  poapId?: InputMaybe<Order_By>;
   price?: InputMaybe<Order_By>;
 };
 
@@ -537,6 +545,8 @@ export enum Product_Select_Column {
   /** column name */
   Name = "name",
   /** column name */
+  PoapId = "poapId",
+  /** column name */
   Price = "price",
 }
 
@@ -549,6 +559,7 @@ export type Product_Set_Input = {
   id?: InputMaybe<Scalars["uuid"]>;
   image?: InputMaybe<Scalars["bpchar"]>;
   name?: InputMaybe<Scalars["String"]>;
+  poapId?: InputMaybe<Scalars["numeric"]>;
   price?: InputMaybe<Scalars["numeric"]>;
 };
 
@@ -556,6 +567,7 @@ export type Product_Set_Input = {
 export type Product_Stddev_Fields = {
   __typename?: "product_stddev_fields";
   discount?: Maybe<Scalars["Float"]>;
+  poapId?: Maybe<Scalars["Float"]>;
   price?: Maybe<Scalars["Float"]>;
 };
 
@@ -563,6 +575,7 @@ export type Product_Stddev_Fields = {
 export type Product_Stddev_Pop_Fields = {
   __typename?: "product_stddev_pop_fields";
   discount?: Maybe<Scalars["Float"]>;
+  poapId?: Maybe<Scalars["Float"]>;
   price?: Maybe<Scalars["Float"]>;
 };
 
@@ -570,6 +583,7 @@ export type Product_Stddev_Pop_Fields = {
 export type Product_Stddev_Samp_Fields = {
   __typename?: "product_stddev_samp_fields";
   discount?: Maybe<Scalars["Float"]>;
+  poapId?: Maybe<Scalars["Float"]>;
   price?: Maybe<Scalars["Float"]>;
 };
 
@@ -590,6 +604,7 @@ export type Product_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars["uuid"]>;
   image?: InputMaybe<Scalars["bpchar"]>;
   name?: InputMaybe<Scalars["String"]>;
+  poapId?: InputMaybe<Scalars["numeric"]>;
   price?: InputMaybe<Scalars["numeric"]>;
 };
 
@@ -597,6 +612,7 @@ export type Product_Stream_Cursor_Value_Input = {
 export type Product_Sum_Fields = {
   __typename?: "product_sum_fields";
   discount?: Maybe<Scalars["smallint"]>;
+  poapId?: Maybe<Scalars["numeric"]>;
   price?: Maybe<Scalars["numeric"]>;
 };
 
@@ -617,6 +633,8 @@ export enum Product_Update_Column {
   /** column name */
   Name = "name",
   /** column name */
+  PoapId = "poapId",
+  /** column name */
   Price = "price",
 }
 
@@ -632,6 +650,7 @@ export type Product_Updates = {
 export type Product_Var_Pop_Fields = {
   __typename?: "product_var_pop_fields";
   discount?: Maybe<Scalars["Float"]>;
+  poapId?: Maybe<Scalars["Float"]>;
   price?: Maybe<Scalars["Float"]>;
 };
 
@@ -639,6 +658,7 @@ export type Product_Var_Pop_Fields = {
 export type Product_Var_Samp_Fields = {
   __typename?: "product_var_samp_fields";
   discount?: Maybe<Scalars["Float"]>;
+  poapId?: Maybe<Scalars["Float"]>;
   price?: Maybe<Scalars["Float"]>;
 };
 
@@ -646,6 +666,7 @@ export type Product_Var_Samp_Fields = {
 export type Product_Variance_Fields = {
   __typename?: "product_variance_fields";
   discount?: Maybe<Scalars["Float"]>;
+  poapId?: Maybe<Scalars["Float"]>;
   price?: Maybe<Scalars["Float"]>;
 };
 
@@ -817,6 +838,7 @@ export type GetAdminQuery = {
     image?: any | null;
     name: string;
     price: any;
+    poapId?: any | null;
   }>;
 };
 
@@ -844,6 +866,7 @@ export type CreateProductMutationVariables = Exact<{
   discount?: InputMaybe<Scalars["smallint"]>;
   curation?: InputMaybe<Scalars["bpchar"]>;
   collection?: InputMaybe<Scalars["bpchar"]>;
+  poapId?: InputMaybe<Scalars["numeric"]>;
 }>;
 
 export type CreateProductMutation = {
@@ -858,6 +881,7 @@ export type CreateProductMutation = {
     image?: any | null;
     name: string;
     price: any;
+    poapId?: any | null;
   } | null;
 };
 
@@ -881,6 +905,7 @@ export type EditProductMutationVariables = Exact<{
   image?: InputMaybe<Scalars["bpchar"]>;
   name?: InputMaybe<Scalars["String"]>;
   price?: InputMaybe<Scalars["numeric"]>;
+  poapId?: InputMaybe<Scalars["numeric"]>;
 }>;
 
 export type EditProductMutation = {
@@ -896,6 +921,7 @@ export type EditProductMutation = {
       image?: any | null;
       name: string;
       price: any;
+      poapId?: any | null;
     }>;
   } | null;
 };
@@ -916,6 +942,7 @@ export type Product_By_PkQuery = {
     image?: any | null;
     name: string;
     price: any;
+    poapId?: any | null;
   } | null;
 };
 
@@ -933,6 +960,7 @@ export type GetProductsQuery = {
     image?: any | null;
     name: string;
     price: any;
+    poapId?: any | null;
   }>;
 };
 
@@ -960,6 +988,7 @@ export const GetAdminDocument = gql`
       image
       name
       price
+      poapId
     }
   }
 `;
@@ -1069,6 +1098,7 @@ export const CreateProductDocument = gql`
     $discount: smallint
     $curation: bpchar
     $collection: bpchar
+    $poapId: numeric
   ) {
     insert_product_one(
       object: {
@@ -1079,6 +1109,7 @@ export const CreateProductDocument = gql`
         price: $price
         curation: $curation
         collection: $collection
+        poapId: $poapId
       }
     ) {
       app_id
@@ -1089,6 +1120,7 @@ export const CreateProductDocument = gql`
       image
       name
       price
+      poapId
     }
   }
 `;
@@ -1116,6 +1148,7 @@ export type CreateProductMutationFn = Apollo.MutationFunction<
  *      discount: // value for 'discount'
  *      curation: // value for 'curation'
  *      collection: // value for 'collection'
+ *      poapId: // value for 'poapId'
  *   },
  * });
  */
@@ -1201,6 +1234,7 @@ export const EditProductDocument = gql`
     $image: bpchar
     $name: String
     $price: numeric
+    $poapId: numeric
   ) {
     update_product(
       _set: {
@@ -1210,6 +1244,7 @@ export const EditProductDocument = gql`
         image: $image
         name: $name
         price: $price
+        poapId: $poapId
       }
       where: { id: { _eq: $id } }
     ) {
@@ -1221,6 +1256,7 @@ export const EditProductDocument = gql`
         image
         name
         price
+        poapId
       }
     }
   }
@@ -1250,6 +1286,7 @@ export type EditProductMutationFn = Apollo.MutationFunction<
  *      image: // value for 'image'
  *      name: // value for 'name'
  *      price: // value for 'price'
+ *      poapId: // value for 'poapId'
  *   },
  * });
  */
@@ -1285,6 +1322,7 @@ export const Product_By_PkDocument = gql`
       image
       name
       price
+      poapId
     }
   }
 `;
@@ -1350,6 +1388,7 @@ export const GetProductsDocument = gql`
       image
       name
       price
+      poapId
     }
   }
 `;

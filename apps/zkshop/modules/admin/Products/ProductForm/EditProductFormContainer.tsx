@@ -1,11 +1,4 @@
 import { useDisclosure, useToast } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useForm, FormProvider } from "react-hook-form";
-
-import { DeleteProductModal } from "./DeleteProductModal";
-import { ProductForm } from "./ProductForm";
-import { AddProductFormValues } from "./types";
-
 import {
   Product,
   useDeleteProductMutation,
@@ -16,6 +9,12 @@ import {
   getDeleteProductSuccessMessage,
   getEditProductSuccessMessage,
 } from "libs/messages";
+import { useRouter } from "next/router";
+import { useForm, FormProvider } from "react-hook-form";
+
+import { DeleteProductModal } from "./DeleteProductModal";
+import { ProductForm } from "./ProductForm";
+import { AddProductFormValues } from "./types";
 
 type EditProductFormContainerProps = {
   product: Product;
@@ -54,6 +53,8 @@ export const EditProductFormContainer = ({
   };
 
   const onSubmit = async (data: AddProductFormValues) => {
+    console.log({ data });
+
     editProduct({
       variables: { ...data, id: product.id },
       onCompleted: () => toast(getEditProductSuccessMessage(data.name)),

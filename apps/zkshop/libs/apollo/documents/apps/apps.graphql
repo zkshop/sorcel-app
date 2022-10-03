@@ -14,6 +14,7 @@ query getAdmin {
     image
     name
     price
+    poapId
   }
 }
 

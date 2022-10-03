@@ -8,5 +8,6 @@ query GetProducts {
     image
     name
     price
+    poapId
   }
 }

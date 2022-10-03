@@ -8,5 +8,6 @@ query Product_by_pk($id: uuid!) {
     image
     name
     price
+    poapId
   }
 }

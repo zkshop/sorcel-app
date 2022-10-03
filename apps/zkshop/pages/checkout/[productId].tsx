@@ -1,13 +1,12 @@
-import { Box, Flex, VStack, Text, Heading } from "@chakra-ui/react";
+import { VStack, Heading } from "@chakra-ui/react";
 import { Elements } from "@stripe/react-stripe-js";
-import { GetServerSidePropsContext } from "next";
-import { useState, useEffect } from "react";
-
 import { getPaymentIntent, getStripeObject } from "clients/stripe";
 import { initializeApollo, addApolloState } from "libs/apollo/client";
 import { Product_By_PkDocument } from "libs/apollo/generated";
 import { CheckoutForm } from "modules/checkout/CheckoutForm";
 import { Product } from "modules/product-page/ProductPage";
+import { GetServerSidePropsContext } from "next";
+import { useState, useEffect } from "react";
 
 type CheckoutProps = {
   product: Product;

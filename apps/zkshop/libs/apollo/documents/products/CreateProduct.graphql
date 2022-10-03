@@ -5,6 +5,7 @@ mutation CreateProduct(
   $discount: smallint
   $curation: bpchar
   $collection: bpchar
+  $poapId: numeric
 ) {
   insert_product_one(
     object: {
@@ -15,6 +16,7 @@ mutation CreateProduct(
       price: $price
       curation: $curation
       collection: $collection
+      poapId: $poapId
     }
   ) {
     app_id
@@ -25,5 +27,6 @@ mutation CreateProduct(
     image
     name
     price
+    poapId
   }
 }

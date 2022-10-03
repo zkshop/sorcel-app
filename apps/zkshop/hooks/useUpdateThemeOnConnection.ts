@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from "react";
+import { fetchPOAPS } from "store/slices/poap";
 import { useAccount } from "wagmi";
 
 import { fetchNFTS, reset } from "../store/slices/nfts";
@@ -8,11 +9,13 @@ import { useAppDispatch, useAppSelector } from "../store/store";
 const useUpdateThemeOnConnection = () => {
   const { isConnected, isDisconnected, address } = useAccount();
   const nfts = useAppSelector((state) => state.nfts);
+  const poap = useAppSelector((state) => state.poap);
   const dispatch = useAppDispatch();
 
   const getNfts = useCallback(async () => {
     if (address) {
       dispatch(fetchNFTS(address));
+      dispatch(fetchPOAPS(address));
     }
   }, [address, dispatch]);
 
@@ -35,7 +38,7 @@ const useUpdateThemeOnConnection = () => {
     }
   }, [address, getNfts]);
 
-  return { nfts };
+  return { nfts, poap };
 };
 
 export default useUpdateThemeOnConnection;

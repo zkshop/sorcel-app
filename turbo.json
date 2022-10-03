@@ -23,7 +23,8 @@
         "$HASURA_API_URL",
         "$HASURA_API_KEY",
         "$PUBLIC_STRIPE_PUBLISHABLE_KEY",
-        "$STRIPE_SECRET_KEY"
+        "$STRIPE_SECRET_KEY",
+        "$POAP_API_KEY"
       ],
       "cache": false
     },

@@ -6,6 +6,7 @@ mutation EditProduct(
   $image: bpchar
   $name: String
   $price: numeric
+  $poapId: numeric
 ) {
   update_product(
     _set: {
@@ -15,8 +16,9 @@ mutation EditProduct(
       image: $image
       name: $name
       price: $price
+      poapId: $poapId
     }
-    where: { id: { _eq: $id} }
+    where: { id: { _eq: $id } }
   ) {
     returning {
       collection
@@ -26,6 +28,7 @@ mutation EditProduct(
       image
       name
       price
+      poapId
     }
   }
 }
