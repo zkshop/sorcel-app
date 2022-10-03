@@ -1,5 +1,4 @@
-import { Box, Grid, GridItem, VStack } from "@chakra-ui/react";
-import Image from "next/image";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { ProductCard } from "ui";
 
 import { useAppSelector } from "../../../apps/zkshop/store/store";
@@ -83,6 +82,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
                   discount={isAnHolder && discount ? discount : undefined}
                   price={price}
                   collection={collection}
+                  poapImgUrl="https://assets.poap.xyz/i-met-lucas-from-poapfr-during-summer-2022-2022-logo-1657016785296.png"
                   isTransparent={isTransparent || false}
                   isEligible={curation && isAnHolder}
                 />
