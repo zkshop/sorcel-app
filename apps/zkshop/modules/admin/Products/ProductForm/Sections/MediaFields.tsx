@@ -1,4 +1,3 @@
-import { LinkIcon } from "@chakra-ui/icons";
 import {
   Heading,
   FormControl,
@@ -9,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { FaLink } from "react-icons/fa";
 import { Section } from "ui";
 
 export const MediaFields = () => {
@@ -26,7 +26,7 @@ export const MediaFields = () => {
             color="gray.300"
             fontSize="1.2em"
           >
-            <LinkIcon />
+            <FaLink />
           </InputLeftElement>
 
           <Input placeholder="Image link" {...register("image")} />

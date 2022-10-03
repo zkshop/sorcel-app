@@ -1,4 +1,3 @@
-import { ChatIcon } from "@chakra-ui/icons";
 import {
   Heading,
   FormControl,
@@ -9,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { BsChatRightText } from "react-icons/bs";
 import { Section } from "ui";
 
 import { PRODUCTS_FIELDS } from "../../constants";
@@ -44,7 +44,7 @@ export const GeneralInformationsFields = () => {
             color="gray.300"
             fontSize="1.2em"
           >
-            <ChatIcon />
+            <BsChatRightText />
           </InputLeftElement>
 
           <Input placeholder="Description" />

@@ -1,34 +1,16 @@
-import {
-  FormControl,
-  FormLabel,
-  Heading,
-  HStack,
-  Input,
-} from "@chakra-ui/react";
+import { Box, FormControl, FormLabel, Heading, Input } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
-import { Button } from "ui";
 import { Section } from "ui";
 
 import { SHIPPING_FIELDS } from "../constants";
 
-import { ShippingFormValues } from "modules";
+type ShippingFormProps = {};
 
-type ShippingFormProps = {
-  handleSubmit: Function;
-  onSubmit(data: ShippingFormValues): Promise<void>;
-  isLoading: boolean;
-};
-
-export const ShippingForm = ({
-  handleSubmit,
-  isLoading,
-  onSubmit,
-}: ShippingFormProps) => {
+export const ShippingForm = ({}: ShippingFormProps) => {
   const { register } = useFormContext();
 
   return (
-    <form style={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
-      <Heading as="h2">Shipping Informations</Heading>
+    <Box w="full">
       <Section>
         <Heading fontSize="xl"> Delivery Informations </Heading>
 
@@ -47,6 +29,7 @@ export const ShippingForm = ({
           <Input {...register(SHIPPING_FIELDS.address.name)} />
         </FormControl>
       </Section>
+
       <Section>
         <Heading fontSize="xl"> Contact Informations </Heading>
 
@@ -59,11 +42,7 @@ export const ShippingForm = ({
           <FormLabel mb={1}>{SHIPPING_FIELDS.phoneNumber.label}</FormLabel>
           <Input {...register(SHIPPING_FIELDS.phoneNumber.name)} />
         </FormControl>
-
-        <HStack pt={2} justifyContent="flex-end">
-          <Button type="submit">Go to payment</Button>
-        </HStack>
       </Section>
-    </form>
+    </Box>
   );
 };

@@ -1,3 +1,4 @@
+import { Text, Flex } from "@chakra-ui/react";
 import {
   PaymentElement,
   useStripe,
@@ -7,7 +8,11 @@ import React, { useEffect, useState } from "react";
 
 import { StyledCheckoutForm } from "./CheckoutForm.style";
 
-export function CheckoutForm() {
+type CheckoutFormProps = {
+  price: string;
+};
+
+export function CheckoutForm({ price }: CheckoutFormProps) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -53,6 +58,7 @@ export function CheckoutForm() {
     }
 
     setIsLoading(true);
+    console.log({ host: process.env.HOSTNAME });
 
     const { error } = await stripe.confirmPayment({
       elements,
@@ -73,6 +79,11 @@ export function CheckoutForm() {
   return (
     <StyledCheckoutForm id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" />
+
+      <Text fontWeight="700" py={4}>
+        Price: {price}€
+      </Text>
+
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}

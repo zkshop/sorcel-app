@@ -1,4 +1,3 @@
-import { SunIcon, AtSignIcon } from "@chakra-ui/icons";
 import {
   Heading,
   FormControl,
@@ -9,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { BsCollection, BsCollectionPlay } from "react-icons/bs";
 import { Section } from "ui";
 
 export const OnChainDataFields = () => {
@@ -27,7 +27,7 @@ export const OnChainDataFields = () => {
             color="gray.300"
             fontSize="1.2em"
           >
-            <SunIcon />
+            <BsCollection />
           </InputLeftElement>
 
           <Input placeholder="Collection Name" {...register("collection")} />
@@ -43,7 +43,7 @@ export const OnChainDataFields = () => {
             color="gray.300"
             fontSize="1.2em"
           >
-            <AtSignIcon />
+            <BsCollectionPlay />
           </InputLeftElement>
 
           <Input placeholder="Collection Address" {...register("curation")} />
