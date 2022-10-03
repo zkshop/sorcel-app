@@ -6,8 +6,36 @@ export const poap = axios.create({ baseURL: POAP_BASE_URL });
 
 export const getEveryPoapURL = (address: string) => `/actions/scan/${address}`;
 
+export const getPoapURLFromId = (id: string) => `/events/id/${id}`;
+
 export const getEveryPOAPOfAWallet = async (address: string) => {
   const { data } = await axios.get(`/api/poap/${address}`);
 
   return data.data;
+};
+
+export const getPOAPFromId = async (id: string) => {
+  const { data } = await axios.get(`/api/poap/events/id/${id}`);
+
+  return data.data;
+};
+
+export const getPOAPListFromIds = async (ids: string[]) => {
+  console.log({ ids });
+
+  function getAllRequest() {
+    const calls = [];
+    for (const id of ids) {
+      calls.push(getPOAPFromId(id));
+    }
+    return calls;
+  }
+  const result: any[] = [];
+
+  await Promise.all(getAllRequest()).then((responseList) =>
+    responseList.map((data) => result.push(data)),
+  );
+  console.log({ result });
+
+  return result;
 };

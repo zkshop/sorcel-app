@@ -5,9 +5,8 @@ import { useState, useEffect } from 'react';
 
 import { getPaymentIntent, getStripeObject } from 'clients/stripe';
 import { initializeApollo, addApolloState } from 'libs/apollo/client';
-import { Product_By_PkDocument } from 'libs/apollo/generated';
+import { Product, Product_By_PkDocument } from 'libs/apollo/generated';
 import { CheckoutForm } from 'modules/checkout/CheckoutForm';
-import { Product } from 'modules/product-page/ProductPage';
 
 type CheckoutProps = {
   product: Product;

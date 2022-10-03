@@ -20,8 +20,15 @@ type Product = {
   poapId?: any;
 };
 
+function getPoapImageFromId(poapId: string, poapList: any[]) {
+  const poap = poapList.find(({ id }) => id === poapId);
+
+  if (poap) return poap.image_url;
+}
+
 export const ProductCardList = ({ products }: ProductCardListProps) => {
   const nfts = useAppSelector((state) => state.nfts);
+  const poapImageList = useAppSelector((state) => state.poapImageList);
   const poaps = useAppSelector((state) => state.poap);
   const poapIds = poaps.map((poap: any) => poap.event.id);
   const collections = nfts.map((nft) => nft.contract.address);
@@ -69,7 +76,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
                   discount={isAnHolder && discount ? discount : undefined}
                   price={price}
                   collection={collection}
-                  poapImgUrl="https://assets.poap.xyz/i-met-lucas-from-poapfr-during-summer-2022-2022-logo-1657016785296.png"
+                  poapImgUrl={getPoapImageFromId(poapId, poapImageList)}
                   isTransparent={isTransparent || false}
                   isEligible={curation && isAnHolder}
                 />

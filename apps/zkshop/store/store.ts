@@ -4,12 +4,14 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import nftsReducer from './slices/nfts';
 import poapReducer from './slices/poap';
+import poapImageListReducer from './slices/poapImageList';
 import themeReducer from './slices/theme';
 
 const rootReducer = combineReducers({
   theme: themeReducer,
   nfts: nftsReducer,
   poap: poapReducer,
+  poapImageList: poapImageListReducer,
 });
 
 const makeStore = () =>

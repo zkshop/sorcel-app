@@ -5,8 +5,8 @@ import { BackButton } from 'ui';
 import { useAccount } from 'wagmi';
 
 import { addApolloState, initializeApollo } from 'libs/apollo/client';
-import { Product_By_PkDocument } from 'libs/apollo/generated';
-import { Product, ProductPage } from 'modules/product-page/ProductPage';
+import { Product, Product_By_PkDocument } from 'libs/apollo/generated';
+import { ProductPage } from 'modules/product-page/ProductPage';
 
 type ProductDetailsPage = {
   product: Product;
