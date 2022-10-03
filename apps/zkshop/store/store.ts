@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { createWrapper } from "next-redux-wrapper";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import nftsReducer from "./slices/nfts";
@@ -9,13 +10,14 @@ const rootReducer = combineReducers({
   nfts: nftsReducer,
 });
 
-const store = configureStore({
-  reducer: rootReducer,
-});
+const makeStore = () =>
+  configureStore({
+    reducer: rootReducer,
+  });
 
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatch = ReturnType<typeof makeStore>["dispatch"];
 export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof makeStore>;
+export const useAppSelector: TypedUseSelectorHook<AppStore> = useSelector;
 
-export default store;
+export const wrapper = createWrapper<AppStore>(makeStore);

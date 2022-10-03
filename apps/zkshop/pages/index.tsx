@@ -18,7 +18,6 @@ type MarketplaceProps = {
 };
 
 const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
-  console.log(process.env.HOSTNAME);
   const { data, loading, error } = productsQueryResult;
   const {} = useUpdateThemeOnConnection();
   const { isConnected } = useAccount();

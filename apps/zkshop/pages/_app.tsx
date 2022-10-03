@@ -7,12 +7,12 @@ import { AppProps } from "next/app";
 import { Provider as ReduxProvider } from "react-redux";
 import { WagmiConfig } from "wagmi";
 
-import store from "../store/store";
 import ThemeDecorator from "../theme/ThemeDecorator";
 
 import { wagmiClient, chains } from "clients/wagmi";
 import { Layout } from "components/Layout";
 import { useApollo } from "libs/apollo/client";
+import { wrapper } from "store/store";
 
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps);
@@ -21,17 +21,15 @@ function App({ Component, pageProps }: AppProps) {
     <WagmiConfig client={wagmiClient}>
       <ApolloProvider client={apolloClient}>
         <RainbowKitProvider chains={chains}>
-          <ReduxProvider store={store}>
-            <ThemeDecorator>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </ThemeDecorator>
-          </ReduxProvider>
+          <ThemeDecorator>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ThemeDecorator>
         </RainbowKitProvider>
       </ApolloProvider>
     </WagmiConfig>
   );
 }
 
-export default App;
+export default wrapper.withRedux(App);
