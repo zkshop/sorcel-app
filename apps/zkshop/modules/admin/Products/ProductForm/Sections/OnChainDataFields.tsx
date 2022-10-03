@@ -5,11 +5,11 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
-} from "@chakra-ui/react";
-import React from "react";
-import { useFormContext } from "react-hook-form";
-import { BsCollection, BsCollectionPlay } from "react-icons/bs";
-import { Section } from "ui";
+} from '@chakra-ui/react';
+import React from 'react';
+import { useFormContext } from 'react-hook-form';
+import { BsCollection, BsCollectionPlay } from 'react-icons/bs';
+import { Section } from 'ui';
 
 export const OnChainDataFields = () => {
   const { register } = useFormContext();
@@ -22,15 +22,11 @@ export const OnChainDataFields = () => {
         <FormLabel> Collection Name </FormLabel>
 
         <InputGroup>
-          <InputLeftElement
-            pointerEvents="none"
-            color="gray.300"
-            fontSize="1.2em"
-          >
+          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
             <BsCollection />
           </InputLeftElement>
 
-          <Input placeholder="Collection Name" {...register("collection")} />
+          <Input placeholder="Collection Name" {...register('collection')} />
         </InputGroup>
       </FormControl>
 
@@ -38,15 +34,11 @@ export const OnChainDataFields = () => {
         <FormLabel> Collection Address </FormLabel>
 
         <InputGroup>
-          <InputLeftElement
-            pointerEvents="none"
-            color="gray.300"
-            fontSize="1.2em"
-          >
+          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
             <BsCollectionPlay />
           </InputLeftElement>
 
-          <Input placeholder="Collection Address" {...register("curation")} />
+          <Input placeholder="Collection Address" {...register('curation')} />
         </InputGroup>
       </FormControl>
 
@@ -54,15 +46,11 @@ export const OnChainDataFields = () => {
         <FormLabel> Poap Id </FormLabel>
 
         <InputGroup>
-          <InputLeftElement
-            pointerEvents="none"
-            color="gray.300"
-            fontSize="1.2em"
-          >
+          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
             <BsCollection />
           </InputLeftElement>
 
-          <Input type="number" placeholder="Poap ID" {...register("poapId")} />
+          <Input type="number" placeholder="Poap ID" {...register('poapId')} />
         </InputGroup>
       </FormControl>
     </Section>

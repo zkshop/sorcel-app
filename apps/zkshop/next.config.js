@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-import withTM from "next-transpile-modules";
+import withTM from 'next-transpile-modules';
 
 const nextConfig = {
   reactStrictMode: true,
@@ -13,8 +13,8 @@ const nextConfig = {
     POAP_API_KEY: process.env.POAP_API_KEY,
   },
   images: {
-    domains: ["https://firebasestorage.googleapis.com"],
+    domains: ['https://firebasestorage.googleapis.com'],
   },
 };
 
-export default withTM(["ui"])(nextConfig);
+export default withTM(['ui'])(nextConfig);

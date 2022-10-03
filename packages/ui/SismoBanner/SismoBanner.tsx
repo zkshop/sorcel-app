@@ -1,5 +1,5 @@
-import { HStack, Link, Text } from "@chakra-ui/react";
-import Image from "next/image";
+import { HStack, Link, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 
 type SismoBannerProps = {
   admin: boolean;
@@ -14,8 +14,8 @@ export const SismoBanner = ({ admin, enable }: SismoBannerProps) => {
       sx={{
         mt: 2,
         pb: 2,
-        w: "full",
-        justifyContent: "flex-end",
+        w: 'full',
+        justifyContent: 'flex-end',
       }}
     >
       <Link href="https://sandbox.sismo.io/misfitwear" isExternal>

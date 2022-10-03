@@ -1,17 +1,15 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { CartOrderSummary } from "./CartOrderSummary";
+import { CartOrderSummary } from './CartOrderSummary';
 
 export default {
-  title: "CartOrderSummary",
+  title: 'CartOrderSummary',
   component: CartOrderSummary,
 } as ComponentMeta<typeof CartOrderSummary>;
 
-const Template: ComponentStory<typeof CartOrderSummary> = (args) => (
-  <CartOrderSummary {...args} />
-);
+const Template: ComponentStory<typeof CartOrderSummary> = (args) => <CartOrderSummary {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  children: "CartOrderSummary",
+  children: 'CartOrderSummary',
 };

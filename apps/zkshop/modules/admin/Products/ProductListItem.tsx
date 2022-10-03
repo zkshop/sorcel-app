@@ -1,5 +1,5 @@
-import { Box, Image, Tr, Td } from "@chakra-ui/react";
-import Link from "next/link";
+import { Box, Image, Tr, Td } from '@chakra-ui/react';
+import Link from 'next/link';
 
 type ProductListItemProps = {
   id: string;
@@ -24,8 +24,8 @@ export const ProductListItem = ({
     <Tr
       sx={{
         _hover: {
-          backgroundColor: "#0077ff1e",
-          cursor: "pointer",
+          backgroundColor: '#0077ff1e',
+          cursor: 'pointer',
         },
       }}
     >

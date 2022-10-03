@@ -1,16 +1,9 @@
-import {
-  Box,
-  VStack,
-  HStack,
-  Text,
-  Button,
-  useDisclosure,
-} from "@chakra-ui/react";
-import Image from "next/image";
-import Link from "next/link";
-import { SismoBanner, MenuDrawer } from "ui";
+import { Box, VStack, HStack, Text, Button, useDisclosure } from '@chakra-ui/react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { SismoBanner, MenuDrawer } from 'ui';
 
-import ConnectWalletButton from "./ConnectWalletButton";
+import ConnectWalletButton from './ConnectWalletButton';
 
 type NavBarProps = {
   admin: boolean;
@@ -34,7 +27,7 @@ export const NavBar = ({ admin }: NavBarProps) => (
             width={210}
             src="/images/3shop-logo.png"
             alt="3shop"
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
           />
         </Link>
 

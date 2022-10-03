@@ -1,12 +1,13 @@
-import { VStack, Heading } from "@chakra-ui/react";
-import { Elements } from "@stripe/react-stripe-js";
-import { getPaymentIntent, getStripeObject } from "clients/stripe";
-import { initializeApollo, addApolloState } from "libs/apollo/client";
-import { Product_By_PkDocument } from "libs/apollo/generated";
-import { CheckoutForm } from "modules/checkout/CheckoutForm";
-import { Product } from "modules/product-page/ProductPage";
-import { GetServerSidePropsContext } from "next";
-import { useState, useEffect } from "react";
+import { VStack, Heading } from '@chakra-ui/react';
+import { Elements } from '@stripe/react-stripe-js';
+import { GetServerSidePropsContext } from 'next';
+import { useState, useEffect } from 'react';
+
+import { getPaymentIntent, getStripeObject } from 'clients/stripe';
+import { initializeApollo, addApolloState } from 'libs/apollo/client';
+import { Product_By_PkDocument } from 'libs/apollo/generated';
+import { CheckoutForm } from 'modules/checkout/CheckoutForm';
+import { Product } from 'modules/product-page/ProductPage';
 
 type CheckoutProps = {
   product: Product;
@@ -33,10 +34,7 @@ const Checkout = ({ product }: CheckoutProps) => {
       </Heading>
 
       {clientSecret && (
-        <Elements
-          options={{ appearance: { theme: "stripe" }, clientSecret }}
-          stripe={stripe}
-        >
+        <Elements options={{ appearance: { theme: 'stripe' }, clientSecret }} stripe={stripe}>
           <CheckoutForm price={product.price} />
         </Elements>
       )}
@@ -46,9 +44,7 @@ const Checkout = ({ product }: CheckoutProps) => {
 
 export default Checkout;
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const { params } = context;
   const apolloClient = initializeApollo();
 

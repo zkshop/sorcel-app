@@ -1,8 +1,8 @@
-import { UseToastOptions } from "@chakra-ui/react";
+import { UseToastOptions } from '@chakra-ui/react';
 
 export const ERROR_MESSAGE: UseToastOptions = {
-  title: "Error",
+  title: 'Error',
   description: "We couldn't execute your request. Please try again later.",
-  status: "error",
+  status: 'error',
   duration: 3000,
 };

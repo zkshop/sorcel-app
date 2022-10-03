@@ -1,35 +1,28 @@
 export const PRODUCTS_FIELDS = {
   image: {
-    name: "image",
-    label: "Image",
+    name: 'image',
+    label: 'Image',
   },
   name: {
-    name: "name",
-    label: "Name",
+    name: 'name',
+    label: 'Name',
   },
   price: {
-    name: "price",
-    label: "Price",
+    name: 'price',
+    label: 'Price',
   },
   discount: {
-    name: "discount",
-    label: "Discount",
+    name: 'discount',
+    label: 'Discount',
   },
   curation: {
-    name: "curation",
-    label: "Curation",
+    name: 'curation',
+    label: 'Curation',
   },
   collection: {
-    name: "collection",
-    label: "Collection",
+    name: 'collection',
+    label: 'Collection',
   },
 };
 
-export const PRODUCT_ATTRIBUTES = [
-  "Image",
-  "Name",
-  "Price",
-  "Discount",
-  "Curation",
-  "Collection",
-];
+export const PRODUCT_ATTRIBUTES = ['Image', 'Name', 'Price', 'Discount', 'Curation', 'Collection'];

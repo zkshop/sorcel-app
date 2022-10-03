@@ -1,14 +1,14 @@
-import { Box, Grid, GridItem } from "@chakra-ui/react";
-import { ProductCard } from "ui";
+import { Box, Grid, GridItem } from '@chakra-ui/react';
+import { ProductCard } from 'ui';
 
-import { useAppSelector } from "../../../apps/zkshop/store/store";
+import { useAppSelector } from '../../../apps/zkshop/store/store';
 
 type ProductCardListProps = {
   products: Product[];
 };
 
 type Product = {
-  __typename?: "product" | undefined;
+  __typename?: 'product' | undefined;
   app_id: any;
   collection?: any;
   curation?: any;
@@ -26,7 +26,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
   const poapIds = poaps.map((poap: any) => poap.event.id);
   const collections = nfts.map((nft) => nft.contract.address);
   const isAnHolder = products.some((product: Product) =>
-    collections.includes(product?.curation?.toLowerCase())
+    collections.includes(product?.curation?.toLowerCase()),
   );
 
   return (
@@ -47,34 +47,21 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
         gap={8}
         sx={{
           gridTemplateColumns: {
-            xs: "repeat(2, 1fr)",
-            sm: "repeat(3, 1fr)",
-            md: "repeat(4, 1fr)",
+            xs: 'repeat(2, 1fr)',
+            sm: 'repeat(3, 1fr)',
+            md: 'repeat(4, 1fr)',
           },
         }}
       >
         {products.map(
-          ({
-            image,
-            name,
-            discount,
-            price,
-            collection,
-            curation,
-            id,
-            poapId,
-          }: Product) => {
+          ({ image, name, discount, price, collection, curation, id, poapId }: Product) => {
             const isTransparent =
               (curation || poapId) &&
               !collections.includes(curation.toLowerCase()) &&
               !poapIds.includes(poapId);
 
             return (
-              <GridItem
-                key={`products-${id}`}
-                display="flex"
-                justifyContent="center"
-              >
+              <GridItem key={`products-${id}`} display="flex" justifyContent="center">
                 <ProductCard
                   id={id}
                   srcItem={image}
@@ -88,7 +75,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => {
                 />
               </GridItem>
             );
-          }
+          },
         )}
       </Grid>
     </Box>

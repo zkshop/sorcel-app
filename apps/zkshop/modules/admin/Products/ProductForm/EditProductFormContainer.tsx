@@ -1,28 +1,23 @@
-import { useDisclosure, useToast } from "@chakra-ui/react";
-import {
-  Product,
-  useDeleteProductMutation,
-  useEditProductMutation,
-} from "libs/apollo/generated";
+import { useDisclosure, useToast } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { useForm, FormProvider } from 'react-hook-form';
+
+import { DeleteProductModal } from './DeleteProductModal';
+import { ProductForm } from './ProductForm';
+import { AddProductFormValues } from './types';
+
+import { Product, useDeleteProductMutation, useEditProductMutation } from 'libs/apollo/generated';
 import {
   ERROR_MESSAGE,
   getDeleteProductSuccessMessage,
   getEditProductSuccessMessage,
-} from "libs/messages";
-import { useRouter } from "next/router";
-import { useForm, FormProvider } from "react-hook-form";
-
-import { DeleteProductModal } from "./DeleteProductModal";
-import { ProductForm } from "./ProductForm";
-import { AddProductFormValues } from "./types";
+} from 'libs/messages';
 
 type EditProductFormContainerProps = {
   product: Product;
 };
 
-export const EditProductFormContainer = ({
-  product,
-}: EditProductFormContainerProps) => {
+export const EditProductFormContainer = ({ product }: EditProductFormContainerProps) => {
   const methods = useForm<AddProductFormValues>({
     defaultValues: product,
   });
@@ -33,8 +28,7 @@ export const EditProductFormContainer = ({
   const toast = useToast();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
-  const [deleteProduct, { loading: isDeleteLoading }] =
-    useDeleteProductMutation();
+  const [deleteProduct, { loading: isDeleteLoading }] = useDeleteProductMutation();
   const [editProduct, { loading: isEditLoading }] = useEditProductMutation();
 
   const deleteProductOnClick = async () => {
@@ -46,7 +40,7 @@ export const EditProductFormContainer = ({
         onCompleted: () => toast(getDeleteProductSuccessMessage(product.name)),
         onError: () => toast(ERROR_MESSAGE),
       });
-      router.push("/admin");
+      router.push('/admin');
     } catch (e) {
       console.error(e);
     }

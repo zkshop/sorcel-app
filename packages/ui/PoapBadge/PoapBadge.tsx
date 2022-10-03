@@ -1,4 +1,4 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Image } from '@chakra-ui/react';
 
 type PoapBadgeProps = {
   imgUrl: string;
@@ -8,7 +8,7 @@ export const PoapBadge = ({ imgUrl }: PoapBadgeProps) => (
   <Box
     sx={{
       zIndex: 1,
-      position: "absolute",
+      position: 'absolute',
       top: -3,
       right: -3,
     }}

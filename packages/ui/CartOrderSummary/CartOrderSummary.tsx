@@ -6,11 +6,11 @@ import {
   Stack,
   Text,
   useColorModeValue as mode,
-} from "@chakra-ui/react";
-import { FaArrowRight } from "react-icons/fa";
+} from '@chakra-ui/react';
+import { FaArrowRight } from 'react-icons/fa';
 // TODO: Remove Chakra/icons
 
-import { formatPrice } from "../PriceTag/PriceTag";
+import { formatPrice } from '../PriceTag/PriceTag';
 
 type OrderSummaryItemProps = {
   label: string;
@@ -23,7 +23,7 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
 
   return (
     <Flex justify="space-between" fontSize="sm">
-      <Text fontWeight="medium" color={mode("gray.600", "gray.400")}>
+      <Text fontWeight="medium" color={mode('gray.600', 'gray.400')}>
         {label}
       </Text>
       {value ? <Text fontWeight="medium">{value}</Text> : children}
@@ -41,9 +41,9 @@ export const CartOrderSummary = ({ price }: CartOrderSummaryProps) => (
     rounded="lg"
     width="full"
     sx={{
-      bg: "white",
+      bg: 'white',
       p: 8,
-      border: "1px solid lightgrey",
+      border: '1px solid lightgrey',
     }}
   >
     <Heading size="md">Order Summary</Heading>
@@ -70,13 +70,7 @@ export const CartOrderSummary = ({ price }: CartOrderSummaryProps) => (
       </Flex>
     </Stack>
 
-    <Button
-      colorScheme="blue"
-      size="lg"
-      fontSize="md"
-      rightIcon={<FaArrowRight />}
-      type="submit"
-    >
+    <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />} type="submit">
       Checkout
     </Button>
   </Stack>

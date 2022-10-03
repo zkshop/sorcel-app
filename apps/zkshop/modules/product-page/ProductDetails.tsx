@@ -1,8 +1,8 @@
-import { Box, Text, Button, Image, HStack, VStack } from "@chakra-ui/react";
-import { GoTriangleUp } from "react-icons/go";
-import { CollectionBadge, SizeSelector } from "ui";
+import { Box, Text, Button, Image, HStack, VStack } from '@chakra-ui/react';
+import { GoTriangleUp } from 'react-icons/go';
+import { CollectionBadge, SizeSelector } from 'ui';
 
-import useTransaction from "../../hooks/useTransaction";
+import useTransaction from '../../hooks/useTransaction';
 
 interface ProductDetailsProps {
   id?: string;
@@ -34,9 +34,7 @@ export const ProductDetails = ({
   const promoPercent = discount ? discountNumber / 100 : 0;
   const priceReduced = discount ? priceNumber - priceNumber * promoPercent : 0;
 
-  const { sendTransaction } = useTransaction(
-    discount ? priceReduced : priceNumber
-  );
+  const { sendTransaction } = useTransaction(discount ? priceReduced : priceNumber);
 
   return (
     <Box
@@ -50,16 +48,16 @@ export const ProductDetails = ({
           ? {
               content: '""',
               zIndex: -1,
-              position: "absolute",
-              top: "-12px",
-              right: "-12px",
-              bottom: "-12px",
-              left: "-12px",
+              position: 'absolute',
+              top: '-12px',
+              right: '-12px',
+              bottom: '-12px',
+              left: '-12px',
               background:
-                "linear-gradient(to right, var(--chakra-colors-bannerLeft) , var(--chakra-colors-bannerRight))",
-              transition: "opacity 0.3s",
-              borderRadius: "inherit",
-              filter: "blur(5px)",
+                'linear-gradient(to right, var(--chakra-colors-bannerLeft) , var(--chakra-colors-bannerRight))',
+              transition: 'opacity 0.3s',
+              borderRadius: 'inherit',
+              filter: 'blur(5px)',
               opacity: 0.9,
             }
           : {}
@@ -69,12 +67,12 @@ export const ProductDetails = ({
           ? {
               content: '""',
               zIndex: -1,
-              position: "absolute",
+              position: 'absolute',
               top: 0,
               right: 0,
               bottom: 0,
               left: 0,
-              background: "inherit",
+              background: 'inherit',
             }
           : {}
       }
@@ -85,7 +83,7 @@ export const ProductDetails = ({
         <>
           <Box
             sx={{
-              position: "absolute",
+              position: 'absolute',
               top: 0,
               left: 0,
               bottom: 0,
@@ -108,7 +106,7 @@ export const ProductDetails = ({
             fontSize="2xl"
             width="100%"
           >
-            Connect your {collection || "Misfitwear"} wallet to unlock
+            Connect your {collection || 'Misfitwear'} wallet to unlock
           </Text>
         </>
       )}
@@ -135,18 +133,12 @@ export const ProductDetails = ({
               </Text>
             </Box>
 
-            <Text sx={{ fontsize: "14px", color: "black", p: 1 }}>
-              {description}
-            </Text>
+            <Text sx={{ fontsize: '14px', color: 'black', p: 1 }}>{description}</Text>
           </VStack>
 
           <Box flex={1} width="100%" p={2}>
             <SizeSelector />
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="flex-end"
-            >
+            <Box display="flex" justifyContent="space-between" alignItems="flex-end">
               {discount ? (
                 <Box
                   border="1px #dedde0 solid"
@@ -158,12 +150,7 @@ export const ProductDetails = ({
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <Text
-                    fontWeight="bold"
-                    fontSize="14px"
-                    color="black"
-                    padding="2px"
-                  >
+                  <Text fontWeight="bold" fontSize="14px" color="black" padding="2px">
                     {`-${discount}%`}
                   </Text>
                 </Box>
@@ -177,18 +164,13 @@ export const ProductDetails = ({
                   fontSize="16px"
                   color="black"
                   padding="2px"
-                  textDecoration={discount ? "line-through" : "none"}
-                  marginRight={discount ? "2px" : "none"}
+                  textDecoration={discount ? 'line-through' : 'none'}
+                  marginRight={discount ? '2px' : 'none'}
                 >
                   {`${price}$`}
                 </Text>
                 {discount && (
-                  <Text
-                    fontWeight="bold"
-                    fontSize="16px"
-                    color="#FF5F1F"
-                    padding="2px"
-                  >
+                  <Text fontWeight="bold" fontSize="16px" color="#FF5F1F" padding="2px">
                     {`${priceReduced}$`}
                   </Text>
                 )}
@@ -204,14 +186,10 @@ export const ProductDetails = ({
                 p={1}
                 isDisabled={isTransparent}
                 bg="#4473c3"
-                _hover={{ bg: "#5686d8" }}
+                _hover={{ bg: '#5686d8' }}
                 href={`/shipping/${id}`}
               >
-                <Box
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
+                <Box display="flex" justifyContent="space-between" alignItems="center">
                   <Text
                     fontWeight="bold"
                     fontSize="16px"
@@ -223,7 +201,7 @@ export const ProductDetails = ({
                   </Text>
 
                   <Box borderRadius="10px" display="flex">
-                    <GoTriangleUp style={{ marginLeft: "8px" }} color="white" />
+                    <GoTriangleUp style={{ marginLeft: '8px' }} color="white" />
                   </Box>
                 </Box>
               </Button>
@@ -240,13 +218,9 @@ export const ProductDetails = ({
                 p={1}
                 isDisabled={isTransparent}
                 bg="#e89938"
-                _hover={{ bg: "#f7ad54" }}
+                _hover={{ bg: '#f7ad54' }}
               >
-                <Box
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
+                <Box display="flex" justifyContent="space-between" alignItems="center">
                   <Text
                     fontWeight="bold"
                     fontSize="16px"
@@ -258,7 +232,7 @@ export const ProductDetails = ({
                   </Text>
 
                   <Box borderRadius="10px" display="flex">
-                    <GoTriangleUp style={{ marginLeft: "8px" }} color="white" />
+                    <GoTriangleUp style={{ marginLeft: '8px' }} color="white" />
                   </Box>
                 </Box>
               </Button>

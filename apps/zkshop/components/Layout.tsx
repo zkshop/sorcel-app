@@ -1,18 +1,18 @@
-import { Box } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { GridLayout, Banner } from "ui";
+import { Box } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { GridLayout, Banner, CartItem } from 'ui';
 
-import { NavBar } from "./NavBar";
+import { NavBar } from './NavBar';
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
-const pageWithOutGridLayout = ["/iframe"];
+const pageWithOutGridLayout = ['/iframe'];
 
 export const Layout = ({ children, ...props }: LayoutProps) => {
   const { asPath } = useRouter();
-  const withLayout = asPath == "/iframe";
+  const withLayout = asPath == '/iframe';
   const withGridLayout = !pageWithOutGridLayout.includes(asPath);
 
   if (withLayout) {
@@ -21,7 +21,7 @@ export const Layout = ({ children, ...props }: LayoutProps) => {
 
   return (
     <Box {...props}>
-      <NavBar admin={asPath === "/admin"} />
+      <NavBar admin={asPath === '/admin'} />
 
       <Banner />
 

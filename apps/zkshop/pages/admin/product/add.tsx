@@ -1,6 +1,6 @@
-import { BackButton } from "ui";
+import { BackButton } from 'ui';
 
-import { AddProductFormContainer } from "modules";
+import { AddProductFormContainer } from 'modules';
 
 const AddProductPage = () => (
   <>

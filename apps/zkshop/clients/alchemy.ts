@@ -1,7 +1,7 @@
-import { Network, Alchemy } from "alchemy-sdk";
+import { Network, Alchemy } from 'alchemy-sdk';
 
 const settings = {
-  apiKey: "demo",
+  apiKey: 'demo',
   network: Network.MATIC_MAINNET,
 };
 

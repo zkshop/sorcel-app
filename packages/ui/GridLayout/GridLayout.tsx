@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box } from '@chakra-ui/react';
 
 type GridLayoutProps = {
   children: React.ReactNode;
@@ -8,8 +8,8 @@ type GridLayoutProps = {
 export const GridLayout = ({ children, sx, ...props }: GridLayoutProps) => (
   <Box
     sx={{
-      m: "0 auto",
-      width: "100%",
+      m: '0 auto',
+      width: '100%',
       maxWidth: 1024, // TODO: change to 1440px
       p: { xs: 4, md: 8, lg: 8 },
       ...sx,

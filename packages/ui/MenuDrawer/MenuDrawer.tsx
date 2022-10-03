@@ -7,8 +7,8 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Text,
-} from "@chakra-ui/react";
-import Link from "next/link";
+} from '@chakra-ui/react';
+import Link from 'next/link';
 
 type MenuDrawerProps = {
   isOpen: boolean;
@@ -24,10 +24,10 @@ export const MenuDrawer = ({ isOpen, onOpen, onClose }: MenuDrawerProps) => (
         <Text fontSize="24px" textTransform="uppercase">
           <span
             style={{
-              background: "-webkit-linear-gradient(#0987A0, #805AD5)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              fontSize: "26px",
+              background: '-webkit-linear-gradient(#0987A0, #805AD5)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              fontSize: '26px',
             }}
           >
             Zk

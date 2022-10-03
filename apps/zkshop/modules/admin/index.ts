@@ -1,2 +1,2 @@
-export * from "./General";
-export * from "./Products";
+export * from './General';
+export * from './Products';

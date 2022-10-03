@@ -1,11 +1,12 @@
-import { useToast } from "@chakra-ui/react";
-import { useCreateProductMutation } from "libs/apollo/generated";
-import { getAddProductSuccessMessage } from "libs/messages";
-import { useRouter } from "next/router";
-import { useForm, FormProvider } from "react-hook-form";
+import { useToast } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { useForm, FormProvider } from 'react-hook-form';
 
-import { ProductForm } from "./ProductForm";
-import { AddProductFormValues } from "./types";
+import { ProductForm } from './ProductForm';
+import { AddProductFormValues } from './types';
+
+import { useCreateProductMutation } from 'libs/apollo/generated';
+import { getAddProductSuccessMessage } from 'libs/messages';
 
 export const AddProductFormContainer = () => {
   const methods = useForm<AddProductFormValues>();
@@ -26,7 +27,7 @@ export const AddProductFormContainer = () => {
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),
       });
 
-      router.push("/admin");
+      router.push('/admin');
     } catch (e) {
       console.error(e);
     }
@@ -34,11 +35,7 @@ export const AddProductFormContainer = () => {
 
   return (
     <FormProvider {...methods}>
-      <ProductForm
-        isLoading={isLoading}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-      />
+      <ProductForm isLoading={isLoading} handleSubmit={handleSubmit} onSubmit={onSubmit} />
     </FormProvider>
   );
 };

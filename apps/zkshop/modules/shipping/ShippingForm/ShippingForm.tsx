@@ -1,8 +1,8 @@
-import { Box, FormControl, FormLabel, Heading, Input } from "@chakra-ui/react";
-import { useFormContext } from "react-hook-form";
-import { Section } from "ui";
+import { Box, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react';
+import { useFormContext } from 'react-hook-form';
+import { Section } from 'ui';
 
-import { SHIPPING_FIELDS } from "../constants";
+import { SHIPPING_FIELDS } from '../constants';
 
 type ShippingFormProps = {};
 

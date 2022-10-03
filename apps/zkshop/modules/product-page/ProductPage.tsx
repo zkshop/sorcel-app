@@ -1,16 +1,15 @@
-import { Product } from "libs/apollo/generated";
+import { useAppSelector } from '../../store/store';
 
-import { useAppSelector } from "../../store/store";
+import { ProductDetails } from './ProductDetails';
 
-import { ProductDetails } from "./ProductDetails";
+import { Product } from 'libs/apollo/generated';
 
 type ProductPageProps = {
   product: Product;
 };
 
 export const ProductPage = ({ product }: ProductPageProps) => {
-  const { curation, id, image, name, price, discount, collection, poapId } =
-    product;
+  const { curation, id, image, name, price, discount, collection, poapId } = product;
   const nfts = useAppSelector((state) => state.nfts);
   const poaps = useAppSelector((state) => state.poap);
   const poapIds = poaps.map((poap: any) => poap.event.id);

@@ -1,12 +1,8 @@
-import { GridLayout } from "ui";
+import { GridLayout } from 'ui';
 
-import { ProductFormHeader } from "./ProductFormHeader";
-import {
-  GeneralInformationsFields,
-  MediaFields,
-  OnChainDataFields,
-} from "./Sections";
-import { AddProductFormValues } from "./types";
+import { ProductFormHeader } from './ProductFormHeader';
+import { GeneralInformationsFields, MediaFields, OnChainDataFields } from './Sections';
+import { AddProductFormValues } from './types';
 
 type AddProductFormProps = {
   handleSubmit: Function;
@@ -15,12 +11,7 @@ type AddProductFormProps = {
   isLoading: boolean;
 };
 
-export const ProductForm = ({
-  handleSubmit,
-  onSubmit,
-  onOpen,
-  isLoading,
-}: AddProductFormProps) => (
+export const ProductForm = ({ handleSubmit, onSubmit, onOpen, isLoading }: AddProductFormProps) => (
   <GridLayout>
     <form onSubmit={handleSubmit(onSubmit)}>
       <ProductFormHeader isLoading={isLoading} onOpen={onOpen} />

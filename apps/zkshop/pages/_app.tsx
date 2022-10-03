@@ -1,18 +1,18 @@
-import "@rainbow-me/rainbowkit/styles.css";
-import "../min.css";
+import '@rainbow-me/rainbowkit/styles.css';
+import '../min.css';
 
-import { ApolloProvider } from "@apollo/client";
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { AppProps } from "next/app";
-import { Provider as ReduxProvider } from "react-redux";
-import { WagmiConfig } from "wagmi";
+import { ApolloProvider } from '@apollo/client';
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { AppProps } from 'next/app';
+import { Provider as ReduxProvider } from 'react-redux';
+import { WagmiConfig } from 'wagmi';
 
-import ThemeDecorator from "../theme/ThemeDecorator";
+import ThemeDecorator from '../theme/ThemeDecorator';
 
-import { wagmiClient, chains } from "clients/wagmi";
-import { Layout } from "components/Layout";
-import { useApollo } from "libs/apollo/client";
-import { wrapper } from "store/store";
+import { wagmiClient, chains } from 'clients/wagmi';
+import { Layout } from 'components/Layout';
+import { useApollo } from 'libs/apollo/client';
+import { wrapper } from 'store/store';
 
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps);

@@ -1,8 +1,8 @@
-import { Spinner } from "@chakra-ui/react";
-import { VerticalMenu } from "ui";
+import { Spinner } from '@chakra-ui/react';
+import { VerticalMenu } from 'ui';
 
-import { useGetAdminQuery } from "libs/apollo/generated";
-import { General, Products } from "modules";
+import { useGetAdminQuery } from 'libs/apollo/generated';
+import { General, Products } from 'modules';
 
 const Admin = () => {
   const { data, loading } = useGetAdminQuery();
@@ -15,10 +15,10 @@ const Admin = () => {
 
   const items = [
     {
-      title: "General",
-      content: <General app={{ name: data.app.name || "" }} />,
+      title: 'General',
+      content: <General app={{ name: data.app.name || '' }} />,
     },
-    { title: "Products", content: <Products /> },
+    { title: 'Products', content: <Products /> },
   ];
 
   return (

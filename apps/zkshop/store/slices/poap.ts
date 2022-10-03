@@ -1,14 +1,14 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getEveryPOAPOfAWallet } from "pages/api/poap/utils";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
+import { getEveryPOAPOfAWallet } from 'pages/api/poap/utils';
 
 export const fetchPOAPS = createAsyncThunk(
-  "poap/fetch",
-  async (walletAddress: string) => await getEveryPOAPOfAWallet(walletAddress)
+  'poap/fetch',
+  async (walletAddress: string) => await getEveryPOAPOfAWallet(walletAddress),
 );
 
-
 export const poapSlice = createSlice({
-  name: "poap",
+  name: 'poap',
   initialState: [],
   reducers: {
     reset: () => [],

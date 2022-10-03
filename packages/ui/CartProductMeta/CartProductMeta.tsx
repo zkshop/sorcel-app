@@ -7,8 +7,8 @@ import {
   Stack,
   Text,
   useColorModeValue as mode,
-} from "@chakra-ui/react";
-import { FiGift } from "react-icons/fi";
+} from '@chakra-ui/react';
+import { FiGift } from 'react-icons/fi';
 
 export type CartProductMetaProps = {
   isGiftWrapping?: boolean;
@@ -34,7 +34,7 @@ export const CartProductMeta = (props: CartProductMetaProps) => {
       <Box pt="4">
         <Stack spacing="0.5">
           <Text fontWeight="medium">{name}</Text>
-          <Text color={mode("gray.600", "gray.400")} fontSize="sm">
+          <Text color={mode('gray.600', 'gray.400')} fontSize="sm">
             {description}
           </Text>
         </Stack>

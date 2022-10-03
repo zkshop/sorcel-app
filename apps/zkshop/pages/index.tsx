@@ -1,20 +1,12 @@
-import { QueryResult } from "@apollo/client";
-import axios from "axios";
-import { initializeApollo, addApolloState } from "libs/apollo/client";
-import {
-  GetProductsDocument,
-  GetProductsQuery,
-  useGetProductsQuery,
-} from "libs/apollo/generated";
-import { useEffect, useState } from "react";
-import ReactCanvasConfetti from "react-canvas-confetti";
-import { ProductCardList } from "ui";
-import { GridLayout } from "ui";
-import { useAccount } from "wagmi";
+import { QueryResult } from '@apollo/client';
+import ReactCanvasConfetti from 'react-canvas-confetti';
+import { ProductCardList } from 'ui';
+import { useAccount } from 'wagmi';
 
-import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";
+import useUpdateThemeOnConnection from '../hooks/useUpdateThemeOnConnection';
 
-import { getEveryPOAPOfAWallet } from "./api/poap/utils";
+import { initializeApollo, addApolloState } from 'libs/apollo/client';
+import { GetProductsDocument, GetProductsQuery } from 'libs/apollo/generated';
 
 type MarketplaceProps = {
   productsQueryResult: QueryResult<GetProductsQuery>;

@@ -1,9 +1,9 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider } from '@chakra-ui/react';
 
-import useUpdateThemeOnConnection from "../hooks/useUpdateThemeOnConnection";
-import { useAppSelector } from "../store/store";
+import useUpdateThemeOnConnection from '../hooks/useUpdateThemeOnConnection';
+import { useAppSelector } from '../store/store';
 
-import { themes } from ".";
+import { themes } from '.';
 
 function ThemeDecorator({ children }: { children: React.ReactNode }) {
   const theme = useAppSelector((state) => state.theme);

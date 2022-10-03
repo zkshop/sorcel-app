@@ -5,13 +5,13 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
-} from "@chakra-ui/react";
-import React from "react";
-import { useFormContext } from "react-hook-form";
-import { BsChatRightText } from "react-icons/bs";
-import { Section } from "ui";
+} from '@chakra-ui/react';
+import React from 'react';
+import { useFormContext } from 'react-hook-form';
+import { BsChatRightText } from 'react-icons/bs';
+import { Section } from 'ui';
 
-import { PRODUCTS_FIELDS } from "../../constants";
+import { PRODUCTS_FIELDS } from '../../constants';
 
 export const GeneralInformationsFields = () => {
   const { register } = useFormContext();
@@ -24,14 +24,10 @@ export const GeneralInformationsFields = () => {
         <FormLabel mb={1}>{PRODUCTS_FIELDS.name.label}</FormLabel>
 
         <InputGroup>
-          <InputLeftElement
-            pointerEvents="none"
-            color="gray.300"
-            fontSize="1.2em"
-          >
+          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
             -
           </InputLeftElement>
-          <Input placeholder="Name" {...register("name")} />
+          <Input placeholder="Name" {...register('name')} />
         </InputGroup>
       </FormControl>
 
@@ -39,11 +35,7 @@ export const GeneralInformationsFields = () => {
         <FormLabel mb={1}>Description</FormLabel>
 
         <InputGroup>
-          <InputLeftElement
-            pointerEvents="none"
-            color="gray.300"
-            fontSize="1.2em"
-          >
+          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
             <BsChatRightText />
           </InputLeftElement>
 
@@ -55,15 +47,11 @@ export const GeneralInformationsFields = () => {
         <FormLabel mb={1}>{PRODUCTS_FIELDS.price.label}</FormLabel>
 
         <InputGroup>
-          <InputLeftElement
-            pointerEvents="none"
-            color="gray.300"
-            fontSize="1.2em"
-          >
+          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
             $
           </InputLeftElement>
 
-          <Input placeholder="Price" {...register("price")} />
+          <Input placeholder="Price" {...register('price')} />
         </InputGroup>
       </FormControl>
 
@@ -71,15 +59,11 @@ export const GeneralInformationsFields = () => {
         <FormLabel mb={1}>Discount for holders</FormLabel>
 
         <InputGroup>
-          <InputLeftElement
-            pointerEvents="none"
-            color="gray.300"
-            fontSize="1.2em"
-          >
+          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
             %
           </InputLeftElement>
 
-          <Input placeholder="Discount for holders" {...register("discount")} />
+          <Input placeholder="Discount for holders" {...register('discount')} />
         </InputGroup>
       </FormControl>
     </Section>

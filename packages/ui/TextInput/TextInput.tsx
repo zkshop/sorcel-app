@@ -1,5 +1,5 @@
-import { Box, FormLabel, Input } from "@chakra-ui/react";
-import { UseFormRegister } from "react-hook-form";
+import { Box, FormLabel, Input } from '@chakra-ui/react';
+import { UseFormRegister } from 'react-hook-form';
 
 type TextInputProps = {
   name: string;

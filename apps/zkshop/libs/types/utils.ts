@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export type EntityWithId<T> = T & { id: string };
 export type WithChildren<T> = T & { children: ReactNode };

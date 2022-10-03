@@ -1,28 +1,18 @@
-import {
-  Flex,
-  Heading,
-  HStack,
-  SimpleGrid,
-  Spacer,
-  Stack,
-  VStack,
-} from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { FormProvider, useForm } from "react-hook-form";
-import { CartItem, CartOrderSummary, Section } from "ui";
+import { Flex, Heading, HStack, SimpleGrid, Spacer, Stack, VStack } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { FormProvider, useForm } from 'react-hook-form';
+import { CartItem, CartOrderSummary, Section } from 'ui';
 
-import { ShippingForm } from "./ShippingForm";
-import { ShippingFormValues } from "./types";
+import { ShippingForm } from './ShippingForm';
+import { ShippingFormValues } from './types';
 
-import { Product } from "modules/product-page/ProductPage";
+import { Product } from 'modules/product-page/ProductPage';
 
 type ShippingFormContainerProps = {
   product: Product;
 };
 
-export const ShippingFormContainer = ({
-  product,
-}: ShippingFormContainerProps) => {
+export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) => {
   const { id, price, name, image } = product;
   const methods = useForm<ShippingFormValues>();
   const { handleSubmit } = methods;
@@ -32,14 +22,14 @@ export const ShippingFormContainer = ({
   const onSubmit = async (data: ShippingFormValues) => {
     console.log(data);
 
-    router.push(router.asPath.replace("shipping", "checkout"));
+    router.push(router.asPath.replace('shipping', 'checkout'));
   };
 
   const cartData = [
     {
       id,
       price,
-      currency: "EUR",
+      currency: 'EUR',
       name,
       description: name,
       quantity: 1,

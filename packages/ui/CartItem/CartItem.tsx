@@ -1,14 +1,7 @@
-import {
-  CloseButton,
-  Flex,
-  Link,
-  Select,
-  SelectProps,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { CloseButton, Flex, Link, Select, SelectProps, useColorModeValue } from '@chakra-ui/react';
 
-import { CartProductMeta } from "../CartProductMeta/CartProductMeta";
-import { PriceTag } from "../PriceTag/PriceTag";
+import { CartProductMeta } from '../CartProductMeta/CartProductMeta';
+import { PriceTag } from '../PriceTag/PriceTag';
 
 type CartItemProps = {
   isGiftWrapping?: boolean;
@@ -27,7 +20,7 @@ const QuantitySelect = (props: SelectProps) => (
   <Select
     maxW="64px"
     aria-label="Select quantity"
-    focusBorderColor={useColorModeValue("blue.500", "blue.200")}
+    focusBorderColor={useColorModeValue('blue.500', 'blue.200')}
     {...props}
   >
     <option value="1">1</option>
@@ -51,11 +44,7 @@ export const CartItem = (props: CartItemProps) => {
   } = props;
 
   return (
-    <Flex
-      direction={{ base: "column", md: "row" }}
-      justify="space-between"
-      align="center"
-    >
+    <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" align="center">
       <CartProductMeta
         name={name}
         description={description}
@@ -64,12 +53,7 @@ export const CartItem = (props: CartItemProps) => {
       />
 
       {/* Desktop */}
-      <Flex
-        width="full"
-        justify="space-between"
-        display={{ base: "none", md: "flex" }}
-        flex={1}
-      >
+      <Flex width="full" justify="space-between" display={{ base: 'none', md: 'flex' }} flex={1}>
         {/* <QuantitySelect
           value={quantity}
           onChange={(e) => {
@@ -89,7 +73,7 @@ export const CartItem = (props: CartItemProps) => {
         align="center"
         width="full"
         justify="space-between"
-        display={{ base: "flex", md: "none" }}
+        display={{ base: 'flex', md: 'none' }}
       >
         <Link fontSize="sm" textDecor="underline">
           Delete

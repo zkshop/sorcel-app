@@ -1,41 +1,33 @@
-import {
-  ApolloClient,
-  HttpLink,
-  InMemoryCache,
-  from,
-  NormalizedCacheObject,
-} from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
-import { concatPagination } from "@apollo/client/utilities";
-import merge from "deepmerge";
-import isEqual from "lodash/isEqual";
-import { useMemo } from "react";
+import { ApolloClient, HttpLink, InMemoryCache, from, NormalizedCacheObject } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
+import { concatPagination } from '@apollo/client/utilities';
+import merge from 'deepmerge';
+import isEqual from 'lodash/isEqual';
+import { useMemo } from 'react';
 
-export const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__";
+export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      )
+      console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`),
     );
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
 const httpLink = new HttpLink({
   uri: process.env.HASURA_API_URL, // Server URL (must be absolute)
-  credentials: "same-origin", // Additional fetch() options like `credentials` or `headers`
+  credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
   headers: {
-    "x-hasura-admin-secret": process.env.HASURA_API_KEY || "",
+    'x-hasura-admin-secret': process.env.HASURA_API_KEY || '',
   },
 });
 
 function createApolloClient() {
   return new ApolloClient({
-    ssrMode: typeof window === "undefined",
+    ssrMode: typeof window === 'undefined',
     link: from([errorLink, httpLink]),
     cache: new InMemoryCache({
       typePolicies: {
@@ -63,9 +55,7 @@ export function initializeApollo(initialState = null) {
       // combine arrays using object equality (like in sets)
       arrayMerge: (destinationArray, sourceArray) => [
         ...sourceArray,
-        ...destinationArray.filter((d) =>
-          sourceArray.every((s) => !isEqual(d, s))
-        ),
+        ...destinationArray.filter((d) => sourceArray.every((s) => !isEqual(d, s))),
       ],
     });
 
@@ -73,7 +63,7 @@ export function initializeApollo(initialState = null) {
     _apolloClient.cache.restore(data);
   }
   // For SSG and SSR always create a new Apollo Client
-  if (typeof window === "undefined") return _apolloClient;
+  if (typeof window === 'undefined') return _apolloClient;
   // Create the Apollo Client once in the client
   if (!apolloClient) apolloClient = _apolloClient;
 

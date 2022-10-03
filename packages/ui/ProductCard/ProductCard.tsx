@@ -1,9 +1,9 @@
-import { Box, Text, Image, HStack } from "@chakra-ui/react";
-import Link from "next/link";
+import { Box, Text, Image, HStack } from '@chakra-ui/react';
+import Link from 'next/link';
 
-import { PoapBadge } from "../PoapBadge/PoapBadge";
+import { PoapBadge } from '../PoapBadge/PoapBadge';
 
-import { CollectionBadge } from "./CollectionBadge";
+import { CollectionBadge } from './CollectionBadge';
 
 interface ProductCardProps {
   id?: string;
@@ -32,9 +32,7 @@ export const ProductCard = ({
   const discountNumber = discount ? parseInt(discount) : 0;
 
   const promoPercent = discount ? discountNumber / 100 : 0;
-  const priceReduced = discount
-    ? princeNumber - princeNumber * promoPercent
-    : 0;
+  const priceReduced = discount ? princeNumber - princeNumber * promoPercent : 0;
 
   return (
     <Link href={`product/${id}`}>
@@ -50,16 +48,16 @@ export const ProductCard = ({
             ? {
                 content: '""',
                 zIndex: -1,
-                position: "absolute",
-                top: "-6px",
-                right: "-6px",
-                bottom: "-6px",
-                left: "-6px",
+                position: 'absolute',
+                top: '-6px',
+                right: '-6px',
+                bottom: '-6px',
+                left: '-6px',
                 background:
-                  "linear-gradient(to right, var(--chakra-colors-bannerLeft) , var(--chakra-colors-bannerRight))",
-                transition: "opacity 0.3s",
-                borderRadius: "inherit",
-                filter: "blur(5px)",
+                  'linear-gradient(to right, var(--chakra-colors-bannerLeft) , var(--chakra-colors-bannerRight))',
+                transition: 'opacity 0.3s',
+                borderRadius: 'inherit',
+                filter: 'blur(5px)',
                 opacity: 0.9,
               }
             : {}
@@ -69,20 +67,18 @@ export const ProductCard = ({
             ? {
                 content: '""',
                 zIndex: -1,
-                position: "absolute",
+                position: 'absolute',
                 top: 0,
                 right: 0,
                 bottom: 0,
                 left: 0,
-                background: "inherit",
-                borderRadius: "inherit",
+                background: 'inherit',
+                borderRadius: 'inherit',
               }
             : {}
         }
       >
-        {collection && !poapImgUrl && (
-          <CollectionBadge CollectionName={collection} />
-        )}
+        {collection && !poapImgUrl && <CollectionBadge CollectionName={collection} />}
 
         {poapImgUrl && <PoapBadge imgUrl={poapImgUrl} />}
 
@@ -90,13 +86,13 @@ export const ProductCard = ({
           <>
             <Box
               sx={{
-                position: "absolute",
+                position: 'absolute',
                 top: 0,
                 left: 0,
                 bottom: 0,
                 right: 0,
                 opacity: 0.5,
-                borderRadius: "10px",
+                borderRadius: '10px',
               }}
               display="flex"
               justifyContent="center"
@@ -112,7 +108,7 @@ export const ProductCard = ({
               color="white"
               fontWeight="bold"
             >
-              Connect your {collection || "Misfitwear"} wallet to unlock
+              Connect your {collection || 'Misfitwear'} wallet to unlock
             </Text>
           </>
         )}
@@ -131,30 +127,20 @@ export const ProductCard = ({
             {title}
           </Text>
 
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            mt={4}
-          >
+          <Box display="flex" justifyContent="space-between" alignItems="center" mt={4}>
             <HStack px={1}>
               <Text
                 fontWeight="bold"
                 fontSize="14px"
                 color="black"
-                textDecoration={discount ? "line-through" : "none"}
-                marginRight={discount ? "2px" : "none"}
+                textDecoration={discount ? 'line-through' : 'none'}
+                marginRight={discount ? '2px' : 'none'}
               >
                 {`${price}$`}
               </Text>
 
               {discount && (
-                <Text
-                  fontWeight="bold"
-                  fontSize="14px"
-                  color="#FF5F1F"
-                  marginLeft="0 !important"
-                >
+                <Text fontWeight="bold" fontSize="14px" color="#FF5F1F" marginLeft="0 !important">
                   {`${priceReduced}$`}
                 </Text>
               )}
@@ -171,12 +157,7 @@ export const ProductCard = ({
                 alignItems="center"
                 justifyContent="center"
               >
-                <Text
-                  fontWeight="bold"
-                  fontSize="12px"
-                  color="black"
-                  padding="2px"
-                >
+                <Text fontWeight="bold" fontSize="12px" color="black" padding="2px">
                   {`-${discount}%`}
                 </Text>
               </Box>

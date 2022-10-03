@@ -1,5 +1,5 @@
-import { Box, FormLabel, Input } from "@chakra-ui/react";
-import { UseFormRegister } from "react-hook-form";
+import { Box, FormLabel, Input } from '@chakra-ui/react';
+import { UseFormRegister } from 'react-hook-form';
 
 type FormFieldProps = {
   label: string;
@@ -9,20 +9,9 @@ type FormFieldProps = {
   maxWidth?: string | number;
 };
 
-export const FormField = ({
-  label,
-  name,
-  placeholder,
-  register,
-  maxWidth,
-}: FormFieldProps) => (
+export const FormField = ({ label, name, placeholder, register, maxWidth }: FormFieldProps) => (
   <Box>
     <FormLabel>{label}</FormLabel>
-    <Input
-      maxWidth={maxWidth}
-      type="text"
-      placeholder={placeholder}
-      {...register?.(name)}
-    />
+    <Input maxWidth={maxWidth} type="text" placeholder={placeholder} {...register?.(name)} />
   </Box>
 );

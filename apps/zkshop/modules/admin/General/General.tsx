@@ -1,6 +1,6 @@
-import { Box } from "@chakra-ui/react";
+import { Box } from '@chakra-ui/react';
 
-import { GeneralForm } from "./GeneralForm";
+import { GeneralForm } from './GeneralForm';
 
 type GeneralProps = {
   app: { name: string };

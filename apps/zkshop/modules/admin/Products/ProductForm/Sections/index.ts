@@ -1,3 +1,3 @@
-export * from "./GeneralInformationsFields";
-export * from "./MediaFields";
-export * from "./OnChainDataFields";
+export * from './GeneralInformationsFields';
+export * from './MediaFields';
+export * from './OnChainDataFields';

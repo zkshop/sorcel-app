@@ -1,4 +1,4 @@
-import { alchemy } from "clients/alchemy";
+import { alchemy } from 'clients/alchemy';
 
 export async function getEveryNftOfWallet(walletAddress: string) {
   try {

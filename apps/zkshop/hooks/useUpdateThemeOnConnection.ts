@@ -1,10 +1,11 @@
-import { useCallback, useEffect } from "react";
-import { fetchPOAPS } from "store/slices/poap";
-import { useAccount } from "wagmi";
+import { useCallback, useEffect } from 'react';
+import { useAccount } from 'wagmi';
 
-import { fetchNFTS, reset } from "../store/slices/nfts";
-import { update } from "../store/slices/theme";
-import { useAppDispatch, useAppSelector } from "../store/store";
+import { fetchNFTS, reset } from '../store/slices/nfts';
+import { update } from '../store/slices/theme';
+import { useAppDispatch, useAppSelector } from '../store/store';
+
+import { fetchPOAPS } from 'store/slices/poap';
 
 const useUpdateThemeOnConnection = () => {
   const { isConnected, isDisconnected, address } = useAccount();
@@ -20,8 +21,8 @@ const useUpdateThemeOnConnection = () => {
   }, [address, dispatch]);
 
   useEffect(() => {
-    const setVanillaTheme = () => dispatch(update("vanilla"));
-    const setFirstTheme = () => dispatch(update("first"));
+    const setVanillaTheme = () => dispatch(update('vanilla'));
+    const setFirstTheme = () => dispatch(update('first'));
 
     if (isConnected) {
       setFirstTheme();

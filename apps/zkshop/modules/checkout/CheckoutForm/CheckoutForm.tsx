@@ -1,12 +1,8 @@
-import { Text, Flex } from "@chakra-ui/react";
-import {
-  PaymentElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
-import React, { useEffect, useState } from "react";
+import { Text, Flex } from '@chakra-ui/react';
+import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import React, { useEffect, useState } from 'react';
 
-import { StyledCheckoutForm } from "./CheckoutForm.style";
+import { StyledCheckoutForm } from './CheckoutForm.style';
 
 type CheckoutFormProps = {
   price: string;
@@ -25,7 +21,7 @@ export function CheckoutForm({ price }: CheckoutFormProps) {
     }
 
     const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
+      'payment_intent_client_secret',
     );
 
     if (!clientSecret) {
@@ -34,17 +30,17 @@ export function CheckoutForm({ price }: CheckoutFormProps) {
 
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent?.status) {
-        case "succeeded":
-          setMessage("Payment succeeded!");
+        case 'succeeded':
+          setMessage('Payment succeeded!');
           break;
-        case "processing":
-          setMessage("Your payment is processing.");
+        case 'processing':
+          setMessage('Your payment is processing.');
           break;
-        case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
+        case 'requires_payment_method':
+          setMessage('Your payment was not successful, please try again.');
           break;
         default:
-          setMessage("Something went wrong.");
+          setMessage('Something went wrong.');
           break;
       }
     });
@@ -63,14 +59,14 @@ export function CheckoutForm({ price }: CheckoutFormProps) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: process.env.HOSTNAME || "",
+        return_url: process.env.HOSTNAME || '',
       },
     });
 
-    if (error.type === "card_error" || error.type === "validation_error") {
+    if (error.type === 'card_error' || error.type === 'validation_error') {
       setMessage(error.message);
     } else {
-      setMessage("An unexpected error occurred.");
+      setMessage('An unexpected error occurred.');
     }
 
     setIsLoading(false);
@@ -86,7 +82,7 @@ export function CheckoutForm({ price }: CheckoutFormProps) {
 
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+          {isLoading ? <div className="spinner" id="spinner"></div> : 'Pay now'}
         </span>
       </button>
       {/* Show any error or success messages */}

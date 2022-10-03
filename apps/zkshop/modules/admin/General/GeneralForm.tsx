@@ -1,8 +1,8 @@
-import { Box, Heading, HStack } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import { Button, FormField } from "ui";
+import { Box, Heading, HStack } from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
+import { Button, FormField } from 'ui';
 
-import { useUpdateAppMutation } from "libs/apollo/generated";
+import { useUpdateAppMutation } from 'libs/apollo/generated';
 
 type GeneralFormValues = {
   name: string;
@@ -43,19 +43,14 @@ export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
       <Box
         my={4}
         sx={{
-          bg: "white",
-          borderRadius: "8px",
+          bg: 'white',
+          borderRadius: '8px',
           p: 8,
-          border: "1px solid lightgrey",
+          border: '1px solid lightgrey',
         }}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormField
-            label="App Name"
-            name="name"
-            maxWidth={32}
-            register={register}
-          />
+          <FormField label="App Name" name="name" maxWidth={32} register={register} />
         </form>
       </Box>
     </Box>
