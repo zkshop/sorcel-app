@@ -47,8 +47,6 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
   };
 
   const onSubmit = async (data: AddProductFormValues) => {
-    console.log({ data });
-
     editProduct({
       variables: { ...data, id: product.id },
       onCompleted: () => toast(getEditProductSuccessMessage(data.name)),

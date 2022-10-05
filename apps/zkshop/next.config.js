@@ -17,4 +17,4 @@ const nextConfig = {
   },
 };
 
-export default withTM(['ui'])(nextConfig);
+export default withTM(['ui', 'pure'])(nextConfig);

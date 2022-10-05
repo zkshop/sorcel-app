@@ -5,7 +5,7 @@ import { PoapBadge } from '../PoapBadge/PoapBadge';
 
 import { CollectionBadge } from './CollectionBadge';
 
-interface ProductCardProps {
+export interface ProductCardProps {
   id?: string;
   srcItem: string;
   title: string;
@@ -13,7 +13,7 @@ interface ProductCardProps {
   price: string;
   collection: string;
   isTransparent: boolean;
-  isEligible: boolean | string;
+  isAnHolder: boolean | string;
   poapImgUrl: string;
 }
 
@@ -24,7 +24,7 @@ export const ProductCard = ({
   price,
   collection,
   isTransparent,
-  isEligible,
+  isAnHolder,
   id,
   poapImgUrl,
 }: ProductCardProps) => {
@@ -44,7 +44,7 @@ export const ProductCard = ({
         borderRadius="10px"
         position="relative"
         _before={
-          isEligible
+          isAnHolder
             ? {
                 content: '""',
                 zIndex: -1,
@@ -63,7 +63,7 @@ export const ProductCard = ({
             : {}
         }
         _after={
-          isEligible
+          isAnHolder
             ? {
                 content: '""',
                 zIndex: -1,

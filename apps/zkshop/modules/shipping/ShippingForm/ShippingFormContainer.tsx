@@ -20,8 +20,6 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
   const router = useRouter();
 
   const onSubmit = async (data: ShippingFormValues) => {
-    console.log(data);
-
     router.push(router.asPath.replace('shipping', 'checkout'));
   };
 

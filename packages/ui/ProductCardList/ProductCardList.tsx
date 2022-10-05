@@ -1,10 +1,12 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
 import { ProductCard } from 'ui';
-
-import { useAppSelector } from '../../../apps/zkshop/store/store';
+import { formatProductData } from './formatProductData';
 
 type ProductCardListProps = {
   products: Product[];
+  poapImageList: string[];
+  collections: string[];
+  poapIds: string[];
 };
 
 type Product = {
@@ -20,71 +22,58 @@ type Product = {
   poapId?: any;
 };
 
-function getPoapImageFromId(poapId: string, poapList: any[]) {
-  const poap = poapList.find(({ id }) => id === poapId);
-
-  if (poap) return poap.image_url;
-}
-
-export const ProductCardList = ({ products }: ProductCardListProps) => {
-  const nfts = useAppSelector((state) => state.nfts);
-  const poapImageList = useAppSelector((state) => state.poapImageList);
-  const poaps = useAppSelector((state) => state.poap);
-  const poapIds = poaps.map((poap: any) => poap.event.id);
-  const collections = nfts.map((nft) => nft.contract.address);
-  const isAnHolder = products.some((product: Product) =>
-    collections.includes(product?.curation?.toLowerCase()),
-  );
-
-  return (
-    <Box>
-      {/* <VStack pb={8}>
-        <Image
-          height={80}
-          width={750}
-          src="/images/misfitwear.jpg"
-          alt="misfitwear"
-          style={{
-            borderRadius: "16px",
-          }}
-        />
-      </VStack> */}
-
-      <Grid
-        gap={8}
-        sx={{
-          gridTemplateColumns: {
-            xs: 'repeat(2, 1fr)',
-            sm: 'repeat(3, 1fr)',
-            md: 'repeat(4, 1fr)',
-          },
-        }}
-      >
-        {products.map(
-          ({ image, name, discount, price, collection, curation, id, poapId }: Product) => {
-            const isTransparent =
-              (curation || poapId) &&
-              !collections.includes(curation.toLowerCase()) &&
-              !poapIds.includes(poapId);
-
-            return (
-              <GridItem key={`products-${id}`} display="flex" justifyContent="center">
-                <ProductCard
-                  id={id}
-                  srcItem={image}
-                  title={name}
-                  discount={isAnHolder && discount ? discount : undefined}
-                  price={price}
-                  collection={collection}
-                  poapImgUrl={getPoapImageFromId(poapId, poapImageList)}
-                  isTransparent={isTransparent || false}
-                  isEligible={curation && isAnHolder}
-                />
-              </GridItem>
-            );
-          },
-        )}
-      </Grid>
-    </Box>
-  );
+export type GetProductCardPropsParams = Product & {
+  poapImageList: any[];
+  poapIds: string[];
+  collections: string[];
 };
+
+export const ProductCardList = ({
+  products,
+  collections,
+  poapIds,
+  poapImageList,
+}: ProductCardListProps) => (
+  <Box>
+    <Grid
+      gap={8}
+      sx={{
+        gridTemplateColumns: {
+          xs: 'repeat(2, 1fr)',
+          sm: 'repeat(3, 1fr)',
+          md: 'repeat(4, 1fr)',
+        },
+      }}
+    >
+      {products.map((product) => {
+        const {
+          collection,
+          isAnHolder,
+          isTransparent,
+          poapImgUrl,
+          price,
+          srcItem,
+          title,
+          discount,
+          id,
+        } = formatProductData({ ...product, poapIds, collections, poapImageList });
+
+        return (
+          <GridItem key={`products-${product.id}`} display="flex" justifyContent="center">
+            <ProductCard
+              id={id}
+              title={title}
+              discount={discount}
+              srcItem={srcItem}
+              price={price}
+              poapImgUrl={poapImgUrl}
+              isAnHolder={isAnHolder}
+              isTransparent={isTransparent}
+              collection={collection}
+            />
+          </GridItem>
+        );
+      })}
+    </Grid>
+  </Box>
+);

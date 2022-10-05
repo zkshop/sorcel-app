@@ -14,7 +14,6 @@ interface ProductDetailsProps {
   isTransparent: boolean;
   isEligible: boolean | string;
   description?: string;
-  collections: string[];
 }
 
 export const ProductDetails = ({

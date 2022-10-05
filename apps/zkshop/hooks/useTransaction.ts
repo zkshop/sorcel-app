@@ -2,7 +2,7 @@ import { parseEther } from 'ethers/lib/utils';
 import { useEffect, useState } from 'react';
 import { usePrepareSendTransaction, useSendTransaction, useWaitForTransaction } from 'wagmi';
 
-import convertUSDToETH from '../utils/convertUSDToETH';
+import { convertUSDToETH } from 'pure';
 
 import getETHUSDprice from 'pages/api/getETHUSDPrice';
 

@@ -21,8 +21,6 @@ export const getPOAPFromId = async (id: string) => {
 };
 
 export const getPOAPListFromIds = async (ids: string[]) => {
-  console.log({ ids });
-
   function getAllRequest() {
     const calls = [];
     for (const id of ids) {
@@ -35,7 +33,6 @@ export const getPOAPListFromIds = async (ids: string[]) => {
   await Promise.all(getAllRequest()).then((responseList) =>
     responseList.map((data) => result.push(data)),
   );
-  console.log({ result });
 
   return result;
 };

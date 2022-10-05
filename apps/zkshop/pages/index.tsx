@@ -10,6 +10,7 @@ import { initializeApollo, addApolloState } from 'libs/apollo/client';
 import { GetProductsDocument, GetProductsQuery } from 'libs/apollo/generated';
 import { fetchPOAPImageList } from 'store/slices/poapImageList';
 import { useAppDispatch } from 'store/store';
+import { ProductListContainer } from 'modules';
 
 type MarketplaceProps = {
   productsQueryResult: QueryResult<GetProductsQuery>;
@@ -42,7 +43,7 @@ const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
     <>
       <ReactCanvasConfetti fire={isConnected} className="canvas" />
 
-      <ProductCardList products={data?.products} />
+      <ProductListContainer products={data?.products} />
     </>
   );
 };

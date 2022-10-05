@@ -54,7 +54,6 @@ export function CheckoutForm({ price }: CheckoutFormProps) {
     }
 
     setIsLoading(true);
-    console.log({ host: process.env.HOSTNAME });
 
     const { error } = await stripe.confirmPayment({
       elements,
