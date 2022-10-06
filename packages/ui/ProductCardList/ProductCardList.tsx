@@ -6,7 +6,7 @@ type ProductCardListProps = {
   products: Product[];
   poapImageList: string[];
   collections: string[];
-  poapIds: string[];
+  poapIds: number[];
 };
 
 type Product = {
@@ -24,7 +24,7 @@ type Product = {
 
 export type GetProductCardPropsParams = Product & {
   poapImageList: any[];
-  poapIds: string[];
+  poapIds: number[];
   collections: string[];
 };
 
