@@ -9,9 +9,11 @@ import themeReducer from './slices/theme';
 
 const rootReducer = combineReducers({
   theme: themeReducer,
-  nfts: nftsReducer,
-  poap: poapReducer,
   poapImageList: poapImageListReducer,
+  user: combineReducers({
+    nfts: nftsReducer,
+    poap: poapReducer,
+  }),
 });
 
 const makeStore = () =>

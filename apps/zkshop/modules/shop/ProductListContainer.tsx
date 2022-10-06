@@ -7,8 +7,8 @@ type ProductListContainerProps = {
 };
 
 export const ProductListContainer = ({ products }: ProductListContainerProps) => {
-  const user = useAppSelector((state) => ({ nfts: state.nfts, poap: state.poap }));
-  const poapIds = user.poap.map((poap: any) => poap.event.id);
+  const user = useAppSelector((state) => state.user);
+  const poapIds = user.poap.map((poap) => poap.event.id.toString());
   const poapImageList = useAppSelector((state) => state.poapImageList);
   const collections = user.nfts.map((nft) => nft.contract.address);
 

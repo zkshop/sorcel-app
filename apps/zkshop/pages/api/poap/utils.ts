@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Poap } from 'store/slices/poap';
 
 export const POAP_BASE_URL = 'https://api.poap.tech';
 
@@ -8,10 +9,16 @@ export const getEveryPoapURL = (address: string) => `/actions/scan/${address}`;
 
 export const getPoapURLFromId = (id: string) => `/events/id/${id}`;
 
-export const getEveryPOAPOfAWallet = async (address: string) => {
-  const { data } = await axios.get(`/api/poap/${address}`);
+export const getEveryPOAPOfAWallet = async (address: string): Promise<Poap[]> => {
+  try {
+    const { data } = await axios.get(`/api/poap/${address}`);
 
-  return data.data;
+    return data.data;
+  } catch (e) {
+    console.error(e);
+  }
+
+  return [];
 };
 
 export const getPOAPFromId = async (id: string) => {

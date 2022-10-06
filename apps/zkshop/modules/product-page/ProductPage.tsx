@@ -14,12 +14,12 @@ const description =
 
 export const ProductPage = ({ product }: ProductPageProps) => {
   const collections = useAppSelector((state) =>
-    state.nfts.map(({ contract: { address } }) => address),
+    state.user.nfts.map(({ contract: { address } }) => address),
   );
-  const poapIds = useAppSelector((state) => state.poap.map((poap: any) => poap.event.id));
+  const poapIds = useAppSelector((state) => state.user.poap.map((poap: any) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
 
-  const { collection, isAnHolder, isTransparent, poapImgUrl, price, srcItem, title, discount, id } =
+  const { collection, isAnHolder, isTransparent, price, srcItem, title, discount, id } =
     formatProductData({ ...product, poapIds, collections, poapImageList });
 
   return (
