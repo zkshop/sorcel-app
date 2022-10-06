@@ -12,6 +12,7 @@ import {
   getDeleteProductSuccessMessage,
   getEditProductSuccessMessage,
 } from 'libs/messages';
+import { toNumber } from 'pure';
 
 type EditProductFormContainerProps = {
   product: Product;
@@ -48,7 +49,13 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
 
   const onSubmit = async (data: AddProductFormValues) => {
     editProduct({
-      variables: { ...data, id: product.id },
+      variables: {
+        ...data,
+        id: product.id,
+        price: toNumber(data.price),
+        discount: toNumber(data.discount),
+        poapId: toNumber(data.poapId),
+      },
       onCompleted: () => toast(getEditProductSuccessMessage(data.name)),
       onError: () => toast(ERROR_MESSAGE),
     });

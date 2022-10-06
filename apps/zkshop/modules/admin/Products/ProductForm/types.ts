@@ -1,6 +1,6 @@
 export type AddProductFormValues = {
-  price: number;
-  discount: number;
+  price: string;
+  discount: string;
   image: string;
   curation: string;
   poapId: string;

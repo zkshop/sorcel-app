@@ -2,13 +2,16 @@ import { useToast } from '@chakra-ui/react';
 import { useCreateProductMutation } from 'libs/apollo/generated';
 import { getAddProductSuccessMessage } from 'libs/messages';
 import { useRouter } from 'next/router';
+import { toNumber } from 'pure';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import { ProductForm } from './ProductForm';
 import { AddProductFormValues } from './types';
 
 export const AddProductFormContainer = () => {
-  const methods = useForm<AddProductFormValues>();
+  const methods = useForm<AddProductFormValues>({
+    defaultValues: {},
+  });
   const { handleSubmit } = methods;
 
   const router = useRouter();
@@ -22,6 +25,9 @@ export const AddProductFormContainer = () => {
       await createProduct({
         variables: {
           ...data,
+          price: toNumber(data.price),
+          discount: toNumber(data.discount),
+          poapId: toNumber(data.poapId),
         },
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),
       });
