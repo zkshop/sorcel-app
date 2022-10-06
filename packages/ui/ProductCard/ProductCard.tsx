@@ -1,9 +1,7 @@
 import { Box, Text, Image, HStack } from '@chakra-ui/react';
 import Link from 'next/link';
 
-import { PoapBadge } from '../PoapBadge/PoapBadge';
-
-import { CollectionBadge } from './CollectionBadge';
+import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 
 export interface ProductCardProps {
   id?: string;
@@ -78,9 +76,7 @@ export const ProductCard = ({
             : {}
         }
       >
-        {collection && !poapImgUrl && <CollectionBadge CollectionName={collection} />}
-
-        {poapImgUrl && <PoapBadge imgUrl={poapImgUrl} />}
+        <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} />
 
         {isTransparent && (
           <>

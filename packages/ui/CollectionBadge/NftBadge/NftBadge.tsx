@@ -1,10 +1,10 @@
 import { Box } from '@chakra-ui/react';
 
-type CollectionBadgeProps = {
-  CollectionName: string;
+type NftBadgeProps = {
+  title: string;
 };
 
-export const CollectionBadge = ({ CollectionName }: CollectionBadgeProps) => (
+export const NftBadge = ({ title }: NftBadgeProps) => (
   <Box
     sx={{
       zIndex: 1,
@@ -33,6 +33,6 @@ export const CollectionBadge = ({ CollectionName }: CollectionBadgeProps) => (
       borderColor: 'rgb(128, 90, 213) transparent transparent rgb(128, 90, 213)',
     }}
   >
-    {CollectionName}
+    {title}
   </Box>
 );

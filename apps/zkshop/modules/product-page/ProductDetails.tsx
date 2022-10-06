@@ -1,6 +1,6 @@
 import { Box, Text, Button, Image, HStack, VStack } from '@chakra-ui/react';
 import { GoTriangleUp } from 'react-icons/go';
-import { CollectionBadge, SizeSelector } from 'ui';
+import { CollectionBadge, SizeSelector, PoapBadge } from 'ui';
 
 import useTransaction from '../../hooks/useTransaction';
 
@@ -14,6 +14,7 @@ interface ProductDetailsProps {
   isTransparent: boolean;
   isEligible: boolean | string;
   description?: string;
+  poapImgUrl?: string;
 }
 
 export const ProductDetails = ({
@@ -26,6 +27,7 @@ export const ProductDetails = ({
   isTransparent,
   isEligible,
   description,
+  poapImgUrl,
 }: ProductDetailsProps) => {
   const priceNumber = parseInt(price);
   const discountNumber = discount ? parseInt(discount) : 0;
@@ -76,8 +78,7 @@ export const ProductDetails = ({
           : {}
       }
     >
-      {collection && <CollectionBadge CollectionName={collection} />}
-
+      <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} />
       {isTransparent && (
         <>
           <Box
@@ -109,7 +110,6 @@ export const ProductDetails = ({
           </Text>
         </>
       )}
-
       <HStack alignItems="stretch">
         <Box>
           <Image alt="product" height="500px" src={srcItem} />
