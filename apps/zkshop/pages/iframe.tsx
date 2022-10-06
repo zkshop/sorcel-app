@@ -7,12 +7,17 @@ import useUpdateThemeOnConnection from '../hooks/useUpdateThemeOnConnection';
 
 import { addApolloState, initializeApollo } from 'libs/apollo/client';
 import { GetProductsDocument, GetProductsQueryResult } from 'libs/apollo/generated';
+import { useAppSelector } from 'store/store';
 
 type MarketplaceProps = {
   productsQueryResult: GetProductsQueryResult;
 };
 
 const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
+  const user = useAppSelector((state) => state.user);
+  const poapIds = user.poap.map((poap) => poap.event.id.toString());
+  const poapImageList = useAppSelector((state) => state.poapImageList);
+  const collections = user.nfts.map((nft) => nft.contract.address);
   const {} = useUpdateThemeOnConnection();
   const { isConnected } = useAccount();
 
@@ -28,7 +33,12 @@ const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
     <GridLayout>
       <ReactCanvasConfetti fire={isConnected} className="canvas" />
 
-      <ProductCardList products={productsQueryResult.data?.products} />
+      <ProductCardList
+        products={productsQueryResult.data.products}
+        collections={collections}
+        poapIds={poapIds}
+        poapImageList={poapImageList}
+      />
     </GridLayout>
   );
 };

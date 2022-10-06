@@ -9,8 +9,7 @@ import { fetchPOAPS } from 'store/slices/poap';
 
 const useUpdateThemeOnConnection = () => {
   const { isConnected, isDisconnected, address } = useAccount();
-  const nfts = useAppSelector((state) => state.nfts);
-  const poap = useAppSelector((state) => state.poap);
+  const { nfts, poap } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const getNfts = useCallback(async () => {
