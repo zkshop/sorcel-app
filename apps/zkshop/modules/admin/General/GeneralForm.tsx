@@ -21,9 +21,10 @@ export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
 
   const onSubmit = async (data: GeneralFormValues) => {
     try {
-      const res = await updateApp({
+      await updateApp({
         variables: {
           newName: data.name,
+          appId: process.env.APP_ID,
         },
       });
     } catch (e) {

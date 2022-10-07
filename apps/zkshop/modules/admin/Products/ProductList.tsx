@@ -9,7 +9,10 @@ import { ProductListItem } from './ProductListItem';
 import { useGetProductsQuery } from 'libs/apollo/generated';
 
 export const Products = () => {
-  const { data, error, loading } = useGetProductsQuery();
+  const { data, error, loading } = useGetProductsQuery({
+    variables: { appId: process.env.APP_ID },
+  });
+
   if (loading) return <Spinner />;
 
   if (error || !data) {

@@ -1,4 +1,4 @@
-query Product_by_pk($id: uuid!) {
+query GetProductById($id: uuid!) {
   product_by_pk(id: $id) {
     app_id
     collection

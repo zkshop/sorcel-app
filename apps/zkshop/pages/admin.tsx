@@ -5,7 +5,7 @@ import { useGetAdminQuery } from 'libs/apollo/generated';
 import { General, Products } from 'modules';
 
 const Admin = () => {
-  const { data, loading } = useGetAdminQuery();
+  const { data, loading } = useGetAdminQuery({ variables: { appId: process.env.APP_ID } });
 
   if (loading) return <Spinner />;
 

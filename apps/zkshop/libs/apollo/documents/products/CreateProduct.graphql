@@ -1,4 +1,5 @@
 mutation CreateProduct(
+  $appId: uuid!
   $price: numeric
   $name: String
   $image: bpchar
@@ -9,7 +10,7 @@ mutation CreateProduct(
 ) {
   insert_product_one(
     object: {
-      app_id: "7c0623b1-5715-4e77-8db3-cf71204bdb80"
+      app_id: $appId
       discount: $discount
       image: $image
       name: $name

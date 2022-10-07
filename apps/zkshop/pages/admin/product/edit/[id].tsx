@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 import { BackButton } from 'ui';
 
 import { addApolloState, initializeApollo } from 'libs/apollo/client';
-import { Product, Product_By_PkDocument } from 'libs/apollo/generated';
+import { GetProductByIdDocument, Product } from 'libs/apollo/generated';
 import { EditProductFormContainer } from 'modules';
 
 type EditProductPageProps = {
@@ -25,7 +25,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   if (params?.id) {
     const { id } = params;
     const res = await apolloClient.query({
-      query: Product_By_PkDocument,
+      query: GetProductByIdDocument,
       variables: {
         id,
       },

@@ -54,6 +54,9 @@ export async function getServerSideProps() {
   const apolloClient = initializeApollo();
   const productsQueryResult = await apolloClient.query({
     query: GetProductsDocument,
+    variables: {
+      appId: process.env.APP_ID,
+    },
   });
 
   return addApolloState(apolloClient, {

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 import { getPaymentIntent, getStripeObject } from 'clients/stripe';
 import { initializeApollo, addApolloState } from 'libs/apollo/client';
-import { Product, Product_By_PkDocument } from 'libs/apollo/generated';
+import { GetProductByIdDocument, Product } from 'libs/apollo/generated';
 import { CheckoutForm } from 'modules/checkout/CheckoutForm';
 
 type CheckoutProps = {
@@ -51,7 +51,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     if (params?.productId) {
       const { productId } = params;
       const res = await apolloClient.query({
-        query: Product_By_PkDocument,
+        query: GetProductByIdDocument,
         variables: {
           id: productId,
         },

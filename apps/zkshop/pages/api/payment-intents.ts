@@ -4,9 +4,9 @@ import Stripe from 'stripe';
 import { formatAmountForStripe } from 'clients/stripe';
 import { initializeApollo } from 'libs/apollo/client';
 import {
-  Product_By_PkDocument,
-  Product_By_PkQuery,
-  Product_By_PkQueryVariables,
+  GetProductByIdDocument,
+  GetProductByIdQuery,
+  GetProductByIdQueryVariables,
 } from 'libs/apollo/generated';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
@@ -15,12 +15,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const apolloClient = initializeApollo();
-  const { data } = await apolloClient.query<Product_By_PkQuery, Product_By_PkQueryVariables>({
-    query: Product_By_PkDocument,
+  const { data } = await apolloClient.query<GetProductByIdQuery, GetProductByIdQueryVariables>({
+    query: GetProductByIdDocument,
     variables: { id: req.body.productId },
   });
 
-  // Create a PaymentIntent with the order amount and currency
   const paymentIntent = await stripe.paymentIntents.create({
     amount: formatAmountForStripe(data.product_by_pk?.price, 'eur'),
     currency: 'eur',

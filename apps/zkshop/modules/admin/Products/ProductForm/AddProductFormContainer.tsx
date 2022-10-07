@@ -25,6 +25,7 @@ export const AddProductFormContainer = () => {
       await createProduct({
         variables: {
           ...data,
+          appId: process.env.APP_ID,
           price: toNumber(data.price),
           discount: toNumber(data.discount),
           poapId: toNumber(data.poapId),

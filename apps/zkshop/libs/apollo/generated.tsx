@@ -2,15 +2,9 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -824,7 +818,9 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-export type GetAdminQueryVariables = Exact<{ [key: string]: never }>;
+export type GetAdminQueryVariables = Exact<{
+  appId: Scalars['uuid'];
+}>;
 
 export type GetAdminQuery = {
   __typename?: 'query_root';
@@ -844,6 +840,7 @@ export type GetAdminQuery = {
 
 export type UpdateAppMutationVariables = Exact<{
   newName: Scalars['String'];
+  appId: Scalars['uuid'];
 }>;
 
 export type UpdateAppMutation = {
@@ -860,6 +857,7 @@ export type App_Mutation_ResponseFragmentFragment = {
 };
 
 export type CreateProductMutationVariables = Exact<{
+  appId: Scalars['uuid'];
   price?: InputMaybe<Scalars['numeric']>;
   name?: InputMaybe<Scalars['String']>;
   image?: InputMaybe<Scalars['bpchar']>;
@@ -926,11 +924,11 @@ export type EditProductMutation = {
   } | null;
 };
 
-export type Product_By_PkQueryVariables = Exact<{
+export type GetProductByIdQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
-export type Product_By_PkQuery = {
+export type GetProductByIdQuery = {
   __typename?: 'query_root';
   product_by_pk?: {
     __typename?: 'product';
@@ -946,7 +944,9 @@ export type Product_By_PkQuery = {
   } | null;
 };
 
-export type GetProductsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetProductsQueryVariables = Exact<{
+  appId: Scalars['uuid'];
+}>;
 
 export type GetProductsQuery = {
   __typename?: 'query_root';
@@ -955,8 +955,8 @@ export type GetProductsQuery = {
     app_id: any;
     collection?: any | null;
     curation?: any | null;
-    id: any;
     discount?: any | null;
+    id: any;
     image?: any | null;
     name: string;
     price: any;
@@ -973,12 +973,12 @@ export const App_Mutation_ResponseFragmentFragmentDoc = gql`
   }
 `;
 export const GetAdminDocument = gql`
-  query getAdmin {
-    app: app_by_pk(id: "7c0623b1-5715-4e77-8db3-cf71204bdb80") {
+  query getAdmin($appId: uuid!) {
+    app: app_by_pk(id: $appId) {
       id
       name
     }
-    products: product(where: { app_id: { _eq: "7c0623b1-5715-4e77-8db3-cf71204bdb80" } }) {
+    products: product(where: { app_id: { _eq: $appId } }) {
       collection
       curation
       discount
@@ -1003,11 +1003,12 @@ export const GetAdminDocument = gql`
  * @example
  * const { data, loading, error } = useGetAdminQuery({
  *   variables: {
+ *      appId: // value for 'appId'
  *   },
  * });
  */
 export function useGetAdminQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetAdminQuery, GetAdminQueryVariables>,
+  baseOptions: Apollo.QueryHookOptions<GetAdminQuery, GetAdminQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<GetAdminQuery, GetAdminQueryVariables>(GetAdminDocument, options);
@@ -1022,11 +1023,8 @@ export type GetAdminQueryHookResult = ReturnType<typeof useGetAdminQuery>;
 export type GetAdminLazyQueryHookResult = ReturnType<typeof useGetAdminLazyQuery>;
 export type GetAdminQueryResult = Apollo.QueryResult<GetAdminQuery, GetAdminQueryVariables>;
 export const UpdateAppDocument = gql`
-  mutation UpdateApp($newName: String!) {
-    update_app(
-      where: { id: { _eq: "7c0623b1-5715-4e77-8db3-cf71204bdb80" } }
-      _set: { name: $newName }
-    ) {
+  mutation UpdateApp($newName: String!, $appId: uuid!) {
+    update_app(where: { id: { _eq: $appId } }, _set: { name: $newName }) {
       ...app_mutation_responseFragment
     }
   }
@@ -1051,6 +1049,7 @@ export type UpdateAppMutationFn = Apollo.MutationFunction<
  * const [updateAppMutation, { data, loading, error }] = useUpdateAppMutation({
  *   variables: {
  *      newName: // value for 'newName'
+ *      appId: // value for 'appId'
  *   },
  * });
  */
@@ -1071,6 +1070,7 @@ export type UpdateAppMutationOptions = Apollo.BaseMutationOptions<
 >;
 export const CreateProductDocument = gql`
   mutation CreateProduct(
+    $appId: uuid!
     $price: numeric
     $name: String
     $image: bpchar
@@ -1081,7 +1081,7 @@ export const CreateProductDocument = gql`
   ) {
     insert_product_one(
       object: {
-        app_id: "7c0623b1-5715-4e77-8db3-cf71204bdb80"
+        app_id: $appId
         discount: $discount
         image: $image
         name: $name
@@ -1121,6 +1121,7 @@ export type CreateProductMutationFn = Apollo.MutationFunction<
  * @example
  * const [createProductMutation, { data, loading, error }] = useCreateProductMutation({
  *   variables: {
+ *      appId: // value for 'appId'
  *      price: // value for 'price'
  *      name: // value for 'name'
  *      image: // value for 'image'
@@ -1272,8 +1273,8 @@ export type EditProductMutationOptions = Apollo.BaseMutationOptions<
   EditProductMutation,
   EditProductMutationVariables
 >;
-export const Product_By_PkDocument = gql`
-  query Product_by_pk($id: uuid!) {
+export const GetProductByIdDocument = gql`
+  query GetProductById($id: uuid!) {
     product_by_pk(id: $id) {
       app_id
       collection
@@ -1289,53 +1290,53 @@ export const Product_By_PkDocument = gql`
 `;
 
 /**
- * __useProduct_By_PkQuery__
+ * __useGetProductByIdQuery__
  *
- * To run a query within a React component, call `useProduct_By_PkQuery` and pass it any options that fit your needs.
- * When your component renders, `useProduct_By_PkQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetProductByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useProduct_By_PkQuery({
+ * const { data, loading, error } = useGetProductByIdQuery({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function useProduct_By_PkQuery(
-  baseOptions: Apollo.QueryHookOptions<Product_By_PkQuery, Product_By_PkQueryVariables>,
+export function useGetProductByIdQuery(
+  baseOptions: Apollo.QueryHookOptions<GetProductByIdQuery, GetProductByIdQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<Product_By_PkQuery, Product_By_PkQueryVariables>(
-    Product_By_PkDocument,
+  return Apollo.useQuery<GetProductByIdQuery, GetProductByIdQueryVariables>(
+    GetProductByIdDocument,
     options,
   );
 }
-export function useProduct_By_PkLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<Product_By_PkQuery, Product_By_PkQueryVariables>,
+export function useGetProductByIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetProductByIdQuery, GetProductByIdQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<Product_By_PkQuery, Product_By_PkQueryVariables>(
-    Product_By_PkDocument,
+  return Apollo.useLazyQuery<GetProductByIdQuery, GetProductByIdQueryVariables>(
+    GetProductByIdDocument,
     options,
   );
 }
-export type Product_By_PkQueryHookResult = ReturnType<typeof useProduct_By_PkQuery>;
-export type Product_By_PkLazyQueryHookResult = ReturnType<typeof useProduct_By_PkLazyQuery>;
-export type Product_By_PkQueryResult = Apollo.QueryResult<
-  Product_By_PkQuery,
-  Product_By_PkQueryVariables
+export type GetProductByIdQueryHookResult = ReturnType<typeof useGetProductByIdQuery>;
+export type GetProductByIdLazyQueryHookResult = ReturnType<typeof useGetProductByIdLazyQuery>;
+export type GetProductByIdQueryResult = Apollo.QueryResult<
+  GetProductByIdQuery,
+  GetProductByIdQueryVariables
 >;
 export const GetProductsDocument = gql`
-  query GetProducts {
-    products: product {
+  query GetProducts($appId: uuid!) {
+    products: product(where: { app_id: { _eq: $appId } }) {
       app_id
       collection
       curation
-      id
       discount
+      id
       image
       name
       price
@@ -1356,11 +1357,12 @@ export const GetProductsDocument = gql`
  * @example
  * const { data, loading, error } = useGetProductsQuery({
  *   variables: {
+ *      appId: // value for 'appId'
  *   },
  * });
  */
 export function useGetProductsQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetProductsQuery, GetProductsQueryVariables>,
+  baseOptions: Apollo.QueryHookOptions<GetProductsQuery, GetProductsQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<GetProductsQuery, GetProductsQueryVariables>(GetProductsDocument, options);

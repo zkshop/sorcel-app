@@ -1,10 +1,10 @@
-query GetProducts {
-  products: product {
+query GetProducts($appId: uuid!) {
+  products: product(where: { app_id: { _eq: $appId } }) {
     app_id
     collection
     curation
-    id
     discount
+    id
     image
     name
     price
