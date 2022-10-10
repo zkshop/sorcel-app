@@ -4,7 +4,7 @@ import '../min.css';
 import { ApolloProvider } from '@apollo/client';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { AppProps } from 'next/app';
-import { Provider as ReduxProvider } from 'react-redux';
+
 import { WagmiConfig } from 'wagmi';
 
 import ThemeDecorator from '../theme/ThemeDecorator';

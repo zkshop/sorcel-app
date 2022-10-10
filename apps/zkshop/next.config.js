@@ -12,6 +12,7 @@ const nextConfig = {
     PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
     POAP_API_KEY: process.env.POAP_API_KEY,
     APP_ID: process.env.APP_ID,
+    PUBLIC_MAGIC_PUBLISHABLE_KEY: process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY,
   },
   images: {
     domains: ['https://firebasestorage.googleapis.com'],

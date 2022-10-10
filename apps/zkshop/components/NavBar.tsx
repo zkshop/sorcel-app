@@ -1,46 +1,92 @@
-import { Box, VStack, HStack, Text, Button, useDisclosure } from '@chakra-ui/react';
+import { ConnectButtonGroup } from './ConnectButtonGroup';
+import { LoginModal } from './LoginModal';
+import { VStack, HStack, useDisclosure } from '@chakra-ui/react';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { SismoBanner, MenuDrawer } from 'ui';
+import { useForm } from 'react-hook-form';
 
-import ConnectWalletButton from './ConnectWalletButton';
+import { getCurrentUser, login, logoutUser } from 'store/slices/auth';
+import { useAppDispatch, useAppSelector } from 'store/store';
+import { SismoBanner } from 'ui';
+import { useEffect } from 'react';
+
+import { useAccount } from 'wagmi';
 
 type NavBarProps = {
   admin: boolean;
 };
 
-export const NavBar = ({ admin }: NavBarProps) => (
-  // const { isOpen, onOpen, onClose } = useDisclosure();
+export const NavBar = ({ admin }: NavBarProps) => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
-  <VStack as="header" sx={{ py: 3, px: { xs: 2, md: 4, lg: 6 } }}>
-    <HStack w="full">
-      {/* <Button mr={4} bgColor="white" onClick={onOpen}>
-          <HamburgerIcon w={8} h={8} />
-        </Button> */}
+  const user = useAppSelector((state) => state.user.auth);
+  const { handleSubmit, register } = useForm<{ email: string }>();
+  const dispatch = useAppDispatch();
+  const { isConnected } = useAccount();
 
-      {/* <MenuDrawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> */}
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
 
-      <HStack justifyContent="space-between" flex={1}>
-        <Link href="/" passHref>
-          <a>
-            <Image
-              height={70}
-              width={210}
-              src="/images/3shop-logo.png"
-              alt="3shop"
-              style={{ cursor: 'pointer' }}
+  useEffect(() => {
+    if (user.email) {
+      onClose();
+    }
+  }, [onClose, user.email]);
+
+  useEffect(() => {
+    async function changeUserIsLoading() {
+      await dispatch(getCurrentUser());
+    }
+
+    changeUserIsLoading();
+  }, [dispatch]);
+
+  const onSubmit = async (data: { email: string }) => {
+    dispatch(login(data.email));
+  };
+
+  const handleOpenLoginModal = () => {
+    onOpen();
+  };
+
+  return (
+    <VStack as="header" sx={{ py: 3, px: { xs: 2, md: 4, lg: 6 } }}>
+      <HStack w="full">
+        <HStack justifyContent="space-between" flex={1}>
+          <Link href="/">
+            <a>
+              <Image
+                height={70}
+                width={210}
+                src="/images/3shop-logo.png"
+                alt="3shop"
+                style={{ cursor: 'pointer' }}
+              />
+            </a>
+          </Link>
+
+          {!admin && (
+            <ConnectButtonGroup
+              isConnectedByWallet={isConnected}
+              userEmail={user.email}
+              userLoading={user.loading}
+              handleOpenLoginModal={handleOpenLoginModal}
+              handleLogout={handleLogout}
             />
-          </a>
-        </Link>
-
-        {!admin && (
-          <Box display="flex" alignItems="center" flexDirection="column">
-            <ConnectWalletButton />
-          </Box>
-        )}
+          )}
+        </HStack>
       </HStack>
-    </HStack>
 
-    <SismoBanner admin={admin} enable={false} />
-  </VStack>
-);
+      <SismoBanner admin={admin} enable={false} />
+      <LoginModal
+        isOpen={isOpen}
+        onClose={onClose}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        register={register}
+      />
+    </VStack>
+  );
+};

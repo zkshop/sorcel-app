@@ -25,7 +25,9 @@
         "$PUBLIC_STRIPE_PUBLISHABLE_KEY",
         "$STRIPE_SECRET_KEY",
         "$POAP_API_KEY",
-        "$APP_ID"
+        "$APP_ID",
+        "$PUBLIC_MAGIC_PUBLISHABLE_KEY",
+        "$MAGIC_SECRET_KEY"
       ],
       "cache": false
     },

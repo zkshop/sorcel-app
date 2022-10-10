@@ -5,11 +5,12 @@ import { fetchNFTS, reset } from '../store/slices/nfts';
 import { update } from '../store/slices/theme';
 import { useAppDispatch, useAppSelector } from '../store/store';
 
-import { fetchPOAPS } from 'store/slices/poap';
+import { fetchPOAPS, reset as resetPoaps } from 'store/slices/poap';
 
 const useUpdateThemeOnConnection = () => {
   const { isConnected, isDisconnected, address } = useAccount();
   const { nfts, poap } = useAppSelector((state) => state.user);
+  const email = useAppSelector((state) => state.user.auth.email);
   const dispatch = useAppDispatch();
 
   const getNfts = useCallback(async () => {
@@ -17,7 +18,10 @@ const useUpdateThemeOnConnection = () => {
       dispatch(fetchNFTS(address));
       dispatch(fetchPOAPS(address));
     }
-  }, [address, dispatch]);
+    if (email) {
+      dispatch(fetchPOAPS(email));
+    }
+  }, [address, dispatch, email]);
 
   useEffect(() => {
     const setVanillaTheme = () => dispatch(update('vanilla'));
@@ -29,14 +33,15 @@ const useUpdateThemeOnConnection = () => {
     if (isDisconnected) {
       setVanillaTheme();
       dispatch(reset());
+      dispatch(resetPoaps());
     }
   }, [dispatch, isConnected, isDisconnected]);
 
   useEffect(() => {
-    if (address) {
+    if (address || email) {
       getNfts();
     }
-  }, [address, getNfts]);
+  }, [address, email, getNfts]);
 
   return { nfts, poap };
 };
