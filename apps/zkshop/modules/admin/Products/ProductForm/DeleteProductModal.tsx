@@ -7,7 +7,6 @@ import {
   ModalBody,
   ModalFooter,
 } from '@chakra-ui/react';
-import React from 'react';
 import { Button } from 'ui';
 
 type DeleteProductModalProps = {

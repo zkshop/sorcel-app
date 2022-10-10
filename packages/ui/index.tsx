@@ -17,3 +17,4 @@ export * from './SismoBanner/SismoBanner';
 export * from './SizeSelector/SizeSelector';
 export * from './TextInput/TextInput';
 export * from './VerticalMenu/VerticalMenu';
+export * from './Icons';

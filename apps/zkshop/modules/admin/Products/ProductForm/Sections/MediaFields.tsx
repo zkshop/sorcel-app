@@ -6,13 +6,12 @@ import {
   InputLeftElement,
   Input,
 } from '@chakra-ui/react';
-import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FaLink } from 'react-icons/fa';
-import { Section } from 'ui';
+import { Section, LinkIcon } from 'ui';
 
 export const MediaFields = () => {
   const { register } = useFormContext();
+
   return (
     <Section>
       <Heading fontSize="xl"> Media </Heading>
@@ -22,7 +21,7 @@ export const MediaFields = () => {
 
         <InputGroup>
           <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
-            <FaLink />
+            <LinkIcon />
           </InputLeftElement>
 
           <Input placeholder="Image link" {...register('image')} />

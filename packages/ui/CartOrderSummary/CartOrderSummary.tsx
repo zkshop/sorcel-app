@@ -7,8 +7,7 @@ import {
   Text,
   useColorModeValue as mode,
 } from '@chakra-ui/react';
-import { FaArrowRight } from 'react-icons/fa';
-// TODO: Remove Chakra/icons
+import { ArrowRightIcon } from '../Icons';
 
 import { formatPrice } from '../PriceTag/PriceTag';
 
@@ -70,7 +69,7 @@ export const CartOrderSummary = ({ price }: CartOrderSummaryProps) => (
       </Flex>
     </Stack>
 
-    <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />} type="submit">
+    <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<ArrowRightIcon />} type="submit">
       Checkout
     </Button>
   </Stack>

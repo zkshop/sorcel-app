@@ -1,6 +1,5 @@
 import { Box, Text, Button, Image, HStack, VStack } from '@chakra-ui/react';
-import { GoTriangleUp } from 'react-icons/go';
-import { CollectionBadge, SizeSelector, PoapBadge } from 'ui';
+import { CollectionBadge, SizeSelector, TriangleUpIcon } from 'ui';
 
 import useTransaction from '../../hooks/useTransaction';
 
@@ -200,7 +199,7 @@ export const ProductDetails = ({
                   </Text>
 
                   <Box borderRadius="10px" display="flex">
-                    <GoTriangleUp style={{ marginLeft: '8px' }} color="white" />
+                    <TriangleUpIcon style={{ marginLeft: '8px' }} color="white" />
                   </Box>
                 </Box>
               </Button>
@@ -231,7 +230,7 @@ export const ProductDetails = ({
                   </Text>
 
                   <Box borderRadius="10px" display="flex">
-                    <GoTriangleUp style={{ marginLeft: '8px' }} color="white" />
+                    <TriangleUpIcon style={{ marginLeft: '8px' }} color="white" />
                   </Box>
                 </Box>
               </Button>

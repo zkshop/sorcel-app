@@ -24,8 +24,6 @@
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
   },
-  "dependencies": {
-    "react-icons": "^4.4.0"
-  },
+  "dependencies": {},
   "packageManager": "yarn@1.22.17"
 }

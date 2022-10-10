@@ -6,10 +6,8 @@ import {
   InputLeftElement,
   Input,
 } from '@chakra-ui/react';
-import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { BsCollection, BsCollectionPlay } from 'react-icons/bs';
-import { Section } from 'ui';
+import { Section, CollectionIcon, CollectionPlayIcon } from 'ui';
 
 export const OnChainDataFields = () => {
   const { register } = useFormContext();
@@ -23,7 +21,7 @@ export const OnChainDataFields = () => {
 
         <InputGroup>
           <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
-            <BsCollection />
+            <CollectionIcon />
           </InputLeftElement>
 
           <Input placeholder="Collection Name" {...register('collection')} />
@@ -35,7 +33,7 @@ export const OnChainDataFields = () => {
 
         <InputGroup>
           <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
-            <BsCollectionPlay />
+            <CollectionPlayIcon />
           </InputLeftElement>
 
           <Input placeholder="Collection Address" {...register('curation')} />
@@ -47,7 +45,7 @@ export const OnChainDataFields = () => {
 
         <InputGroup>
           <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
-            <BsCollection />
+            <CollectionIcon />
           </InputLeftElement>
 
           <Input type="number" placeholder="Poap ID" {...register('poapId')} />

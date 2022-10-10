@@ -8,7 +8,6 @@ import {
   Text,
   useColorModeValue as mode,
 } from '@chakra-ui/react';
-import { FiGift } from 'react-icons/fi';
 
 export type CartProductMetaProps = {
   isGiftWrapping?: boolean;
@@ -41,7 +40,7 @@ export const CartProductMeta = (props: CartProductMetaProps) => {
 
         {/* {isGiftWrapping && (
           <HStack spacing="1" mt="3" color={mode("gray.600", "gray.400")}>
-            <Icon as={FiGift} boxSize="4" />
+            <Icon as={GiftIcon} boxSize="4" />
             <Link fontSize="sm" textDecoration="underline">
               Add gift wrapping
             </Link>

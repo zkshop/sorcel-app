@@ -9,6 +9,7 @@
     "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
+    "react-icons": "^4.4.0",
     "pure": "*"
   },
   "devDependencies": {

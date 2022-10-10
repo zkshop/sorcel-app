@@ -6,10 +6,9 @@ import {
   InputLeftElement,
   Input,
 } from '@chakra-ui/react';
-import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { BsChatRightText } from 'react-icons/bs';
-import { Section } from 'ui';
+
+import { Section, ChatRightTextIcon } from 'ui';
 
 import { PRODUCTS_FIELDS } from '../../constants';
 
@@ -36,7 +35,7 @@ export const GeneralInformationsFields = () => {
 
         <InputGroup>
           <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
-            <BsChatRightText />
+            <ChatRightTextIcon />
           </InputLeftElement>
 
           <Input placeholder="Description" />
