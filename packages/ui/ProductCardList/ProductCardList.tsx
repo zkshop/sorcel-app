@@ -50,6 +50,7 @@ export const ProductCardList = ({
           collection,
           isAnHolder,
           isTransparent,
+          poapUrl,
           poapImgUrl,
           price,
           srcItem,
@@ -66,6 +67,7 @@ export const ProductCardList = ({
               discount={discount}
               srcItem={srcItem}
               price={price}
+              poapUrl={poapUrl}
               poapImgUrl={poapImgUrl}
               isAnHolder={isAnHolder}
               isTransparent={isTransparent}

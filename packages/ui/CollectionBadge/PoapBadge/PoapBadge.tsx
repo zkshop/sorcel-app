@@ -3,6 +3,7 @@ import { Box, Image } from '@chakra-ui/react';
 type PoapBadgeProps = {
   imgUrl: string;
   size?: 'sm' | 'md' | 'lg';
+  href?: string;
 };
 
 const sizeToBoxSize = {
@@ -11,11 +12,14 @@ const sizeToBoxSize = {
   lg: 100,
 };
 
-export const PoapBadge = ({ imgUrl, size = 'md' }: PoapBadgeProps) => {
+export const PoapBadge = ({ imgUrl, size = 'md', href = '' }: PoapBadgeProps) => {
   const boxSize = sizeToBoxSize[size];
 
   return (
     <Box
+      as="a"
+      href={href}
+      target="_blank"
       sx={{
         zIndex: 1,
         position: 'absolute',
@@ -25,7 +29,6 @@ export const PoapBadge = ({ imgUrl, size = 'md' }: PoapBadgeProps) => {
     >
       <Image
         boxShadow="2px 2px 2px 1px rgb(0 0 0 / 29%)"
-        // border="1px solid white"
         borderRadius="full"
         boxSize={boxSize}
         src={imgUrl}

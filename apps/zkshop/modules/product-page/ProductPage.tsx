@@ -19,8 +19,18 @@ export const ProductPage = ({ product }: ProductPageProps) => {
   const poapIds = useAppSelector((state) => state.user.poap.map((poap: any) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
 
-  const { collection, isAnHolder, isTransparent, price, srcItem, title, discount, id, poapImgUrl } =
-    formatProductData({ ...product, poapIds, collections, poapImageList });
+  const {
+    collection,
+    isAnHolder,
+    isTransparent,
+    price,
+    srcItem,
+    title,
+    discount,
+    id,
+    poapUrl,
+    poapImgUrl,
+  } = formatProductData({ ...product, poapIds, collections, poapImageList });
 
   return (
     <ProductDetails
@@ -34,6 +44,7 @@ export const ProductPage = ({ product }: ProductPageProps) => {
       isTransparent={isTransparent}
       isEligible={isAnHolder}
       description={description}
+      poapUrl={poapUrl}
       poapImgUrl={poapImgUrl}
     />
   );

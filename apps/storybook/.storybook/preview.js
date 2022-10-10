@@ -1,3 +1,5 @@
+import { RouterContext } from "next/dist/shared/lib/router-context";
+
 const themes = require('../../zkshop/theme/index')
 const theme = themes.vanilla;
 
@@ -11,5 +13,8 @@ export const parameters = {
   },
   chakra: {
     theme,
+  },
+  nextRouter: {
+    Provider: RouterContext.Provider,
   },
 }

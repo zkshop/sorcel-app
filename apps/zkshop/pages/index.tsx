@@ -21,6 +21,7 @@ const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
   const {} = useUpdateThemeOnConnection();
   const { isConnected } = useAccount();
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (data) {
       dispatch(

@@ -21,14 +21,16 @@ export const NavBar = ({ admin }: NavBarProps) => (
       {/* <MenuDrawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> */}
 
       <HStack justifyContent="space-between" flex={1}>
-        <Link href="/">
-          <Image
-            height={70}
-            width={210}
-            src="/images/3shop-logo.png"
-            alt="3shop"
-            style={{ cursor: 'pointer' }}
-          />
+        <Link href="/" passHref>
+          <a>
+            <Image
+              height={70}
+              width={210}
+              src="/images/3shop-logo.png"
+              alt="3shop"
+              style={{ cursor: 'pointer' }}
+            />
+          </a>
         </Link>
 
         {!admin && (

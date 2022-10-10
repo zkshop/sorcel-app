@@ -13,6 +13,7 @@ interface ProductDetailsProps {
   isTransparent: boolean;
   isEligible: boolean | string;
   description?: string;
+  poapUrl: string;
   poapImgUrl?: string;
 }
 
@@ -26,6 +27,7 @@ export const ProductDetails = ({
   isTransparent,
   isEligible,
   description,
+  poapUrl,
   poapImgUrl,
 }: ProductDetailsProps) => {
   const priceNumber = parseInt(price);
@@ -77,7 +79,7 @@ export const ProductDetails = ({
           : {}
       }
     >
-      <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} />
+      <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} href={poapUrl} />
       {isTransparent && (
         <>
           <Box

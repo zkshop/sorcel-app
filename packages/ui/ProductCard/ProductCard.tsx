@@ -12,7 +12,8 @@ export interface ProductCardProps {
   collection: string;
   isTransparent: boolean;
   isAnHolder: boolean | string;
-  poapImgUrl: string;
+  poapUrl: string;
+  poapImgUrl?: string;
 }
 
 export const ProductCard = ({
@@ -24,6 +25,7 @@ export const ProductCard = ({
   isTransparent,
   isAnHolder,
   id,
+  poapUrl,
   poapImgUrl,
 }: ProductCardProps) => {
   const princeNumber = parseInt(price);
@@ -33,8 +35,9 @@ export const ProductCard = ({
   const priceReduced = discount ? princeNumber - princeNumber * promoPercent : 0;
 
   return (
-    <Link href={`product/${id}`}>
+    <Link href={`product/${id}`} passHref>
       <Box
+        as="a"
         cursor="pointer"
         boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
         bg="white"
@@ -76,7 +79,7 @@ export const ProductCard = ({
             : {}
         }
       >
-        <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} />
+        <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} href={poapUrl} />
 
         {isTransparent && (
           <>
