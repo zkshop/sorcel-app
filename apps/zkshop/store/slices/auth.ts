@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AuthData, isLoggedIn, loginWithEmail, logout } from 'clients/magic';
+import { AuthData, isLoggedIn, loginWithEmail, logout } from 'auth';
 
 type AuthSliceType = AuthData & { loading: boolean };
 

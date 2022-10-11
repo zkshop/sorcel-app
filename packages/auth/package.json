@@ -1,0 +1,21 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --max-warnings=0 --ext .ts,.tsx,.js,.jsx .",
+    "lint:fix": "yarn lint --fix"
+  },
+  "dependencies": {
+    "@magic-ext/oauth": "^4.0.0",
+    "@magic-sdk/admin": "^1.4.1",
+    "magic-sdk": "^10.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "*",
+    "typescript": "^4.5.2",
+    "tsconfig": "*"
+  }
+}
