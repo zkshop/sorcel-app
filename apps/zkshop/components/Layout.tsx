@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { GridLayout, Banner, CartItem } from 'ui';
+import { MainLayout, Banner } from 'ui';
 
 import { NavBar } from './NavBar';
 
@@ -13,7 +13,7 @@ const pageWithOutGridLayout = ['/iframe'];
 export const Layout = ({ children, ...props }: LayoutProps) => {
   const { asPath } = useRouter();
   const withLayout = asPath == '/iframe';
-  const withGridLayout = !pageWithOutGridLayout.includes(asPath);
+  const withMainLayout = !pageWithOutGridLayout.includes(asPath);
 
   if (withLayout) {
     return <> {children} </>;
@@ -25,7 +25,7 @@ export const Layout = ({ children, ...props }: LayoutProps) => {
 
       <Banner />
 
-      {withGridLayout ? <GridLayout> {children} </GridLayout> : children}
+      {withMainLayout ? <MainLayout> {children} </MainLayout> : children}
     </Box>
   );
 };

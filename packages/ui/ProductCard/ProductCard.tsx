@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 
-export interface ProductCardProps {
+export type ProductCardProps = {
   id?: string;
   srcItem: string;
   title: string;
@@ -11,10 +11,10 @@ export interface ProductCardProps {
   price: string;
   collection: string;
   isTransparent: boolean;
-  isAnHolder: boolean | string;
+  isAnHolder: boolean;
   poapUrl: string;
   poapImgUrl?: string;
-}
+};
 
 export const ProductCard = ({
   srcItem,
@@ -112,9 +112,10 @@ export const ProductCard = ({
           </>
         )}
         <Box p={2}>
-          <Box borderRadius="10px" height="200px">
+          <Box sx={{ borderRadius: '10px', height: { xs: '150px', sm: '160px', md: '200px' } }}>
             <Image alt="product" height="100%" width="100%" src={srcItem} />
           </Box>
+
           <Text
             fontWeight="bold"
             fontSize="14px"
@@ -135,12 +136,12 @@ export const ProductCard = ({
                 textDecoration={discount ? 'line-through' : 'none'}
                 marginRight={discount ? '2px' : 'none'}
               >
-                {`${price}$`}
+                {`${price}€`}
               </Text>
 
               {discount && (
                 <Text fontWeight="bold" fontSize="14px" color="#FF5F1F" marginLeft="0 !important">
-                  {`${priceReduced}$`}
+                  {`${priceReduced}€`}
                 </Text>
               )}
             </HStack>

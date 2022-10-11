@@ -12,7 +12,7 @@ const sizeToBoxSize = {
   lg: 100,
 };
 
-export const PoapBadge = ({ imgUrl, size = 'md', href = '' }: PoapBadgeProps) => {
+export const PoapBadge = ({ imgUrl, size = 'sm', href = '' }: PoapBadgeProps) => {
   const boxSize = sizeToBoxSize[size];
 
   return (

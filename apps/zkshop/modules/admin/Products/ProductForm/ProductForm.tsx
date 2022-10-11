@@ -1,4 +1,4 @@
-import { GridLayout } from 'ui';
+import { MainLayout } from 'ui';
 
 import { ProductFormHeader } from './ProductFormHeader';
 import { GeneralInformationsFields, MediaFields, OnChainDataFields } from './Sections';
@@ -12,7 +12,7 @@ type AddProductFormProps = {
 };
 
 export const ProductForm = ({ handleSubmit, onSubmit, onOpen, isLoading }: AddProductFormProps) => (
-  <GridLayout>
+  <MainLayout>
     <form onSubmit={handleSubmit(onSubmit)}>
       <ProductFormHeader isLoading={isLoading} onOpen={onOpen} />
 
@@ -22,5 +22,5 @@ export const ProductForm = ({ handleSubmit, onSubmit, onOpen, isLoading }: AddPr
 
       <OnChainDataFields />
     </form>
-  </GridLayout>
+  </MainLayout>
 );

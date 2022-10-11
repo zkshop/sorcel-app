@@ -6,7 +6,7 @@ import { useAccount } from 'wagmi';
 
 import { addApolloState, initializeApollo } from 'libs/apollo/client';
 import { Product, GetProductByIdDocument } from 'libs/apollo/generated';
-import { ProductPage } from 'modules/product-page/ProductPage';
+import { ProductDetailsContainer } from 'modules/product-page/ProductDetailsContainer';
 
 type ProductDetailsPage = {
   product: Product;
@@ -21,7 +21,11 @@ const ProductDetailsPage = ({ product }: ProductDetailsPage) => {
 
       <BackButton text="Go back" href="/" />
 
-      {product ? <ProductPage product={product} /> : <div> No corresponding product </div>}
+      {product ? (
+        <ProductDetailsContainer product={product} />
+      ) : (
+        <div> No corresponding product </div>
+      )}
     </VStack>
   );
 };
@@ -33,12 +37,12 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const apolloClient = initializeApollo();
 
   try {
-    if (params?.id) {
-      const { id } = params;
+    if (params?.productId) {
+      const { productId } = params;
       const res = await apolloClient.query({
         query: GetProductByIdDocument,
         variables: {
-          id,
+          id: productId,
         },
       });
 

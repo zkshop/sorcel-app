@@ -1,6 +1,5 @@
 import ReactCanvasConfetti from 'react-canvas-confetti';
-import { ProductCardList } from 'ui';
-import { GridLayout } from 'ui';
+import { MainLayout, ProductCardList } from 'ui';
 import { useAccount } from 'wagmi';
 
 import useUpdateThemeOnConnection from '../hooks/useUpdateThemeOnConnection';
@@ -30,7 +29,7 @@ const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
   }
 
   return (
-    <GridLayout>
+    <MainLayout>
       <ReactCanvasConfetti fire={isConnected} className="canvas" />
 
       <ProductCardList
@@ -39,7 +38,7 @@ const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
         poapIds={poapIds}
         poapImageList={poapImageList}
       />
-    </GridLayout>
+    </MainLayout>
   );
 };
 

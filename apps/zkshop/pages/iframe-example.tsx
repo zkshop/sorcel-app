@@ -1,8 +1,8 @@
 import { Box, Text } from '@chakra-ui/layout';
-import { GridLayout } from 'ui';
+import { MainLayout } from 'ui';
 
 const IframePage = () => (
-  <GridLayout>
+  <MainLayout>
     <Box m={3} height="85vh" display="flex" flexDirection="column">
       <Text fontSize="26px" p={2} textAlign="center" fontWeight={500}>
         Exemple of the app integrated in an iframe
@@ -16,7 +16,7 @@ const IframePage = () => (
         id="iframe-zkshop"
       />
     </Box>
-  </GridLayout>
+  </MainLayout>
 );
 
 export default IframePage;

@@ -1,12 +1,13 @@
 import { Box } from '@chakra-ui/react';
 
-type GridLayoutProps = {
+type MainLayoutProps = {
   children: React.ReactNode;
   sx?: any;
 };
 
-export const GridLayout = ({ children, sx, ...props }: GridLayoutProps) => (
+export const MainLayout = ({ children, sx, ...props }: MainLayoutProps) => (
   <Box
+    as="main"
     sx={{
       m: '0 auto',
       width: '100%',
