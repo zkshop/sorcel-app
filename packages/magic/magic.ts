@@ -8,7 +8,5 @@ const createMagicClient = (key: string) =>
     extensions: [new OAuthExtension()],
   });
 
-export interface AuthData extends MagicUserMetadata {}
-
 export const magicClient = createMagicClient(process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY || '');
 export const magicSDK = new AuthMagic(process.env.MAGIC_SECRET_KEY || '');

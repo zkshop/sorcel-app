@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AuthData, isLoggedIn, loginWithEmail, logout } from 'auth';
+import { AuthData, AuthService } from 'domains';
+import { UserAuthenticationClient } from 'infra';
 
 type AuthSliceType = AuthData & { loading: boolean };
+const Auth = AuthService(UserAuthenticationClient());
 
 const initialState: AuthSliceType = {
   email: null,
@@ -13,16 +15,16 @@ const initialState: AuthSliceType = {
 
 export const login = createAsyncThunk(
   'auth/login',
-  async (email: string) => await loginWithEmail(email),
+  async (email: string) => await Auth.loginWithEmail(email),
 );
 
 export const getCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
-  async () => await isLoggedIn(),
+  async () => await Auth.refresh(),
 );
 
 export const logoutUser = createAsyncThunk('auth/logout', async () => {
-  await logout();
+  await Auth.logout();
 });
 
 export const authSlice = createSlice({

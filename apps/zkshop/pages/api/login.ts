@@ -1,10 +1,13 @@
+import { AuthTokenValidationService } from 'domains';
+import { UserTokenValidationClient } from 'infra';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { magicSDK } from 'auth';
+
+const Token = AuthTokenValidationService(UserTokenValidationClient());
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const didToken = req.headers.authorization?.substring(7) || '';
-    magicSDK.token.validate(didToken);
+    const token = req.headers.authorization?.substring(7) || '';
+    Token.validate(token);
     res.status(200).json({ authenticated: true });
   } catch (error) {
     res.status(500).json({ error });
