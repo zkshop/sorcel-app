@@ -16,7 +16,7 @@ const Admin = () => {
   const items = [
     {
       title: 'General',
-      content: <General app={{ name: data.app.name || '' }} />,
+      content: <General app={{ name: data.app.name || '', imgUrl: data.app.imgUrl || '' }} />,
     },
     { title: 'Products', content: <Products /> },
   ];

@@ -15,7 +15,7 @@ const nextConfig = {
     PUBLIC_MAGIC_PUBLISHABLE_KEY: process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY,
   },
   images: {
-    domains: ['https://firebasestorage.googleapis.com'],
+    domains: ['firebasestorage.googleapis.com'],
   },
 };
 

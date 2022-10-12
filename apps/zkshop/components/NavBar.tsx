@@ -13,11 +13,20 @@ import { useEffect } from 'react';
 
 import { useAccount } from 'wagmi';
 
+import { useGetAppQuery } from 'libs/apollo/generated';
+
 type NavBarProps = {
   admin: boolean;
 };
 
 export const NavBar = ({ admin }: NavBarProps) => {
+  const data = useGetAppQuery({
+    variables: {
+      appId: process.env.APP_ID,
+    },
+  });
+  const imgUrl = data?.data?.app?.imgUrl;
+
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   const user = useAppSelector((state) => state.user.auth);
@@ -60,8 +69,9 @@ export const NavBar = ({ admin }: NavBarProps) => {
               <Image
                 height={70}
                 width={210}
-                src="/images/3shop-logo.png"
+                src={imgUrl || ''}
                 alt="3shop"
+                loading="lazy"
                 style={{ cursor: 'pointer' }}
               />
             </a>

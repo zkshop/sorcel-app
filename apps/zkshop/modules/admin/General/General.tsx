@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react';
 import { GeneralForm } from './GeneralForm';
 
 type GeneralProps = {
-  app: { name: string };
+  app: { name: string; imgUrl: string };
 };
 
 export const General = ({ app }: GeneralProps) => (

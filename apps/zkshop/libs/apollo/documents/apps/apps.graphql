@@ -1,7 +1,16 @@
+query getApp($appId: uuid!) {
+  app: app_by_pk(id: $appId) {
+    id
+    name
+    imgUrl
+  }
+}
+
 query getAdmin($appId: uuid!) {
   app: app_by_pk(id: $appId) {
     id
     name
+    imgUrl
   }
 
   products: product(where: { app_id: { _eq: $appId } }) {
@@ -16,8 +25,8 @@ query getAdmin($appId: uuid!) {
   }
 }
 
-mutation UpdateApp($newName: String!, $appId: uuid!) {
-  update_app(where: { id: { _eq: $appId } }, _set: { name: $newName }) {
+mutation UpdateApp($appId: uuid!, $newName: String!, $newImgUrl: String!) {
+  update_app(where: { id: { _eq: $appId } }, _set: { name: $newName, imgUrl: $newImgUrl }) {
     ...app_mutation_responseFragment
   }
 }
@@ -26,5 +35,6 @@ fragment app_mutation_responseFragment on app_mutation_response {
   returning {
     id
     name
+    imgUrl
   }
 }

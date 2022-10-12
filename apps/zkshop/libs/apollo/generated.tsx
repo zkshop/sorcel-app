@@ -56,6 +56,7 @@ export type String_Comparison_Exp = {
 export type App = {
   __typename?: 'app';
   id: Scalars['uuid'];
+  imgUrl?: Maybe<Scalars['String']>;
   name: Scalars['String'];
 };
 
@@ -86,6 +87,7 @@ export type App_Bool_Exp = {
   _not?: InputMaybe<App_Bool_Exp>;
   _or?: InputMaybe<Array<App_Bool_Exp>>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  imgUrl?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -98,6 +100,7 @@ export enum App_Constraint {
 /** input type for inserting data into table "app" */
 export type App_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']>;
+  imgUrl?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -105,6 +108,7 @@ export type App_Insert_Input = {
 export type App_Max_Fields = {
   __typename?: 'app_max_fields';
   id?: Maybe<Scalars['uuid']>;
+  imgUrl?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
@@ -112,6 +116,7 @@ export type App_Max_Fields = {
 export type App_Min_Fields = {
   __typename?: 'app_min_fields';
   id?: Maybe<Scalars['uuid']>;
+  imgUrl?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
@@ -134,6 +139,7 @@ export type App_On_Conflict = {
 /** Ordering options when selecting data from "app". */
 export type App_Order_By = {
   id?: InputMaybe<Order_By>;
+  imgUrl?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
 };
 
@@ -147,12 +153,15 @@ export enum App_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  ImgUrl = 'imgUrl',
+  /** column name */
   Name = 'name',
 }
 
 /** input type for updating data in table "app" */
 export type App_Set_Input = {
   id?: InputMaybe<Scalars['uuid']>;
+  imgUrl?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -167,6 +176,7 @@ export type App_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type App_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['uuid']>;
+  imgUrl?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -174,6 +184,8 @@ export type App_Stream_Cursor_Value_Input = {
 export enum App_Update_Column {
   /** column name */
   Id = 'id',
+  /** column name */
+  ImgUrl = 'imgUrl',
   /** column name */
   Name = 'name',
 }
@@ -818,13 +830,22 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type GetAppQueryVariables = Exact<{
+  appId: Scalars['uuid'];
+}>;
+
+export type GetAppQuery = {
+  __typename?: 'query_root';
+  app?: { __typename?: 'app'; id: any; name: string; imgUrl?: string | null } | null;
+};
+
 export type GetAdminQueryVariables = Exact<{
   appId: Scalars['uuid'];
 }>;
 
 export type GetAdminQuery = {
   __typename?: 'query_root';
-  app?: { __typename?: 'app'; id: any; name: string } | null;
+  app?: { __typename?: 'app'; id: any; name: string; imgUrl?: string | null } | null;
   products: Array<{
     __typename?: 'product';
     collection?: any | null;
@@ -839,21 +860,22 @@ export type GetAdminQuery = {
 };
 
 export type UpdateAppMutationVariables = Exact<{
-  newName: Scalars['String'];
   appId: Scalars['uuid'];
+  newName: Scalars['String'];
+  newImgUrl: Scalars['String'];
 }>;
 
 export type UpdateAppMutation = {
   __typename?: 'mutation_root';
   update_app?: {
     __typename?: 'app_mutation_response';
-    returning: Array<{ __typename?: 'app'; id: any; name: string }>;
+    returning: Array<{ __typename?: 'app'; id: any; name: string; imgUrl?: string | null }>;
   } | null;
 };
 
 export type App_Mutation_ResponseFragmentFragment = {
   __typename?: 'app_mutation_response';
-  returning: Array<{ __typename?: 'app'; id: any; name: string }>;
+  returning: Array<{ __typename?: 'app'; id: any; name: string; imgUrl?: string | null }>;
 };
 
 export type CreateProductMutationVariables = Exact<{
@@ -969,14 +991,57 @@ export const App_Mutation_ResponseFragmentFragmentDoc = gql`
     returning {
       id
       name
+      imgUrl
     }
   }
 `;
+export const GetAppDocument = gql`
+  query getApp($appId: uuid!) {
+    app: app_by_pk(id: $appId) {
+      id
+      name
+      imgUrl
+    }
+  }
+`;
+
+/**
+ * __useGetAppQuery__
+ *
+ * To run a query within a React component, call `useGetAppQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAppQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAppQuery({
+ *   variables: {
+ *      appId: // value for 'appId'
+ *   },
+ * });
+ */
+export function useGetAppQuery(
+  baseOptions: Apollo.QueryHookOptions<GetAppQuery, GetAppQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetAppQuery, GetAppQueryVariables>(GetAppDocument, options);
+}
+export function useGetAppLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetAppQuery, GetAppQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetAppQuery, GetAppQueryVariables>(GetAppDocument, options);
+}
+export type GetAppQueryHookResult = ReturnType<typeof useGetAppQuery>;
+export type GetAppLazyQueryHookResult = ReturnType<typeof useGetAppLazyQuery>;
+export type GetAppQueryResult = Apollo.QueryResult<GetAppQuery, GetAppQueryVariables>;
 export const GetAdminDocument = gql`
   query getAdmin($appId: uuid!) {
     app: app_by_pk(id: $appId) {
       id
       name
+      imgUrl
     }
     products: product(where: { app_id: { _eq: $appId } }) {
       collection
@@ -1023,8 +1088,8 @@ export type GetAdminQueryHookResult = ReturnType<typeof useGetAdminQuery>;
 export type GetAdminLazyQueryHookResult = ReturnType<typeof useGetAdminLazyQuery>;
 export type GetAdminQueryResult = Apollo.QueryResult<GetAdminQuery, GetAdminQueryVariables>;
 export const UpdateAppDocument = gql`
-  mutation UpdateApp($newName: String!, $appId: uuid!) {
-    update_app(where: { id: { _eq: $appId } }, _set: { name: $newName }) {
+  mutation UpdateApp($appId: uuid!, $newName: String!, $newImgUrl: String!) {
+    update_app(where: { id: { _eq: $appId } }, _set: { name: $newName, imgUrl: $newImgUrl }) {
       ...app_mutation_responseFragment
     }
   }
@@ -1048,8 +1113,9 @@ export type UpdateAppMutationFn = Apollo.MutationFunction<
  * @example
  * const [updateAppMutation, { data, loading, error }] = useUpdateAppMutation({
  *   variables: {
- *      newName: // value for 'newName'
  *      appId: // value for 'appId'
+ *      newName: // value for 'newName'
+ *      newImgUrl: // value for 'newImgUrl'
  *   },
  * });
  */
