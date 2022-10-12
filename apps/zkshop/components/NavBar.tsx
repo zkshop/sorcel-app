@@ -1,8 +1,7 @@
 import { ConnectButtonGroup } from './ConnectButtonGroup';
 import { LoginModal } from './LoginModal';
-import { VStack, HStack, useDisclosure } from '@chakra-ui/react';
-
-import Image from 'next/image';
+import { VStack, HStack, useDisclosure, Image } from '@chakra-ui/react';
+// TODO: USE NESTJS IMAGE INSTEAD
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
