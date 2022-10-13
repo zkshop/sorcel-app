@@ -2,6 +2,7 @@ mutation CreateProduct(
   $appId: uuid!
   $price: numeric
   $name: String
+  $description: String
   $image: bpchar
   $discount: smallint
   $curation: bpchar
@@ -14,6 +15,7 @@ mutation CreateProduct(
       discount: $discount
       image: $image
       name: $name
+      description: $description
       price: $price
       curation: $curation
       collection: $collection
@@ -27,6 +29,7 @@ mutation CreateProduct(
     id
     image
     name
+    description
     price
     poapId
   }

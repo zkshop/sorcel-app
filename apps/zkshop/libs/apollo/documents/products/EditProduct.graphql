@@ -5,6 +5,7 @@ mutation EditProduct(
   $discount: smallint
   $image: bpchar
   $name: String
+  $description: String
   $price: numeric
   $poapId: numeric
 ) {
@@ -15,6 +16,7 @@ mutation EditProduct(
       discount: $discount
       image: $image
       name: $name
+      description: $description
       price: $price
       poapId: $poapId
     }
@@ -27,6 +29,7 @@ mutation EditProduct(
       id
       image
       name
+      description
       price
       poapId
     }

@@ -8,9 +8,6 @@ type ProductDetailsContainerProps = {
   product: Product;
 };
 
-const description =
-  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
-
 export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProps) => {
   const collections = useAppSelector((state) =>
     state.user.nfts.map(({ contract: { address } }) => address),
@@ -22,6 +19,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
     isAnHolder,
     isTransparent,
     price,
+    description,
     srcItem,
     title,
     discount,

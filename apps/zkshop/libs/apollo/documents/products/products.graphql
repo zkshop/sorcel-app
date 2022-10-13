@@ -7,6 +7,7 @@ query GetProducts($appId: uuid!) {
     id
     image
     name
+    description
     price
     poapId
   }

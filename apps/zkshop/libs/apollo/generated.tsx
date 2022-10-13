@@ -385,6 +385,7 @@ export type Product = {
   app_id: Scalars['uuid'];
   collection?: Maybe<Scalars['bpchar']>;
   curation?: Maybe<Scalars['bpchar']>;
+  description?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['smallint']>;
   id: Scalars['uuid'];
   image?: Maybe<Scalars['bpchar']>;
@@ -438,6 +439,7 @@ export type Product_Bool_Exp = {
   app_id?: InputMaybe<Uuid_Comparison_Exp>;
   collection?: InputMaybe<Bpchar_Comparison_Exp>;
   curation?: InputMaybe<Bpchar_Comparison_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
   discount?: InputMaybe<Smallint_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<Bpchar_Comparison_Exp>;
@@ -464,6 +466,7 @@ export type Product_Insert_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
   collection?: InputMaybe<Scalars['bpchar']>;
   curation?: InputMaybe<Scalars['bpchar']>;
+  description?: InputMaybe<Scalars['String']>;
   discount?: InputMaybe<Scalars['smallint']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['bpchar']>;
@@ -478,6 +481,7 @@ export type Product_Max_Fields = {
   app_id?: Maybe<Scalars['uuid']>;
   collection?: Maybe<Scalars['bpchar']>;
   curation?: Maybe<Scalars['bpchar']>;
+  description?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['smallint']>;
   id?: Maybe<Scalars['uuid']>;
   image?: Maybe<Scalars['bpchar']>;
@@ -492,6 +496,7 @@ export type Product_Min_Fields = {
   app_id?: Maybe<Scalars['uuid']>;
   collection?: Maybe<Scalars['bpchar']>;
   curation?: Maybe<Scalars['bpchar']>;
+  description?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['smallint']>;
   id?: Maybe<Scalars['uuid']>;
   image?: Maybe<Scalars['bpchar']>;
@@ -521,6 +526,7 @@ export type Product_Order_By = {
   app_id?: InputMaybe<Order_By>;
   collection?: InputMaybe<Order_By>;
   curation?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
   discount?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
@@ -543,6 +549,8 @@ export enum Product_Select_Column {
   /** column name */
   Curation = 'curation',
   /** column name */
+  Description = 'description',
+  /** column name */
   Discount = 'discount',
   /** column name */
   Id = 'id',
@@ -561,6 +569,7 @@ export type Product_Set_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
   collection?: InputMaybe<Scalars['bpchar']>;
   curation?: InputMaybe<Scalars['bpchar']>;
+  description?: InputMaybe<Scalars['String']>;
   discount?: InputMaybe<Scalars['smallint']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['bpchar']>;
@@ -606,6 +615,7 @@ export type Product_Stream_Cursor_Value_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
   collection?: InputMaybe<Scalars['bpchar']>;
   curation?: InputMaybe<Scalars['bpchar']>;
+  description?: InputMaybe<Scalars['String']>;
   discount?: InputMaybe<Scalars['smallint']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['bpchar']>;
@@ -630,6 +640,8 @@ export enum Product_Update_Column {
   Collection = 'collection',
   /** column name */
   Curation = 'curation',
+  /** column name */
+  Description = 'description',
   /** column name */
   Discount = 'discount',
   /** column name */
@@ -924,6 +936,7 @@ export type EditProductMutationVariables = Exact<{
   discount?: InputMaybe<Scalars['smallint']>;
   image?: InputMaybe<Scalars['bpchar']>;
   name?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['numeric']>;
   poapId?: InputMaybe<Scalars['numeric']>;
 }>;
@@ -940,6 +953,7 @@ export type EditProductMutation = {
       id: any;
       image?: any | null;
       name: string;
+      description?: string | null;
       price: any;
       poapId?: any | null;
     }>;
@@ -961,6 +975,7 @@ export type GetProductByIdQuery = {
     id: any;
     image?: any | null;
     name: string;
+    description?: string | null;
     price: any;
     poapId?: any | null;
   } | null;
@@ -981,6 +996,7 @@ export type GetProductsQuery = {
     id: any;
     image?: any | null;
     name: string;
+    description?: string | null;
     price: any;
     poapId?: any | null;
   }>;
@@ -1267,6 +1283,7 @@ export const EditProductDocument = gql`
     $discount: smallint
     $image: bpchar
     $name: String
+    $description: String
     $price: numeric
     $poapId: numeric
   ) {
@@ -1277,6 +1294,7 @@ export const EditProductDocument = gql`
         discount: $discount
         image: $image
         name: $name
+        description: $description
         price: $price
         poapId: $poapId
       }
@@ -1289,6 +1307,7 @@ export const EditProductDocument = gql`
         id
         image
         name
+        description
         price
         poapId
       }
@@ -1319,6 +1338,7 @@ export type EditProductMutationFn = Apollo.MutationFunction<
  *      discount: // value for 'discount'
  *      image: // value for 'image'
  *      name: // value for 'name'
+ *      description: // value for 'description'
  *      price: // value for 'price'
  *      poapId: // value for 'poapId'
  *   },
@@ -1349,6 +1369,7 @@ export const GetProductByIdDocument = gql`
       id
       image
       name
+      description
       price
       poapId
     }
@@ -1405,6 +1426,7 @@ export const GetProductsDocument = gql`
       id
       image
       name
+      description
       price
       poapId
     }

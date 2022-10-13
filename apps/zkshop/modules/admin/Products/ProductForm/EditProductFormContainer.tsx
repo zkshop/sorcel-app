@@ -20,8 +20,14 @@ type EditProductFormContainerProps = {
 
 export const EditProductFormContainer = ({ product }: EditProductFormContainerProps) => {
   const methods = useForm<AddProductFormValues>({
-    defaultValues: product,
+    defaultValues: {
+      ...product,
+      price: product.price.toString(),
+      discount: product.discount?.toString(),
+      poapId: product.poapId?.toString(),
+    },
   });
+
   const { handleSubmit } = methods;
 
   const router = useRouter();

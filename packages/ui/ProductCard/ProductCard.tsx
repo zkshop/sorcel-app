@@ -14,6 +14,7 @@ export type ProductCardProps = {
   isAnHolder: boolean;
   poapUrl: string;
   poapImgUrl?: string;
+  description?: any;
 };
 
 export const ProductCard = ({
@@ -35,7 +36,7 @@ export const ProductCard = ({
   const priceReduced = discount ? princeNumber - princeNumber * promoPercent : 0;
 
   return (
-    <Link href={`product/${id}`} passHref>
+    <Link href={`product/${id}`}>
       <Box
         as="a"
         cursor="pointer"

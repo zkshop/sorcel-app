@@ -20,6 +20,7 @@ type Product = {
   name: string;
   price: any;
   poapId?: any;
+  description?: any;
 };
 
 export type GetProductCardPropsParams = Product & {

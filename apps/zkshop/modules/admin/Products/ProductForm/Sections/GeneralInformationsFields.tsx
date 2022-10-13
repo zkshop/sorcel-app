@@ -31,14 +31,14 @@ export const GeneralInformationsFields = () => {
       </FormControl>
 
       <FormControl>
-        <FormLabel mb={1}>Description</FormLabel>
+        <FormLabel mb={1}>{PRODUCTS_FIELDS.description.label}</FormLabel>
 
         <InputGroup>
           <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
             <ChatRightTextIcon />
           </InputLeftElement>
 
-          <Input placeholder="Description" />
+          <Input placeholder="Description" {...register('description')} />
         </InputGroup>
       </FormControl>
 
