@@ -1,14 +1,11 @@
 {
-  "name": "domains",
+  "name": "alchemy",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "scripts": {
-    "lint": "eslint --max-warnings=0 --ext .ts,.tsx,.js,.jsx .",
-    "lint:fix": "yarn lint --fix"
-  },
   "dependencies": {
-    "alchemy": "*"
+    "@alch/alchemy-web3": "^1.4.6",
+    "alchemy-sdk": "^2.1.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Nft } from 'alchemy-sdk';
+import { Nft, WalletScrapperService, Network } from 'domains';
+import { NftScrapperClient } from 'infra';
 
-import { getEveryNftOfWallet } from 'pages/api/nft';
+const WalletScrapper = WalletScrapperService(NftScrapperClient(Network.MATIC_MAINNET));
 
 export const fetchNFTS = createAsyncThunk(
   'nfts/fetch',
-  async (walletAddress: string) => await getEveryNftOfWallet(walletAddress),
+  async (walletAddress: string) => await WalletScrapper.getWalletNfts(walletAddress),
 );
 
 const initialState: Nft[] = [];
