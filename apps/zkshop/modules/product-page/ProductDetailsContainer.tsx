@@ -1,7 +1,6 @@
 import { ProductDetails } from 'ui';
 import { useAppSelector } from '../../store/store';
 
-import useTransaction from '../../hooks/useTransaction';
 import { formatProductData } from 'ui/ProductCardList/formatProductData';
 import { Product } from 'libs/apollo/generated';
 
@@ -35,7 +34,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
 
   const promoPercent = discount ? discountNumber / 100 : 0;
   const priceReduced = discount ? priceNumber - priceNumber * promoPercent : 0;
-  const { sendTransaction } = useTransaction(discount ? priceReduced : priceNumber);
+  const sendTransaction = () => {};
 
   return (
     <ProductDetails

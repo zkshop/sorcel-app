@@ -31,10 +31,10 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
 };
 
 type CartOrderSummaryProps = {
-  price: number;
+  amount: number;
 };
 
-export const CartOrderSummary = ({ price }: CartOrderSummaryProps) => (
+export const CartOrderSummary = ({ amount }: CartOrderSummaryProps) => (
   <Stack
     spacing="8"
     rounded="lg"
@@ -48,7 +48,7 @@ export const CartOrderSummary = ({ price }: CartOrderSummaryProps) => (
     <Heading size="md">Order Summary</Heading>
 
     <Stack spacing="6">
-      <OrderSummaryItem label="Subtotal" value={formatPrice(price)} />
+      <OrderSummaryItem label="Subtotal" value={formatPrice(amount)} />
       <OrderSummaryItem label="Shipping + Tax">
         <Link href="#" textDecor="underline">
           Calculate shipping
@@ -64,13 +64,13 @@ export const CartOrderSummary = ({ price }: CartOrderSummaryProps) => (
           Total
         </Text>
         <Text fontSize="xl" fontWeight="extrabold">
-          {formatPrice(price)}
+          {formatPrice(amount)}
         </Text>
       </Flex>
     </Stack>
 
     <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<ArrowRightIcon />} type="submit">
-      Checkout
+      {amount ? 'Checkout' : 'Get for free'}
     </Button>
   </Stack>
 );
