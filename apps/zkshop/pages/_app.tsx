@@ -7,12 +7,11 @@ import { AppProps } from 'next/app';
 
 import { WagmiConfig } from 'wagmi';
 
-import ThemeDecorator from '../theme/ThemeDecorator';
-
 import { wagmiClient, chains } from 'clients/wagmi';
 import { Layout } from 'components/Layout';
 import { useApollo } from 'libs/apollo/client';
 import { wrapper } from 'store/store';
+import { ThemeDecorator } from 'components/ThemeDecorator';
 
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps);

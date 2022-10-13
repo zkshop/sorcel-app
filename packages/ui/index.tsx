@@ -19,3 +19,4 @@ export * from './SizeSelector/SizeSelector';
 export * from './TextInput/TextInput';
 export * from './VerticalMenu/VerticalMenu';
 export * from './Icons';
+export * from './theme';

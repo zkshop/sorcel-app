@@ -7,3 +7,5 @@ export const themes: { [k in Theme]: any } = {
   vanilla,
   first,
 };
+
+export { ThemeProvider } from './ThemeProvider';
