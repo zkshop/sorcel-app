@@ -1,5 +1,6 @@
 import { useToast } from '@chakra-ui/react';
 import { useCreateProductMutation } from 'apollo';
+import axios from 'axios';
 import { getAddProductSuccessMessage } from 'libs/messages';
 import { useRouter } from 'next/router';
 import { toNumber } from 'pure';
@@ -22,6 +23,10 @@ export const AddProductFormContainer = () => {
 
   const onSubmit = async (data: AddProductFormValues) => {
     try {
+      const {
+        data: { uploadUrl },
+      } = await axios.post('/api/image/store', { url: data.image });
+
       await createProduct({
         variables: {
           ...data,
@@ -29,6 +34,7 @@ export const AddProductFormContainer = () => {
           price: toNumber(data.price),
           discount: toNumber(data.discount),
           poapId: toNumber(data.poapId),
+          image: uploadUrl,
         },
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),
       });

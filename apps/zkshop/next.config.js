@@ -26,6 +26,14 @@ const nextConfig = {
   },
 };
 
-export default withTM(['ui', 'pure', 'domains', 'infra', 'magic', 'alchemy', 'types', 'apollo'])(
-  nextConfig,
-);
+export default withTM([
+  'ui',
+  'pure',
+  'domains',
+  'infra',
+  'magic',
+  'alchemy',
+  'types',
+  'apollo',
+  'supabase',
+])(nextConfig);
