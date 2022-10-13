@@ -165,7 +165,7 @@ export const ProductDetails = ({
                   mr={1}
                   textTransform="uppercase"
                 >
-                  Pay in fiat
+                  PAY
                 </Text>
 
                 <Box borderRadius="10px" display="flex">
