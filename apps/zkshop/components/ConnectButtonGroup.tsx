@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 
 import React from 'react';
 import { Button } from 'ui';
@@ -10,6 +10,9 @@ type ConnectButtonGroupProps = {
   userEmail: string | null;
   isConnectedByWallet: boolean;
 };
+
+const truncate = (input: string) => (input.length > 5 ? `${input.substring(0, 10)}...` : input);
+
 export function ConnectButtonGroup({
   handleOpenLoginModal,
   handleLogout,
@@ -21,18 +24,59 @@ export function ConnectButtonGroup({
 
   if (userEmail)
     return (
-      <Box display="flex" alignItems="center" flexDirection="row" gap={1}>
-        <Button isActive={false}>{userEmail}</Button>
-        <Button onClick={handleLogout}>Logout</Button>
+      <Box
+        gap={1}
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+        }}
+      >
+        <Button
+          isActive={false}
+          fontSize="16px"
+          fontWeight="700"
+          borderRadius="xl"
+          sx={{
+            maxWidth: '150px',
+            minWidth: '150px',
+          }}
+        >
+          {truncate(userEmail)}
+        </Button>
+
+        <Button
+          onClick={handleLogout}
+          fontSize="16px"
+          fontWeight="700"
+          borderRadius="xl"
+          sx={{
+            maxWidth: '100px',
+            minWidth: '100px',
+          }}
+        >
+          Logout
+        </Button>
       </Box>
     );
 
   return (
-    <Box display="flex" alignItems="center" flexDirection="row" gap={1}>
+    <Flex
+      gap={1}
+      sx={{
+        flexDirection: { xs: 'column', sm: 'row' },
+      }}
+    >
       <ConnectWalletButton />
-      <Button isLoading={userLoading} onClick={handleOpenLoginModal}>
-        Log In with an email
+
+      <Button
+        isLoading={userLoading}
+        onClick={handleOpenLoginModal}
+        fontSize="16px"
+        fontWeight="700"
+        borderRadius="xl"
+      >
+        E-mail login
       </Button>
-    </Box>
+    </Flex>
   );
 }
