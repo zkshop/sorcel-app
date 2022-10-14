@@ -1,6 +1,6 @@
 import { RouterContext } from "next/dist/shared/lib/router-context";
+import { themes } from '../../../packages/ui/theme'
 
-const themes = require('../../zkshop/theme/index')
 const theme = themes.vanilla;
 
 export const parameters = {
