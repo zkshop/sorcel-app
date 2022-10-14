@@ -6,7 +6,7 @@ import { Header } from 'ui';
 import { PRODUCT_ATTRIBUTES } from './constants';
 import { ProductListItem } from './ProductListItem';
 
-import { useGetProductsQuery } from 'libs/apollo/generated';
+import { useGetProductsQuery } from 'apollo';
 
 export const Products = () => {
   const { data, error, loading } = useGetProductsQuery({

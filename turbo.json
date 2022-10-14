@@ -38,6 +38,13 @@
       "outputs": [
         "storybook-static/**"
       ]
+    },
+    "generate:graphql": {
+      "cache": false,
+      "dependsOn": [
+        "$HASURA_API_URL",
+        "$HASURA_API_KEY"
+      ]
     }
   }
 }

@@ -4,8 +4,7 @@ import ReactCanvasConfetti from 'react-canvas-confetti';
 import { BackButton } from 'ui';
 import { useAccount } from 'wagmi';
 
-import { addApolloState, initializeApollo } from 'libs/apollo/client';
-import { Product, GetProductByIdDocument } from 'libs/apollo/generated';
+import { addApolloState, initializeApollo, Product, GetProductByIdDocument } from 'apollo';
 import { ProductDetailsContainer } from 'modules/product-page/ProductDetailsContainer';
 
 type ProductDetailsPage = {

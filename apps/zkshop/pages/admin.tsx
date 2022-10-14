@@ -1,7 +1,7 @@
 import { Spinner } from '@chakra-ui/react';
 import { VerticalMenu } from 'ui';
 
-import { useGetAdminQuery } from 'libs/apollo/generated';
+import { useGetAdminQuery } from 'apollo';
 import { General, Products } from 'modules';
 
 const Admin = () => {

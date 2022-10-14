@@ -1,5 +1,5 @@
 import { useToast } from '@chakra-ui/react';
-import { useCreateProductMutation } from 'libs/apollo/generated';
+import { useCreateProductMutation } from 'apollo';
 import { getAddProductSuccessMessage } from 'libs/messages';
 import { useRouter } from 'next/router';
 import { toNumber } from 'pure';

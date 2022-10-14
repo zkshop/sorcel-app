@@ -1,4 +1,5 @@
-import { Product } from 'libs/apollo/generated';
+import { formatProductData } from 'pure';
+import { Product } from 'apollo';
 import { useAppSelector } from 'store/store';
 import { ProductCardList } from 'ui';
 
@@ -11,13 +12,9 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
   const poapIds = user.poap.map((poap) => poap.event.id);
   const poapImageList = useAppSelector((state) => state.poapImageList);
   const collections = user.nfts.map((nft) => nft.contract.address);
-
-  return (
-    <ProductCardList
-      products={products}
-      poapIds={poapIds}
-      poapImageList={poapImageList}
-      collections={collections}
-    />
+  const formatedProducts = products.map((product) =>
+    formatProductData({ ...product, poapIds, collections, poapImageList }),
   );
+
+  return <ProductCardList products={formatedProducts} />;
 };

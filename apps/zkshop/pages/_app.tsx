@@ -9,7 +9,7 @@ import { WagmiConfig } from 'wagmi';
 
 import { wagmiClient, chains } from 'clients/wagmi';
 import { Layout } from 'components/Layout';
-import { useApollo } from 'libs/apollo/client';
+import { useApollo } from 'apollo';
 import { wrapper } from 'store/store';
 import { ThemeDecorator } from 'components/ThemeDecorator';
 

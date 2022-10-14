@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 
 import { useAccount } from 'wagmi';
 
-import { useGetAppQuery } from 'libs/apollo/generated';
+import { useGetAppQuery } from 'apollo';
 
 type NavBarProps = {
   admin: boolean;

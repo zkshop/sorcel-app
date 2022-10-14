@@ -2,12 +2,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 
 import { formatAmountForStripe } from 'clients/stripe';
-import { initializeApollo } from 'libs/apollo/client';
 import {
+  initializeApollo,
   GetProductByIdDocument,
   GetProductByIdQuery,
   GetProductByIdQueryVariables,
-} from 'libs/apollo/generated';
+} from 'apollo';
 import { applyDiscount } from 'pure';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {

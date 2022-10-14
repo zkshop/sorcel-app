@@ -1,8 +1,7 @@
 import { GetServerSidePropsContext } from 'next';
 import { BackButton } from 'ui';
 
-import { addApolloState, initializeApollo } from 'libs/apollo/client';
-import { GetProductByIdDocument, Product } from 'libs/apollo/generated';
+import { addApolloState, initializeApollo, GetProductByIdDocument, Product } from 'apollo';
 import { EditProductFormContainer } from 'modules';
 
 type EditProductPageProps = {

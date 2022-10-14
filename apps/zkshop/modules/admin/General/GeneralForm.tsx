@@ -2,7 +2,7 @@ import { Box, Heading, HStack } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { Button, FormField } from 'ui';
 
-import { useUpdateAppMutation } from 'libs/apollo/generated';
+import { useUpdateAppMutation } from 'apollo';
 
 type GeneralFormValues = {
   name: string;

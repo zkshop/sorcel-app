@@ -6,7 +6,7 @@ import { DeleteProductModal } from './DeleteProductModal';
 import { ProductForm } from './ProductForm';
 import { AddProductFormValues } from './types';
 
-import { Product, useDeleteProductMutation, useEditProductMutation } from 'libs/apollo/generated';
+import { Product, useDeleteProductMutation, useEditProductMutation } from 'apollo';
 import {
   ERROR_MESSAGE,
   getDeleteProductSuccessMessage,

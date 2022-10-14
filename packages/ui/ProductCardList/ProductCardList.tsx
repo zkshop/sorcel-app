@@ -1,40 +1,12 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
 import { ProductCard } from 'ui';
-import { formatProductData } from './formatProductData';
+import { FormatedProductData } from 'types';
 
 type ProductCardListProps = {
-  products: Product[];
-  poapImageList: string[];
-  collections: string[];
-  poapIds: number[];
+  products: FormatedProductData[];
 };
 
-type Product = {
-  __typename?: 'product' | undefined;
-  app_id: any;
-  collection?: any;
-  curation?: any;
-  id: any;
-  discount?: any;
-  image?: any;
-  name: string;
-  price: any;
-  poapId?: any;
-  description?: any;
-};
-
-export type GetProductCardPropsParams = Product & {
-  poapImageList: any[];
-  poapIds: number[];
-  collections: string[];
-};
-
-export const ProductCardList = ({
-  products,
-  collections,
-  poapIds,
-  poapImageList,
-}: ProductCardListProps) => (
+export const ProductCardList = ({ products }: ProductCardListProps) => (
   <Box>
     <Grid
       gap={8}
@@ -46,8 +18,10 @@ export const ProductCardList = ({
         },
       }}
     >
-      {products.map((product) => {
-        const {
+      {products.map(
+        ({
+          id,
+          title,
           collection,
           isAnHolder,
           isTransparent,
@@ -55,13 +29,9 @@ export const ProductCardList = ({
           poapImgUrl,
           price,
           srcItem,
-          title,
           discount,
-          id,
-        } = formatProductData({ ...product, poapIds, collections, poapImageList });
-
-        return (
-          <GridItem key={`products-${product.id}`} display="flex" justifyContent="center">
+        }) => (
+          <GridItem key={`products-${id}`} display="flex" justifyContent="center">
             <ProductCard
               id={id}
               title={title}
@@ -75,8 +45,8 @@ export const ProductCardList = ({
               collection={collection}
             />
           </GridItem>
-        );
-      })}
+        ),
+      )}
     </Grid>
   </Box>
 );

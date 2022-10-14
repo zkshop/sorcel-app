@@ -15,8 +15,10 @@ const nextConfig = {
     PUBLIC_MAGIC_PUBLISHABLE_KEY: process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY,
   },
   images: {
-    domains: ['firebasestorage.googleapis.com', 'assets.poap.xyz', 'www.poap.xyz'],
+    domains: ['firebasestorage.googleapis.com', 'assets.poap.xyz', 'www.poap.xyz', 'poap.xyz'],
   },
 };
 
-export default withTM(['ui', 'pure', 'domains', 'infra', 'magic', 'alchemy'])(nextConfig);
+export default withTM(['ui', 'pure', 'domains', 'infra', 'magic', 'alchemy', 'types', 'apollo'])(
+  nextConfig,
+);

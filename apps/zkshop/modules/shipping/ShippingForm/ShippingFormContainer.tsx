@@ -6,7 +6,7 @@ import { CartItem, CartOrderSummary, Section } from 'ui';
 import { ShippingForm } from './ShippingForm';
 import { ShippingFormValues } from './types';
 
-import { Product } from 'libs/apollo/generated';
+import { Product } from 'apollo';
 import { applyDiscount } from 'pure';
 
 type ShippingFormContainerProps = {

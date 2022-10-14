@@ -3,12 +3,12 @@ schema:
   ${HASURA_API_URL}:
     headers:
       x-hasura-admin-secret: ${HASURA_API_KEY}
-documents: "libs/apollo/documents/**/*.graphql"
+documents: "./documents/**/*.graphql"
 generates:
   introspection.json:
     plugins:
       - introspection
-  libs/apollo/generated.tsx:
+  generated.tsx:
     plugins:
       - "typescript"
       - "typescript-operations"
