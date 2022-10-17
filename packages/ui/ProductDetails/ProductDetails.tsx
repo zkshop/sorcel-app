@@ -1,7 +1,8 @@
-import { Box, Text, Button, Image, HStack as Flex, VStack } from '@chakra-ui/react';
+import { Box, Text, Button, HStack as Flex, VStack } from '@chakra-ui/react';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 import { TriangleUpIcon } from '../Icons';
 import { StyledProductDetails } from './ProductDetails.style';
+import Image from 'next/image';
 
 type ProductDetailsProps = {
   id?: string;
@@ -63,6 +64,7 @@ export const ProductDetails = ({
           fontWeight="bold"
           fontSize="2xl"
           width="100%"
+          zIndex={1}
         >
           Connect your {collection || 'Misfitwear'} wallet to unlock
         </Text>
@@ -71,7 +73,7 @@ export const ProductDetails = ({
 
     <Flex alignItems="stretch" sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
       <Flex justifyContent="center">
-        <Image alt="product" height="500px" src={srcItem} />
+        <Image alt="product" height={400} width={400} src={srcItem} />
       </Flex>
 
       <VStack flex={1} justifyContent="space-between">

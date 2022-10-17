@@ -1,8 +1,8 @@
 import { ProductDetails } from 'ui';
 import { useAppSelector } from '../../store/store';
 
-import { formatProductData } from 'ui/ProductCardList/formatProductData';
-import { Product } from 'libs/apollo/generated';
+import { Product } from 'apollo';
+import { formatProductData } from 'pure';
 
 type ProductDetailsContainerProps = {
   product: Product;
@@ -14,6 +14,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   );
   const poapIds = useAppSelector((state) => state.user.poap.map((poap: any) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
+  const sendTransaction = () => {};
   const {
     collection,
     isAnHolder,
@@ -29,10 +30,8 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   } = formatProductData({ ...product, poapIds, collections, poapImageList });
   const priceNumber = parseInt(price);
   const discountNumber = discount ? parseInt(discount) : 0;
-
   const promoPercent = discount ? discountNumber / 100 : 0;
   const priceReduced = discount ? priceNumber - priceNumber * promoPercent : 0;
-  const sendTransaction = () => {};
 
   return (
     <ProductDetails

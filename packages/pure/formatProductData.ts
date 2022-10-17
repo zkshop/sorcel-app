@@ -1,6 +1,12 @@
-import { ProductCardProps } from 'ui';
 import { getPoapImageFromPoapList } from 'pure';
-import { GetProductCardPropsParams } from './ProductCardList';
+import { Product } from 'apollo';
+import { FormatedProductData } from 'types';
+
+export type GetProductCardPropsParams = Product & {
+  poapImageList: any[];
+  poapIds: number[];
+  collections: string[];
+};
 
 export const formatProductData = ({
   image,
@@ -15,7 +21,7 @@ export const formatProductData = ({
   poapImageList,
   collections,
   poapIds,
-}: GetProductCardPropsParams): ProductCardProps => {
+}: GetProductCardPropsParams): FormatedProductData => {
   const isGated = curation || poapId;
   const isAPoapHolder = poapIds.includes(poapId);
   const isAnNftHolder = collections.includes(curation?.toLowerCase());

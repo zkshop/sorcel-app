@@ -1,6 +1,6 @@
 import { Heading, HStack } from '@chakra-ui/react';
 
-import { WithOptionalChildren } from '../../../apps/zkshop/libs/types/utils';
+import { WithOptionalChildren } from 'types';
 
 type HeaderProps = WithOptionalChildren<{ title: string }>;
 

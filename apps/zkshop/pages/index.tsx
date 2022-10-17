@@ -6,8 +6,7 @@ import { useAccount } from 'wagmi';
 
 import useUpdateThemeOnConnection from '../hooks/useUpdateThemeOnConnection';
 
-import { initializeApollo, addApolloState } from 'libs/apollo/client';
-import { GetProductsDocument, GetProductsQuery } from 'libs/apollo/generated';
+import { initializeApollo, addApolloState, GetProductsDocument, GetProductsQuery } from 'apollo';
 import { fetchPOAPImageList } from 'store/slices/poapImageList';
 import { useAppDispatch } from 'store/store';
 import { ProductListContainer } from 'modules';

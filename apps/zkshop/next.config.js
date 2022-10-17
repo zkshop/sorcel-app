@@ -13,10 +13,27 @@ const nextConfig = {
     POAP_API_KEY: process.env.POAP_API_KEY,
     APP_ID: process.env.APP_ID,
     PUBLIC_MAGIC_PUBLISHABLE_KEY: process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY,
+    SUPABASE_API_KEY: process.env.SUPABASE_API_KEY,
   },
   images: {
-    domains: ['firebasestorage.googleapis.com', 'assets.poap.xyz'],
+    domains: [
+      'firebasestorage.googleapis.com',
+      'assets.poap.xyz',
+      'www.poap.xyz',
+      'poap.xyz',
+      'kqjytgxbtetzewipikax.supabase.co',
+    ],
   },
 };
 
-export default withTM(['ui', 'pure', 'domains', 'infra', 'magic', 'alchemy'])(nextConfig);
+export default withTM([
+  'ui',
+  'pure',
+  'domains',
+  'infra',
+  'magic',
+  'alchemy',
+  'types',
+  'apollo',
+  'supabase',
+])(nextConfig);

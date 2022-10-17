@@ -1,7 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { addApolloState, initializeApollo } from 'libs/apollo/client';
-import { Product, GetProductByIdDocument } from 'libs/apollo/generated';
+import { addApolloState, initializeApollo, Product, GetProductByIdDocument } from 'apollo';
 import { ShippingFormContainer } from 'modules';
 
 type ShippingPageProps = {

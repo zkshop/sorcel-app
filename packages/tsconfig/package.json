@@ -2,7 +2,7 @@
   "name": "tsconfig",
   "version": "0.0.0",
   "private": true,
-  "main": "index.js",
+  "main": "index.ts",
   "files": [
     "base.json",
     "nextjs.json",

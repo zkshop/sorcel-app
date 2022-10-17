@@ -1,13 +1,15 @@
 {
-  "name": "ui",
+  "name": "types",
   "version": "0.0.0",
+  "private": true,
   "main": "index.ts",
+  "files": [
+    "base.json",
+    "nextjs.json",
+    "react-library.json"
+  ],
   "scripts": {
     "lint": "eslint --max-warnings=0 --ext .ts,.tsx,.js,.jsx .",
     "lint:fix": "yarn lint --fix"
-  },
-  "dependencies": {
-    "react-icons": "^4.4.0",
-    "pure": "*"
   }
 }

@@ -4,8 +4,7 @@ import { GetServerSidePropsContext } from 'next';
 import { useState, useEffect } from 'react';
 
 import { getPaymentIntent, getStripeObject } from 'clients/stripe';
-import { initializeApollo, addApolloState } from 'libs/apollo/client';
-import { GetProductByIdDocument, Product } from 'libs/apollo/generated';
+import { initializeApollo, addApolloState, GetProductByIdDocument, Product } from 'apollo';
 import { CheckoutForm } from 'modules/checkout/CheckoutForm';
 
 type CheckoutProps = {

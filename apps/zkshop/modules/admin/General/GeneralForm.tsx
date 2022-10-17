@@ -2,7 +2,8 @@ import { Box, Heading, HStack } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { Button, FormField } from 'ui';
 
-import { useUpdateAppMutation } from 'libs/apollo/generated';
+import { useUpdateAppMutation } from 'apollo';
+import axios from 'axios';
 
 type GeneralFormValues = {
   name: string;
@@ -21,13 +22,27 @@ export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
   const [updateApp] = useUpdateAppMutation();
 
   const onSubmit = async (data: GeneralFormValues) => {
+    const variables = {
+      newName: data.name,
+      newImgUrl: data.imgUrl,
+      appId: process.env.APP_ID,
+    };
+
     try {
+      if (data.imgUrl !== defaultValues.imgUrl) {
+        const {
+          data: { uploadUrl },
+        } = await axios.post('/api/image/update', {
+          newImageUrl: data.imgUrl,
+          path: defaultValues.imgUrl,
+          bucketName: 'apps',
+        });
+
+        Object.assign(variables, { newImgUrl: uploadUrl });
+      }
+
       await updateApp({
-        variables: {
-          newName: data.name,
-          newImgUrl: data.imgUrl,
-          appId: process.env.APP_ID,
-        },
+        variables,
       });
     } catch (e) {
       console.error(e);

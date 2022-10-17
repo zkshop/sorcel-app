@@ -11,14 +11,20 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "start:storybook": "turbo run storybook",
-    "build:storybook": "turbo run build-storybook"
+    "build:storybook": "turbo run build-storybook",
+    "generate:graphql": "turbo run generate:graphql"
   },
   "devDependencies": {
-    "eslint-config-custom": "*",
     "prettier": "latest",
-    "turbo": "latest"
+    "turbo": "latest",
+    "typescript": "latest",
+    "eslint-config-custom": "*",
+    "dotenv": "^16.0.1",
+    "utils": "*",
+    "pure": "*",
+    "types": "*",
+    "tsconfig": "*"
   },
   "engines": {
     "npm": ">=7.0.0",

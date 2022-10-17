@@ -1,7 +1,22 @@
-import { Box, Text, Image, HStack } from '@chakra-ui/react';
+import { Box, Text, HStack } from '@chakra-ui/react';
 import Link from 'next/link';
-
+import Image from 'next/image';
+import styled from '@emotion/styled';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
+
+const ImageWrap = styled.span`
+  margin: 32px auto;
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & > div {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+  }
+`;
 
 export type ProductCardProps = {
   id?: string;
@@ -107,14 +122,21 @@ export const ProductCard = ({
               textAlign="center"
               color="white"
               fontWeight="bold"
+              zIndex={1}
             >
               Connect your {collection || 'Misfitwear'} wallet to unlock
             </Text>
           </>
         )}
         <Box p={2}>
-          <Box sx={{ borderRadius: '10px', height: { xs: '150px', sm: '160px', md: '200px' } }}>
-            <Image alt="product" height="100%" width="100%" src={srcItem} />
+          <Box
+            sx={{
+              position: 'relative',
+              borderRadius: '10px',
+              height: { xs: '150px', sm: '160px', md: '200px' },
+            }}
+          >
+            <Image alt="product" src={srcItem} layout="fill" />
           </Box>
 
           <Text

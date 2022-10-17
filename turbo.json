@@ -3,7 +3,8 @@
   "pipeline": {
     "build": {
       "dependsOn": [
-        "^build"
+        "^build",
+        "lint"
       ],
       "outputs": [
         "dist/**",
@@ -27,7 +28,8 @@
         "$POAP_API_KEY",
         "$APP_ID",
         "$PUBLIC_MAGIC_PUBLISHABLE_KEY",
-        "$MAGIC_SECRET_KEY"
+        "$MAGIC_SECRET_KEY",
+        "$SUPABASE_API_KEY"
       ],
       "cache": false
     },
@@ -37,6 +39,13 @@
     "build-storybook": {
       "outputs": [
         "storybook-static/**"
+      ]
+    },
+    "generate:graphql": {
+      "cache": false,
+      "dependsOn": [
+        "$HASURA_API_URL",
+        "$HASURA_API_KEY"
       ]
     }
   }

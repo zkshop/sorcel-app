@@ -1,9 +1,10 @@
 import { ConnectButtonGroup } from './ConnectButtonGroup';
 import { LoginModal } from './LoginModal';
-import { VStack, HStack, useDisclosure, Image } from '@chakra-ui/react';
+import { VStack, HStack, useDisclosure } from '@chakra-ui/react';
 // TODO: USE NESTJS IMAGE INSTEAD
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import Image from 'next/image';
 
 import { getCurrentUser, login, logoutUser } from 'store/slices/auth';
 import { useAppDispatch, useAppSelector } from 'store/store';
@@ -12,7 +13,7 @@ import { useEffect } from 'react';
 
 import { useAccount } from 'wagmi';
 
-import { useGetAppQuery } from 'libs/apollo/generated';
+import { useGetAppQuery } from 'apollo';
 
 type NavBarProps = {
   admin: boolean;

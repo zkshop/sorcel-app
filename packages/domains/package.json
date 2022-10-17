@@ -1,19 +1,13 @@
 {
   "name": "domains",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "private": true,
+  "main": "index.ts",
   "scripts": {
     "lint": "eslint --max-warnings=0 --ext .ts,.tsx,.js,.jsx .",
     "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
     "alchemy": "*"
-  },
-  "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-custom": "*",
-    "typescript": "^4.5.2",
-    "tsconfig": "*"
   }
 }

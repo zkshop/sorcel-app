@@ -894,6 +894,7 @@ export type CreateProductMutationVariables = Exact<{
   appId: Scalars['uuid'];
   price?: InputMaybe<Scalars['numeric']>;
   name?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
   image?: InputMaybe<Scalars['bpchar']>;
   discount?: InputMaybe<Scalars['smallint']>;
   curation?: InputMaybe<Scalars['bpchar']>;
@@ -912,6 +913,7 @@ export type CreateProductMutation = {
     id: any;
     image?: any | null;
     name: string;
+    description?: string | null;
     price: any;
     poapId?: any | null;
   } | null;
@@ -1155,6 +1157,7 @@ export const CreateProductDocument = gql`
     $appId: uuid!
     $price: numeric
     $name: String
+    $description: String
     $image: bpchar
     $discount: smallint
     $curation: bpchar
@@ -1167,6 +1170,7 @@ export const CreateProductDocument = gql`
         discount: $discount
         image: $image
         name: $name
+        description: $description
         price: $price
         curation: $curation
         collection: $collection
@@ -1180,6 +1184,7 @@ export const CreateProductDocument = gql`
       id
       image
       name
+      description
       price
       poapId
     }
@@ -1206,6 +1211,7 @@ export type CreateProductMutationFn = Apollo.MutationFunction<
  *      appId: // value for 'appId'
  *      price: // value for 'price'
  *      name: // value for 'name'
+ *      description: // value for 'description'
  *      image: // value for 'image'
  *      discount: // value for 'discount'
  *      curation: // value for 'curation'
