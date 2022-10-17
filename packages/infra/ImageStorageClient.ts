@@ -5,9 +5,9 @@ import { getObjectPathFromImageUrl } from 'pure';
 
 export function ImageStorageClient(): StorageClient {
   return {
-    uploadPicture: async (image) => {
+    uploadPicture: async (image, bucketName) => {
       const filename = crypto.randomUUID();
-      const { error } = await supabase.storage.from('products').upload(filename, image, {
+      const { error } = await supabase.storage.from(bucketName).upload(filename, image, {
         contentType: 'image/jpeg',
       });
 
@@ -17,13 +17,13 @@ export function ImageStorageClient(): StorageClient {
 
       const {
         data: { publicUrl },
-      } = supabase.storage.from('products').getPublicUrl(filename);
+      } = supabase.storage.from(bucketName).getPublicUrl(filename);
 
       return publicUrl;
     },
 
-    deletePicture: async (imageUrl) => {
-      const { error } = await supabase.storage.from('products').remove([imageUrl]);
+    deletePicture: async (imageUrl, bucketName) => {
+      const { error } = await supabase.storage.from(bucketName).remove([imageUrl]);
 
       if (error) {
         throw new Error(error.message);
@@ -32,14 +32,14 @@ export function ImageStorageClient(): StorageClient {
       return;
     },
 
-    updatePicture: async (image, imagePath) => {
+    updatePicture: async (image, imagePath, bucketName) => {
       const resourceId = getObjectPathFromImageUrl(imagePath);
 
       if (!resourceId) {
         throw new Error('Resource path not found.');
       }
 
-      const { error } = await supabase.storage.from('products').update(resourceId, image, {
+      const { error } = await supabase.storage.from(bucketName).update(resourceId, image, {
         upsert: true,
         contentType: 'image/jpeg',
       });
@@ -50,7 +50,7 @@ export function ImageStorageClient(): StorageClient {
 
       const {
         data: { publicUrl },
-      } = supabase.storage.from('products').getPublicUrl(resourceId);
+      } = supabase.storage.from(bucketName).getPublicUrl(resourceId);
 
       return publicUrl;
     },

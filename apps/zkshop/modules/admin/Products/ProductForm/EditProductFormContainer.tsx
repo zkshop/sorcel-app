@@ -41,7 +41,9 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
 
   const deleteProductOnClick = async () => {
     try {
-      await axios.delete(`/api/image/delete?url=${getObjectPathFromImageUrl(product.image)}`);
+      await axios.delete(
+        `/api/image/delete?url=${getObjectPathFromImageUrl(product.image)}&bucketName=products`,
+      );
 
       await deleteProduct({
         variables: {

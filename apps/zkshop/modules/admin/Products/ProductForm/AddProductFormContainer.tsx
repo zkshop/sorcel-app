@@ -25,7 +25,7 @@ export const AddProductFormContainer = () => {
     try {
       const {
         data: { uploadUrl },
-      } = await axios.post('/api/image/store', { url: data.image });
+      } = await axios.post('/api/image/store', { url: data.image, bucketName: 'products' });
 
       await createProduct({
         variables: {
