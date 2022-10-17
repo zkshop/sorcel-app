@@ -12,7 +12,8 @@ import {
   getDeleteProductSuccessMessage,
   getEditProductSuccessMessage,
 } from 'libs/messages';
-import { toNumber } from 'pure';
+import { getObjectPathFromImageUrl, toNumber } from 'pure';
+import axios from 'axios';
 
 type EditProductFormContainerProps = {
   product: Product;
@@ -22,7 +23,7 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
   const methods = useForm<AddProductFormValues>({
     defaultValues: {
       ...product,
-      price: product.price.toString(),
+      price: product?.price.toString(),
       discount: product.discount?.toString(),
       poapId: product.poapId?.toString(),
     },
@@ -40,6 +41,8 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
 
   const deleteProductOnClick = async () => {
     try {
+      await axios.delete(`/api/image/delete?url=${getObjectPathFromImageUrl(product.image)}`);
+
       await deleteProduct({
         variables: {
           id: product.id,
@@ -54,14 +57,27 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
   };
 
   const onSubmit = async (data: AddProductFormValues) => {
+    const variables = {
+      ...data,
+      id: product.id,
+      price: toNumber(data.price),
+      discount: toNumber(data.discount),
+      poapId: toNumber(data.poapId),
+    };
+
+    if (data.image !== product.image) {
+      const {
+        data: { uploadUrl },
+      } = await axios.post('/api/image/update', {
+        newImageUrl: data.image,
+        path: product.image,
+      });
+
+      Object.assign(variables, { image: uploadUrl });
+    }
+
     editProduct({
-      variables: {
-        ...data,
-        id: product.id,
-        price: toNumber(data.price),
-        discount: toNumber(data.discount),
-        poapId: toNumber(data.poapId),
-      },
+      variables,
       onCompleted: () => toast(getEditProductSuccessMessage(data.name)),
       onError: () => toast(ERROR_MESSAGE),
     });
