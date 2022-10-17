@@ -1,13 +1,5 @@
-import {
-  Box,
-  HStack,
-  Icon,
-  Image,
-  Link,
-  Stack,
-  Text,
-  useColorModeValue as mode,
-} from '@chakra-ui/react';
+import { Box, Stack, Text, useColorModeValue as mode } from '@chakra-ui/react';
+import Image from 'next/image';
 
 export type CartProductMetaProps = {
   isGiftWrapping?: boolean;
@@ -20,16 +12,10 @@ export const CartProductMeta = (props: CartProductMetaProps) => {
   const { isGiftWrapping = true, image, name, description } = props;
   return (
     <Stack direction="row" spacing="5" width="full">
-      <Image
-        rounded="lg"
-        width="120px"
-        height="120px"
-        fit="cover"
-        src={image}
-        alt={name}
-        draggable="false"
-        loading="lazy"
-      />
+      <Box rounded="lg">
+        <Image width={120} height={120} src={image} alt={name} />
+      </Box>
+
       <Box pt="4">
         <Stack spacing="0.5">
           <Text fontWeight="medium">{name}</Text>
