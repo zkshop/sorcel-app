@@ -23,9 +23,11 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
   const methods = useForm<AddProductFormValues>({
     defaultValues: {
       ...product,
-      price: product?.price.toString(),
+      price: product.price.toString(),
       discount: product.discount?.toString(),
       poapId: product.poapId?.toString(),
+      description: product.description || '',
+      isDiscountGated: false,
     },
   });
 

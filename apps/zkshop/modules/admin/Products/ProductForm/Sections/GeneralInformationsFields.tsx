@@ -13,9 +13,10 @@ import { useFormContext } from 'react-hook-form';
 import { Section, ChatRightTextIcon } from 'ui';
 
 import { PRODUCTS_FIELDS } from '../../constants';
+import { AddProductFormValues } from '../types';
 
 export const GeneralInformationsFields = () => {
-  const { register } = useFormContext();
+  const { register } = useFormContext<AddProductFormValues>();
 
   return (
     <Section>
@@ -70,7 +71,7 @@ export const GeneralInformationsFields = () => {
 
       <FormControl>
         <HStack>
-          <Checkbox isChecked={true} />
+          <Checkbox {...register('isDiscountGated')} />
 
           <FormLabel>Enable discount only for holders</FormLabel>
         </HStack>
