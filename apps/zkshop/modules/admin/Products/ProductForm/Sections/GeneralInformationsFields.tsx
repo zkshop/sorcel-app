@@ -5,6 +5,8 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
+  Checkbox,
+  HStack,
 } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
@@ -55,7 +57,7 @@ export const GeneralInformationsFields = () => {
       </FormControl>
 
       <FormControl>
-        <FormLabel mb={1}>Discount for holders</FormLabel>
+        <FormLabel mb={1}>Discount</FormLabel>
 
         <InputGroup>
           <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
@@ -64,6 +66,14 @@ export const GeneralInformationsFields = () => {
 
           <Input placeholder="Discount for holders" {...register('discount')} />
         </InputGroup>
+      </FormControl>
+
+      <FormControl>
+        <HStack>
+          <Checkbox isChecked={true} />
+
+          <FormLabel>Enable discount only for holders</FormLabel>
+        </HStack>
       </FormControl>
     </Section>
   );
