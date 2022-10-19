@@ -22,6 +22,8 @@ const nextConfig = {
       'www.poap.xyz',
       'poap.xyz',
       'kqjytgxbtetzewipikax.supabase.co',
+      'media.discordapp.net',
+      'cdn.discordapp.com',
     ],
   },
 };

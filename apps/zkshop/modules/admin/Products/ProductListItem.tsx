@@ -1,6 +1,5 @@
-import { Box, Tr, Td } from '@chakra-ui/react';
+import { Box, Tr, Td, Image } from '@chakra-ui/react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 type ProductListItemProps = {
   id: string;

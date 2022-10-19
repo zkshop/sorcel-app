@@ -1,7 +1,6 @@
 import { Box, Spinner, Table, TableContainer, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
 import Link from 'next/link';
-import { Button } from 'ui';
-import { Header } from 'ui';
+import { Button, Header } from 'ui';
 
 import { PRODUCT_ATTRIBUTES } from './constants';
 import { ProductListItem } from './ProductListItem';
