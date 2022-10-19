@@ -1,5 +1,9 @@
 {
   "$schema": "https://turborepo.org/schema.json",
+  "globalDependencies": [
+    ".env",
+    "tsconfig.json"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": [

@@ -7,11 +7,12 @@ const nextConfig = {
   swcMinify: true,
   env: {
     HOSTNAME: process.env.HOSTNAME,
+    APP_ID: process.env.APP_ID,
     HASURA_API_URL: process.env.HASURA_API_URL,
     HASURA_API_KEY: process.env.HASURA_API_KEY,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
     POAP_API_KEY: process.env.POAP_API_KEY,
-    APP_ID: process.env.APP_ID,
     PUBLIC_MAGIC_PUBLISHABLE_KEY: process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY,
     SUPABASE_API_KEY: process.env.SUPABASE_API_KEY,
   },

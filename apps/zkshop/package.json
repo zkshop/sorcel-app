@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --max-warnings=0 --ext .ts,.tsx,.js,.jsx .",
+    "lint": "next lint",
     "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
@@ -41,7 +41,6 @@
     "@types/axios": "^0.14.0",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
-    "eslint-config-custom": "*",
     "next-transpile-modules": "^9.0.0"
   }
 }

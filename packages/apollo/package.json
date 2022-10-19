@@ -4,9 +4,9 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "lint": "eslint --max-warnings=0 --ext .ts,.tsx,.js,.jsx .",
+    "lint": "eslint \"**/*.ts*\"",
     "lint:fix": "yarn lint --fix",
-    "generate:graphql": "graphql-codegen --config codegen.yaml -r dotenv/config && prettier --write ./generated.tsx"
+    "generate:graphql": "DOTENV_CONFIG_PATH=../../.env graphql-codegen --config codegen.yaml -r dotenv/config && prettier --write ./generated.tsx"
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
