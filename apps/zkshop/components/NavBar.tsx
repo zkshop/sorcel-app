@@ -1,6 +1,6 @@
 import { ConnectButtonGroup } from './ConnectButtonGroup';
 import { LoginModal } from './LoginModal';
-import { VStack, HStack, useDisclosure } from '@chakra-ui/react';
+import { VStack, HStack, useDisclosure, Box } from '@chakra-ui/react';
 // TODO: USE NESTJS IMAGE INSTEAD
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -25,6 +25,7 @@ export const NavBar = ({ admin }: NavBarProps) => {
       appId: process.env.APP_ID,
     },
   });
+  const appName = data?.data?.app?.name;
   const imgUrl = data?.data?.app?.imgUrl;
 
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -66,14 +67,25 @@ export const NavBar = ({ admin }: NavBarProps) => {
         <HStack justifyContent="space-between" flex={1}>
           <Link href="/">
             <a>
-              <Image
-                height={70}
-                width={210}
-                src={imgUrl || ''}
-                alt="3shop"
-                loading="lazy"
-                style={{ cursor: 'pointer' }}
-              />
+              {imgUrl ? (
+                <Image
+                  height={70}
+                  width={210}
+                  src={imgUrl || ''}
+                  alt="3shop"
+                  loading="lazy"
+                  style={{ cursor: 'pointer' }}
+                />
+              ) : (
+                <Box
+                  sx={{
+                    fontSize: '24px',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {appName}
+                </Box>
+              )}
             </a>
           </Link>
 
@@ -90,6 +102,7 @@ export const NavBar = ({ admin }: NavBarProps) => {
       </HStack>
 
       <SismoBanner admin={admin} enable={false} />
+
       <LoginModal
         isOpen={isOpen}
         onClose={onClose}
