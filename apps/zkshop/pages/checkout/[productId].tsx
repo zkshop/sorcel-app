@@ -10,6 +10,7 @@ import { useAppSelector } from 'store/store';
 
 type CheckoutProps = {
   product: Product;
+  hostname: string;
 };
 
 const stripe = getStripeObject();

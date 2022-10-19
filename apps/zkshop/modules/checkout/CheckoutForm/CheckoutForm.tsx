@@ -1,5 +1,6 @@
 import { Text, Flex } from '@chakra-ui/react';
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useRouter } from 'next/router';
 import { applyDiscount } from 'pure';
 import React, { useEffect, useState } from 'react';
 
