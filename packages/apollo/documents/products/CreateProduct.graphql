@@ -8,6 +8,7 @@ mutation CreateProduct(
   $curation: bpchar
   $collection: bpchar
   $poapId: numeric
+  $isDiscountGated: Boolean
 ) {
   insert_product_one(
     object: {
@@ -20,6 +21,7 @@ mutation CreateProduct(
       curation: $curation
       collection: $collection
       poapId: $poapId
+      isDiscountGated: $isDiscountGated
     }
   ) {
     app_id
@@ -32,5 +34,6 @@ mutation CreateProduct(
     description
     price
     poapId
+    isDiscountGated
   }
 }

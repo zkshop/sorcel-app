@@ -19,6 +19,19 @@ export type Scalars = {
   uuid: any;
 };
 
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['Boolean']>;
+  _gt?: InputMaybe<Scalars['Boolean']>;
+  _gte?: InputMaybe<Scalars['Boolean']>;
+  _in?: InputMaybe<Array<Scalars['Boolean']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Boolean']>;
+  _lte?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Scalars['Boolean']>;
+  _nin?: InputMaybe<Array<Scalars['Boolean']>>;
+};
+
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['String']>;
@@ -389,6 +402,7 @@ export type Product = {
   discount?: Maybe<Scalars['smallint']>;
   id: Scalars['uuid'];
   image?: Maybe<Scalars['bpchar']>;
+  isDiscountGated: Scalars['Boolean'];
   name: Scalars['String'];
   poapId?: Maybe<Scalars['numeric']>;
   price: Scalars['numeric'];
@@ -443,6 +457,7 @@ export type Product_Bool_Exp = {
   discount?: InputMaybe<Smallint_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<Bpchar_Comparison_Exp>;
+  isDiscountGated?: InputMaybe<Boolean_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   poapId?: InputMaybe<Numeric_Comparison_Exp>;
   price?: InputMaybe<Numeric_Comparison_Exp>;
@@ -470,6 +485,7 @@ export type Product_Insert_Input = {
   discount?: InputMaybe<Scalars['smallint']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['bpchar']>;
+  isDiscountGated?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   poapId?: InputMaybe<Scalars['numeric']>;
   price?: InputMaybe<Scalars['numeric']>;
@@ -530,6 +546,7 @@ export type Product_Order_By = {
   discount?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
+  isDiscountGated?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   poapId?: InputMaybe<Order_By>;
   price?: InputMaybe<Order_By>;
@@ -557,6 +574,8 @@ export enum Product_Select_Column {
   /** column name */
   Image = 'image',
   /** column name */
+  IsDiscountGated = 'isDiscountGated',
+  /** column name */
   Name = 'name',
   /** column name */
   PoapId = 'poapId',
@@ -573,6 +592,7 @@ export type Product_Set_Input = {
   discount?: InputMaybe<Scalars['smallint']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['bpchar']>;
+  isDiscountGated?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   poapId?: InputMaybe<Scalars['numeric']>;
   price?: InputMaybe<Scalars['numeric']>;
@@ -619,6 +639,7 @@ export type Product_Stream_Cursor_Value_Input = {
   discount?: InputMaybe<Scalars['smallint']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['bpchar']>;
+  isDiscountGated?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   poapId?: InputMaybe<Scalars['numeric']>;
   price?: InputMaybe<Scalars['numeric']>;
@@ -648,6 +669,8 @@ export enum Product_Update_Column {
   Id = 'id',
   /** column name */
   Image = 'image',
+  /** column name */
+  IsDiscountGated = 'isDiscountGated',
   /** column name */
   Name = 'name',
   /** column name */
@@ -900,6 +923,7 @@ export type CreateProductMutationVariables = Exact<{
   curation?: InputMaybe<Scalars['bpchar']>;
   collection?: InputMaybe<Scalars['bpchar']>;
   poapId?: InputMaybe<Scalars['numeric']>;
+  isDiscountGated?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 export type CreateProductMutation = {
@@ -916,6 +940,7 @@ export type CreateProductMutation = {
     description?: string | null;
     price: any;
     poapId?: any | null;
+    isDiscountGated: boolean;
   } | null;
 };
 
@@ -941,6 +966,7 @@ export type EditProductMutationVariables = Exact<{
   description?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['numeric']>;
   poapId?: InputMaybe<Scalars['numeric']>;
+  isDiscountGated?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 export type EditProductMutation = {
@@ -958,6 +984,7 @@ export type EditProductMutation = {
       description?: string | null;
       price: any;
       poapId?: any | null;
+      isDiscountGated: boolean;
     }>;
   } | null;
 };
@@ -980,6 +1007,7 @@ export type GetProductByIdQuery = {
     description?: string | null;
     price: any;
     poapId?: any | null;
+    isDiscountGated: boolean;
   } | null;
 };
 
@@ -1001,6 +1029,7 @@ export type GetProductsQuery = {
     description?: string | null;
     price: any;
     poapId?: any | null;
+    isDiscountGated: boolean;
   }>;
 };
 
@@ -1163,6 +1192,7 @@ export const CreateProductDocument = gql`
     $curation: bpchar
     $collection: bpchar
     $poapId: numeric
+    $isDiscountGated: Boolean
   ) {
     insert_product_one(
       object: {
@@ -1175,6 +1205,7 @@ export const CreateProductDocument = gql`
         curation: $curation
         collection: $collection
         poapId: $poapId
+        isDiscountGated: $isDiscountGated
       }
     ) {
       app_id
@@ -1187,6 +1218,7 @@ export const CreateProductDocument = gql`
       description
       price
       poapId
+      isDiscountGated
     }
   }
 `;
@@ -1217,6 +1249,7 @@ export type CreateProductMutationFn = Apollo.MutationFunction<
  *      curation: // value for 'curation'
  *      collection: // value for 'collection'
  *      poapId: // value for 'poapId'
+ *      isDiscountGated: // value for 'isDiscountGated'
  *   },
  * });
  */
@@ -1292,6 +1325,7 @@ export const EditProductDocument = gql`
     $description: String
     $price: numeric
     $poapId: numeric
+    $isDiscountGated: Boolean
   ) {
     update_product(
       _set: {
@@ -1303,6 +1337,7 @@ export const EditProductDocument = gql`
         description: $description
         price: $price
         poapId: $poapId
+        isDiscountGated: $isDiscountGated
       }
       where: { id: { _eq: $id } }
     ) {
@@ -1316,6 +1351,7 @@ export const EditProductDocument = gql`
         description
         price
         poapId
+        isDiscountGated
       }
     }
   }
@@ -1347,6 +1383,7 @@ export type EditProductMutationFn = Apollo.MutationFunction<
  *      description: // value for 'description'
  *      price: // value for 'price'
  *      poapId: // value for 'poapId'
+ *      isDiscountGated: // value for 'isDiscountGated'
  *   },
  * });
  */
@@ -1378,6 +1415,7 @@ export const GetProductByIdDocument = gql`
       description
       price
       poapId
+      isDiscountGated
     }
   }
 `;
@@ -1435,6 +1473,7 @@ export const GetProductsDocument = gql`
       description
       price
       poapId
+      isDiscountGated
     }
   }
 `;

@@ -8,6 +8,7 @@ mutation EditProduct(
   $description: String
   $price: numeric
   $poapId: numeric
+  $isDiscountGated: Boolean
 ) {
   update_product(
     _set: {
@@ -19,6 +20,7 @@ mutation EditProduct(
       description: $description
       price: $price
       poapId: $poapId
+      isDiscountGated: $isDiscountGated
     }
     where: { id: { _eq: $id } }
   ) {
@@ -32,6 +34,7 @@ mutation EditProduct(
       description
       price
       poapId
+      isDiscountGated
     }
   }
 }

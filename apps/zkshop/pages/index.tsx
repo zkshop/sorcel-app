@@ -1,7 +1,6 @@
 import { QueryResult } from '@apollo/client';
 import { useEffect } from 'react';
 import ReactCanvasConfetti from 'react-canvas-confetti';
-import { ProductCardList } from 'ui';
 import { useAccount } from 'wagmi';
 
 import useUpdateThemeOnConnection from '../hooks/useUpdateThemeOnConnection';

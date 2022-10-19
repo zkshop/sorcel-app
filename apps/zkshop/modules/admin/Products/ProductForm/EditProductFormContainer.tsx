@@ -27,7 +27,7 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
       discount: product.discount?.toString(),
       poapId: product.poapId?.toString(),
       description: product.description || '',
-      isDiscountGated: false,
+      isDiscountGated: product.isDiscountGated,
     },
   });
 
