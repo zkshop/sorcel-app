@@ -1,14 +1,16 @@
 import { Text, Flex } from '@chakra-ui/react';
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { applyDiscount } from 'pure';
 import React, { useEffect, useState } from 'react';
 
 import { StyledCheckoutForm } from './CheckoutForm.style';
 
 type CheckoutFormProps = {
-  price: string;
+  price: number;
+  discount?: number;
 };
 
-export function CheckoutForm({ price }: CheckoutFormProps) {
+export function CheckoutForm({ price, discount }: CheckoutFormProps) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -76,7 +78,7 @@ export function CheckoutForm({ price }: CheckoutFormProps) {
       <PaymentElement id="payment-element" />
 
       <Text fontWeight="700" py={4}>
-        Price: {price}€
+        Price: {applyDiscount(price, discount)}€
       </Text>
 
       <button disabled={isLoading || !stripe || !elements} id="submit">
