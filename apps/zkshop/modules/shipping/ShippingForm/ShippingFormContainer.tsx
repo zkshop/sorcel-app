@@ -15,12 +15,19 @@ type ShippingFormContainerProps = {
 };
 
 export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) => {
-  const { id, price, name, image, discount } = product;
+  const { id, price, name, image, discount, curation, poapId } = product;
   const methods = useForm<ShippingFormValues>();
   const { handleSubmit } = methods;
 
+  function showDiscount() {
+    if (!curation && !poapId) return true;
+    if (isAnHolder) return true;
+    return false;
+  }
+
   const isAnHolder = useIsAnHolder(product);
-  const amount = applyDiscount(price, isAnHolder ? discount : undefined);
+
+  const amount = applyDiscount(price, showDiscount() && discount);
 
   const router = useRouter();
 

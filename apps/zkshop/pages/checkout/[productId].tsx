@@ -21,6 +21,12 @@ const Checkout = ({ product }: CheckoutProps) => {
 
   const isAnHolder = useIsAnHolder(product);
 
+  function showDiscount() {
+    if (!product.curation && !product.poapId) return true;
+    if (isAnHolder) return true;
+    return false;
+  }
+
   useEffect(() => {
     async function updateClientSecret() {
       const clientSecret = await getPaymentIntent(product.id);
@@ -38,7 +44,7 @@ const Checkout = ({ product }: CheckoutProps) => {
 
       {clientSecret && (
         <Elements options={{ appearance: { theme: 'stripe' }, clientSecret }} stripe={stripe}>
-          <CheckoutForm price={product.price} discount={isAnHolder && product.discount} />
+          <CheckoutForm price={product.price} discount={showDiscount() && product.discount} />
         </Elements>
       )}
     </VStack>
