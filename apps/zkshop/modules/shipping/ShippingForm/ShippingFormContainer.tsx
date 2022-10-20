@@ -8,16 +8,23 @@ import { ShippingFormValues } from './types';
 
 import { Product } from 'apollo';
 import { applyDiscount } from 'pure';
+import { useAppSelector } from 'store/store';
 
 type ShippingFormContainerProps = {
   product: Product;
 };
 
 export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) => {
-  const { id, price, name, image, discount } = product;
+  const { id, price, name, image, discount, curation, poapId } = product;
   const methods = useForm<ShippingFormValues>();
   const { handleSubmit } = methods;
-  const amount = applyDiscount(price, discount);
+  const poapIds = useAppSelector((state) => state.user.poap).map(({ event: { id } }) => id);
+  const collections = useAppSelector((state) => state.user.nfts).map((nft) => nft.contract);
+
+  const isAPoapHolder = poapIds.includes(poapId);
+  const isAnNftHolder = collections.includes(curation?.toLowerCase());
+  const isAnHolder = isAnNftHolder || isAPoapHolder;
+  const amount = applyDiscount(price, isAnHolder ? discount : undefined);
 
   const router = useRouter();
 

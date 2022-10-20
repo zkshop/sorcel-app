@@ -33,7 +33,6 @@ export const ProductDetails = ({
   collection,
   poapImgUrl,
   poapUrl,
-  sendTransaction,
 }: ProductDetailsProps) => (
   <StyledProductDetails isEligible={isEligible}>
     <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} href={poapUrl} />
@@ -145,45 +144,47 @@ export const ProductDetails = ({
             </Box>
           </Box>
 
-          <Box mt={2}>
-            <Button
-              as="a"
-              height="48px"
-              width="100%"
-              borderRadius="10px"
-              p={1}
-              isDisabled={isTransparent}
-              bg="#4473c3"
-              _hover={{
-                bg: '#5686d8',
-              }}
-              href={`/shipping/${id}`}
-            >
-              <Box display="flex" justifyContent="space-between" alignItems="center">
-                <Text
-                  fontWeight="bold"
-                  fontSize="16px"
-                  color="white"
-                  mr={1}
-                  textTransform="uppercase"
-                >
-                  PAY
-                </Text>
-
-                <Box borderRadius="10px" display="flex">
-                  <TriangleUpIcon
-                    style={{
-                      marginLeft: '8px',
-                    }}
+          {isTransparent ? null : (
+            <Box mt={2}>
+              <Button
+                as="a"
+                height="48px"
+                width="100%"
+                borderRadius="10px"
+                p={1}
+                isDisabled={isTransparent}
+                bg="#4473c3"
+                _hover={{
+                  bg: '#5686d8',
+                }}
+                href={`/shipping/${id}`}
+              >
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                  <Text
+                    fontWeight="bold"
+                    fontSize="16px"
                     color="white"
-                  />
+                    mr={1}
+                    textTransform="uppercase"
+                  >
+                    PAY
+                  </Text>
+
+                  <Box borderRadius="10px" display="flex">
+                    <TriangleUpIcon
+                      style={{
+                        marginLeft: '8px',
+                      }}
+                      color="white"
+                    />
+                  </Box>
                 </Box>
-              </Box>
-            </Button>
-          </Box>
+              </Button>
+            </Box>
+          )}
 
           {/* <Box mt={2}>
-            <Button
+          <Button
               onClick={() => {
                 sendTransaction?.();
               }}
