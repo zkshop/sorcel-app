@@ -4,12 +4,14 @@ import axios from 'axios';
 import { getAddProductSuccessMessage } from 'libs/messages';
 import { useRouter } from 'next/router';
 import { toNumber } from 'pure';
+import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import { ProductForm } from './ProductForm';
 import { AddProductFormValues } from './types';
 
 export const AddProductFormContainer = () => {
+  const [storageActionLoading, setStorageActionLoading] = useState(false);
   const methods = useForm<AddProductFormValues>({
     defaultValues: {},
   });
@@ -23,9 +25,11 @@ export const AddProductFormContainer = () => {
 
   const onSubmit = async (data: AddProductFormValues) => {
     try {
+      setStorageActionLoading(true);
       const {
         data: { uploadUrl },
       } = await axios.post('/api/image/store', { url: data.image, bucketName: 'products' });
+      setStorageActionLoading(false);
 
       await createProduct({
         variables: {
@@ -42,12 +46,18 @@ export const AddProductFormContainer = () => {
       router.push('/admin');
     } catch (e) {
       console.error(e);
+    } finally {
+      setStorageActionLoading(false);
     }
   };
 
   return (
     <FormProvider {...methods}>
-      <ProductForm isLoading={isLoading} handleSubmit={handleSubmit} onSubmit={onSubmit} />
+      <ProductForm
+        isLoading={storageActionLoading || isLoading}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+      />
     </FormProvider>
   );
 };

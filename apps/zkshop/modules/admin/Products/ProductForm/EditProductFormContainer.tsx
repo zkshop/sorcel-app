@@ -14,12 +14,14 @@ import {
 } from 'libs/messages';
 import { getObjectPathFromImageUrl, toNumber } from 'pure';
 import axios from 'axios';
+import { useState } from 'react';
 
 type EditProductFormContainerProps = {
   product: Product;
 };
 
 export const EditProductFormContainer = ({ product }: EditProductFormContainerProps) => {
+  const [storageActionLoading, setStorageActionLoading] = useState(false);
   const methods = useForm<AddProductFormValues>({
     defaultValues: {
       ...product,
@@ -42,10 +44,12 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
   const [editProduct, { loading: isEditLoading }] = useEditProductMutation();
 
   const deleteProductOnClick = async () => {
+    setStorageActionLoading(true);
     try {
       await axios.delete(
         `/api/image/delete?url=${getObjectPathFromImageUrl(product.image)}&bucketName=products`,
       );
+      setStorageActionLoading(false);
 
       await deleteProduct({
         variables: {
@@ -57,6 +61,8 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
       router.push('/admin');
     } catch (e) {
       console.error(e);
+    } finally {
+      setStorageActionLoading(false);
     }
   };
 
@@ -69,22 +75,31 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
       poapId: toNumber(data.poapId),
     };
 
-    if (data.image !== product.image) {
-      const {
-        data: { uploadUrl },
-      } = await axios.post('/api/image/update', {
-        newImageUrl: data.image,
-        path: product.image,
+    try {
+      if (data.image !== product.image) {
+        setStorageActionLoading(true);
+        const {
+          data: { uploadUrl },
+        } = await axios.post('/api/image/update', {
+          newImageUrl: data.image,
+          path: product.image,
+          bucketName: 'products',
+        });
+
+        setStorageActionLoading(false);
+        Object.assign(variables, { image: uploadUrl });
+      }
+
+      editProduct({
+        variables,
+        onCompleted: () => toast(getEditProductSuccessMessage(data.name)),
+        onError: () => toast(ERROR_MESSAGE),
       });
-
-      Object.assign(variables, { image: uploadUrl });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setStorageActionLoading(false);
     }
-
-    editProduct({
-      variables,
-      onCompleted: () => toast(getEditProductSuccessMessage(data.name)),
-      onError: () => toast(ERROR_MESSAGE),
-    });
   };
 
   return (
@@ -93,13 +108,13 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
         onOpen={onOpen}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
-        isLoading={isEditLoading}
+        isLoading={storageActionLoading || isEditLoading}
       />
 
       <DeleteProductModal
         isOpen={isOpen}
         onClose={onClose}
-        isDeleteLoading={isDeleteLoading}
+        isDeleteLoading={storageActionLoading || isDeleteLoading}
         deleteProductOnClick={deleteProductOnClick}
         productName={product.name}
       />

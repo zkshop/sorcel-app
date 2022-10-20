@@ -39,6 +39,10 @@ export function ImageStorageClient(): StorageClient {
         throw new Error('Resource path not found.');
       }
 
+      if (!bucketName) {
+        throw new Error('No Bucket Name specified.');
+      }
+
       const { error } = await supabase.storage.from(bucketName).update(resourceId, image, {
         upsert: true,
         contentType: 'image/jpeg',
