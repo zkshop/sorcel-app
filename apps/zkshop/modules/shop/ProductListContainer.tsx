@@ -8,10 +8,13 @@ type ProductListContainerProps = {
 };
 
 export const ProductListContainer = ({ products }: ProductListContainerProps) => {
-  const user = useAppSelector((state) => state.user);
-  const poapIds = user.poap.map((poap) => poap.event.id);
+  const poap = useAppSelector((state) => state.user.poap);
+  const nfts = useAppSelector((state) => state.user.nfts);
+
+  const poapIds = poap.map((poap) => poap.event.id);
   const poapImageList = useAppSelector((state) => state.poapImageList);
-  const collections = user.nfts.map((nft) => nft.contract.address);
+  const collections = nfts.map((nft) => nft.contract.address);
+
   const formatedProducts = products.map((product) =>
     formatProductData({ ...product, poapIds, collections, poapImageList }),
   );

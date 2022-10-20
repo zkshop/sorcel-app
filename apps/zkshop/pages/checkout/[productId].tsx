@@ -7,6 +7,7 @@ import { getPaymentIntent, getStripeObject } from 'clients/stripe';
 import { initializeApollo, addApolloState, GetProductByIdDocument, Product } from 'apollo';
 import { CheckoutForm } from 'modules/checkout/CheckoutForm';
 import { useAppSelector } from 'store/store';
+import { useIsAnHolder } from 'hooks/useIsAnHolder';
 
 type CheckoutProps = {
   product: Product;
@@ -17,11 +18,8 @@ const stripe = getStripeObject();
 
 const Checkout = ({ product }: CheckoutProps) => {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
-  const collections = useAppSelector((state) => state.user.nfts);
-  const poapIds = useAppSelector((state) => state.user.poap).map((p) => p.event.id);
-  const isAPoapHolder = poapIds.includes(product?.poapId);
-  const isAnNftHolder = collections.includes(product?.curation?.toLowerCase());
-  const isAnHolder = isAPoapHolder || isAnNftHolder;
+
+  const isAnHolder = useIsAnHolder(product);
 
   useEffect(() => {
     async function updateClientSecret() {
