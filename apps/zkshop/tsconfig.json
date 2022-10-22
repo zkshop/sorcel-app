@@ -24,7 +24,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "__tests__/utils.js"
   ],
   "exclude": [
     "node_modules"

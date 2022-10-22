@@ -9,6 +9,7 @@ import { ShippingFormValues } from './types';
 import { Product } from 'apollo';
 import { applyDiscount } from 'pure';
 import { useIsAnHolder } from 'hooks/useIsAnHolder';
+import axios from 'axios';
 
 type ShippingFormContainerProps = {
   product: Product;
@@ -31,11 +32,16 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
 
   const router = useRouter();
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: ShippingFormValues) => {
     if (amount === 0) {
-      // TODO: Send E-mail confirmation
       return router.push('/');
     }
+
+    await axios.post('/api/email', {
+      firstname: data.firstname,
+      lastname: data.firstname,
+      email: data.email,
+    });
 
     router.push(router.asPath.replace('shipping', 'checkout'));
   };

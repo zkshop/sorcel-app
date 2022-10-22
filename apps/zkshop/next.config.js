@@ -5,6 +5,17 @@ import withTM from 'next-transpile-modules';
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  webpack(config) {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      net: false,
+      tls: false,
+      http: false,
+    };
+
+    return config;
+  },
   env: {
     HOSTNAME: process.env.HOSTNAME,
     APP_ID: process.env.APP_ID,
@@ -17,15 +28,7 @@ const nextConfig = {
     SUPABASE_API_KEY: process.env.SUPABASE_API_KEY,
   },
   images: {
-    domains: [
-      'firebasestorage.googleapis.com',
-      'assets.poap.xyz',
-      'www.poap.xyz',
-      'poap.xyz',
-      'kqjytgxbtetzewipikax.supabase.co',
-      'media.discordapp.net',
-      'cdn.discordapp.com',
-    ],
+    domains: ['assets.poap.xyz', 'www.poap.xyz', 'poap.xyz', 'kqjytgxbtetzewipikax.supabase.co'],
   },
 };
 
@@ -39,4 +42,5 @@ export default withTM([
   'types',
   'apollo',
   'supabase',
+  'sendinblue',
 ])(nextConfig);
