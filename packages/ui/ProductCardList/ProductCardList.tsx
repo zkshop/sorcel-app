@@ -6,18 +6,15 @@ type ProductCardListProps = {
   products: FormatedProductData[];
 };
 
+const templateColumns = {
+  xs: 'repeat(2, 1fr)',
+  sm: 'repeat(3, 1fr)',
+  md: 'repeat(4, 1fr)',
+};
+
 export const ProductCardList = ({ products }: ProductCardListProps) => (
   <Box>
-    <Grid
-      gap={8}
-      sx={{
-        gridTemplateColumns: {
-          xs: 'repeat(2, 1fr)',
-          sm: 'repeat(3, 1fr)',
-          md: 'repeat(4, 1fr)',
-        },
-      }}
-    >
+    <Grid gap={8} templateColumns={templateColumns}>
       {products.map(
         ({
           id,
@@ -28,6 +25,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
           poapUrl,
           poapImgUrl,
           price,
+          priceReduced,
           srcItem,
           discount,
         }) => (
@@ -38,9 +36,10 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
               discount={discount}
               srcItem={srcItem}
               price={price}
+              priceReduced={priceReduced}
               poapUrl={poapUrl}
               poapImgUrl={poapImgUrl}
-              isAnHolder={isAnHolder}
+              isEligible={isAnHolder}
               isTransparent={isTransparent}
               collection={collection}
             />

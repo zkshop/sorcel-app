@@ -23,7 +23,7 @@ export const PoapBadge = ({ imgUrl, href = '' }: PoapBadgeProps) => {
       href={href}
       target="_blank"
       sx={{
-        zIndex: 1,
+        zIndex: 2,
         position: 'absolute',
         top: Math.round(-boxSize / 3),
         right: Math.round(-boxSize / 3),

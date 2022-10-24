@@ -3,6 +3,7 @@ import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 import { TriangleUpIcon } from '../Icons';
 import { StyledProductDetails } from './ProductDetails.style';
 import Image from 'next/image';
+import { LockedLayer } from '../LockedLayer/LockedLayer';
 
 type ProductDetailsProps = {
   id?: string;
@@ -37,38 +38,7 @@ export const ProductDetails = ({
   <StyledProductDetails isEligible={isEligible}>
     <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} href={poapUrl} />
 
-    {isTransparent && (
-      <>
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            opacity: 0.4,
-          }}
-          display="flex"
-          justifyContent="center"
-          flexDirection="column"
-          alignItems="center"
-          bgColor="black"
-        />
-        <Text
-          px={1}
-          position="absolute"
-          top={190}
-          textAlign="center"
-          color="white"
-          fontWeight="bold"
-          fontSize="2xl"
-          width="100%"
-          zIndex={1}
-        >
-          Connect your {collection || 'Misfitwear'} wallet to unlock
-        </Text>
-      </>
-    )}
+    <LockedLayer isLocked={isTransparent} collectionName={collection} size="lg" />
 
     <Flex alignItems="stretch" sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
       <Flex justifyContent="center">
@@ -182,44 +152,6 @@ export const ProductDetails = ({
               </Button>
             </Box>
           )}
-
-          {/* <Box mt={2}>
-          <Button
-              onClick={() => {
-                sendTransaction?.();
-              }}
-              height="48px"
-              width="100%"
-              borderRadius="10px"
-              p={1}
-              isDisabled={isTransparent}
-              bg="#e89938"
-              _hover={{
-                bg: '#f7ad54',
-              }}
-            >
-              <Box display="flex" justifyContent="space-between" alignItems="center">
-                <Text
-                  fontWeight="bold"
-                  fontSize="16px"
-                  color="white"
-                  mr={1}
-                  textTransform="uppercase"
-                >
-                  Pay in crypto
-                </Text>
-
-                <Box borderRadius="10px" display="flex">
-                  <TriangleUpIcon
-                    style={{
-                      marginLeft: '8px',
-                    }}
-                    color="white"
-                  />
-                </Box>
-              </Box>
-            </Button>
-          </Box> */}
         </VStack>
       </VStack>
     </Flex>

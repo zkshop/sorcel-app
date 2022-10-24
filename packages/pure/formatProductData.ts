@@ -30,6 +30,10 @@ export const formatProductData = ({
   const isTransparent = isGated && !isAnHolder && !isDiscountGated;
   const poapUrl = `https://poap.gallery/event/${poapId}`;
   const poapImgUrl = getPoapImageFromPoapList(poapId, poapImageList);
+  const priceNumber = parseInt(price);
+  const discountNumber = discount ? parseInt(discount) : 0;
+  const promoPercent = discount ? discountNumber / 100 : 0;
+  const priceReduced = discount ? priceNumber - priceNumber * promoPercent : 0;
 
   const showDiscount = (() => {
     if (discount) {
@@ -51,6 +55,7 @@ export const formatProductData = ({
     discount: showDiscount && discount,
     description,
     price,
+    priceReduced,
     collection,
     id,
   };

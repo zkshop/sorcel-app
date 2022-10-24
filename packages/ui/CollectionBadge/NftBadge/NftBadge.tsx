@@ -7,7 +7,7 @@ type NftBadgeProps = {
 export const NftBadge = ({ title }: NftBadgeProps) => (
   <Box
     sx={{
-      zIndex: 1,
+      zIndex: 2,
       position: 'absolute',
       top: -2,
       right: -1,

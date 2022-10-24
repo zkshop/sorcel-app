@@ -1,22 +1,9 @@
 import { Box, Text, HStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import styled from '@emotion/styled';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
-
-const ImageWrap = styled.span`
-  margin: 32px auto;
-  box-sizing: content-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  & > div {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 5px;
-  }
-`;
+import { StyledProductCard } from './ProductCard.style';
+import { LockedLayer } from '../LockedLayer/LockedLayer';
 
 export type ProductCardProps = {
   id?: string;
@@ -24,9 +11,10 @@ export type ProductCardProps = {
   title: string;
   discount?: string;
   price: string;
+  priceReduced?: number;
   collection: string;
   isTransparent: boolean;
-  isAnHolder: boolean;
+  isEligible: boolean;
   poapUrl: string;
   poapImgUrl?: string;
   description?: any;
@@ -37,157 +25,79 @@ export const ProductCard = ({
   title,
   discount,
   price,
+  priceReduced,
   collection,
   isTransparent,
-  isAnHolder,
+  isEligible,
   id,
   poapUrl,
   poapImgUrl,
-}: ProductCardProps) => {
-  const princeNumber = parseInt(price);
-  const discountNumber = discount ? parseInt(discount) : 0;
+}: ProductCardProps) => (
+  <Link href={`product/${id}`}>
+    <StyledProductCard as="a" isEligible={isEligible}>
+      <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} href={poapUrl} />
 
-  const promoPercent = discount ? discountNumber / 100 : 0;
-  const priceReduced = discount ? princeNumber - princeNumber * promoPercent : 0;
+      <LockedLayer isLocked={isTransparent} collectionName={collection} />
 
-  return (
-    <Link href={`product/${id}`}>
-      <Box
-        as="a"
-        cursor="pointer"
-        boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
-        bg="white"
-        width="100%"
-        borderRadius="10px"
-        position="relative"
-        _before={
-          isAnHolder
-            ? {
-                content: '""',
-                zIndex: -1,
-                position: 'absolute',
-                top: '-6px',
-                right: '-6px',
-                bottom: '-6px',
-                left: '-6px',
-                background:
-                  'linear-gradient(to right, var(--chakra-colors-bannerLeft) , var(--chakra-colors-bannerRight))',
-                transition: 'opacity 0.3s',
-                borderRadius: 'inherit',
-                filter: 'blur(5px)',
-                opacity: 0.9,
-              }
-            : {}
-        }
-        _after={
-          isAnHolder
-            ? {
-                content: '""',
-                zIndex: -1,
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0,
-                background: 'inherit',
-                borderRadius: 'inherit',
-              }
-            : {}
-        }
-      >
-        <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} href={poapUrl} />
+      <Box p={2}>
+        <Box
+          sx={{
+            position: 'relative',
+            borderRadius: '10px',
+            height: { xs: '150px', sm: '160px', md: '200px' },
+          }}
+        >
+          <Image alt="product" src={srcItem} layout="fill" />
+        </Box>
 
-        {isTransparent && (
-          <>
-            <Box
-              sx={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                bottom: 0,
-                right: 0,
-                opacity: 0.5,
-                borderRadius: '10px',
-              }}
-              display="flex"
-              justifyContent="center"
-              flexDirection="column"
-              alignItems="center"
-              bgColor="black"
-            />
+        <Text
+          fontWeight="bold"
+          fontSize="14px"
+          color="black"
+          marginTop="4px"
+          padding="2px"
+          textTransform="capitalize"
+        >
+          {title}
+        </Text>
+
+        <Box display="flex" justifyContent="space-between" alignItems="center" mt={4}>
+          <HStack px={1}>
             <Text
-              px={1}
-              position="absolute"
-              top={90}
-              textAlign="center"
-              color="white"
               fontWeight="bold"
-              zIndex={1}
+              fontSize="14px"
+              color="black"
+              textDecoration={discount ? 'line-through' : 'none'}
+              marginRight={discount ? '2px' : 'none'}
             >
-              Connect your {collection || 'Misfitwear'} wallet to unlock
+              {`${price}€`}
             </Text>
-          </>
-        )}
-        <Box p={2}>
-          <Box
-            sx={{
-              position: 'relative',
-              borderRadius: '10px',
-              height: { xs: '150px', sm: '160px', md: '200px' },
-            }}
-          >
-            <Image alt="product" src={srcItem} layout="fill" />
-          </Box>
-
-          <Text
-            fontWeight="bold"
-            fontSize="14px"
-            color="black"
-            marginTop="4px"
-            padding="2px"
-            textTransform="capitalize"
-          >
-            {title}
-          </Text>
-
-          <Box display="flex" justifyContent="space-between" alignItems="center" mt={4}>
-            <HStack px={1}>
-              <Text
-                fontWeight="bold"
-                fontSize="14px"
-                color="black"
-                textDecoration={discount ? 'line-through' : 'none'}
-                marginRight={discount ? '2px' : 'none'}
-              >
-                {`${price}€`}
-              </Text>
-
-              {discount && (
-                <Text fontWeight="bold" fontSize="14px" color="#FF5F1F" marginLeft="0 !important">
-                  {`${priceReduced}€`}
-                </Text>
-              )}
-            </HStack>
 
             {discount && (
-              <Box
-                border="1px gray solid"
-                width="50px"
-                borderRadius="10px"
-                padding="2px"
-                marginTop="4px"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Text fontWeight="bold" fontSize="12px" color="black" padding="2px">
-                  {`-${discount}%`}
-                </Text>
-              </Box>
+              <Text fontWeight="bold" fontSize="14px" color="#FF5F1F" marginLeft="0 !important">
+                {`${priceReduced}€`}
+              </Text>
             )}
-          </Box>
+          </HStack>
+
+          {discount && (
+            <Box
+              border="1px gray solid"
+              width="50px"
+              borderRadius="10px"
+              padding="2px"
+              marginTop="4px"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Text fontWeight="bold" fontSize="12px" color="black" padding="2px">
+                {`-${discount}%`}
+              </Text>
+            </Box>
+          )}
         </Box>
       </Box>
-    </Link>
-  );
-};
+    </StyledProductCard>
+  </Link>
+);

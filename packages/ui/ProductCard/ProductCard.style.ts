@@ -1,17 +1,21 @@
 import { css, Theme } from '@emotion/react';
+import { Box } from '@chakra-ui/react';
+
 import styled from '@emotion/styled';
 
-type StyledProductDetailsProps = {
+type StyledProductCardProps = {
   theme?: Theme;
   isEligible: boolean;
 };
 
-export const StyledProductDetails = styled.div(
-  ({ isEligible }: StyledProductDetailsProps) => css`
+export const StyledProductCard = styled(Box)(
+  ({ isEligible }: StyledProductCardProps) => css`
     position: relative;
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin-top: 32px !important;
+    cursor: pointer;
+    width: 100%;
     border-radius: 10px;
 
     :before {

@@ -4,6 +4,7 @@ export type FormatedProductData = {
   title: string;
   discount?: string;
   price: string;
+  priceReduced: number;
   collection: string;
   isTransparent: boolean;
   isAnHolder: boolean;
