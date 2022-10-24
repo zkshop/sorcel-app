@@ -4,6 +4,6 @@ export type { Nft } from 'alchemy-sdk';
 
 export const createAlchemy = (network: Network): Alchemy =>
   new Alchemy({
-    apiKey: 'demo',
+    apiKey: process.env.ALCHEMY_SECRET_KEY,
     network,
   });
