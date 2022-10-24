@@ -20,7 +20,7 @@ Primary.args = {
   srcItem: '',
   title: 'Product Title',
   price: '100',
-  discount: '10%',
+  discount: '10',
   priceReduced: 90,
   collection: 'Collection Name',
   isTransparent: false,

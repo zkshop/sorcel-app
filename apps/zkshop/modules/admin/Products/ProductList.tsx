@@ -30,7 +30,7 @@ export const Products = () => {
         my={4}
         sx={{
           bg: 'white',
-          borderRadius: '8px',
+          borderRadius: 'lg',
           p: 8,
           border: '1px solid lightgrey',
         }}

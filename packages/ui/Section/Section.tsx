@@ -12,7 +12,7 @@ export const Section = ({ children, width = 'full', sx }: FormStackProps) => (
     spacing={3}
     backgroundColor="white"
     sx={{
-      borderRadius: '8px',
+      borderRadius: 'lg',
       p: 8,
       border: '1px solid lightgrey',
       ...sx,

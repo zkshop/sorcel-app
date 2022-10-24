@@ -27,7 +27,7 @@ export const LockedLayer = ({ isLocked, collectionName = '', size = 'md' }: Lock
           flexDirection: 'column',
           alignItems: 'center',
           bg: 'black',
-          borderRadius: '10px',
+          borderRadius: '2xl',
         }}
       />
 

@@ -1,13 +1,12 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import { themes } from '.';
+import { theme } from './theme';
 
 type Props = {
   children?: React.ReactNode;
-  themeToApply: 'vanilla' | 'first';
 };
 
-export const ThemeProvider = ({ children, themeToApply }: Props) => (
-  <ChakraProvider resetCSS theme={themes[themeToApply]}>
+export const ThemeProvider = ({ children }: Props) => (
+  <ChakraProvider resetCSS theme={theme}>
     {children}
   </ChakraProvider>
 );

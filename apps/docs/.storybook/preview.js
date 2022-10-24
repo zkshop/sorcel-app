@@ -1,6 +1,4 @@
-import { themes } from '../../../packages/ui/theme'
-
-const theme = themes.vanilla;
+import { theme } from '../../../packages/ui/theme/theme'
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

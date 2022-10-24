@@ -80,7 +80,7 @@ export const ProductDetails = ({
               <Box
                 border="1px #dedde0 solid"
                 width="50px"
-                borderRadius="10px"
+                borderRadius="2xl"
                 padding="2px"
                 marginTop="4px"
                 display="flex"
@@ -120,7 +120,7 @@ export const ProductDetails = ({
                 as="a"
                 height="48px"
                 width="100%"
-                borderRadius="10px"
+                borderRadius="2xl"
                 p={1}
                 isDisabled={isTransparent}
                 bg="#4473c3"
@@ -140,7 +140,7 @@ export const ProductDetails = ({
                     PAY
                   </Text>
 
-                  <Box borderRadius="10px" display="flex">
+                  <Box borderRadius="2xl" display="flex">
                     <TriangleUpIcon
                       style={{
                         marginLeft: '8px',

@@ -41,9 +41,9 @@ export const ProductCard = ({
 
       <Box p={2}>
         <Box
+          borderRadius="2xl"
           sx={{
             position: 'relative',
-            borderRadius: '10px',
             height: { xs: '150px', sm: '160px', md: '200px' },
           }}
         >
@@ -84,7 +84,7 @@ export const ProductCard = ({
             <Box
               border="1px gray solid"
               width="50px"
-              borderRadius="10px"
+              borderRadius="2xl"
               padding="2px"
               marginTop="4px"
               display="flex"
