@@ -1,19 +1,10 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "globalDependencies": [
-    ".env",
-    "tsconfig.json"
-  ],
+  "globalDependencies": [".env", "tsconfig.json"],
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "^build",
-        "lint"
-      ],
-      "outputs": [
-        "dist/**",
-        ".next/**"
-      ]
+      "dependsOn": ["^build", "lint"],
+      "outputs": ["dist/**", ".next/**"]
     },
     "lint": {
       "outputs": []
@@ -33,7 +24,10 @@
         "$APP_ID",
         "$PUBLIC_MAGIC_PUBLISHABLE_KEY",
         "$MAGIC_SECRET_KEY",
-        "$SUPABASE_API_KEY"
+        "$SUPABASE_API_KEY",
+        "$SENDGRID_API_KEY",
+        "$EMAIL_ORDER_TARGET",
+        "$SENDINBLUE_API_KEY"
       ],
       "cache": false
     },
@@ -41,16 +35,11 @@
       "cache": false
     },
     "build-storybook": {
-      "outputs": [
-        "storybook-static/**"
-      ]
+      "outputs": ["storybook-static/**"]
     },
     "generate:graphql": {
       "cache": false,
-      "dependsOn": [
-        "$HASURA_API_URL",
-        "$HASURA_API_KEY"
-      ]
+      "dependsOn": ["$HASURA_API_URL", "$HASURA_API_KEY"]
     }
   }
 }

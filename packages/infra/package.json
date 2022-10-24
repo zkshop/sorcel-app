@@ -14,7 +14,9 @@
     "domains": "*",
     "magic": "*",
     "alchemy": "*",
-    "supabase": "*"
+    "supabase": "*",
+    "sendgrid": "*",
+    "sendinblue": "*"
   },
   "devDependencies": {
     "tsconfig": "*"
