@@ -15,7 +15,7 @@
     "dev": {
       "dependsOn": [
         "$NODE_ENV",
-        "$HOSTNAME",
+        "$VERCEL_URL",
         "$HASURA_API_URL",
         "$HASURA_API_KEY",
         "$PUBLIC_STRIPE_PUBLISHABLE_KEY",

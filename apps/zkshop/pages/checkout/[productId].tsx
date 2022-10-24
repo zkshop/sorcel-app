@@ -11,7 +11,6 @@ import { useIsAnHolder } from 'hooks/useIsAnHolder';
 
 type CheckoutProps = {
   product: Product;
-  hostname: string;
 };
 
 const stripe = getStripeObject();

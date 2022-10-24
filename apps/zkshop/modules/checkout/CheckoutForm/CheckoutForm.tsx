@@ -58,10 +58,15 @@ export function CheckoutForm({ price, discount }: CheckoutFormProps) {
 
     setIsLoading(true);
 
+    const return_url =
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000'
+        : `https://${process.env.VERCEL_URL}`;
+
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: process.env.HOSTNAME || '',
+        return_url,
       },
     });
 

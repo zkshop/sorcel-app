@@ -17,7 +17,7 @@ const nextConfig = {
     return config;
   },
   env: {
-    HOSTNAME: process.env.HOSTNAME,
+    VERCEL_URL: process.env.VERCEL_URL,
     APP_ID: process.env.APP_ID,
     HASURA_API_URL: process.env.HASURA_API_URL,
     HASURA_API_KEY: process.env.HASURA_API_KEY,
