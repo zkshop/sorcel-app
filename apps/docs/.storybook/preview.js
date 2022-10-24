@@ -1,4 +1,3 @@
-import { RouterContext } from "next/dist/shared/lib/router-context";
 import { themes } from '../../../packages/ui/theme'
 
 const theme = themes.vanilla;
@@ -13,8 +12,5 @@ export const parameters = {
   },
   chakra: {
     theme,
-  },
-  nextRouter: {
-    Provider: RouterContext.Provider,
   },
 }
