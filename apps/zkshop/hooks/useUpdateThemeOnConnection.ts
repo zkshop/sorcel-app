@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 
 import { fetchNFTS, reset } from '../store/slices/nfts';
-import { update } from '../store/slices/theme';
+// import { update } from '../store/slices/theme';
 import { useAppDispatch, useAppSelector } from '../store/store';
 
 import { fetchPOAPS, reset as resetPoaps } from 'store/slices/poap';
@@ -24,14 +24,14 @@ const useUpdateThemeOnConnection = () => {
   }, [address, dispatch, email]);
 
   useEffect(() => {
-    const setVanillaTheme = () => dispatch(update('vanilla'));
-    const setFirstTheme = () => dispatch(update('first'));
+    // const setVanillaTheme = () => dispatch(update('vanilla'));
+    // const setFirstTheme = () => dispatch(update('first'));
 
     if (isConnected) {
-      setFirstTheme();
+      // setFirstTheme();
     }
     if (isDisconnected) {
-      setVanillaTheme();
+      // setVanillaTheme();
       dispatch(reset());
       dispatch(resetPoaps());
     }
