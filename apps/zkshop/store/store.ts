@@ -5,11 +5,9 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import nftsReducer from './slices/nfts';
 import poapReducer from './slices/poap';
 import poapImageListReducer from './slices/poapImageList';
-import themeReducer from './slices/theme';
 import authReducer from './slices/auth';
 
 const rootReducer = combineReducers({
-  theme: themeReducer,
   poapImageList: poapImageListReducer,
   user: combineReducers({
     nfts: nftsReducer,
