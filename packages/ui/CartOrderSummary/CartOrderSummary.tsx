@@ -32,9 +32,10 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
 
 type CartOrderSummaryProps = {
   amount: number;
+  isDisabled: boolean;
 };
 
-export const CartOrderSummary = ({ amount }: CartOrderSummaryProps) => (
+export const CartOrderSummary = ({ amount, isDisabled }: CartOrderSummaryProps) => (
   <Stack
     spacing="8"
     rounded="lg"
@@ -48,12 +49,12 @@ export const CartOrderSummary = ({ amount }: CartOrderSummaryProps) => (
     <Heading size="md">Order Summary</Heading>
 
     <Stack spacing="6">
-      <OrderSummaryItem label="Subtotal" value={formatPrice(amount)} />
-      <OrderSummaryItem label="Shipping + Tax">
+      {/* <OrderSummaryItem label="Subtotal" value={formatPrice(amount)} /> */}
+      {/* <OrderSummaryItem label="Shipping + Tax">
         <Link href="#" textDecor="underline">
           Calculate shipping
         </Link>
-      </OrderSummaryItem>
+      </OrderSummaryItem> */}
       {/* <OrderSummaryItem label="Coupon Code">
         <Link href="#" textDecor="underline">
           Add coupon code
@@ -69,7 +70,14 @@ export const CartOrderSummary = ({ amount }: CartOrderSummaryProps) => (
       </Flex>
     </Stack>
 
-    <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<ArrowRightIcon />} type="submit">
+    <Button
+      colorScheme="blue"
+      size="lg"
+      fontSize="md"
+      rightIcon={<ArrowRightIcon />}
+      isDisabled={isDisabled}
+      type="submit"
+    >
       {amount ? 'Checkout' : 'Get for free'}
     </Button>
   </Stack>

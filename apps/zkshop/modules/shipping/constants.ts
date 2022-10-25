@@ -19,4 +19,4 @@ export const SHIPPING_FIELDS = {
     label: 'Phone Number',
     name: 'phoneNumber',
   },
-};
+} as const;

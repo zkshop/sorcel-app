@@ -10,6 +10,8 @@ import { Product } from 'apollo';
 import { applyDiscount } from 'pure';
 import { useIsAnHolder } from 'hooks/useIsAnHolder';
 import axios from 'axios';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { SHIPPING_FORM_SCHEMA } from 'libs/schemas';
 
 type ShippingFormContainerProps = {
   product: Product;
@@ -17,8 +19,14 @@ type ShippingFormContainerProps = {
 
 export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) => {
   const { id, price, name, image, discount, curation, poapId } = product;
-  const methods = useForm<ShippingFormValues>();
-  const { handleSubmit } = methods;
+  const methods = useForm<ShippingFormValues>({
+    mode: 'onChange',
+    resolver: yupResolver(SHIPPING_FORM_SCHEMA),
+  });
+  const {
+    handleSubmit,
+    formState: { isValid },
+  } = methods;
 
   function showDiscount() {
     if (!curation && !poapId) return true;
@@ -82,7 +90,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
               </Stack>
             </Section>
 
-            <CartOrderSummary amount={amount} />
+            <CartOrderSummary isDisabled={!isValid} amount={amount} />
           </VStack>
         </SimpleGrid>
       </form>
