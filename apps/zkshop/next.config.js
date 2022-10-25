@@ -44,4 +44,5 @@ export default withTM([
   'apollo',
   'supabase',
   'sendinblue',
+  'validation',
 ])(nextConfig);

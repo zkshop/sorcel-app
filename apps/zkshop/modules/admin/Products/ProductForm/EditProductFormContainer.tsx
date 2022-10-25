@@ -15,6 +15,8 @@ import {
 import { getObjectPathFromImageUrl, toNumber } from 'pure';
 import axios from 'axios';
 import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { ADD_PRODUCT_FORM_SCHEMA } from 'libs/schemas';
 
 type EditProductFormContainerProps = {
   product: Product;
@@ -31,9 +33,14 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
       description: product.description || '',
       isDiscountGated: product.isDiscountGated,
     },
+    resolver: yupResolver(ADD_PRODUCT_FORM_SCHEMA),
+    mode: 'onChange',
   });
 
-  const { handleSubmit } = methods;
+  const {
+    handleSubmit,
+    formState: { isValid, isDirty },
+  } = methods;
 
   const router = useRouter();
 
@@ -105,6 +112,7 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
   return (
     <FormProvider {...methods}>
       <ProductForm
+        isDisabled={!isValid || !isDirty}
         onOpen={onOpen}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}

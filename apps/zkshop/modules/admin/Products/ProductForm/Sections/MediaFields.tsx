@@ -5,18 +5,23 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 import { Section, LinkIcon } from 'ui';
+import { AddProductFormValues } from '../types';
 
 export const MediaFields = () => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<AddProductFormValues>();
 
   return (
     <Section>
       <Heading fontSize="xl"> Media </Heading>
 
-      <FormControl>
+      <FormControl isInvalid={Boolean(errors.image)}>
         <FormLabel mb={1}> Url </FormLabel>
 
         <InputGroup>
@@ -26,6 +31,7 @@ export const MediaFields = () => {
 
           <Input placeholder="Image link" {...register('image')} />
         </InputGroup>
+        <FormErrorMessage>{errors.image?.message}</FormErrorMessage>
       </FormControl>
     </Section>
   );

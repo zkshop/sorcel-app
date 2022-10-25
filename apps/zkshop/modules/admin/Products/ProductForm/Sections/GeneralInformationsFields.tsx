@@ -7,6 +7,7 @@ import {
   Input,
   Checkbox,
   HStack,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
@@ -16,13 +17,17 @@ import { PRODUCTS_FIELDS } from '../../constants';
 import { AddProductFormValues } from '../types';
 
 export const GeneralInformationsFields = () => {
-  const { register } = useFormContext<AddProductFormValues>();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<AddProductFormValues>();
 
   return (
     <Section>
       <Heading fontSize="xl"> General Information </Heading>
 
-      <FormControl>
+      {/* Name */}
+      <FormControl isInvalid={Boolean(errors.name)}>
         <FormLabel mb={1}>{PRODUCTS_FIELDS.name.label}</FormLabel>
 
         <InputGroup>
@@ -31,9 +36,11 @@ export const GeneralInformationsFields = () => {
           </InputLeftElement>
           <Input placeholder="Name" {...register('name')} />
         </InputGroup>
+        <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl>
+      {/* Description */}
+      <FormControl isInvalid={Boolean(errors.description)}>
         <FormLabel mb={1}>{PRODUCTS_FIELDS.description.label}</FormLabel>
 
         <InputGroup>
@@ -43,9 +50,11 @@ export const GeneralInformationsFields = () => {
 
           <Input placeholder="Description" {...register('description')} />
         </InputGroup>
+        <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl>
+      {/* Price */}
+      <FormControl isInvalid={Boolean(errors.price)}>
         <FormLabel mb={1}>{PRODUCTS_FIELDS.price.label}</FormLabel>
 
         <InputGroup>
@@ -55,9 +64,11 @@ export const GeneralInformationsFields = () => {
 
           <Input placeholder="Price" {...register('price')} />
         </InputGroup>
+        <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl>
+      {/* Discount */}
+      <FormControl isInvalid={Boolean(errors.discount)}>
         <FormLabel mb={1}>Discount</FormLabel>
 
         <InputGroup>
@@ -67,14 +78,18 @@ export const GeneralInformationsFields = () => {
 
           <Input placeholder="Discount for holders" {...register('discount')} />
         </InputGroup>
+        <FormErrorMessage>{errors.discount?.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl>
+      {/* isDiscountGated */}
+      <FormControl isInvalid={Boolean(errors.isDiscountGated)}>
         <HStack>
           <Checkbox {...register('isDiscountGated')} />
 
           <FormLabel>Enable discount only for holders</FormLabel>
         </HStack>
+
+        <FormErrorMessage>{errors.isDiscountGated?.message}</FormErrorMessage>
       </FormControl>
     </Section>
   );

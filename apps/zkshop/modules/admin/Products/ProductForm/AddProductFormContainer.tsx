@@ -6,16 +6,23 @@ import { useRouter } from 'next/router';
 import { toNumber } from 'pure';
 import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-
+import { yupResolver } from '@hookform/resolvers/yup';
 import { ProductForm } from './ProductForm';
 import { AddProductFormValues } from './types';
+import { ADD_PRODUCT_FORM_SCHEMA } from 'libs/schemas';
 
 export const AddProductFormContainer = () => {
   const [storageActionLoading, setStorageActionLoading] = useState(false);
   const methods = useForm<AddProductFormValues>({
     defaultValues: {},
+    resolver: yupResolver(ADD_PRODUCT_FORM_SCHEMA),
+    mode: 'onChange',
   });
-  const { handleSubmit } = methods;
+
+  const {
+    handleSubmit,
+    formState: { isValid },
+  } = methods;
 
   const router = useRouter();
 
@@ -54,6 +61,7 @@ export const AddProductFormContainer = () => {
   return (
     <FormProvider {...methods}>
       <ProductForm
+        isDisabled={!isValid}
         isLoading={storageActionLoading || isLoading}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}

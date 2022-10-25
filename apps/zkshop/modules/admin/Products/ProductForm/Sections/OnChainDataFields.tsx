@@ -5,18 +5,23 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 import { Section, CollectionIcon, CollectionPlayIcon } from 'ui';
+import { AddProductFormValues } from '../types';
 
 export const OnChainDataFields = () => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<AddProductFormValues>();
 
   return (
     <Section>
       <Heading fontSize="xl"> On-Chain Data </Heading>
 
-      <FormControl>
+      <FormControl isInvalid={Boolean(errors.collection)}>
         <FormLabel> Collection Name </FormLabel>
 
         <InputGroup>
@@ -26,9 +31,10 @@ export const OnChainDataFields = () => {
 
           <Input placeholder="Collection Name" {...register('collection')} />
         </InputGroup>
+        <FormErrorMessage>{errors.collection?.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl>
+      <FormControl isInvalid={Boolean(errors.curation)}>
         <FormLabel> Collection Address </FormLabel>
 
         <InputGroup>
@@ -38,9 +44,10 @@ export const OnChainDataFields = () => {
 
           <Input placeholder="Collection Address" {...register('curation')} />
         </InputGroup>
+        <FormErrorMessage>{errors.curation?.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl>
+      <FormControl isInvalid={Boolean(errors.poapId)}>
         <FormLabel> Poap Id </FormLabel>
 
         <InputGroup>
@@ -50,6 +57,7 @@ export const OnChainDataFields = () => {
 
           <Input type="number" placeholder="Poap ID" {...register('poapId')} />
         </InputGroup>
+        <FormErrorMessage>{errors.poapId?.message}</FormErrorMessage>
       </FormControl>
     </Section>
   );

@@ -9,12 +9,19 @@ type AddProductFormProps = {
   onSubmit(data: AddProductFormValues): Promise<void>;
   onOpen?(): void;
   isLoading: boolean;
+  isDisabled: boolean;
 };
 
-export const ProductForm = ({ handleSubmit, onSubmit, onOpen, isLoading }: AddProductFormProps) => (
+export const ProductForm = ({
+  handleSubmit,
+  onSubmit,
+  onOpen,
+  isLoading,
+  isDisabled,
+}: AddProductFormProps) => (
   <MainLayout>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <ProductFormHeader isLoading={isLoading} onOpen={onOpen} />
+      <ProductFormHeader isDisabled={isDisabled} isLoading={isLoading} onOpen={onOpen} />
 
       <GeneralInformationsFields />
 
