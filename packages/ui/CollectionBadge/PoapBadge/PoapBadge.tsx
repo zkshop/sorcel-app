@@ -33,9 +33,9 @@ export const PoapBadge = ({ imgUrl, href = '' }: PoapBadgeProps) => {
       height={boxSize}
     >
       <Image
+        fill
         src={imgUrl}
         alt="poap"
-        layout="fill"
         style={{
           borderRadius: '50%',
           // boxShadow: '2px 2px 2px 1px rgb(0 0 0 / 29%)',
