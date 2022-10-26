@@ -1,0 +1,7 @@
+{
+  "name": "jest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "files": ["jest-next.js"]
+}

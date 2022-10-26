@@ -19,11 +19,6 @@ export const AddProductFormContainer = () => {
     mode: 'onChange',
   });
 
-  const {
-    handleSubmit,
-    formState: { isValid },
-  } = methods;
-
   const router = useRouter();
 
   const [createProduct, { loading: isLoading }] = useCreateProductMutation();
@@ -60,12 +55,7 @@ export const AddProductFormContainer = () => {
 
   return (
     <FormProvider {...methods}>
-      <ProductForm
-        isDisabled={!isValid}
-        isLoading={storageActionLoading || isLoading}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-      />
+      <ProductForm isLoading={storageActionLoading || isLoading} onSubmit={onSubmit} />
     </FormProvider>
   );
 };

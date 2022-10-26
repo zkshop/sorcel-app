@@ -12,6 +12,11 @@
     "lint:fix": {
       "outputs": []
     },
+    "test": {
+      "outputs": ["coverage/**"],
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts"],
+      "outputMode": "full"
+    },
     "dev": {
       "dependsOn": [
         "$NODE_ENV",
