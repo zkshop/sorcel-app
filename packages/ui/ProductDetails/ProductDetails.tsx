@@ -2,7 +2,7 @@ import { Box, Text, Button, HStack as Flex, VStack } from '@chakra-ui/react';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 import { TriangleUpIcon } from '../Icons';
 import { StyledProductDetails } from './ProductDetails.style';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
 
 type ProductDetailsProps = {

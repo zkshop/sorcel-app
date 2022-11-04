@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "test": "jest",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -25,7 +26,7 @@
     "domains": "*",
     "ethers": "^5.7.1",
     "framer-motion": "^7.5.3",
-    "next": "^12.3.1",
+    "next": "^13.0.0",
     "next-connect": "^0.13.0",
     "next-redux-wrapper": "^8.0.0",
     "pure": "*",

@@ -4,11 +4,10 @@ import { VStack, HStack, useDisclosure, Box } from '@chakra-ui/react';
 // TODO: USE NESTJS IMAGE INSTEAD
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import { getCurrentUser, login, logoutUser } from 'store/slices/auth';
 import { useAppDispatch, useAppSelector } from 'store/store';
-import { SismoBanner } from 'ui';
 import { useEffect } from 'react';
 
 import { useAccount } from 'wagmi';
@@ -66,27 +65,25 @@ export const NavBar = ({ admin }: NavBarProps) => {
       <HStack w="full">
         <HStack justifyContent="space-between" flex={1}>
           <Link href="/">
-            <a>
-              {imgUrl ? (
-                <Image
-                  height={70}
-                  width={210}
-                  src={imgUrl || ''}
-                  alt="3shop"
-                  loading="lazy"
-                  style={{ cursor: 'pointer' }}
-                />
-              ) : (
-                <Box
-                  sx={{
-                    fontSize: '24px',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {appName}
-                </Box>
-              )}
-            </a>
+            {imgUrl ? (
+              <Image
+                height={70}
+                width={210}
+                src={imgUrl || ''}
+                alt="3shop"
+                loading="lazy"
+                style={{ cursor: 'pointer' }}
+              />
+            ) : (
+              <Box
+                sx={{
+                  fontSize: '24px',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {appName}
+              </Box>
+            )}
           </Link>
 
           {!admin && (
@@ -100,8 +97,6 @@ export const NavBar = ({ admin }: NavBarProps) => {
           )}
         </HStack>
       </HStack>
-
-      <SismoBanner admin={admin} enable={false} />
 
       <LoginModal
         isOpen={isOpen}

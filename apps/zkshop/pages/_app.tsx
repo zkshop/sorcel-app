@@ -7,7 +7,7 @@ import { AppProps } from 'next/app';
 
 import { WagmiConfig } from 'wagmi';
 
-import { wagmiClient, chains } from 'clients/wagmi';
+import { wagmiClient, chains } from '../clients/wagmi';
 import { Layout } from 'components/Layout';
 import { useApollo } from 'apollo';
 import { wrapper } from 'store/store';

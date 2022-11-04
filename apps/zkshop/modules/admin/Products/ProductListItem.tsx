@@ -1,4 +1,5 @@
-import { Box, Tr, Td, Image } from '@chakra-ui/react';
+import { Box, Tr, Td } from '@chakra-ui/react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 type ProductListItemProps = {
@@ -20,7 +21,7 @@ export const ProductListItem = ({
   collection,
   collectionAddress,
 }: ProductListItemProps) => (
-  <Link href={`/admin/product/edit/${id}`}>
+  <Link href={`/admin/product/edit/${id}`} legacyBehavior>
     <Tr
       sx={{
         _hover: {
@@ -31,7 +32,7 @@ export const ProductListItem = ({
     >
       <Td>
         <Box>
-          <Image src={image} alt={name} />
+          <Image src={image} alt={name} width={50} height={50} />
         </Box>
       </Td>
       <Td>{name}</Td>

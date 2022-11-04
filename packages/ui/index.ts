@@ -14,7 +14,6 @@ export * from './ProductCardList/ProductCardList';
 export * from './ProductDetails/ProductDetails';
 export * from './CollectionBadge/PoapBadge/PoapBadge';
 export * from './Section/Section';
-export * from './SismoBanner/SismoBanner';
 export * from './SizeSelector/SizeSelector';
 export * from './TextInput/TextInput';
 export * from './VerticalMenu/VerticalMenu';
