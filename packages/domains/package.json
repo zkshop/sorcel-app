@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "lint": "eslint \"**/*.ts*\"",
+    "lint": "eslint \"**/*.ts*\" --fix",
     "lint:fix": "yarn lint --fix"
   },
   "dependencies": {

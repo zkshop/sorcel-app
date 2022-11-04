@@ -9,7 +9,7 @@
     "react-library.json"
   ],
   "scripts": {
-    "lint": "eslint \"**/*.ts*\"",
+    "lint": "eslint \"**/*.ts*\" --fix",
     "lint:fix": "yarn lint --fix"
   }
 }

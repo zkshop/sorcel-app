@@ -13,18 +13,32 @@
     "lint:fix": "turbo run lint:fix",
     "start:storybook": "turbo run storybook",
     "build:storybook": "turbo run build-storybook",
-    "generate:graphql": "turbo run generate:graphql"
+    "generate:graphql": "turbo run generate:graphql",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "prettier": "latest",
-    "turbo": "latest",
-    "typescript": "latest",
-    "eslint-config-custom": "*",
     "dotenv": "^16.0.1",
-    "utils": "*",
+    "eslint-config-custom": "*",
+    "lint-staged": "^13.0.3",
+    "prettier": "latest",
     "pure": "*",
+    "tsconfig": "*",
+    "turbo": "latest",
     "types": "*",
-    "tsconfig": "*"
+    "typescript": "latest",
+    "utils": "*",
+    "husky": "^8.0.0"
+  },
+  "lint-staged": {
+    "apps/**/*.{js,ts,jsx,tsx}": [
+      "eslint --fix"
+    ],
+    "packages/ui/**/*.{js,ts,jsx,tsx}": [
+      "eslint --fix"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
   },
   "engines": {
     "npm": ">=7.0.0",
