@@ -30,7 +30,6 @@
     "turbo": "latest",
     "types": "*",
     "typescript": "latest",
-    "utils": "*",
     "husky": "^8.0.0"
   },
   "lint-staged": {
