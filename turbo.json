@@ -3,7 +3,25 @@
   "globalDependencies": [".env", "tsconfig.json"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "lint"],
+      "dependsOn": [
+        "^build",
+        "lint",
+        "$APP_ID",
+        "$NODE_ENV",
+        "$VERCEL_URL",
+        "$HASURA_API_URL",
+        "$HASURA_API_KEY",
+        "$PUBLIC_STRIPE_PUBLISHABLE_KEY",
+        "$ALCHEMY_SECRET_KEY",
+        "$STRIPE_SECRET_KEY",
+        "$POAP_API_KEY",
+        "$PUBLIC_MAGIC_PUBLISHABLE_KEY",
+        "$MAGIC_SECRET_KEY",
+        "$SUPABASE_API_KEY",
+        "$SENDGRID_API_KEY",
+        "$EMAIL_ORDER_TARGET",
+        "$SENDINBLUE_API_KEY"
+      ],
       "outputs": ["dist/**", ".next/**"]
     },
     "lint": {
