@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react';
 
-import { Button } from 'ui';
+import { Button } from './Button/Button';
 import ConnectWalletButton from './ConnectWalletButton';
 type ConnectButtonGroupProps = {
   isConnectedByWallet: boolean;
