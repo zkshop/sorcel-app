@@ -1,39 +1,35 @@
 import { VStack, Heading } from '@chakra-ui/react';
-import { Elements } from '@stripe/react-stripe-js';
-import { GetServerSidePropsContext } from 'next';
-import { useState, useEffect } from 'react';
 
-import { getPaymentIntent, getStripeObject } from 'clients/stripe';
-import { initializeApollo, addApolloState, GetProductByIdDocument, Product } from 'apollo';
+import { useGetProductByIdQuery } from 'apollo';
 import { CheckoutForm } from 'modules/checkout/CheckoutForm';
-import { useAppSelector } from 'store/store';
 import { useIsAnHolder } from 'hooks/useIsAnHolder';
+import { useRouter } from 'next/router';
+import { StripeProvider } from 'modules/checkout/StripeProvider';
 
-type CheckoutProps = {
-  product: Product;
+const showDiscount = (curation: string, poapId: number, isAnHolder: boolean) => {
+  if (!curation && !poapId) return true;
+  if (isAnHolder) return true;
+  return false;
 };
 
-const stripe = getStripeObject();
+const Checkout = () => {
+  const { query } = useRouter();
+  const { productId } = query;
+  const { data, loading, error } = useGetProductByIdQuery({ variables: { id: productId } });
 
-const Checkout = ({ product }: CheckoutProps) => {
-  const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const isAnHolder = useIsAnHolder(data?.product_by_pk?.poapId, data?.product_by_pk?.curation);
 
-  const isAnHolder = useIsAnHolder(product);
-
-  function showDiscount() {
-    if (!product.curation && !product.poapId) return true;
-    if (isAnHolder) return true;
-    return false;
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  useEffect(() => {
-    async function updateClientSecret() {
-      const clientSecret = await getPaymentIntent(product.id);
-      setClientSecret(clientSecret);
-    }
+  const product = data?.product_by_pk;
 
-    updateClientSecret();
-  }, [product.id]);
+  if (!product || error) {
+    return null;
+  }
+
+  const { id, price, curation, poapId } = product;
 
   return (
     <VStack justifyContent="center">
@@ -41,42 +37,14 @@ const Checkout = ({ product }: CheckoutProps) => {
         Checkout
       </Heading>
 
-      {clientSecret && (
-        <Elements options={{ appearance: { theme: 'stripe' }, clientSecret }} stripe={stripe}>
-          <CheckoutForm price={product.price} discount={showDiscount() && product.discount} />
-        </Elements>
-      )}
+      <StripeProvider productId={id}>
+        <CheckoutForm
+          price={price}
+          discount={showDiscount(poapId, curation, isAnHolder) && product.discount}
+        />
+      </StripeProvider>
     </VStack>
   );
 };
 
 export default Checkout;
-
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { params } = context;
-  const apolloClient = initializeApollo();
-
-  try {
-    if (params?.productId) {
-      const { productId } = params;
-      const res = await apolloClient.query({
-        query: GetProductByIdDocument,
-        variables: {
-          id: productId,
-        },
-      });
-
-      return addApolloState(apolloClient, {
-        props: { product: res.data?.product_by_pk },
-      });
-    }
-  } catch {
-    return addApolloState(apolloClient, {
-      props: {},
-    });
-  }
-
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-};

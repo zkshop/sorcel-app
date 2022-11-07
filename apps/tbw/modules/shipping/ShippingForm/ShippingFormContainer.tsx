@@ -34,7 +34,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
     return false;
   }
 
-  const isAnHolder = useIsAnHolder(product);
+  const isAnHolder = useIsAnHolder(product.poapId, product.curation);
 
   const amount = applyDiscount(price, showDiscount() && discount);
 
