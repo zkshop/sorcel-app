@@ -1,18 +1,30 @@
 import { VStack } from '@chakra-ui/react';
-import { GetServerSidePropsContext } from 'next';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import { BackButton } from 'ui';
 import { useAccount } from 'wagmi';
 
-import { addApolloState, initializeApollo, Product, GetProductByIdDocument } from 'apollo';
+import { useGetProductByIdQuery } from 'apollo';
 import { ProductDetailsContainer } from 'modules/product-page/ProductDetailsContainer';
+import { useRouter } from 'next/router';
 
-type ProductDetailsPage = {
-  product: Product;
-};
-
-const ProductDetailsPage = ({ product }: ProductDetailsPage) => {
+const ProductDetailsPage = () => {
   const { isConnected } = useAccount();
+  const { query } = useRouter();
+  const { productId } = query;
+  const { data, loading, error } = useGetProductByIdQuery({
+    variables: {
+      id: productId,
+    },
+  });
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!data || error) {
+    return null;
+  }
+  const product = data?.product_by_pk;
 
   return (
     <VStack>
@@ -30,32 +42,3 @@ const ProductDetailsPage = ({ product }: ProductDetailsPage) => {
 };
 
 export default ProductDetailsPage;
-
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { params } = context;
-  const apolloClient = initializeApollo();
-
-  try {
-    if (params?.productId) {
-      const { productId } = params;
-      const res = await apolloClient.query({
-        query: GetProductByIdDocument,
-        variables: {
-          id: productId,
-        },
-      });
-
-      return addApolloState(apolloClient, {
-        props: { product: res.data?.product_by_pk },
-      });
-    }
-  } catch {
-    return addApolloState(apolloClient, {
-      props: {},
-    });
-  }
-
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-};
