@@ -13,6 +13,14 @@ import { useApollo } from 'apollo';
 import { wrapper } from 'store/store';
 import { ThemeProvider } from 'ui';
 
+type SafeHydrateProps = {
+  children: React.ReactNode;
+};
+
+function SafeHydrate({ children }: SafeHydrateProps) {
+  return <div suppressHydrationWarning>{typeof window === 'undefined' ? null : children}</div>;
+}
+
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps);
 
@@ -21,9 +29,11 @@ function App({ Component, pageProps }: AppProps) {
       <ApolloProvider client={apolloClient}>
         <RainbowKitProvider chains={chains}>
           <ThemeProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <SafeHydrate>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </SafeHydrate>
           </ThemeProvider>
         </RainbowKitProvider>
       </ApolloProvider>

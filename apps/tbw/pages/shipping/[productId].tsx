@@ -1,43 +1,27 @@
-import { GetServerSidePropsContext } from 'next';
-
-import { addApolloState, initializeApollo, Product, GetProductByIdDocument } from 'apollo';
+import { useGetProductByIdQuery } from 'apollo';
 import { ShippingFormContainer } from 'modules';
+import { useRouter } from 'next/router';
 
-type ShippingPageProps = {
-  product: Product;
-};
+const ShippingPage = () => {
+  const { query } = useRouter();
+  const { productId } = query;
+  const { data, loading, error } = useGetProductByIdQuery({
+    variables: {
+      id: productId,
+    },
+  });
 
-const ShippingPage = ({ product }: ShippingPageProps) => (
-  <ShippingFormContainer product={product} />
-);
-
-export default ShippingPage;
-
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { params } = context;
-  const apolloClient = initializeApollo();
-
-  try {
-    if (params?.productId) {
-      const { productId } = params;
-      const res = await apolloClient.query({
-        query: GetProductByIdDocument,
-        variables: {
-          id: productId,
-        },
-      });
-
-      return addApolloState(apolloClient, {
-        props: { product: res.data?.product_by_pk },
-      });
-    }
-  } catch {
-    return addApolloState(apolloClient, {
-      props: {},
-    });
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  return addApolloState(apolloClient, {
-    props: {},
-  });
+  const product = data?.product_by_pk;
+
+  if (!product || error) {
+    return null;
+  }
+
+  return <ShippingFormContainer product={product} />;
 };
+
+export default ShippingPage;

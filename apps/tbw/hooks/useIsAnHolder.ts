@@ -1,7 +1,6 @@
-import { Product } from 'apollo';
 import { useAppSelector } from 'store/store';
 
-export const useIsAnHolder = ({ poapId, curation }: Product) => {
+export const useIsAnHolder = (poapId: number, curation: string) => {
   const poapIds = useAppSelector((state) => state.user.poap).map(({ event: { id } }) => id);
   const collections = useAppSelector((state) => state.user.nfts).map((nft) => nft.contract.address);
 
