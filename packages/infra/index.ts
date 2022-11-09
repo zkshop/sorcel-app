@@ -3,3 +3,4 @@ export * from './UserTokenValidationClient';
 export * from './NftScrapperClient';
 export * from './ImageStorageClient';
 export * from './SendEmailClient';
+export * from './PaperWalletClient';

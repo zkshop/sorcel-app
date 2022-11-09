@@ -1,7 +1,11 @@
+import { TokenService } from 'domains';
 import { AuthClient } from 'domains/auth/AuthClient';
 import { magicClient } from 'magic';
+import { PaperWalletClient } from './PaperWalletClient';
 
 const initialAuthData = { email: null, issuer: null, phoneNumber: null, publicAddress: null };
+
+const paper = TokenService(PaperWalletClient());
 
 export function UserAuthenticationClient(): AuthClient {
   return {
@@ -39,6 +43,14 @@ export function UserAuthenticationClient(): AuthClient {
     logout: async () => {
       if (!magicClient) return;
       await magicClient.user.logout();
+    },
+
+    loginWithPaper: async (code: string) => {
+      const userToken = await paper.getToken(code);
+
+      const paperWallet = await paper.getPaperWalletInfo(userToken);
+
+      return paperWallet;
     },
   };
 }
