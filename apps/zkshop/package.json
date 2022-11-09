@@ -38,7 +38,8 @@
     "stripe": "^10.13.0",
     "ui": "*",
     "validation": "*",
-    "wagmi": "^0.6.8"
+    "wagmi": "^0.6.8",
+    "paper": "*"
   },
   "devDependencies": {
     "@hookform/devtools": "^4.2.2",

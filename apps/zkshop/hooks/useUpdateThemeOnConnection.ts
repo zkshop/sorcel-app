@@ -10,17 +10,22 @@ const useUpdateThemeOnConnection = () => {
   const { isConnected, isDisconnected, address } = useAccount();
   const { nfts, poap } = useAppSelector((state) => state.user);
   const email = useAppSelector((state) => state.user.auth.email);
+  const connectionType = useAppSelector((state) => state.user.auth.type);
+  const publicAddress = useAppSelector((state) => state.user.auth.publicAddress);
+
   const dispatch = useAppDispatch();
 
   const getNfts = useCallback(async () => {
-    if (address) {
+    if (connectionType === 'PAPER' && publicAddress) {
+      dispatch(fetchNFTS(publicAddress));
+      dispatch(fetchPOAPS(publicAddress));
+    } else if (address) {
       dispatch(fetchNFTS(address));
       dispatch(fetchPOAPS(address));
-    }
-    if (email) {
+    } else if (email) {
       dispatch(fetchPOAPS(email));
     }
-  }, [address, dispatch, email]);
+  }, [connectionType, publicAddress, address, email, dispatch]);
 
   useEffect(() => {
     if (isDisconnected) {

@@ -1,0 +1,9 @@
+{
+  "name": "paper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@paperxyz/react-client-sdk": "^0.7.34"
+  }
+}
