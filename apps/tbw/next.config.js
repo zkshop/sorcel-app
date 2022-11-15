@@ -35,6 +35,7 @@ const nextConfig = {
 
 export default withTM([
   'ui',
+  'ui-tbw',
   'pure',
   'domains',
   'infra',

@@ -1,5 +1,5 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
-import { ProductCard } from './ProductCard';
+import { ProductCard } from '../ProductCard/ProductCard';
 import { FormatedProductData } from 'types';
 
 type ProductCardListProps = {
