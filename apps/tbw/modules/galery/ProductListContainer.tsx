@@ -1,7 +1,7 @@
 import { formatProductData } from 'pure';
 import { Product } from 'apollo';
 import { useAppSelector } from 'store/store';
-import { ProductCardList } from './ProductCardList';
+import { ProductCardList } from 'ui-tbw';
 
 type ProductListContainerProps = {
   products: Product[];
