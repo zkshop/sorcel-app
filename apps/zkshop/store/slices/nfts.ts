@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Nft, WalletScrapperService, Network } from 'domains';
-import { NftScrapperClient } from 'infra';
+import { Nft, NftService, Network } from 'domains';
+import { NftReaderClient } from 'infra';
 
-const WalletScrapper = WalletScrapperService(NftScrapperClient(Network.MATIC_MAINNET));
+const WalletScrapper = NftService(NftReaderClient(Network.MATIC_MAINNET));
 
 export const fetchNFTS = createAsyncThunk(
   'nfts/fetch',
