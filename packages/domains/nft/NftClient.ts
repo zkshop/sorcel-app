@@ -1,5 +1,6 @@
-import { Nft } from './Nft';
+import { Nft, NftAttribute } from './Nft';
 
 export type NftClient = {
   getWalletNfts(address: string): Promise<Nft[]>;
+  getNftAttribute(smartContractAdress: string): Promise<NftAttribute<any>[]>;
 };
