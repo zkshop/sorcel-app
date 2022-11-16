@@ -1,5 +1,5 @@
 import { Nft } from './Nft';
 
-export type WalletScrapperClient = {
+export type NftClient = {
   getWalletNfts(address: string): Promise<Nft[]>;
 };

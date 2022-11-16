@@ -1,7 +1,7 @@
 import { createAlchemy, Network } from 'alchemy';
-import { WalletScrapperClient } from 'domains/walletScrapper';
+import { NftClient } from 'domains/nft';
 
-export function NftScrapperClient(network: Network): WalletScrapperClient {
+export function NftReaderClient(network: Network): NftClient {
   const api = createAlchemy(network);
   return {
     getWalletNfts: async (address) => {
