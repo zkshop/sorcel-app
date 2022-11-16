@@ -11,4 +11,5 @@ export type FormatedProductData = {
   poapUrl: string;
   poapImgUrl?: string;
   description?: any;
+  externalLink?: string;
 };

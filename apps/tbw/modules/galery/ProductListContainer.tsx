@@ -1,4 +1,4 @@
-import { formatProductData } from 'pure';
+import { formatProductData } from './formatProductData';
 import { Product } from 'apollo';
 import { useAppSelector } from 'store/store';
 import { ProductCardList } from 'ui-tbw';
