@@ -20,19 +20,22 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
     }}
   >
     <Grid gap={3} templateColumns={templateColumns}>
-      {products.map(({ id, title, price, priceReduced, srcItem, discount, description }) => (
-        <GridItem key={`products-${id}`} display="flex" justifyContent="center">
-          <ProductCard
-            id={id}
-            title={title}
-            discount={discount}
-            description={description}
-            srcItem={srcItem}
-            price={price}
-            priceReduced={priceReduced}
-          />
-        </GridItem>
-      ))}
+      {products.map(
+        ({ id, title, price, priceReduced, srcItem, discount, description, externalLink }) => (
+          <GridItem key={`products-${id}`} display="flex" justifyContent="center">
+            <ProductCard
+              id={id}
+              title={title}
+              discount={discount}
+              description={description}
+              srcItem={srcItem}
+              price={price}
+              priceReduced={priceReduced}
+              externalLink={externalLink}
+            />
+          </GridItem>
+        ),
+      )}
     </Grid>
   </Box>
 );

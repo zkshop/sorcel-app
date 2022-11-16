@@ -1,5 +1,6 @@
 import '@rainbow-me/rainbowkit/styles.css';
 import '../min.css';
+import Script from 'next/script';
 
 import { ApolloProvider } from '@apollo/client';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
@@ -25,19 +26,24 @@ function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps);
 
   return (
-    <WagmiConfig client={wagmiClient}>
-      <ApolloProvider client={apolloClient}>
-        <RainbowKitProvider chains={chains}>
-          <ThemeProvider>
-            <SafeHydrate>
+    <SafeHydrate>
+      <WagmiConfig client={wagmiClient}>
+        <ApolloProvider client={apolloClient}>
+          <RainbowKitProvider chains={chains}>
+            <ThemeProvider>
               <Layout>
+                <Script
+                  strategy="lazyOnload"
+                  src="https://api.memberstack.io/static/memberstack.js?webflow"
+                  data-memberstack-id="59c14da429bc5b71d3fde892fd9fdc7d"
+                />
                 <Component {...pageProps} />
               </Layout>
-            </SafeHydrate>
-          </ThemeProvider>
-        </RainbowKitProvider>
-      </ApolloProvider>
-    </WagmiConfig>
+            </ThemeProvider>
+          </RainbowKitProvider>
+        </ApolloProvider>
+      </WagmiConfig>
+    </SafeHydrate>
   );
 }
 
