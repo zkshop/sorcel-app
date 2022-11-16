@@ -9,16 +9,28 @@ import { initializeApollo, addApolloState, GetProductsDocument, GetProductsQuery
 import { fetchPOAPImageList } from 'store/slices/poapImageList';
 import { useAppDispatch } from 'store/store';
 import { ProductListContainer } from 'modules';
+import { Network, NftService } from 'domains';
+import { NftReaderClient } from 'infra';
 
 type MarketplaceProps = {
   productsQueryResult: QueryResult<GetProductsQuery>;
 };
+
+const nft = NftService(NftReaderClient(Network.MATIC_MAINNET));
 
 const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
   const { data, loading, error } = productsQueryResult;
   const {} = useUpdateThemeOnConnection();
   const { isConnected } = useAccount();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    async function getNftAttribute() {
+      const res = await nft.getNftAttribute('0x3c11B1975C17fcf8Cbb315d4430233eD1E87CF05');
+    }
+
+    getNftAttribute();
+  }, []);
 
   useEffect(() => {
     if (data) {
