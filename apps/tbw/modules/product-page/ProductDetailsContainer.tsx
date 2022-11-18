@@ -2,7 +2,7 @@ import { ProductDetails } from 'ui';
 import { useAppSelector } from '../../store/store';
 
 import { Product } from 'apollo';
-import { formatProductData } from 'pure';
+import { formatProductData } from 'modules/galery/formatProductData';
 
 type ProductDetailsContainerProps = {
   product: Product;
@@ -12,10 +12,9 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   const collections = useAppSelector((state) =>
     state.user.nfts.map(({ contract: { address } }) => address),
   );
-  const poapIds = useAppSelector((state) => state.user.poap.map((poap: any) => poap.event.id));
-  const poapImageList = useAppSelector((state) => state.poapImageList);
   const sendTransaction = () => {};
   const {
+    id,
     collection,
     isAnHolder,
     isTransparent,
@@ -25,10 +24,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
     srcItem,
     title,
     discount,
-    id,
-    poapUrl,
-    poapImgUrl,
-  } = formatProductData({ ...product, poapIds, collections, poapImageList });
+  } = formatProductData({ ...product, collections });
 
   return (
     <ProductDetails
@@ -42,8 +38,6 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
       isEligible={isAnHolder}
       isTransparent={isTransparent}
       collection={collection}
-      poapUrl={poapUrl}
-      poapImgUrl={poapImgUrl}
       sendTransaction={sendTransaction}
     />
   );

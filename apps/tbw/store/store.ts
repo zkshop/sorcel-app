@@ -3,15 +3,11 @@ import { createWrapper } from 'next-redux-wrapper';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import nftsReducer from './slices/nfts';
-import poapReducer from './slices/poap';
-import poapImageListReducer from './slices/poapImageList';
 import authReducer from './slices/auth';
 
 const rootReducer = combineReducers({
-  poapImageList: poapImageListReducer,
   user: combineReducers({
     nfts: nftsReducer,
-    poap: poapReducer,
     auth: authReducer,
   }),
 });

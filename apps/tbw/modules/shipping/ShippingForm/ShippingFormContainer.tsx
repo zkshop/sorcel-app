@@ -18,7 +18,7 @@ type ShippingFormContainerProps = {
 };
 
 export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) => {
-  const { id, price, name, image, discount, curation, poapId } = product;
+  const { id, price, name, image, discount, curation } = product;
   const methods = useForm<ShippingFormValues>({
     mode: 'onChange',
     resolver: yupResolver(SHIPPING_FORM_SCHEMA),
@@ -29,12 +29,12 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
   } = methods;
 
   function showDiscount() {
-    if (!curation && !poapId) return true;
+    if (!curation) return true;
     if (isAnHolder) return true;
     return false;
   }
 
-  const isAnHolder = useIsAnHolder(product.poapId, product.curation);
+  const isAnHolder = useIsAnHolder(product.curation);
 
   const amount = applyDiscount(price, showDiscount() && discount);
 

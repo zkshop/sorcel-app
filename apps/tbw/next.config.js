@@ -24,12 +24,11 @@ const nextConfig = {
     ALCHEMY_SECRET_KEY: process.env.ALCHEMY_SECRET_KEY,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
-    POAP_API_KEY: process.env.POAP_API_KEY,
     PUBLIC_MAGIC_PUBLISHABLE_KEY: process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY,
     SUPABASE_API_KEY: process.env.SUPABASE_API_KEY,
   },
   images: {
-    domains: ['assets.poap.xyz', 'www.poap.xyz', 'poap.xyz', 'kqjytgxbtetzewipikax.supabase.co'],
+    domains: ['kqjytgxbtetzewipikax.supabase.co'],
   },
 };
 

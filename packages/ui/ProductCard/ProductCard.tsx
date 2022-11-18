@@ -15,7 +15,7 @@ export type ProductCardProps = {
   collection: string;
   isTransparent: boolean;
   isEligible: boolean;
-  poapUrl: string;
+  poapUrl?: string;
   poapImgUrl?: string;
   description?: any;
 };

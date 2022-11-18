@@ -8,7 +8,7 @@ export type FormatedProductData = {
   collection: string;
   isTransparent: boolean;
   isAnHolder: boolean;
-  poapUrl: string;
+  poapUrl?: string;
   poapImgUrl?: string;
   description?: any;
   externalLink?: string;
