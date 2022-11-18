@@ -1,10 +1,7 @@
-import { getPoapImageFromPoapList } from 'pure';
 import { Product } from 'apollo';
 import { FormatedProductData } from 'types';
 
 export type GetProductCardPropsParams = Product & {
-  poapImageList: any[];
-  poapIds: number[];
   collections: string[];
 };
 
@@ -18,18 +15,11 @@ export const formatProductData = ({
   curation,
   id,
   isDiscountGated,
-  poapId,
-  poapImageList,
   collections,
-  poapIds,
 }: GetProductCardPropsParams): FormatedProductData => {
-  const isGated = curation || poapId;
-  const isAPoapHolder = poapIds.includes(poapId);
+  const isGated = curation;
   const isAnNftHolder = collections.includes(curation?.toLowerCase());
-  const isAnHolder = isAnNftHolder || isAPoapHolder;
-  const isTransparent = isGated && !isAnHolder && !isDiscountGated;
-  const poapUrl = `https://poap.gallery/event/${poapId}`;
-  const poapImgUrl = getPoapImageFromPoapList(poapId, poapImageList);
+  const isTransparent = isGated && !isAnNftHolder && !isDiscountGated;
   const priceNumber = parseInt(price);
   const discountNumber = discount ? parseInt(discount) : 0;
   const promoPercent = discount ? discountNumber / 100 : 0;
@@ -38,7 +28,7 @@ export const formatProductData = ({
   const showDiscount = (() => {
     if (discount) {
       if (isDiscountGated) {
-        return isAnHolder;
+        return isAnNftHolder;
       }
       return true;
     }
@@ -52,10 +42,8 @@ export const formatProductData = ({
 
   return {
     externalLink: memberStackLink,
-    isAnHolder,
+    isAnHolder: isAnNftHolder,
     isTransparent,
-    poapUrl,
-    poapImgUrl,
     srcItem: image,
     title: name,
     discount: showDiscount && discount,

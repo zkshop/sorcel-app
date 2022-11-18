@@ -16,7 +16,7 @@ type ProductDetailsProps = {
   isEligible: boolean;
   description?: string;
   priceReduced: number;
-  poapUrl: string;
+  poapUrl?: string;
   poapImgUrl?: string;
   sendTransaction?: Function;
 };

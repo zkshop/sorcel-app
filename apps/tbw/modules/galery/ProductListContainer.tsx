@@ -8,15 +8,12 @@ type ProductListContainerProps = {
 };
 
 export const ProductListContainer = ({ products }: ProductListContainerProps) => {
-  const poap = useAppSelector((state) => state.user.poap);
   const nfts = useAppSelector((state) => state.user.nfts);
 
-  const poapIds = poap.map((poap) => poap.event.id);
-  const poapImageList = useAppSelector((state) => state.poapImageList);
   const collections = nfts.map((nft) => nft.contract.address);
 
   const formatedProducts = products.map((product) =>
-    formatProductData({ ...product, poapIds, collections, poapImageList }),
+    formatProductData({ ...product, collections }),
   );
 
   return <ProductCardList products={formatedProducts} />;
