@@ -3,7 +3,6 @@ import { Box, Flex } from '@chakra-ui/react';
 import React from 'react';
 import { Button } from 'ui';
 import ConnectWalletButton from './ConnectWalletButton';
-import { LoginWithPaper } from './LoginWithPaper';
 type ConnectButtonGroupProps = {
   handleOpenLoginModal(): void;
   handleLogout(): void;
@@ -78,8 +77,6 @@ export function ConnectButtonGroup({
       >
         E-mail login
       </Button>
-
-      <LoginWithPaper />
     </Flex>
   );
 }

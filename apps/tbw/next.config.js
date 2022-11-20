@@ -26,6 +26,8 @@ const nextConfig = {
     PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
     PUBLIC_MAGIC_PUBLISHABLE_KEY: process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY,
     SUPABASE_API_KEY: process.env.SUPABASE_API_KEY,
+    PAPER_KEY_MANAGER_TOKEN: process.env.PAPER_KEY_MANAGER_TOKEN,
+    PAPER_CLIENT_ID: process.env.PAPER_CLIENT_ID,
   },
   images: {
     domains: ['kqjytgxbtetzewipikax.supabase.co'],
@@ -36,6 +38,7 @@ export default withTM([
   'ui',
   'ui-tbw',
   'pure',
+  'paper',
   'domains',
   'infra',
   'magic',
