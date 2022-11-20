@@ -11,11 +11,11 @@ type ProductDetailsProps = {
   title: string;
   discount?: string;
   price: string;
-  collection: string;
-  isTransparent: boolean;
-  isEligible: boolean;
+  collection?: string;
+  isTransparent?: boolean;
+  isEligible?: boolean;
   description?: string;
-  priceReduced: number;
+  priceReduced?: number;
   poapUrl?: string;
   poapImgUrl?: string;
   sendTransaction?: Function;
@@ -29,8 +29,8 @@ export const ProductDetails = ({
   price,
   discount,
   priceReduced,
-  isEligible,
-  isTransparent,
+  isEligible = true,
+  isTransparent = false,
   collection,
   poapImgUrl,
   poapUrl,

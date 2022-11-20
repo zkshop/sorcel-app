@@ -1,9 +1,12 @@
 import { Product } from 'apollo';
-import { FormatedProductData } from 'types';
+import { FormatedProductData } from 'ui-tbw';
 
 export type GetProductCardPropsParams = Product & {
   collections: string[];
 };
+
+const MEMBER_STACK_PRODUCT_ID = '51e46fb2-cd9e-4baf-81db-8df9d58b62b2';
+const HIGHLIGHTED_PRODUCT_ID = 'ebb24d16-6b6f-464b-bb54-897482b4bc67';
 
 export const formatProductData = ({
   image,
@@ -36,11 +39,12 @@ export const formatProductData = ({
   })();
 
   const memberStackLink =
-    id === '51e46fb2-cd9e-4baf-81db-8df9d58b62b2'
-      ? '#/ms/signup/6372923763918000040c740f'
-      : undefined;
+    id === MEMBER_STACK_PRODUCT_ID ? '#/ms/signup/6372923763918000040c740f' : undefined;
+
+  const highlight = id === HIGHLIGHTED_PRODUCT_ID;
 
   return {
+    highlight,
     externalLink: memberStackLink,
     isAnHolder: isAnNftHolder,
     isTransparent,
