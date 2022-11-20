@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { LoginWithPaper as OriginalLoginWithPaper } from 'paper';
 import { loginWithPaper } from 'store/slices/auth';
 import { useAppDispatch } from 'store/store';

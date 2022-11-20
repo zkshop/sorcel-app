@@ -1,6 +1,7 @@
 import { Flex } from '@chakra-ui/react';
 
 import { Button } from 'ui-tbw';
+import { LoginWithPaper } from './LoginWithPaper';
 import ConnectWalletButton from './ConnectWalletButton';
 type ConnectButtonGroupProps = {
   isConnectedByWallet: boolean;
@@ -18,16 +19,21 @@ export function ConnectButtonGroup({ isConnectedByWallet }: ConnectButtonGroupPr
     >
       <ConnectWalletButton />
 
-      <Button
-        sx={{
-          fontFamily: 'Exo',
-          fontSize: '16px',
-          fontWeight: '700',
-          borderRadius: 'xl',
-        }}
-      >
-        Paper connect
-      </Button>
+      <LoginWithPaper>
+        {({ onClick }: { onClick: () => void }) => (
+          <Button
+            sx={{
+              fontFamily: 'Exo',
+              fontSize: '16px',
+              fontWeight: '700',
+              borderRadius: 'xl',
+            }}
+            onClick={onClick}
+          >
+            Paper connect
+          </Button>
+        )}
+      </LoginWithPaper>
     </Flex>
   );
 }

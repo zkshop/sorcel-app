@@ -4194,20 +4194,20 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@paperxyz/js-client-sdk@^0.0.30":
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/@paperxyz/js-client-sdk/-/js-client-sdk-0.0.30.tgz#3c5666c5d40b06068053ca1f9600997e43799d88"
-  integrity sha512-v2ThFA5Z5qV4gMM6TbwlorzboBafw53SSMcStvdOnGV9Br6oaxMyrjvv517GweDzY0AgReqNE2Jp+78xKYGONQ==
+"@paperxyz/js-client-sdk@^0.0.32":
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/@paperxyz/js-client-sdk/-/js-client-sdk-0.0.32.tgz#dbbe65f4c9e4ed5ea65d52093789d4dc8f1e19d5"
+  integrity sha512-uYdR9r+iLtOIEJi8QbFWNLuHctxwCv3UAAPb8E6V0HgxVkxEAqar01SaOr4naM2nQ8oyKRwvWLAp9K5uh45z4g==
   dependencies:
     ethers "^5.7.0"
 
-"@paperxyz/react-client-sdk@^0.7.34":
-  version "0.7.34"
-  resolved "https://registry.yarnpkg.com/@paperxyz/react-client-sdk/-/react-client-sdk-0.7.34.tgz#b0aa599d1250dcfdedf70933a6676b7aaca8fbc1"
-  integrity sha512-NdDh97OFb6jDSEkXIrOVMU/WNJ9ZsFMZxR8eRqrp0O4RX8D5Bywk85Od7T+Lm/nYUscUhtJmNmsN8cMeAMVzUQ==
+"@paperxyz/react-client-sdk@^0.7.38":
+  version "0.7.38"
+  resolved "https://registry.yarnpkg.com/@paperxyz/react-client-sdk/-/react-client-sdk-0.7.38.tgz#24b3ff4dcbc8fd3cb97b96fe32c770b996c33c99"
+  integrity sha512-EJdKqNfZ3ONqtOu3Wt2rHYEb4JrKW7fpT6FyEPEKlQhWaX+PLKz0QBXcOBUPPNT3SkZxgvcSvmjoM/f8ULF1Dg==
   dependencies:
     "@headlessui/react" "^1.6.6"
-    "@paperxyz/js-client-sdk" "^0.0.30"
+    "@paperxyz/js-client-sdk" "^0.0.32"
     ethers ">=5"
     wagmi "^0.5.0"
 

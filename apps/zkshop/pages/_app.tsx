@@ -12,7 +12,6 @@ import { Layout } from 'components/Layout';
 import { useApollo } from 'apollo';
 import { wrapper } from 'store/store';
 import { ThemeDecorator } from 'components/ThemeDecorator';
-import { PaperSDKProvider } from 'paper';
 
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps);
@@ -21,13 +20,11 @@ function App({ Component, pageProps }: AppProps) {
     <WagmiConfig client={wagmiClient}>
       <ApolloProvider client={apolloClient}>
         <RainbowKitProvider chains={chains}>
-          <PaperSDKProvider clientId={process.env.PAPER_CLIENT_ID} chainName="Polygon">
-            <ThemeDecorator>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </ThemeDecorator>
-          </PaperSDKProvider>
+          <ThemeDecorator>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ThemeDecorator>
         </RainbowKitProvider>
       </ApolloProvider>
     </WagmiConfig>

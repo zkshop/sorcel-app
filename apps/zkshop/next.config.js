@@ -27,8 +27,6 @@ const nextConfig = {
     POAP_API_KEY: process.env.POAP_API_KEY,
     PUBLIC_MAGIC_PUBLISHABLE_KEY: process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY,
     SUPABASE_API_KEY: process.env.SUPABASE_API_KEY,
-    PAPER_KEY_MANAGER_TOKEN: process.env.PAPER_KEY_MANAGER_TOKEN,
-    PAPER_CLIENT_ID: process.env.PAPER_CLIENT_ID,
   },
   images: {
     domains: ['assets.poap.xyz', 'www.poap.xyz', 'poap.xyz', 'kqjytgxbtetzewipikax.supabase.co'],
@@ -47,5 +45,4 @@ export default withTM([
   'supabase',
   'sendinblue',
   'validation',
-  'paper',
 ])(nextConfig);
