@@ -1,6 +1,22 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
 import { ProductCard } from '../ProductCard/ProductCard';
-import { FormatedProductData } from 'types';
+
+export type FormatedProductData = {
+  id?: string;
+  srcItem: string;
+  title: string;
+  discount?: string;
+  price: string;
+  priceReduced?: number;
+  collection?: string;
+  isTransparent?: boolean;
+  isAnHolder?: boolean;
+  poapUrl?: string;
+  poapImgUrl?: string;
+  description?: any;
+  externalLink?: string;
+  highlight?: boolean;
+};
 
 type ProductCardListProps = {
   products: FormatedProductData[];
@@ -20,8 +36,18 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
     }}
   >
     <Grid gap={3} templateColumns={templateColumns}>
-      {products.map(
-        ({ id, title, price, priceReduced, srcItem, discount, description, externalLink }) => (
+      {products?.map(
+        ({
+          id,
+          title,
+          price,
+          priceReduced,
+          srcItem,
+          discount,
+          description,
+          externalLink,
+          highlight,
+        }) => (
           <GridItem key={`products-${id}`} display="flex" justifyContent="center">
             <ProductCard
               id={id}
@@ -32,6 +58,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
               price={price}
               priceReduced={priceReduced}
               externalLink={externalLink}
+              highlight={highlight}
             />
           </GridItem>
         ),
