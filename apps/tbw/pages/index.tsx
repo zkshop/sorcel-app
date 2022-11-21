@@ -5,6 +5,7 @@ import useUpdateThemeOnConnection from '../hooks/useUpdateThemeOnConnection';
 
 import { useGetProductsQuery } from 'apollo';
 import { ProductListContainer } from 'modules';
+import { useEffect } from 'react';
 
 const APP_ID = process.env.APP_ID;
 
@@ -14,6 +15,13 @@ const Marketplace = () => {
       appId: APP_ID,
     },
   });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // TODO(refacto): hack to get the member stack script to load correctly
+      window?.MemberStack?.reload();
+    }
+  }, []);
 
   const {} = useUpdateThemeOnConnection();
   const { isConnected } = useAccount();
