@@ -1,14 +1,15 @@
 import { getDefaultWallets } from '@rainbow-me/rainbowkit';
 import { chain, configureChains, createClient } from 'wagmi';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 
 export const { chains, provider } = configureChains(
   [chain.polygon, chain.polygonMumbai, chain.mainnet, chain.optimism, chain.arbitrum],
-  [publicProvider()],
+  [alchemyProvider({ apiKey: process.env.ALCHEMY_SECRET_KEY || 'demo' }), publicProvider()],
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'My RainbowKit App',
+  appName: '3shop',
   chains,
 });
 

@@ -4264,9 +4264,9 @@
   integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
 
 "@rainbow-me/rainbowkit@^0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@rainbow-me/rainbowkit/-/rainbowkit-0.7.1.tgz#edf38dd512c1345624ab54b8ea5ac7d4aba444d0"
-  integrity sha512-8Q8uZ3ElrIjXhIiumc6s+8KlYzaN5HDTnpC5CjhnYcWkid7ZuKEzb/1uiNARmt0LTm0y7VGdOHRT74UBksxD0A==
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/@rainbow-me/rainbowkit/-/rainbowkit-0.7.4.tgz#5cf25d9108ae125c3b1b2b6ddb01d785940011bd"
+  integrity sha512-o3kwaHZw9O40gfK2DamJZzoqPbK7EHC+8++QtFy5AQ0Sw5P+U0tzb/87KHatSIXyIwrZTEGD0uciPjCGikJMjg==
   dependencies:
     "@vanilla-extract/css" "1.9.1"
     "@vanilla-extract/dynamic" "2.0.2"
@@ -5456,28 +5456,36 @@
   dependencies:
     defer-to-connect "^2.0.1"
 
-"@tanstack/query-core@^4.0.0-beta.1":
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.2.1.tgz#21ff3a33f27bf038c990ea53af89cf7c7e8078fc"
-  integrity sha512-UOyOhHKLS/5i9qG2iUnZNVV3R9riJJmG9eG+hnMFIPT/oRh5UzAfjxCtBneNgPQZLDuP8y6YtRYs/n4qVAD5Ng==
+"@tanstack/query-core@4.15.1":
+  version "4.15.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.15.1.tgz#a282f04fe5e612b50019e1cfaf0efabd220e00ce"
+  integrity sha512-+UfqJsNbPIVo0a9ANW0ZxtjiMfGLaaoIaL9vZeVycvmBuWywJGtSi7fgPVMCPdZQFOzMsaXaOsDtSKQD5xLRVQ==
+
+"@tanstack/query-persist-client-core@4.15.1":
+  version "4.15.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-persist-client-core/-/query-persist-client-core-4.15.1.tgz#27e459a531de16454755a515b8d3dc4a0b99c7bb"
+  integrity sha512-ldoGHNJ4Du83CT1CvJQqaJtQXEz4CdGcDmexVoyRG2q8DV9PAfYi+zls462ZbIWxlni93pkEgG1/q4mZVk2nqQ==
 
 "@tanstack/query-sync-storage-persister@^4.0.10":
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-sync-storage-persister/-/query-sync-storage-persister-4.2.1.tgz#e4c2c6ee9232e99b95fff494b44f1f369bc76ead"
-  integrity sha512-exjzMdQ00CfGD/FTPgzxciC57Uvs2SbltEumPpVENvWs2L/Bf7Lxy9rTMVqzgCORHINd1RVPBhN8Lx5fnzPIKQ==
+  version "4.15.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-sync-storage-persister/-/query-sync-storage-persister-4.15.1.tgz#a2a1407178cf429a21cf1f8e36a2e7d65d8bbc9c"
+  integrity sha512-uMk8VCTkxTS9F99nSjbJRIsNalv6cwAtBJ6HgX41dYW2BCQR4ZQrM52oohIMbZo8DqlE/gGRtplbCbQ3NDfx4g==
+  dependencies:
+    "@tanstack/query-persist-client-core" "4.15.1"
 
 "@tanstack/react-query-persist-client@^4.0.10":
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query-persist-client/-/react-query-persist-client-4.2.1.tgz#a4b054a1453c6cdc4a0491c917d1bf0a9bef27ad"
-  integrity sha512-5z3oo6S8stiPTFK7hmv4O04ZTMgdCrhgV+cq+z0t2NJwd5eeKPLrAUSBM+ah9eEhUlzs5ZEhaYeSwtPopOjYdg==
+  version "4.16.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-persist-client/-/react-query-persist-client-4.16.1.tgz#ab54352fe8435e88961cda48c75b844ab6e6e559"
+  integrity sha512-7i1Dj9amEDdRz34UMslf11uFs7QSpGqNRT9nFwc17pcJ4I3X7tSiEN1pgrAMg05eqnfGJgnSTZg+RpFR1Nsy+w==
+  dependencies:
+    "@tanstack/query-persist-client-core" "4.15.1"
 
 "@tanstack/react-query@^4.0.10":
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.2.1.tgz#1f00f03573b35a353e62fa64f904bbb0286a1808"
-  integrity sha512-w02oTOYpoxoBzD/onAGRQNeLAvggLn7WZjS811cT05WAE/4Q3br0PTp388M7tnmyYGbgOOhFq0MkhH0wIfAKqA==
+  version "4.16.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.16.1.tgz#077006b8eb2c87fbe8d1597c1a0083a2d218b791"
+  integrity sha512-PDE9u49wSDykPazlCoLFevUpceLjQ0Mm8i6038HgtTEKb/aoVnUZdlUP7C392ds3Cd75+EGlHU7qpEX06R7d9Q==
   dependencies:
-    "@tanstack/query-core" "^4.0.0-beta.1"
-    "@types/use-sync-external-store" "^0.0.3"
+    "@tanstack/query-core" "4.15.1"
     use-sync-external-store "^1.2.0"
 
 "@testing-library/dom@^8.3.0":
@@ -19739,9 +19747,9 @@ zen-observable@0.8.15:
   integrity sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==
 
 zustand@^4.0.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.1.0.tgz#9676eeb30ece318707fd739a96dcb7b410d7d2c2"
-  integrity sha512-ba39yDM90wFHiCO5AuoP2Tr1vSY5Eggduk0ou91mWL/qKnz2sBq8AcdFoticOftt7AfIHRBENI7WfjkUrqB3vA==
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.1.4.tgz#b0286da4cc9edd35e91c96414fa54bfa4652a54d"
+  integrity sha512-k2jVOlWo8p4R83mQ+/uyB8ILPO2PCJOf+QVjcL+1PbMCk1w5OoPYpAIxy9zd93FSfmJqoH6lGdwzzjwqJIRU5A==
   dependencies:
     use-sync-external-store "1.2.0"
 
