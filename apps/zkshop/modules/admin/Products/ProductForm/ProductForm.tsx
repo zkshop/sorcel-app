@@ -3,6 +3,7 @@ import { MainLayout } from 'ui';
 import { ProductFormHeader } from './ProductFormHeader';
 import { GeneralInformationsFields, MediaFields, OnChainDataFields } from './Sections';
 import { AddProductFormValues } from './types';
+import { GateSection } from '../GateForm';
 
 type AddProductFormProps = {
   handleSubmit: Function;
@@ -29,5 +30,6 @@ export const ProductForm = ({
 
       <OnChainDataFields />
     </form>
+    {onOpen && <GateSection />}
   </MainLayout>
 );
