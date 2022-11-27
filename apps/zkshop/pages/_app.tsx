@@ -1,7 +1,6 @@
 import '@rainbow-me/rainbowkit/styles.css';
 import '../min.css';
 
-import { ApolloProvider } from '@apollo/client';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { AppProps } from 'next/app';
 
@@ -9,7 +8,7 @@ import { WagmiConfig } from 'wagmi';
 
 import { wagmiClient, chains } from '../clients/wagmi';
 import { Layout } from 'components/Layout';
-import { useApollo } from 'apollo';
+import { ApolloProvider, useApollo } from 'apollo';
 import { wrapper } from 'store/store';
 import { ThemeDecorator } from 'components/ThemeDecorator';
 
