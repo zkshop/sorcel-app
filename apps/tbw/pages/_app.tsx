@@ -3,7 +3,6 @@ import '../min.css';
 import Script from 'next/script';
 import { PaperSDKProvider } from 'paper';
 
-import { ApolloProvider } from '@apollo/client';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { AppProps } from 'next/app';
 
@@ -11,7 +10,7 @@ import { WagmiConfig } from 'wagmi';
 
 import { wagmiClient, chains } from '../clients/wagmi';
 import { Layout } from 'components/Layout';
-import { useApollo } from 'apollo';
+import { ApolloProvider, useApollo } from 'apollo';
 import { wrapper } from 'store/store';
 import { ThemeProvider } from 'ui';
 import { Provider as ReduxProvider } from 'react-redux';
