@@ -1,6 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
-import Link from 'next/link';
-import Image from 'next/image';
+import { Box, Text, Image } from '@chakra-ui/react';
 
 export type ProductCardProps = {
   id?: string;
@@ -15,7 +13,6 @@ export type ProductCardProps = {
 };
 
 export const ProductCard = ({
-  id,
   srcItem,
   title,
   description,
@@ -35,14 +32,14 @@ export const ProductCard = ({
         boxShadow: highlight && '4px 6px 9px #14FFD5',
       }}
     >
-      <Box
+      <Image
+        alt="product"
+        src={srcItem}
         sx={{
           height: '140px',
-          position: 'relative',
+          width: '100%',
         }}
-      >
-        <Image alt="product" src={srcItem} fill />
-      </Box>
+      />
 
       <Box
         sx={{
@@ -80,9 +77,5 @@ export const ProductCard = ({
     </Box>
   );
 
-  if (externalLink) {
-    return <a href={externalLink}> {content} </a>;
-  }
-
-  return <Link href={`/product/${id}`}> {content} </Link>;
+  return <a href={externalLink || `#`}> {content} </a>;
 };
