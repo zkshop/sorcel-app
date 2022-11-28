@@ -16,10 +16,11 @@ const rootReducer = combineReducers({
   }),
 });
 
-const makeStore = () =>
-  configureStore({
+export const store = configureStore({
     reducer: rootReducer,
   });
+
+const makeStore = () => store;
 
 export type AppDispatch = ReturnType<typeof makeStore>['dispatch'];
 export const useAppDispatch: () => AppDispatch = useDispatch;
