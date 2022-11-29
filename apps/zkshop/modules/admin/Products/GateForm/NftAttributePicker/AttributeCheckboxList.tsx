@@ -6,23 +6,22 @@ import { useAppDispatch } from 'store/store';
 
 type AttributeListProps = {
   attribute: NftAttribute<any>;
-  index: number;
 };
 
-export const AttributeCheckboxList = ({ attribute, index }: AttributeListProps) => {
+export const AttributeCheckboxList = ({ attribute }: AttributeListProps) => {
   const { name, options } = attribute;
   const [pickedAttribute, setPickedAttribute] = useState<string | undefined>();
   const dispatch = useAppDispatch();
 
-  const pushAttribute = (gateIndex: number, attribute: { name: string; value: string }) => {
-    dispatch(setAttributeToGate({ attribute, gateIndex }));
+  const pushAttribute = (attribute: { name: string; value: string }) => {
+    dispatch(setAttributeToGate({ attribute }));
   };
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target;
 
     setPickedAttribute(value);
-    pushAttribute(index, { name, value });
+    pushAttribute({ name, value });
   }
 
   return (

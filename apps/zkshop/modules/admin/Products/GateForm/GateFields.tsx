@@ -1,12 +1,7 @@
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Spinner,
-} from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, NumberInput, NumberInputField } from '@chakra-ui/react';
 import { NftAttribute } from 'domains';
+import { useFormContext } from 'react-hook-form';
+import { AddGateFormValues } from './AddGateModal';
 import { NftAttributePicker } from './NftAttributePicker';
 
 type GateFieldsProps = {
@@ -14,22 +9,26 @@ type GateFieldsProps = {
 };
 
 export const GateFields = ({ nftAttributes }: GateFieldsProps) => {
+  const { register } = useFormContext<AddGateFormValues>();
+
   if (!nftAttributes) return null;
 
   return (
     <>
       <FormControl>
         <FormLabel>Discount</FormLabel>
-        <InputGroup>
-          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
-            %
-          </InputLeftElement>
-
-          <Input placeholder="Discount for holders" />
-        </InputGroup>
+        <NumberInput>
+          <NumberInputField
+            min={0}
+            max={100}
+            placeholder="Discount for holders"
+            {...register('discount')}
+          />
+        </NumberInput>
       </FormControl>
-
-      <NftAttributePicker attributes={nftAttributes} />
+      <Box overflow="scroll" height="400px" mt={2}>
+        <NftAttributePicker attributes={nftAttributes} />
+      </Box>
     </>
   );
 };

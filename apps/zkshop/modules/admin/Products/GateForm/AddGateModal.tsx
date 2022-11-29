@@ -1,4 +1,7 @@
 import {
+  FormLabel,
+  HStack,
+  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -6,8 +9,16 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spinner,
 } from '@chakra-ui/react';
+import { useCreateGateMutation } from 'apollo';
+import { useRouter } from 'next/router';
+import { FormProvider, useForm } from 'react-hook-form';
+import { fetchNFTAttributes } from 'store/slices/nftAttributes';
+import { useAppDispatch, useAppSelector } from 'store/store';
 import { Button } from 'ui';
+
+import { GateFields } from './GateFields';
 
 type AddGateModalProps = {
   isOpen: boolean;
@@ -15,19 +26,68 @@ type AddGateModalProps = {
   isFormValid: boolean;
 };
 
-export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps) => (
-  <Modal isOpen={isOpen} onClose={onClose} isCentered>
-    <ModalOverlay />
-    <ModalContent>
-      <ModalHeader>Add Gate</ModalHeader>
-      <ModalCloseButton />
-      <ModalBody>Form</ModalBody>
-      <ModalFooter>
-        <Button backgroundColor="red" color="white" onClick={onClose} mr={3}>
-          Cancel
-        </Button>
-        <Button isDisabled={!isFormValid}>Add</Button>
-      </ModalFooter>
-    </ModalContent>
-  </Modal>
-);
+export type AddGateFormValues = {
+  contractAddress: string;
+  discount: number;
+};
+
+export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps) => {
+  const methods = useForm<AddGateFormValues>();
+  const { handleSubmit, register, watch } = methods;
+  const contractAddressValue = watch('contractAddress');
+  const [createGate, { loading: createGateLoading }] = useCreateGateMutation();
+  const router = useRouter();
+  const { id: productId } = router.query as { id: string };
+
+  const dispatch = useAppDispatch();
+  const gate = useAppSelector((state) => state.gates);
+  const nftAttributes = useAppSelector((state) => state.nftAttributes.hits);
+  const loading = useAppSelector((state) => state.nftAttributes.loading);
+
+  const handleClickFindContractAttributes = async () => {
+    dispatch(fetchNFTAttributes(contractAddressValue));
+  };
+
+  const onSubmit = async ({ discount, contractAddress }: AddGateFormValues) => {
+    await createGate({
+      variables: {
+        discount,
+        contractAddress,
+        attributes: JSON.stringify(gate),
+        productId,
+      },
+    });
+  };
+
+  return (
+    <FormProvider {...methods}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <ModalHeader>Add Gate</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <FormLabel>Enter the contract address of the NFT</FormLabel>
+              <HStack>
+                <Input
+                  placeholder="0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D"
+                  {...register('contractAddress')}
+                />
+                <Button onClick={handleClickFindContractAttributes}>Find</Button>
+              </HStack>
+
+              {loading ? <Spinner /> : <GateFields nftAttributes={nftAttributes} />}
+            </ModalBody>
+            <ModalFooter>
+              <Button backgroundColor="red" color="white" onClick={onClose} mr={3}>
+                Cancel
+              </Button>
+              <Button type="submit">Add</Button>
+            </ModalFooter>
+          </form>
+        </ModalContent>
+      </Modal>
+    </FormProvider>
+  );
+};
