@@ -1,5 +1,5 @@
 import '@rainbow-me/rainbowkit/styles.css';
-import { ThemeProvider } from 'ui/theme/ThemeProvider';
+import { ThemeProvider } from 'ui-tbw';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './store';
 import { ApolloProvider, useApollo, APOLLO_STATE_PROP_NAME } from 'apollo';
