@@ -21,61 +21,62 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   const bgColor = highlight ? '#101238' : 'white';
   const textColor = highlight ? 'white' : 'black';
-  const content = (
-    <Box
-      sx={{
-        width: '100%',
-        border: '1px solid #000000',
-        borderRadius: '6px',
-        overflow: 'hidden',
-        bg: bgColor,
-        boxShadow: highlight && '4px 6px 9px #14FFD5',
-      }}
-    >
-      <Image
-        alt="product"
-        src={srcItem}
-        sx={{
-          height: '140px',
-          width: '100%',
-        }}
-      />
-
+  return (
+    <a href={externalLink || `#`} className="tbw-product-card-link">
       <Box
+        className="tbw-product-card"
         sx={{
-          height: '140px',
-          p: '8px',
+          width: '100%',
+          border: '1px solid #000000',
+          borderRadius: '6px',
+          overflow: 'hidden',
+          bg: bgColor,
+          boxShadow: highlight && '4px 6px 9px #14FFD5',
         }}
       >
-        <Text
+        <Image
+          alt="product"
+          src={srcItem}
           sx={{
-            fontFamily: 'Avenir',
-            textTransform: 'capitalize',
-            color: textColor,
-            fontWeight: '800',
-            fontSize: '20px',
-            lineHeight: '27px',
+            height: '140px',
+            width: '100%',
           }}
-        >
-          {title}
-        </Text>
+        />
 
-        <Text
+        <Box
           sx={{
-            fontFamily: 'Avenir',
-            textTransform: 'capitalize',
-            color: textColor,
-            fontWeight: '400',
-            fontSize: '16px',
-            lineHeight: '17px',
-            marginTop: '8px',
+            height: '140px',
+            p: '8px',
           }}
         >
-          {description}
-        </Text>
+          <Text
+            sx={{
+              fontFamily: 'Avenir',
+              textTransform: 'capitalize',
+              color: textColor,
+              fontWeight: '800',
+              fontSize: '20px',
+              lineHeight: '27px',
+            }}
+          >
+            {title}
+          </Text>
+
+          <Text
+            sx={{
+              fontFamily: 'Avenir',
+              textTransform: 'capitalize',
+              color: textColor,
+              fontWeight: '400',
+              fontSize: '16px',
+              lineHeight: '17px',
+              marginTop: '8px',
+            }}
+          >
+            {description}
+          </Text>
+        </Box>
       </Box>
-    </Box>
+    </a>
   );
-
-  return <a href={externalLink || `#`}> {content} </a>;
 };

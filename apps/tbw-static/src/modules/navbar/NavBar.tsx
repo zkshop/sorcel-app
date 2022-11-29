@@ -33,10 +33,11 @@ export const NavBar = ({}: NavBarProps) => {
   }, [dispatch]);
 
   return (
-    <VStack as="header" sx={{ p: 2, maxW: '875px', margin: 'auto' }}>
+    <VStack as="header" sx={{ p: 2, maxW: '875px', margin: 'auto' }} className="tbw-header">
       <HStack w="full">
         <HStack justifyContent="space-between" flex={1}>
           <Box
+            className="tbw-logo"
             sx={{
               fontFamily: 'Exo',
               fontSize: '45px',
