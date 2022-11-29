@@ -9,7 +9,6 @@ type ProductListContainerProps = {
 
 export const ProductListContainer = ({ products }: ProductListContainerProps) => {
   const nfts = useAppSelector((state) => state.user.nfts);
-
   const collections = nfts.map((nft) => nft.contract.address);
 
   const formatedProducts = products.map((product) =>
