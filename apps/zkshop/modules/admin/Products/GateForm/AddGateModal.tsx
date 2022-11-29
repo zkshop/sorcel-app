@@ -1,4 +1,6 @@
 import {
+  FormControl,
+  FormErrorMessage,
   FormLabel,
   HStack,
   Input,
@@ -12,12 +14,14 @@ import {
   Spinner,
   useToast,
 } from '@chakra-ui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useCreateGateMutation } from 'apollo';
 import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 import { fetchNFTAttributes } from 'store/slices/nftAttributes';
 import { useAppDispatch, useAppSelector } from 'store/store';
 import { Button } from 'ui';
+import { ADD_GATE_MODAL_SCHEMA } from './AddGateModalSchema';
 
 import { GateFields } from './GateFields';
 
@@ -33,8 +37,15 @@ export type AddGateFormValues = {
 };
 
 export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps) => {
-  const methods = useForm<AddGateFormValues>();
-  const { handleSubmit, register, watch } = methods;
+  const methods = useForm<AddGateFormValues>({
+    resolver: yupResolver(ADD_GATE_MODAL_SCHEMA),
+  });
+  const {
+    handleSubmit,
+    register,
+    watch,
+    formState: { errors },
+  } = methods;
   const contractAddressValue = watch('contractAddress');
   const [createGate, { loading: createGateLoading }] = useCreateGateMutation();
   const router = useRouter();
@@ -86,10 +97,14 @@ export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps
             <ModalBody>
               <FormLabel>Enter the contract address of the NFT</FormLabel>
               <HStack>
-                <Input
-                  placeholder="0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D"
-                  {...register('contractAddress')}
-                />
+                <FormControl isInvalid={Boolean(errors.contractAddress)}>
+                  <Input
+                    placeholder="0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D"
+                    {...register('contractAddress')}
+                  />
+                  <FormErrorMessage>{errors.contractAddress?.message}</FormErrorMessage>
+                </FormControl>
+
                 <Button onClick={handleClickFindContractAttributes}>Find</Button>
               </HStack>
 

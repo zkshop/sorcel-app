@@ -9,12 +9,14 @@ import {
   ListItem,
 } from '@chakra-ui/react';
 import { Gate } from 'apollo';
+import { CloseIcon } from '@chakra-ui/icons';
 
 type GateTable = {
   gates: Gate[];
+  handleClickOnCloseIcon(id: string): void;
 };
 
-export const GateTable = ({ gates }: GateTable) => (
+export const GateTable = ({ gates, handleClickOnCloseIcon }: GateTable) => (
   <TableContainer>
     <Table>
       <Thead>
@@ -37,6 +39,9 @@ export const GateTable = ({ gates }: GateTable) => (
                   </ListItem>
                 ))}
               </UnorderedList>
+            </Th>
+            <Th>
+              <CloseIcon onClick={() => handleClickOnCloseIcon(gate.id)} cursor="pointer" />
             </Th>
           </Tr>
         ))}

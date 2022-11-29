@@ -1,4 +1,11 @@
-import { Box, FormControl, FormLabel, NumberInput, NumberInputField } from '@chakra-ui/react';
+import {
+  Box,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  NumberInput,
+  NumberInputField,
+} from '@chakra-ui/react';
 import { NftAttribute } from 'domains';
 import { useFormContext } from 'react-hook-form';
 import { AddGateFormValues } from './AddGateModal';
@@ -9,13 +16,16 @@ type GateFieldsProps = {
 };
 
 export const GateFields = ({ nftAttributes }: GateFieldsProps) => {
-  const { register } = useFormContext<AddGateFormValues>();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<AddGateFormValues>();
 
   if (!nftAttributes) return null;
 
   return (
     <>
-      <FormControl>
+      <FormControl isInvalid={Boolean(errors.discount)}>
         <FormLabel>Discount</FormLabel>
         <NumberInput>
           <NumberInputField
@@ -25,6 +35,7 @@ export const GateFields = ({ nftAttributes }: GateFieldsProps) => {
             {...register('discount')}
           />
         </NumberInput>
+        <FormErrorMessage>{errors.discount?.message}</FormErrorMessage>
       </FormControl>
       <Box overflow="scroll" height="400px" mt={2}>
         <NftAttributePicker attributes={nftAttributes} />
