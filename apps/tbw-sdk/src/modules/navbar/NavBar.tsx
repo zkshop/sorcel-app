@@ -7,7 +7,7 @@ import { useAccount } from 'wagmi';
 
 import { useGetAppQuery } from 'apollo';
 import { ConnectButtonGroup } from './ConnectButtonGroup';
-// import { getCurrentUser } from '../../store/reducer/auth';
+import { getCurrentUser } from '../../store/reducer/auth';
 
 type NavBarProps = {
   admin?: boolean;
@@ -26,7 +26,7 @@ export const NavBar = ({}: NavBarProps) => {
 
   useEffect(() => {
     async function changeUserIsLoading() {
-      // await dispatch(getCurrentUser());
+      await dispatch(getCurrentUser());
     }
 
     changeUserIsLoading();
