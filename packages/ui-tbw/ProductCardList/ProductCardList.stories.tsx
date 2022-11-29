@@ -29,7 +29,7 @@ Primary.args = {
       price: '0',
     },
     {
-      externalLink: '#/ms/signup/6372923763918000040c740f',
+      externalLink: '/#/ms/signup/6372923763918000040c740f',
       id: '51e46fb2-cd9e-4baf-81db-8df9d58b62b2',
       srcItem:
         'https://kqjytgxbtetzewipikax.supabase.co/storage/v1/object/public/products/1e9f094b-0896-48a3-ad1e-0ed68a7581a9',

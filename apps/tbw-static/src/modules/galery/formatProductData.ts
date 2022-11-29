@@ -39,7 +39,7 @@ export const formatProductData = ({
   })();
 
   const memberStackLink =
-    id === MEMBER_STACK_PRODUCT_ID ? '#/ms/signup/6372923763918000040c740f' : undefined;
+    id === MEMBER_STACK_PRODUCT_ID ? '/#/ms/signup/6372923763918000040c740f' : undefined;
 
   const highlight = id === HIGHLIGHTED_PRODUCT_ID;
 
