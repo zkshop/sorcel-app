@@ -30,6 +30,7 @@ const templateColumns = {
 
 export const ProductCardList = ({ products }: ProductCardListProps) => (
   <Box
+    className="tbw-product-card-list"
     sx={{
       maxW: '768px',
       margin: '0 auto',
