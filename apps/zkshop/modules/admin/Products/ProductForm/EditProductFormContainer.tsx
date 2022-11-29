@@ -6,7 +6,7 @@ import { DeleteProductModal } from './DeleteProductModal';
 import { ProductForm } from './ProductForm';
 import { AddProductFormValues } from './types';
 
-import { Product, useDeleteProductMutation, useEditProductMutation } from 'apollo';
+import { Gate, Product, useDeleteProductMutation, useEditProductMutation } from 'apollo';
 import {
   ERROR_MESSAGE,
   getDeleteProductSuccessMessage,
@@ -20,9 +20,10 @@ import { ADD_PRODUCT_FORM_SCHEMA } from 'libs/schemas';
 
 type EditProductFormContainerProps = {
   product: Product;
+  gates: Gate[];
 };
 
-export const EditProductFormContainer = ({ product }: EditProductFormContainerProps) => {
+export const EditProductFormContainer = ({ product, gates }: EditProductFormContainerProps) => {
   const [storageActionLoading, setStorageActionLoading] = useState(false);
   const methods = useForm<AddProductFormValues>({
     defaultValues: {
@@ -117,6 +118,7 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         isLoading={storageActionLoading || isEditLoading}
+        gates={gates}
       />
 
       <DeleteProductModal

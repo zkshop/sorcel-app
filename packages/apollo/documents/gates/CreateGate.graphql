@@ -1,13 +1,3 @@
-query GetGateFromProduct($productId: uuid) {
-  gate(where: { product_id: { _eq: $productId } }) {
-    attributes
-    contractAddress
-    discount
-    id
-    product_id
-  }
-}
-
 mutation CreateGate(
   $attributes: jsonb!
   $contractAddress: String!

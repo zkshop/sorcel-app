@@ -10,6 +10,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Spinner,
+  useToast,
 } from '@chakra-ui/react';
 import { useCreateGateMutation } from 'apollo';
 import { useRouter } from 'next/router';
@@ -38,6 +39,7 @@ export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps
   const [createGate, { loading: createGateLoading }] = useCreateGateMutation();
   const router = useRouter();
   const { id: productId } = router.query as { id: string };
+  const toast = useToast();
 
   const dispatch = useAppDispatch();
   const gate = useAppSelector((state) => state.gates);
@@ -49,14 +51,28 @@ export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps
   };
 
   const onSubmit = async ({ discount, contractAddress }: AddGateFormValues) => {
-    await createGate({
-      variables: {
-        discount,
-        contractAddress,
-        attributes: JSON.stringify(gate),
-        productId,
-      },
-    });
+    try {
+      await createGate({
+        variables: {
+          discount,
+          contractAddress,
+          attributes: gate,
+          productId,
+        },
+      });
+      toast({
+        status: 'success',
+        title: 'Gate Added Successfully',
+        description: `Gate for contract ${contractAddress} has been successfully added`,
+      });
+    } catch (e) {
+      console.error(e);
+      toast({
+        status: 'error',
+        title: 'An error occured',
+        description: 'Please try again later',
+      });
+    }
   };
 
   return (
