@@ -1,17 +1,25 @@
 import { GetServerSidePropsContext } from 'next';
 import { BackButton } from 'ui';
 
-import { addApolloState, initializeApollo, GetProductByIdDocument, Product } from 'apollo';
+import {
+  addApolloState,
+  initializeApollo,
+  GetProductByIdDocument,
+  Product,
+  GetGateFromProductDocument,
+  Gate,
+} from 'apollo';
 import { EditProductFormContainer } from 'modules';
 
 type EditProductPageProps = {
   product: Product;
+  gates: Gate[];
 };
 
-const EditProductPage = ({ product }: EditProductPageProps) => (
+const EditProductPage = ({ product, gates }: EditProductPageProps) => (
   <>
     <BackButton href="/admin" />
-    <EditProductFormContainer product={product} />
+    <EditProductFormContainer gates={gates} product={product} />
   </>
 );
 
@@ -23,15 +31,22 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   if (params?.id) {
     const { id } = params;
-    const res = await apolloClient.query({
+    const { data: productData } = await apolloClient.query({
       query: GetProductByIdDocument,
       variables: {
         id,
       },
     });
 
+    const { data: gateData } = await apolloClient.query({
+      query: GetGateFromProductDocument,
+      variables: {
+        productId: id,
+      },
+    });
+
     return addApolloState(apolloClient, {
-      props: { product: res.data?.product_by_pk },
+      props: { product: productData?.product_by_pk, gates: gateData?.gates },
     });
   }
 };

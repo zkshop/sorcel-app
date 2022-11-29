@@ -4,14 +4,20 @@ import { ProductFormHeader } from './ProductFormHeader';
 import { GeneralInformationsFields, MediaFields, OnChainDataFields } from './Sections';
 import { AddProductFormValues } from './types';
 import { GateSection } from '../GateForm';
+import { Gate } from 'apollo';
 
-type AddProductFormProps = {
+type BaseProductFormProps = {
   handleSubmit: Function;
   onSubmit(data: AddProductFormValues): Promise<void>;
-  onOpen?(): void;
   isLoading: boolean;
   isDisabled: boolean;
 };
+
+type AddProductFormProps = { onOpen?: undefined; gates?: undefined } & BaseProductFormProps;
+type EditProductFormProps = {
+  onOpen(): void;
+  gates: Gate[];
+} & BaseProductFormProps;
 
 export const ProductForm = ({
   handleSubmit,
@@ -19,7 +25,8 @@ export const ProductForm = ({
   onOpen,
   isLoading,
   isDisabled,
-}: AddProductFormProps) => (
+  gates,
+}: EditProductFormProps | AddProductFormProps) => (
   <MainLayout>
     <form onSubmit={handleSubmit(onSubmit)}>
       <ProductFormHeader isDisabled={isDisabled} isLoading={isLoading} onOpen={onOpen} />
@@ -30,6 +37,6 @@ export const ProductForm = ({
 
       <OnChainDataFields />
     </form>
-    {onOpen && <GateSection />}
+    {onOpen && <GateSection gates={gates} />}
   </MainLayout>
 );

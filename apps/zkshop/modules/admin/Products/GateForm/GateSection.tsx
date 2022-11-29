@@ -1,8 +1,14 @@
 import { Heading, useDisclosure } from '@chakra-ui/react';
+import { Gate } from 'apollo';
 import { Section, Button } from 'ui';
+import { GateTable } from '../GateTable';
 import { AddGateModal } from './AddGateModal';
 
-export const GateSection = () => {
+type GateSectionProps = {
+  gates: Gate[];
+};
+
+export const GateSection = ({ gates }: GateSectionProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
@@ -15,6 +21,8 @@ export const GateSection = () => {
       </Heading>
 
       <AddGateModal isFormValid={true} isOpen={isOpen} onClose={onClose} />
+
+      <GateTable gates={gates} />
     </Section>
   );
 };
