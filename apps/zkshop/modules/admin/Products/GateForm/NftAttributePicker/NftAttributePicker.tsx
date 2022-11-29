@@ -21,7 +21,7 @@ export const NftAttributePicker = ({ attributes }: NftAttributePickerProps) => (
       Properties
     </Heading>
     <Accordion defaultIndex={[0]} allowMultiple>
-      {attributes.map((attribute, index) => (
+      {attributes.map((attribute) => (
         <AccordionItem key={`nft-attribute-picker-${attribute.name}`}>
           <AccordionButton>
             <Box flex="1" textAlign="left">
@@ -30,7 +30,7 @@ export const NftAttributePicker = ({ attributes }: NftAttributePickerProps) => (
             </Box>
           </AccordionButton>
           <AccordionPanel>
-            <AttributeCheckboxList index={0} attribute={attribute} />
+            <AttributeCheckboxList attribute={attribute} />
           </AccordionPanel>
         </AccordionItem>
       ))}

@@ -1,0 +1,31 @@
+query GetGateFromProduct($productId: uuid) {
+  gate(where: { product_id: { _eq: $productId } }) {
+    attributes
+    contractAddress
+    discount
+    id
+    product_id
+  }
+}
+
+mutation CreateGate(
+  $attributes: jsonb!
+  $contractAddress: String!
+  $discount: numeric!
+  $productId: uuid!
+) {
+  insert_gate_one(
+    object: {
+      attributes: $attributes
+      contractAddress: $contractAddress
+      discount: $discount
+      product_id: $productId
+    }
+  ) {
+    attributes
+    contractAddress
+    discount
+    id
+    product_id
+  }
+}
