@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Heading, useDisclosure, useToast, Section, Button } from 'ui';
 import { Gate, useDeleteGateFromIdMutation } from 'apollo';
 import { useState } from 'react';
@@ -55,6 +56,14 @@ export const GateSection = ({ gates }: GateSectionProps) => {
       });
     }
   };
+=======
+import { Heading, useDisclosure } from '@chakra-ui/react';
+import { Section, Button } from 'ui';
+import { AddGateModal } from './AddGateModal';
+
+export const GateSection = () => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+>>>>>>> dbf5779 (feat(admin): form to add gate to product)
 
   return (
     <Section>
@@ -65,6 +74,7 @@ export const GateSection = ({ gates }: GateSectionProps) => {
         </Button>
       </Heading>
 
+<<<<<<< HEAD
       <AddGateModal isFormValid={true} isOpen={isAddGateModalOpen} onClose={onCloseAddGateModal} />
 
       <GateTable handleClickOnCloseIcon={handleClickOnCloseIcon} gates={gates} />
@@ -75,6 +85,9 @@ export const GateSection = ({ gates }: GateSectionProps) => {
         deleteGateLoading={deleteGateLoading}
         handleClickOnDeleteModal={handleClickOnDeleteModal}
       />
+=======
+      <AddGateModal isFormValid={true} isOpen={isOpen} onClose={onClose} />
+>>>>>>> dbf5779 (feat(admin): form to add gate to product)
     </Section>
   );
 };
