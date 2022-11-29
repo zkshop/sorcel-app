@@ -1346,6 +1346,12 @@ export type App_Mutation_ResponseFragmentFragment = {
   returning: Array<{ __typename?: 'app'; id: any; name: string; imgUrl?: string | null }>;
 };
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> a754840 (feat(admin): form to add gate to product)
 export type CreateGateMutationVariables = Exact<{
   attributes: Scalars['jsonb'];
   contractAddress: Scalars['String'];
@@ -1356,12 +1362,28 @@ export type CreateGateMutationVariables = Exact<{
 export type CreateGateMutation = {
   __typename?: 'mutation_root';
   insert_gate_one?: {
+<<<<<<< HEAD
+=======
+=======
+export type GetGateFromProductQueryVariables = Exact<{
+  productId?: InputMaybe<Scalars['uuid']>;
+}>;
+
+export type GetGateFromProductQuery = {
+  __typename?: 'query_root';
+  gate: Array<{
+>>>>>>> 790d489 (feat(admin): form to add gate to product)
+>>>>>>> a754840 (feat(admin): form to add gate to product)
     __typename?: 'gate';
     attributes?: any | null;
     contractAddress: string;
     discount: any;
     id: any;
     product_id?: any | null;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> a754840 (feat(admin): form to add gate to product)
   } | null;
 };
 
@@ -1384,15 +1406,44 @@ export type GetGateFromProductQueryVariables = Exact<{
 export type GetGateFromProductQuery = {
   __typename?: 'query_root';
   gates: Array<{
+<<<<<<< HEAD
+=======
+=======
+  }>;
+};
+
+export type CreateGateMutationVariables = Exact<{
+  attributes: Scalars['jsonb'];
+  contractAddress: Scalars['String'];
+  discount: Scalars['numeric'];
+  productId: Scalars['uuid'];
+}>;
+
+export type CreateGateMutation = {
+  __typename?: 'mutation_root';
+  insert_gate_one?: {
+>>>>>>> 790d489 (feat(admin): form to add gate to product)
+>>>>>>> a754840 (feat(admin): form to add gate to product)
     __typename?: 'gate';
     attributes?: any | null;
     contractAddress: string;
     discount: any;
     id: any;
     product_id?: any | null;
+<<<<<<< HEAD
   }>;
 };
 
+=======
+<<<<<<< HEAD
+  }>;
+=======
+  } | null;
+>>>>>>> 790d489 (feat(admin): form to add gate to product)
+};
+
+>>>>>>> 818e777 (feat(admin): form to add gate to product)
+>>>>>>> a754840 (feat(admin): form to add gate to product)
 export type CreateProductMutationVariables = Exact<{
   appId: Scalars['uuid'];
   price?: InputMaybe<Scalars['numeric']>;
@@ -1661,6 +1712,71 @@ export type UpdateAppMutationOptions = Apollo.BaseMutationOptions<
   UpdateAppMutation,
   UpdateAppMutationVariables
 >;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+export const GetGateFromProductDocument = gql`
+  query GetGateFromProduct($productId: uuid) {
+    gate(where: { product_id: { _eq: $productId } }) {
+      attributes
+      contractAddress
+      discount
+      id
+      product_id
+    }
+  }
+`;
+
+/**
+ * __useGetGateFromProductQuery__
+ *
+ * To run a query within a React component, call `useGetGateFromProductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetGateFromProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetGateFromProductQuery({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useGetGateFromProductQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetGateFromProductQuery, GetGateFromProductQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetGateFromProductQuery, GetGateFromProductQueryVariables>(
+    GetGateFromProductDocument,
+    options,
+  );
+}
+export function useGetGateFromProductLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetGateFromProductQuery,
+    GetGateFromProductQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetGateFromProductQuery, GetGateFromProductQueryVariables>(
+    GetGateFromProductDocument,
+    options,
+  );
+}
+export type GetGateFromProductQueryHookResult = ReturnType<typeof useGetGateFromProductQuery>;
+export type GetGateFromProductLazyQueryHookResult = ReturnType<
+  typeof useGetGateFromProductLazyQuery
+>;
+export type GetGateFromProductQueryResult = Apollo.QueryResult<
+  GetGateFromProductQuery,
+  GetGateFromProductQueryVariables
+>;
+>>>>>>> 790d489 (feat(admin): form to add gate to product)
+>>>>>>> a754840 (feat(admin): form to add gate to product)
 export const CreateGateDocument = gql`
   mutation CreateGate(
     $attributes: jsonb!
@@ -1724,6 +1840,10 @@ export type CreateGateMutationOptions = Apollo.BaseMutationOptions<
   CreateGateMutation,
   CreateGateMutationVariables
 >;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> a754840 (feat(admin): form to add gate to product)
 export const DeleteGateFromIdDocument = gql`
   mutation DeleteGateFromId($id: uuid!) {
     delete_gate(where: { id: { _eq: $id } }) {
@@ -1830,6 +1950,12 @@ export type GetGateFromProductQueryResult = Apollo.QueryResult<
   GetGateFromProductQuery,
   GetGateFromProductQueryVariables
 >;
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 790d489 (feat(admin): form to add gate to product)
+>>>>>>> 818e777 (feat(admin): form to add gate to product)
+>>>>>>> a754840 (feat(admin): form to add gate to product)
 export const CreateProductDocument = gql`
   mutation CreateProduct(
     $appId: uuid!
