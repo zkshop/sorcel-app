@@ -1,0 +1,7 @@
+mutation DeleteGateFromId($id: uuid!) {
+  delete_gate(where: { id: { _eq: $id } }) {
+    returning {
+      id
+    }
+  }
+}

@@ -1365,6 +1365,18 @@ export type CreateGateMutation = {
   } | null;
 };
 
+export type DeleteGateFromIdMutationVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+export type DeleteGateFromIdMutation = {
+  __typename?: 'mutation_root';
+  delete_gate?: {
+    __typename?: 'gate_mutation_response';
+    returning: Array<{ __typename?: 'gate'; id: any }>;
+  } | null;
+};
+
 export type GetGateFromProductQueryVariables = Exact<{
   productId?: InputMaybe<Scalars['uuid']>;
 }>;
@@ -1711,6 +1723,55 @@ export type CreateGateMutationResult = Apollo.MutationResult<CreateGateMutation>
 export type CreateGateMutationOptions = Apollo.BaseMutationOptions<
   CreateGateMutation,
   CreateGateMutationVariables
+>;
+export const DeleteGateFromIdDocument = gql`
+  mutation DeleteGateFromId($id: uuid!) {
+    delete_gate(where: { id: { _eq: $id } }) {
+      returning {
+        id
+      }
+    }
+  }
+`;
+export type DeleteGateFromIdMutationFn = Apollo.MutationFunction<
+  DeleteGateFromIdMutation,
+  DeleteGateFromIdMutationVariables
+>;
+
+/**
+ * __useDeleteGateFromIdMutation__
+ *
+ * To run a mutation, you first call `useDeleteGateFromIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteGateFromIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteGateFromIdMutation, { data, loading, error }] = useDeleteGateFromIdMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteGateFromIdMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DeleteGateFromIdMutation,
+    DeleteGateFromIdMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<DeleteGateFromIdMutation, DeleteGateFromIdMutationVariables>(
+    DeleteGateFromIdDocument,
+    options,
+  );
+}
+export type DeleteGateFromIdMutationHookResult = ReturnType<typeof useDeleteGateFromIdMutation>;
+export type DeleteGateFromIdMutationResult = Apollo.MutationResult<DeleteGateFromIdMutation>;
+export type DeleteGateFromIdMutationOptions = Apollo.BaseMutationOptions<
+  DeleteGateFromIdMutation,
+  DeleteGateFromIdMutationVariables
 >;
 export const GetGateFromProductDocument = gql`
   query GetGateFromProduct($productId: uuid) {
