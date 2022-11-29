@@ -6,21 +6,17 @@ type Attribute = {
   value: string;
 };
 
-type Gate = Attribute[][];
+type Gate = Attribute[];
 
-const initialState: Gate = [[]];
+const initialState: Gate = [];
 
 function setAttributeToGateAction(
   state: Gate,
-  action: { type: string; payload: { attribute: Attribute; gateIndex: number } },
+  action: { type: string; payload: { attribute: Attribute } },
 ) {
-  const { gateIndex, attribute } = action.payload;
+  const { attribute } = action.payload;
 
-  return [
-    ...state.slice(0, gateIndex),
-    [...state[gateIndex].filter((attr) => attr.name !== attribute.name), attribute],
-    ...state.slice(gateIndex, findLastIndex(state)),
-  ];
+  return [...state.filter((attr) => attr.name !== attribute.name), attribute];
 }
 
 export const gatesSlice = createSlice({
