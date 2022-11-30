@@ -1,21 +1,10 @@
-import {
-  Heading,
-  HStack,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-  useToast,
-} from '@chakra-ui/react';
+import { Heading, useDisclosure, useToast } from '@chakra-ui/react';
 import { Gate, useDeleteGateFromIdMutation } from 'apollo';
 import { useState } from 'react';
 import { Section, Button } from 'ui';
 import { GateTable } from '../GateTable';
 import { AddGateModal } from './AddGateModal';
+import { DeleteGateModal } from './DeleteGateModal';
 
 type GateSectionProps = {
   gates: Gate[];
@@ -37,7 +26,7 @@ export const GateSection = ({ gates }: GateSectionProps) => {
   const toast = useToast();
   const [gateIdToDelete, setGateIdToDelete] = useState<string | null>(null);
 
-  const [deleteGate, { loading: deleteGateLoading }] = useDeleteGateFromIdMutation();
+  const [deleteGate, { data, loading: deleteGateLoading }] = useDeleteGateFromIdMutation();
 
   const handleClickOnCloseIcon = (id: string) => {
     setGateIdToDelete(id);
@@ -80,26 +69,13 @@ export const GateSection = ({ gates }: GateSectionProps) => {
       <AddGateModal isFormValid={true} isOpen={isAddGateModalOpen} onClose={onCloseAddGateModal} />
 
       <GateTable handleClickOnCloseIcon={handleClickOnCloseIcon} gates={gates} />
-      <Modal isOpen={isDeleteGateModalOpen} onClose={onCloseDeleteGateModal}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Delete Gate {gateIdToDelete}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>Do you want to delete Gate {gateIdToDelete}</ModalBody>
-          <ModalFooter>
-            <HStack justifyContent="flex-end">
-              <Button onClick={onCloseDeleteGateModal}>Cancel</Button>
-              <Button
-                isLoading={deleteGateLoading}
-                isDisabled={deleteGateLoading}
-                onClick={handleClickOnDeleteModal}
-              >
-                Delete
-              </Button>
-            </HStack>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <DeleteGateModal
+        isDeleteGateModalOpen={isDeleteGateModalOpen}
+        onCloseDeleteGateModal={onCloseDeleteGateModal}
+        gateIdToDelete={gateIdToDelete}
+        deleteGateLoading={deleteGateLoading}
+        handleClickOnDeleteModal={handleClickOnDeleteModal}
+      />
     </Section>
   );
 };

@@ -55,7 +55,7 @@ export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps
   const dispatch = useAppDispatch();
   const gate = useAppSelector((state) => state.gates);
   const nftAttributes = useAppSelector((state) => state.nftAttributes.hits);
-  const loading = useAppSelector((state) => state.nftAttributes.loading);
+  const nftAttributesLoading = useAppSelector((state) => state.nftAttributes.loading);
 
   const handleClickFindContractAttributes = async () => {
     dispatch(fetchNFTAttributes(contractAddressValue));
@@ -108,13 +108,21 @@ export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps
                 <Button onClick={handleClickFindContractAttributes}>Find</Button>
               </HStack>
 
-              {loading ? <Spinner /> : <GateFields nftAttributes={nftAttributes} />}
+              {nftAttributesLoading ? <Spinner /> : <GateFields nftAttributes={nftAttributes} />}
             </ModalBody>
             <ModalFooter>
-              <Button backgroundColor="red" color="white" onClick={onClose} mr={3}>
+              <Button
+                backgroundColor="red"
+                color="white"
+                onClick={onClose}
+                mr={3}
+                isDisabled={createGateLoading}
+              >
                 Cancel
               </Button>
-              <Button type="submit">Add</Button>
+              <Button type="submit" isLoading={createGateLoading} isDisabled={createGateLoading}>
+                Add
+              </Button>
             </ModalFooter>
           </form>
         </ModalContent>
