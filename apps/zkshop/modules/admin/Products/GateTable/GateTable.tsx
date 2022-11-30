@@ -1,15 +1,6 @@
-import {
-  TableContainer,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Tbody,
-  UnorderedList,
-  ListItem,
-} from '@chakra-ui/react';
+import { TableContainer, Table, Thead, Tr, Th, Tbody } from '@chakra-ui/react';
 import { Gate } from 'apollo';
-import { CloseIcon } from '@chakra-ui/icons';
+import { GateTableRow } from './GateTableRow';
 
 type GateTable = {
   gates: Gate[];
@@ -24,26 +15,16 @@ export const GateTable = ({ gates, handleClickOnCloseIcon }: GateTable) => (
           <Th>Contract address</Th>
           <Th>Discount</Th>
           <Th>Attributes</Th>
+          <Th></Th>
         </Tr>
       </Thead>
       <Tbody>
         {gates.map((gate) => (
-          <Tr>
-            <Th>{gate.contractAddress}</Th>
-            <Th>{gate.discount}</Th>
-            <Th>
-              <UnorderedList>
-                {gate.attributes?.map((attribute: { name: string; value: string }) => (
-                  <ListItem>
-                    {attribute.name}: {attribute.value}
-                  </ListItem>
-                ))}
-              </UnorderedList>
-            </Th>
-            <Th>
-              <CloseIcon onClick={() => handleClickOnCloseIcon(gate.id)} cursor="pointer" />
-            </Th>
-          </Tr>
+          <GateTableRow
+            key={`gate-table-row-${gate.id}`}
+            gate={gate}
+            handleClickOnCloseIcon={handleClickOnCloseIcon}
+          />
         ))}
       </Tbody>
     </Table>
