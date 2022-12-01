@@ -21,8 +21,14 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   const bgColor = highlight ? '#101238' : 'white';
   const textColor = highlight ? 'white' : 'black';
+
   return (
-    <a href={externalLink || `#`} className="tbw-product-card-link">
+    <a
+      href={externalLink || `#`}
+      target="_blank"
+      className="tbw-product-card-link"
+      rel="noreferrer"
+    >
       <Box
         className="tbw-product-card"
         sx={{
