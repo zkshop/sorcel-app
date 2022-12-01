@@ -1,5 +1,6 @@
 import { Product } from 'apollo';
 import { FormatedProductData } from 'ui-tbw';
+import { getExternalLink } from './getExternalLink';
 
 export type GetProductCardPropsParams = Product & {
   collections: string[];
@@ -38,14 +39,12 @@ export const formatProductData = ({
     return false;
   })();
 
-  const memberStackLink =
-    id === MEMBER_STACK_PRODUCT_ID ? '/#/ms/signup/6372923763918000040c740f' : undefined;
-
   const highlight = id === HIGHLIGHTED_PRODUCT_ID;
+  const externalLink = getExternalLink(id);
 
   return {
     highlight,
-    externalLink: memberStackLink,
+    externalLink,
     isAnHolder: isAnNftHolder,
     isTransparent,
     srcItem: image,
