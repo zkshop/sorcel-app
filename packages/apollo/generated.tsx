@@ -1347,11 +1347,16 @@ export type App_Mutation_ResponseFragmentFragment = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> a754840 (feat(admin): form to add gate to product)
+=======
+>>>>>>> 0ba0e8c (fix(git): re-generate graphql)
+>>>>>>> c6cec51 (fix(git): re-generate graphql)
 export type CreateGateMutationVariables = Exact<{
   attributes: Scalars['jsonb'];
   contractAddress: Scalars['String'];
@@ -1362,6 +1367,7 @@ export type CreateGateMutationVariables = Exact<{
 export type CreateGateMutation = {
   __typename?: 'mutation_root';
   insert_gate_one?: {
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -1374,6 +1380,8 @@ export type GetGateFromProductQuery = {
   gate: Array<{
 >>>>>>> 790d489 (feat(admin): form to add gate to product)
 >>>>>>> a754840 (feat(admin): form to add gate to product)
+=======
+>>>>>>> c6cec51 (fix(git): re-generate graphql)
     __typename?: 'gate';
     attributes?: any | null;
     contractAddress: string;
@@ -1381,9 +1389,12 @@ export type GetGateFromProductQuery = {
     id: any;
     product_id?: any | null;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> a754840 (feat(admin): form to add gate to product)
+=======
+>>>>>>> c6cec51 (fix(git): re-generate graphql)
   } | null;
 };
 
@@ -1407,6 +1418,7 @@ export type GetGateFromProductQuery = {
   __typename?: 'query_root';
   gates: Array<{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
   }>;
@@ -1424,14 +1436,16 @@ export type CreateGateMutation = {
   insert_gate_one?: {
 >>>>>>> 790d489 (feat(admin): form to add gate to product)
 >>>>>>> a754840 (feat(admin): form to add gate to product)
+=======
+>>>>>>> c6cec51 (fix(git): re-generate graphql)
     __typename?: 'gate';
     attributes?: any | null;
     contractAddress: string;
     discount: any;
     id: any;
     product_id?: any | null;
-<<<<<<< HEAD
   }>;
+<<<<<<< HEAD
 };
 
 =======
@@ -1440,6 +1454,8 @@ export type CreateGateMutation = {
 =======
   } | null;
 >>>>>>> 790d489 (feat(admin): form to add gate to product)
+=======
+>>>>>>> c6cec51 (fix(git): re-generate graphql)
 };
 
 >>>>>>> 818e777 (feat(admin): form to add gate to product)
@@ -1713,6 +1729,7 @@ export type UpdateAppMutationOptions = Apollo.BaseMutationOptions<
   UpdateAppMutationVariables
 >;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
@@ -1776,7 +1793,12 @@ export type GetGateFromProductQueryResult = Apollo.QueryResult<
   GetGateFromProductQueryVariables
 >;
 >>>>>>> 790d489 (feat(admin): form to add gate to product)
+<<<<<<< HEAD
 >>>>>>> a754840 (feat(admin): form to add gate to product)
+=======
+=======
+>>>>>>> 0ba0e8c (fix(git): re-generate graphql)
+>>>>>>> c6cec51 (fix(git): re-generate graphql)
 export const CreateGateDocument = gql`
   mutation CreateGate(
     $attributes: jsonb!
@@ -1841,9 +1863,12 @@ export type CreateGateMutationOptions = Apollo.BaseMutationOptions<
   CreateGateMutationVariables
 >;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> a754840 (feat(admin): form to add gate to product)
+=======
+>>>>>>> c6cec51 (fix(git): re-generate graphql)
 export const DeleteGateFromIdDocument = gql`
   mutation DeleteGateFromId($id: uuid!) {
     delete_gate(where: { id: { _eq: $id } }) {
@@ -1951,11 +1976,19 @@ export type GetGateFromProductQueryResult = Apollo.QueryResult<
   GetGateFromProductQueryVariables
 >;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 790d489 (feat(admin): form to add gate to product)
 >>>>>>> 818e777 (feat(admin): form to add gate to product)
 >>>>>>> a754840 (feat(admin): form to add gate to product)
+=======
+=======
+>>>>>>> 790d489 (feat(admin): form to add gate to product)
+>>>>>>> 818e777 (feat(admin): form to add gate to product)
+=======
+>>>>>>> 0ba0e8c (fix(git): re-generate graphql)
+>>>>>>> c6cec51 (fix(git): re-generate graphql)
 export const CreateProductDocument = gql`
   mutation CreateProduct(
     $appId: uuid!
