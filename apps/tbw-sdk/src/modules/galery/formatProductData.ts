@@ -42,7 +42,11 @@ export const formatProductData = ({
   const highlight = id === HIGHLIGHTED_PRODUCT_ID;
   const externalLink = getExternalLink(id);
 
+  // TODO: replace with the real logic, it's just for the demo
+  const isLocked = id === MEMBER_STACK_PRODUCT_ID;
+
   return {
+    isLocked,
     highlight,
     externalLink,
     isAnHolder: isAnNftHolder,

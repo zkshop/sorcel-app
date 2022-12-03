@@ -1,4 +1,6 @@
 import { Box, Text, Image } from '@chakra-ui/react';
+import { LockedLayer } from './LockedLayer';
+import { StyledProductCard } from './ProductCard.style';
 
 export type ProductCardProps = {
   id?: string;
@@ -10,7 +12,10 @@ export type ProductCardProps = {
   description?: any;
   externalLink?: string;
   highlight?: boolean;
+  isLocked?: boolean;
 };
+
+const CLASSNAME = 'tbw-product-card';
 
 export const ProductCard = ({
   srcItem,
@@ -18,71 +23,62 @@ export const ProductCard = ({
   description,
   externalLink,
   highlight = false,
+  isLocked = false,
 }: ProductCardProps) => {
-  const bgColor = highlight ? '#101238' : 'white';
-  const textColor = highlight ? 'white' : 'black';
+  const href = !isLocked && externalLink ? externalLink : '#';
+  const additionalProps = isLocked
+    ? {}
+    : {
+        href,
+        target: '_blank',
+        rel: 'noreferrer',
+      };
 
   return (
-    <a
-      href={externalLink || `#`}
-      target="_blank"
-      className="tbw-product-card-link"
-      rel="noreferrer"
+    <StyledProductCard
+      className={CLASSNAME}
+      highlight={highlight}
+      as={isLocked ? 'div' : 'a'}
+      {...additionalProps}
     >
-      <Box
-        className="tbw-product-card"
+      <LockedLayer isLocked={isLocked} />
+
+      <Image
+        alt="product"
+        src={srcItem}
         sx={{
+          height: '140px',
           width: '100%',
-          border: '1px solid #000000',
-          borderRadius: '6px',
-          overflow: 'hidden',
-          bg: bgColor,
-          boxShadow: highlight && '4px 6px 9px #14FFD5',
+        }}
+      />
+
+      <Box
+        sx={{
+          height: '140px',
+          p: '8px',
         }}
       >
-        <Image
-          alt="product"
-          src={srcItem}
+        <Text
           sx={{
-            height: '140px',
-            width: '100%',
-          }}
-        />
-
-        <Box
-          sx={{
-            height: '140px',
-            p: '8px',
+            fontWeight: '800',
+            fontSize: '20px',
+            lineHeight: '27px',
           }}
         >
-          <Text
-            sx={{
-              fontFamily: 'Avenir',
-              textTransform: 'capitalize',
-              color: textColor,
-              fontWeight: '800',
-              fontSize: '20px',
-              lineHeight: '27px',
-            }}
-          >
-            {title}
-          </Text>
+          {title}
+        </Text>
 
-          <Text
-            sx={{
-              fontFamily: 'Avenir',
-              textTransform: 'capitalize',
-              color: textColor,
-              fontWeight: '400',
-              fontSize: '16px',
-              lineHeight: '17px',
-              marginTop: '8px',
-            }}
-          >
-            {description}
-          </Text>
-        </Box>
+        <Text
+          sx={{
+            fontWeight: '400',
+            fontSize: '16px',
+            lineHeight: '17px',
+            marginTop: '8px',
+          }}
+        >
+          {description}
+        </Text>
       </Box>
-    </a>
+    </StyledProductCard>
   );
 };
