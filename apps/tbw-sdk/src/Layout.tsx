@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box } from 'ui-tbw';
 import { NavBar } from './modules/navbar';
 
 type LayoutProps = {
