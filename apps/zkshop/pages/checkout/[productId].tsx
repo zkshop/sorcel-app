@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import { getPaymentIntent, getStripeObject } from 'clients/stripe';
 import { initializeApollo, addApolloState, GetProductByIdDocument, Product } from 'apollo';
 import { CheckoutForm } from 'modules/checkout/CheckoutForm';
-import { useAppSelector } from 'store/store';
 import { useIsAnHolder } from 'hooks/useIsAnHolder';
 
 type CheckoutProps = {

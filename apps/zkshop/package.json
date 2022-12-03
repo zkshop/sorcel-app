@@ -38,6 +38,7 @@
     "stripe": "^10.13.0",
     "ui": "*",
     "validation": "*",
+    "store": "*",
     "wagmi": "^0.6.8",
     "paper": "*"
   },

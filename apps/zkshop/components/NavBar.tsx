@@ -6,13 +6,13 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import Image from 'next/legacy/image';
 
-import { getCurrentUser, login, logoutUser } from 'store/slices/auth';
-import { useAppDispatch, useAppSelector } from 'store/store';
 import { useEffect } from 'react';
 
 import { useAccount } from 'wagmi';
 
 import { useGetAppQuery } from 'apollo';
+import { useAppDispatch, useAppSelector } from 'store';
+import { getCurrentUser, login, logoutUser } from 'store/slices/auth';
 
 type NavBarProps = {
   admin: boolean;

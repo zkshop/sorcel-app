@@ -1,8 +1,8 @@
 import { ProductDetails } from 'ui';
-import { useAppSelector } from '../../store/store';
 
 import { Product } from 'apollo';
 import { formatProductData } from 'pure';
+import { useAppSelector } from 'store';
 
 type ProductDetailsContainerProps = {
   product: Product;

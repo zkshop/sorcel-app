@@ -1,10 +1,8 @@
 import { useCallback, useEffect } from 'react';
-import { useAccount } from 'wagmi';
-
-import { fetchNFTS, reset } from '../store/slices/nfts';
-import { useAppDispatch, useAppSelector } from '../store/store';
-
+import { useAppSelector, useAppDispatch } from 'store';
+import { fetchNFTS, reset } from 'store/slices/nfts';
 import { fetchPOAPS, reset as resetPoaps } from 'store/slices/poap';
+import { useAccount } from 'wagmi';
 
 const useUpdateThemeOnConnection = () => {
   const { isConnected, isDisconnected, address } = useAccount();
