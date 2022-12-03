@@ -1,0 +1,11 @@
+{
+  "name": "store",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "domains": "*",
+    "infra": "*",
+    "redux": "^4.2.0"
+  }
+}
