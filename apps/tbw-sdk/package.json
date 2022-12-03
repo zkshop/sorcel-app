@@ -10,9 +10,6 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.4.1",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
     "@rainbow-me/rainbowkit": "^0.7.1",
     "@reduxjs/toolkit": "^1.8.6",
     "apollo": "*",

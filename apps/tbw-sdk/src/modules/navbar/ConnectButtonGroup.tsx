@@ -1,6 +1,5 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, Button } from 'ui-tbw';
 
-import { Button } from 'ui-tbw';
 import { LoginWithPaper } from './LoginWithPaper';
 import ConnectWalletButton from './ConnectWalletButton';
 type ConnectButtonGroupProps = {

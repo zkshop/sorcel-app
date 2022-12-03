@@ -1,4 +1,4 @@
-import { VStack, HStack, Box } from '@chakra-ui/react';
+import { VStack, HStack, Box } from 'ui-tbw';
 
 import { useAppDispatch } from '../../store';
 import { useEffect } from 'react';
