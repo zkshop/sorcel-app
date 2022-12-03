@@ -16,11 +16,14 @@ export type FormatedProductData = {
   description?: any;
   externalLink?: string;
   highlight?: boolean;
+  isLocked?: boolean;
 };
 
 type ProductCardListProps = {
   products: FormatedProductData[];
 };
+
+const CLASSNAME = 'tbw-product-card-list';
 
 const templateColumns = {
   xs: 'repeat(2, 1fr)',
@@ -30,7 +33,7 @@ const templateColumns = {
 
 export const ProductCardList = ({ products }: ProductCardListProps) => (
   <Box
-    className="tbw-product-card-list"
+    className={CLASSNAME}
     sx={{
       maxW: '768px',
       margin: '0 auto',
@@ -48,6 +51,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
           description,
           externalLink,
           highlight,
+          isLocked,
         }) => (
           <GridItem key={`products-${id}`} display="flex" justifyContent="center">
             <ProductCard
@@ -60,6 +64,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
               priceReduced={priceReduced}
               externalLink={externalLink}
               highlight={highlight}
+              isLocked={isLocked}
             />
           </GridItem>
         ),

@@ -13,6 +13,9 @@ type NavBarProps = {
   admin?: boolean;
 };
 
+const CLASSNAME = 'tbw-header';
+const LOGO_CLASSNAME = 'tbw-header-logo';
+
 export const NavBar = ({}: NavBarProps) => {
   const data = useGetAppQuery({
     variables: {
@@ -33,11 +36,11 @@ export const NavBar = ({}: NavBarProps) => {
   }, [dispatch]);
 
   return (
-    <VStack as="header" sx={{ p: 2, maxW: '875px', margin: 'auto' }} className="tbw-header">
+    <VStack as="header" sx={{ p: 2, maxW: '875px', margin: 'auto' }} className={CLASSNAME}>
       <HStack w="full">
         <HStack justifyContent="space-between" flex={1}>
           <Box
-            className="tbw-logo"
+            className={LOGO_CLASSNAME}
             sx={{
               fontFamily: 'Exo',
               fontSize: '45px',
