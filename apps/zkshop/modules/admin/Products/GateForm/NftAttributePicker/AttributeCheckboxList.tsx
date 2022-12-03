@@ -1,8 +1,8 @@
 import { Checkbox, CheckboxGroup, HStack } from '@chakra-ui/react';
 import { NftAttribute } from 'domains';
 import { ChangeEvent, useState } from 'react';
+import { useAppDispatch } from 'store';
 import { setAttributeToGate } from 'store/slices/gate';
-import { useAppDispatch } from 'store/store';
 
 type AttributeListProps = {
   attribute: NftAttribute<any>;

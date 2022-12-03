@@ -45,4 +45,5 @@ export default withTM([
   'supabase',
   'sendinblue',
   'validation',
+  'store',
 ])(nextConfig);

@@ -10,11 +10,12 @@ import { WagmiConfig } from 'wagmi';
 import { wagmiClient, chains } from '../clients/wagmi';
 import { Layout } from 'components/Layout';
 import { ApolloProvider, useApollo } from 'apollo';
-import { wrapper, store } from 'store/store';
+import { wrapper } from 'store';
 import { ThemeDecorator } from 'components/ThemeDecorator';
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps, ...rest }: AppProps) {
   const apolloClient = useApollo(pageProps);
+  const { store } = wrapper.useWrappedStore(rest);
 
   return (
     <ReduxProvider store={store}>
@@ -33,4 +34,4 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-export default wrapper.withRedux(App);
+export default App;

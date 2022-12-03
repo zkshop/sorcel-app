@@ -6,7 +6,7 @@ type Props = {
 };
 
 export const ThemeProvider = ({ children }: Props) => (
-  <ChakraProvider resetCSS theme={theme}>
+  <ChakraProvider resetCSS theme={theme} cssVarsRoot="body">
     {children}
   </ChakraProvider>
 );
