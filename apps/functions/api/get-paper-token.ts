@@ -1,10 +1,11 @@
 import { TokenService } from '../domains/TokenService';
 import { PaperWalletClient } from '../infra/PaperWalletClient';
 import { VercelRequest, VercelResponse } from '@vercel/node';
+import { allowCors } from '../allowCors';
 
 const Token = TokenService(PaperWalletClient());
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(404).json({ error: 'Method not allowed' });
   }
@@ -21,3 +22,5 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.status(500).json(e);
   }
 }
+
+export default allowCors(handler);
