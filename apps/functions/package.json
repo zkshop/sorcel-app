@@ -1,0 +1,13 @@
+{
+  "name": "functions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "@vercel/node": "^2.7.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3"
+  }
+}
