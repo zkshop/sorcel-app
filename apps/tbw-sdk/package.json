@@ -20,7 +20,8 @@
     "react-canvas-confetti": "^1.3.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.4",
-    "wagmi": "^0.6.8"
+    "wagmi": "^0.6.8",
+    "domains": "*"
   },
   "devDependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
