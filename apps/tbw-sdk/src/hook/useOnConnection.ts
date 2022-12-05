@@ -6,6 +6,9 @@ import { useAppDispatch, useAppSelector } from '../store';
 
 export const useOnConnection = () => {
   const { isConnected, isDisconnected, address } = useAccount();
+  const publicAddress = useAppSelector((state) => state.user.auth.publicAddress);
+  const connectionType = useAppSelector((state) => state.user.auth.type);
+
   const { nfts } = useAppSelector((state) => state.user);
   const email = useAppSelector((state) => state.user.auth.email);
   const dispatch = useAppDispatch();
@@ -14,7 +17,11 @@ export const useOnConnection = () => {
     if (address) {
       dispatch(fetchNFTS(address));
     }
-  }, [address, dispatch]);
+
+    if (connectionType === 'PAPER' && publicAddress) {
+      dispatch(fetchNFTS(publicAddress));
+    }
+  }, [address, connectionType, dispatch, publicAddress]);
 
   useEffect(() => {
     if (isDisconnected) {

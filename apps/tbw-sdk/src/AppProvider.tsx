@@ -6,6 +6,7 @@ import { ApolloProvider, useApollo, APOLLO_STATE_PROP_NAME } from 'apollo';
 import { WagmiConfig } from 'wagmi';
 import { wagmiClient, chains } from './clients/wagmi';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { PaperSDKProvider } from 'paper';
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -21,7 +22,11 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       <ApolloProvider client={apolloClient}>
         <ThemeProvider>
           <WagmiConfig client={wagmiClient}>
-            <RainbowKitProvider chains={chains}>{children}</RainbowKitProvider>
+            <RainbowKitProvider chains={chains}>
+              <PaperSDKProvider clientId={process.env.PAPER_CLIENT_ID} chainName="Polygon">
+                {children}
+              </PaperSDKProvider>
+            </RainbowKitProvider>
           </WagmiConfig>
         </ThemeProvider>
       </ApolloProvider>

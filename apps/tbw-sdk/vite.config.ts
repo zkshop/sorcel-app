@@ -17,7 +17,14 @@ export default defineConfig({
     inject({
       util: 'util/',
     }),
-    EnvironmentPlugin(['APP_ID', 'HASURA_API_URL', 'HASURA_API_KEY', 'ALCHEMY_SECRET_KEY']),
+    EnvironmentPlugin([
+      'APP_ID',
+      'HASURA_API_URL',
+      'HASURA_API_KEY',
+      'ALCHEMY_SECRET_KEY',
+      'FUNCTIONS_API',
+      'PAPER_CLIENT_ID',
+    ]),
   ],
   define: {
     'process.env': {
@@ -29,6 +36,8 @@ export default defineConfig({
       MAGIC_SECRET_KEY: 'sk_live_23C4458F3EEE6FF9',
       SUPABASE_API_KEY:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtxanl0Z3hidGV0emV3aXBpa2F4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY2NTczNzc5NSwiZXhwIjoxOTgxMzEzNzk1fQ.913rq_gUqPxJxDK4lYvrrmophNnupbN09LqCp6wUAQ4',
+      FUNCTIONS_API: 'https://functions.3shop.co',
+      PAPER_CLIENT_ID: 'a8a84815-f9dc-4292-8724-850ec225fb90',
     },
   },
   build: {
