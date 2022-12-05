@@ -16,7 +16,8 @@
     "alchemy": "*",
     "supabase": "*",
     "sendgrid": "*",
-    "sendinblue": "*"
+    "sendinblue": "*",
+    "pure": "*"
   },
   "devDependencies": {
     "tsconfig": "*"

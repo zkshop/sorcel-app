@@ -17,7 +17,6 @@ export const Galery = () => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // TODO(refacto): hack to get the member stack script to load correctly
       window?.MemberStack?.reload();
     }
   }, []);

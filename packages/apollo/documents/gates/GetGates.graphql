@@ -1,0 +1,9 @@
+query GetGates {
+  gates: gate {
+    attributes
+    contractAddress
+    discount
+    id
+    product_id
+  }
+}
