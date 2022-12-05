@@ -10,7 +10,14 @@ export default defineConfig({
     inject({
       util: 'util/',
     }),
-    EnvironmentPlugin(['APP_ID', 'HASURA_API_URL', 'HASURA_API_KEY', 'ALCHEMY_SECRET_KEY']),
+    EnvironmentPlugin([
+      'APP_ID',
+      'HASURA_API_URL',
+      'HASURA_API_KEY',
+      'ALCHEMY_SECRET_KEY',
+      'FUNCTIONS_API',
+      'PAPER_CLIENT_ID',
+    ]),
   ],
   define: {
     'process.env': {},
