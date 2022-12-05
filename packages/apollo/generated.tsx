@@ -1401,6 +1401,20 @@ export type DeleteGateFromIdMutation = {
   } | null;
 };
 
+export type GetGatesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetGatesQuery = {
+  __typename?: 'query_root';
+  gates: Array<{
+    __typename?: 'gate';
+    attributes?: any | null;
+    contractAddress: string;
+    discount: any;
+    id: any;
+    product_id?: any | null;
+  }>;
+};
+
 export type GetGateFromProductQueryVariables = Exact<{
   productId?: InputMaybe<Scalars['uuid']>;
 }>;
@@ -1797,6 +1811,48 @@ export type DeleteGateFromIdMutationOptions = Apollo.BaseMutationOptions<
   DeleteGateFromIdMutation,
   DeleteGateFromIdMutationVariables
 >;
+export const GetGatesDocument = gql`
+  query GetGates {
+    gates: gate {
+      attributes
+      contractAddress
+      discount
+      id
+      product_id
+    }
+  }
+`;
+
+/**
+ * __useGetGatesQuery__
+ *
+ * To run a query within a React component, call `useGetGatesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetGatesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetGatesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetGatesQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetGatesQuery, GetGatesQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetGatesQuery, GetGatesQueryVariables>(GetGatesDocument, options);
+}
+export function useGetGatesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetGatesQuery, GetGatesQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetGatesQuery, GetGatesQueryVariables>(GetGatesDocument, options);
+}
+export type GetGatesQueryHookResult = ReturnType<typeof useGetGatesQuery>;
+export type GetGatesLazyQueryHookResult = ReturnType<typeof useGetGatesLazyQuery>;
+export type GetGatesQueryResult = Apollo.QueryResult<GetGatesQuery, GetGatesQueryVariables>;
 export const GetGateFromProductDocument = gql`
   query GetGateFromProduct($productId: uuid) {
     gates: gate(where: { product_id: { _eq: $productId } }) {

@@ -1,12 +1,12 @@
-import { Product } from 'apollo';
+import { Gate, Product } from 'apollo';
 import { FormatedProductData } from 'ui-tbw';
 import { getExternalLink } from './getExternalLink';
 
 export type GetProductCardPropsParams = Product & {
   collections: string[];
+  gate: Gate | null;
 };
 
-const MEMBER_STACK_PRODUCT_ID = '51e46fb2-cd9e-4baf-81db-8df9d58b62b2';
 const HIGHLIGHTED_PRODUCT_ID = 'ebb24d16-6b6f-464b-bb54-897482b4bc67';
 
 export const formatProductData = ({
@@ -20,6 +20,7 @@ export const formatProductData = ({
   id,
   isDiscountGated,
   collections,
+  gate,
 }: GetProductCardPropsParams): FormatedProductData => {
   const isGated = curation;
   const isAnNftHolder = collections.includes(curation?.toLowerCase());
@@ -40,10 +41,8 @@ export const formatProductData = ({
   })();
 
   const highlight = id === HIGHLIGHTED_PRODUCT_ID;
-  const externalLink = getExternalLink(id);
-
-  // TODO: replace with the real logic, it's just for the demo
-  const isLocked = id === MEMBER_STACK_PRODUCT_ID;
+  const externalLink = getExternalLink(id, gate);
+  const isLocked = !externalLink;
 
   return {
     isLocked,
