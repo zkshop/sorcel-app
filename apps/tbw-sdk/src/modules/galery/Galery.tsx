@@ -34,7 +34,18 @@ export const Galery = () => {
 
   return (
     <>
-      <ReactCanvasConfetti fire={isConnected} className="canvas" />
+      <ReactCanvasConfetti
+        fire={isConnected}
+        style={{
+          height: '100%',
+          left: '0px',
+          pointerEvents: 'none',
+          position: 'fixed',
+          top: '0px',
+          width: '100%',
+          zIndex: '-1',
+        }}
+      />
 
       <ProductListContainer products={data?.products} />
     </>
