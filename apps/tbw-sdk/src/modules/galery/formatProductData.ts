@@ -42,7 +42,7 @@ export const formatProductData = ({
   })();
 
   const highlight = id === HIGHLIGHTED_PRODUCT_ID;
-  const externalLink = getExternalLink(id, gate);
+  const externalLink = getExternalLink(id, gate, isAnNftHolder);
   const isLocked = !externalLink;
   const targetAttribute = getTargetAttribute(id);
 

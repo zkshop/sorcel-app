@@ -36,7 +36,11 @@ const getMemberStackLink = (gate: Gate) => {
   return `${MS_LINK_PREFIX}${correctplan}`;
 };
 
-export const getExternalLink = (productId: string, gate: Gate | null) => {
+export const getExternalLink = (productId: string, gate: Gate | null, isAnNftHolder: boolean) => {
+  if (!isAnNftHolder) {
+    return '';
+  }
+
   if (productId === DISCORD_PRODUCT_ID) {
     return DISCORD_LINK;
   }
