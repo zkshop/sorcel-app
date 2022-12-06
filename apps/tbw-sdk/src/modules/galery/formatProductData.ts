@@ -1,6 +1,7 @@
 import { Gate, Product } from 'apollo';
 import { FormatedProductData } from 'ui-tbw';
 import { getExternalLink } from './getExternalLink';
+import { getTargetAttribute } from './getTargetAttribute';
 
 export type GetProductCardPropsParams = Product & {
   collections: string[];
@@ -43,11 +44,13 @@ export const formatProductData = ({
   const highlight = id === HIGHLIGHTED_PRODUCT_ID;
   const externalLink = getExternalLink(id, gate);
   const isLocked = !externalLink;
+  const targetAttribute = getTargetAttribute(id);
 
   return {
     isLocked,
     highlight,
     externalLink,
+    targetAttribute,
     isAnHolder: isAnNftHolder,
     isTransparent,
     srcItem: image,

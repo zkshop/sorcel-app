@@ -13,6 +13,7 @@ export type ProductCardProps = {
   externalLink?: string;
   highlight?: boolean;
   isLocked?: boolean;
+  targetAttribute?: string;
 };
 
 const CLASSNAME = 'tbw-product-card';
@@ -24,13 +25,14 @@ export const ProductCard = ({
   externalLink,
   highlight = false,
   isLocked = false,
+  targetAttribute = '_blank',
 }: ProductCardProps) => {
   const href = !isLocked && externalLink ? externalLink : '#';
   const additionalProps = isLocked
     ? {}
     : {
         href,
-        target: '_blank',
+        target: targetAttribute,
         rel: 'noreferrer',
       };
 
