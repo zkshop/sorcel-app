@@ -11,7 +11,6 @@ type ProductListContainerProps = {
 
 const isNftMatchingWithGate = (gate: Gate, nft: Nft): boolean => {
   if (!nft.rawMetadata || !nft.rawMetadata.attributes) return false;
-
   for (const gateAttribute of gate.attributes) {
     const nftAttribute = nft.rawMetadata.attributes.find(
       (attribute) => attribute.trait_type === gateAttribute.name,
@@ -26,7 +25,7 @@ const isNftMatchingWithGate = (gate: Gate, nft: Nft): boolean => {
 
 const isMatchingGate = (gate: Gate, nfts: Nft[]): boolean => {
   const nftsWithSameSmartContract = nfts.filter(
-    (nft) => nft.contract.address === gate.contractAddress,
+    (nft) => nft?.contract?.address?.toLowerCase() === gate?.contractAddress?.toLowerCase(),
   );
 
   if (!nftsWithSameSmartContract.length) return false;
