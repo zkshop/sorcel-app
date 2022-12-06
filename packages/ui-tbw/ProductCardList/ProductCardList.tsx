@@ -17,6 +17,7 @@ export type FormatedProductData = {
   externalLink?: string;
   highlight?: boolean;
   isLocked?: boolean;
+  targetAttribute?: string;
 };
 
 type ProductCardListProps = {
@@ -52,6 +53,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
           externalLink,
           highlight,
           isLocked,
+          targetAttribute,
         }) => (
           <GridItem key={`products-${id}`} display="flex" justifyContent="center">
             <ProductCard
@@ -65,6 +67,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
               externalLink={externalLink}
               highlight={highlight}
               isLocked={isLocked}
+              targetAttribute={targetAttribute}
             />
           </GridItem>
         ),
