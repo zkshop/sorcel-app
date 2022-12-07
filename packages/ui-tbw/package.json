@@ -6,9 +6,10 @@
     "lint": "eslint \"**/*.ts*\" --fix",
     "lint:fix": "yarn lint --fix"
   },
-  "dependencies": {
-    "@chakra-ui/react": "^2.4.1",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5"
-  }
+  "peerDependencies": {
+    "@chakra-ui/react": "*",
+    "@emotion/react": "*",
+    "@emotion/styled": "*"
+  },
+  "dependencies": {}
 }
