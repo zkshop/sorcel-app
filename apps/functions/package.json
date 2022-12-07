@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {},
   "dependencies": {
-    "@vercel/node": "^2.7.1",
-    "axios": "^1.2.0"
+    "@vercel/node": "^2.7.1"
   },
-  "devDependencies": {
-    "typescript": "^4.9.3"
+  "devDependencies": {},
+  "peerDependencies": {
+    "axios": "*",
+    "typescript": "*"
   }
 }

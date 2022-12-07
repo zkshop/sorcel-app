@@ -25,7 +25,7 @@ const isNftMatchingWithGate = (gate: Gate, nft: Nft): boolean => {
 
 const isMatchingGate = (gate: Gate, nfts: Nft[]): boolean => {
   const nftsWithSameSmartContract = nfts.filter(
-    (nft) => nft?.contract?.address?.toLowerCase() === gate?.contractAddress?.toLowerCase(),
+    (nft) => nft.contract.address.toLowerCase() === gate.contractAddress.toLowerCase(),
   );
 
   if (!nftsWithSameSmartContract.length) return false;
