@@ -15,6 +15,8 @@ export * from './ProductDetails/ProductDetails';
 export * from './CollectionBadge/PoapBadge/PoapBadge';
 export * from './Section/Section';
 export * from './SizeSelector/SizeSelector';
+export * from './Spinner';
+export * from './Box';
 export * from './TextInput/TextInput';
 export * from './VerticalMenu/VerticalMenu';
 export * from './Icons';
@@ -50,6 +52,9 @@ export {
   NumberInput,
   NumberInputField,
   Spinner,
+  VStack,
+  Link,
+  Image,
   Table,
   TableContainer,
   Tbody,
@@ -61,7 +66,6 @@ export {
   UnorderedList,
   useDisclosure,
   useToast,
-  VStack,
   SimpleGrid,
   Stack,
 } from '@chakra-ui/react';

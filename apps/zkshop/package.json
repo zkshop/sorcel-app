@@ -6,9 +6,9 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "lint": "next lint --fix",
     "start": "next start",
-    "test": "jest"
+    "lint": "next lint",
+    "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
@@ -22,17 +22,18 @@
     "next": "^13.0.0",
     "next-connect": "^0.13.0",
     "next-redux-wrapper": "^8.0.0",
-    "paper": "*",
     "pure": "*",
     "react": "^18.2.0",
     "react-canvas-confetti": "^1.3.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.37.0",
-    "store": "*",
     "stripe": "^10.13.0",
     "ui": "*",
     "validation": "*",
-    "wagmi": "^0.6.8"
+    "store": "*",
+    "wagmi": "^0.6.8",
+    "paper": "*",
+    "poap": "*"
   },
   "devDependencies": {
     "@hookform/devtools": "^4.2.2",

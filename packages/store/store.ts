@@ -4,10 +4,9 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import nftsReducer from './slices/nfts';
 import poapReducer from './slices/poap';
-import nftAttributesReducer from './slices/nftAttributes';
+
 import poapImageListReducer from './slices/poapImageList';
 import authReducer from './slices/auth';
-import gateReducer from './slices/gate';
 
 const rootReducer = combineReducers({
   poapImageList: poapImageListReducer,
@@ -16,8 +15,6 @@ const rootReducer = combineReducers({
     poap: poapReducer,
     auth: authReducer,
   }),
-  gates: gateReducer,
-  nftAttributes: nftAttributesReducer,
 });
 
 export const store = configureStore({
