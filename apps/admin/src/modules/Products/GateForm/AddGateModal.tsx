@@ -51,7 +51,7 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
 
   const contractAddressValue = watch('contractAddress');
   const [createGate, { loading: createGateLoading }] = useCreateGateMutation();
-  const { id: productId } = useParams();
+  const { productId } = useParams();
 
   const toast = useToast();
   const dispatch = useAppDispatch();
@@ -87,14 +87,6 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
         description: 'Please try again later',
       });
     }
-    await createGate({
-      variables: {
-        discount,
-        contractAddress,
-        attributes: JSON.stringify(gate),
-        productId,
-      },
-    });
   };
 
   return (
@@ -121,30 +113,19 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
 
               {nftAttributesLoading ? <Spinner /> : <GateFields nftAttributes={nftAttributes} />}
             </ModalBody>
-            <Button
-              backgroundColor="red"
-              color="white"
-              onClick={onClose}
-              mr={3}
-              isDisabled={createGateLoading}
-            >
-              Cancel
-            </Button>
-            <Button type="submit" isLoading={createGateLoading} isDisabled={createGateLoading}>
-              Add
-            </Button>
-
-            <Input
-              placeholder="0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D"
-              {...register('contractAddress')}
-            />
-            <Button onClick={handleClickFindContractAttributes}>Find</Button>
-
             <ModalFooter>
-              <Button backgroundColor="red" color="white" onClick={onClose} mr={3}>
+              <Button
+                backgroundColor="red"
+                color="white"
+                onClick={onClose}
+                mr={3}
+                isDisabled={createGateLoading}
+              >
                 Cancel
               </Button>
-              <Button type="submit">Add</Button>
+              <Button type="submit" isLoading={createGateLoading} isDisabled={createGateLoading}>
+                Add
+              </Button>
             </ModalFooter>
           </form>
         </ModalContent>

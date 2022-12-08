@@ -1,13 +1,13 @@
 mutation EditProduct(
-  $id: uuid
-  $collection: bpchar
-  $curation: bpchar
-  $discount: smallint
-  $image: bpchar
+  $id: uuid!
+  $collection: String!
+  $curation: String
+  $discount: Int
+  $image: String!
   $name: String
-  $description: String
-  $price: numeric
-  $poapId: numeric
+  $description: String!
+  $price: Int!
+  $poapId: Int
   $isDiscountGated: Boolean
 ) {
   update_product(

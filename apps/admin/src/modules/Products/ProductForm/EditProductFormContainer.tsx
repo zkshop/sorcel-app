@@ -32,11 +32,6 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
   const methods = useForm<AddProductFormValues>({
     defaultValues: {
       ...product,
-      price: product.price.toString(),
-      discount: product.discount?.toString(),
-      poapId: product.poapId?.toString(),
-      description: product.description || '',
-      isDiscountGated: product.isDiscountGated,
     },
     resolver: yupResolver(ADD_PRODUCT_FORM_SCHEMA),
     mode: 'onChange',
@@ -80,9 +75,9 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
     const variables = {
       ...data,
       id: product.id,
-      price: toNumber(data.price),
-      discount: toNumber(data.discount),
-      poapId: toNumber(data.poapId),
+      price: data.price,
+      discount: data.discount,
+      poapId: data.poapId,
     };
 
     try {

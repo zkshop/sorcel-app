@@ -30,6 +30,8 @@ const EditProductContainer = ({ productId }: EditProductPageProps) => {
 
   if (!productData?.product_by_pk || !gateData || productError) return <>Error</>;
 
+  console.log({ gateData });
+
   const product = productData?.product_by_pk;
   const gates = gateData?.gates;
 

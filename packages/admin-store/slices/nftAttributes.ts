@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { NftAttribute } from 'domains';
 import { Network, NftService } from 'domains';
-import { NftMetadataClient } from 'admin-infra';
+import { NftReaderClient } from 'admin-infra';
 
-const nft = NftService(NftMetadataClient(Network.MATIC_MAINNET));
+const nft = NftService(NftReaderClient(Network.MATIC_MAINNET));
 
 export const fetchNFTAttributes = createAsyncThunk(
   'nftAttributes/fetch',
