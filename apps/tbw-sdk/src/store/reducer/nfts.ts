@@ -1,15 +1,29 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Nft, Network, createAlchemy } from 'alchemy';
+import { Nft, Network, createAlchemy, Alchemy, OwnedNft } from 'alchemy';
 import { NftService, NftClient } from 'domains';
+
+const getAllWalletNtfs = async (
+  api: Alchemy,
+  address: string,
+  pageKey?: string,
+): Promise<OwnedNft[]> => {
+  const result = await api.nft.getNftsForOwner(address, {
+    pageSize: 100,
+    pageKey,
+  });
+
+  const ownedNfts = result.ownedNfts;
+
+  if (result.pageKey) return ownedNfts.concat(await getAllWalletNtfs(api, address, result.pageKey));
+  return ownedNfts;
+};
 
 export function NftScrapperClient(network: Network): NftClient {
   const api = createAlchemy(network);
 
   return {
-    getWalletNfts: async (address) => {
-      const result = await api.nft.getNftsForOwner(address);
-      return result.ownedNfts;
-    },
+    getWalletNfts: async (address: string, pageKey?: string) =>
+      await getAllWalletNtfs(api, address, pageKey),
 
     getNftAttribute: async () => [],
   };
