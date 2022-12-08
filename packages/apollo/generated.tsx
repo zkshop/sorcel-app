@@ -13,11 +13,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  bpchar: any;
   jsonb: any;
-  name: any;
-  numeric: any;
-  smallint: any;
   uuid: any;
 };
 
@@ -32,6 +28,19 @@ export type Boolean_Comparison_Exp = {
   _lte?: InputMaybe<Scalars['Boolean']>;
   _neq?: InputMaybe<Scalars['Boolean']>;
   _nin?: InputMaybe<Array<Scalars['Boolean']>>;
+};
+
+/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
+export type Int_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['Int']>;
+  _gt?: InputMaybe<Scalars['Int']>;
+  _gte?: InputMaybe<Scalars['Int']>;
+  _in?: InputMaybe<Array<Scalars['Int']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Int']>;
+  _lte?: InputMaybe<Scalars['Int']>;
+  _neq?: InputMaybe<Scalars['Int']>;
+  _nin?: InputMaybe<Array<Scalars['Int']>>;
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -67,12 +76,12 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']>;
 };
 
-/** columns and relationships of "app" */
+/** app table */
 export type App = {
   __typename?: 'app';
   id: Scalars['uuid'];
   imgUrl?: Maybe<Scalars['String']>;
-  isZKP: Scalars['Boolean'];
+  isZKP?: Maybe<Scalars['Boolean']>;
   name: Scalars['String'];
 };
 
@@ -111,7 +120,7 @@ export type App_Bool_Exp = {
 /** unique or primary key constraints on table "app" */
 export enum App_Constraint {
   /** unique or primary key constraint on columns "id" */
-  AppsPkey = 'apps_pkey',
+  AppPkey = 'app_pkey',
 }
 
 /** input type for inserting data into table "app" */
@@ -221,39 +230,6 @@ export type App_Updates = {
   where: App_Bool_Exp;
 };
 
-/** Boolean expression to compare columns of type "bpchar". All fields are combined with logical 'AND'. */
-export type Bpchar_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['bpchar']>;
-  _gt?: InputMaybe<Scalars['bpchar']>;
-  _gte?: InputMaybe<Scalars['bpchar']>;
-  /** does the column match the given case-insensitive pattern */
-  _ilike?: InputMaybe<Scalars['bpchar']>;
-  _in?: InputMaybe<Array<Scalars['bpchar']>>;
-  /** does the column match the given POSIX regular expression, case insensitive */
-  _iregex?: InputMaybe<Scalars['bpchar']>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  /** does the column match the given pattern */
-  _like?: InputMaybe<Scalars['bpchar']>;
-  _lt?: InputMaybe<Scalars['bpchar']>;
-  _lte?: InputMaybe<Scalars['bpchar']>;
-  _neq?: InputMaybe<Scalars['bpchar']>;
-  /** does the column NOT match the given case-insensitive pattern */
-  _nilike?: InputMaybe<Scalars['bpchar']>;
-  _nin?: InputMaybe<Array<Scalars['bpchar']>>;
-  /** does the column NOT match the given POSIX regular expression, case insensitive */
-  _niregex?: InputMaybe<Scalars['bpchar']>;
-  /** does the column NOT match the given pattern */
-  _nlike?: InputMaybe<Scalars['bpchar']>;
-  /** does the column NOT match the given POSIX regular expression, case sensitive */
-  _nregex?: InputMaybe<Scalars['bpchar']>;
-  /** does the column NOT match the given SQL regular expression */
-  _nsimilar?: InputMaybe<Scalars['bpchar']>;
-  /** does the column match the given POSIX regular expression, case sensitive */
-  _regex?: InputMaybe<Scalars['bpchar']>;
-  /** does the column match the given SQL regular expression */
-  _similar?: InputMaybe<Scalars['bpchar']>;
-};
-
 /** ordering argument of a cursor */
 export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
@@ -267,10 +243,10 @@ export type Gate = {
   __typename?: 'gate';
   attributes?: Maybe<Scalars['jsonb']>;
   contractAddress: Scalars['String'];
-  discount: Scalars['numeric'];
+  discount: Scalars['Int'];
   id: Scalars['uuid'];
-  name?: Maybe<Scalars['name']>;
-  product_id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+  product_id: Scalars['uuid'];
 };
 
 /** columns and relationships of "gate" */
@@ -325,16 +301,16 @@ export type Gate_Bool_Exp = {
   _or?: InputMaybe<Array<Gate_Bool_Exp>>;
   attributes?: InputMaybe<Jsonb_Comparison_Exp>;
   contractAddress?: InputMaybe<String_Comparison_Exp>;
-  discount?: InputMaybe<Numeric_Comparison_Exp>;
+  discount?: InputMaybe<Int_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
-  name?: InputMaybe<Name_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
   product_id?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "gate" */
 export enum Gate_Constraint {
   /** unique or primary key constraint on columns "id" */
-  GatePkey = 'gate_pkey',
+  GatePkey = 'Gate_pkey',
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -354,16 +330,16 @@ export type Gate_Delete_Key_Input = {
 
 /** input type for incrementing numeric columns in table "gate" */
 export type Gate_Inc_Input = {
-  discount?: InputMaybe<Scalars['numeric']>;
+  discount?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "gate" */
 export type Gate_Insert_Input = {
   attributes?: InputMaybe<Scalars['jsonb']>;
   contractAddress?: InputMaybe<Scalars['String']>;
-  discount?: InputMaybe<Scalars['numeric']>;
+  discount?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
-  name?: InputMaybe<Scalars['name']>;
+  name?: InputMaybe<Scalars['String']>;
   product_id?: InputMaybe<Scalars['uuid']>;
 };
 
@@ -371,8 +347,9 @@ export type Gate_Insert_Input = {
 export type Gate_Max_Fields = {
   __typename?: 'gate_max_fields';
   contractAddress?: Maybe<Scalars['String']>;
-  discount?: Maybe<Scalars['numeric']>;
+  discount?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
   product_id?: Maybe<Scalars['uuid']>;
 };
 
@@ -380,8 +357,9 @@ export type Gate_Max_Fields = {
 export type Gate_Min_Fields = {
   __typename?: 'gate_min_fields';
   contractAddress?: Maybe<Scalars['String']>;
-  discount?: Maybe<Scalars['numeric']>;
+  discount?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
   product_id?: Maybe<Scalars['uuid']>;
 };
 
@@ -441,9 +419,9 @@ export enum Gate_Select_Column {
 export type Gate_Set_Input = {
   attributes?: InputMaybe<Scalars['jsonb']>;
   contractAddress?: InputMaybe<Scalars['String']>;
-  discount?: InputMaybe<Scalars['numeric']>;
+  discount?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
-  name?: InputMaybe<Scalars['name']>;
+  name?: InputMaybe<Scalars['String']>;
   product_id?: InputMaybe<Scalars['uuid']>;
 };
 
@@ -477,16 +455,16 @@ export type Gate_Stream_Cursor_Input = {
 export type Gate_Stream_Cursor_Value_Input = {
   attributes?: InputMaybe<Scalars['jsonb']>;
   contractAddress?: InputMaybe<Scalars['String']>;
-  discount?: InputMaybe<Scalars['numeric']>;
+  discount?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
-  name?: InputMaybe<Scalars['name']>;
+  name?: InputMaybe<Scalars['String']>;
   product_id?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate sum on columns */
 export type Gate_Sum_Fields = {
   __typename?: 'gate_sum_fields';
-  discount?: Maybe<Scalars['numeric']>;
+  discount?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "gate" */
@@ -747,32 +725,6 @@ export type Mutation_RootUpdate_Product_ManyArgs = {
   updates: Array<Product_Updates>;
 };
 
-/** Boolean expression to compare columns of type "name". All fields are combined with logical 'AND'. */
-export type Name_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['name']>;
-  _gt?: InputMaybe<Scalars['name']>;
-  _gte?: InputMaybe<Scalars['name']>;
-  _in?: InputMaybe<Array<Scalars['name']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['name']>;
-  _lte?: InputMaybe<Scalars['name']>;
-  _neq?: InputMaybe<Scalars['name']>;
-  _nin?: InputMaybe<Array<Scalars['name']>>;
-};
-
-/** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
-export type Numeric_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['numeric']>;
-  _gt?: InputMaybe<Scalars['numeric']>;
-  _gte?: InputMaybe<Scalars['numeric']>;
-  _in?: InputMaybe<Array<Scalars['numeric']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['numeric']>;
-  _lte?: InputMaybe<Scalars['numeric']>;
-  _neq?: InputMaybe<Scalars['numeric']>;
-  _nin?: InputMaybe<Array<Scalars['numeric']>>;
-};
-
 /** column ordering options */
 export enum Order_By {
   /** in ascending order, nulls last */
@@ -793,16 +745,16 @@ export enum Order_By {
 export type Product = {
   __typename?: 'product';
   app_id: Scalars['uuid'];
-  collection?: Maybe<Scalars['bpchar']>;
-  curation?: Maybe<Scalars['bpchar']>;
-  description?: Maybe<Scalars['String']>;
-  discount?: Maybe<Scalars['smallint']>;
+  collection: Scalars['String'];
+  curation?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
+  discount?: Maybe<Scalars['Int']>;
   id: Scalars['uuid'];
-  image?: Maybe<Scalars['bpchar']>;
+  image: Scalars['String'];
   isDiscountGated: Scalars['Boolean'];
   name: Scalars['String'];
-  poapId?: Maybe<Scalars['numeric']>;
-  price: Scalars['numeric'];
+  poapId?: Maybe<Scalars['Int']>;
+  price: Scalars['Int'];
 };
 
 /** aggregated selection of "product" */
@@ -848,16 +800,16 @@ export type Product_Bool_Exp = {
   _not?: InputMaybe<Product_Bool_Exp>;
   _or?: InputMaybe<Array<Product_Bool_Exp>>;
   app_id?: InputMaybe<Uuid_Comparison_Exp>;
-  collection?: InputMaybe<Bpchar_Comparison_Exp>;
-  curation?: InputMaybe<Bpchar_Comparison_Exp>;
+  collection?: InputMaybe<String_Comparison_Exp>;
+  curation?: InputMaybe<String_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
-  discount?: InputMaybe<Smallint_Comparison_Exp>;
+  discount?: InputMaybe<Int_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
-  image?: InputMaybe<Bpchar_Comparison_Exp>;
+  image?: InputMaybe<String_Comparison_Exp>;
   isDiscountGated?: InputMaybe<Boolean_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
-  poapId?: InputMaybe<Numeric_Comparison_Exp>;
-  price?: InputMaybe<Numeric_Comparison_Exp>;
+  poapId?: InputMaybe<Int_Comparison_Exp>;
+  price?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "product" */
@@ -868,54 +820,54 @@ export enum Product_Constraint {
 
 /** input type for incrementing numeric columns in table "product" */
 export type Product_Inc_Input = {
-  discount?: InputMaybe<Scalars['smallint']>;
-  poapId?: InputMaybe<Scalars['numeric']>;
-  price?: InputMaybe<Scalars['numeric']>;
+  discount?: InputMaybe<Scalars['Int']>;
+  poapId?: InputMaybe<Scalars['Int']>;
+  price?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "product" */
 export type Product_Insert_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
-  collection?: InputMaybe<Scalars['bpchar']>;
-  curation?: InputMaybe<Scalars['bpchar']>;
+  collection?: InputMaybe<Scalars['String']>;
+  curation?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
-  discount?: InputMaybe<Scalars['smallint']>;
+  discount?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
-  image?: InputMaybe<Scalars['bpchar']>;
+  image?: InputMaybe<Scalars['String']>;
   isDiscountGated?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
-  poapId?: InputMaybe<Scalars['numeric']>;
-  price?: InputMaybe<Scalars['numeric']>;
+  poapId?: InputMaybe<Scalars['Int']>;
+  price?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
 export type Product_Max_Fields = {
   __typename?: 'product_max_fields';
   app_id?: Maybe<Scalars['uuid']>;
-  collection?: Maybe<Scalars['bpchar']>;
-  curation?: Maybe<Scalars['bpchar']>;
+  collection?: Maybe<Scalars['String']>;
+  curation?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  discount?: Maybe<Scalars['smallint']>;
+  discount?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
-  image?: Maybe<Scalars['bpchar']>;
+  image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  poapId?: Maybe<Scalars['numeric']>;
-  price?: Maybe<Scalars['numeric']>;
+  poapId?: Maybe<Scalars['Int']>;
+  price?: Maybe<Scalars['Int']>;
 };
 
 /** aggregate min on columns */
 export type Product_Min_Fields = {
   __typename?: 'product_min_fields';
   app_id?: Maybe<Scalars['uuid']>;
-  collection?: Maybe<Scalars['bpchar']>;
-  curation?: Maybe<Scalars['bpchar']>;
+  collection?: Maybe<Scalars['String']>;
+  curation?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  discount?: Maybe<Scalars['smallint']>;
+  discount?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
-  image?: Maybe<Scalars['bpchar']>;
+  image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  poapId?: Maybe<Scalars['numeric']>;
-  price?: Maybe<Scalars['numeric']>;
+  poapId?: Maybe<Scalars['Int']>;
+  price?: Maybe<Scalars['Int']>;
 };
 
 /** response of any mutation on the table "product" */
@@ -983,16 +935,16 @@ export enum Product_Select_Column {
 /** input type for updating data in table "product" */
 export type Product_Set_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
-  collection?: InputMaybe<Scalars['bpchar']>;
-  curation?: InputMaybe<Scalars['bpchar']>;
+  collection?: InputMaybe<Scalars['String']>;
+  curation?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
-  discount?: InputMaybe<Scalars['smallint']>;
+  discount?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
-  image?: InputMaybe<Scalars['bpchar']>;
+  image?: InputMaybe<Scalars['String']>;
   isDiscountGated?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
-  poapId?: InputMaybe<Scalars['numeric']>;
-  price?: InputMaybe<Scalars['numeric']>;
+  poapId?: InputMaybe<Scalars['Int']>;
+  price?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -1030,24 +982,24 @@ export type Product_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Product_Stream_Cursor_Value_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
-  collection?: InputMaybe<Scalars['bpchar']>;
-  curation?: InputMaybe<Scalars['bpchar']>;
+  collection?: InputMaybe<Scalars['String']>;
+  curation?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
-  discount?: InputMaybe<Scalars['smallint']>;
+  discount?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
-  image?: InputMaybe<Scalars['bpchar']>;
+  image?: InputMaybe<Scalars['String']>;
   isDiscountGated?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
-  poapId?: InputMaybe<Scalars['numeric']>;
-  price?: InputMaybe<Scalars['numeric']>;
+  poapId?: InputMaybe<Scalars['Int']>;
+  price?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate sum on columns */
 export type Product_Sum_Fields = {
   __typename?: 'product_sum_fields';
-  discount?: Maybe<Scalars['smallint']>;
-  poapId?: Maybe<Scalars['numeric']>;
-  price?: Maybe<Scalars['numeric']>;
+  discount?: Maybe<Scalars['Int']>;
+  poapId?: Maybe<Scalars['Int']>;
+  price?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "product" */
@@ -1190,19 +1142,6 @@ export type Query_RootProduct_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
-/** Boolean expression to compare columns of type "smallint". All fields are combined with logical 'AND'. */
-export type Smallint_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['smallint']>;
-  _gt?: InputMaybe<Scalars['smallint']>;
-  _gte?: InputMaybe<Scalars['smallint']>;
-  _in?: InputMaybe<Array<Scalars['smallint']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['smallint']>;
-  _lte?: InputMaybe<Scalars['smallint']>;
-  _neq?: InputMaybe<Scalars['smallint']>;
-  _nin?: InputMaybe<Array<Scalars['smallint']>>;
-};
-
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** fetch data from the table: "app" */
@@ -1328,13 +1267,7 @@ export type GetAppQueryVariables = Exact<{
 
 export type GetAppQuery = {
   __typename?: 'query_root';
-  app?: {
-    __typename?: 'app';
-    id: any;
-    name: string;
-    imgUrl?: string | null;
-    isZKP: boolean;
-  } | null;
+  app?: { __typename?: 'app'; id: any; name: string; imgUrl?: string | null } | null;
 };
 
 export type GetAdminQueryVariables = Exact<{
@@ -1346,14 +1279,14 @@ export type GetAdminQuery = {
   app?: { __typename?: 'app'; id: any; name: string; imgUrl?: string | null } | null;
   products: Array<{
     __typename?: 'product';
-    collection?: any | null;
-    curation?: any | null;
-    discount?: any | null;
+    collection: string;
+    curation?: string | null;
+    discount?: number | null;
     id: any;
-    image?: any | null;
+    image: string;
     name: string;
-    price: any;
-    poapId?: any | null;
+    price: number;
+    poapId?: number | null;
   }>;
 };
 
@@ -1379,7 +1312,7 @@ export type App_Mutation_ResponseFragmentFragment = {
 export type CreateGateMutationVariables = Exact<{
   attributes: Scalars['jsonb'];
   contractAddress: Scalars['String'];
-  discount: Scalars['numeric'];
+  discount: Scalars['Int'];
   productId: Scalars['uuid'];
 }>;
 
@@ -1389,9 +1322,9 @@ export type CreateGateMutation = {
     __typename?: 'gate';
     attributes?: any | null;
     contractAddress: string;
-    discount: any;
+    discount: number;
     id: any;
-    product_id?: any | null;
+    product_id: any;
   } | null;
 };
 
@@ -1415,9 +1348,9 @@ export type GetGatesQuery = {
     __typename?: 'gate';
     attributes?: any | null;
     contractAddress: string;
-    discount: any;
+    discount: number;
     id: any;
-    product_id?: any | null;
+    product_id: any;
   }>;
 };
 
@@ -1431,22 +1364,22 @@ export type GetGateFromProductQuery = {
     __typename?: 'gate';
     attributes?: any | null;
     contractAddress: string;
-    discount: any;
+    discount: number;
     id: any;
-    product_id?: any | null;
+    product_id: any;
   }>;
 };
 
 export type CreateProductMutationVariables = Exact<{
   appId: Scalars['uuid'];
-  price?: InputMaybe<Scalars['numeric']>;
+  price: Scalars['Int'];
   name?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
-  image?: InputMaybe<Scalars['bpchar']>;
-  discount?: InputMaybe<Scalars['smallint']>;
-  curation?: InputMaybe<Scalars['bpchar']>;
-  collection?: InputMaybe<Scalars['bpchar']>;
-  poapId?: InputMaybe<Scalars['numeric']>;
+  image: Scalars['String'];
+  discount: Scalars['Int'];
+  curation: Scalars['String'];
+  collection: Scalars['String'];
+  poapId: Scalars['Int'];
   isDiscountGated?: InputMaybe<Scalars['Boolean']>;
 }>;
 
@@ -1455,15 +1388,15 @@ export type CreateProductMutation = {
   insert_product_one?: {
     __typename?: 'product';
     app_id: any;
-    collection?: any | null;
-    curation?: any | null;
-    discount?: any | null;
+    collection: string;
+    curation?: string | null;
+    discount?: number | null;
     id: any;
-    image?: any | null;
+    image: string;
     name: string;
-    description?: string | null;
-    price: any;
-    poapId?: any | null;
+    description: string;
+    price: number;
+    poapId?: number | null;
     isDiscountGated: boolean;
   } | null;
 };
@@ -1481,15 +1414,15 @@ export type DeleteProductMutation = {
 };
 
 export type EditProductMutationVariables = Exact<{
-  id?: InputMaybe<Scalars['uuid']>;
-  collection?: InputMaybe<Scalars['bpchar']>;
-  curation?: InputMaybe<Scalars['bpchar']>;
-  discount?: InputMaybe<Scalars['smallint']>;
-  image?: InputMaybe<Scalars['bpchar']>;
+  id: Scalars['uuid'];
+  collection: Scalars['String'];
+  curation?: InputMaybe<Scalars['String']>;
+  discount?: InputMaybe<Scalars['Int']>;
+  image: Scalars['String'];
   name?: InputMaybe<Scalars['String']>;
-  description?: InputMaybe<Scalars['String']>;
-  price?: InputMaybe<Scalars['numeric']>;
-  poapId?: InputMaybe<Scalars['numeric']>;
+  description: Scalars['String'];
+  price: Scalars['Int'];
+  poapId?: InputMaybe<Scalars['Int']>;
   isDiscountGated?: InputMaybe<Scalars['Boolean']>;
 }>;
 
@@ -1499,15 +1432,15 @@ export type EditProductMutation = {
     __typename?: 'product_mutation_response';
     returning: Array<{
       __typename?: 'product';
-      collection?: any | null;
-      curation?: any | null;
-      discount?: any | null;
+      collection: string;
+      curation?: string | null;
+      discount?: number | null;
       id: any;
-      image?: any | null;
+      image: string;
       name: string;
-      description?: string | null;
-      price: any;
-      poapId?: any | null;
+      description: string;
+      price: number;
+      poapId?: number | null;
       isDiscountGated: boolean;
     }>;
   } | null;
@@ -1522,15 +1455,15 @@ export type GetProductByIdQuery = {
   product_by_pk?: {
     __typename?: 'product';
     app_id: any;
-    collection?: any | null;
-    curation?: any | null;
-    discount?: any | null;
+    collection: string;
+    curation?: string | null;
+    discount?: number | null;
     id: any;
-    image?: any | null;
+    image: string;
     name: string;
-    description?: string | null;
-    price: any;
-    poapId?: any | null;
+    description: string;
+    price: number;
+    poapId?: number | null;
     isDiscountGated: boolean;
   } | null;
 };
@@ -1544,15 +1477,15 @@ export type GetProductsQuery = {
   products: Array<{
     __typename?: 'product';
     app_id: any;
-    collection?: any | null;
-    curation?: any | null;
-    discount?: any | null;
+    collection: string;
+    curation?: string | null;
+    discount?: number | null;
     id: any;
-    image?: any | null;
+    image: string;
     name: string;
-    description?: string | null;
-    price: any;
-    poapId?: any | null;
+    description: string;
+    price: number;
+    poapId?: number | null;
     isDiscountGated: boolean;
   }>;
 };
@@ -1572,7 +1505,6 @@ export const GetAppDocument = gql`
       id
       name
       imgUrl
-      isZKP
     }
   }
 `;
@@ -1710,7 +1642,7 @@ export const CreateGateDocument = gql`
   mutation CreateGate(
     $attributes: jsonb!
     $contractAddress: String!
-    $discount: numeric!
+    $discount: Int!
     $productId: uuid!
   ) {
     insert_gate_one(
@@ -1920,14 +1852,14 @@ export type GetGateFromProductQueryResult = Apollo.QueryResult<
 export const CreateProductDocument = gql`
   mutation CreateProduct(
     $appId: uuid!
-    $price: numeric
+    $price: Int!
     $name: String
     $description: String
-    $image: bpchar
-    $discount: smallint
-    $curation: bpchar
-    $collection: bpchar
-    $poapId: numeric
+    $image: String!
+    $discount: Int!
+    $curation: String!
+    $collection: String!
+    $poapId: Int!
     $isDiscountGated: Boolean
   ) {
     insert_product_one(
@@ -2052,15 +1984,15 @@ export type DeleteProductMutationOptions = Apollo.BaseMutationOptions<
 >;
 export const EditProductDocument = gql`
   mutation EditProduct(
-    $id: uuid
-    $collection: bpchar
-    $curation: bpchar
-    $discount: smallint
-    $image: bpchar
+    $id: uuid!
+    $collection: String!
+    $curation: String
+    $discount: Int
+    $image: String!
     $name: String
-    $description: String
-    $price: numeric
-    $poapId: numeric
+    $description: String!
+    $price: Int!
+    $poapId: Int
     $isDiscountGated: Boolean
   ) {
     update_product(

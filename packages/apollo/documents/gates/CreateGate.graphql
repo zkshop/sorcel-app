@@ -1,7 +1,7 @@
 mutation CreateGate(
   $attributes: jsonb!
   $contractAddress: String!
-  $discount: numeric!
+  $discount: Int!
   $productId: uuid!
 ) {
   insert_gate_one(

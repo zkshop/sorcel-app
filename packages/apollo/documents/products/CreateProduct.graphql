@@ -1,13 +1,13 @@
 mutation CreateProduct(
   $appId: uuid!
-  $price: numeric
+  $price: Int!
   $name: String
   $description: String
-  $image: bpchar
-  $discount: smallint
-  $curation: bpchar
-  $collection: bpchar
-  $poapId: numeric
+  $image: String!
+  $discount: Int!
+  $curation: String!
+  $collection: String!
+  $poapId: Int!
   $isDiscountGated: Boolean
 ) {
   insert_product_one(
