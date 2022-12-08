@@ -1,7 +1,7 @@
 import { Spinner, VerticalMenu } from 'ui';
 
 import { useGetAdminQuery } from 'apollo';
-import { General, Products } from 'modules';
+import { Products } from 'modules';
 
 const Admin = () => {
   const { data, loading } = useGetAdminQuery({ variables: { appId: process.env.APP_ID } });
@@ -12,13 +12,7 @@ const Admin = () => {
     return <div> Error </div>;
   }
 
-  const items = [
-    {
-      title: 'General',
-      content: <General app={{ name: data.app.name || '', imgUrl: data.app.imgUrl || '' }} />,
-    },
-    { title: 'Products', content: <Products /> },
-  ];
+  const items = [{ title: 'Products', content: <Products /> }];
 
   return (
     <>

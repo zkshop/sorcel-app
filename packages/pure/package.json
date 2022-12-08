@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "alchemy": "*",
-    "domains": "*"
+    "domains": "*",
+    "types": "*"
   }
 }

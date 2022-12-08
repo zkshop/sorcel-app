@@ -6,6 +6,10 @@
   "dependencies": {
     "domains": "*",
     "infra": "*",
-    "redux": "^4.2.0"
+    "pure": "*",
+    "poap": "*"
+  },
+  "peerDependencies": {
+    "redux": "*"
   }
 }

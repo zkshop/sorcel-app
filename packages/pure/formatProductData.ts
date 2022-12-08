@@ -1,4 +1,4 @@
-import { getPoapImageFromPoapList } from 'pure';
+import { getPoapImageFromPoapList } from 'poap';
 import { Product } from 'apollo';
 import { FormatedProductData } from 'types';
 

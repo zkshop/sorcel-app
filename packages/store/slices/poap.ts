@@ -1,17 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { getEveryPOAPOfAWallet } from 'pages/api/poap/utils';
-
-export type Poap = {
-  tokenId: string;
-  owner: string;
-  chain: string;
-  created: string;
-  event: {
-    id: number;
-    image_url: string;
-  };
-};
+import { getEveryPOAPOfAWallet, Poap } from 'poap';
 
 export const fetchPOAPS = createAsyncThunk(
   'poap/fetch',

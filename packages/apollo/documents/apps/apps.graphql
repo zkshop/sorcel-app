@@ -3,6 +3,7 @@ query getApp($appId: uuid!) {
     id
     name
     imgUrl
+    isZKP
   }
 }
 
