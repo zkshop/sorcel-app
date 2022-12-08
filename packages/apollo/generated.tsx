@@ -1328,7 +1328,13 @@ export type GetAppQueryVariables = Exact<{
 
 export type GetAppQuery = {
   __typename?: 'query_root';
-  app?: { __typename?: 'app'; id: any; name: string; imgUrl?: string | null } | null;
+  app?: {
+    __typename?: 'app';
+    id: any;
+    name: string;
+    imgUrl?: string | null;
+    isZKP: boolean;
+  } | null;
 };
 
 export type GetAdminQueryVariables = Exact<{
@@ -1566,6 +1572,7 @@ export const GetAppDocument = gql`
       id
       name
       imgUrl
+      isZKP
     }
   }
 `;

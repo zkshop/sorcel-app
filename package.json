@@ -56,6 +56,7 @@
     "@rainbow-me/rainbowkit": "^0.7.1",
     "@reduxjs/toolkit": "^1.8.6",
     "axios": "^1.1.3",
+    "redux": "^4.2.0",
     "react-redux": "^8.0.4"
   },
   "packageManager": "yarn@1.22.17",

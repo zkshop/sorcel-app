@@ -25,7 +25,7 @@ const httpLink = new HttpLink({
   },
 });
 
-function createApolloClient() {
+export function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: from([errorLink, httpLink]),
