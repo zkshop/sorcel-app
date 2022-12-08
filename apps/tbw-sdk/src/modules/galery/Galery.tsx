@@ -15,12 +15,6 @@ export const Galery = () => {
     },
   });
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window?.MemberStack?.reload();
-    }
-  }, []);
-
   const {} = useOnConnection();
   const { isConnected } = useAccount();
 
