@@ -11,6 +11,7 @@ type ProductListContainerProps = {
 
 const isNftMatchingWithGate = (gate: Gate, nft: Nft): boolean => {
   if (!nft.rawMetadata || !nft.rawMetadata.attributes) return false;
+
   for (const gateAttribute of gate.attributes) {
     const nftAttribute = nft.rawMetadata.attributes.find(
       (attribute) => attribute.trait_type === gateAttribute.name,
@@ -47,10 +48,11 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
   const nfts = useAppSelector((state) => state.user.nfts);
   const collections = nfts.map((nft) => nft.contract.address);
   const { data } = useGetGatesQuery();
+  const gates = data?.gates.slice() || [];
+  const sortedGates = gates.sort((a, b) => b.discount - a.discount);
 
   const formatedProducts = products.map((product) => {
-    const gates = findProductGates(product.id, data?.gates);
-    const gate = gateVerifier(gates, nfts);
+    const gate = gateVerifier(findProductGates(product.id, sortedGates), nfts);
 
     return formatProductData({ ...product, collections, gate });
   });
