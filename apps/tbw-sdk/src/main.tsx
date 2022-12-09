@@ -1,3 +1,7 @@
+import { Buffer as BufferPolyfill } from 'buffer';
+declare var Buffer: typeof BufferPolyfill;
+globalThis.Buffer = BufferPolyfill;
+
 (window.global as any) = globalThis;
 import React from 'react';
 import ReactDOM from 'react-dom/client';
