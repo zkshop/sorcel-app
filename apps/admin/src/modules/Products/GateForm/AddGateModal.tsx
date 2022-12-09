@@ -24,6 +24,7 @@ import { fetchNFTAttributes, useAppDispatch, useAppSelector } from 'admin-store'
 import { ADD_GATE_MODAL_SCHEMA } from './AddGateModalSchema';
 
 import { GateFields } from './GateFields';
+import { useParams } from 'react-router-dom';
 
 type AddGateModalProps = {
   isOpen: boolean;
@@ -46,10 +47,11 @@ export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps
     watch,
     formState: { errors },
   } = methods;
+
   const contractAddressValue = watch('contractAddress');
   const [createGate, { loading: createGateLoading }] = useCreateGateMutation();
-  const router = useRouter();
-  const { id: productId } = router.query as { id: string };
+  const { productId } = useParams();
+
   const toast = useToast();
 
   const dispatch = useAppDispatch();
