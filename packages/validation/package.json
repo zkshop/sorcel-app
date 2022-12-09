@@ -1,8 +1,8 @@
 {
   "name": "validation",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
+  "main": "index.js",
   "dependencies": {
     "yup": "^0.32.11"
   }

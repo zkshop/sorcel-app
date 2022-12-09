@@ -1,8 +1,8 @@
 {
   "name": "supabase",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
+  "main": "index.js",
   "dependencies": {
     "@supabase/supabase-js": "^2.0.0"
   }

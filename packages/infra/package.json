@@ -1,23 +1,22 @@
 {
   "name": "infra",
   "version": "1.0.0",
-  "main": "index.ts",
   "private": true,
+  "main": "index.ts",
   "scripts": {
-    "lint": "eslint \"**/*.ts*\" --fix",
-    "lint:fix": "yarn lint --fix"
+    "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
     "@magic-ext/oauth": "^4.0.0",
     "@magic-sdk/admin": "^1.4.1",
-    "magic-sdk": "^10.0.0",
+    "alchemy": "*",
     "domains": "*",
     "magic": "*",
-    "alchemy": "*",
-    "supabase": "*",
+    "magic-sdk": "^10.0.0",
+    "pure": "*",
     "sendgrid": "*",
     "sendinblue": "*",
-    "pure": "*"
+    "supabase": "*"
   },
   "devDependencies": {
     "tsconfig": "*"
