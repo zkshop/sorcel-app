@@ -1,5 +1,4 @@
-import { Box, Text, HStack } from '@chakra-ui/react';
-import Link from 'next/link';
+import { Box, Text, HStack, Link } from '@chakra-ui/react';
 import Image from 'next/image';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 import { StyledProductCard } from './ProductCard.style';

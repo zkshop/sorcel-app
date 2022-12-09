@@ -1,14 +1,16 @@
-import { Route, Routes as ReactRouterRoutes } from 'react-router-dom';
-import { GeneralContainer } from '../modules/General/GeneralContainer';
-import { Home } from '../pages';
+import { Route, Routes as OriginalRoutes } from 'react-router-dom';
+import { PageLayout, Home, General } from '../pages';
+import { ProductRoutes } from './ProductRoutes';
 
 const Routes = () => (
-  <ReactRouterRoutes>
-    <Route path="/">
+  <OriginalRoutes>
+    <Route path="/" element={<PageLayout />}>
       <Route index element={<Home />} />
-      <Route path="/general" element={<GeneralContainer />} />
+      <Route path="general" element={<General />} />
+
+      <Route path="product/*" element={<ProductRoutes />} />
     </Route>
-  </ReactRouterRoutes>
+  </OriginalRoutes>
 );
 
 export default Routes;

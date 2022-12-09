@@ -37,11 +37,15 @@ import { fetchNFTAttributes, useAppDispatch, useAppSelector } from 'admin-store'
 import { ADD_GATE_MODAL_SCHEMA } from './AddGateModalSchema';
 
 import { GateFields } from './GateFields';
+<<<<<<< HEAD
 =======
 import { Button } from 'ui';
 >>>>>>> dbf5779 (feat(admin): form to add gate to product)
 
 import { GateFields } from './GateFields';
+=======
+import { useParams } from 'react-router-dom';
+>>>>>>> 4240e68 (feat: make admin containers work)
 
 type AddGateModalProps = {
   isOpen: boolean;
@@ -65,6 +69,7 @@ export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps
     watch,
     formState: { errors },
   } = methods;
+<<<<<<< HEAD
 =======
   const methods = useForm<AddGateFormValues>();
   const { handleSubmit, register, watch } = methods;
@@ -74,6 +79,13 @@ export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps
   const router = useRouter();
   const { id: productId } = router.query as { id: string };
 <<<<<<< HEAD
+=======
+
+  const contractAddressValue = watch('contractAddress');
+  const [createGate, { loading: createGateLoading }] = useCreateGateMutation();
+  const { productId } = useParams();
+
+>>>>>>> 4240e68 (feat: make admin containers work)
   const toast = useToast();
 =======
 >>>>>>> dbf5779 (feat(admin): form to add gate to product)

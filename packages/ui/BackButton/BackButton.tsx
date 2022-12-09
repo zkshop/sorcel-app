@@ -1,5 +1,4 @@
-import { HStack, Text } from '@chakra-ui/react';
-import Link from 'next/link';
+import { HStack, Text, Link } from '@chakra-ui/react';
 import { OutlineArrowLeftIcon } from '../Icons';
 
 type BackButtonProps = {
