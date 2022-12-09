@@ -1,17 +1,24 @@
-import { Text, Flex } from 'ui';
+import { Text } from 'ui';
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { useRouter } from 'next/router';
 import { applyDiscount } from 'pure';
 import React, { useEffect, useState } from 'react';
 
 import { StyledCheckoutForm } from './CheckoutForm.style';
+import { useRouter } from 'next/router';
 
 type CheckoutFormProps = {
   price: number;
   discount?: number;
 };
 
+const RETURN_URL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/success'
+    : `https://${process.env.VERCEL_URL}/success`;
+
 export function CheckoutForm({ price, discount }: CheckoutFormProps) {
+  const { query } = useRouter();
+  const { name, email } = query;
   const stripe = useStripe();
   const elements = useElements();
 
@@ -58,15 +65,10 @@ export function CheckoutForm({ price, discount }: CheckoutFormProps) {
 
     setIsLoading(true);
 
-    const return_url =
-      process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000'
-        : `https://${process.env.VERCEL_URL}`;
-
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url,
+        return_url: RETURN_URL + `?name=${name}&email=${email}`,
       },
     });
 
