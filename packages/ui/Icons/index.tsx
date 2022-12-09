@@ -11,3 +11,4 @@ export { FaLink as LinkIcon, FaArrowRight as ArrowRightIcon } from 'react-icons/
 export { FiGift as GiftIcon } from 'react-icons/fi';
 
 export { GoTriangleUp as TriangleUpIcon } from 'react-icons/go';
+export { CloseIcon, ChevronUpIcon } from '@chakra-ui/icons';
