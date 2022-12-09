@@ -6,9 +6,10 @@ import {
   Box,
   Heading,
   VStack,
+  ChevronUpIcon,
 } from 'ui';
 import { NftAttribute } from 'domains';
-import { ChevronUpIcon } from '@chakra-ui/icons';
+
 import { AttributeCheckboxList } from './AttributeCheckboxList';
 
 type NftAttributePickerProps = {
