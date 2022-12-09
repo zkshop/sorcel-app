@@ -1,5 +1,4 @@
-import { Tr, Th, UnorderedList, ListItem } from 'ui';
-import { CloseIcon } from '@chakra-ui/icons';
+import { Tr, Th, UnorderedList, ListItem, CloseIcon } from 'ui';
 import { Gate } from 'apollo';
 
 type GateTableRowProps = {
