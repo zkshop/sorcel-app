@@ -41,7 +41,6 @@
     "next-transpile-modules": "^9.0.0"
   },
   "peerDependencies": {
-    "@chakra-ui/react": "*",
     "@emotion/react": "*",
     "@emotion/styled": "*",
     "@rainbow-me/rainbowkit": "*",

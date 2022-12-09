@@ -1,4 +1,4 @@
-import { Tr, Th, UnorderedList, ListItem } from '@chakra-ui/react';
+import { Tr, Th, UnorderedList, ListItem } from 'ui';
 import { CloseIcon } from '@chakra-ui/icons';
 import { Gate } from 'apollo';
 

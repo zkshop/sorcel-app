@@ -7,8 +7,8 @@ import {
   ModalBody,
   ModalFooter,
   HStack,
-} from '@chakra-ui/react';
-import { Button } from 'ui';
+  Button,
+} from 'ui';
 
 type DeleteGateModalProps = {
   isDeleteGateModalOpen: boolean;

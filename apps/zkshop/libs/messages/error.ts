@@ -1,4 +1,4 @@
-import { UseToastOptions } from '@chakra-ui/react';
+import { UseToastOptions } from 'ui';
 
 export const ERROR_MESSAGE: UseToastOptions = {
   title: 'Error',

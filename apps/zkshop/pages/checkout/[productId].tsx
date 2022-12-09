@@ -1,4 +1,4 @@
-import { VStack, Heading } from '@chakra-ui/react';
+import { VStack, Heading } from 'ui';
 import { Elements } from '@stripe/react-stripe-js';
 import { GetServerSidePropsContext } from 'next';
 import { useState, useEffect } from 'react';

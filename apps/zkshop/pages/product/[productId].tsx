@@ -1,7 +1,6 @@
-import { VStack } from '@chakra-ui/react';
+import { VStack, BackButton } from 'ui';
 import { GetServerSidePropsContext } from 'next';
 import ReactCanvasConfetti from 'react-canvas-confetti';
-import { BackButton } from 'ui';
 import { useAccount } from 'wagmi';
 
 import { addApolloState, initializeApollo, Product, GetProductByIdDocument } from 'apollo';

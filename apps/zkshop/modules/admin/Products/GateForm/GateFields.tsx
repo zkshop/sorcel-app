@@ -1,11 +1,4 @@
-import {
-  Box,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  NumberInput,
-  NumberInputField,
-} from '@chakra-ui/react';
+import { Box, FormControl, FormErrorMessage, FormLabel, NumberInput, NumberInputField } from 'ui';
 import { NftAttribute } from 'domains';
 import { useFormContext } from 'react-hook-form';
 import { AddGateFormValues } from './AddGateModal';

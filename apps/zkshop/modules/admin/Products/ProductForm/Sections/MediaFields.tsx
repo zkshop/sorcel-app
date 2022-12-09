@@ -6,9 +6,10 @@ import {
   InputLeftElement,
   Input,
   FormErrorMessage,
-} from '@chakra-ui/react';
+  Section,
+  LinkIcon,
+} from 'ui';
 import { useFormContext } from 'react-hook-form';
-import { Section, LinkIcon } from 'ui';
 import { AddProductFormValues } from '../types';
 
 export const MediaFields = () => {

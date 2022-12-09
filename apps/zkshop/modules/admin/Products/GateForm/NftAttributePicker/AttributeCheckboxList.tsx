@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxGroup, HStack } from '@chakra-ui/react';
+import { Checkbox, CheckboxGroup, HStack } from 'ui';
 import { NftAttribute } from 'domains';
 import { ChangeEvent, useState } from 'react';
 import { setAttributeToGate } from 'store/slices/gate';

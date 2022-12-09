@@ -1,5 +1,4 @@
-import { Spinner } from '@chakra-ui/react';
-import { VerticalMenu } from 'ui';
+import { Spinner, VerticalMenu } from 'ui';
 
 import { useGetAdminQuery } from 'apollo';
 import { General, Products } from 'modules';

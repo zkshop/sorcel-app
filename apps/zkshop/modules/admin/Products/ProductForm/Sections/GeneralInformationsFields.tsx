@@ -8,10 +8,10 @@ import {
   Checkbox,
   HStack,
   FormErrorMessage,
-} from '@chakra-ui/react';
+  Section,
+  ChatRightTextIcon,
+} from 'ui';
 import { useFormContext } from 'react-hook-form';
-
-import { Section, ChatRightTextIcon } from 'ui';
 
 import { PRODUCTS_FIELDS } from '../../constants';
 import { AddProductFormValues } from '../types';

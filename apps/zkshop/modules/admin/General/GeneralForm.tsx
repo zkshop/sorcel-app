@@ -1,6 +1,5 @@
-import { Box, Heading, HStack } from '@chakra-ui/react';
+import { Box, Heading, HStack, Button, FormField } from 'ui';
 import { useForm } from 'react-hook-form';
-import { Button, FormField } from 'ui';
 
 import { useUpdateAppMutation } from 'apollo';
 import axios from 'axios';

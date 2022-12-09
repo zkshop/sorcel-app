@@ -8,10 +8,10 @@ import {
   Input,
   Box,
   VStack,
-} from '@chakra-ui/react';
+  Button,
+} from 'ui';
 import React from 'react';
 import { UseFormRegister } from 'react-hook-form';
-import { Button } from 'ui';
 
 type LoginModalProps = {
   isOpen: boolean;

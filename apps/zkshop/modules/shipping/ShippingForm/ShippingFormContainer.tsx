@@ -1,7 +1,6 @@
-import { Heading, SimpleGrid, Stack, VStack } from '@chakra-ui/react';
+import { Heading, SimpleGrid, Stack, VStack, CartItem, CartOrderSummary, Section } from 'ui';
 import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
-import { CartItem, CartOrderSummary, Section } from 'ui';
 
 import { ShippingForm } from './ShippingForm';
 import { ShippingFormValues } from './types';

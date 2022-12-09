@@ -1,4 +1,4 @@
-import { TableContainer, Table, Thead, Tr, Th, Tbody } from '@chakra-ui/react';
+import { TableContainer, Table, Thead, Tr, Th, Tbody } from 'ui';
 import { Gate } from 'apollo';
 import { GateTableRow } from './GateTableRow';
 

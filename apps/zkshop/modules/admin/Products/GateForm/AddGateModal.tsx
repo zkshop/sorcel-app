@@ -13,14 +13,14 @@ import {
   ModalOverlay,
   Spinner,
   useToast,
-} from '@chakra-ui/react';
+  Button,
+} from 'ui';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useCreateGateMutation } from 'apollo';
 import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 import { fetchNFTAttributes } from 'store/slices/nftAttributes';
 import { useAppDispatch, useAppSelector } from 'store/store';
-import { Button } from 'ui';
 import { ADD_GATE_MODAL_SCHEMA } from './AddGateModalSchema';
 
 import { GateFields } from './GateFields';

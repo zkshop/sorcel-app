@@ -6,8 +6,8 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
-} from '@chakra-ui/react';
-import { Button } from 'ui';
+  Button,
+} from 'ui';
 
 type DeleteProductModalProps = {
   isOpen: boolean;

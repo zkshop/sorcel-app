@@ -1,4 +1,4 @@
-import { useDisclosure, useToast } from '@chakra-ui/react';
+import { useDisclosure, useToast } from 'ui';
 import { useRouter } from 'next/router';
 import { useForm, FormProvider } from 'react-hook-form';
 

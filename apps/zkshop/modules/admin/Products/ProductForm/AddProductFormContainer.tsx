@@ -1,4 +1,4 @@
-import { useToast } from '@chakra-ui/react';
+import { useToast } from 'ui';
 import { useCreateProductMutation } from 'apollo';
 import axios from 'axios';
 import { getAddProductSuccessMessage } from 'libs/messages';

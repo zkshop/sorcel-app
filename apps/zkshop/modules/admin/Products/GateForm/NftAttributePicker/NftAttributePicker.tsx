@@ -6,7 +6,7 @@ import {
   Box,
   Heading,
   VStack,
-} from '@chakra-ui/react';
+} from 'ui';
 import { NftAttribute } from 'domains';
 import { ChevronUpIcon } from '@chakra-ui/icons';
 import { AttributeCheckboxList } from './AttributeCheckboxList';

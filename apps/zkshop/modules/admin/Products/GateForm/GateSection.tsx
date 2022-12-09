@@ -1,7 +1,6 @@
-import { Heading, useDisclosure, useToast } from '@chakra-ui/react';
+import { Heading, useDisclosure, useToast, Section, Button } from 'ui';
 import { Gate, useDeleteGateFromIdMutation } from 'apollo';
 import { useState } from 'react';
-import { Section, Button } from 'ui';
 import { GateTable } from '../GateTable';
 import { AddGateModal } from './AddGateModal';
 import { DeleteGateModal } from './DeleteGateModal';
