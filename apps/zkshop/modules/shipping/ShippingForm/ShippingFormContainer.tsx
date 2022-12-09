@@ -8,9 +8,9 @@ import { ShippingFormValues } from './types';
 import { Product } from 'apollo';
 import { applyDiscount } from 'pure';
 import { useIsAnHolder } from 'hooks/useIsAnHolder';
-import axios from 'axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SHIPPING_FORM_SCHEMA } from 'libs/schemas';
+import { sendEmail } from 'modules/checkout/sendEmail';
 
 type ShippingFormContainerProps = {
   product: Product;
@@ -41,16 +41,17 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
 
   const onSubmit = async (data: ShippingFormValues) => {
     if (amount === 0) {
-      return router.push('/');
+      return router.push('/success');
     }
 
-    await axios.post('/api/email', {
-      firstname: data.firstname,
-      lastname: data.firstname,
-      email: data.email,
+    // TODO: refacto use Redux instead of query params
+    router.push({
+      pathname: router.asPath.replace('shipping', 'checkout'),
+      query: {
+        name: data.firstname,
+        email: data.email,
+      },
     });
-
-    router.push(router.asPath.replace('shipping', 'checkout'));
   };
 
   const cartData = [

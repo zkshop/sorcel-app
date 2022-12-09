@@ -8,13 +8,12 @@ type StyledProductCardProps = {
   isEligible: boolean;
 };
 
-export const StyledProductCard = styled(Box)(
+export const StyledProductCard = styled('div')(
   ({ theme, isEligible }: StyledProductCardProps) => css`
     position: relative;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin-top: 32px !important;
-    cursor: pointer;
     width: 100%;
     border-radius: ${theme?.radii['2xl']};
 

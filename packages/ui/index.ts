@@ -36,6 +36,7 @@ export {
   Heading,
   HStack,
   Input,
+  Image,
   InputGroup,
   InputLeftElement,
   ListItem,
