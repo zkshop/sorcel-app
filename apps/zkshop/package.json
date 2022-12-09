@@ -1,25 +1,14 @@
 {
   "name": "zkshop-app",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
-    "test": "jest",
-    "dev": "next dev",
     "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint --fix",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "yarn lint --fix"
-  },
-  "peerDependencies": {
-    "axios": "*",
-    "@types/axios": "*",
-    "@chakra-ui/react": "*",
-    "@emotion/react": "*",
-    "@emotion/styled": "*",
-    "@reduxjs/toolkit": "*",
-    "react-redux": "*",
-    "@rainbow-me/rainbowkit": "*"
+    "test": "jest"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
@@ -33,22 +22,32 @@
     "next": "^13.0.0",
     "next-connect": "^0.13.0",
     "next-redux-wrapper": "^8.0.0",
+    "paper": "*",
     "pure": "*",
     "react": "^18.2.0",
     "react-canvas-confetti": "^1.3.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.37.0",
+    "store": "*",
     "stripe": "^10.13.0",
     "ui": "*",
     "validation": "*",
-    "store": "*",
-    "wagmi": "^0.6.8",
-    "paper": "*"
+    "wagmi": "^0.6.8"
   },
   "devDependencies": {
     "@hookform/devtools": "^4.2.2",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "next-transpile-modules": "^9.0.0"
+  },
+  "peerDependencies": {
+    "@chakra-ui/react": "*",
+    "@emotion/react": "*",
+    "@emotion/styled": "*",
+    "@rainbow-me/rainbowkit": "*",
+    "@reduxjs/toolkit": "*",
+    "@types/axios": "*",
+    "axios": "*",
+    "react-redux": "*"
   }
 }
