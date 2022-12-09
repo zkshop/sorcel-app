@@ -6,9 +6,11 @@ import {
   InputLeftElement,
   Input,
   FormErrorMessage,
-} from '@chakra-ui/react';
+  Section,
+  CollectionIcon,
+  CollectionPlayIcon,
+} from 'ui';
 import { useFormContext } from 'react-hook-form';
-import { Section, CollectionIcon, CollectionPlayIcon } from 'ui';
 import { AddProductFormValues } from '../types';
 
 export const OnChainDataFields = () => {

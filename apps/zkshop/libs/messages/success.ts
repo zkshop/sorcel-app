@@ -1,4 +1,4 @@
-import { UseToastOptions } from '@chakra-ui/react';
+import { UseToastOptions } from 'ui';
 
 export const getEditProductSuccessMessage = (productName: string): UseToastOptions => ({
   title: 'Product Edited',

@@ -1,6 +1,5 @@
-import { Box } from '@chakra-ui/react';
+import { Box, MainLayout, Banner } from 'ui';
 import { useRouter } from 'next/router';
-import { MainLayout, Banner } from 'ui';
 
 import { NavBar } from './NavBar';
 

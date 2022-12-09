@@ -1,7 +1,6 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Button } from 'ui';
 
 import React from 'react';
-import { Button } from 'ui';
 import ConnectWalletButton from './ConnectWalletButton';
 type ConnectButtonGroupProps = {
   handleOpenLoginModal(): void;
