@@ -1,4 +1,4 @@
-import { AuthService } from '../domains/AuthService';
+import { AuthService } from 'domains';
 import { UserAuthenticationClient } from '../infra/UserAuthenticationClient';
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { allowCors } from '../allowCors';

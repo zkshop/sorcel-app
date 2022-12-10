@@ -3,13 +3,18 @@ import { useCreateProductMutation } from 'apollo';
 import axios from 'axios';
 import { getAddProductSuccessMessage } from 'messages';
 import { useRouter } from 'next/router';
-import { toNumber } from 'pure';
+import { blobFromURL, toNumber } from 'pure';
 import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ProductForm } from './ProductForm';
 import { AddProductFormValues } from './types';
 import { ADD_PRODUCT_FORM_SCHEMA } from '../../../schemas';
+import { StorageService } from 'domains';
+import { ImageStorageClient } from 'admin-infra';
+import { useNavigate } from 'react-router-dom';
+
+const storage = StorageService(ImageStorageClient());
 
 export const AddProductFormContainer = () => {
   const [storageActionLoading, setStorageActionLoading] = useState(false);
@@ -24,7 +29,7 @@ export const AddProductFormContainer = () => {
     formState: { isValid },
   } = methods;
 
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const [createProduct, { loading: isLoading }] = useCreateProductMutation();
 
@@ -33,9 +38,9 @@ export const AddProductFormContainer = () => {
   const onSubmit = async (data: AddProductFormValues) => {
     try {
       setStorageActionLoading(true);
-      const {
-        data: { uploadUrl },
-      } = await axios.post('/api/image/store', { url: data.image, bucketName: 'products' });
+      const image = await blobFromURL(data.image);
+      const uploadUrl = await storage.uploadPicture(image, 'products');
+
       setStorageActionLoading(false);
 
       await createProduct({
@@ -50,7 +55,7 @@ export const AddProductFormContainer = () => {
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),
       });
 
-      router.push('/admin');
+      navigate('/');
     } catch (e) {
       console.error(e);
     } finally {
