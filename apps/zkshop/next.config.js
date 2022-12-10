@@ -46,4 +46,6 @@ export default withTM([
   'sendinblue',
   'validation',
   'store',
+  'poap',
+  'messages',
 ])(nextConfig);
