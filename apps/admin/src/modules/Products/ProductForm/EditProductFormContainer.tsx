@@ -12,16 +12,20 @@ import {
   getDeleteProductSuccessMessage,
   getEditProductSuccessMessage,
 } from 'messages';
-import { getObjectPathFromImageUrl, toNumber } from 'pure';
-import axios from 'axios';
+import { blobFromURL, getObjectPathFromImageUrl, toNumber } from 'pure';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ADD_PRODUCT_FORM_SCHEMA } from '../../../schemas';
+import { StorageService } from 'domains';
+import { ImageStorageClient } from 'admin-infra';
+import { useNavigate } from 'react-router-dom';
 
 type EditProductFormContainerProps = {
   product: Product;
   gates: Gate[];
 };
+
+const storage = StorageService(ImageStorageClient());
 
 export const EditProductFormContainer = ({ product, gates }: EditProductFormContainerProps) => {
   const [storageActionLoading, setStorageActionLoading] = useState(false);
@@ -43,7 +47,7 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
     formState: { isValid, isDirty },
   } = methods;
 
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const toast = useToast();
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -54,9 +58,7 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
   const deleteProductOnClick = async () => {
     setStorageActionLoading(true);
     try {
-      await axios.delete(
-        `/api/image/delete?url=${getObjectPathFromImageUrl(product.image)}&bucketName=products`,
-      );
+      await storage.deletePicture(getObjectPathFromImageUrl(product.image) as string, 'products');
       setStorageActionLoading(false);
 
       await deleteProduct({
@@ -66,7 +68,7 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
         onCompleted: () => toast(getDeleteProductSuccessMessage(product.name)),
         onError: () => toast(ERROR_MESSAGE),
       });
-      router.push('/admin');
+      navigate('/');
     } catch (e) {
       console.error(e);
     } finally {
@@ -86,13 +88,9 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
     try {
       if (data.image !== product.image) {
         setStorageActionLoading(true);
-        const {
-          data: { uploadUrl },
-        } = await axios.post('/api/image/update', {
-          newImageUrl: data.image,
-          path: product.image,
-          bucketName: 'products',
-        });
+
+        const image = await blobFromURL(data.image);
+        const uploadUrl = await storage.updatePicture(image, product.image, 'products');
 
         setStorageActionLoading(false);
         Object.assign(variables, { image: uploadUrl });

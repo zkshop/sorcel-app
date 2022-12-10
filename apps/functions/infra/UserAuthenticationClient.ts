@@ -1,5 +1,4 @@
-import { TokenService } from '../domains/TokenService';
-import { AuthClient } from '../domains/AuthService';
+import { TokenService, AuthClient } from 'domains';
 import { PaperWalletClient } from './PaperWalletClient';
 
 const initialAuthData = { email: null, issuer: null, phoneNumber: null, publicAddress: null };

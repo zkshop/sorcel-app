@@ -31,7 +31,7 @@ export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
       if (data.imgUrl !== defaultValues.imgUrl) {
         const {
           data: { uploadUrl },
-        } = await axios.post('/api/image/update', {
+        } = await axios.post(`${process.env.FUNCTIONS_API}/api/image/update`, {
           newImageUrl: data.imgUrl,
           path: defaultValues.imgUrl,
           bucketName: 'apps',
