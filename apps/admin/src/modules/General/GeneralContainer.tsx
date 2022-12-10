@@ -4,7 +4,7 @@ import { Spinner } from 'ui';
 
 export const GeneralContainer = () => {
   const { data, loading, error } = useGetAppQuery({
-    variables: { appId: '7c0623b1-5715-4e77-8db3-cf71204bdb80' },
+    variables: { appId: process.env.APP_ID },
   });
 
   if (loading) return <Spinner />;
