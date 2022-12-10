@@ -54,7 +54,6 @@ export {
   Spinner,
   VStack,
   Link,
-  Image,
   Table,
   TableContainer,
   Tbody,

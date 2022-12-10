@@ -9,7 +9,6 @@ import { Product } from 'apollo';
 import { applyDiscount } from 'pure';
 import { useIsAnHolder } from 'hooks/useIsAnHolder';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { sendEmail } from 'modules/checkout/sendEmail';
 import { SHIPPING_FORM_SCHEMA } from 'schemas';
 
 type ShippingFormContainerProps = {
