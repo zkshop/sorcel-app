@@ -14,7 +14,7 @@ import {
 import { useFormContext } from 'react-hook-form';
 
 import { PRODUCTS_FIELDS } from '../../constants';
-import { AddProductFormValues } from '../types';
+import type { AddProductFormValues } from '../types';
 
 export const GeneralInformationsFields = () => {
   const {

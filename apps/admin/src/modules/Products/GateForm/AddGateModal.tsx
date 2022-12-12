@@ -38,7 +38,7 @@ export type AddGateFormValues = {
   discount: number;
 };
 
-export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps) => {
+export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
   const methods = useForm<AddGateFormValues>({
     resolver: yupResolver(ADD_GATE_MODAL_SCHEMA),
   });
@@ -58,7 +58,7 @@ export const AddGateModal = ({ isOpen, onClose, isFormValid }: AddGateModalProps
   const gate = useAppSelector((state) => state.gates);
   const nftAttributes = useAppSelector((state) => state.nftAttributes.hits);
   const nftAttributesLoading = useAppSelector((state) => state.nftAttributes.loading);
-  const loading = useAppSelector((state) => state.nftAttributes.loading);
+  const {} = useAppSelector((state) => state.nftAttributes.loading);
 
   const handleClickFindContractAttributes = async () => {
     dispatch(fetchNFTAttributes(contractAddressValue));

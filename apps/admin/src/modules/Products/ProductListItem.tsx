@@ -1,4 +1,4 @@
-import { Box, Tr, Td, Link, Image } from 'ui';
+import { Tr, Td, Image } from 'ui';
 
 type ProductListItemProps = {
   id: string;
@@ -12,7 +12,6 @@ type ProductListItemProps = {
 };
 
 export const ProductListItem = ({
-  id,
   image,
   name,
   price,

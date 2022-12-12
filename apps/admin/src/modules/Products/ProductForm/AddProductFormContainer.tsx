@@ -1,14 +1,12 @@
 import { useToast } from 'ui';
 import { useCreateProductMutation } from 'apollo';
-import axios from 'axios';
 import { getAddProductSuccessMessage } from 'messages';
-import { useRouter } from 'next/router';
 import { blobFromURL, toNumber } from 'pure';
 import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ProductForm } from './ProductForm';
-import { AddProductFormValues } from './types';
+import type { AddProductFormValues } from './types';
 import { ADD_PRODUCT_FORM_SCHEMA } from '../../../schemas';
 import { StorageService } from 'domains';
 import { ImageStorageClient } from 'admin-infra';

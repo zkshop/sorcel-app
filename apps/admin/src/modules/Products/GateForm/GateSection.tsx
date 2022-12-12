@@ -1,5 +1,6 @@
 import { Heading, useDisclosure, useToast, Section, Button } from 'ui';
-import { Gate, useDeleteGateFromIdMutation } from 'apollo';
+import type { Gate } from 'apollo';
+import { useDeleteGateFromIdMutation } from 'apollo';
 import { useState } from 'react';
 import { GateTable } from '../GateTable';
 import { AddGateModal } from './AddGateModal';
@@ -25,7 +26,7 @@ export const GateSection = ({ gates }: GateSectionProps) => {
   const toast = useToast();
   const [gateIdToDelete, setGateIdToDelete] = useState<string | null>(null);
 
-  const [deleteGate, { data, loading: deleteGateLoading }] = useDeleteGateFromIdMutation();
+  const [deleteGate, { loading: deleteGateLoading }] = useDeleteGateFromIdMutation();
 
   const handleClickOnCloseIcon = (id: string) => {
     setGateIdToDelete(id);

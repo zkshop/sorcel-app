@@ -2,11 +2,12 @@ import { MainLayout } from 'ui';
 
 import { ProductFormHeader } from './ProductFormHeader';
 import { GeneralInformationsFields, MediaFields, OnChainDataFields } from './Sections';
-import { AddProductFormValues } from './types';
+import type { AddProductFormValues } from './types';
 import { GateSection } from '../GateForm';
-import { Gate } from 'apollo';
+import type { Gate } from 'apollo';
 
 type BaseProductFormProps = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
   handleSubmit: Function;
   onSubmit(data: AddProductFormValues): Promise<void>;
   isLoading: boolean;

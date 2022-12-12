@@ -1,5 +1,5 @@
 import { Tr, Th, UnorderedList, ListItem, CloseIcon } from 'ui';
-import { Gate } from 'apollo';
+import type { Gate } from 'apollo';
 
 type GateTableRowProps = {
   gate: Gate;

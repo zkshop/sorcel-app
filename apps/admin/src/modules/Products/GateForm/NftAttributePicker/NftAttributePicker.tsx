@@ -8,7 +8,7 @@ import {
   VStack,
   ChevronUpIcon,
 } from 'ui';
-import { NftAttribute } from 'domains';
+import type { NftAttribute } from 'domains';
 
 import { AttributeCheckboxList } from './AttributeCheckboxList';
 

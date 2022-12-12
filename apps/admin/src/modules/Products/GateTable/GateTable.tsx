@@ -1,13 +1,13 @@
 import { TableContainer, Table, Thead, Tr, Th, Tbody } from 'ui';
-import { Gate } from 'apollo';
+import type { Gate } from 'apollo';
 import { GateTableRow } from './GateTableRow';
 
-type GateTable = {
+type GateTableProps = {
   gates: Gate[];
   handleClickOnCloseIcon(id: string): void;
 };
 
-export const GateTable = ({ gates, handleClickOnCloseIcon }: GateTable) => (
+export const GateTable = ({ gates, handleClickOnCloseIcon }: GateTableProps) => (
   <TableContainer>
     <Table>
       <Thead>

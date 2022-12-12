@@ -1,7 +1,7 @@
 import { Box, FormControl, FormErrorMessage, FormLabel, NumberInput, NumberInputField } from 'ui';
-import { NftAttribute } from 'domains';
+import type { NftAttribute } from 'domains';
 import { useFormContext } from 'react-hook-form';
-import { AddGateFormValues } from './AddGateModal';
+import type { AddGateFormValues } from './AddGateModal';
 import { NftAttributePicker } from './NftAttributePicker';
 
 type GateFieldsProps = {

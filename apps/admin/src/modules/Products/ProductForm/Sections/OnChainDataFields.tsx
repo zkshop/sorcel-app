@@ -11,7 +11,7 @@ import {
   CollectionPlayIcon,
 } from 'ui';
 import { useFormContext } from 'react-hook-form';
-import { AddProductFormValues } from '../types';
+import type { AddProductFormValues } from '../types';
 
 export const OnChainDataFields = () => {
   const {

@@ -1,6 +1,6 @@
 import { useDropzone } from 'react-dropzone';
 
-type ImageInputProps = {};
+type ImageInputProps = object;
 
 export function ImageInput({}: ImageInputProps) {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone();

@@ -1,6 +1,7 @@
 import { Checkbox, CheckboxGroup, HStack } from 'ui';
-import { NftAttribute } from 'domains';
-import { ChangeEvent, useState } from 'react';
+import type { NftAttribute } from 'domains';
+import type { ChangeEvent } from 'react';
+import { useState } from 'react';
 import { useAppDispatch, setAttributeToGate } from 'admin-store';
 
 type AttributeListProps = {

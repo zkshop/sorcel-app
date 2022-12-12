@@ -1,12 +1,12 @@
 import { useDisclosure, useToast } from 'ui';
-import { useRouter } from 'next/router';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import { DeleteProductModal } from './DeleteProductModal';
 import { ProductForm } from './ProductForm';
-import { AddProductFormValues } from './types';
+import type { AddProductFormValues } from './types';
 
-import { Gate, Product, useDeleteProductMutation, useEditProductMutation } from 'apollo';
+import type { Gate, Product } from 'apollo';
+import { useDeleteProductMutation, useEditProductMutation } from 'apollo';
 import {
   ERROR_MESSAGE,
   getDeleteProductSuccessMessage,

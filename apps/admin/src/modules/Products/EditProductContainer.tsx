@@ -1,12 +1,6 @@
 import { BackButton, Spinner } from 'ui';
 
-import {
-  Product,
-  Gate,
-  useGetProductsQuery,
-  useGetGateFromProductQuery,
-  useGetProductByIdQuery,
-} from 'apollo';
+import { useGetGateFromProductQuery, useGetProductByIdQuery } from 'apollo';
 import { EditProductFormContainer } from './ProductForm/EditProductFormContainer';
 
 type EditProductPageProps = {
