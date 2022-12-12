@@ -1,4 +1,4 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { StorageService } from 'domains';
 import { ImageStorageClient } from '../../../infra';
 

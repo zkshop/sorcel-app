@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint \"**/*.ts\" --fix"
+  },
   "dependencies": {
     "@types/multiparty": "^0.0.33",
     "@vercel/fetch": "^6.2.0",

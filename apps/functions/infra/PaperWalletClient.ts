@@ -1,4 +1,4 @@
-import { TokenClient } from 'domains';
+import type { TokenClient } from 'domains';
 import axios from 'axios';
 
 export function PaperWalletClient(): TokenClient {

@@ -1,4 +1,4 @@
-import { StorageClient } from 'domains';
+import type { StorageClient } from 'domains';
 import crypto from 'crypto';
 import { supabase } from 'supabase';
 import { getObjectPathFromImageUrl } from 'pure';

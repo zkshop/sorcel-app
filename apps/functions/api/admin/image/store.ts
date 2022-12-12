@@ -1,6 +1,6 @@
 import { StorageService } from 'domains';
 import { ImageStorageClient } from '../../../infra';
-import { VercelRequest, VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { allowCors } from '../../../allowCors';
 import { blobFromURL } from '../../../utils/getBlobFromURL';
 
