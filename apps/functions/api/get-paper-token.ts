@@ -1,7 +1,7 @@
 import { TokenService } from 'domains';
 import { PaperWalletClient } from '../infra/PaperWalletClient';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { allowCors } from '../allowCors';
+import { allowCors } from '../middlewares/allowCors';
 
 const Token = TokenService(PaperWalletClient());
 

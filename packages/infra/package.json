@@ -12,7 +12,7 @@
     "alchemy": "*",
     "domains": "*",
     "magic": "*",
-    "magic-sdk": "^10.0.0",
+    "magic-sdk": "*",
     "pure": "*",
     "sendgrid": "*",
     "sendinblue": "*",

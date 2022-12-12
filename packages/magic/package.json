@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "@magic-ext/oauth": "^4.0.0",
-    "@magic-sdk/admin": "^1.4.1",
     "magic-sdk": "^10.0.0"
   }
 }

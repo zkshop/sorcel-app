@@ -15,7 +15,6 @@ import type { UseFormRegister } from 'react-hook-form';
 type LoginModalProps = {
   isOpen: boolean;
   onClose(): void;
-  // eslint-disable-next-line @typescript-eslint/ban-types
   handleSubmit: Function;
   onSubmit(data: { email: string }): Promise<void>;
   register: UseFormRegister<{ email: string }>;
