@@ -1,10 +1,12 @@
 import { Route, Routes as OriginalRoutes } from 'react-router-dom';
 import { PageLayout, Home, General } from '../pages';
+import { Login } from '../pages/Login';
 import { ProductRoutes } from './ProductRoutes';
 
 const Routes = () => (
   <OriginalRoutes>
     <Route path="/" element={<PageLayout />}>
+      <Route index element={<Login />} />
       <Route index element={<Home />} />
       <Route path="general" element={<General />} />
 

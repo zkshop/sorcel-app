@@ -1,0 +1,12 @@
+{
+  "name": "magic-server-sdk",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix",
+    "lint:fix": "yarn lint --fix"
+  },
+  "dependencies": {
+    "@magic-sdk/admin": "1.8.0"
+  }
+}
