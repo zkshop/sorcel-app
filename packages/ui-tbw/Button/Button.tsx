@@ -1,4 +1,5 @@
-import { Button as ChakraButton, ButtonProps as ChakraButtonProps } from '@chakra-ui/react';
+import type { ButtonProps as ChakraButtonProps } from '@chakra-ui/react';
+import { Button as ChakraButton } from '@chakra-ui/react';
 
 type ButtonProps = {
   children: React.ReactNode;

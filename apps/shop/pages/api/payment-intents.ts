@@ -1,13 +1,9 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 
 import { formatAmountForStripe } from 'clients/stripe';
-import {
-  initializeApollo,
-  GetProductByIdDocument,
-  GetProductByIdQuery,
-  GetProductByIdQueryVariables,
-} from 'apollo';
+import type { GetProductByIdQuery, GetProductByIdQueryVariables } from 'apollo';
+import { initializeApollo, GetProductByIdDocument } from 'apollo';
 import { applyDiscount } from 'pure';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {

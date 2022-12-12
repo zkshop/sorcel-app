@@ -1,4 +1,4 @@
-import { Nft, NftAttribute } from 'domains';
+import type { Nft, NftAttribute } from 'domains';
 import uniq from 'lodash/uniq';
 
 export const createAttributeListFromNftMetadata = (nfts: Nft[]): NftAttribute<any>[] => {

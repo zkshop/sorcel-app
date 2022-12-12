@@ -1,4 +1,4 @@
-import { AuthTokenValidationClient } from './AuthTokenValidationClient';
+import type { AuthTokenValidationClient } from './AuthTokenValidationClient';
 
 export function AuthTokenValidationService(client: AuthTokenValidationClient) {
   return {

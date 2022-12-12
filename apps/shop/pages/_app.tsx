@@ -2,7 +2,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import '../min.css';
 
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import { AppProps } from 'next/app';
+import type { AppProps } from 'next/app';
 import { Provider as ReduxProvider } from 'react-redux';
 
 import { WagmiConfig } from 'wagmi';

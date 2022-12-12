@@ -1,4 +1,5 @@
-import { CloseButton, Flex, Link, Select, SelectProps, useColorModeValue } from '@chakra-ui/react';
+import type { SelectProps } from '@chakra-ui/react';
+import { Flex, Link, Select, useColorModeValue } from '@chakra-ui/react';
 
 import { CartProductMeta } from '../CartProductMeta/CartProductMeta';
 import { PriceTag } from '../PriceTag/PriceTag';
@@ -40,7 +41,6 @@ export const CartItem = (props: CartItemProps) => {
     currency,
     price,
     onChangeQuantity,
-    onClickDelete,
   } = props;
 
   return (

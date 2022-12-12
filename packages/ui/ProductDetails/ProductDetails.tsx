@@ -18,6 +18,7 @@ type ProductDetailsProps = {
   priceReduced?: number;
   poapUrl?: string;
   poapImgUrl?: string;
+  // eslint-disable-next-line @typescript-eslint/ban-types
   sendTransaction?: Function;
 };
 

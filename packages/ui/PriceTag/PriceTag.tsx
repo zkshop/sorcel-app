@@ -1,4 +1,5 @@
-import { HStack, StackProps, Text, TextProps, useColorModeValue as mode } from '@chakra-ui/react';
+import type { StackProps, TextProps } from '@chakra-ui/react';
+import { HStack, Text, useColorModeValue as mode } from '@chakra-ui/react';
 
 interface PriceTagProps {
   currency?: string;

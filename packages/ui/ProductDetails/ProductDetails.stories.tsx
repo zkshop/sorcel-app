@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { ComponentStory, ComponentMeta } from '@storybook/react';
 import { MainLayout } from '../MainLayout/MainLayout';
 
 import { ProductDetails } from './ProductDetails';
@@ -30,5 +30,6 @@ Primary.args = {
   collection: '',
   poapUrl: 'https://poap.gallery/event/1',
   poapImgUrl: 'https://www.poap.xyz/events/badges/dappcon-18.png',
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   sendTransaction: () => {},
 };

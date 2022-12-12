@@ -3,7 +3,6 @@ import { useAccount } from 'wagmi';
 
 import { useGetProductsQuery } from 'apollo';
 import { ProductListContainer } from './ProductListContainer';
-import { useEffect } from 'react';
 import { useOnConnection } from '../../hook/useOnConnection';
 
 const APP_ID = process.env.APP_ID;

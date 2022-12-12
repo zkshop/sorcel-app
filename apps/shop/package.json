@@ -6,8 +6,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "lint": "next lint",
-    "lint:fix": "yarn lint --fix",
+    "lint": "next lint --fix",
     "start": "next start"
   },
   "dependencies": {

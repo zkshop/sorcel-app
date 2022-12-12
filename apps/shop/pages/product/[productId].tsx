@@ -1,9 +1,10 @@
 import { VStack, BackButton } from 'ui';
-import { GetServerSidePropsContext } from 'next';
+import type { GetServerSidePropsContext } from 'next';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import { useAccount } from 'wagmi';
 
-import { addApolloState, initializeApollo, Product, GetProductByIdDocument } from 'apollo';
+import type { Product } from 'apollo';
+import { addApolloState, initializeApollo, GetProductByIdDocument } from 'apollo';
 import { ProductDetailsContainer } from 'modules/product-page/ProductDetailsContainer';
 
 type ProductDetailsPage = {

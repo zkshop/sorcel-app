@@ -16,7 +16,7 @@ type MenuDrawerProps = {
   onClose: () => void;
 };
 
-export const MenuDrawer = ({ isOpen, onOpen, onClose }: MenuDrawerProps) => (
+export const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => (
   <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
     <DrawerOverlay />
     <DrawerContent>

@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Box } from '@chakra-ui/react';
 
 import { PoapBadge } from './PoapBadge';

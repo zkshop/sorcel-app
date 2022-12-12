@@ -1,4 +1,4 @@
-import { EmailClient } from '../domains';
+import type { EmailClient } from '../domains';
 import { SendinBlueClient } from 'sendinblue';
 
 export function SendEmailClient(): EmailClient {

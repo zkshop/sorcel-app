@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Nft, Network, createAlchemy, Alchemy, OwnedNft } from 'alchemy';
-import { NftService, NftClient } from 'domains';
+import type { Nft, Alchemy, OwnedNft } from 'alchemy';
+import { Network, createAlchemy } from 'alchemy';
+import type { NftClient } from 'domains';
+import { NftService } from 'domains';
 
 const getAllWalletNtfs = async (
   api: Alchemy,

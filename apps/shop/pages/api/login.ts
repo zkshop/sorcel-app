@@ -1,6 +1,6 @@
 import { AuthTokenValidationService } from 'domains';
 import { UserTokenValidationClient } from 'infra';
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 const Token = AuthTokenValidationService(UserTokenValidationClient());
 

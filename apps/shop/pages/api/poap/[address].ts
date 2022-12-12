@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next/types';
+import type { NextApiRequest, NextApiResponse } from 'next/types';
 import { getEveryPoapURL, poap } from 'poap';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

@@ -1,5 +1,5 @@
-import { PaperWallet } from './PaperWallet';
-import { TokenClient } from './TokenClient';
+import type { PaperWallet } from './PaperWallet';
+import type { TokenClient } from './TokenClient';
 
 type TokenServiceType = {
   getToken(code: string): Promise<string>;

@@ -1,4 +1,4 @@
-import { Gate } from 'apollo';
+import type { Gate } from 'apollo';
 
 // AMA
 const AMA_PRODUCT_ID = '28f10d56-2585-4697-805b-51114ae34250';

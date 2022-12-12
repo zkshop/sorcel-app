@@ -1,8 +1,9 @@
 import { formatProductData } from './formatProductData';
-import { Gate, Product, useGetGatesQuery } from 'apollo';
+import type { Gate, Product } from 'apollo';
+import { useGetGatesQuery } from 'apollo';
 import { ProductCardList } from 'ui-tbw';
 import { useAppSelector } from '../../store';
-import { Nft } from 'alchemy';
+import type { Nft } from 'alchemy';
 import { findProductGates } from './findProductGates';
 
 type ProductListContainerProps = {

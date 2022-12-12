@@ -1,5 +1,5 @@
-import { PaperWallet } from '../token';
-import { AuthData } from './AuthData';
+import type { PaperWallet } from '../token';
+import type { AuthData } from './AuthData';
 
 export type AuthClient = {
   login(email: string): Promise<AuthData>;

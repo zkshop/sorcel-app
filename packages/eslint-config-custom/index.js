@@ -1,7 +1,16 @@
 module.exports = {
-  extends: ['next', 'turbo', 'plugin:react/recommended', 'plugin:prettier/recommended', 'prettier'],
+  extends: [
+    'next',
+    'turbo',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+    'prettier',
+  ],
   rules: {
     '@next/next/no-html-link-for-pages': ['off'],
+    '@typescript-eslint/consistent-type-imports': 'error',
+    '@typescript-eslint/no-explicit-any': 'off',
     'import/no-duplicates': ['error', { considerQueryString: true }],
     'react/jsx-key': 'off',
     'import/no-anonymous-default-export': 'off',

@@ -1,6 +1,6 @@
-import { PaperWallet } from '..';
-import { AuthClient } from './AuthClient';
-import { AuthData } from './AuthData';
+import type { PaperWallet } from '..';
+import type { AuthClient } from './AuthClient';
+import type { AuthData } from './AuthData';
 
 type AuthServiceType = {
   loginWithEmail: (email: string) => Promise<AuthData>;

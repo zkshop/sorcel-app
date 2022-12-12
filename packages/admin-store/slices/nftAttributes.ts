@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Network, NftAttribute, NftService } from 'domains';
+import type { NftAttribute } from 'domains';
+import { Network, NftService } from 'domains';
 import { NftMetadataClient } from 'admin-infra';
 
 const nft = NftService(NftMetadataClient(Network.MATIC_MAINNET));
@@ -19,7 +20,7 @@ const nftAttributes = createSlice({
   name: 'nftAttributes',
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(fetchNFTAttributes.pending, (state, action) => ({
+    builder.addCase(fetchNFTAttributes.pending, () => ({
       loading: true,
       hits: null,
     }));

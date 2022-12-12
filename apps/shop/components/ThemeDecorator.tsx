@@ -1,9 +1,9 @@
 import { ThemeProvider } from 'ui';
 
-type ThemeDecorator = {
+type ThemeDecoratorProps = {
   children: React.ReactNode;
 };
 
-export const ThemeDecorator = ({ children }: ThemeDecorator) => (
+export const ThemeDecorator = ({ children }: ThemeDecoratorProps) => (
   <ThemeProvider>{children}</ThemeProvider>
 );

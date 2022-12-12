@@ -1,6 +1,6 @@
 import { EmailService } from 'domains';
 import { SendEmailClient } from 'infra';
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 const Email = EmailService(SendEmailClient());
 

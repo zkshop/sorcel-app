@@ -1,5 +1,6 @@
-import { createAlchemy, Network } from 'alchemy';
-import { NftClient } from 'domains/nft';
+import type { Network } from 'alchemy';
+import { createAlchemy } from 'alchemy';
+import type { NftClient } from 'domains/nft';
 import { createAttributeListFromNftMetadata } from 'pure';
 
 export function NftMetadataClient(network: Network): NftClient {

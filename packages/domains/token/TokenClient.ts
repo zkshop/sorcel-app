@@ -1,4 +1,4 @@
-import { PaperWallet } from './PaperWallet';
+import type { PaperWallet } from './PaperWallet';
 
 export type TokenClient = {
   getToken(code: string): Promise<string>;

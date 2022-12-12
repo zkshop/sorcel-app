@@ -1,5 +1,5 @@
 import { getPOAPFromId } from './getPoapFromId';
-import { Poap } from './Poap';
+import type { Poap } from './Poap';
 
 export const getPOAPListFromIds = async (ids: string[]) => {
   function getAllRequest() {

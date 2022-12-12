@@ -1,5 +1,5 @@
-import { Nft, NftAttribute } from './Nft';
-import { NftClient } from './NftClient';
+import type { Nft, NftAttribute } from './Nft';
+import type { NftClient } from './NftClient';
 
 type NftServiceType = {
   getWalletNfts(walletAddress: string): Promise<Nft[]>;

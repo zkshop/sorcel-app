@@ -1,5 +1,6 @@
 import { Buffer as BufferPolyfill } from 'buffer';
-declare var Buffer: typeof BufferPolyfill;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+declare let Buffer: typeof BufferPolyfill;
 globalThis.Buffer = BufferPolyfill;
 
 (window.global as any) = globalThis;

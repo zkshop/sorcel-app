@@ -1,4 +1,5 @@
-import { Box as ChakraBox, BoxProps as ChakraBoxProps } from '@chakra-ui/react';
+import type { BoxProps as ChakraBoxProps } from '@chakra-ui/react';
+import { Box as ChakraBox } from '@chakra-ui/react';
 
 type BoxProps = ChakraBoxProps;
 

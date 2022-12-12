@@ -1,4 +1,4 @@
-import { Magic, MagicUserMetadata } from 'magic-sdk';
+import { Magic } from 'magic-sdk';
 import { Magic as AuthMagic } from '@magic-sdk/admin';
 import { OAuthExtension } from '@magic-ext/oauth';
 

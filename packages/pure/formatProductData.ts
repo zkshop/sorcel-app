@@ -1,6 +1,6 @@
 import { getPoapImageFromPoapList } from 'poap';
-import { Product } from 'apollo';
-import { FormatedProductData } from 'types';
+import type { Product } from 'apollo';
+import type { FormatedProductData } from 'types';
 
 export type GetProductCardPropsParams = Product & {
   poapImageList: any[];

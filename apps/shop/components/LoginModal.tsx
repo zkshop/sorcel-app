@@ -6,16 +6,16 @@ import {
   ModalCloseButton,
   ModalBody,
   Input,
-  Box,
   VStack,
   Button,
 } from 'ui';
 import React from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import type { UseFormRegister } from 'react-hook-form';
 
 type LoginModalProps = {
   isOpen: boolean;
   onClose(): void;
+  // eslint-disable-next-line @typescript-eslint/ban-types
   handleSubmit: Function;
   onSubmit(data: { email: string }): Promise<void>;
   register: UseFormRegister<{ email: string }>;

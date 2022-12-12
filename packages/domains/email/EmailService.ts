@@ -1,4 +1,4 @@
-import { EmailClient, EmailData } from './EmailClient';
+import type { EmailClient, EmailData } from './EmailClient';
 
 type EmailServiceType = {
   sendEmail(email: EmailData): Promise<void>;

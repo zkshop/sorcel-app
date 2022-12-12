@@ -1,11 +1,12 @@
-import { QueryResult } from '@apollo/client';
+import type { QueryResult } from '@apollo/client';
 import { useEffect } from 'react';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import { useAccount } from 'wagmi';
 
 import useUpdateThemeOnConnection from '../hooks/useUpdateThemeOnConnection';
 
-import { initializeApollo, addApolloState, GetProductsDocument, GetProductsQuery } from 'apollo';
+import type { GetProductsQuery } from 'apollo';
+import { initializeApollo, addApolloState, GetProductsDocument } from 'apollo';
 
 import { ProductListContainer } from 'modules';
 import { Network, NftService } from 'domains';
@@ -27,7 +28,7 @@ const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
 
   useEffect(() => {
     async function getNftAttribute() {
-      const res = await nft.getNftAttribute('0x3c11B1975C17fcf8Cbb315d4430233eD1E87CF05');
+      await nft.getNftAttribute('0x3c11B1975C17fcf8Cbb315d4430233eD1E87CF05');
     }
 
     getNftAttribute();

@@ -1,4 +1,4 @@
-import { StorageClient } from './StorageClient';
+import type { StorageClient } from './StorageClient';
 
 type StorageServiceType = {
   uploadPicture(image: Blob, bucketName: string): Promise<string>;

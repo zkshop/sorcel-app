@@ -1,5 +1,5 @@
 import { TokenService } from 'domains';
-import { AuthClient } from 'domains/auth/AuthClient';
+import type { AuthClient } from 'domains/auth/AuthClient';
 import { magicClient } from 'magic';
 import { PaperWalletClient } from './PaperWalletClient';
 

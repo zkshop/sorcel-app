@@ -1,12 +1,4 @@
-import {
-  Button,
-  Flex,
-  Heading,
-  Link,
-  Stack,
-  Text,
-  useColorModeValue as mode,
-} from '@chakra-ui/react';
+import { Button, Flex, Heading, Stack, Text, useColorModeValue as mode } from '@chakra-ui/react';
 import { ArrowRightIcon } from '../Icons';
 
 import { formatPrice } from '../PriceTag/PriceTag';
@@ -17,6 +9,7 @@ type OrderSummaryItemProps = {
   children?: React.ReactNode;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const OrderSummaryItem = (props: OrderSummaryItemProps) => {
   const { label, value, children } = props;
 

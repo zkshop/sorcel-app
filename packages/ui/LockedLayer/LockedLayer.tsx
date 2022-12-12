@@ -1,4 +1,4 @@
-import { Box, Text, HStack } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 type LockedLayerProps = {
   isLocked: boolean;

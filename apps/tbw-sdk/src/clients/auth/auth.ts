@@ -1,4 +1,5 @@
-import { PaperWalletClient, TokenClient } from '../paper';
+import type { TokenClient } from '../paper';
+import { PaperWalletClient } from '../paper';
 
 type TokenServiceType = {
   getToken(code: string): Promise<string>;
@@ -40,6 +41,7 @@ export const UserAuthenticationClient = (): AuthClient => ({
 
   login: async () => initialAuthData,
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   logout: async () => {},
 
   loginWithPaper: async (code: string) => {

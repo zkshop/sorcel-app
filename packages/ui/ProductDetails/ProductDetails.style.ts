@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Theme } from '@chakra-ui/react';
+import type { Theme } from '@chakra-ui/react';
 
 import styled from '@emotion/styled';
 

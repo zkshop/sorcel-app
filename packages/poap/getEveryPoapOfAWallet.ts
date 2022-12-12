@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Poap } from './Poap';
+import type { Poap } from './Poap';
 
 export const getEveryPOAPOfAWallet = async (address: string): Promise<Poap[]> => {
   try {

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { AuthData, AuthType, PaperWallet } from './auth.type';
+import type { AuthData, AuthType, PaperWallet } from './auth.type';
 
 type AuthSliceType = AuthData & { loading: boolean; type?: AuthType };
 

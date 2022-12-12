@@ -1,10 +1,11 @@
 import { VStack, Heading } from 'ui';
 import { Elements } from '@stripe/react-stripe-js';
-import { GetServerSidePropsContext } from 'next';
+import type { GetServerSidePropsContext } from 'next';
 import { useState, useEffect } from 'react';
 
 import { getPaymentIntent, getStripeObject } from 'clients/stripe';
-import { initializeApollo, addApolloState, GetProductByIdDocument, Product } from 'apollo';
+import type { Product } from 'apollo';
+import { initializeApollo, addApolloState, GetProductByIdDocument } from 'apollo';
 import { CheckoutForm } from 'modules/checkout/CheckoutForm';
 import { useIsAnHolder } from 'hooks/useIsAnHolder';
 
