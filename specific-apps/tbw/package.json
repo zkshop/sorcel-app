@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build",
-    "dev": "vite --config vite.config.dev.ts",
+    "build": "tsc && vite build --config ../../packages/vite-config/vite.config.ts",
+    "dev": "vite --config ../../packages/vite-config/vite.config.dev.ts",
     "lint": "eslint \"**/*.ts*\" --fix",
-    "preview": "vite preview"
+    "preview": "vite preview --config ../../packages/vite-config/vite.config.ts"
   },
   "dependencies": {
     "apollo": "*",
@@ -21,17 +21,13 @@
     "wagmi": "^0.6.8"
   },
   "devDependencies": {
-    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
-    "@rollup/plugin-inject": "^5.0.2",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
-    "@vitejs/plugin-react": "^2.2.0",
     "buffer": "^6.0.3",
     "deepmerge": "^4.2.2",
     "rimraf": "^3.0.2",
-    "rollup-plugin-polyfill-node": "^0.11.0",
     "vite": "^3.2.3",
-    "vite-plugin-environment": "^1.1.3"
+    "vite-config": "*"
   },
   "peerDependencies": {
     "@rainbow-me/rainbowkit": "*",

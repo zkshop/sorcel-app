@@ -17,6 +17,7 @@ export default defineConfig({
       'ALCHEMY_SECRET_KEY',
       'FUNCTIONS_API',
       'PAPER_CLIENT_ID',
+      'SUPABASE_API_KEY',
     ]),
   ],
   define: {

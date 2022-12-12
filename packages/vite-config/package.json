@@ -1,0 +1,15 @@
+{
+  "name": "vite-config",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix"
+  },
+  "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
+    "@rollup/plugin-inject": "^5.0.2",
+    "@vitejs/plugin-react": "^2.2.0",
+    "rollup-plugin-polyfill-node": "^0.11.0",
+    "vite-plugin-environment": "^1.1.3"
+  }
+}
