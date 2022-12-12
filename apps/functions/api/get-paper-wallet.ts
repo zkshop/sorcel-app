@@ -1,7 +1,7 @@
 import { AuthService } from 'domains';
 import { UserAuthenticationClient } from '../infra/UserAuthenticationClient';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { allowCors } from '../allowCors';
+import { allowCors } from '../middlewares/allowCors';
 
 const Auth = AuthService(UserAuthenticationClient());
 
