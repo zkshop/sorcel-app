@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build --config ../../packages/vite-config/vite.config.ts",
-    "dev": "vite --config ../../packages/vite-config/vite.config.dev.ts",
+    "build": "tsc && vite build -c ../../packages/vite-config/vite.config.admin.ts",
+    "dev": "vite -c ../../packages/vite-config/vite.config.dev.ts",
     "lint": "eslint \"**/*.ts*\" --fix",
-    "preview": "vite preview --config ../../packages/vite-config/vite.config.ts"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@types/uuid": "^9.0.0",
