@@ -18,6 +18,7 @@ export type FormatedProductData = {
   highlight?: boolean;
   isLocked?: boolean;
   targetAttribute?: string;
+  isWithHref?: boolean;
 };
 
 type ProductCardListProps = {

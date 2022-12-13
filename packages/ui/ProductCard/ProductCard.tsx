@@ -1,5 +1,4 @@
-import { Box, Text, HStack, Link } from '@chakra-ui/react';
-import Image from 'next/image';
+import { Box, Text, HStack, Link, Image } from '@chakra-ui/react';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 import { StyledProductCard } from './ProductCard.style';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
@@ -11,12 +10,13 @@ export type ProductCardProps = {
   discount?: string;
   price: string;
   priceReduced?: number;
-  collection: string;
-  isTransparent: boolean;
-  isEligible: boolean;
+  collection?: string;
+  isTransparent?: boolean;
+  isEligible?: boolean;
   poapUrl?: string;
   poapImgUrl?: string;
   description?: any;
+  isWithHref?: boolean;
 };
 
 export const ProductCard = ({
@@ -26,18 +26,20 @@ export const ProductCard = ({
   price,
   priceReduced,
   collection,
-  isTransparent,
-  isEligible,
+  isTransparent = false,
+  isEligible = false,
   id,
   poapUrl,
   poapImgUrl,
+  isWithHref = true,
 }: ProductCardProps) => {
   const href = `product/${id}`;
-  const additionalProps = isTransparent
-    ? {}
-    : {
-        href,
-      };
+  const additionalProps =
+    isTransparent || !isWithHref
+      ? {}
+      : {
+          href,
+        };
   return (
     <StyledProductCard
       isEligible={isEligible}
@@ -56,7 +58,7 @@ export const ProductCard = ({
             height: { xs: '150px', sm: '160px', md: '200px' },
           }}
         >
-          <Image alt="product" src={srcItem} fill />
+          <Image alt="product" src={srcItem} w="full" h="full" />
         </Box>
 
         <Text

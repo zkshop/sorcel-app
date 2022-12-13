@@ -28,6 +28,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
           priceReduced,
           srcItem,
           discount,
+          isWithHref,
         }) => (
           <GridItem key={`products-${id}`} display="flex" justifyContent="center">
             <ProductCard
@@ -42,6 +43,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
               isEligible={isAnHolder}
               isTransparent={isTransparent}
               collection={collection}
+              isWithHref={isWithHref}
             />
           </GridItem>
         ),
