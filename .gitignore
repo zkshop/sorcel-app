@@ -43,3 +43,9 @@ yarn-error.log*
 *.sln
 *.sw?
 .vercel
+storybook-static
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault

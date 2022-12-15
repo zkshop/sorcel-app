@@ -9,14 +9,20 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "build:storybook": "turbo run build-storybook",
+    "build:admin": "yarn build --filter=admin...",
+    "build:docs": "yarn build --filter=docs...",
+    "build:shop": "yarn build --filter=shop...",
     "dev": "turbo run dev --parallel",
+    "dev:admin": "yarn dev --filter=admin...",
+    "dev:docs": "yarn dev --filter=docs...",
+    "dev:functions": "yarn dev --filter=functions...",
+    "dev:shop": "yarn dev --filter=shop...",
     "generate:graphql": "turbo run generate:graphql",
     "generate:package": "plop --plopfile generators/package.js",
     "lint": "turbo run lint",
     "prepare": "husky install",
     "sort": "sort-package-json",
-    "start:storybook": "turbo run storybook"
+    "test": "turbo run test"
   },
   "lint-staged": {
     "apps/**/*.{js,ts,jsx,tsx}": [

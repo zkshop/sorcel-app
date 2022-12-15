@@ -12,7 +12,7 @@ import {
   getDeleteProductSuccessMessage,
   getEditProductSuccessMessage,
 } from 'messages';
-import { blobFromURL, getObjectPathFromImageUrl, toNumber } from 'pure';
+import { blobFromURL, getObjectPathFromImageUrl } from 'pure';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ADD_PRODUCT_FORM_SCHEMA } from '../../../schemas';
