@@ -7,8 +7,8 @@
     "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
-    "domains": "*",
     "alchemy": "*",
+    "domains": "*",
     "pure": "*"
   }
 }

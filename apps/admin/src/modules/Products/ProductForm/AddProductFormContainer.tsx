@@ -1,7 +1,7 @@
 import { useToast } from 'ui';
 import { useCreateProductMutation } from 'apollo';
 import { getAddProductSuccessMessage } from 'messages';
-import { blobFromURL, toNumber } from 'pure';
+import { blobFromURL } from 'pure';
 import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';

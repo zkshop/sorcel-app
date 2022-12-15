@@ -1,69 +1,42 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "globalDependencies": [".env", "tsconfig.json"],
+  "globalEnv": [
+    "ALCHEMY_SECRET_KEY",
+    "APP_ID",
+    "EMAIL_ORDER_TARGET",
+    "FUNCTIONS_API",
+    "HASURA_API_KEY",
+    "HASURA_API_URL",
+    "MAGIC_SECRET_KEY",
+    "NODE_ENV",
+    "PAPER_API_KEY",
+    "PAPER_CLIENT_ID",
+    "PAPER_KEY_MANAGER_TOKEN",
+    "POAP_API_KEY",
+    "PUBLIC_MAGIC_PUBLISHABLE_KEY",
+    "PUBLIC_STRIPE_PUBLISHABLE_KEY",
+    "SENDINBLUE_API_KEY",
+    "STRIPE_SECRET_KEY",
+    "SUPABASE_API_KEY",
+    "VERCEL_URL"
+  ],
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "^build",
-        "lint",
-        "$APP_ID",
-        "$NODE_ENV",
-        "$VERCEL_URL",
-        "$HASURA_API_URL",
-        "$HASURA_API_KEY",
-        "$PUBLIC_STRIPE_PUBLISHABLE_KEY",
-        "$ALCHEMY_SECRET_KEY",
-        "$STRIPE_SECRET_KEY",
-        "$POAP_API_KEY",
-        "$PUBLIC_MAGIC_PUBLISHABLE_KEY",
-        "$MAGIC_SECRET_KEY",
-        "$SUPABASE_API_KEY",
-        "$SENDGRID_API_KEY",
-        "$EMAIL_ORDER_TARGET",
-        "$SENDINBLUE_API_KEY",
-        "$FUNCTIONS_API"
-      ],
-      "outputs": ["dist/**", ".next/**"]
-    },
-    "lint": {
-      "outputs": []
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", "storybook-static/**"]
     },
     "dev": {
-      "dependsOn": [
-        "$NODE_ENV",
-        "$VERCEL_URL",
-        "$HASURA_API_URL",
-        "$HASURA_API_KEY",
-        "$PUBLIC_STRIPE_PUBLISHABLE_KEY",
-        "$ALCHEMY_SECRET_KEY",
-        "$STRIPE_SECRET_KEY",
-        "$POAP_API_KEY",
-        "$APP_ID",
-        "$PUBLIC_MAGIC_PUBLISHABLE_KEY",
-        "$MAGIC_SECRET_KEY",
-        "$SUPABASE_API_KEY",
-        "$SENDGRID_API_KEY",
-        "$EMAIL_ORDER_TARGET",
-        "$SENDINBLUE_API_KEY",
-        "$PAPER_KEY_MANAGER_TOKEN",
-        "$PAPER_CLIENT_ID",
-        "$PAPER_API_KEY",
-        "$FUNCTIONS_API"
-      ],
+      "dependsOn": [],
       "cache": false
-    },
-    "storybook": {
-      "cache": false
-    },
-    "build-storybook": {
-      "outputs": ["storybook-static/**"]
     },
     "generate:graphql": {
       "cache": false,
-      "dependsOn": ["$HASURA_API_URL", "$HASURA_API_KEY"]
+      "env": ["HASURA_API_URL", "HASURA_API_KEY"]
     },
+    "lint": {},
     "test": {
-      "outputs": []
+      "dependsOn": ["lint", "build"]
     }
   }
 }

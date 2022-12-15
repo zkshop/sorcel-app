@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "vc dev",
     "lint": "eslint \"**/*.ts\" --fix"
   },
   "dependencies": {

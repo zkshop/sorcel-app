@@ -6,8 +6,8 @@
   "dependencies": {
     "domains": "*",
     "infra": "*",
-    "pure": "*",
-    "poap": "*"
+    "poap": "*",
+    "pure": "*"
   },
   "peerDependencies": {
     "redux": "*"

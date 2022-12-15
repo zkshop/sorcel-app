@@ -4,8 +4,8 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "build-storybook": "build-storybook",
-    "storybook": "start-storybook -p 6006"
+    "build": "build-storybook",
+    "dev": "start-storybook -p 6006"
   },
   "dependencies": {
     "react": "^18.2.0",
