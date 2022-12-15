@@ -27,14 +27,10 @@ query getAdmin($appId: uuid!) {
 
 mutation UpdateApp($appId: uuid!, $newName: String!, $newImgUrl: String!) {
   update_app(where: { id: { _eq: $appId } }, _set: { name: $newName, imgUrl: $newImgUrl }) {
-    ...app_mutation_responseFragment
-  }
-}
-
-fragment app_mutation_responseFragment on app_mutation_response {
-  returning {
-    id
-    name
-    imgUrl
+    returning {
+      id
+      imgUrl
+      name
+    }
   }
 }

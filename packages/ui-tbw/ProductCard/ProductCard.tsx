@@ -6,8 +6,8 @@ export type ProductCardProps = {
   id?: string;
   srcItem: string;
   title: string;
-  discount?: string;
-  price: string;
+  discount?: number;
+  price: number;
   priceReduced?: number;
   description?: any;
   externalLink?: string;

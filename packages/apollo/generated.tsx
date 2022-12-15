@@ -1300,13 +1300,8 @@ export type UpdateAppMutation = {
   __typename?: 'mutation_root';
   update_app?: {
     __typename?: 'app_mutation_response';
-    returning: Array<{ __typename?: 'app'; id: any; name: string; imgUrl?: string | null }>;
+    returning: Array<{ __typename?: 'app'; id: any; imgUrl?: string | null; name: string }>;
   } | null;
-};
-
-export type App_Mutation_ResponseFragmentFragment = {
-  __typename?: 'app_mutation_response';
-  returning: Array<{ __typename?: 'app'; id: any; name: string; imgUrl?: string | null }>;
 };
 
 export type CreateGateMutationVariables = Exact<{
@@ -1373,13 +1368,13 @@ export type GetGateFromProductQuery = {
 export type CreateProductMutationVariables = Exact<{
   appId: Scalars['uuid'];
   price: Scalars['Int'];
-  name?: InputMaybe<Scalars['String']>;
-  description?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  description: Scalars['String'];
   image: Scalars['String'];
-  discount: Scalars['Int'];
-  curation: Scalars['String'];
-  collection: Scalars['String'];
-  poapId: Scalars['Int'];
+  discount?: InputMaybe<Scalars['Int']>;
+  curation?: InputMaybe<Scalars['String']>;
+  collection?: InputMaybe<Scalars['String']>;
+  poapId?: InputMaybe<Scalars['Int']>;
   isDiscountGated?: InputMaybe<Scalars['Boolean']>;
 }>;
 
@@ -1490,15 +1485,6 @@ export type GetProductsQuery = {
   }>;
 };
 
-export const App_Mutation_ResponseFragmentFragmentDoc = gql`
-  fragment app_mutation_responseFragment on app_mutation_response {
-    returning {
-      id
-      name
-      imgUrl
-    }
-  }
-`;
 export const GetAppDocument = gql`
   query getApp($appId: uuid!) {
     app: app_by_pk(id: $appId) {
@@ -1594,10 +1580,13 @@ export type GetAdminQueryResult = Apollo.QueryResult<GetAdminQuery, GetAdminQuer
 export const UpdateAppDocument = gql`
   mutation UpdateApp($appId: uuid!, $newName: String!, $newImgUrl: String!) {
     update_app(where: { id: { _eq: $appId } }, _set: { name: $newName, imgUrl: $newImgUrl }) {
-      ...app_mutation_responseFragment
+      returning {
+        id
+        imgUrl
+        name
+      }
     }
   }
-  ${App_Mutation_ResponseFragmentFragmentDoc}
 `;
 export type UpdateAppMutationFn = Apollo.MutationFunction<
   UpdateAppMutation,
@@ -1853,13 +1842,13 @@ export const CreateProductDocument = gql`
   mutation CreateProduct(
     $appId: uuid!
     $price: Int!
-    $name: String
-    $description: String
+    $name: String!
+    $description: String!
     $image: String!
-    $discount: Int!
-    $curation: String!
-    $collection: String!
-    $poapId: Int!
+    $discount: Int
+    $curation: String
+    $collection: String
+    $poapId: Int
     $isDiscountGated: Boolean
   ) {
     insert_product_one(

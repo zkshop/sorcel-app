@@ -43,7 +43,10 @@ const Checkout = ({ product }: CheckoutProps) => {
 
       {clientSecret && (
         <Elements options={{ appearance: { theme: 'stripe' }, clientSecret }} stripe={stripe}>
-          <CheckoutForm price={product.price} discount={showDiscount() && product.discount} />
+          <CheckoutForm
+            price={product.price}
+            discount={(showDiscount() && product.discount) || 0}
+          />
         </Elements>
       )}
     </VStack>

@@ -23,13 +23,11 @@ export const formatProductData = ({
   collections,
   gate,
 }: GetProductCardPropsParams): FormatedProductData => {
-  const isGated = curation;
-  const isAnNftHolder = collections.includes(curation?.toLowerCase());
+  const isGated = Boolean(curation);
+  const isAnNftHolder = Boolean(curation && collections.includes(curation.toLowerCase()));
   const isTransparent = isGated && !isAnNftHolder && !isDiscountGated;
-  const priceNumber = parseInt(price);
-  const discountNumber = discount ? parseInt(discount) : 0;
-  const promoPercent = discount ? discountNumber / 100 : 0;
-  const priceReduced = discount ? priceNumber - priceNumber * promoPercent : 0;
+  const promoPercent = discount ? discount / 100 : 0;
+  const priceReduced = discount ? price - price * promoPercent : 0;
 
   const showDiscount = (() => {
     if (discount) {
@@ -60,7 +58,7 @@ export const formatProductData = ({
     isTransparent,
     srcItem: image,
     title: name,
-    discount: showDiscount && discount,
+    discount: (showDiscount && discount) || 0,
     description,
     price,
     priceReduced,

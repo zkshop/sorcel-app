@@ -26,7 +26,9 @@ const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
     if (data) {
       dispatch(
         fetchPOAPImageList(
-          data.products.filter(({ poapId }) => poapId !== null).map(({ poapId }) => poapId),
+          data.products
+            .filter(({ poapId }) => poapId !== null)
+            .map(({ poapId }) => (poapId as number).toString()),
         ),
       );
     }

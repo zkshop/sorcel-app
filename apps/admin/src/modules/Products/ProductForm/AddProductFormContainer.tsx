@@ -36,6 +36,7 @@ export const AddProductFormContainer = () => {
   const onSubmit = async (data: AddProductFormValues) => {
     try {
       setStorageActionLoading(true);
+
       const image = await blobFromURL(data.image);
       const uploadUrl = await storage.uploadPicture(image, 'products');
 
@@ -45,9 +46,6 @@ export const AddProductFormContainer = () => {
         variables: {
           ...data,
           appId: process.env.APP_ID,
-          price: toNumber(data.price),
-          discount: toNumber(data.discount),
-          poapId: toNumber(data.poapId),
           image: uploadUrl,
         },
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),
