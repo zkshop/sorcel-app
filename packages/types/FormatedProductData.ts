@@ -2,8 +2,8 @@ export type FormatedProductData = {
   id?: string;
   srcItem: string;
   title: string;
-  discount?: string;
-  price: string;
+  discount?: number;
+  price: number;
   priceReduced?: number;
   collection?: string;
   isTransparent?: boolean;

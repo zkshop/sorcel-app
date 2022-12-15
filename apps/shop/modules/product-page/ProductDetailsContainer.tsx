@@ -1,6 +1,6 @@
 import { ProductDetails } from 'ui';
 
-import { Product } from 'apollo';
+import type { Product } from 'apollo';
 import { formatProductData } from 'pure';
 import { useAppSelector } from 'store';
 
@@ -14,7 +14,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   );
   const poapIds = useAppSelector((state) => state.user.poap.map((poap: any) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
-  const sendTransaction = () => {};
+  const sendTransaction = () => null;
   const {
     collection,
     isAnHolder,

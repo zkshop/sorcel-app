@@ -38,7 +38,7 @@ const getPaidPlans = (discount?: keyof paidPlansType) => {
 };
 
 const getMemberStackLink = (gate: Gate) => {
-  const correctplan = getPaidPlans(gate.discount);
+  const correctplan = getPaidPlans(gate.discount as keyof paidPlansType);
 
   return `${MS_LINK_PREFIX}${correctplan}`;
 };

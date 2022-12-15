@@ -17,9 +17,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     variables: { id: req.body.productId },
   });
 
-  const price = data.product_by_pk?.discount
-    ? applyDiscount(data.product_by_pk?.price || 1, data.product_by_pk.discount)
-    : data.product_by_pk?.price;
+  if (!data.product_by_pk) {
+    res.status(500).json({ message: 'Server Error' });
+    return;
+  }
+
+  const price = data.product_by_pk.discount
+    ? applyDiscount(data.product_by_pk.price, data.product_by_pk.discount)
+    : data.product_by_pk.price;
 
   const paymentIntent = await stripe.paymentIntents.create({
     amount: formatAmountForStripe(price, 'eur'),

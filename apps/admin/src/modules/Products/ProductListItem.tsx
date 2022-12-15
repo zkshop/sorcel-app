@@ -1,13 +1,14 @@
+import type { Nullable } from 'types';
 import { Tr, Td, Image } from 'ui';
 
 type ProductListItemProps = {
   id: string;
   image: string;
   name: string;
-  price: string;
-  discount: string;
-  collection: string;
-  collectionAddress: string;
+  price: number;
+  discount?: Nullable<number>;
+  collection?: Nullable<string>;
+  collectionAddress?: Nullable<string>;
   goToProduct(): void;
 };
 

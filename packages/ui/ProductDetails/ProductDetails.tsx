@@ -4,13 +4,14 @@ import { TriangleUpIcon } from '../Icons';
 import { StyledProductDetails } from './ProductDetails.style';
 import Image from 'next/legacy/image';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
+import type { Nullable } from 'types';
 
 type ProductDetailsProps = {
   id?: string;
   srcItem: string;
   title: string;
-  discount?: string;
-  price: string;
+  discount?: Nullable<number>;
+  price: number;
   collection?: string;
   isTransparent?: boolean;
   isEligible?: boolean;

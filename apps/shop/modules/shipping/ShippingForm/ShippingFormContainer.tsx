@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { ShippingForm } from './ShippingForm';
-import { ShippingFormValues } from './types';
+import type { ShippingFormValues } from './types';
 
-import { Product } from 'apollo';
+import type { Product } from 'apollo';
 import { applyDiscount } from 'pure';
 import { useIsAnHolder } from 'hooks/useIsAnHolder';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -34,7 +34,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
 
   const isAnHolder = useIsAnHolder(product);
 
-  const amount = applyDiscount(price, showDiscount() && discount);
+  const amount = applyDiscount(price, (showDiscount() && discount) || 0);
 
   const router = useRouter();
 
