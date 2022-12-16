@@ -6,7 +6,7 @@ import type { GetProductByIdQuery, GetProductByIdQueryVariables } from 'apollo';
 import { initializeApollo, GetProductByIdDocument } from 'apollo';
 import { applyDiscount } from 'pure';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
+const stripe = new Stripe(process.env.SECRET_STRIPE || '', {
   apiVersion: '2022-08-01',
 });
 

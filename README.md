@@ -3,7 +3,19 @@
 ## Develop
 
 ```sh
+npx dotenv-vault pull
+
+# Run at the root of the project
+cp .env apps/admin/.env
+cp .env apps/shop/.env
+cp .env apps/functions/.env
+
+cp .env specific-apps/tbw/.env
+cp .env specific-apps/artos/.env
+
+yarn
 yarn dev
+
 ```
 
 ## Develop for a specific app
