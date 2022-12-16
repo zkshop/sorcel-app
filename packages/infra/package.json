@@ -1,5 +1,5 @@
 {
-  "name": "infra",
+  "name": "@3shop/infra",
   "version": "1.0.0",
   "private": true,
   "main": "index.ts",
@@ -7,18 +7,16 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
+    "@3shop/alchemy": "*",
+    "@3shop/domains": "*",
+    "@3shop/magic": "*",
+    "@3shop/pure": "*",
+    "@3shop/sendinblue": "*",
+    "@3shop/supabase": "*",
     "@magic-ext/oauth": "^4.0.0",
-    "@magic-sdk/admin": "^1.4.1",
-    "alchemy": "*",
-    "domains": "*",
-    "magic": "*",
-    "magic-sdk": "*",
-    "pure": "*",
-    "sendgrid": "*",
-    "sendinblue": "*",
-    "supabase": "*"
+    "@magic-sdk/admin": "^1.4.1"
   },
   "devDependencies": {
-    "tsconfig": "*"
+    "@3shop/tsconfig": "*"
   }
 }

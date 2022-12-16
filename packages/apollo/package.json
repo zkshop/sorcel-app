@@ -1,5 +1,5 @@
 {
-  "name": "apollo",
+  "name": "@3shop/apollo",
   "version": "0.0.0",
   "private": true,
   "main": "index.ts",
@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
-    "cookies": "*",
+    "@3shop/cookies": "*",
     "graphql": "^16.6.0"
   },
   "devDependencies": {

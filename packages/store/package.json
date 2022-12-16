@@ -1,13 +1,16 @@
 {
-  "name": "store",
+  "name": "@3shop/store",
   "version": "1.0.0",
   "license": "MIT",
   "main": "index.js",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix"
+  },
   "dependencies": {
-    "domains": "*",
-    "infra": "*",
-    "poap": "*",
-    "pure": "*"
+    "@3shop/domains": "*",
+    "@3shop/infra": "*",
+    "@3shop/poap": "*",
+    "@3shop/pure": "*"
   },
   "peerDependencies": {
     "redux": "*"

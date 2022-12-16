@@ -10,12 +10,12 @@ import {
   Button,
   Header,
   Spinner,
-} from 'ui';
+} from '@3shop/ui';
 
 import { PRODUCT_ATTRIBUTES } from './constants';
 import { ProductListItem } from './ProductListItem';
 
-import { useGetAdminProductsQuery } from 'apollo';
+import { useGetAdminProductsQuery } from '@3shop/apollo';
 import { useNavigate } from 'react-router-dom';
 
 const getEditProductIdRoute = (id: string) => `product/edit/${id}`;

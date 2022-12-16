@@ -1,5 +1,5 @@
-import type { Nullable } from 'types';
-import { Tr, Td, Image } from 'ui';
+import type { Nullable } from '@3shop/types';
+import { Tr, Td, Image } from '@3shop/ui';
 
 type ProductListItemProps = {
   id: string;

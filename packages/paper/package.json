@@ -1,8 +1,11 @@
 {
-  "name": "paper",
+  "name": "@3shop/paper",
   "version": "1.0.0",
   "license": "MIT",
   "main": "index.js",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix"
+  },
   "dependencies": {
     "@paperxyz/react-client-sdk": "^0.7.38"
   }

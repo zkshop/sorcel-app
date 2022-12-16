@@ -1,6 +1,6 @@
-import { TokenService } from 'domains';
-import type { AuthClient } from 'domains/auth/AuthClient';
-import { magicClient } from 'magic';
+import { TokenService } from '@3shop/domains';
+import type { AuthClient } from '@3shop/domains/auth/AuthClient';
+import { magicClient } from '@3shop/magic';
 import { PaperWalletClient } from './PaperWalletClient';
 
 const initialAuthData = { email: null, issuer: null, phoneNumber: null, publicAddress: null };

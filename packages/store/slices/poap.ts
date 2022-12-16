@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { getEveryPOAPOfAWallet, Poap } from 'poap';
+import type { Poap } from '@3shop/poap';
+import { getEveryPOAPOfAWallet } from '@3shop/poap';
 
 export const fetchPOAPS = createAsyncThunk(
   'poap/fetch',
@@ -10,7 +11,7 @@ export const fetchPOAPS = createAsyncThunk(
 const initialState: Poap[] = [];
 
 export const poapSlice = createSlice({
-  name: 'poap',
+  name: '@3shop/poap',
   initialState,
   reducers: {
     reset: () => [],

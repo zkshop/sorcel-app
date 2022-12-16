@@ -1,8 +1,8 @@
-import { VStack, HStack, Box } from 'ui';
+import { VStack, HStack, Box } from '@3shop/ui';
 
 import { useAccount } from 'wagmi';
 
-import { useGetAppQuery } from 'apollo';
+import { useGetAppQuery } from '@3shop/apollo';
 import { ConnectButtonGroup } from './ConnectButtonGroup';
 
 const CLASSNAME = 'tbw-header';

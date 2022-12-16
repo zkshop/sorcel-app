@@ -13,9 +13,12 @@ const initialState: AuthSliceType = {
 };
 
 export const getPaperWallet = async (code: string) => {
-  const res = await axios.post<PaperWallet>(`${process.env.PUBLIC_FUNCTIONS_URL}/api/get-paper-wallet`, {
-    code,
-  });
+  const res = await axios.post<PaperWallet>(
+    `${process.env.PUBLIC_FUNCTIONS_URL}/api/get-paper-wallet`,
+    {
+      code,
+    },
+  );
 
   return res.data;
 };
@@ -37,7 +40,7 @@ export const authSlice = createSlice({
       publicAddress: action.payload.walletAddress,
       email: action.payload.email,
       loading: false,
-      type: 'PAPER',
+      type: '@3shop/paper',
     }));
   },
 });

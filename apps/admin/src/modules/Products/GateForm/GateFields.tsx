@@ -1,5 +1,12 @@
-import { Box, FormControl, FormErrorMessage, FormLabel, NumberInput, NumberInputField } from 'ui';
-import type { NftAttribute } from 'domains';
+import {
+  Box,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  NumberInput,
+  NumberInputField,
+} from '@3shop/ui';
+import type { NftAttribute } from '@3shop/domains';
 import { useFormContext } from 'react-hook-form';
 import type { AddGateFormValues } from './AddGateModal';
 import { NftAttributePicker } from './NftAttributePicker';

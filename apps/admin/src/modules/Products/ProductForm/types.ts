@@ -1,4 +1,4 @@
-import type { Nullable } from 'types';
+import type { Nullable } from '@3shop/types';
 
 export type AddProductFormValues = {
   price: string;

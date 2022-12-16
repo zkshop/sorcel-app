@@ -1,6 +1,6 @@
+import { useGetAdminAppQuery } from '@3shop/apollo';
 import { General } from './General';
-import { Spinner } from 'ui';
-import { useGetAdminAppQuery } from 'apollo';
+import { Spinner } from '@3shop/ui';
 
 export const GeneralContainer = () => {
   const { data, loading, error } = useGetAdminAppQuery();

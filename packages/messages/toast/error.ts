@@ -1,4 +1,4 @@
-import type { UseToastOptions } from 'ui';
+import type { UseToastOptions } from '@3shop/ui';
 
 export const ERROR_MESSAGE: UseToastOptions = {
   title: 'Error',

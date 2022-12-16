@@ -1,15 +1,14 @@
 {
-  "name": "admin-infra",
+  "name": "@3shop/admin-infra",
   "version": "0.0.0",
   "main": "index.ts",
   "scripts": {
-    "lint": "eslint \"**/*.ts*\" --fix",
-    "lint:fix": "yarn lint --fix"
+    "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "alchemy": "*",
-    "cookies": "*",
-    "domains": "*",
-    "pure": "*"
+    "@3shop/cookies": "*",
+    "@3shop/alchemy": "*",
+    "@3shop/domains": "*",
+    "@3shop/pure": "*"
   }
 }

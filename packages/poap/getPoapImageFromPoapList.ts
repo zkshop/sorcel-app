@@ -1,4 +1,4 @@
-import type { Nullable } from 'types';
+import type { Nullable } from '@3shop/types';
 
 export function getPoapImageFromPoapList(poapList: any[], poapId?: Nullable<number>) {
   if (!poapId) return;

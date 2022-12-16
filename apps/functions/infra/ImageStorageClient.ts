@@ -1,7 +1,7 @@
-import type { StorageClient } from 'domains';
+import type { StorageClient } from '@3shop/domains';
 import crypto from 'crypto';
-import { supabase } from 'supabase';
-import { getObjectPathFromImageUrl } from 'pure';
+import { supabase } from '@3shop/supabase';
+import { getObjectPathFromImageUrl } from '@3shop/pure';
 
 export function ImageStorageClient(): StorageClient {
   return {

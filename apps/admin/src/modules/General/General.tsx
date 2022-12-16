@@ -1,5 +1,5 @@
-import { Box } from 'ui';
-import type { App } from 'apollo';
+import { Box } from '@3shop/ui';
+import type { App } from '@3shop/apollo';
 
 import { GeneralForm } from './GeneralForm';
 

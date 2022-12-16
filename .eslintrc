@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["custom"],
+  "extends": ["@3shop/eslint-config-custom"],
   "settings": {
     "next": {
       "rootDir": ["apps/*/"]

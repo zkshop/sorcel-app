@@ -1,7 +1,7 @@
-import { formatProductData } from 'pure';
-import { Product } from 'apollo';
-import { ProductCardList } from 'ui';
-import { useAppSelector } from 'store';
+import { formatProductData } from '@3shop/pure';
+import type { Product } from '@3shop/apollo';
+import { ProductCardList } from '@3shop/ui';
+import { useAppSelector } from '@3shop/store';
 
 type ProductListContainerProps = {
   products: Product[];

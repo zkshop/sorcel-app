@@ -1,5 +1,5 @@
-import { TableContainer, Table, Thead, Tr, Th, Tbody } from 'ui';
-import type { Gate } from 'apollo';
+import { TableContainer, Table, Thead, Tr, Th, Tbody } from '@3shop/ui';
+import type { Gate } from '@3shop/apollo';
 import { GateTableRow } from './GateTableRow';
 
 type GateTableProps = {

@@ -1,5 +1,5 @@
 {
-  "name": "magic",
+  "name": "@3shop/magic",
   "version": "1.0.0",
   "private": true,
   "main": "index.ts",
