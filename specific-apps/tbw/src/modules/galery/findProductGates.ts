@@ -1,4 +1,4 @@
-import type { Gate } from 'apollo';
+import type { Gate } from '@3shop/apollo';
 
 export const findProductGates = (id: string, gates?: Gate[]) => {
   if (!gates) {

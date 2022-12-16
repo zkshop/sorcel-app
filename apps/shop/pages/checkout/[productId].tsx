@@ -1,11 +1,11 @@
-import { VStack, Heading } from 'ui';
+import { VStack, Heading } from '@3shop/ui';
 import { Elements } from '@stripe/react-stripe-js';
 import type { GetServerSidePropsContext } from 'next';
 import { useState, useEffect } from 'react';
 
 import { getPaymentIntent, getStripeObject } from 'clients/stripe';
-import type { Product } from 'apollo';
-import { initializeApollo, addApolloState, GetProductByIdDocument } from 'apollo';
+import type { Product } from '@3shop/apollo';
+import { initializeApollo, addApolloState, GetProductByIdDocument } from '@3shop/apollo';
 import { CheckoutForm } from 'modules/checkout/CheckoutForm';
 import { useIsAnHolder } from 'hooks/useIsAnHolder';
 

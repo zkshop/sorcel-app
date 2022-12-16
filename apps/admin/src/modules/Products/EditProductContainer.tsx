@@ -1,6 +1,6 @@
-import { BackButton, Spinner } from 'ui';
+import { BackButton, Spinner } from '@3shop/ui';
 
-import { useGetGateFromProductQuery, useGetProductByIdQuery } from 'apollo';
+import { useGetGateFromProductQuery, useGetProductByIdQuery } from '@3shop/apollo';
 import { EditProductFormContainer } from './ProductForm/EditProductFormContainer';
 
 type EditProductPageProps = {

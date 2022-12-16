@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next/types';
-import { getEveryPoapURL, poap } from 'poap';
+import { getEveryPoapURL, poap } from '@3shop/poap';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { address } = req.query;

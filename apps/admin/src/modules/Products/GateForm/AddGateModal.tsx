@@ -14,18 +14,18 @@ import {
   Spinner,
   useToast,
 } from '@chakra-ui/react';
-import { useCreateGateMutation } from 'apollo';
+import { useCreateGateMutation } from '@3shop/apollo';
 import { useParams } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { fetchNFTAttributes, useAppDispatch, useAppSelector } from 'admin-store';
+import { fetchNFTAttributes, useAppDispatch, useAppSelector } from '@3shop/admin-store';
 
 import { ADD_GATE_MODAL_SCHEMA } from './AddGateModalSchema';
 
 import { GateFields } from './GateFields';
-import { Button } from 'ui';
+import { Button } from '@3shop/ui';
 
 type AddGateModalProps = {
   isOpen: boolean;

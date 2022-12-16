@@ -1,7 +1,7 @@
-import type { Network } from 'alchemy';
-import { createAlchemy } from 'alchemy';
-import type { NftClient } from 'domains/nft';
-import { createAttributeListFromNftMetadata } from 'pure';
+import type { Network } from '@3shop/alchemy';
+import { createAlchemy } from '@3shop/alchemy';
+import type { NftClient } from '@3shop/domains/nft';
+import { createAttributeListFromNftMetadata } from '@3shop/pure';
 
 export function NftMetadataClient(network: Network): NftClient {
   const api = createAlchemy(network);

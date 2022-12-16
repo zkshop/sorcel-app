@@ -1,4 +1,4 @@
-import { REQUIRED } from 'messages';
+import { REQUIRED } from '@3shop/messages';
 import { useForm } from 'react-hook-form';
 import {
   Section,
@@ -9,11 +9,11 @@ import {
   Button,
   HStack,
   FormErrorMessage,
-} from 'ui';
-import { FormValidation } from 'validation';
+} from '@3shop/ui';
+import { FormValidation } from '@3shop/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { AuthAdminService } from 'domains';
-import { CustomerAuthClient } from 'admin-infra';
+import { AuthAdminService } from '@3shop/domains';
+import { CustomerAuthClient } from '@3shop/admin-infra';
 import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
 import { useNavigate } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
@@ -45,7 +45,7 @@ export const Login = () => {
     resolver: yupResolver(LOGIN_SCHEMA),
   });
 
-  const { loading } = useVerifyToken();
+  const {} = useVerifyToken();
 
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoginLoading(true);

@@ -1,4 +1,4 @@
-import { TokenService } from 'domains';
+import { TokenService } from '@3shop/domains';
 import { PaperWalletClient } from '../infra/PaperWalletClient';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { allowCors } from '../middlewares/allowCors';

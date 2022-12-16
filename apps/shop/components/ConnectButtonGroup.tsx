@@ -1,4 +1,4 @@
-import { Box, Flex, Button } from 'ui';
+import { Box, Flex, Button } from '@3shop/ui';
 
 import React from 'react';
 import ConnectWalletButton from './ConnectWalletButton';

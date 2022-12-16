@@ -1,7 +1,7 @@
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import { useAccount } from 'wagmi';
 
-import { useGetProductsQuery } from 'apollo';
+import { useGetProductsQuery } from '@3shop/apollo';
 import { ProductListContainer } from './ProductListContainer';
 import { useOnConnection } from '../../hook/useOnConnection';
 

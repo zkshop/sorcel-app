@@ -38,7 +38,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const ssrHttpLink = new HttpLink({
-  uri: process.env.HASURA_API_URL,
+  uri: process.env.PUBLIC_HASURA_API_URL,
   credentials: 'same-origin',
   headers: {
     'x-hasura-admin-secret': process.env.SECRET_HASURA || '',

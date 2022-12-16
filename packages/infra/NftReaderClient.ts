@@ -1,7 +1,7 @@
-import type { Network, Alchemy, Nft } from 'alchemy';
-import { createAlchemy } from 'alchemy';
-import type { NftClient } from 'domains/nft';
-import { createAttributeListFromNftMetadata } from 'pure';
+import type { Network, Alchemy, Nft } from '@3shop/alchemy';
+import { createAlchemy } from '@3shop/alchemy';
+import type { NftClient } from '@3shop/domains/nft';
+import { createAttributeListFromNftMetadata } from '@3shop/pure';
 
 const getEveryNftForContract = async (
   api: Alchemy,

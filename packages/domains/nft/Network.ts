@@ -1,1 +1,1 @@
-export { Network } from 'alchemy';
+export { Network } from '@3shop/alchemy';

@@ -1,5 +1,5 @@
-import type { Product } from 'apollo';
-import type { FormatedProductData } from 'ui-tbw';
+import type { Product } from '@3shop/apollo';
+import type { FormatedProductData } from '@3shop/ui-tbw';
 
 export type GetProductCardPropsParams = Product & {
   collections: string[];

@@ -9,8 +9,8 @@ import { WagmiConfig } from 'wagmi';
 
 import { wagmiClient, chains } from '../clients/wagmi';
 import { Layout } from 'components/Layout';
-import { ApolloProvider, useApollo } from 'apollo';
-import { wrapper } from 'store';
+import { ApolloProvider, useApollo } from '@3shop/apollo';
+import { wrapper } from '@3shop/store';
 import { ThemeDecorator } from 'components/ThemeDecorator';
 
 function App({ Component, pageProps, ...rest }: AppProps) {

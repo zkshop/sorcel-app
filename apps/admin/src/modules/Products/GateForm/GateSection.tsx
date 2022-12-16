@@ -1,6 +1,6 @@
-import { Heading, useDisclosure, useToast, Section, Button } from 'ui';
-import type { Gate } from 'apollo';
-import { useDeleteGateFromIdMutation } from 'apollo';
+import { Heading, useDisclosure, useToast, Section, Button } from '@3shop/ui';
+import type { Gate } from '@3shop/apollo';
+import { useDeleteGateFromIdMutation } from '@3shop/apollo';
 import { useState } from 'react';
 import { GateTable } from '../GateTable';
 import { AddGateModal } from './AddGateModal';

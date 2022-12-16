@@ -1,4 +1,4 @@
-import { Box, MainLayout, Banner } from 'ui';
+import { Box, MainLayout, Banner } from '@3shop/ui';
 import { useRouter } from 'next/router';
 
 import { NavBar } from './NavBar';

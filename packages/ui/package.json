@@ -1,12 +1,12 @@
 {
-  "name": "ui",
+  "name": "@3shop/ui",
   "version": "0.0.0",
   "main": "index.ts",
   "scripts": {
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "pure": "*",
+    "@3shop/pure": "*",
     "react-icons": "^4.4.0"
   }
 }

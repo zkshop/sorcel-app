@@ -9,7 +9,7 @@ import {
   Section,
   CollectionIcon,
   CollectionPlayIcon,
-} from 'ui';
+} from '@3shop/ui';
 import { useFormContext } from 'react-hook-form';
 import type { AddProductFormValues } from '../types';
 

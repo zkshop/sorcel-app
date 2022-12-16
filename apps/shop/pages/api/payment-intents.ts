@@ -2,9 +2,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 
 import { formatAmountForStripe } from 'clients/stripe';
-import type { GetProductByIdQuery, GetProductByIdQueryVariables } from 'apollo';
-import { initializeApollo, GetProductByIdDocument } from 'apollo';
-import { applyDiscount } from 'pure';
+import type { GetProductByIdQuery, GetProductByIdQueryVariables } from '@3shop/apollo';
+import { initializeApollo, GetProductByIdDocument } from '@3shop/apollo';
+import { applyDiscount } from '@3shop/pure';
 
 const stripe = new Stripe(process.env.SECRET_STRIPE || '', {
   apiVersion: '2022-08-01',

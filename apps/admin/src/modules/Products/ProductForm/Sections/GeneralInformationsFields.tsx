@@ -12,7 +12,7 @@ import {
   ChatRightTextIcon,
   NumberInput,
   NumberInputField,
-} from 'ui';
+} from '@3shop/ui';
 import { useFormContext } from 'react-hook-form';
 
 import { PRODUCTS_FIELDS } from '../../constants';
