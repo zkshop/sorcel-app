@@ -1,4 +1,4 @@
-export type { Nft } from 'alchemy';
+export type { Nft } from '@3shop/alchemy';
 
 export type NftAttribute<T> = {
   name: string;

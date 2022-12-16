@@ -1,8 +1,8 @@
-import { ProductDetails } from 'ui';
+import { ProductDetails } from '@3shop/ui';
 
-import type { Product } from 'apollo';
-import { formatProductData } from 'pure';
-import { useAppSelector } from 'store';
+import type { Product } from '@3shop/apollo';
+import { formatProductData } from '@3shop/pure';
+import { useAppSelector } from '@3shop/store';
 
 type ProductDetailsContainerProps = {
   product: Product;

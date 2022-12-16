@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCustomerTokenCookie } from './useCustomerTokenCookie';
 
 export const useVerifyToken = (fromAdminRoute = false) => {
-  const { tokenCookie, setCustomerTokenCookie } = useCustomerTokenCookie();
+  const { tokenCookie } = useCustomerTokenCookie();
 
   const [loading, setLoading] = useState(false);
 
@@ -18,7 +18,7 @@ export const useVerifyToken = (fromAdminRoute = false) => {
         if (!tokenCookie) throw new Error();
 
         await axios.get<{ token: string | null }>(
-          `${process.env.FUNCTIONS_API}/api/admin/auth/verify`,
+          `${process.env.PUBLIC_FUNCTIONS_URL}/api/admin/auth/verify`,
           {
             headers: {
               Authorization: 'Bearer ' + token,

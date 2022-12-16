@@ -1,4 +1,4 @@
-import type { UseToastOptions } from 'ui';
+import type { UseToastOptions } from '@3shop/ui';
 
 export const getEditProductSuccessMessage = (productName: string): UseToastOptions => ({
   title: 'Product Edited',

@@ -1,5 +1,5 @@
-import type { Gate, Product } from 'apollo';
-import type { FormatedProductData } from 'ui-tbw';
+import type { Gate, Product } from '@3shop/apollo';
+import type { FormatedProductData } from '@3shop/ui-tbw';
 import { getExternalLink } from './getExternalLink';
 import { getTargetAttribute } from './getTargetAttribute';
 

@@ -1,16 +1,16 @@
-import { useToast } from 'ui';
-import { useCreateAdminProductMutation } from 'apollo';
-import { getAddProductSuccessMessage } from 'messages';
-import { blobFromURL } from 'pure';
+import { useToast } from '@3shop/ui';
+import { getAddProductSuccessMessage } from '@3shop/messages';
+import { blobFromURL } from '@3shop/pure';
 import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ProductForm } from './ProductForm';
 import type { AddProductFormValues } from './types';
 import { ADD_PRODUCT_FORM_SCHEMA } from '../../../schemas';
-import { StorageService } from 'domains';
-import { ImageStorageClient } from 'admin-infra';
+import { StorageService } from '@3shop/domains';
+import { ImageStorageClient } from '@3shop/admin-infra';
 import { useNavigate } from 'react-router-dom';
+import { useCreateAdminProductMutation } from '@3shop/apollo';
 
 const storage = StorageService(ImageStorageClient());
 

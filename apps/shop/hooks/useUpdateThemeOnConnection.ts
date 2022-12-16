@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from 'store';
-import { fetchNFTS, reset } from 'store/slices/nfts';
-import { fetchPOAPS, reset as resetPoaps } from 'store/slices/poap';
+import { useAppSelector, useAppDispatch } from '@3shop/store';
+import { fetchNFTS, reset } from '@3shop/store/slices/nfts';
+import { fetchPOAPS, reset as resetPoaps } from '@3shop/store/slices/poap';
 import { useAccount } from 'wagmi';
 
 const useUpdateThemeOnConnection = () => {
@@ -14,7 +14,7 @@ const useUpdateThemeOnConnection = () => {
   const dispatch = useAppDispatch();
 
   const getNfts = useCallback(async () => {
-    if (connectionType === 'PAPER' && publicAddress) {
+    if (connectionType === '@3shop/paper' && publicAddress) {
       dispatch(fetchNFTS(publicAddress));
       dispatch(fetchPOAPS(publicAddress));
     } else if (address) {

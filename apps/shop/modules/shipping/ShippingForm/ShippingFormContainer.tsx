@@ -1,12 +1,12 @@
-import { Heading, SimpleGrid, Stack, VStack, CartItem, CartOrderSummary, Section } from 'ui';
+import { Heading, SimpleGrid, Stack, VStack, CartItem, CartOrderSummary, Section } from '@3shop/ui';
 import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { ShippingForm } from './ShippingForm';
 import type { ShippingFormValues } from './types';
 
-import type { Product } from 'apollo';
-import { applyDiscount } from 'pure';
+import type { Product } from '@3shop/apollo';
+import { applyDiscount } from '@3shop/pure';
 import { useIsAnHolder } from 'hooks/useIsAnHolder';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SHIPPING_FORM_SCHEMA } from 'schemas';

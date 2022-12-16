@@ -1,6 +1,6 @@
-import { LoginWithPaper as OriginalLoginWithPaper } from 'paper';
-import { useAppDispatch } from 'store';
-import { loginWithPaper } from 'store/slices/auth';
+import { LoginWithPaper as OriginalLoginWithPaper } from '@3shop/paper';
+import { useAppDispatch } from '@3shop/store';
+import { loginWithPaper } from '@3shop/store/slices/auth';
 
 export function LoginWithPaper() {
   const dispatch = useAppDispatch();

@@ -13,8 +13,8 @@
     "app_id": "2b1a5788-cc27-4530-a346-a5aa674bb523"
   },
   "dependencies": {
-    "apollo": "*",
-    "domains": "*",
+    "@3shop/apollo": "*",
+    "@3shop/domains": "*",
     "framer-motion": "^7.6.12",
     "posthog-js": "^1.37.0",
     "process": "^0.11.10",
@@ -24,13 +24,13 @@
     "wagmi": "^0.6.8"
   },
   "devDependencies": {
+    "@3shop/vite-config": "*",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "buffer": "^6.0.3",
     "deepmerge": "^4.2.2",
     "rimraf": "^3.0.2",
-    "vite": "^3.2.3",
-    "vite-config": "*"
+    "vite": "^3.2.3"
   },
   "peerDependencies": {
     "@rainbow-me/rainbowkit": "*",

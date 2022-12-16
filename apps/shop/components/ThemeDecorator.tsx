@@ -1,4 +1,4 @@
-import { ThemeProvider } from 'ui';
+import { ThemeProvider } from '@3shop/ui';
 
 type ThemeDecoratorProps = {
   children: React.ReactNode;

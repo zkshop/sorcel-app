@@ -1,6 +1,6 @@
 import { ConnectButtonGroup } from './ConnectButtonGroup';
 import { LoginModal } from './LoginModal';
-import { VStack, HStack, useDisclosure, Box } from 'ui';
+import { VStack, HStack, useDisclosure, Box } from '@3shop/ui';
 // TODO: USE NESTJS IMAGE INSTEAD
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -10,9 +10,9 @@ import { useEffect } from 'react';
 
 import { useAccount } from 'wagmi';
 
-import { useGetAppQuery } from 'apollo';
-import { useAppDispatch, useAppSelector } from 'store';
-import { getCurrentUser, login, logoutUser } from 'store/slices/auth';
+import { useGetAppQuery } from '@3shop/apollo';
+import { useAppDispatch, useAppSelector } from '@3shop/store';
+import { getCurrentUser, login, logoutUser } from '@3shop/store/slices/auth';
 
 type NavBarProps = {
   admin: boolean;

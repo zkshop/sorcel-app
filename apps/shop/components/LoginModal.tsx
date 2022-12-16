@@ -8,7 +8,7 @@ import {
   Input,
   VStack,
   Button,
-} from 'ui';
+} from '@3shop/ui';
 import React from 'react';
 import type { UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 

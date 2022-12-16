@@ -7,7 +7,7 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-} from 'ui';
+} from '@3shop/ui';
 
 type DeleteProductModalProps = {
   isOpen: boolean;

@@ -7,8 +7,8 @@ import {
   Heading,
   VStack,
   ChevronUpIcon,
-} from 'ui';
-import type { NftAttribute } from 'domains';
+} from '@3shop/ui';
+import type { NftAttribute } from '@3shop/domains';
 
 import { AttributeCheckboxList } from './AttributeCheckboxList';
 

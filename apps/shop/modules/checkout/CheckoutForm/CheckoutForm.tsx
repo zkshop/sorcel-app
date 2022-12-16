@@ -1,6 +1,6 @@
-import { Text } from 'ui';
+import { Text } from '@3shop/ui';
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { applyDiscount } from 'pure';
+import { applyDiscount } from '@3shop/pure';
 import React, { useEffect, useState } from 'react';
 
 import { StyledCheckoutForm } from './CheckoutForm.style';

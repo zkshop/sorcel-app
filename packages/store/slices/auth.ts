@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { AuthData, AuthService, PaperWallet } from 'domains';
-import { UserAuthenticationClient } from 'infra';
+import type { AuthData, PaperWallet } from '@3shop/domains';
+import { AuthService } from '@3shop/domains';
+import { UserAuthenticationClient } from '@3shop/infra';
 
-type AuthType = 'PAPER' | 'MAGIC' | 'WALLET';
+type AuthType = '@3shop/paper' | '@3shop/magic' | 'WALLET';
 
 type AuthSliceType = AuthData & { loading: boolean; type?: AuthType };
 const Auth = AuthService(UserAuthenticationClient());
@@ -51,7 +52,7 @@ export const authSlice = createSlice({
     builder.addCase(login.fulfilled, (_, action) => ({
       ...action.payload,
       loading: false,
-      type: 'MAGIC',
+      type: '@3shop/magic',
     }));
 
     builder.addCase(login.pending, (state) => ({ ...state, loading: true }));
@@ -72,7 +73,7 @@ export const authSlice = createSlice({
       publicAddress: action.payload.walletAddress,
       email: action.payload.email,
       loading: false,
-      type: 'PAPER',
+      type: '@3shop/paper',
     }));
   },
 });

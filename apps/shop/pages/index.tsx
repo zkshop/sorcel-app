@@ -5,12 +5,12 @@ import { useAccount } from 'wagmi';
 
 import useUpdateThemeOnConnection from '../hooks/useUpdateThemeOnConnection';
 
-import type { GetProductsQuery } from 'apollo';
-import { initializeApollo, addApolloState, GetProductsDocument } from 'apollo';
+import type { GetProductsQuery } from '@3shop/apollo';
+import { initializeApollo, addApolloState, GetProductsDocument } from '@3shop/apollo';
 
 import { ProductListContainer } from 'modules';
-import { useAppDispatch } from 'store';
-import { fetchPOAPImageList } from 'store/slices/poapImageList';
+import { useAppDispatch } from '@3shop/store';
+import { fetchPOAPImageList } from '@3shop/store/slices/poapImageList';
 
 type MarketplaceProps = {
   productsQueryResult: QueryResult<GetProductsQuery>;

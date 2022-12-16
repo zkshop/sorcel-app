@@ -1,23 +1,23 @@
-import { useDisclosure, useToast } from 'ui';
+import { useDisclosure, useToast } from '@3shop/ui';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import { DeleteProductModal } from './DeleteProductModal';
 import { ProductForm } from './ProductForm';
 import type { AddProductFormValues } from './types';
 
-import type { Gate, Product } from 'apollo';
-import { useDeleteProductMutation, useEditProductMutation } from 'apollo';
+import type { Gate, Product } from '@3shop/apollo';
+import { useDeleteProductMutation, useEditProductMutation } from '@3shop/apollo';
 import {
   ERROR_MESSAGE,
   getDeleteProductSuccessMessage,
   getEditProductSuccessMessage,
-} from 'messages';
-import { blobFromURL, getObjectPathFromImageUrl } from 'pure';
+} from '@3shop/messages';
+import { blobFromURL, getObjectPathFromImageUrl } from '@3shop/pure';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ADD_PRODUCT_FORM_SCHEMA } from '../../../schemas';
-import { StorageService } from 'domains';
-import { ImageStorageClient } from 'admin-infra';
+import { StorageService } from '@3shop/domains';
+import { ImageStorageClient } from '@3shop/admin-infra';
 import { useNavigate } from 'react-router-dom';
 
 type EditProductFormContainerProps = {
