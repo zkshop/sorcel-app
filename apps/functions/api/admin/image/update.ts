@@ -1,8 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { StorageService } from 'domains';
+import { OK } from 'http-status';
 import { ImageStorageClient } from '../../../infra';
 
 import { allowCors } from '../../../middlewares/allowCors';
+import { method } from '../../../middlewares/method';
 import { blobFromURL } from '../../../utils/getBlobFromURL';
 
 const Storage = StorageService(ImageStorageClient());
@@ -10,16 +12,13 @@ const Storage = StorageService(ImageStorageClient());
 type QueryParams = { newImageUrl: string; path: string; bucketName: string };
 
 async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'POST') {
-    return res.status(404).json({ error: 'Method not allowed' });
-  }
-
   const { newImageUrl, path, bucketName } = req.body as QueryParams;
 
   const blob = await blobFromURL(newImageUrl);
 
   const uploadUrl = await Storage.updatePicture(blob, path, bucketName);
-  res.status(200).json({ uploadUrl });
+
+  res.status(OK).json({ uploadUrl });
 }
 
-export default allowCors(handler);
+export default method('POST', allowCors(handler));

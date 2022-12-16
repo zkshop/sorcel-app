@@ -2,20 +2,18 @@ import { StorageService } from 'domains';
 import { ImageStorageClient } from '../../../infra';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { allowCors } from '../../../middlewares/allowCors';
+import { method } from '../../../middlewares/method';
+import { OK } from 'http-status';
 
 const Storage = StorageService(ImageStorageClient());
 type QueryParams = { url: string; bucketName: string };
 
 async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'DELETE') {
-    return res.status(404).json({ error: 'Method not allowed' });
-  }
-
   const { url, bucketName } = req.query as QueryParams;
 
   await Storage.deletePicture(url, bucketName);
 
-  res.status(200).send({ url });
+  res.status(OK).send({ url });
 }
 
-export default allowCors(handler);
+export default method('DELETE', allowCors(handler));

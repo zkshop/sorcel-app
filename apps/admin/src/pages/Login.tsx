@@ -25,7 +25,6 @@ const LOGIN_SCHEMA = FormValidation.object().shape({
 
 const auth = AuthAdminService(CustomerAuthClient());
 
-
 export const Login = () => {
   const {
     handleSubmit,
@@ -44,8 +43,7 @@ export const Login = () => {
 
     const res = await auth.login(data.email);
 
-    console.log({ res});
-    
+    console.log({ res });
   };
 
   return (
