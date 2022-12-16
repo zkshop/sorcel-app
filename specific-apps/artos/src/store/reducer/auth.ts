@@ -13,7 +13,7 @@ const initialState: AuthSliceType = {
 };
 
 export const getPaperWallet = async (code: string) => {
-  const res = await axios.post<PaperWallet>(`${process.env.FUNCTIONS_API}/api/get-paper-wallet`, {
+  const res = await axios.post<PaperWallet>(`${process.env.PUBLIC_FUNCTIONS_URL}/api/get-paper-wallet`, {
     code,
   });
 

@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "build": "tsc && vite build -c ../../packages/vite-config/vite.config.artos.ts",
-    "dev": "vite -c ../../packages/vite-config/vite.config.dev.ts",
+    "dev": "APP_ID=$npm_package_config_app_id vite -c ../../packages/vite-config/vite.config.dev.ts",
     "lint": "eslint \"**/*.ts*\" --fix",
     "preview": "vite preview"
+  },
+  "config": {
+    "app_id": "2b1a5788-cc27-4530-a346-a5aa674bb523"
   },
   "dependencies": {
     "apollo": "*",
