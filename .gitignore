@@ -49,3 +49,5 @@ storybook-static
 .flaskenv*
 !.env.project
 !.env.vault
+
+*.timestamp
