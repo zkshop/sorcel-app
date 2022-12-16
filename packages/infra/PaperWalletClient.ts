@@ -10,7 +10,7 @@ export function PaperWalletClient(): TokenClient {
 
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${process.env.PAPER_API_KEY}`,
+          Authorization: `Bearer ${process.env.SECRET_PAPER}`,
         },
 
         data: {
@@ -32,7 +32,7 @@ export function PaperWalletClient(): TokenClient {
         url: 'https://paper.xyz/api/v1/oauth/user-details',
 
         headers: {
-          Authorization: `Bearer ${process.env.PAPER_API_KEY}`,
+          Authorization: `Bearer ${process.env.SECRET_PAPER}`,
         },
 
         data: {

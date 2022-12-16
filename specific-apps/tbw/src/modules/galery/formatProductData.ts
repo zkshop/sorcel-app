@@ -8,7 +8,7 @@ export type GetProductCardPropsParams = Product & {
   gate: Gate | null;
 };
 
-const HIGHLIGHTED_PRODUCT_ID = 'ebb24d16-6b6f-464b-bb54-897482b4bc67';
+const CONFIG_TBW_HIGHLIGHTED_PRODUCT_ID = 'ebb24d16-6b6f-464b-bb54-897482b4bc67';
 
 export const formatProductData = ({
   image,
@@ -39,7 +39,7 @@ export const formatProductData = ({
     return false;
   })();
 
-  const highlight = id === HIGHLIGHTED_PRODUCT_ID;
+  const highlight = id === CONFIG_TBW_HIGHLIGHTED_PRODUCT_ID;
   const externalLink = getExternalLink(id, gate, isAnNftHolder);
   if (typeof window !== 'undefined') {
     setTimeout(() => {
