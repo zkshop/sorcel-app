@@ -1,12 +1,12 @@
-import { Box, Heading, HStack, Button, FormField, useToast } from 'ui';
+import { Box, Heading, HStack, Button, FormField, useToast } from '@3shop/ui';
 import { useForm } from 'react-hook-form';
 
-import { useUpdateAppMutation } from 'apollo';
-import { ImageStorageClient } from 'admin-infra';
-import { StorageService } from 'domains';
-import { blobFromURL } from 'pure';
+import { useUpdateAppMutation } from '@3shop/apollo';
+import { ImageStorageClient } from '@3shop/admin-infra';
+import { StorageService } from '@3shop/domains';
+import { blobFromURL } from '@3shop/pure';
 import { useState } from 'react';
-import { ERROR_MESSAGE } from 'messages';
+import { ERROR_MESSAGE } from '@3shop/messages';
 
 type GeneralFormValues = {
   name: string;

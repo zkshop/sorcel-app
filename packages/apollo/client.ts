@@ -21,7 +21,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const httpLink = new HttpLink({
-  uri: process.env.HASURA_API_URL, // Server URL (must be absolute)
+  uri: process.env.PUBLIC_HASURA_API_URL, // Server URL (must be absolute)
   credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 });
 
@@ -41,7 +41,7 @@ const ssrHttpLink = new HttpLink({
   uri: process.env.HASURA_API_URL,
   credentials: 'same-origin',
   headers: {
-    'x-hasura-admin-secret': process.env.HASURA_API_KEY || '',
+    'x-hasura-admin-secret': process.env.SECRET_HASURA || '',
   },
 });
 

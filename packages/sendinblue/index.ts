@@ -4,7 +4,7 @@ const SendinBlueClient = new SibApi.TransactionalEmailsApi();
 
 SendinBlueClient.setApiKey(
   SibApi.TransactionalEmailsApiApiKeys.apiKey,
-  process.env.SENDINBLUE_API_KEY || '',
+  process.env.SECRET_SENDINBLUE || '',
 );
 
 export { SendinBlueClient };
