@@ -9,6 +9,7 @@ module.exports = {
   ],
   rules: {
     '@next/next/no-html-link-for-pages': ['off'],
+    '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/no-explicit-any': 'off',
     'import/no-duplicates': ['error', { considerQueryString: true }],
