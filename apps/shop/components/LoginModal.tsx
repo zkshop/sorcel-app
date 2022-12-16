@@ -10,12 +10,14 @@ import {
   Button,
 } from 'ui';
 import React from 'react';
-import type { UseFormRegister } from 'react-hook-form';
+import type { UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
 type LoginModalProps = {
   isOpen: boolean;
   onClose(): void;
-  handleSubmit: Function;
+  handleSubmit: UseFormHandleSubmit<{
+    email: string;
+  }>;
   onSubmit(data: { email: string }): Promise<void>;
   register: UseFormRegister<{ email: string }>;
 };

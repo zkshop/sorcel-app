@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse, VercelApiHandler } from '@vercel/node';
+import { OK } from 'http-status';
 
 export const allowCors =
   (fn: VercelApiHandler) => async (req: VercelRequest, res: VercelResponse) => {
@@ -11,7 +12,7 @@ export const allowCors =
     );
 
     if (req.method === 'OPTIONS') {
-      res.status(200).end();
+      res.status(OK).end();
       return;
     }
 
