@@ -1,5 +1,5 @@
-import { CookieManagerClient } from 'admin-infra';
-import { CookieService } from 'domains';
+import { CookieManagerClient } from '@3shop/admin-infra';
+import { CookieService } from '@3shop/domains';
 
 export const CUSTOMER_TOKEN_NAME = 'customer-token';
 

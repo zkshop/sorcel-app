@@ -1,8 +1,11 @@
 {
-  "name": "supabase",
+  "name": "@3shop/supabase",
   "version": "1.0.0",
   "license": "MIT",
   "main": "index.js",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.0.0"
   }

@@ -1,5 +1,5 @@
-import type { Product } from 'apollo';
-import { useAppSelector } from 'store/store';
+import type { Product } from '@3shop/apollo';
+import { useAppSelector } from '@3shop/store/store';
 
 export const useIsAnHolder = ({ poapId, curation }: Product) => {
   const poapIds = useAppSelector((state) => state.user.poap).map(({ event: { id } }) => id);

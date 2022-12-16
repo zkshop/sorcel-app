@@ -1,4 +1,4 @@
-import { StorageService } from 'domains';
+import { StorageService } from '@3shop/domains';
 import { ImageStorageClient } from '../../../infra';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { allowCors } from '../../../middlewares/allowCors';

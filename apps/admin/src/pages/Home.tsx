@@ -1,4 +1,4 @@
-import { VerticalMenu } from 'ui';
+import { VerticalMenu } from '@3shop/ui';
 import { GeneralContainer } from '../modules/General/GeneralContainer';
 import { Products } from '../modules/Products';
 

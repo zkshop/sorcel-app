@@ -1,5 +1,5 @@
-import { EmailService } from 'domains';
-import { SendEmailClient } from 'infra';
+import { EmailService } from '@3shop/domains';
+import { SendEmailClient } from '@3shop/infra';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const Email = EmailService(SendEmailClient());

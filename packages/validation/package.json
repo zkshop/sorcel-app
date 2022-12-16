@@ -1,8 +1,11 @@
 {
-  "name": "validation",
+  "name": "@3shop/validation",
   "version": "1.0.0",
   "license": "MIT",
   "main": "index.js",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix"
+  },
   "dependencies": {
     "yup": "^0.32.11"
   }

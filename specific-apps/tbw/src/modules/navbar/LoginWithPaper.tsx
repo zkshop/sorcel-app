@@ -1,4 +1,4 @@
-import { LoginWithPaper as OriginalLoginWithPaper } from 'paper';
+import { LoginWithPaper as OriginalLoginWithPaper } from '@3shop/paper';
 import { useAppDispatch } from '../../store';
 import { loginWithPaper } from '../../store/reducer/auth';
 

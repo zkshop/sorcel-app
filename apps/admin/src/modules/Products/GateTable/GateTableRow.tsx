@@ -1,5 +1,5 @@
-import { Tr, Th, UnorderedList, ListItem, CloseIcon } from 'ui';
-import type { Gate } from 'apollo';
+import { Tr, Th, UnorderedList, ListItem, CloseIcon } from '@3shop/ui';
+import type { Gate } from '@3shop/apollo';
 
 type GateTableRowProps = {
   gate: Gate;

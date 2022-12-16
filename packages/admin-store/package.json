@@ -1,13 +1,12 @@
 {
-  "name": "admin-store",
+  "name": "@3shop/admin-store",
   "version": "0.0.0",
   "main": "index.ts",
   "scripts": {
-    "lint": "eslint \"**/*.ts*\" --fix",
-    "lint:fix": "yarn lint --fix"
+    "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "admin-infra": "*"
+    "@3shop/admin-infra": "*"
   },
   "peerDependencies": {
     "redux": "*"

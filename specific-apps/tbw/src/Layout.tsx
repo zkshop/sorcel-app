@@ -1,4 +1,4 @@
-import { Box } from 'ui-tbw';
+import { Box } from '@3shop/ui-tbw';
 import { NavBar } from './modules/navbar';
 
 type LayoutProps = {

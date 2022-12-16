@@ -1,4 +1,4 @@
-import { ButtonGroup, Button, Header } from 'ui';
+import { ButtonGroup, Button, Header } from '@3shop/ui';
 
 type ProductFormHeaderProps = { isLoading: boolean; onOpen?(): void; isDisabled: boolean };
 

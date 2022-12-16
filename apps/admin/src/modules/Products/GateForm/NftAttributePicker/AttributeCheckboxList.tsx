@@ -1,8 +1,8 @@
-import { Checkbox, CheckboxGroup, HStack } from 'ui';
-import type { NftAttribute } from 'domains';
+import { Checkbox, CheckboxGroup, HStack } from '@3shop/ui';
+import type { NftAttribute } from '@3shop/domains';
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
-import { useAppDispatch, setAttributeToGate } from 'admin-store';
+import { useAppDispatch, setAttributeToGate } from '@3shop/admin-store';
 
 type AttributeListProps = {
   attribute: NftAttribute<any>;

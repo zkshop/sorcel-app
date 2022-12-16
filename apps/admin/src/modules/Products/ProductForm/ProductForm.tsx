@@ -1,10 +1,10 @@
-import { MainLayout } from 'ui';
+import { MainLayout } from '@3shop/ui';
 
 import { ProductFormHeader } from './ProductFormHeader';
 import { GeneralInformationsFields, MediaFields, OnChainDataFields } from './Sections';
 import type { AddProductFormValues } from './types';
 import { GateSection } from '../GateForm';
-import type { Gate } from 'apollo';
+import type { Gate } from '@3shop/apollo';
 
 type BaseProductFormProps = {
   // eslint-disable-next-line @typescript-eslint/ban-types

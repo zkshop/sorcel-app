@@ -1,7 +1,7 @@
-import { ThemeProvider } from 'ui';
+import { ThemeProvider } from '@3shop/ui';
 import { Provider as ReduxProvider } from 'react-redux';
-import { store } from 'admin-store';
-import { ApolloProvider, createApolloClient } from 'apollo';
+import { store } from '@3shop/admin-store';
+import { ApolloProvider, createApolloClient } from '@3shop/apollo';
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 import { CookiesProvider } from 'react-cookie';

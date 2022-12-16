@@ -1,9 +1,9 @@
 import { formatProductData } from './formatProductData';
-import type { Gate, Product } from 'apollo';
-import { useGetGatesQuery } from 'apollo';
-import { ProductCardList } from 'ui-tbw';
+import type { Gate, Product } from '@3shop/apollo';
+import { useGetGatesQuery } from '@3shop/apollo';
+import { ProductCardList } from '@3shop/ui-tbw';
 import { useAppSelector } from '../../store';
-import type { Nft } from 'alchemy';
+import type { Nft } from '@3shop/alchemy';
 import { findProductGates } from './findProductGates';
 
 type ProductListContainerProps = {

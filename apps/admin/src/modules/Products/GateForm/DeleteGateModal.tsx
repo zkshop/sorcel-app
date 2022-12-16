@@ -8,7 +8,7 @@ import {
   ModalFooter,
   HStack,
   Button,
-} from 'ui';
+} from '@3shop/ui';
 
 type DeleteGateModalProps = {
   isDeleteGateModalOpen: boolean;

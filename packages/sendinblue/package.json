@@ -1,8 +1,11 @@
 {
-  "name": "sendinblue",
+  "name": "@3shop/sendinblue",
   "version": "1.0.0",
   "license": "MIT",
   "main": "index.js",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix"
+  },
   "dependencies": {
     "sib-api-v3-typescript": "2.2.3-beta.1"
   }

@@ -1,4 +1,4 @@
-import { REQUIRED } from 'messages';
+import { REQUIRED } from '@3shop/messages';
 import * as yup from 'yup';
 
 export const ADD_GATE_MODAL_SCHEMA = yup.object().shape({

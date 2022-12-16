@@ -1,5 +1,5 @@
 {
-  "name": "domains",
+  "name": "@3shop/domains",
   "version": "1.0.0",
   "private": true,
   "main": "index.ts",
@@ -7,6 +7,6 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "alchemy": "*"
+    "@3shop/alchemy": "*"
   }
 }

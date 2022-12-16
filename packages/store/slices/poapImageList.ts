@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { getPOAPListFromIds } from 'poap';
+import { getPOAPListFromIds } from '@3shop/poap';
 
 export const fetchPOAPImageList = createAsyncThunk(
   'poapImageList/fetch',

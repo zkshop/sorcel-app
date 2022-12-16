@@ -1,5 +1,5 @@
 import type { EmailClient } from '../domains';
-import { SendinBlueClient } from 'sendinblue';
+import { SendinBlueClient } from '@3shop/sendinblue';
 
 export function SendEmailClient(): EmailClient {
   return {

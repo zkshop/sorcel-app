@@ -1,10 +1,10 @@
-import { Box, FormControl, FormErrorMessage, FormLabel, Heading, Input, Section } from 'ui';
+import { Box, FormControl, FormErrorMessage, FormLabel, Heading, Input, Section } from '@3shop/ui';
 import { useFormContext } from 'react-hook-form';
 
 import { SHIPPING_FIELDS } from '../constants';
-import { ShippingFormValues } from './types';
+import type { ShippingFormValues } from './types';
 
-type ShippingFormProps = {};
+type ShippingFormProps = object;
 
 export const ShippingForm = ({}: ShippingFormProps) => {
   const {

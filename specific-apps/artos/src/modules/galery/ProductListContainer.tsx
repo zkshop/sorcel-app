@@ -1,6 +1,6 @@
 import { formatProductData } from './formatProductData';
-import type { Product } from 'apollo';
-import { Box, ProductCardList } from 'ui';
+import type { Product } from '@3shop/apollo';
+import { Box, ProductCardList } from '@3shop/ui';
 import { useAppSelector } from '../../store';
 
 type ProductListContainerProps = {

@@ -1,4 +1,4 @@
-import { Box, MainLayout } from 'ui';
+import { Box, MainLayout } from '@3shop/ui';
 import { NavBar } from './modules/navbar';
 
 type LayoutProps = {

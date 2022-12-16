@@ -3,7 +3,7 @@ import { sendEmail } from 'modules/checkout/sendEmail';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { Box, Text, Image } from 'ui';
+import { Box, Text, Image } from '@3shop/ui';
 
 const success = () => {
   const { query } = useRouter();

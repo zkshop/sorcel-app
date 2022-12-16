@@ -38,7 +38,8 @@ export default defineConfig({
       SECRET_ALCHEMY: 'x97VSdTdeVeFEUpCDRH1ENsSyi5PYPIP',
       SECRET_HASURA: 'nCVvYfVZn0kVQd39iG0OQ2uqbq2G2CLpX6oTLHU9OoHINzFiL5f4CwtzJ0hSRiEI',
       SECRET_MAGIC: 'sk_live_23C4458F3EEE6FF9',
-      SECRET_SUPABASE: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtxanl0Z3hidGV0emV3aXBpa2F4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY2NTczNzc5NSwiZXhwIjoxOTgxMzEzNzk1fQ.913rq_gUqPxJxDK4lYvrrmophNnupbN09LqCp6wUAQ4',
+      SECRET_SUPABASE:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtxanl0Z3hidGV0emV3aXBpa2F4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY2NTczNzc5NSwiZXhwIjoxOTgxMzEzNzk1fQ.913rq_gUqPxJxDK4lYvrrmophNnupbN09LqCp6wUAQ4',
     },
   },
   build: {

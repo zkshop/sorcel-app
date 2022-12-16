@@ -1,4 +1,4 @@
-import { Flex, Button } from 'ui';
+import { Flex, Button } from '@3shop/ui';
 
 import { LoginWithPaper } from './LoginWithPaper';
 import ConnectWalletButton from './ConnectWalletButton';

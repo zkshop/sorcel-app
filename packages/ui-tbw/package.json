@@ -1,5 +1,5 @@
 {
-  "name": "ui-tbw",
+  "name": "@3shop/ui-tbw",
   "version": "0.0.0",
   "main": "index.ts",
   "scripts": {

@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { StorageService } from 'domains';
 import { OK } from 'http-status';
+import { StorageService } from '@3shop/domains';
 import { ImageStorageClient } from '../../../infra';
 
 import { allowCors } from '../../../middlewares/allowCors';
