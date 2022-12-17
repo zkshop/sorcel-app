@@ -16,7 +16,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   const blob = await blobFromURL(url);
 
   const uploadUrl = await Storage.uploadPicture(blob, bucketName);
-  res.status(CREATED).json({ uploadUrl });
+  return res.status(CREATED).json({ uploadUrl });
 }
 
 export default allowCors(method('POST', handler));

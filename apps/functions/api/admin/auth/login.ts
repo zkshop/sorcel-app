@@ -10,36 +10,26 @@ import { getUser } from '../../../utils';
 const Token = AuthorizationTokenService(JsonWebTokenClient());
 
 async function handler(req: VercelRequest, res: VercelResponse) {
-  if (!process.env.JWT_SECRET) {
-    res.status(INTERNAL_SERVER_ERROR).json({ message: 'Server Error' });
-    return;
-  }
+  if (!process.env.JWT_SECRET) return res.status(INTERNAL_SERVER_ERROR);
+
+  if (!req.headers.authorization) return res.status(UNAUTHORIZED);
 
   try {
-    const didToken = req.headers.authorization?.substring(7);
-    magicSDK.token.validate(didToken || '');
-    const metadata = await magicSDK.users.getMetadataByToken(didToken || '');
+    const didToken = req.headers.authorization.substring(7);
+    magicSDK.token.validate(didToken);
+    const metadata = await magicSDK.users.getMetadataByToken(didToken);
 
-    if (!metadata.email) {
-      res.status(INTERNAL_SERVER_ERROR).json({
-        message: 'Server Error',
-      });
-      return;
-    }
+    if (!metadata.email) return res.status(INTERNAL_SERVER_ERROR);
 
     const user = await getUser(metadata.email);
 
-    if (!user) {
-      res.status(UNAUTHORIZED).json({ message: 'Unauthorized' });
-      return;
-    }
+    if (!user) return res.status(UNAUTHORIZED);
 
     const token = Token.sign(user.app_id, metadata);
 
-    res.status(OK).send({ token });
+    return res.status(OK).send({ token });
   } catch (error) {
-    console.error(error);
-    res.status(INTERNAL_SERVER_ERROR).json({ error });
+    return res.status(INTERNAL_SERVER_ERROR).json({ error });
   }
 }
 

@@ -13,11 +13,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const paperWallet = await Auth.loginWithPaper(code);
 
-    res.status(OK).json(paperWallet);
+    return res.status(OK).json(paperWallet);
   } catch (e) {
     console.error(e);
 
-    res.status(INTERNAL_SERVER_ERROR).send({ message: 'Error when requesting the wallet ' });
+    return res.status(INTERNAL_SERVER_ERROR).send({ message: 'Error when requesting the wallet ' });
   }
 }
 
