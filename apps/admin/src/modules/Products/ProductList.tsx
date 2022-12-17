@@ -15,7 +15,7 @@ import {
 import { PRODUCT_ATTRIBUTES } from './constants';
 import { ProductListItem } from './ProductListItem';
 
-import { useGetProductsQuery } from 'apollo';
+import { useGetAdminProductsQuery } from 'apollo';
 import { useNavigate } from 'react-router-dom';
 
 const getEditProductIdRoute = (id: string) => `product/edit/${id}`;
@@ -28,9 +28,7 @@ const boxStyle = {
 };
 
 export const Products = () => {
-  const { data, error, loading } = useGetProductsQuery({
-    variables: { appId: process.env.APP_ID },
-  });
+  const { data, error, loading } = useGetAdminProductsQuery();
   const navigate = useNavigate();
 
   if (loading) return <Spinner />;
@@ -42,7 +40,7 @@ export const Products = () => {
   return (
     <Box>
       <Header title="Products">
-        <Link href="/product/add">
+        <Link href="/app/product/add">
           <Button>+ New Product</Button>
         </Link>
       </Header>

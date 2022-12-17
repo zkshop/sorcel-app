@@ -1541,24 +1541,11 @@ export type GetAppQuery = {
   app?: { __typename?: 'app'; id: any; name: string; imgUrl?: string | null } | null;
 };
 
-export type GetAdminQueryVariables = Exact<{
-  appId: Scalars['uuid'];
-}>;
+export type GetAdminAppQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetAdminQuery = {
+export type GetAdminAppQuery = {
   __typename?: 'query_root';
-  app?: { __typename?: 'app'; id: any; name: string; imgUrl?: string | null } | null;
-  products: Array<{
-    __typename?: 'product';
-    collection: string;
-    curation?: string | null;
-    discount?: number | null;
-    id: any;
-    image: string;
-    name: string;
-    price: number;
-    poapId?: number | null;
-  }>;
+  app: Array<{ __typename?: 'app'; id: any; name: string; imgUrl?: string | null }>;
 };
 
 export type UpdateAppMutationVariables = Exact<{
@@ -1667,6 +1654,36 @@ export type CreateProductMutation = {
   } | null;
 };
 
+export type CreateAdminProductMutationVariables = Exact<{
+  price: Scalars['Int'];
+  name: Scalars['String'];
+  description: Scalars['String'];
+  image: Scalars['String'];
+  discount?: InputMaybe<Scalars['Int']>;
+  curation?: InputMaybe<Scalars['String']>;
+  collection?: InputMaybe<Scalars['String']>;
+  poapId?: InputMaybe<Scalars['Int']>;
+  isDiscountGated?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+export type CreateAdminProductMutation = {
+  __typename?: 'mutation_root';
+  insert_product_one?: {
+    __typename?: 'product';
+    app_id: any;
+    collection: string;
+    curation?: string | null;
+    discount?: number | null;
+    id: any;
+    image: string;
+    name: string;
+    description: string;
+    price: number;
+    poapId?: number | null;
+    isDiscountGated: boolean;
+  } | null;
+};
+
 export type DeleteProductMutationVariables = Exact<{
   id?: InputMaybe<Scalars['uuid']>;
 }>;
@@ -1756,9 +1773,9 @@ export type GetProductsQuery = {
   }>;
 };
 
-export type NewGetProductsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetAdminProductsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type NewGetProductsQuery = {
+export type GetAdminProductsQuery = {
   __typename?: 'query_root';
   products: Array<{
     __typename?: 'product';
@@ -1824,57 +1841,52 @@ export function useGetAppLazyQuery(
 export type GetAppQueryHookResult = ReturnType<typeof useGetAppQuery>;
 export type GetAppLazyQueryHookResult = ReturnType<typeof useGetAppLazyQuery>;
 export type GetAppQueryResult = Apollo.QueryResult<GetAppQuery, GetAppQueryVariables>;
-export const GetAdminDocument = gql`
-  query getAdmin($appId: uuid!) {
-    app: app_by_pk(id: $appId) {
+export const GetAdminAppDocument = gql`
+  query getAdminApp {
+    app {
       id
       name
       imgUrl
-    }
-    products: product(where: { app_id: { _eq: $appId } }) {
-      collection
-      curation
-      discount
-      id
-      image
-      name
-      price
-      poapId
     }
   }
 `;
 
 /**
- * __useGetAdminQuery__
+ * __useGetAdminAppQuery__
  *
- * To run a query within a React component, call `useGetAdminQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetAdminQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetAdminAppQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAdminAppQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetAdminQuery({
+ * const { data, loading, error } = useGetAdminAppQuery({
  *   variables: {
- *      appId: // value for 'appId'
  *   },
  * });
  */
-export function useGetAdminQuery(
-  baseOptions: Apollo.QueryHookOptions<GetAdminQuery, GetAdminQueryVariables>,
+export function useGetAdminAppQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetAdminAppQuery, GetAdminAppQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetAdminQuery, GetAdminQueryVariables>(GetAdminDocument, options);
+  return Apollo.useQuery<GetAdminAppQuery, GetAdminAppQueryVariables>(GetAdminAppDocument, options);
 }
-export function useGetAdminLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<GetAdminQuery, GetAdminQueryVariables>,
+export function useGetAdminAppLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetAdminAppQuery, GetAdminAppQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetAdminQuery, GetAdminQueryVariables>(GetAdminDocument, options);
+  return Apollo.useLazyQuery<GetAdminAppQuery, GetAdminAppQueryVariables>(
+    GetAdminAppDocument,
+    options,
+  );
 }
-export type GetAdminQueryHookResult = ReturnType<typeof useGetAdminQuery>;
-export type GetAdminLazyQueryHookResult = ReturnType<typeof useGetAdminLazyQuery>;
-export type GetAdminQueryResult = Apollo.QueryResult<GetAdminQuery, GetAdminQueryVariables>;
+export type GetAdminAppQueryHookResult = ReturnType<typeof useGetAdminAppQuery>;
+export type GetAdminAppLazyQueryHookResult = ReturnType<typeof useGetAdminAppLazyQuery>;
+export type GetAdminAppQueryResult = Apollo.QueryResult<
+  GetAdminAppQuery,
+  GetAdminAppQueryVariables
+>;
 export const UpdateAppDocument = gql`
   mutation UpdateApp($appId: uuid!, $newName: String!, $newImgUrl: String!) {
     update_app(where: { id: { _eq: $appId } }, _set: { name: $newName, imgUrl: $newImgUrl }) {
@@ -2223,6 +2235,93 @@ export type CreateProductMutationOptions = Apollo.BaseMutationOptions<
   CreateProductMutation,
   CreateProductMutationVariables
 >;
+export const CreateAdminProductDocument = gql`
+  mutation CreateAdminProduct(
+    $price: Int!
+    $name: String!
+    $description: String!
+    $image: String!
+    $discount: Int
+    $curation: String
+    $collection: String
+    $poapId: Int
+    $isDiscountGated: Boolean
+  ) {
+    insert_product_one(
+      object: {
+        discount: $discount
+        image: $image
+        name: $name
+        description: $description
+        price: $price
+        curation: $curation
+        collection: $collection
+        poapId: $poapId
+        isDiscountGated: $isDiscountGated
+      }
+    ) {
+      app_id
+      collection
+      curation
+      discount
+      id
+      image
+      name
+      description
+      price
+      poapId
+      isDiscountGated
+    }
+  }
+`;
+export type CreateAdminProductMutationFn = Apollo.MutationFunction<
+  CreateAdminProductMutation,
+  CreateAdminProductMutationVariables
+>;
+
+/**
+ * __useCreateAdminProductMutation__
+ *
+ * To run a mutation, you first call `useCreateAdminProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateAdminProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createAdminProductMutation, { data, loading, error }] = useCreateAdminProductMutation({
+ *   variables: {
+ *      price: // value for 'price'
+ *      name: // value for 'name'
+ *      description: // value for 'description'
+ *      image: // value for 'image'
+ *      discount: // value for 'discount'
+ *      curation: // value for 'curation'
+ *      collection: // value for 'collection'
+ *      poapId: // value for 'poapId'
+ *      isDiscountGated: // value for 'isDiscountGated'
+ *   },
+ * });
+ */
+export function useCreateAdminProductMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateAdminProductMutation,
+    CreateAdminProductMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateAdminProductMutation, CreateAdminProductMutationVariables>(
+    CreateAdminProductDocument,
+    options,
+  );
+}
+export type CreateAdminProductMutationHookResult = ReturnType<typeof useCreateAdminProductMutation>;
+export type CreateAdminProductMutationResult = Apollo.MutationResult<CreateAdminProductMutation>;
+export type CreateAdminProductMutationOptions = Apollo.BaseMutationOptions<
+  CreateAdminProductMutation,
+  CreateAdminProductMutationVariables
+>;
 export const DeleteProductDocument = gql`
   mutation DeleteProduct($id: uuid) {
     delete_product(where: { id: { _eq: $id } }) {
@@ -2470,8 +2569,8 @@ export type GetProductsQueryResult = Apollo.QueryResult<
   GetProductsQuery,
   GetProductsQueryVariables
 >;
-export const NewGetProductsDocument = gql`
-  query NewGetProducts {
+export const GetAdminProductsDocument = gql`
+  query GetAdminProducts {
     products: product {
       app_id
       collection
@@ -2489,43 +2588,43 @@ export const NewGetProductsDocument = gql`
 `;
 
 /**
- * __useNewGetProductsQuery__
+ * __useGetAdminProductsQuery__
  *
- * To run a query within a React component, call `useNewGetProductsQuery` and pass it any options that fit your needs.
- * When your component renders, `useNewGetProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetAdminProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAdminProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useNewGetProductsQuery({
+ * const { data, loading, error } = useGetAdminProductsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useNewGetProductsQuery(
-  baseOptions?: Apollo.QueryHookOptions<NewGetProductsQuery, NewGetProductsQueryVariables>,
+export function useGetAdminProductsQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetAdminProductsQuery, GetAdminProductsQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<NewGetProductsQuery, NewGetProductsQueryVariables>(
-    NewGetProductsDocument,
+  return Apollo.useQuery<GetAdminProductsQuery, GetAdminProductsQueryVariables>(
+    GetAdminProductsDocument,
     options,
   );
 }
-export function useNewGetProductsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<NewGetProductsQuery, NewGetProductsQueryVariables>,
+export function useGetAdminProductsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetAdminProductsQuery, GetAdminProductsQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<NewGetProductsQuery, NewGetProductsQueryVariables>(
-    NewGetProductsDocument,
+  return Apollo.useLazyQuery<GetAdminProductsQuery, GetAdminProductsQueryVariables>(
+    GetAdminProductsDocument,
     options,
   );
 }
-export type NewGetProductsQueryHookResult = ReturnType<typeof useNewGetProductsQuery>;
-export type NewGetProductsLazyQueryHookResult = ReturnType<typeof useNewGetProductsLazyQuery>;
-export type NewGetProductsQueryResult = Apollo.QueryResult<
-  NewGetProductsQuery,
-  NewGetProductsQueryVariables
+export type GetAdminProductsQueryHookResult = ReturnType<typeof useGetAdminProductsQuery>;
+export type GetAdminProductsLazyQueryHookResult = ReturnType<typeof useGetAdminProductsLazyQuery>;
+export type GetAdminProductsQueryResult = Apollo.QueryResult<
+  GetAdminProductsQuery,
+  GetAdminProductsQueryVariables
 >;
 export const GetUserDocument = gql`
   query GetUser {

@@ -37,3 +37,41 @@ mutation CreateProduct(
     isDiscountGated
   }
 }
+
+mutation CreateAdminProduct(
+  $price: Int!
+  $name: String!
+  $description: String!
+  $image: String!
+  $discount: Int
+  $curation: String
+  $collection: String
+  $poapId: Int
+  $isDiscountGated: Boolean
+) {
+  insert_product_one(
+    object: {
+      discount: $discount
+      image: $image
+      name: $name
+      description: $description
+      price: $price
+      curation: $curation
+      collection: $collection
+      poapId: $poapId
+      isDiscountGated: $isDiscountGated
+    }
+  ) {
+    app_id
+    collection
+    curation
+    discount
+    id
+    image
+    name
+    description
+    price
+    poapId
+    isDiscountGated
+  }
+}
