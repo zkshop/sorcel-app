@@ -18,7 +18,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
   const uploadUrl = await Storage.updatePicture(blob, path, bucketName);
 
-  res.status(OK).json({ uploadUrl });
+  return res.status(OK).json({ uploadUrl });
 }
 
 export default allowCors(method('POST', handler));

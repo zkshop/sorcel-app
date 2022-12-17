@@ -13,11 +13,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const userToken = await Token.getToken(code);
 
-    res.status(OK).json({ userToken });
+    return res.status(OK).json({ userToken });
   } catch (e) {
     console.error({ e });
 
-    res.status(INTERNAL_SERVER_ERROR).json(e);
+    return res.status(INTERNAL_SERVER_ERROR).json(e);
   }
 }
 
