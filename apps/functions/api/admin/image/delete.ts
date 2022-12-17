@@ -13,7 +13,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
   await Storage.deletePicture(url, bucketName);
 
-  res.status(OK).send({ url });
+  return res.status(OK).send({ url });
 }
 
 export default allowCors(method('DELETE', handler));
