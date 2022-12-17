@@ -21,4 +21,4 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   res.status(OK).json({ uploadUrl });
 }
 
-export default method('POST', allowCors(handler));
+export default allowCors(method('POST', handler));

@@ -13,3 +13,19 @@ query GetProducts($appId: uuid!) {
     isDiscountGated
   }
 }
+
+query NewGetProducts {
+  products: product {
+    app_id
+    collection
+    curation
+    discount
+    id
+    image
+    name
+    description
+    price
+    poapId
+    isDiscountGated
+  }
+}

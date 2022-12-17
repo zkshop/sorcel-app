@@ -16,4 +16,4 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   res.status(OK).send({ url });
 }
 
-export default method('DELETE', allowCors(handler));
+export default allowCors(method('DELETE', handler));

@@ -3,9 +3,11 @@ import { ApolloClient, HttpLink, InMemoryCache, from } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { concatPagination } from '@apollo/client/utilities';
 import merge from 'deepmerge';
+import Cookies from 'js-cookie';
 import isEqual from 'lodash/isEqual';
 import { useMemo } from 'react';
 
+const CUSTOMER_TOKEN_NAME = 'customer-token';
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
@@ -22,7 +24,7 @@ const httpLink = new HttpLink({
   uri: process.env.HASURA_API_URL, // Server URL (must be absolute)
   credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
   headers: {
-    'x-hasura-admin-secret': process.env.HASURA_API_KEY || '',
+    Authorization: 'Bearer ' + Cookies.get(CUSTOMER_TOKEN_NAME),
   },
 });
 
