@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { OK } from 'http-status';
 import type { Handler } from './method';
 
-export const allowCors = (fn: Handler) => async (req: VercelRequest, res: VercelResponse) => {
+export const allowCors = (next: Handler) => async (req: VercelRequest, res: VercelResponse) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -15,5 +15,5 @@ export const allowCors = (fn: Handler) => async (req: VercelRequest, res: Vercel
     return res.status(OK).end();
   }
 
-  return await fn(req, res);
+  return await next(req, res);
 };

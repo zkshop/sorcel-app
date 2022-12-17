@@ -5,17 +5,18 @@ import { allowCors } from '../../../middlewares/allowCors';
 import { method } from '../../../middlewares/method';
 import { AuthorizationTokenService } from 'domains';
 import { JsonWebTokenClient } from '../../../infra/JsonWebTokenClient';
-import { getUser } from '../../../utils';
+import { extractTokenFromAuthorization, getUser } from '../../../utils';
 
 const Token = AuthorizationTokenService(JsonWebTokenClient());
 
 async function handler(req: VercelRequest, res: VercelResponse) {
   if (!process.env.JWT_SECRET) return res.status(INTERNAL_SERVER_ERROR);
 
-  if (!req.headers.authorization) return res.status(UNAUTHORIZED);
+  const didToken = extractTokenFromAuthorization(req.headers.authorization);
+
+  if (!didToken) return res.status(UNAUTHORIZED);
 
   try {
-    const didToken = req.headers.authorization.substring(7);
     magicSDK.token.validate(didToken);
     const metadata = await magicSDK.users.getMetadataByToken(didToken);
 
