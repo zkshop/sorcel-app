@@ -11,13 +11,9 @@ const Token = AuthorizationTokenService(JsonWebTokenClient());
 async function handler(req: VercelRequest, res: VercelResponse) {
   const token = extractTokenFromAuthorization(req.headers.authorization);
 
-  if (!token) return res.status(UNAUTHORIZED);
+  if (!token || !Token.verify(token)) return res.status(UNAUTHORIZED).end();
 
-  const verifiedToken = Token.verify(token);
-
-  if (!verifiedToken) return res.status(UNAUTHORIZED);
-
-  return res.status(NO_CONTENT);
+  return res.status(NO_CONTENT).end();
 }
 
 export default allowCors(method('GET', handler));

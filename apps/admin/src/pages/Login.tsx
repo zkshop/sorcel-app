@@ -14,8 +14,8 @@ import { FormValidation } from 'validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AuthAdminService } from 'domains';
 import { CustomerAuthClient } from 'admin-infra';
-import { useNewGetProductsLazyQuery } from 'apollo';
 import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
+import { useNavigate } from 'react-router-dom';
 
 type LoginFormValues = {
   email: string;
@@ -28,6 +28,7 @@ const LOGIN_SCHEMA = FormValidation.object().shape({
 const auth = AuthAdminService(CustomerAuthClient());
 
 export const Login = () => {
+  const navigate = useNavigate();
   const { setCustomerTokenCookie } = useCustomerTokenCookie();
   const {
     handleSubmit,
@@ -41,16 +42,12 @@ export const Login = () => {
     resolver: yupResolver(LOGIN_SCHEMA),
   });
 
-  const [getProducts] = useNewGetProductsLazyQuery();
-
   const onSubmit = async (data: LoginFormValues) => {
     const res = await auth.login(data.email);
 
     setCustomerTokenCookie(res.token);
 
-    const productsQuery = await getProducts();
-
-    console.log(productsQuery.data);
+    navigate('/app');
   };
 
   return (
