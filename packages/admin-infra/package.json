@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "alchemy": "*",
+    "cookies": "*",
     "domains": "*",
     "pure": "*"
   }

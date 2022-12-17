@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { AuthAdminClient, AuthAdminData } from 'domains';
 import { magicClient } from 'magic';
 
-const initialAuthData: AuthAdminData = { email: '', issuer: '', appId: '', publicAddress: '' };
+const initialAuthData: AuthAdminData = { token: '' };
 
 export const CustomerAuthClient = (): AuthAdminClient => ({
   login: async (email) => {
@@ -15,7 +15,7 @@ export const CustomerAuthClient = (): AuthAdminClient => ({
       redirectURI: window.location.origin,
     });
 
-    axios({
+    const res = await axios<AuthAdminData>({
       url: `${process.env.FUNCTIONS_API}/api/admin/auth/login`,
       method: 'POST',
       headers: {
@@ -23,7 +23,7 @@ export const CustomerAuthClient = (): AuthAdminClient => ({
       },
     });
 
-    return initialAuthData;
+    return res.data;
   },
 
   verifyUser: async () => {

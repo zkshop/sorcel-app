@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
+    "cookies": "^3.0.1",
     "graphql": "^16.6.0"
   },
   "devDependencies": {

@@ -18,6 +18,7 @@ export default defineConfig({
       'FUNCTIONS_API',
       'PAPER_CLIENT_ID',
       'SUPABASE_API_KEY',
+      'PUBLIC_MAGIC_PUBLISHABLE_KEY',
     ]),
   ],
   define: {
