@@ -1,5 +1,5 @@
 import { useToast } from 'ui';
-import { useCreateProductMutation } from 'apollo';
+import { useCreateAdminProductMutation } from 'apollo';
 import { getAddProductSuccessMessage } from 'messages';
 import { blobFromURL } from 'pure';
 import { useState } from 'react';
@@ -29,7 +29,7 @@ export const AddProductFormContainer = () => {
 
   const navigate = useNavigate();
 
-  const [createProduct, { loading: isLoading }] = useCreateProductMutation();
+  const [createProduct, { loading: isLoading }] = useCreateAdminProductMutation();
 
   const toast = useToast();
 
@@ -45,7 +45,6 @@ export const AddProductFormContainer = () => {
       await createProduct({
         variables: {
           ...data,
-          appId: process.env.APP_ID,
           image: uploadUrl,
         },
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),

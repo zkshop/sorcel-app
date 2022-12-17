@@ -1,27 +1,16 @@
 query getApp($appId: uuid!) {
-  app: app_by_pk(id: $appId) {
+  app: app_by_pk(id: $appId)  {
     id
     name
     imgUrl
   }
 }
 
-query getAdmin($appId: uuid!) {
-  app: app_by_pk(id: $appId) {
+query getAdminApp {
+  app {
     id
     name
     imgUrl
-  }
-
-  products: product(where: { app_id: { _eq: $appId } }) {
-    collection
-    curation
-    discount
-    id
-    image
-    name
-    price
-    poapId
   }
 }
 
