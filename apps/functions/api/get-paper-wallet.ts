@@ -21,4 +21,4 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 }
 
-export default method('POST', allowCors(handler));
+export default allowCors(method('POST', handler));

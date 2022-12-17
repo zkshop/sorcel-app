@@ -1,8 +1,5 @@
 export type AuthAdminData = {
-  issuer: string;
-  publicAddress: string;
-  appId: string;
-  email: string;
+  token: string;
 };
 
 export type AuthAdminClient = {
