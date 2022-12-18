@@ -32,6 +32,9 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
   const methods = useForm<AddProductFormValues>({
     defaultValues: {
       ...product,
+      price: product.price.toString(),
+      discount: product.discount?.toString(),
+      poapId: product.poapId?.toString(),
     },
     resolver: yupResolver(ADD_PRODUCT_FORM_SCHEMA),
     mode: 'onChange',
@@ -63,7 +66,7 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
         onCompleted: () => toast(getDeleteProductSuccessMessage(product.name)),
         onError: () => toast(ERROR_MESSAGE),
       });
-      navigate('/');
+      navigate('/app');
     } catch (e) {
       console.error(e);
     } finally {
@@ -75,9 +78,9 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
     const variables = {
       ...data,
       id: product.id,
-      price: data.price,
-      discount: data.discount,
-      poapId: data.poapId,
+      price: Number(data.price),
+      discount: Number(data.discount),
+      poapId: Number(data.poapId),
     };
 
     try {

@@ -10,6 +10,8 @@ import {
   FormErrorMessage,
   Section,
   ChatRightTextIcon,
+  NumberInput,
+  NumberInputField,
 } from 'ui';
 import { useFormContext } from 'react-hook-form';
 
@@ -57,27 +59,21 @@ export const GeneralInformationsFields = () => {
       <FormControl isInvalid={Boolean(errors.price)}>
         <FormLabel mb={1}>{PRODUCTS_FIELDS.price.label}</FormLabel>
 
-        <InputGroup>
-          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
-            $
-          </InputLeftElement>
+        <NumberInput min={0}>
+          <NumberInputField placeholder="Price" {...register('price')} />
+        </NumberInput>
 
-          <Input placeholder="Price" {...register('price')} />
-        </InputGroup>
         <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
       </FormControl>
 
       {/* Discount */}
       <FormControl isInvalid={Boolean(errors.discount)}>
-        <FormLabel mb={1}>Discount</FormLabel>
+        <FormLabel mb={1}>Discount (in %)</FormLabel>
 
-        <InputGroup>
-          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
-            %
-          </InputLeftElement>
+        <NumberInput min={0} max={100}>
+          <NumberInputField placeholder="Discount for holders" {...register('discount')} />
+        </NumberInput>
 
-          <Input placeholder="Discount for holders" {...register('discount')} />
-        </InputGroup>
         <FormErrorMessage>{errors.discount?.message}</FormErrorMessage>
       </FormControl>
 
