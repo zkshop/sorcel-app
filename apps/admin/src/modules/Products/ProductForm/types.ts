@@ -1,12 +1,12 @@
 import type { Nullable } from 'types';
 
 export type AddProductFormValues = {
-  price: number;
+  price: string;
   description: string;
-  discount: Nullable<number>;
+  discount: Nullable<string>;
   image: string;
   curation: Nullable<string>;
-  poapId: Nullable<number>;
+  poapId: Nullable<string>;
   collection: string;
   name: string;
   isDiscountGated: boolean;
