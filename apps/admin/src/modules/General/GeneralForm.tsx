@@ -7,6 +7,7 @@ import axios from 'axios';
 type GeneralFormValues = {
   name: string;
   imgUrl: string;
+  id: string;
 };
 
 type GeneralFormProps = {
@@ -14,6 +15,8 @@ type GeneralFormProps = {
 };
 
 export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
+  const { id } = defaultValues;
+
   const { handleSubmit, register } = useForm<GeneralFormValues>({
     defaultValues,
   });
@@ -24,7 +27,7 @@ export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
     const variables = {
       newName: data.name,
       newImgUrl: data.imgUrl,
-      appId: process.env.APP_ID,
+      appId: id,
     };
 
     try {
