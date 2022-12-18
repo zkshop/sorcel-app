@@ -46,11 +46,14 @@ export const AddProductFormContainer = () => {
         variables: {
           ...data,
           image: uploadUrl,
+          price: Number(data.price),
+          discount: Number(data.discount),
+          poapId: Number(data.poapId),
         },
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),
       });
 
-      navigate('/');
+      navigate('/app');
     } catch (e) {
       console.error(e);
     } finally {

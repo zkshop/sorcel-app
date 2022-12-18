@@ -37,7 +37,7 @@ const EditProductContainer = ({ productId }: EditProductPageProps) => {
 
   return (
     <>
-      <BackButton href="/" />
+      <BackButton href="/app" />
       <EditProductFormContainer gates={gates} product={product} />
     </>
   );
