@@ -1,8 +1,6 @@
 import { Magic } from 'magic-sdk';
 import { OAuthExtension } from '@magic-ext/oauth';
 
-console.log(process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY);
-
 const createMagicClient = (key: string) =>
   typeof window != 'undefined' &&
   new Magic(key, {
