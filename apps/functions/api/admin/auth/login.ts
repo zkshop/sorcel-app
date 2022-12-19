@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { magicSDK } from 'magic-server-sdk';
+import { magicSDK } from '@3shop/magic-server-sdk';
 import { INTERNAL_SERVER_ERROR, OK, UNAUTHORIZED } from 'http-status';
 import { allowCors } from '../../../middlewares/allowCors';
 import { method } from '../../../middlewares/method';

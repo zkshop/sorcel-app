@@ -1,5 +1,5 @@
 import type { AuthTokenValidationClient } from 'domains/auth/AuthTokenValidationClient';
-import { magicSDK } from 'magic-server-sdk';
+import { magicSDK } from '@3shop/magic-server-sdk';
 
 export function UserTokenValidationClient(): AuthTokenValidationClient {
   return {
