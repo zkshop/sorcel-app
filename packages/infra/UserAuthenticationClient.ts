@@ -24,7 +24,6 @@ export function UserAuthenticationClient(): AuthClient {
 
       const didToken = await magicClient.auth.loginWithMagicLink({
         email,
-        redirectURI: window.location.origin,
       });
 
       const res = await fetch('/api/login', {
