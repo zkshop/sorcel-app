@@ -8,8 +8,8 @@
     "lint": "eslint \"**/*.ts\" --fix"
   },
   "dependencies": {
+    "@3shop/magic-server-sdk": "*",
     "@types/jsonwebtoken": "^8.5.9",
-    "@types/multiparty": "^0.0.33",
     "@vercel/fetch": "^6.2.0",
     "@vercel/node": "^2.7.1",
     "axios": "*",
@@ -17,8 +17,6 @@
     "http-status": "^1.5.3",
     "json-web-token": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
-    "magic-server-sdk": "*",
-    "multiparty": "^4.2.3",
     "typescript": "*"
   },
   "devDependencies": {

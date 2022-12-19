@@ -1,5 +1,5 @@
 {
-  "name": "magic-server-sdk",
+  "name": "@3shop/magic-server-sdk",
   "version": "0.0.0",
   "main": "index.ts",
   "scripts": {
