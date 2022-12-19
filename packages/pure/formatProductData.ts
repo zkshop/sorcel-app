@@ -45,8 +45,6 @@ export const formatProductData = ({
     return false;
   })();
 
-  console.log(isAnHolder);
-
   return {
     isAnHolder,
     isTransparent,

@@ -1,7 +1,7 @@
 import type { NormalizedCacheObject } from '@apollo/client';
 import { ApolloClient, HttpLink, InMemoryCache, from } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
-import { concatPagination } from '@apollo/client/utilities';
 import merge from 'deepmerge';
 import Cookies from 'js-cookie';
 import isEqual from 'lodash/isEqual';
@@ -23,29 +23,49 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 const httpLink = new HttpLink({
   uri: process.env.HASURA_API_URL, // Server URL (must be absolute)
   credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = Cookies.get(CUSTOMER_TOKEN_NAME);
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const ssrHttpLink = new HttpLink({
+  uri: process.env.HASURA_API_URL,
+  credentials: 'same-origin',
   headers: {
-    Authorization: 'Bearer ' + Cookies.get(CUSTOMER_TOKEN_NAME),
+    'x-hasura-admin-secret': process.env.HASURA_API_KEY || '',
   },
 });
 
 export function createApolloClient() {
   return new ApolloClient({
-    ssrMode: typeof window === 'undefined',
-    link: from([errorLink, httpLink]),
+    link: from([errorLink, authLink, httpLink]),
     cache: new InMemoryCache({
-      typePolicies: {
-        Query: {
-          fields: {
-            allPosts: concatPagination(),
-          },
-        },
-      },
+      typePolicies: {},
+    }),
+  });
+}
+
+function createApolloSsrClient() {
+  return new ApolloClient({
+    ssrMode: typeof window === 'undefined',
+    link: from([errorLink, ssrHttpLink]),
+    cache: new InMemoryCache({
+      typePolicies: {},
     }),
   });
 }
 
 export function initializeApollo(initialState = null) {
-  const _apolloClient = apolloClient ?? createApolloClient();
+  const _apolloClient = apolloClient ?? createApolloSsrClient();
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
