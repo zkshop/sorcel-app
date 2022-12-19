@@ -17,6 +17,7 @@ import { CustomerAuthClient } from 'admin-infra';
 import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
 import { useNavigate } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
+import { useState } from 'react';
 
 type LoginFormValues = {
   email: string;
@@ -29,6 +30,7 @@ const LOGIN_SCHEMA = FormValidation.object().shape({
 const auth = AuthAdminService(CustomerAuthClient());
 
 export const Login = () => {
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
   const navigate = useNavigate();
   const { setCustomerTokenCookie } = useCustomerTokenCookie();
   const {
@@ -46,11 +48,15 @@ export const Login = () => {
   const { loading } = useVerifyToken();
 
   const onSubmit = async (data: LoginFormValues) => {
+    setIsLoginLoading(true);
     const res = await auth.login(data.email);
+    if (res.token) {
+      setCustomerTokenCookie(res.token);
 
-    setCustomerTokenCookie(res.token);
+      navigate('/app');
+    }
 
-    navigate('/app');
+    setIsLoginLoading(false);
   };
 
   return (
@@ -62,7 +68,9 @@ export const Login = () => {
           <FormLabel mb={1}> Email </FormLabel>
           <HStack>
             <Input placeholder="vitalik@ethereum.fr" {...register('email')} />
-            <Button>Login</Button>
+            <Button isLoading={isLoginLoading} isDisabled={isLoginLoading}>
+              Login
+            </Button>
           </HStack>
           <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
         </FormControl>
