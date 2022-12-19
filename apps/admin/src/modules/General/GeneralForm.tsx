@@ -1,8 +1,12 @@
-import { Box, Heading, HStack, Button, FormField } from 'ui';
+import { Box, Heading, HStack, Button, FormField, useToast } from 'ui';
 import { useForm } from 'react-hook-form';
 
 import { useUpdateAppMutation } from 'apollo';
-import axios from 'axios';
+import { ImageStorageClient } from 'admin-infra';
+import { StorageService } from 'domains';
+import { blobFromURL } from 'pure';
+import { useState } from 'react';
+import { ERROR_MESSAGE } from 'messages';
 
 type GeneralFormValues = {
   name: string;
@@ -14,12 +18,15 @@ type GeneralFormProps = {
   defaultValues: GeneralFormValues;
 };
 
+const storage = StorageService(ImageStorageClient());
+
 export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
   const { id } = defaultValues;
-
+  const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit, register } = useForm<GeneralFormValues>({
     defaultValues,
   });
+  const toast = useToast();
 
   const [updateApp] = useUpdateAppMutation();
 
@@ -30,15 +37,16 @@ export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
       appId: id,
     };
 
+    setIsLoading(true);
     try {
-      if (data.imgUrl !== defaultValues.imgUrl) {
-        const {
-          data: { uploadUrl },
-        } = await axios.post(`${process.env.FUNCTIONS_API}/api/image/update`, {
-          newImageUrl: data.imgUrl,
-          path: defaultValues.imgUrl,
-          bucketName: 'apps',
-        });
+      if (defaultValues.imgUrl && data.imgUrl !== defaultValues.imgUrl) {
+        const image = await blobFromURL(data.imgUrl);
+        const uploadUrl = await storage.updatePicture(image, defaultValues.imgUrl, 'products');
+
+        Object.assign(variables, { newImgUrl: uploadUrl });
+      } else if (!defaultValues.imgUrl) {
+        const image = await blobFromURL(data.imgUrl);
+        const uploadUrl = await storage.uploadPicture(image, 'products');
 
         Object.assign(variables, { newImgUrl: uploadUrl });
       }
@@ -46,8 +54,17 @@ export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
       await updateApp({
         variables,
       });
+
+      toast({
+        title: `App updated`,
+        description: `App has been updated successfully`,
+        status: 'success',
+      });
     } catch (e) {
       console.error(e);
+      toast(ERROR_MESSAGE);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -57,7 +74,9 @@ export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
         <Heading as="h2" minWidth="300px">
           <HStack justifyContent="space-between">
             <span> General </span>
-            <Button type="submit">Save</Button>
+            <Button isLoading={isLoading} isDisabled={isLoading} type="submit">
+              Save
+            </Button>
           </HStack>
         </Heading>
 
