@@ -16,6 +16,7 @@ import { AuthAdminService } from 'domains';
 import { CustomerAuthClient } from 'admin-infra';
 import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
 import { useNavigate } from 'react-router-dom';
+import { useVerifyToken } from '../useVerifyToken';
 
 type LoginFormValues = {
   email: string;
@@ -41,6 +42,8 @@ export const Login = () => {
     mode: 'onChange',
     resolver: yupResolver(LOGIN_SCHEMA),
   });
+
+  const { loading } = useVerifyToken();
 
   const onSubmit = async (data: LoginFormValues) => {
     const res = await auth.login(data.email);
