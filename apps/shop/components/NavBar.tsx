@@ -13,12 +13,14 @@ import { useAccount } from 'wagmi';
 import { useGetAppQuery } from '@3shop/apollo';
 import { useAppDispatch, useAppSelector } from '@3shop/store';
 import { getCurrentUser, login, logoutUser } from '@3shop/store/slices/auth';
+import useUpdateThemeOnConnection from 'hooks/useUpdateThemeOnConnection';
 
 type NavBarProps = {
   admin: boolean;
 };
 
 export const NavBar = ({ admin }: NavBarProps) => {
+  const {} = useUpdateThemeOnConnection();
   const data = useGetAppQuery({
     variables: {
       appId: process.env.APP_ID,
