@@ -17,11 +17,9 @@ export default defineConfig({
       util: 'util/',
     }),
     EnvironmentPlugin([
-      'APP_ID',
-      'PAPER_CLIENT_ID',
-      'PUBLIC_MAGIC_PUBLISHABLE_KEY',
       'PUBLIC_FUNCTIONS_URL',
       'PUBLIC_HASURA_API_URL',
+      'PUBLIC_MAGIC_PUBLISHABLE_KEY',
       'SECRET_ALCHEMY',
       'SECRET_HASURA',
       'SECRET_MAGIC',
@@ -30,16 +28,13 @@ export default defineConfig({
   ],
   define: {
     'process.env': {
-      APP_ID: '2b1a5788-cc27-4530-a346-a5aa674bb523',
-      PAPER_CLIENT_ID: 'a8a84815-f9dc-4292-8724-850ec225fb90',
-      PUBLIC_FUNCTIONS_URL: 'https://functions.3shop.co',
-      PUBLIC_HASURA_API_URL: 'https://smashing-albacore-74.hasura.app/v1/graphql',
-      PUBLIC_MAGIC_PUBLISHABLE_KEY: 'pk_live_4D8A794EBE593D7D',
-      SECRET_ALCHEMY: 'x97VSdTdeVeFEUpCDRH1ENsSyi5PYPIP',
-      SECRET_HASURA: 'nCVvYfVZn0kVQd39iG0OQ2uqbq2G2CLpX6oTLHU9OoHINzFiL5f4CwtzJ0hSRiEI',
-      SECRET_MAGIC: 'sk_live_23C4458F3EEE6FF9',
-      SECRET_SUPABASE:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtxanl0Z3hidGV0emV3aXBpa2F4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY2NTczNzc5NSwiZXhwIjoxOTgxMzEzNzk1fQ.913rq_gUqPxJxDK4lYvrrmophNnupbN09LqCp6wUAQ4',
+      PUBLIC_FUNCTIONS_URL: `${process.env.PUBLIC_FUNCTIONS_URL}`,
+      PUBLIC_HASURA_API_URL: `${process.env.PUBLIC_HASURA_API_URL}`,
+      PUBLIC_MAGIC_PUBLISHABLE_KEY: `${process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY}`,
+      SECRET_ALCHEMY: `${process.env.SECRET_ALCHEMY}`,
+      SECRET_HASURA: `${process.env.SECRET_HASURA}`,
+      SECRET_MAGIC: `${process.env.SECRET_MAGIC}`,
+      SECRET_SUPABASE: `${process.env.SECRET_SUPABASE}`,
     },
   },
   build: {
