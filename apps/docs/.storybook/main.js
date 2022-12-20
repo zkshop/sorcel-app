@@ -1,22 +1,21 @@
 module.exports = {
-  "stories": [
-    "../../../packages/ui/**/*.stories.mdx",
-    "../../../packages/ui/**/*.stories.@(js|jsx|ts|tsx)",
-    "../../../packages/ui-tbw/**/*.stories.mdx",
-    "../../../packages/ui-tbw/**/*.stories.@(js|jsx|ts|tsx)"
+  stories: [
+    '../../../packages/ui/**/*.stories.mdx',
+    '../../../packages/ui/**/*.stories.@(js|jsx|ts|tsx)',
+    '../../../packages/ui-tbw/**/*.stories.mdx',
+    '../../../packages/ui-tbw/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  "addons": [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-    "storybook-addon-next",
-    "@chakra-ui/storybook-addon"
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+    '@chakra-ui/storybook-addon',
   ],
-  "framework": "@storybook/react",
-  "core": {
-    "builder": "@storybook/builder-webpack5"
+  framework: '@storybook/react',
+  core: {
+    builder: '@storybook/builder-webpack5',
   },
-  "features": {
-    "emotionAlias": false,
+  features: {
+    emotionAlias: false,
   },
-}
+};
