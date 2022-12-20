@@ -4,7 +4,7 @@ import type { AuthData, PaperWallet } from '@3shop/domains';
 import { AuthService } from '@3shop/domains';
 import { UserAuthenticationClient } from '@3shop/infra';
 
-type AuthType = '@3shop/paper' | '@3shop/magic' | 'WALLET';
+type AuthType = 'paper' | 'magic' | 'WALLET';
 
 type AuthSliceType = AuthData & { loading: boolean; type?: AuthType };
 const Auth = AuthService(UserAuthenticationClient());
@@ -52,7 +52,7 @@ export const authSlice = createSlice({
     builder.addCase(login.fulfilled, (_, action) => ({
       ...action.payload,
       loading: false,
-      type: '@3shop/magic',
+      type: 'magic',
     }));
 
     builder.addCase(login.pending, (state) => ({ ...state, loading: true }));
@@ -73,7 +73,7 @@ export const authSlice = createSlice({
       publicAddress: action.payload.walletAddress,
       email: action.payload.email,
       loading: false,
-      type: '@3shop/paper',
+      type: 'paper',
     }));
   },
 });

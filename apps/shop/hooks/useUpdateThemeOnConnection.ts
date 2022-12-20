@@ -14,7 +14,7 @@ const useUpdateThemeOnConnection = () => {
   const dispatch = useAppDispatch();
 
   const getNfts = useCallback(async () => {
-    if (connectionType === '@3shop/paper' && publicAddress) {
+    if (connectionType === 'paper' && publicAddress) {
       dispatch(fetchNFTS(publicAddress));
       dispatch(fetchPOAPS(publicAddress));
     } else if (address) {
