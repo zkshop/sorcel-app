@@ -11,7 +11,7 @@ export const fetchPOAPS = createAsyncThunk(
 const initialState: Poap[] = [];
 
 export const poapSlice = createSlice({
-  name: '@3shop/poap',
+  name: 'poap',
   initialState,
   reducers: {
     reset: () => [],

@@ -1,4 +1,4 @@
-export type AuthType = '@3shop/paper' | 'WALLET';
+export type AuthType = 'paper' | 'WALLET';
 
 export type PaperWallet = {
   walletAddress: string;

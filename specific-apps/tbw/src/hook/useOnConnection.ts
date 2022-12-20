@@ -18,7 +18,7 @@ export const useOnConnection = () => {
       dispatch(fetchNFTS(address));
     }
 
-    if (connectionType === '@3shop/paper' && publicAddress) {
+    if (connectionType === 'paper' && publicAddress) {
       dispatch(fetchNFTS(publicAddress));
     }
   }, [address, connectionType, dispatch, publicAddress]);
