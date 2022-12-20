@@ -3,8 +3,6 @@ import { useEffect } from 'react';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import { useAccount } from 'wagmi';
 
-import useUpdateThemeOnConnection from '../hooks/useUpdateThemeOnConnection';
-
 import type { GetProductsQuery } from '@3shop/apollo';
 import { initializeApollo, addApolloState, GetProductsDocument } from '@3shop/apollo';
 
@@ -18,7 +16,6 @@ type MarketplaceProps = {
 
 const Marketplace = ({ productsQueryResult }: MarketplaceProps) => {
   const { data, loading, error } = productsQueryResult;
-  const {} = useUpdateThemeOnConnection();
   const { isConnected } = useAccount();
   const dispatch = useAppDispatch();
 
