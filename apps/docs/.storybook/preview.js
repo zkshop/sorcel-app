@@ -1,7 +1,7 @@
-import { theme } from '../../../packages/ui/theme/theme'
+import { theme } from '../../../packages/ui/theme/theme';
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -11,4 +11,4 @@ export const parameters = {
   chakra: {
     theme,
   },
-}
+};
