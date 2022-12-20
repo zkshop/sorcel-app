@@ -40,7 +40,7 @@ export const authSlice = createSlice({
       publicAddress: action.payload.walletAddress,
       email: action.payload.email,
       loading: false,
-      type: '@3shop/paper',
+      type: 'paper',
     }));
   },
 });
