@@ -1,10 +1,9 @@
 import { ConnectButtonGroup } from './ConnectButtonGroup';
 import { LoginModal } from './LoginModal';
-import { VStack, HStack, useDisclosure, Box } from '@3shop/ui';
+import { VStack, HStack, useDisclosure, Box, Image } from '@3shop/ui';
 // TODO: USE NESTJS IMAGE INSTEAD
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import Image from 'next/legacy/image';
 
 import { useEffect } from 'react';
 
@@ -68,14 +67,7 @@ export const NavBar = ({ admin }: NavBarProps) => {
         <HStack justifyContent="space-between" flex={1}>
           <Link href="/">
             {imgUrl ? (
-              <Image
-                height={70}
-                width={210}
-                src={imgUrl || ''}
-                alt="3shop"
-                loading="lazy"
-                style={{ cursor: 'pointer' }}
-              />
+              <Image h={70} w={210} src={imgUrl || ''} alt="3shop" style={{ cursor: 'pointer' }} />
             ) : (
               <Box
                 sx={{
