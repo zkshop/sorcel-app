@@ -1,5 +1,4 @@
-import { Box, useMediaQuery } from '@chakra-ui/react';
-import Image from 'next/image';
+import { Box, useMediaQuery, Image } from '@chakra-ui/react';
 
 type PoapBadgeProps = {
   imgUrl: string;
@@ -33,15 +32,14 @@ export const PoapBadge = ({ imgUrl, href = '' }: PoapBadgeProps) => {
       height={boxSize}
     >
       <Image
-        fill
         src={imgUrl}
         alt="poap"
+        w="100%"
+        h="100%"
         style={{
           borderRadius: '50%',
-          // boxShadow: '2px 2px 2px 1px rgb(0 0 0 / 29%)',
           overflow: 'none',
         }}
-        loading="lazy"
       />
     </Box>
   );
