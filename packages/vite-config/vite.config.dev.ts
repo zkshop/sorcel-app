@@ -13,7 +13,6 @@ export default defineConfig({
     EnvironmentPlugin([
       'APP_ID',
       'PAPER_CLIENT_ID',
-      'SUPABASE_API_KEY',
       'PUBLIC_MAGIC_PUBLISHABLE_KEY',
       'PUBLIC_FUNCTIONS_URL',
       'PUBLIC_HASURA_API_URL',
