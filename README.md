@@ -11,7 +11,6 @@ cp .env apps/shop/.env
 cp .env apps/functions/.env
 
 cp .env specific-apps/tbw/.env
-cp .env specific-apps/artos/.env
 
 yarn
 yarn dev
