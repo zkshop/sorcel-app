@@ -2,6 +2,7 @@ import { Box, Text, HStack, Link, Image } from '@chakra-ui/react';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 import { StyledProductCard } from './ProductCard.style';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
+import { classnames } from '@3shop/config';
 
 export type ProductCardProps = {
   id?: string;
@@ -42,6 +43,7 @@ export const ProductCard = ({
         };
   return (
     <StyledProductCard
+      className={classnames.PRODUCT_CARD}
       isEligible={isEligible}
       as={isTransparent ? 'div' : Link}
       {...additionalProps}

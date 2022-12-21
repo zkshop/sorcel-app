@@ -1,6 +1,7 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
 import { ProductCard } from '@3shop/ui';
 import type { FormatedProductData } from '@3shop/types';
+import { classnames } from '@3shop/config';
 
 type ProductCardListProps = {
   products: FormatedProductData[];
@@ -13,7 +14,7 @@ const templateColumns = {
 };
 
 export const ProductCardList = ({ products }: ProductCardListProps) => (
-  <Box>
+  <Box className={classnames.PRODUCT_CARD_LIST}>
     <Grid gap={8} templateColumns={templateColumns}>
       {products.map(
         ({
