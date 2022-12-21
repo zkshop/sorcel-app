@@ -13,6 +13,7 @@ import { useGetAppQuery } from '@3shop/apollo';
 import { useAppDispatch, useAppSelector } from '@3shop/store';
 import { getCurrentUser, login, logoutUser } from '@3shop/store/slices/auth';
 import useUpdateThemeOnConnection from 'hooks/useUpdateThemeOnConnection';
+import { classnames } from '@3shop/config';
 
 type NavBarProps = {
   admin: boolean;
@@ -62,7 +63,7 @@ export const NavBar = ({ admin }: NavBarProps) => {
   };
 
   return (
-    <VStack as="header" sx={{ py: 3, px: { xs: 2, md: 4, lg: 6 } }}>
+    <VStack className={classnames.NAVBAR} as="header" sx={{ py: 3, px: { xs: 2, md: 4, lg: 6 } }}>
       <HStack w="full">
         <HStack justifyContent="space-between" flex={1}>
           <Link href="/">
