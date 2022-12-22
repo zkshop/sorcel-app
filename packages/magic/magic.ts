@@ -5,7 +5,6 @@ import { envVars } from '@3shop/config';
 const createMagicClient = (key: string) =>
   typeof window != 'undefined' &&
   new Magic(key, {
-    //@ts-ignore
     extensions: [new OAuthExtension()],
   });
 
