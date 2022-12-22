@@ -13,7 +13,6 @@ export type ProductCardProps = {
   priceReduced?: number;
   collection?: string;
   isTransparent?: boolean;
-  isEligible?: boolean;
   poapUrl?: string;
   poapImgUrl?: string;
   description?: any;
@@ -28,7 +27,6 @@ export const ProductCard = ({
   priceReduced,
   collection,
   isTransparent = false,
-  isEligible = false,
   id,
   poapUrl,
   poapImgUrl,
@@ -44,7 +42,6 @@ export const ProductCard = ({
   return (
     <StyledProductCard
       className={classnames.PRODUCT_CARD}
-      isEligible={isEligible}
       as={isTransparent ? 'div' : Link}
       {...additionalProps}
     >

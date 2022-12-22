@@ -24,7 +24,6 @@ Primary.args = {
   priceReduced: 90,
   collection: 'Collection Name',
   isTransparent: false,
-  isEligible: false,
   poapUrl: '',
   poapImgUrl: '',
 };

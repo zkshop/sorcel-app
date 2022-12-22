@@ -13,7 +13,6 @@ type ProductDetailsProps = {
   price: number;
   collection?: string;
   isTransparent?: boolean;
-  isEligible?: boolean;
   description?: string;
   priceReduced?: number;
   poapUrl?: string;
@@ -30,13 +29,12 @@ export const ProductDetails = ({
   price,
   discount,
   priceReduced,
-  isEligible = true,
   isTransparent = false,
   collection,
   poapImgUrl,
   poapUrl,
 }: ProductDetailsProps) => (
-  <StyledProductDetails isEligible={isEligible}>
+  <StyledProductDetails>
     <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} href={poapUrl} />
 
     <LockedLayer isLocked={isTransparent} collectionName={collection} size="lg" />
