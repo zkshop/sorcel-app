@@ -9,14 +9,13 @@ export type FormatedProductData = {
   price: number;
   priceReduced?: number;
   collection?: string;
-  isTransparent?: boolean;
+  isLocked?: boolean;
   isAnHolder?: boolean;
   poapUrl?: string;
   poapImgUrl?: string;
   description?: any;
   externalLink?: string;
   highlight?: boolean;
-  isLocked?: boolean;
   targetAttribute?: string;
   isWithHref?: boolean;
 };

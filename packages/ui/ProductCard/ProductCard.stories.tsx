@@ -23,7 +23,7 @@ Primary.args = {
   discount: '10',
   priceReduced: 90,
   collection: 'Collection Name',
-  isTransparent: false,
+  isLocked: false,
   poapUrl: '',
   poapImgUrl: '',
 };
