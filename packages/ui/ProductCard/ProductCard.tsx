@@ -12,7 +12,7 @@ export type ProductCardProps = {
   price: number;
   priceReduced?: number;
   collection?: string;
-  isTransparent?: boolean;
+  isLocked?: boolean;
   poapUrl?: string;
   poapImgUrl?: string;
   description?: any;
@@ -26,7 +26,7 @@ export const ProductCard = ({
   price,
   priceReduced,
   collection,
-  isTransparent = false,
+  isLocked = false,
   id,
   poapUrl,
   poapImgUrl,
@@ -34,7 +34,7 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   const href = `product/${id}`;
   const additionalProps =
-    isTransparent || !isWithHref
+    isLocked || !isWithHref
       ? {}
       : {
           href,
@@ -42,12 +42,12 @@ export const ProductCard = ({
   return (
     <StyledProductCard
       className={classnames.PRODUCT_CARD}
-      as={isTransparent ? 'div' : Link}
+      as={isLocked ? 'div' : Link}
       {...additionalProps}
     >
       <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} href={poapUrl} />
 
-      <LockedLayer isLocked={isTransparent} collectionName={collection} />
+      <LockedLayer isLocked={isLocked} collectionName={collection} />
 
       <Box p={2}>
         <Box

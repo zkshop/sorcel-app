@@ -21,7 +21,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
           id,
           title,
           collection,
-          isTransparent,
+          isLocked,
           poapUrl,
           poapImgUrl,
           price,
@@ -40,7 +40,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
               priceReduced={priceReduced}
               poapUrl={poapUrl}
               poapImgUrl={poapImgUrl}
-              isTransparent={isTransparent}
+              isLocked={isLocked}
               collection={collection}
               isWithHref={isWithHref}
             />
