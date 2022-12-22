@@ -17,7 +17,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   const sendTransaction = () => null;
   const {
     collection,
-    isTransparent,
+    isLocked,
     price,
     priceReduced,
     description,
@@ -38,7 +38,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
       priceReduced={priceReduced}
       discount={discount}
       srcItem={srcItem}
-      isTransparent={isTransparent}
+      isLocked={isLocked}
       collection={collection}
       poapUrl={poapUrl}
       poapImgUrl={poapImgUrl}

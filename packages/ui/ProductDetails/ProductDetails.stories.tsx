@@ -25,7 +25,7 @@ Primary.args = {
   discount: '',
   srcItem:
     'https://firebasestorage.googleapis.com/v0/b/ethcc-72c6f.appspot.com/o/polygon%20sweater.jpeg?alt=media&token=314adbce-7f9f-46a5-b652-4b2d2dc3314a',
-  isTransparent: false,
+  isLocked: false,
   collection: '',
   poapUrl: 'https://poap.gallery/event/1',
   poapImgUrl: 'https://www.poap.xyz/events/badges/dappcon-18.png',

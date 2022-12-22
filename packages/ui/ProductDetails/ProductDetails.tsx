@@ -12,7 +12,7 @@ type ProductDetailsProps = {
   discount?: Nullable<number>;
   price: number;
   collection?: string;
-  isTransparent?: boolean;
+  isLocked?: boolean;
   description?: string;
   priceReduced?: number;
   poapUrl?: string;
@@ -29,7 +29,7 @@ export const ProductDetails = ({
   price,
   discount,
   priceReduced,
-  isTransparent = false,
+  isLocked = false,
   collection,
   poapImgUrl,
   poapUrl,
@@ -37,7 +37,7 @@ export const ProductDetails = ({
   <StyledProductDetails>
     <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} href={poapUrl} />
 
-    <LockedLayer isLocked={isTransparent} collectionName={collection} size="lg" />
+    <LockedLayer isLocked={isLocked} collectionName={collection} size="lg" />
 
     <Flex alignItems="stretch" sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
       <Flex justifyContent="center">
@@ -113,7 +113,7 @@ export const ProductDetails = ({
             </Box>
           </Box>
 
-          {isTransparent ? null : (
+          {isLocked ? null : (
             <Box mt={2}>
               <Button
                 as="a"
@@ -121,7 +121,7 @@ export const ProductDetails = ({
                 width="100%"
                 borderRadius="2xl"
                 p={1}
-                isDisabled={isTransparent}
+                isDisabled={isLocked}
                 bg="#4473c3"
                 _hover={{
                   bg: '#5686d8',
