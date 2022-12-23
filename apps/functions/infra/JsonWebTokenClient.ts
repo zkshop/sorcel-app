@@ -1,4 +1,4 @@
-import type { AuthorizationTokenClient } from 'domains';
+import type { AuthorizationTokenClient } from '@3shop/domains';
 import jwt from 'jsonwebtoken';
 
 const createJsonWebTokenPayload = (appId: string, metadata: object) => ({
@@ -12,7 +12,8 @@ const createJsonWebTokenPayload = (appId: string, metadata: object) => ({
 });
 
 export function JsonWebTokenClient(): AuthorizationTokenClient {
-  const secret = process.env.JWT_SECRET || '';
+  const secret = process.env.SECRET_JWT || '';
+
   return {
     sign: (appId, metadata) => jwt.sign(createJsonWebTokenPayload(appId, metadata), secret),
     verify: (token) => {
@@ -21,7 +22,7 @@ export function JsonWebTokenClient(): AuthorizationTokenClient {
 
         return token;
       } catch (e) {
-        return null;
+        throw new Error('Invalid JWT env');
       }
     },
   };
