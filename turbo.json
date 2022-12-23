@@ -20,9 +20,6 @@
     "SECRET_SENDINBLUE",
     "SECRET_STRIPE",
     "SECRET_SUPABASE",
-    "SENDINBLUE_API_KEY",
-    "STRIPE_SECRET_KEY",
-    "SUPABASE_API_KEY",
     "VERCEL_URL"
   ],
   "pipeline": {
