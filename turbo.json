@@ -4,7 +4,6 @@
   "globalEnv": [
     "APP_ID",
     "EMAIL_ORDER_TARGET",
-    "JWT_SECRET",
     "NODE_ENV",
     "PAPER_CLIENT_ID",
     "PAPER_KEY_MANAGER_TOKEN",
@@ -12,6 +11,7 @@
     "PUBLIC_HASURA_API_URL",
     "PUBLIC_MAGIC_PUBLISHABLE_KEY",
     "PUBLIC_STRIPE_PUBLISHABLE_KEY",
+    "SECRET_JWT",
     "SECRET_ALCHEMY",
     "SECRET_HASURA",
     "SECRET_MAGIC",
@@ -21,7 +21,11 @@
     "SECRET_SENDINBLUE",
     "SECRET_STRIPE",
     "SECRET_SUPABASE",
-    "VERCEL_URL"
+    "SENDINBLUE_API_KEY",
+    "STRIPE_SECRET_KEY",
+    "SUPABASE_API_KEY",
+    "VERCEL_URL",
+    "CI"
   ],
   "pipeline": {
     "build": {
