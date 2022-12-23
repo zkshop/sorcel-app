@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { AuthorizationTokenService } from 'domains';
+import { AuthorizationTokenService } from '@3shop/domains';
 import { NO_CONTENT, UNAUTHORIZED } from 'http-status';
 import { JsonWebTokenClient } from '../../../infra/JsonWebTokenClient';
 import { allowCors } from '../../../middlewares/allowCors';
