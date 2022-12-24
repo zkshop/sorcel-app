@@ -6,8 +6,8 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "@3shop/cookies": "*",
     "@3shop/alchemy": "*",
+    "@3shop/cookies": "*",
     "@3shop/domains": "*",
     "@3shop/pure": "*"
   }
