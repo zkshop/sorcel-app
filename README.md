@@ -1,29 +1,19 @@
-# Scripts
+#Develop
 
-## Develop
+## Environment variables
 
-```sh
+```
 npx dotenv-vault pull
-
-# Run at the root of the project
-cp .env apps/admin/.env
-cp .env apps/shop/.env
-cp .env apps/functions/.env
-
-cp .env specific-apps/tbw/.env
-
-yarn
-yarn dev
-
+yarn init:env
 ```
 
-## Develop for a specific app
+## Install dependencies
 
-```sh
-yarn dev --filter=<app-name>...
-```
+`yarn`
 
-This is the same principle for the other scripts.
+## Start dev server
+
+`yarn dev`
 
 # Deploy
 
@@ -31,11 +21,9 @@ This is the same principle for the other scripts.
 
 ```json
 {
-  "blackpool": "6f306d23-cd24-44e2-9f15-9fd200c7e602",
+  "3shop-dev": "00000000-a85b-469d-884e-b049a2a51e3e",
   "grandsagne": "2b1a5788-cc27-4530-a346-a5aa674bb523",
-  "hsa": "d1beb246-e732-4ab2-a52f-9cef64ac930b",
-  "p00ls": "b5ee19db-47b4-4e55-845c-21824caa50ac",
-  "poapstudio": "d8fa351a-7cbf-4c47-904d-7934eecd77ef",
+  "p00ls": "00ff2163-7b91-4b53-8043-9f4613ed1886",
   "tbw": "d91635d8-1e59-4e73-969c-462768a74b16",
   "wunderpoapstudio": "b2b579e0-8681-485b-9b5c-332f74edae6b"
 }
@@ -45,14 +33,8 @@ This is the same principle for the other scripts.
 
 ```json
 {
-  "3shop": "prj_6jo5U6qKJMSrD1mX0w4m9RDyDe3e",
+  "3shop": "prj_mcuAxslJxpq6oXTwv49J63blOy9g",
   "admin": "prj_F4PB82emJ8EMgXtGV3ua9aVxL2MM",
-  "blackpool": "prj_oI0stWaCuZPs2PABFep9uFLAw5T4",
-  "grandsagne": "prj_zHeIuAzUwhEJSmFsbGWlx04ACPKZ",
-  "hsa": "prj_6sixBuO7TfzGi0dHqHXC9pZvkL1q",
-  "p00ls": "prj_a5K4oDGK6hUcz0eXBMgOHfkhSmFM",
-  "poapstudio": "prj_IIdYlZGIDzSB3J2Y4TquOHNnBinp",
-  "tbw": "prj_GkIL8P4lgXOQocT5IlqqVX1LoYMz",
   "wunderpoapstudio": "prj_frLibJKOyIreaukQpotZjuH11eoN"
 }
 ```
