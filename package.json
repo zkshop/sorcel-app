@@ -22,7 +22,7 @@
     "generate:package": "plop --plopfile generators/package.js",
     "lint": "turbo run lint",
     "prepare": "husky install",
-    "sort": "sort-package-json",
+    "sort": "sort-package-json package.json apps/*/package.json packages/*/package.json",
     "test": "turbo run test"
   },
   "lint-staged": {

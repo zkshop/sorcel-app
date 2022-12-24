@@ -8,13 +8,13 @@
     "lint": "eslint \"**/*.ts\" --fix"
   },
   "dependencies": {
+    "@3shop/domains": "*",
     "@3shop/magic-server-sdk": "*",
     "@types/jsonwebtoken": "^8.5.9",
     "@vercel/fetch": "^6.2.0",
     "@vercel/node": "^2.7.1",
     "axios": "*",
     "cross-fetch": "^3.1.5",
-    "@3shop/domains": "*",
     "http-status": "^1.5.3",
     "json-web-token": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
