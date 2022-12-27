@@ -10,13 +10,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "@3shop/alchemy": "*",
     "@3shop/apollo": "*",
     "@3shop/domains": "*",
+    "@3shop/infra": "*",
+    "@3shop/magic": "*",
     "@3shop/messages": "*",
     "@3shop/paper": "*",
     "@3shop/poap": "*",
     "@3shop/pure": "*",
+    "@3shop/sendinblue": "*",
     "@3shop/store": "*",
+    "@3shop/supabase": "*",
+    "@3shop/types": "*",
     "@3shop/ui": "*",
     "@3shop/validation": "*",
     "@hookform/resolvers": "^2.9.10",
@@ -46,7 +52,6 @@
     "@emotion/styled": "*",
     "@rainbow-me/rainbowkit": "*",
     "@reduxjs/toolkit": "*",
-    "@types/axios": "*",
     "axios": "*",
     "react-redux": "*"
   }
