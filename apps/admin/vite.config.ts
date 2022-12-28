@@ -9,6 +9,7 @@ const envVars = [
   'SECRET_HASURA',
   'SECRET_MAGIC',
   'SECRET_SUPABASE',
+  'SECRET_POAP',
 ];
 
 const commonConfig = createCommonConfig(envVars);
