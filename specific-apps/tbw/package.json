@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build -c ../../packages/vite-config/vite.config.ts",
-    "dev": "APP_ID=$npm_package_config_app_id vite -c ../../packages/vite-config/vite.config.dev.ts",
+    "build": "tsc && APP_ID=$npm_package_config_app_id vite build",
+    "dev": "APP_ID=$npm_package_config_app_id vite",
     "lint": "eslint \"**/*.ts*\" --fix",
-    "preview": "vite preview"
+    "preview": "APP_ID=$npm_package_config_app_id vite preview"
   },
   "config": {
     "app_id": "d91635d8-1e59-4e73-969c-462768a74b16"
