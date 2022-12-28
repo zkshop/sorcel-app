@@ -12,6 +12,7 @@
   "dependencies": {
     "@3shop/admin-store": "*",
     "@3shop/apollo": "*",
+    "@3shop/config": "*",
     "@3shop/messages": "*",
     "@3shop/ui": "*",
     "@3shop/vite-config": "*",

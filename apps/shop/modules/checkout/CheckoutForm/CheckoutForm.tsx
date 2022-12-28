@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 import { StyledCheckoutForm } from './CheckoutForm.style';
 import { useRouter } from 'next/router';
+import { envVars } from '@3shop/config';
 
 type CheckoutFormProps = {
   price: number;
@@ -12,9 +13,9 @@ type CheckoutFormProps = {
 };
 
 const RETURN_URL =
-  process.env.NODE_ENV === 'development'
+  envVars.NODE_ENV === 'development'
     ? 'http://localhost:3000/success'
-    : `https://${process.env.VERCEL_URL}/success`;
+    : `https://${envVars.VERCEL_URL}/success`;
 
 export function CheckoutForm({ price, discount }: CheckoutFormProps) {
   const { query } = useRouter();

@@ -7,6 +7,7 @@ import { WagmiConfig } from 'wagmi';
 import { wagmiClient, chains } from './clients/wagmi';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { PaperSDKProvider } from '@3shop/paper';
+import { envVars } from '@3shop/config';
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -23,7 +24,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         <ThemeProvider>
           <WagmiConfig client={wagmiClient}>
             <RainbowKitProvider chains={chains}>
-              <PaperSDKProvider clientId={process.env.PAPER_CLIENT_ID} chainName="Polygon">
+              <PaperSDKProvider clientId={envVars.PAPER_CLIENT_ID} chainName="Polygon">
                 {children}
               </PaperSDKProvider>
             </RainbowKitProvider>

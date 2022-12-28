@@ -1,10 +1,11 @@
 import type { EmailClient } from '../domains';
 import { SendinBlueClient } from '@3shop/sendinblue';
+import { envVars } from '@3shop/config';
 
 export function SendEmailClient(): EmailClient {
   return {
     sendEmail: async (email) => {
-      if (!process.env.EMAIL_ORDER_TARGET) throw new Error('No order target specified.');
+      if (!envVars.EMAIL_ORDER_TARGET) throw new Error('No order target specified.');
 
       SendinBlueClient.sendTransacEmail({
         templateId: 1,
@@ -14,7 +15,7 @@ export function SendEmailClient(): EmailClient {
             name: `${email.name} ${email.surname}`,
           },
         ],
-        cc: [{ email: process.env.EMAIL_ORDER_TARGET }],
+        cc: [{ email: envVars.EMAIL_ORDER_TARGET }],
         params: {
           NOM: email.name,
         },
