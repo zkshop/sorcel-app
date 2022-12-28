@@ -4,6 +4,7 @@ import { useAccount } from 'wagmi';
 
 import { useGetAppQuery } from '@3shop/apollo';
 import { ConnectButtonGroup } from './ConnectButtonGroup';
+import { envVars } from '@3shop/config';
 
 const CLASSNAME = 'tbw-header';
 const LOGO_CLASSNAME = 'tbw-header-logo';
@@ -11,7 +12,7 @@ const LOGO_CLASSNAME = 'tbw-header-logo';
 export const NavBar = () => {
   const data = useGetAppQuery({
     variables: {
-      appId: process.env.APP_ID,
+      appId: envVars.APP_ID,
     },
   });
   const appName = data?.data?.app?.name;

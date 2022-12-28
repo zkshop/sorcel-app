@@ -1,3 +1,4 @@
+import { envVars } from '@3shop/config';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import type { AuthData, AuthType, PaperWallet } from './auth.type';
@@ -14,7 +15,7 @@ const initialState: AuthSliceType = {
 
 export const getPaperWallet = async (code: string) => {
   const res = await axios.post<PaperWallet>(
-    `${process.env.PUBLIC_FUNCTIONS_URL}/api/get-paper-wallet`,
+    `${envVars.PUBLIC_FUNCTIONS_URL}/api/get-paper-wallet`,
     {
       code,
     },
