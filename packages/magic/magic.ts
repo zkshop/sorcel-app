@@ -1,5 +1,6 @@
 import { Magic } from 'magic-sdk';
 import { OAuthExtension } from '@magic-ext/oauth';
+import { envVars } from '@3shop/config';
 
 const createMagicClient = (key: string) =>
   typeof window != 'undefined' &&
@@ -8,4 +9,4 @@ const createMagicClient = (key: string) =>
     extensions: [new OAuthExtension()],
   });
 
-export const magicClient = createMagicClient(process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY || '');
+export const magicClient = createMagicClient(envVars.PUBLIC_MAGIC_PUBLISHABLE_KEY || '');

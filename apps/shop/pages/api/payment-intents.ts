@@ -5,8 +5,9 @@ import { formatAmountForStripe } from 'clients/stripe';
 import type { GetProductByIdQuery, GetProductByIdQueryVariables } from '@3shop/apollo';
 import { initializeApollo, GetProductByIdDocument } from '@3shop/apollo';
 import { applyDiscount } from '@3shop/pure';
+import { envVars } from '@3shop/config';
 
-const stripe = new Stripe(process.env.SECRET_STRIPE || '', {
+const stripe = new Stripe(envVars.SECRET_STRIPE || '', {
   apiVersion: '2022-08-01',
 });
 

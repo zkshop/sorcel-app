@@ -9,6 +9,7 @@ import { initializeApollo, addApolloState, GetProductsDocument } from '@3shop/ap
 import { ProductListContainer } from 'modules';
 import { useAppDispatch } from '@3shop/store';
 import { fetchPOAPImageList } from '@3shop/store/slices/poapImageList';
+import { envVars } from '@3shop/config';
 
 type MarketplaceProps = {
   productsQueryResult: QueryResult<GetProductsQuery>;
@@ -55,7 +56,7 @@ export async function getServerSideProps() {
   const productsQueryResult = await apolloClient.query({
     query: GetProductsDocument,
     variables: {
-      appId: process.env.APP_ID,
+      appId: envVars.APP_ID,
     },
   });
 
