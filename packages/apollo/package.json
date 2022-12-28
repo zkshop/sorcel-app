@@ -8,6 +8,7 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
+    "@3shop/config": "*",
     "@3shop/cookies": "*",
     "@apollo/client": "^3.7.0",
     "graphql": "^16.6.0"

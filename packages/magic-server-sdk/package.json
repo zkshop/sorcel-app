@@ -6,6 +6,7 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
+    "@3shop/config": "*",
     "@magic-sdk/admin": "1.8.0"
   }
 }

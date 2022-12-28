@@ -4,13 +4,12 @@ import { useAccount } from 'wagmi';
 import { useGetProductsQuery } from '@3shop/apollo';
 import { ProductListContainer } from './ProductListContainer';
 import { useOnConnection } from '../../hook/useOnConnection';
-
-const APP_ID = process.env.APP_ID;
+import { envVars } from '@3shop/config';
 
 export const Galery = () => {
   const { data, loading, error } = useGetProductsQuery({
     variables: {
-      appId: APP_ID,
+      appId: envVars.APP_ID,
     },
   });
 

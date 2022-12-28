@@ -12,6 +12,7 @@
   "dependencies": {
     "@3shop/alchemy": "*",
     "@3shop/apollo": "*",
+    "@3shop/config": "*",
     "@3shop/domains": "*",
     "@3shop/infra": "*",
     "@3shop/magic": "*",

@@ -5,7 +5,9 @@
   "scripts": {
     "lint": "eslint \"**/*.ts*\" --fix"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@3shop/config": "*"
+  },
   "peerDependencies": {
     "axios": "*"
   }

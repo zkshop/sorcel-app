@@ -1,3 +1,4 @@
+import { envVars } from '@3shop/config';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +19,7 @@ export const useVerifyToken = (fromAdminRoute = false) => {
         if (!tokenCookie) throw new Error();
 
         await axios.get<{ token: string | null }>(
-          `${process.env.PUBLIC_FUNCTIONS_URL}/api/admin/auth/verify`,
+          `${envVars.PUBLIC_FUNCTIONS_URL}/api/admin/auth/verify`,
           {
             headers: {
               Authorization: 'Bearer ' + token,

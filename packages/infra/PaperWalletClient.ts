@@ -1,4 +1,5 @@
 import type { TokenClient } from '@3shop/domains';
+import { envVars } from '@3shop/config';
 import axios from 'axios';
 
 export function PaperWalletClient(): TokenClient {
@@ -10,12 +11,12 @@ export function PaperWalletClient(): TokenClient {
 
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${process.env.SECRET_PAPER}`,
+          Authorization: `Bearer ${envVars.SECRET_PAPER}`,
         },
 
         data: {
           code,
-          clientId: process.env.PAPER_CLIENT_ID,
+          clientId: envVars.PAPER_CLIENT_ID,
         },
       });
 
@@ -32,12 +33,12 @@ export function PaperWalletClient(): TokenClient {
         url: 'https://paper.xyz/api/v1/oauth/user-details',
 
         headers: {
-          Authorization: `Bearer ${process.env.SECRET_PAPER}`,
+          Authorization: `Bearer ${envVars.SECRET_PAPER}`,
         },
 
         data: {
           userToken,
-          clientId: process.env.PAPER_CLIENT_ID,
+          clientId: envVars.PAPER_CLIENT_ID,
         },
       });
 

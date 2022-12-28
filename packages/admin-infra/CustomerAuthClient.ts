@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { AuthAdminClient, AuthAdminData } from '@3shop/domains';
 import { magicClient } from '@3shop/magic';
+import { envVars } from '@3shop/config';
 
 const initialAuthData: AuthAdminData = { token: '' };
 
@@ -15,7 +16,7 @@ export const CustomerAuthClient = (): AuthAdminClient => ({
     });
 
     const res = await axios<AuthAdminData>({
-      url: `${process.env.PUBLIC_FUNCTIONS_URL}/api/admin/auth/login`,
+      url: `${envVars.PUBLIC_FUNCTIONS_URL}/api/admin/auth/login`,
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + didToken,

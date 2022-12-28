@@ -6,6 +6,7 @@ import merge from 'deepmerge';
 import Cookies from 'js-cookie';
 import isEqual from 'lodash/isEqual';
 import { useMemo } from 'react';
+import { envVars } from '@3shop/config';
 
 const CUSTOMER_TOKEN_NAME = 'customer-token';
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
@@ -21,7 +22,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const httpLink = new HttpLink({
-  uri: process.env.PUBLIC_HASURA_API_URL, // Server URL (must be absolute)
+  uri: envVars.PUBLIC_HASURA_API_URL, // Server URL (must be absolute)
   credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 });
 
@@ -38,10 +39,10 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const ssrHttpLink = new HttpLink({
-  uri: process.env.PUBLIC_HASURA_API_URL,
+  uri: envVars.PUBLIC_HASURA_API_URL,
   credentials: 'same-origin',
   headers: {
-    'x-hasura-admin-secret': process.env.SECRET_HASURA || '',
+    'x-hasura-admin-secret': envVars.SECRET_HASURA || '',
   },
 });
 
