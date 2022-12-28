@@ -7,7 +7,6 @@ export * from './CollectionBadge/CollectionBadge';
 export * from './FormField/FormField';
 export * from './MainLayout/MainLayout';
 export * from './Header/Header';
-export * from './MenuDrawer/MenuDrawer';
 export * from './ProductCard/ProductCard';
 export * from './CollectionBadge/NftBadge/NftBadge';
 export * from './ProductCardList/ProductCardList';

@@ -15,6 +15,18 @@ const envVars = [
 
 const commonConfig = createCommonConfig(envVars);
 
-export default defineConfig({
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default defineConfig(({ command, mode }) => ({
   ...commonConfig,
-});
+  build: {
+    ...commonConfig.build,
+    rollupOptions: {
+      ...commonConfig.build?.rollupOptions,
+      output: {
+        inlineDynamicImports: true,
+        entryFileNames: '[name].js',
+        assetFileNames: '[name].[ext]',
+      },
+    },
+  },
+}));
