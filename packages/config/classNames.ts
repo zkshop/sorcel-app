@@ -1,4 +1,4 @@
-const PREFIX = '3shop-';
+const PREFIX = 'shop3-';
 
 export const classnames = {
   NAVBAR: PREFIX + 'header',
