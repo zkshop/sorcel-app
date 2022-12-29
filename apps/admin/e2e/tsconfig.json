@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
-    "target": "ESNext",
-    "useDefineForClassFields": true,
+    "sourceMap": true,
+    "outDir": "../tests-out",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
@@ -14,9 +13,11 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "noEmit": true
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [
+    {
+      "path": "../tsconfig.node.json"
+    }
+  ]
 }
