@@ -1,14 +1,6 @@
-import type { Page } from '@playwright/test';
 import { test, expect } from '@playwright/test';
-import crypto from 'crypto';
 
-test.describe.configure({ mode: 'serial' });
-
-let page: Page;
-const productName = 'Test-' + crypto.randomUUID();
-
-test('Login as an admin', async ({ browser }) => {
-  page = await browser.newPage();
+test('Login as an admin', async ({ page, browser }) => {
   await page.goto('http://127.0.0.1:5173/');
   await page.getByPlaceholder('vitalik@ethereum.fr').fill('test.3shop@gmail.com');
   await page.getByRole('button', { name: 'Login' }).click();
@@ -36,49 +28,4 @@ test('Login as an admin', async ({ browser }) => {
   await page.waitForTimeout(12000);
   const product = page.getByText('Products');
   expect(product).toBeDefined();
-});
-
-test('Add a product to the shop', async () => {
-  await page.getByRole('button', { name: '+ New Product' }).click();
-  await page.locator('input[name="name"]').click();
-  await page.locator('input[name="name"]').fill(productName);
-  await page.getByPlaceholder('Description').click();
-  await page.getByPlaceholder('Description').fill('Test end 2 end');
-  await page.getByPlaceholder('Description').press('Tab');
-  await page.getByPlaceholder('Price').fill('50');
-  await page.getByPlaceholder('Price').press('Tab');
-  await page.getByPlaceholder('Discount for holders').fill('10');
-  await page
-    .getByRole('group')
-    .filter({ hasText: 'Enable discount only for holders' })
-    .locator('span')
-    .click();
-  await page.getByPlaceholder('Image link').click();
-  await page
-    .getByPlaceholder('Image link')
-    .fill('https://miro.medium.com/max/439/1*RgZCsBde433FEp_DA6sGBw.jpeg');
-  await page
-    .getByRole('group')
-    .filter({ hasText: 'Enable discount only for holders' })
-    .locator('span')
-    .click();
-
-  await page.getByRole('button', { name: 'Save' }).click();
-  await page.waitForTimeout(1000);
-
-  expect(page.getByText(productName)).toBeDefined();
-  expect(page.getByText('50')).toBeDefined();
-});
-
-test('Delete product from the shop', async () => {
-  await page.waitForTimeout(2000);
-  await page.getByText(productName).click();
-  await page.getByText('Delete').click();
-  await page.getByText('Yes').click();
-
-  await page.waitForTimeout(1000);
-  await page.goto('http://127.0.0.1:5173/app');
-  await page.reload();
-  await page.getByText('Products').waitFor();
-  expect(page.getByText(productName)).not.toBeDefined();
 });
