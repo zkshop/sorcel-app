@@ -10049,11 +10049,6 @@ domain-browser@^4.22.0:
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-4.22.0.tgz#6ddd34220ec281f9a65d3386d267ddd35c491f9f"
   integrity sha512-IGBwjF7tNk3cwypFNH/7bfzBcgSCbaMOD3GsaY1AU/JRrnHnYgEM0+9kQt52iZxjNsjBtJYtao146V+f8jFZNw==
 
-domains@*:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/domains/-/domains-1.1.4.tgz#021e5bfb211fd7807ce64234524f090610cefbc9"
-  integrity sha512-kk5jtFmTOd2n6OGcUHZw9rWCoxPSewcwY590xPVq/nWN7deLzNBuB0YYgBdAbV1uC4t6LGGX4tWkOz3WIw6xjw==
-
 domelementtype@^2.0.1, domelementtype@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/domelementtype/-/domelementtype-2.3.0.tgz#5c45e8e869952626331d7aab326d01daf65d589d"
