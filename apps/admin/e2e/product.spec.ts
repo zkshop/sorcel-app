@@ -89,7 +89,6 @@ test('Edit product from the shop', async ({ page, context }) => {
       'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Logo_de_Free.png/800px-Logo_de_Free.png',
     );
 
-  await page.pause();
   await page.getByRole('button', { name: 'Save' }).click();
   await page.waitForResponse(
     (resp) => resp.url().includes(process.env.PUBLIC_HASURA_API_URL || '') && resp.status() === 200,
