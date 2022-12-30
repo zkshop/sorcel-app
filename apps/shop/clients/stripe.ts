@@ -5,7 +5,9 @@ import axios from 'axios';
 export const getStripeObject = () => loadStripe(envVars.PUBLIC_STRIPE_PUBLISHABLE_KEY || '');
 
 export const getPaymentIntent = async (productId: string) => {
-  const { data } = await axios.post<{ clientSecret: string }>(`/api/payment-intents`, {
+  const url = `${envVars.PUBLIC_FUNCTIONS_URL}/api/shop/payment-intents`;
+
+  const { data } = await axios.post<{ clientSecret: string }>(url, {
     productId,
   });
 

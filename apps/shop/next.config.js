@@ -17,16 +17,17 @@ const nextConfig = {
     return config;
   },
   env: {
-    VERCEL_URL: process.env.VERCEL_URL,
     APP_ID: process.env.APP_ID,
+    PUBLIC_FUNCTIONS_URL: process.env.PUBLIC_FUNCTIONS_URL,
     PUBLIC_HASURA_API_URL: process.env.PUBLIC_HASURA_API_URL,
-    SECRET_HASURA: process.env.SECRET_HASURA,
-    SECRET_ALCHEMY: process.env.SECRET_ALCHEMY,
-    SECRET_STRIPE: process.env.SECRET_STRIPE,
-    PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
-    SECRET_POAP: process.env.SECRET_POAP,
     PUBLIC_MAGIC_PUBLISHABLE_KEY: process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY,
+    PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
+    SECRET_ALCHEMY: process.env.SECRET_ALCHEMY,
+    SECRET_HASURA: process.env.SECRET_HASURA,
+    SECRET_POAP: process.env.SECRET_POAP,
+    SECRET_STRIPE: process.env.SECRET_STRIPE,
     SECRET_SUPABASE: process.env.SECRET_SUPABASE,
+    VERCEL_URL: process.env.VERCEL_URL,
   },
   images: {
     domains: ['assets.poap.xyz', 'www.poap.xyz', 'poap.xyz', 'kqjytgxbtetzewipikax.supabase.co'],
