@@ -7,7 +7,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 
 import { WagmiConfig } from 'wagmi';
 
-import { wagmiClient, chains } from '../clients/wagmi';
+import { wagmiClient, chains } from 'clients/wagmi';
 import { Layout } from 'components/Layout';
 import { ApolloProvider, useApollo } from '@3shop/apollo';
 import { wrapper } from '@3shop/store';
