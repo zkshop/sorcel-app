@@ -3,6 +3,7 @@ import axios from 'axios';
 import type { AuthData, PaperWallet } from '@3shop/domains';
 import { AuthService } from '@3shop/domains';
 import { UserAuthenticationClient } from '@3shop/infra';
+import { envVars } from '@3shop/config';
 
 type AuthType = 'paper' | 'magic' | 'WALLET';
 
@@ -18,7 +19,8 @@ const initialState: AuthSliceType = {
 };
 
 export const getPaperWallet = async (code: string) => {
-  const res = await axios.post<PaperWallet>('/api/get-paper-wallet', {
+  const url = `${envVars.PUBLIC_FUNCTIONS_URL}/api/shop/get-paper-wallet`;
+  const res = await axios.post<PaperWallet>(url, {
     code,
   });
 

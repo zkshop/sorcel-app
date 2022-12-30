@@ -1,9 +1,9 @@
 import { AuthService } from '@3shop/domains';
-import { UserAuthenticationClient } from '../infra/UserAuthenticationClient';
+import { UserAuthenticationClient } from '../../infra/UserAuthenticationClient';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { allowCors } from '../middlewares/allowCors';
+import { allowCors } from '../../middlewares/allowCors';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status';
-import { method } from '../middlewares/method';
+import { method } from '../../middlewares/method';
 
 const Auth = AuthService(UserAuthenticationClient());
 
