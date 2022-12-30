@@ -1,9 +1,9 @@
-import { TokenService } from '@3shop/domains';
-import { PaperWalletClient } from '../infra/PaperWalletClient';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { allowCors } from '../middlewares/allowCors';
+import { allowCors } from '../../middlewares/allowCors';
+import { TokenService } from '@3shop/domains';
+import { PaperWalletClient } from '../../infra/PaperWalletClient';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status';
-import { method } from '../middlewares/method';
+import { method } from '../../middlewares/method';
 
 const Token = TokenService(PaperWalletClient());
 

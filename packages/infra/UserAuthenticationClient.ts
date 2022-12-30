@@ -1,3 +1,4 @@
+import { envVars } from '@3shop/config';
 import { TokenService } from '@3shop/domains';
 import type { AuthClient } from '@3shop/domains/auth/AuthClient';
 import { magicClient } from '@3shop/magic';
@@ -5,11 +6,11 @@ import { PaperWalletClient } from './PaperWalletClient';
 
 const initialAuthData = { email: null, issuer: null, phoneNumber: null, publicAddress: null };
 
-const paper = TokenService(PaperWalletClient());
+const paperWalletService = TokenService(PaperWalletClient());
 
 export function UserAuthenticationClient(): AuthClient {
   return {
-    verifyUser: async () => {
+    async verifyUser() {
       if (!magicClient) return initialAuthData;
       const isUserLoggedIn = await magicClient.user.isLoggedIn();
 
@@ -17,7 +18,7 @@ export function UserAuthenticationClient(): AuthClient {
       return initialAuthData;
     },
 
-    login: async (email) => {
+    async login(email: string) {
       if (!magicClient) {
         return initialAuthData;
       }
@@ -26,7 +27,7 @@ export function UserAuthenticationClient(): AuthClient {
         email,
       });
 
-      const res = await fetch('/api/login', {
+      const res = await fetch(`${envVars.PUBLIC_FUNCTIONS_URL}/api/shop/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,16 +40,14 @@ export function UserAuthenticationClient(): AuthClient {
       return initialAuthData;
     },
 
-    logout: async () => {
+    async logout() {
       if (!magicClient) return;
       await magicClient.user.logout();
     },
 
-    loginWithPaper: async (code: string) => {
-      const userToken = await paper.getToken(code);
-
-      const paperWallet = await paper.getPaperWalletInfo(userToken);
-
+    async loginWithPaper(code: string) {
+      const userToken = await paperWalletService.getToken(code);
+      const paperWallet = await paperWalletService.getPaperWalletInfo(userToken);
       return paperWallet;
     },
   };
