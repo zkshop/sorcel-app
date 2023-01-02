@@ -16,7 +16,7 @@ import useUpdateThemeOnConnection from 'hooks/useUpdateThemeOnConnection';
 import { classnames, envVars } from '@3shop/config';
 
 type NavBarProps = {
-  admin: boolean;
+  admin?: boolean;
 };
 
 export const NavBar = ({ admin }: NavBarProps) => {
