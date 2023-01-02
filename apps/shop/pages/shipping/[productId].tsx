@@ -1,44 +1,17 @@
-import type { GetServerSidePropsContext } from 'next';
-
-import type { Product } from '@3shop/apollo';
-import { addApolloState, initializeApollo, GetProductByIdDocument } from '@3shop/apollo';
+import { useGetProductByIdQuery } from '@3shop/apollo';
 import { ShippingFormContainer } from 'modules';
+import { useRouter } from 'next/router';
 
-type ShippingPageProps = {
-  product: Product;
+const ShippingPage = () => {
+  const { productId } = useRouter().query;
+  const { data } = useGetProductByIdQuery({
+    variables: {
+      id: productId,
+    },
+  });
+  const product = data?.product_by_pk;
+
+  return product && <ShippingFormContainer product={product} />;
 };
-
-const ShippingPage = ({ product }: ShippingPageProps) => (
-  <ShippingFormContainer product={product} />
-);
 
 export default ShippingPage;
-
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { params } = context;
-  const apolloClient = initializeApollo();
-
-  try {
-    if (params?.productId) {
-      const { productId } = params;
-      const res = await apolloClient.query({
-        query: GetProductByIdDocument,
-        variables: {
-          id: productId,
-        },
-      });
-
-      return addApolloState(apolloClient, {
-        props: { product: res.data?.product_by_pk },
-      });
-    }
-  } catch {
-    return addApolloState(apolloClient, {
-      props: {},
-    });
-  }
-
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-};
