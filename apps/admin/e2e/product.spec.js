@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 
-const createJsonWebTokenPayload = (appId: string, metadata: object) => ({
+const createJsonWebTokenPayload = (appId, metadata) => ({
   ...metadata,
   'https://hasura.io/jwt/claims': {
     'x-hasura-allowed-roles': ['customer'],
@@ -26,11 +26,11 @@ test('Add a product to the shop', async ({ context, page }) => {
     {
       name: 'customer-token',
       value: token,
-      url: 'http://127.0.0.1:5173',
+      url: process.env.PLAYWRIGHT_TEST_BASE_URL,
     },
   ]);
 
-  await page.goto('http://127.0.0.1:5173');
+  await page.goto(process.env.PLAYWRIGHT_TEST_BASE_URL);
   await page.getByRole('button', { name: '+ New Product' }).click();
   await page.locator('input[name="name"]').click();
   await page.locator('input[name="name"]').fill(productName);
@@ -64,11 +64,11 @@ test('Edit product from the shop', async ({ page, context }) => {
     {
       name: 'customer-token',
       value: token,
-      url: 'http://127.0.0.1:5173',
+      url: process.env.PLAYWRIGHT_TEST_BASE_URL,
     },
   ]);
 
-  await page.goto('http://127.0.0.1:5173/app');
+  await page.goto(process.env.PLAYWRIGHT_TEST_BASE_URL + '/app');
   await page.waitForResponse(
     (resp) => resp.url().includes(process.env.PUBLIC_HASURA_API_URL || '') && resp.status() === 200,
   );
@@ -94,7 +94,7 @@ test('Edit product from the shop', async ({ page, context }) => {
     (resp) => resp.url().includes(process.env.PUBLIC_HASURA_API_URL || '') && resp.status() === 200,
   );
 
-  await page.goto('http://127.0.0.1:5173/app');
+  await page.goto(process.env.PLAYWRIGHT_TEST_BASE_URL + '/app');
 
   await page.getByText(productName).waitFor();
 
@@ -107,11 +107,11 @@ test('Delete product from the shop', async ({ page, context }) => {
     {
       name: 'customer-token',
       value: token,
-      url: 'http://127.0.0.1:5173',
+      url: process.env.PLAYWRIGHT_TEST_BASE_URL,
     },
   ]);
 
-  await page.goto('http://127.0.0.1:5173/app');
+  await page.goto(process.env.PLAYWRIGHT_TEST_BASE_URL + '/app');
   await page.waitForResponse(
     (resp) => resp.url().includes(process.env.PUBLIC_HASURA_API_URL || '') && resp.status() === 200,
   );

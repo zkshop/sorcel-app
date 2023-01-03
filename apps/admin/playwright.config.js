@@ -1,10 +1,9 @@
-import type { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from '@playwright/test';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: './.env.playwright' });
 
-const config: PlaywrightTestConfig = {
+const config = {
   testDir: './e2e',
   timeout: 60 * 1000,
   expect: {
@@ -18,7 +17,7 @@ const config: PlaywrightTestConfig = {
   reporter: 'html',
   use: {
     actionTimeout: 0,
-
+    screenshot: 'only-on-failure',
     trace: 'on-first-retry',
   },
 
@@ -33,11 +32,6 @@ const config: PlaywrightTestConfig = {
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
   // outputDir: 'test-results/',
-
-  webServer: {
-    command: 'yarn dev',
-    port: 5173,
-  },
 };
 
 export default config;
