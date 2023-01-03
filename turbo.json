@@ -37,7 +37,8 @@
       "cache": false
     },
     "test:e2e": {
-      "cache": false
+      "cache": false,
+      "env": ["PUBLIC_HASURA_API_URL", "SECRET_JWT", "APP_ID", "PLAYWRIGHT_TEST_BASE_URL"]
     },
     "generate:graphql": {
       "cache": false,
