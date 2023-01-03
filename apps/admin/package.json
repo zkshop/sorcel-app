@@ -10,7 +10,7 @@
     "playwright:codegen": "playwright codegen http://127.0.0.1:5173/",
     "preview": "vite preview",
     "pretest": "tsc --incremental -p e2e/tsconfig.json",
-    "test:e2e": "playwright test -c tests-out"
+    "test:e2e": "npx playwright test"
   },
   "dependencies": {
     "@3shop/admin-store": "*",
