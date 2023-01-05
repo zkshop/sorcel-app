@@ -14,9 +14,7 @@ type AppProviderProps = {
 };
 
 export const AppProvider = ({ children }: AppProviderProps) => {
-  const apolloClient = useApollo({
-    [APOLLO_STATE_PROP_NAME]: {},
-  });
+  const apolloClient = useApollo();
 
   return (
     <ReduxProvider store={store}>

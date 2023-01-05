@@ -30,7 +30,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "storybook-static/**"]
+      "outputs": ["dist/**", "storybook-static/**"]
     },
     "dev": {
       "dependsOn": [],

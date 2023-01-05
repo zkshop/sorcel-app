@@ -11,16 +11,13 @@ const sizeToBoxSize = {
   lg: 100,
 };
 
-export const PoapBadge = ({ imgUrl, href = '' }: PoapBadgeProps) => {
+export const PoapBadge = ({ imgUrl }: PoapBadgeProps) => {
   // TODO: use UseBreakpointValue hook here
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   const boxSize = sizeToBoxSize[isLargerThan768 ? 'md' : 'sm'];
 
   return (
     <Box
-      as="a"
-      href={href}
-      target="_blank"
       sx={{
         zIndex: 2,
         position: 'absolute',
