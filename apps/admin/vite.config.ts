@@ -12,7 +12,9 @@ const envVars = [
   'SECRET_POAP',
 ];
 
-const commonConfig = createCommonConfig(envVars);
+const dirname = __dirname;
+
+const commonConfig = createCommonConfig({ envVars, dirname });
 
 export default defineConfig({
   ...commonConfig,

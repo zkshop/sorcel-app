@@ -3,6 +3,7 @@ import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 import { TriangleUpIcon } from '../Icons';
 import { StyledProductDetails } from './ProductDetails.style';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
+import { Link } from 'react-router-dom';
 import type { Nullable } from '@3shop/types';
 
 type ProductDetailsProps = {
@@ -116,7 +117,7 @@ export const ProductDetails = ({
           {isLocked ? null : (
             <Box mt={2}>
               <Button
-                as="a"
+                as={Link}
                 height="48px"
                 width="100%"
                 borderRadius="2xl"
@@ -126,7 +127,7 @@ export const ProductDetails = ({
                 _hover={{
                   bg: '#5686d8',
                 }}
-                href={`/shipping/${id}`}
+                to={`/shipping/${id}`}
               >
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                   <Text

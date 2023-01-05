@@ -1,8 +1,9 @@
-import { Box, Text, HStack, Link, Image } from '@chakra-ui/react';
+import { Box, Text, HStack, Image } from '@chakra-ui/react';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 import { StyledProductCard } from './ProductCard.style';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
 import { classnames } from '@3shop/config';
+import { Link } from 'react-router-dom';
 
 export type ProductCardProps = {
   id?: string;
@@ -32,12 +33,12 @@ export const ProductCard = ({
   poapImgUrl,
   isWithHref = true,
 }: ProductCardProps) => {
-  const href = `product/${id}`;
+  const to = `product/${id}`;
   const additionalProps =
     isLocked || !isWithHref
       ? {}
       : {
-          href,
+          to,
         };
   return (
     <StyledProductCard
