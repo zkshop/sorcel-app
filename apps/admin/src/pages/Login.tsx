@@ -74,9 +74,6 @@ export const Login = () => {
           </HStack>
           <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
         </FormControl>
-        <p>{process.env.PUBLIC_FUNCTIONS_URL || 'NO PUBLIC_FUNCTIONS_URL'}</p>
-        <p>{process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY || 'NO PUBLIC_MAGIC_PUBLISHABLE_KEY'}</p>
-        <p>{process.env.PUBLIC_HASURA_API_URL || 'NO PUBLIC_HASURA_API_URL'}</p>
       </Section>
     </form>
   );
