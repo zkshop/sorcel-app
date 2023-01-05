@@ -1,4 +1,4 @@
-#Develop
+# Develop
 
 ## Environment variables
 
@@ -14,6 +14,12 @@ yarn init:env
 ## Start dev server
 
 `yarn dev`
+
+## Test
+
+`npx playwright install chromium`
+
+`yarn test:e2e`
 
 # Deploy
 
