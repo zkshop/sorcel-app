@@ -1,19 +1,49 @@
 // import type { UserConfigExport } from 'vite';
+import path from 'path';
 import react from '@vitejs/plugin-react';
-import EnvironmentPlugin from 'vite-plugin-environment';
+
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
 
-export const createCommonConfig = (envVars) => ({
-  plugins: [react(), EnvironmentPlugin(envVars)],
-  build: {
-    rollupOptions: {
-      plugins: [nodePolyfills()],
+import EnvironmentPlugin from 'vite-plugin-environment';
+
+export const createCommonConfig = (options) => {
+  const { dirname, envVars = [] } = options;
+
+  return {
+    plugins: [react(), EnvironmentPlugin(envVars)],
+    resolve: {
+      alias: {
+        '@': path.resolve(dirname, './src'),
+      },
     },
-    commonjsOptions: {
-      transformMixedEsModules: true,
+    optimizeDeps: {
+      target: 'es2020',
+      esbuildOptions: {
+        define: {
+          global: 'globalThis',
+        },
+        plugins: [
+          NodeGlobalsPolyfillPlugin({
+            process: true,
+            buffer: true,
+          }),
+          NodeModulesPolyfillPlugin(),
+        ],
+      },
     },
-  },
-});
+    build: {
+      target: 'es2020',
+      rollupOptions: {
+        plugins: [nodePolyfills()],
+      },
+      commonjsOptions: {
+        transformMixedEsModules: true,
+      },
+    },
+  };
+};
 
 /**
  * TODO: move to typescript

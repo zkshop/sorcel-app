@@ -14,8 +14,7 @@
     "@3shop/pure": "*",
     "@3shop/sendinblue": "*",
     "@3shop/supabase": "*",
-    "@magic-ext/oauth": "^4.0.0",
-    "@magic-sdk/admin": "^1.4.1"
+    "@magic-ext/oauth": "^4.0.0"
   },
   "devDependencies": {
     "@3shop/tsconfig": "*"
