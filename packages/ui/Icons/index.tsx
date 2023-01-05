@@ -7,6 +7,7 @@ export {
 } from 'react-icons/bs';
 
 export { FaLink as LinkIcon, FaArrowRight as ArrowRightIcon } from 'react-icons/fa';
+export { FcApproval as ApprovalIcon } from 'react-icons/fc';
 
 export { FiGift as GiftIcon } from 'react-icons/fi';
 

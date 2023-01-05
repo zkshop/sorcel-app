@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { AuthTokenValidationService } from '@3shop/domains';
-import { UserTokenValidationClient } from '@3shop/infra';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status';
 import { allowCors } from '../../middlewares/allowCors';
 import { method } from '../../middlewares/method';
+import { UserTokenValidationClient } from '../../infra/UserTokenValidationClient';
 
 const tokenValidationService = AuthTokenValidationService(UserTokenValidationClient());
 

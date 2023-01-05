@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { createWrapper } from 'next-redux-wrapper';
 import type { TypedUseSelectorHook } from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -29,5 +28,3 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<ReturnType<typeof makeStore>['getState']>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
-export const wrapper = createWrapper<AppStore>(makeStore);
