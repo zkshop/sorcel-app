@@ -1,5 +1,5 @@
 import { sendEmail } from '@/modules/checkout/sendEmail';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Box, Text, ApprovalIcon } from '@3shop/ui';
 
@@ -8,11 +8,10 @@ export const Success = () => {
   const {
     state: { name, email, paymentStatus },
   } = location;
+  const navigate = useNavigate();
 
   setTimeout(() => {
-    if (typeof window !== 'undefined') {
-      window.location.href = '/';
-    }
+    navigate('/');
   }, 5000);
 
   useEffect(() => {

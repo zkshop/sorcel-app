@@ -1,5 +1,5 @@
 import { EmailService } from '@3shop/domains';
-import { SendEmailClient } from '@3shop/infra';
+import { SendEmailClient } from '../../infra';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { allowCors } from '../../middlewares/allowCors';
 import { method } from '../../middlewares/method';
