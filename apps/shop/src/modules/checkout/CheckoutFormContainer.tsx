@@ -1,5 +1,5 @@
 import type { Product } from '@3shop/apollo';
-import { VStack, Heading } from '@chakra-ui/react';
+import { VStack, Heading } from '@3shop/ui';
 import { Elements } from '@stripe/react-stripe-js';
 import { getStripeObject, getPaymentIntent } from '@/clients/stripe';
 import { useIsAnHolder } from '@/hooks/useIsAnHolder';
