@@ -23,7 +23,7 @@ export const Galery = () => {
       dispatch(
         fetchPOAPImageList(
           data.products
-            .filter(({ poapId }) => poapId !== null)
+            .filter(({ poapId }) => poapId !== 0)
             .map(({ poapId }) => (poapId as number).toString()),
         ),
       );
