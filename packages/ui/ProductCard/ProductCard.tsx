@@ -91,7 +91,7 @@ export const ProductCard = ({
             )}
           </HStack>
 
-          {discount && (
+          {discount !== 0 && (
             <Box
               border="1px gray solid"
               width="50px"

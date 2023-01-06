@@ -13,6 +13,7 @@
     "@3shop/magic-server-sdk": "*",
     "@3shop/poap": "*",
     "@3shop/pure": "*",
+    "@3shop/sendinblue": "*",
     "@3shop/supabase": "*",
     "@types/jsonwebtoken": "^8.5.9",
     "@vercel/fetch": "^6.2.0",

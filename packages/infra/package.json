@@ -12,9 +12,7 @@
     "@3shop/domains": "*",
     "@3shop/magic": "*",
     "@3shop/pure": "*",
-    "@3shop/sendinblue": "*",
-    "@3shop/supabase": "*",
-    "@magic-ext/oauth": "^4.0.0"
+    "@3shop/supabase": "*"
   },
   "devDependencies": {
     "@3shop/tsconfig": "*"

@@ -1,4 +1,4 @@
-import type { EmailClient } from '../domains';
+import type { EmailClient } from '@3shop/domains';
 import { SendinBlueClient } from '@3shop/sendinblue';
 import { envVars } from '@3shop/config';
 
