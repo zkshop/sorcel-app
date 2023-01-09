@@ -1,5 +1,5 @@
 import { sendEmail } from '@/modules/checkout/sendEmail';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Box, Text, ApprovalIcon } from '@3shop/ui';
 
@@ -8,26 +8,15 @@ export const Success = () => {
   const {
     state: { name, email, paymentStatus },
   } = location;
-  const navigate = useNavigate();
-
-  setTimeout(() => {
-    navigate('/');
-  }, 5000);
 
   useEffect(() => {
+    console.log({ name, email, paymentStatus });
+
     if (name && email && paymentStatus === 'succeeded') sendEmail(name, name, email);
   }, [name, email, paymentStatus]);
 
   return (
-    <Box
-      sx={{
-        mt: 32,
-        flexDirection: 'column',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <Box mt={32} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
       <ApprovalIcon fontSize="72px" />
 
       <Text fontSize="2xl">
@@ -37,7 +26,7 @@ export const Success = () => {
       </Text>
 
       <Link to="/">
-        <Text> redirect in 5s </Text>
+        <Text> Go back to homepage </Text>
       </Link>
     </Box>
   );
