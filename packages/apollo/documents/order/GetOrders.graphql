@@ -1,0 +1,11 @@
+query GetOrders {
+  orders: order {
+    address
+    email
+    id
+    firstname
+    lastname
+    product_id
+    status
+  }
+}
