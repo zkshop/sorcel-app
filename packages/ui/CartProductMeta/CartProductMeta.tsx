@@ -1,7 +1,6 @@
 import { Box, Stack, Text, useColorModeValue as mode, Image } from '@chakra-ui/react';
 
 export type CartProductMetaProps = {
-  isGiftWrapping?: boolean;
   name: string;
   description: string;
   image: string;
