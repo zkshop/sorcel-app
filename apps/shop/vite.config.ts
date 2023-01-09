@@ -15,6 +15,7 @@ const envVars = {
   SECRET_MAGIC: undefined,
   SECRET_POAP: undefined,
   SECRET_AIRTABLE: undefined,
+  SECRET_RUDDERSTACK: undefined,
   NETWORK: undefined,
 };
 
@@ -22,8 +23,7 @@ const dirname = __dirname;
 
 const commonConfig = createCommonConfig({ envVars, dirname });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
 
   return {
