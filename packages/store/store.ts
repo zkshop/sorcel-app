@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import nftsReducer from './slices/nfts';
 import poapReducer from './slices/poap';
+import orderReducer from './slices/order';
 
 import poapImageListReducer from './slices/poapImageList';
 import authReducer from './slices/auth';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     nfts: nftsReducer,
     poap: poapReducer,
     auth: authReducer,
+    order: orderReducer,
   }),
 });
 

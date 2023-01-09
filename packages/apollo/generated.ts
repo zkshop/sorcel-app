@@ -14,6 +14,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   jsonb: any;
+  order_status: any;
   uuid: any;
 };
 
@@ -558,6 +559,10 @@ export type Mutation_Root = {
   delete_gate?: Maybe<Gate_Mutation_Response>;
   /** delete single row from the table: "gate" */
   delete_gate_by_pk?: Maybe<Gate>;
+  /** delete data from the table: "order" */
+  delete_order?: Maybe<Order_Mutation_Response>;
+  /** delete single row from the table: "order" */
+  delete_order_by_pk?: Maybe<Order>;
   /** delete data from the table: "product" */
   delete_product?: Maybe<Product_Mutation_Response>;
   /** delete single row from the table: "product" */
@@ -574,6 +579,10 @@ export type Mutation_Root = {
   insert_gate?: Maybe<Gate_Mutation_Response>;
   /** insert a single row into the table: "gate" */
   insert_gate_one?: Maybe<Gate>;
+  /** insert data into the table: "order" */
+  insert_order?: Maybe<Order_Mutation_Response>;
+  /** insert a single row into the table: "order" */
+  insert_order_one?: Maybe<Order>;
   /** insert data into the table: "product" */
   insert_product?: Maybe<Product_Mutation_Response>;
   /** insert a single row into the table: "product" */
@@ -594,6 +603,12 @@ export type Mutation_Root = {
   update_gate_by_pk?: Maybe<Gate>;
   /** update multiples rows of table: "gate" */
   update_gate_many?: Maybe<Array<Maybe<Gate_Mutation_Response>>>;
+  /** update data of the table: "order" */
+  update_order?: Maybe<Order_Mutation_Response>;
+  /** update single row of the table: "order" */
+  update_order_by_pk?: Maybe<Order>;
+  /** update multiples rows of table: "order" */
+  update_order_many?: Maybe<Array<Maybe<Order_Mutation_Response>>>;
   /** update data of the table: "product" */
   update_product?: Maybe<Product_Mutation_Response>;
   /** update single row of the table: "product" */
@@ -625,6 +640,16 @@ export type Mutation_RootDelete_GateArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Gate_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_OrderArgs = {
+  where: Order_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Order_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -670,6 +695,18 @@ export type Mutation_RootInsert_GateArgs = {
 export type Mutation_RootInsert_Gate_OneArgs = {
   object: Gate_Insert_Input;
   on_conflict?: InputMaybe<Gate_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_OrderArgs = {
+  objects: Array<Order_Insert_Input>;
+  on_conflict?: InputMaybe<Order_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Order_OneArgs = {
+  object: Order_Insert_Input;
+  on_conflict?: InputMaybe<Order_On_Conflict>;
 };
 
 /** mutation root */
@@ -743,6 +780,23 @@ export type Mutation_RootUpdate_Gate_ManyArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootUpdate_OrderArgs = {
+  _set?: InputMaybe<Order_Set_Input>;
+  where: Order_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Order_By_PkArgs = {
+  _set?: InputMaybe<Order_Set_Input>;
+  pk_columns: Order_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Order_ManyArgs = {
+  updates: Array<Order_Updates>;
+};
+
+/** mutation root */
 export type Mutation_RootUpdate_ProductArgs = {
   _inc?: InputMaybe<Product_Inc_Input>;
   _set?: InputMaybe<Product_Set_Input>;
@@ -778,6 +832,55 @@ export type Mutation_RootUpdate_User_ManyArgs = {
   updates: Array<User_Updates>;
 };
 
+/** columns and relationships of "order" */
+export type Order = {
+  __typename?: 'order';
+  address: Scalars['String'];
+  app_id: Scalars['uuid'];
+  email: Scalars['String'];
+  firstname: Scalars['String'];
+  id: Scalars['uuid'];
+  lastname: Scalars['String'];
+  product_id: Scalars['uuid'];
+  status: Scalars['order_status'];
+};
+
+/** aggregated selection of "order" */
+export type Order_Aggregate = {
+  __typename?: 'order_aggregate';
+  aggregate?: Maybe<Order_Aggregate_Fields>;
+  nodes: Array<Order>;
+};
+
+/** aggregate fields of "order" */
+export type Order_Aggregate_Fields = {
+  __typename?: 'order_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Order_Max_Fields>;
+  min?: Maybe<Order_Min_Fields>;
+};
+
+/** aggregate fields of "order" */
+export type Order_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Order_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "order". All fields are combined with a logical 'AND'. */
+export type Order_Bool_Exp = {
+  _and?: InputMaybe<Array<Order_Bool_Exp>>;
+  _not?: InputMaybe<Order_Bool_Exp>;
+  _or?: InputMaybe<Array<Order_Bool_Exp>>;
+  address?: InputMaybe<String_Comparison_Exp>;
+  app_id?: InputMaybe<Uuid_Comparison_Exp>;
+  email?: InputMaybe<String_Comparison_Exp>;
+  firstname?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  lastname?: InputMaybe<String_Comparison_Exp>;
+  product_id?: InputMaybe<Uuid_Comparison_Exp>;
+  status?: InputMaybe<Order_Status_Comparison_Exp>;
+};
+
 /** column ordering options */
 export enum Order_By {
   /** in ascending order, nulls last */
@@ -793,6 +896,174 @@ export enum Order_By {
   /** in descending order, nulls last */
   DescNullsLast = 'desc_nulls_last',
 }
+
+/** unique or primary key constraints on table "order" */
+export enum Order_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  OrderPkey = 'order_pkey',
+}
+
+/** input type for inserting data into table "order" */
+export type Order_Insert_Input = {
+  address?: InputMaybe<Scalars['String']>;
+  app_id?: InputMaybe<Scalars['uuid']>;
+  email?: InputMaybe<Scalars['String']>;
+  firstname?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  lastname?: InputMaybe<Scalars['String']>;
+  product_id?: InputMaybe<Scalars['uuid']>;
+  status?: InputMaybe<Scalars['order_status']>;
+};
+
+/** aggregate max on columns */
+export type Order_Max_Fields = {
+  __typename?: 'order_max_fields';
+  address?: Maybe<Scalars['String']>;
+  app_id?: Maybe<Scalars['uuid']>;
+  email?: Maybe<Scalars['String']>;
+  firstname?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  lastname?: Maybe<Scalars['String']>;
+  product_id?: Maybe<Scalars['uuid']>;
+  status?: Maybe<Scalars['order_status']>;
+};
+
+/** aggregate min on columns */
+export type Order_Min_Fields = {
+  __typename?: 'order_min_fields';
+  address?: Maybe<Scalars['String']>;
+  app_id?: Maybe<Scalars['uuid']>;
+  email?: Maybe<Scalars['String']>;
+  firstname?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  lastname?: Maybe<Scalars['String']>;
+  product_id?: Maybe<Scalars['uuid']>;
+  status?: Maybe<Scalars['order_status']>;
+};
+
+/** response of any mutation on the table "order" */
+export type Order_Mutation_Response = {
+  __typename?: 'order_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Order>;
+};
+
+/** on_conflict condition type for table "order" */
+export type Order_On_Conflict = {
+  constraint: Order_Constraint;
+  update_columns?: Array<Order_Update_Column>;
+  where?: InputMaybe<Order_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "order". */
+export type Order_Order_By = {
+  address?: InputMaybe<Order_By>;
+  app_id?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  firstname?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  lastname?: InputMaybe<Order_By>;
+  product_id?: InputMaybe<Order_By>;
+  status?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: order */
+export type Order_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "order" */
+export enum Order_Select_Column {
+  /** column name */
+  Address = 'address',
+  /** column name */
+  AppId = 'app_id',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Firstname = 'firstname',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Lastname = 'lastname',
+  /** column name */
+  ProductId = 'product_id',
+  /** column name */
+  Status = 'status',
+}
+
+/** input type for updating data in table "order" */
+export type Order_Set_Input = {
+  address?: InputMaybe<Scalars['String']>;
+  app_id?: InputMaybe<Scalars['uuid']>;
+  email?: InputMaybe<Scalars['String']>;
+  firstname?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  lastname?: InputMaybe<Scalars['String']>;
+  product_id?: InputMaybe<Scalars['uuid']>;
+  status?: InputMaybe<Scalars['order_status']>;
+};
+
+/** Boolean expression to compare columns of type "order_status". All fields are combined with logical 'AND'. */
+export type Order_Status_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['order_status']>;
+  _gt?: InputMaybe<Scalars['order_status']>;
+  _gte?: InputMaybe<Scalars['order_status']>;
+  _in?: InputMaybe<Array<Scalars['order_status']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['order_status']>;
+  _lte?: InputMaybe<Scalars['order_status']>;
+  _neq?: InputMaybe<Scalars['order_status']>;
+  _nin?: InputMaybe<Array<Scalars['order_status']>>;
+};
+
+/** Streaming cursor of the table "order" */
+export type Order_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Order_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Order_Stream_Cursor_Value_Input = {
+  address?: InputMaybe<Scalars['String']>;
+  app_id?: InputMaybe<Scalars['uuid']>;
+  email?: InputMaybe<Scalars['String']>;
+  firstname?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  lastname?: InputMaybe<Scalars['String']>;
+  product_id?: InputMaybe<Scalars['uuid']>;
+  status?: InputMaybe<Scalars['order_status']>;
+};
+
+/** update columns of table "order" */
+export enum Order_Update_Column {
+  /** column name */
+  Address = 'address',
+  /** column name */
+  AppId = 'app_id',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Firstname = 'firstname',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Lastname = 'lastname',
+  /** column name */
+  ProductId = 'product_id',
+  /** column name */
+  Status = 'status',
+}
+
+export type Order_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Order_Set_Input>;
+  where: Order_Bool_Exp;
+};
 
 /** columns and relationships of "product" */
 export type Product = {
@@ -1127,6 +1398,12 @@ export type Query_Root = {
   gate_aggregate: Gate_Aggregate;
   /** fetch data from the table: "gate" using primary key columns */
   gate_by_pk?: Maybe<Gate>;
+  /** fetch data from the table: "order" */
+  order: Array<Order>;
+  /** fetch aggregated fields from the table: "order" */
+  order_aggregate: Order_Aggregate;
+  /** fetch data from the table: "order" using primary key columns */
+  order_by_pk?: Maybe<Order>;
   /** fetch data from the table: "product" */
   product: Array<Product>;
   /** fetch aggregated fields from the table: "product" */
@@ -1178,6 +1455,26 @@ export type Query_RootGate_AggregateArgs = {
 };
 
 export type Query_RootGate_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Query_RootOrderArgs = {
+  distinct_on?: InputMaybe<Array<Order_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Order_Order_By>>;
+  where?: InputMaybe<Order_Bool_Exp>;
+};
+
+export type Query_RootOrder_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Order_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Order_Order_By>>;
+  where?: InputMaybe<Order_Bool_Exp>;
+};
+
+export type Query_RootOrder_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -1239,6 +1536,14 @@ export type Subscription_Root = {
   gate_by_pk?: Maybe<Gate>;
   /** fetch data from the table in a streaming manner: "gate" */
   gate_stream: Array<Gate>;
+  /** fetch data from the table: "order" */
+  order: Array<Order>;
+  /** fetch aggregated fields from the table: "order" */
+  order_aggregate: Order_Aggregate;
+  /** fetch data from the table: "order" using primary key columns */
+  order_by_pk?: Maybe<Order>;
+  /** fetch data from the table in a streaming manner: "order" */
+  order_stream: Array<Order>;
   /** fetch data from the table: "product" */
   product: Array<Product>;
   /** fetch aggregated fields from the table: "product" */
@@ -1307,6 +1612,32 @@ export type Subscription_RootGate_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Gate_Stream_Cursor_Input>>;
   where?: InputMaybe<Gate_Bool_Exp>;
+};
+
+export type Subscription_RootOrderArgs = {
+  distinct_on?: InputMaybe<Array<Order_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Order_Order_By>>;
+  where?: InputMaybe<Order_Bool_Exp>;
+};
+
+export type Subscription_RootOrder_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Order_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Order_Order_By>>;
+  where?: InputMaybe<Order_Bool_Exp>;
+};
+
+export type Subscription_RootOrder_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Subscription_RootOrder_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Order_Stream_Cursor_Input>>;
+  where?: InputMaybe<Order_Bool_Exp>;
 };
 
 export type Subscription_RootProductArgs = {
@@ -1620,6 +1951,46 @@ export type GetGateFromProductQuery = {
     discount: number;
     id: any;
     product_id: any;
+  }>;
+};
+
+export type CreateOrderMutationVariables = Exact<{
+  address: Scalars['String'];
+  email: Scalars['String'];
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
+  product_id: Scalars['uuid'];
+  app_id: Scalars['uuid'];
+}>;
+
+export type CreateOrderMutation = {
+  __typename?: 'mutation_root';
+  insert_order_one?: {
+    __typename?: 'order';
+    address: string;
+    app_id: any;
+    email: string;
+    firstname: string;
+    id: any;
+    lastname: string;
+    product_id: any;
+    status: any;
+  } | null;
+};
+
+export type GetOrdersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetOrdersQuery = {
+  __typename?: 'query_root';
+  orders: Array<{
+    __typename?: 'order';
+    address: string;
+    email: string;
+    id: any;
+    firstname: string;
+    lastname: string;
+    product_id: any;
+    status: any;
   }>;
 };
 
@@ -2148,6 +2519,122 @@ export type GetGateFromProductQueryResult = Apollo.QueryResult<
   GetGateFromProductQuery,
   GetGateFromProductQueryVariables
 >;
+export const CreateOrderDocument = gql`
+  mutation CreateOrder(
+    $address: String!
+    $email: String!
+    $firstname: String!
+    $lastname: String!
+    $product_id: uuid!
+    $app_id: uuid!
+  ) {
+    insert_order_one(
+      object: {
+        address: $address
+        email: $email
+        firstname: $firstname
+        lastname: $lastname
+        product_id: $product_id
+        app_id: $app_id
+      }
+    ) {
+      address
+      app_id
+      email
+      firstname
+      id
+      lastname
+      product_id
+      status
+    }
+  }
+`;
+export type CreateOrderMutationFn = Apollo.MutationFunction<
+  CreateOrderMutation,
+  CreateOrderMutationVariables
+>;
+
+/**
+ * __useCreateOrderMutation__
+ *
+ * To run a mutation, you first call `useCreateOrderMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOrderMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOrderMutation, { data, loading, error }] = useCreateOrderMutation({
+ *   variables: {
+ *      address: // value for 'address'
+ *      email: // value for 'email'
+ *      firstname: // value for 'firstname'
+ *      lastname: // value for 'lastname'
+ *      product_id: // value for 'product_id'
+ *      app_id: // value for 'app_id'
+ *   },
+ * });
+ */
+export function useCreateOrderMutation(
+  baseOptions?: Apollo.MutationHookOptions<CreateOrderMutation, CreateOrderMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateOrderMutation, CreateOrderMutationVariables>(
+    CreateOrderDocument,
+    options,
+  );
+}
+export type CreateOrderMutationHookResult = ReturnType<typeof useCreateOrderMutation>;
+export type CreateOrderMutationResult = Apollo.MutationResult<CreateOrderMutation>;
+export type CreateOrderMutationOptions = Apollo.BaseMutationOptions<
+  CreateOrderMutation,
+  CreateOrderMutationVariables
+>;
+export const GetOrdersDocument = gql`
+  query GetOrders {
+    orders: order {
+      address
+      email
+      id
+      firstname
+      lastname
+      product_id
+      status
+    }
+  }
+`;
+
+/**
+ * __useGetOrdersQuery__
+ *
+ * To run a query within a React component, call `useGetOrdersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOrdersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOrdersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetOrdersQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetOrdersQuery, GetOrdersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetOrdersQuery, GetOrdersQueryVariables>(GetOrdersDocument, options);
+}
+export function useGetOrdersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetOrdersQuery, GetOrdersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetOrdersQuery, GetOrdersQueryVariables>(GetOrdersDocument, options);
+}
+export type GetOrdersQueryHookResult = ReturnType<typeof useGetOrdersQuery>;
+export type GetOrdersLazyQueryHookResult = ReturnType<typeof useGetOrdersLazyQuery>;
+export type GetOrdersQueryResult = Apollo.QueryResult<GetOrdersQuery, GetOrdersQueryVariables>;
 export const CreateProductDocument = gql`
   mutation CreateProduct(
     $appId: uuid!
