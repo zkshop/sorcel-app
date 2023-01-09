@@ -6,14 +6,13 @@ import { Box, Text, ApprovalIcon } from '@3shop/ui';
 export const Success = () => {
   const location = useLocation();
   const {
-    state: { name, email, paymentStatus },
+    state: { name, email, paymentStatus, amount },
   } = location;
 
   useEffect(() => {
-    console.log({ name, email, paymentStatus });
-
-    if (name && email && paymentStatus === 'succeeded') sendEmail(name, name, email);
-  }, [name, email, paymentStatus]);
+    if (name && email && (paymentStatus === 'succeeded' || amount === 0))
+      sendEmail(name, name, email);
+  }, [name, email, paymentStatus, amount]);
 
   return (
     <Box mt={32} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
