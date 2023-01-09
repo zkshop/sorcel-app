@@ -7,6 +7,7 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
+    "@3shop/config": "*",
     "@3shop/domains": "*",
     "@3shop/infra": "*",
     "@3shop/poap": "*",

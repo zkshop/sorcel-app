@@ -7,6 +7,19 @@ npx dotenv-vault pull
 yarn init:env
 ```
 
+### Network
+
+Possible `NETWORK`value depends on alchemy types
+
+```js
+enum Network {
+    ETH_MAINNET
+    ETH_GOERLI
+    MATIC_MAINNET
+    MATIC_MUMBAI
+}
+```
+
 ## Install dependencies
 
 `yarn`

@@ -3,6 +3,7 @@ import type { Nft, Alchemy, OwnedNft } from '@3shop/alchemy';
 import { Network, createAlchemy } from '@3shop/alchemy';
 import type { NftClient } from '@3shop/domains';
 import { NftService } from '@3shop/domains';
+import { envVars } from '@3shop/config';
 
 const getAllWalletNtfs = async (
   api: Alchemy,
@@ -31,7 +32,9 @@ export function NftScrapperClient(network: Network): NftClient {
   };
 }
 
-const WalletScrapper = NftService(NftScrapperClient(Network.MATIC_MAINNET));
+const WalletScrapper = NftService(
+  NftScrapperClient((envVars.NETWORK as Network | undefined) || Network.MATIC_MAINNET),
+);
 
 export const fetchNFTS = createAsyncThunk(
   'nfts/fetch',

@@ -1,6 +1,7 @@
 const envVars = {
   APP_ID: process.env.APP_ID,
   EMAIL_ORDER_TARGET: process.env.EMAIL_ORDER_TARGET,
+  NETWORK: process.env.NETWORK,
   NODE_ENV: process.env.NODE_ENV,
   PAPER_CLIENT_ID: process.env.PAPER_CLIENT_ID,
   PUBLIC_FUNCTIONS_URL: process.env.PUBLIC_FUNCTIONS_URL,
