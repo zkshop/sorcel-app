@@ -1,0 +1,28 @@
+mutation CreateOrder(
+  $address: String!
+  $email: String!
+  $firstname: String!
+  $lastname: String!
+  $product_id: uuid!
+  $app_id: uuid!
+) {
+  insert_order_one(
+    object: {
+      address: $address
+      email: $email
+      firstname: $firstname
+      lastname: $lastname
+      product_id: $product_id
+      app_id: $app_id
+    }
+  ) {
+    address
+    app_id
+    email
+    firstname
+    id
+    lastname
+    product_id
+    status
+  }
+}

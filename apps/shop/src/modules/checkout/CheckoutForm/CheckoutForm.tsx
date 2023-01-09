@@ -9,9 +9,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 type CheckoutFormProps = {
   price: number;
   discount?: number;
+  handlePaymentSuccess(): Promise<void>;
 };
 
-export function CheckoutForm({ price, discount }: CheckoutFormProps) {
+export function CheckoutForm({ price, discount, handlePaymentSuccess }: CheckoutFormProps) {
   const { state } = useLocation();
   const navigate = useNavigate();
   const stripe = useStripe();
@@ -33,10 +34,15 @@ export function CheckoutForm({ price, discount }: CheckoutFormProps) {
       return;
     }
 
-    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+    async function retrievePayment() {
+      if (!stripe || !clientSecret) return;
+
+      const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
+
       switch (paymentIntent?.status) {
         case 'succeeded':
           setMessage('Payment succeeded!');
+
           break;
         case 'processing':
           setMessage('Your payment is processing.');
@@ -48,8 +54,10 @@ export function CheckoutForm({ price, discount }: CheckoutFormProps) {
           setMessage('Something went wrong.');
           break;
       }
-    });
-  }, [stripe]);
+    }
+
+    retrievePayment();
+  }, [handlePaymentSuccess, stripe]);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -72,7 +80,14 @@ export function CheckoutForm({ price, discount }: CheckoutFormProps) {
       setMessage('An unexpected error occurred.');
     }
 
-    navigate('/success', { state: { ...state, paymentStatus: paymentIntent?.status } });
+    await handlePaymentSuccess();
+    navigate('/success', {
+      state: {
+        ...state,
+        paymentStatus: paymentIntent?.status,
+        name: `${state.firstname} ${state.lastname}`,
+      },
+    });
     setIsLoading(false);
   };
 
