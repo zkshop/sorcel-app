@@ -84,6 +84,7 @@ export function CheckoutForm({ price, discount, handlePaymentSuccess }: Checkout
     navigate('/success', {
       state: {
         ...state,
+        amount: applyDiscount(price, discount),
         paymentStatus: paymentIntent?.status,
         name: `${state.firstname} ${state.lastname}`,
       },

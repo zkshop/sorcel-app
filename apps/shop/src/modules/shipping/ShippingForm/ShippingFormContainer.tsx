@@ -58,6 +58,8 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
       navigate('/success', {
         state: {
           ...data,
+          amount: 0,
+          name: `${data.firstname} ${data.lastname}`,
         },
       });
       return;
