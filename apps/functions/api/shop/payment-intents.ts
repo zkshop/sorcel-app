@@ -58,7 +58,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       clientSecret: paymentIntent.client_secret,
     });
   } catch (error) {
-    return res.status(INTERNAL_SERVER_ERROR).json({ message: 'Server Error' });
+    return res.status(INTERNAL_SERVER_ERROR).json({ message: error });
   }
 }
 
