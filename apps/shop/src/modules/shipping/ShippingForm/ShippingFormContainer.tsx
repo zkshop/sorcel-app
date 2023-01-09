@@ -5,11 +5,15 @@ import { ShippingForm } from './ShippingForm';
 import type { ShippingFormValues } from './types';
 
 import type { Product } from '@3shop/apollo';
+import { useCreateOrderMutation } from '@3shop/apollo';
 import { applyDiscount } from '@3shop/pure';
 import { useIsAnHolder } from '@/hooks/useIsAnHolder';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SHIPPING_FORM_SCHEMA } from '@/schemas';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { storeOrder } from '@3shop/store/slices/order';
+import { useDispatch } from 'react-redux';
+import { envVars } from '@3shop/config';
 
 type ShippingFormContainerProps = {
   product: Product;
@@ -21,11 +25,15 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
     mode: 'onChange',
     resolver: yupResolver(SHIPPING_FORM_SCHEMA),
   });
+
   const {
     handleSubmit,
     formState: { isValid },
   } = methods;
+
+  const [createOrder, {}] = useCreateOrderMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const location = useLocation();
 
   function showDiscount() {
@@ -35,14 +43,29 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
   }
 
   const isAnHolder = useIsAnHolder(product);
-  const amount = applyDiscount(price, (showDiscount() && discount) || 0);
+  const amount = applyDiscount(price, showDiscount() ? Number(discount) : undefined);
 
   const onSubmit = async (data: ShippingFormValues) => {
     if (amount === 0) {
-      return navigate('/success');
+      await createOrder({
+        variables: {
+          ...data,
+          product_id: id,
+          app_id: envVars.APP_ID,
+        },
+      });
+
+      navigate('/success', {
+        state: {
+          ...data,
+        },
+      });
+      return;
     }
 
-    navigate(location.pathname.replace('shipping', 'checkout'), {
+    dispatch(storeOrder(data));
+
+    return navigate(location.pathname.replace('shipping', 'checkout'), {
       state: {
         ...data,
       },
@@ -75,7 +98,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
             {/* // TODO: Use Shopping cart component */}
             <Section>
               <Heading fontSize="2xl" fontWeight="extrabold">
-                Shopping Cart (1 item)
+                Shopping Cart
               </Heading>
 
               <Stack spacing="6">
