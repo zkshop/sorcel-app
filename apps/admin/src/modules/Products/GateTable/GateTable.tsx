@@ -1,4 +1,4 @@
-import { TableContainer, Table, Thead, Tr, Th, Tbody } from '@3shop/ui';
+import { Table } from '@3shop/ui';
 import type { Gate } from '@3shop/apollo';
 import { GateTableRow } from './GateTableRow';
 
@@ -7,26 +7,18 @@ type GateTableProps = {
   handleClickOnCloseIcon(id: string): void;
 };
 
+const GATE_TABLE_HEADS = ['Contract address', 'Discount', 'Attributes', ''];
+
 export const GateTable = ({ gates, handleClickOnCloseIcon }: GateTableProps) => (
-  <TableContainer>
-    <Table>
-      <Thead>
-        <Tr>
-          <Th>Contract address</Th>
-          <Th>Discount</Th>
-          <Th>Attributes</Th>
-          <Th></Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {gates.map((gate) => (
-          <GateTableRow
-            key={`gate-table-row-${gate.id}`}
-            gate={gate}
-            handleClickOnCloseIcon={handleClickOnCloseIcon}
-          />
-        ))}
-      </Tbody>
-    </Table>
-  </TableContainer>
+  <Table
+    heads={GATE_TABLE_HEADS}
+    data={gates}
+    renderRow={(gate) => (
+      <GateTableRow
+        key={`gate-table-row-${gate.id}`}
+        gate={gate}
+        handleClickOnCloseIcon={handleClickOnCloseIcon}
+      />
+    )}
+  />
 );

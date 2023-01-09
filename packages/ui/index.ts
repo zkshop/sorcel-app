@@ -1,25 +1,27 @@
 export * from './BackButton/BackButton';
 export * from './Banner/Banner';
+export * from './Box';
+export * from './Box';
 export * from './Button/Button';
 export * from './CartItem/CartItem';
 export * from './CartOrderSummary/CartOrderSummary';
 export * from './CollectionBadge/CollectionBadge';
-export * from './FormField/FormField';
-export * from './MainLayout/MainLayout';
-export * from './Header/Header';
-export * from './ProductCard/ProductCard';
 export * from './CollectionBadge/NftBadge/NftBadge';
+export * from './CollectionBadge/PoapBadge/PoapBadge';
+export * from './FormField/FormField';
+export * from './Header/Header';
+export * from './Icons';
+export * from './MainLayout/MainLayout';
+export * from './ProductCard/ProductCard';
 export * from './ProductCardList/ProductCardList';
 export * from './ProductDetails/ProductDetails';
-export * from './CollectionBadge/PoapBadge/PoapBadge';
 export * from './Section/Section';
 export * from './SizeSelector/SizeSelector';
 export * from './Spinner';
-export * from './Box';
+export * from './Table';
 export * from './TextInput/TextInput';
-export * from './VerticalMenu/VerticalMenu';
-export * from './Icons';
 export * from './theme';
+export * from './VerticalMenu/VerticalMenu';
 
 export {
   Accordion,
@@ -53,7 +55,6 @@ export {
   Spinner,
   VStack,
   Link,
-  Table,
   TableContainer,
   Tbody,
   Th,
