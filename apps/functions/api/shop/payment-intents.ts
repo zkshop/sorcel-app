@@ -11,7 +11,7 @@ import { INTERNAL_SERVER_ERROR, OK } from 'http-status';
 import { queryHasura } from '../../utils';
 
 const stripe = new Stripe(envVars.SECRET_STRIPE || '', {
-  apiVersion: '2022-08-01',
+  apiVersion: '2022-11-15',
 });
 
 // TODO: use generated documents from @3shop/apollo
