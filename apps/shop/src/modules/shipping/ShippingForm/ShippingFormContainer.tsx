@@ -10,7 +10,7 @@ import { applyDiscount } from '@3shop/pure';
 import { useIsAnHolder } from '@/hooks/useIsAnHolder';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SHIPPING_FORM_SCHEMA } from '@/schemas';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { storeOrder } from '@3shop/store/slices/order';
 import { useDispatch } from 'react-redux';
 import { envVars } from '@3shop/config';
@@ -31,10 +31,9 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
     formState: { isValid },
   } = methods;
 
-  const [createOrder, {}] = useCreateOrderMutation();
+  const [createOrder] = useCreateOrderMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation();
 
   function showDiscount() {
     if (!curation && !poapId) return true;
@@ -46,6 +45,8 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
   const amount = applyDiscount(price, showDiscount() ? Number(discount) : undefined);
 
   const onSubmit = async (data: ShippingFormValues) => {
+    dispatch(storeOrder(data));
+
     if (amount === 0) {
       await createOrder({
         variables: {
@@ -55,36 +56,11 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
         },
       });
 
-      navigate('/success', {
-        state: {
-          ...data,
-          amount: 0,
-          name: `${data.firstname} ${data.lastname}`,
-        },
-      });
-      return;
+      return navigate('/success');
     }
 
-    dispatch(storeOrder(data));
-
-    return navigate(location.pathname.replace('shipping', 'checkout'), {
-      state: {
-        ...data,
-      },
-    });
+    return navigate(location.pathname.replace('shipping', 'checkout'));
   };
-
-  const cartData = [
-    {
-      id,
-      price: amount,
-      currency: 'EUR',
-      name,
-      description: name,
-      quantity: 1,
-      imageUrl: image,
-    },
-  ];
 
   return (
     <FormProvider {...methods}>
@@ -97,16 +73,15 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
           </VStack>
 
           <VStack flex={1} justifyContent="space-between">
-            {/* // TODO: Use Shopping cart component */}
             <Section>
-              <Heading fontSize="2xl" fontWeight="extrabold">
-                Shopping Cart
-              </Heading>
-
               <Stack spacing="6">
-                {cartData.map((item) => (
-                  <CartItem key={item.id} {...item} />
-                ))}
+                <CartItem
+                  currency="EUR"
+                  price={amount}
+                  name={name}
+                  description={name}
+                  imageUrl={image}
+                />
               </Stack>
             </Section>
 

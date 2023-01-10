@@ -1,10 +1,9 @@
 import { Text } from '@3shop/ui';
-import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { PaymentElement } from '@stripe/react-stripe-js';
 import { applyDiscount } from '@3shop/pure';
-import React, { useEffect, useState } from 'react';
 
 import { StyledCheckoutForm } from './CheckoutForm.style';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { usePayment } from '@/hooks/usePayment';
 
 type CheckoutFormProps = {
   price: number;
@@ -13,84 +12,7 @@ type CheckoutFormProps = {
 };
 
 export function CheckoutForm({ price, discount, handlePaymentSuccess }: CheckoutFormProps) {
-  const { state } = useLocation();
-  const navigate = useNavigate();
-  const stripe = useStripe();
-  const elements = useElements();
-
-  const [message, setMessage] = useState<string | undefined>();
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (!stripe) {
-      return;
-    }
-
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      'payment_intent_client_secret',
-    );
-
-    if (!clientSecret) {
-      return;
-    }
-
-    async function retrievePayment() {
-      if (!stripe || !clientSecret) return;
-
-      const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
-
-      switch (paymentIntent?.status) {
-        case 'succeeded':
-          setMessage('Payment succeeded!');
-
-          break;
-        case 'processing':
-          setMessage('Your payment is processing.');
-          break;
-        case 'requires_payment_method':
-          setMessage('Your payment was not successful, please try again.');
-          break;
-        default:
-          setMessage('Something went wrong.');
-          break;
-      }
-    }
-
-    retrievePayment();
-  }, [handlePaymentSuccess, stripe]);
-
-  const handleSubmit = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-
-    if (!stripe || !elements) {
-      return;
-    }
-
-    setIsLoading(true);
-
-    const { error, paymentIntent } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {},
-      redirect: 'if_required',
-    });
-
-    if (error?.type === 'card_error' || error?.type === 'validation_error') {
-      setMessage(error?.message);
-    } else {
-      setMessage('An unexpected error occurred.');
-    }
-
-    await handlePaymentSuccess();
-    navigate('/success', {
-      state: {
-        ...state,
-        amount: applyDiscount(price, discount),
-        paymentStatus: paymentIntent?.status,
-        name: `${state.firstname} ${state.lastname}`,
-      },
-    });
-    setIsLoading(false);
-  };
+  const { elements, handleSubmit, paymentMessage, stripe } = usePayment(handlePaymentSuccess);
 
   return (
     <StyledCheckoutForm id="payment-form" onSubmit={handleSubmit}>
@@ -100,13 +22,11 @@ export function CheckoutForm({ price, discount, handlePaymentSuccess }: Checkout
         Price: {applyDiscount(price, discount)}€
       </Text>
 
-      <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : 'Pay now'}
-        </span>
+      <button disabled={!stripe || !elements} id="submit">
+        <span id="button-text">Pay now</span>
       </button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
+
+      {paymentMessage && <div id="payment-message">{paymentMessage}</div>}
     </StyledCheckoutForm>
   );
 }
