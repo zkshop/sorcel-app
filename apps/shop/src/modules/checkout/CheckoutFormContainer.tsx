@@ -1,6 +1,6 @@
 import type { Product } from '@3shop/apollo';
 import { useCreateOrderMutation } from '@3shop/apollo';
-import { VStack, Heading } from '@3shop/ui';
+import { VStack, Heading, Spinner } from '@3shop/ui';
 import { Elements } from '@stripe/react-stripe-js';
 import { getStripeObject, getPaymentIntent } from '@/clients/stripe';
 import { useIsAnHolder } from '@/hooks/useIsAnHolder';
@@ -17,6 +17,7 @@ type CheckoutFormContainerProps = {
 };
 
 export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) => {
+  const [isPaymentIntentLoading, setIsPaymentIntentLoading] = useState(false);
   const { curation, poapId } = product;
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const isAnHolder = useIsAnHolder(product);
@@ -31,8 +32,10 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
 
   useEffect(() => {
     async function updateClientSecret() {
+      setIsPaymentIntentLoading(true);
       const clientSecret = await getPaymentIntent(product.id);
       setClientSecret(clientSecret);
+      setIsPaymentIntentLoading(false);
     }
 
     updateClientSecret();
@@ -57,7 +60,7 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
       <Heading as="h2" py={4}>
         Checkout
       </Heading>
-
+      {isPaymentIntentLoading && <Spinner />}
       {clientSecret && (
         <Elements options={{ appearance: { theme: 'stripe' }, clientSecret }} stripe={stripe}>
           <CheckoutForm
