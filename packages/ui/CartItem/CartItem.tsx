@@ -6,7 +6,6 @@ import { PriceTag } from '../PriceTag/PriceTag';
 type CartItemProps = {
   name: string;
   description: string;
-  quantity: number;
   price: number;
   currency: string;
   imageUrl: string;

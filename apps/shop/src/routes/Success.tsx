@@ -1,18 +1,17 @@
-import { sendEmail } from '@/modules/checkout/sendEmail';
-import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { sendEmail } from '@/modules/checkout/sendEmail';
 import { Box, Text, ApprovalIcon } from '@3shop/ui';
+import { useAppSelector } from '@3shop/store';
 
 export const Success = () => {
-  const location = useLocation();
-  const {
-    state: { name, email, paymentStatus, amount },
-  } = location;
+  const order = useAppSelector((state) => state.user.order);
 
   useEffect(() => {
-    if (name && email && (paymentStatus === 'succeeded' || amount === 0))
-      sendEmail(name, name, email);
-  }, [name, email, paymentStatus, amount]);
+    if (order) sendEmail(order.firstname, order.lastname, order.email);
+  }, [order]);
+
+  if (!order) return <Navigate to="/" />;
 
   return (
     <Box mt={32} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
