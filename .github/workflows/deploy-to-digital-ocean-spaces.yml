@@ -10,7 +10,7 @@ jobs:
     env:
       ACCESS_KEY: DO00PUR2N4DB78NJ4G3G
       SPACE_REGION: fra1
-      SPACE_NAME: 3shop
+      SPACE_NAME: 3shop-dev
       SECRET_KEY: JSCz38e56J+Pl+R9v/JaRc5DmadVq4xYdGLuHBe0SNs
       APP_ID: "00000000-a85b-469d-884e-b049a2a51e3e"
       EMAIL_ORDER_TARGET: "adrien@3shop.co"
