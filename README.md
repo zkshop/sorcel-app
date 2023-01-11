@@ -45,6 +45,21 @@ yarn init:env
 }
 ```
 
+## Integration
+
+```html
+<script type="text/javascript">
+  window.__3SHOP_APP_ID__ = '<APP_ID>';
+  (function () {
+    d = document;
+    s = d.createElement('script');
+    s.src = 'https://cdn.3shop.co/app/index.js';
+    s.async = 1;
+    d.getElementsByTagName('head')[0].appendChild(s);
+  })();
+</script>
+```
+
 ## Caching
 
 ```sh

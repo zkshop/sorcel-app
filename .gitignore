@@ -50,4 +50,4 @@ storybook-static
 !.env.project
 !.env.vault
 
-**/*.timestamp
+*.timestamp*
