@@ -1,0 +1,51 @@
+name: Deploy to DigitalOcean Spaces
+
+on:
+  push:
+    branches: [dev, main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      ACCESS_KEY: DO00PUR2N4DB78NJ4G3G
+      SPACE_REGION: fra1
+      SPACE_NAME: 3shop
+      SECRET_KEY: JSCz38e56J+Pl+R9v/JaRc5DmadVq4xYdGLuHBe0SNs
+      APP_ID: "00000000-a85b-469d-884e-b049a2a51e3e"
+      EMAIL_ORDER_TARGET: "adrien@3shop.co"
+      PAPER_CLIENT_ID: "a8a84815-f9dc-4292-8724-850ec225fb90"
+      PAPER_KEY_MANAGER_TOKEN: "0x2BA6a7547053ba87B74EF1DACAa808d528b628db"
+      PUBLIC_FUNCTIONS_URL: "http://functions.3shop.co"
+      PUBLIC_HASURA_API_URL: "https://smashing-albacore-74.hasura.app/v1/graphql"
+      PUBLIC_MAGIC_PUBLISHABLE_KEY: "pk_live_4D8A794EBE593D7D"
+      PUBLIC_STRIPE_PUBLISHABLE_KEY: "pk_test_51IKmYzFoww6uficXIeMaweCQ90YNSJayTLBoeUxNbHBQ0nm8UZ5PnnDsNjpmj48ax9lKBzNtUmmpwjywBepb0IsB0072RMe4A9"
+      SECRET_ALCHEMY: "x97VSdTdeVeFEUpCDRH1ENsSyi5PYPIP"
+      SECRET_HASURA: "nCVvYfVZn0kVQd39iG0OQ2uqbq2G2CLpX6oTLHU9OoHINzFiL5f4CwtzJ0hSRiEI"
+      SECRET_JWT: "bXYc5pXjGEAjydo8aNO@E1$KUhJl10HA"
+      SECRET_MAGIC: "sk_live_23C4458F3EEE6FF9"
+      SECRET_PAPER: "3bd2b35c-9d5f-4ed0-a323-c9ba6aba4a52"
+      SECRET_POAP: "8SkUED3J4OfpNnYtkF9XmBGLDDkXhXl0TLuM1qDZt1fiaAwJum10u9q9iomDapdNEbfe3YUbVkXrUPNARSxHtCHtVtOsBQfdlljeHKx16SaqUTwalIY5sIszQJwXManD"
+      SECRET_STRIPE: "sk_test_51IKmYzFoww6uficX9MYFUvcgVdvs36tCEhzwTT4zd3eHAG2Je9Luen4fQwRAqQqvAdvV9FClZ3bUVDTa10NZ7Ccy00R4pBSVEk"
+      SECRET_SUPABASE: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtxanl0Z3hidGV0emV3aXBpa2F4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY2NTczNzc5NSwiZXhwIjoxOTgxMzEzNzk1fQ.913rq_gUqPxJxDK4lYvrrmophNnupbN09LqCp6wUAQ4"
+      SECRET_AIRTABLE: "pat3n1I1eIUG5j1It.bdd3f129a145d5194df40e0b5870ce527bcbdfef80f5b65f3045eb5228639f0a"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build application
+        run: yarn build:shop
+
+      - name: Upload Shop app to DigitalOcean Spaces
+        uses: BetaHuhn/do-spaces-action@v2
+        with:
+          access_key: ${{ env.ACCESS_KEY}}
+          secret_key: ${{ env.SECRET_KEY }}
+          space_name: ${{ env.SPACE_NAME }}
+          space_region: ${{ env.SPACE_REGION }}
+          source: apps/shop/dist/index.js
+          out_dir: app
