@@ -1,7 +1,18 @@
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const GITHUB_ACTIONS = process.env.GITHUB_ACTIONS || false;
+
+function getAppId() {
+  if (NODE_ENV === 'production' || GITHUB_ACTIONS) {
+    // @ts-ignore
+    return window.__3SHOP_APP_ID__;
+  }
+  return process.env.APP_ID;
+}
+
 const envVars = {
-  APP_ID: process.env.APP_ID,
+  APP_ID: getAppId(),
   EMAIL_ORDER_TARGET: process.env.EMAIL_ORDER_TARGET,
-  NODE_ENV: process.env.NODE_ENV,
+  NODE_ENV,
   PAPER_CLIENT_ID: process.env.PAPER_CLIENT_ID,
   PUBLIC_FUNCTIONS_URL: process.env.PUBLIC_FUNCTIONS_URL,
   PUBLIC_HASURA_API_URL: process.env.PUBLIC_HASURA_API_URL,
