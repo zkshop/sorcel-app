@@ -24,6 +24,7 @@
     "SENDINBLUE_API_KEY",
     "STRIPE_SECRET_KEY",
     "SUPABASE_API_KEY",
+    "SECRET_AIRTABLE",
     "CI"
   ],
   "pipeline": {

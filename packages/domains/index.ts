@@ -5,3 +5,4 @@ export * from './email';
 export * from './token';
 export * from './authorization-token';
 export * from './cookies';
+export * from './delivery-taxes';

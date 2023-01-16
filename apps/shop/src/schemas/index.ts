@@ -6,5 +6,6 @@ export const SHIPPING_FORM_SCHEMA = FormValidation.object().shape({
   lastname: FormValidation.string().required(REQUIRED),
   address: FormValidation.string().required(REQUIRED),
   email: FormValidation.string().email().required(REQUIRED),
+  country: FormValidation.string().required(REQUIRED),
   phoneNumber: FormValidation.string().required(REQUIRED),
 });

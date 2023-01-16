@@ -7,6 +7,7 @@ type ShippingInformations = {
   address: string;
   email: string;
   phoneNumber: string;
+  amount: number;
 };
 
 type State = ShippingInformations | null;

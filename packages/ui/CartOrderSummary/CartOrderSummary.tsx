@@ -1,14 +1,42 @@
-import { Button, Flex, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Heading,
+  Link,
+  Stack,
+  Text,
+  useColorModeValue as mode,
+} from '@chakra-ui/react';
 import { ArrowRightIcon } from '../Icons';
 
 import { formatPrice } from '../PriceTag/PriceTag';
 
 type CartOrderSummaryProps = {
   amount: number;
+  fees?: number;
   isDisabled: boolean;
 };
 
-export const CartOrderSummary = ({ amount, isDisabled }: CartOrderSummaryProps) => (
+type OrderSummaryItemProps = {
+  label: string;
+  value?: string;
+  children?: React.ReactNode;
+};
+
+const OrderSummaryItem = (props: OrderSummaryItemProps) => {
+  const { label, value, children } = props;
+
+  return (
+    <Flex justify="space-between" fontSize="sm">
+      <Text fontWeight="medium" color={mode('gray.600', 'gray.400')}>
+        {label}
+      </Text>
+      {value ? <Text fontWeight="medium">{value}</Text> : children}
+    </Flex>
+  );
+};
+
+export const CartOrderSummary = ({ amount, isDisabled, fees = 0 }: CartOrderSummaryProps) => (
   <Stack
     spacing="8"
     rounded="lg"
@@ -22,6 +50,11 @@ export const CartOrderSummary = ({ amount, isDisabled }: CartOrderSummaryProps) 
     <Heading size="md">Order Summary</Heading>
 
     <Stack spacing="6">
+      <OrderSummaryItem label="Shipping fees" value={fees.toString() + '€'}>
+        <Link href="#" textDecor="underline">
+          Calculate shipping
+        </Link>
+      </OrderSummaryItem>
       <Flex justify="space-between">
         <Text fontSize="lg" fontWeight="semibold">
           Total

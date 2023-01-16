@@ -1488,6 +1488,18 @@
         "description": "app table",
         "fields": [
           {
+            "name": "deliveryTaxesTableName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -1739,6 +1751,18 @@
             "deprecationReason": null
           },
           {
+            "name": "deliveryTaxesTableName",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -1815,6 +1839,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "deliveryTaxesTableName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -1873,6 +1909,18 @@
         "description": "aggregate max on columns",
         "fields": [
           {
+            "name": "deliveryTaxesTableName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -1919,6 +1967,18 @@
         "name": "app_min_fields",
         "description": "aggregate min on columns",
         "fields": [
+          {
+            "name": "deliveryTaxesTableName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": null,
@@ -2082,6 +2142,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "deliveryTaxesTableName",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -2170,6 +2242,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "deliveryTaxesTableName",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": "column name",
             "isDeprecated": false,
@@ -2202,6 +2280,18 @@
         "description": "input type for updating data in table \"app\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "deliveryTaxesTableName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": null,
@@ -2301,6 +2391,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "deliveryTaxesTableName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -2361,6 +2463,12 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
+          {
+            "name": "deliveryTaxesTableName",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": "column name",
