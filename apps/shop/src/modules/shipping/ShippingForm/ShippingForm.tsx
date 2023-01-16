@@ -2,6 +2,7 @@ import { Box, FormControl, FormErrorMessage, FormLabel, Heading, Input, Section 
 import { useFormContext } from 'react-hook-form';
 
 import { SHIPPING_FIELDS } from '../constants';
+import { DeliveryTaxesZonesField } from '../DeliveryTaxesZonesField';
 import type { ShippingFormValues } from './types';
 
 type ShippingFormProps = object;
@@ -33,6 +34,11 @@ export const ShippingForm = ({}: ShippingFormProps) => {
           <FormLabel mb={1}>{SHIPPING_FIELDS.address.label}</FormLabel>
           <Input {...register(SHIPPING_FIELDS.address.name)} />
           <FormErrorMessage>{errors.address?.message}</FormErrorMessage>
+        </FormControl>
+
+        <FormControl isInvalid={Boolean(errors.country)}>
+          <FormLabel mb={1}>{SHIPPING_FIELDS.country.label}</FormLabel>
+          <DeliveryTaxesZonesField />
         </FormControl>
       </Section>
 

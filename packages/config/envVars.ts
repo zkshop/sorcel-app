@@ -16,6 +16,7 @@ const envVars = {
   SECRET_SENDINBLUE: process.env.SECRET_SENDINBLUE,
   SECRET_STRIPE: process.env.SECRET_STRIPE,
   SECRET_SUPABASE: process.env.SECRET_SUPABASE,
+  SECRET_AIRTABLE: process.env.SECRET_AIRTABLE,
 };
 
 export { envVars };

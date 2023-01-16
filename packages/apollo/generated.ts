@@ -80,6 +80,7 @@ export type String_Comparison_Exp = {
 /** app table */
 export type App = {
   __typename?: 'app';
+  deliveryTaxesTableName?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   imgUrl?: Maybe<Scalars['String']>;
   isZKP?: Maybe<Scalars['Boolean']>;
@@ -112,6 +113,7 @@ export type App_Bool_Exp = {
   _and?: InputMaybe<Array<App_Bool_Exp>>;
   _not?: InputMaybe<App_Bool_Exp>;
   _or?: InputMaybe<Array<App_Bool_Exp>>;
+  deliveryTaxesTableName?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   imgUrl?: InputMaybe<String_Comparison_Exp>;
   isZKP?: InputMaybe<Boolean_Comparison_Exp>;
@@ -126,6 +128,7 @@ export enum App_Constraint {
 
 /** input type for inserting data into table "app" */
 export type App_Insert_Input = {
+  deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
   isZKP?: InputMaybe<Scalars['Boolean']>;
@@ -135,6 +138,7 @@ export type App_Insert_Input = {
 /** aggregate max on columns */
 export type App_Max_Fields = {
   __typename?: 'app_max_fields';
+  deliveryTaxesTableName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   imgUrl?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -143,6 +147,7 @@ export type App_Max_Fields = {
 /** aggregate min on columns */
 export type App_Min_Fields = {
   __typename?: 'app_min_fields';
+  deliveryTaxesTableName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   imgUrl?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -166,6 +171,7 @@ export type App_On_Conflict = {
 
 /** Ordering options when selecting data from "app". */
 export type App_Order_By = {
+  deliveryTaxesTableName?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   imgUrl?: InputMaybe<Order_By>;
   isZKP?: InputMaybe<Order_By>;
@@ -180,6 +186,8 @@ export type App_Pk_Columns_Input = {
 /** select columns of table "app" */
 export enum App_Select_Column {
   /** column name */
+  DeliveryTaxesTableName = 'deliveryTaxesTableName',
+  /** column name */
   Id = 'id',
   /** column name */
   ImgUrl = 'imgUrl',
@@ -191,6 +199,7 @@ export enum App_Select_Column {
 
 /** input type for updating data in table "app" */
 export type App_Set_Input = {
+  deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
   isZKP?: InputMaybe<Scalars['Boolean']>;
@@ -207,6 +216,7 @@ export type App_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type App_Stream_Cursor_Value_Input = {
+  deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
   isZKP?: InputMaybe<Scalars['Boolean']>;
@@ -215,6 +225,8 @@ export type App_Stream_Cursor_Value_Input = {
 
 /** update columns of table "app" */
 export enum App_Update_Column {
+  /** column name */
+  DeliveryTaxesTableName = 'deliveryTaxesTableName',
   /** column name */
   Id = 'id',
   /** column name */
@@ -1869,7 +1881,13 @@ export type GetAppQueryVariables = Exact<{
 
 export type GetAppQuery = {
   __typename?: 'query_root';
-  app?: { __typename?: 'app'; id: any; name: string; imgUrl?: string | null } | null;
+  app?: {
+    __typename?: 'app';
+    id: any;
+    name: string;
+    imgUrl?: string | null;
+    deliveryTaxesTableName?: string | null;
+  } | null;
 };
 
 export type GetAdminAppQueryVariables = Exact<{ [key: string]: never }>;
@@ -2177,6 +2195,7 @@ export const GetAppDocument = gql`
       id
       name
       imgUrl
+      deliveryTaxesTableName
     }
   }
 `;

@@ -19,4 +19,8 @@ export const SHIPPING_FIELDS = {
     label: 'Phone Number',
     name: 'phoneNumber',
   },
+  country: {
+    label: 'Country',
+    name: 'country',
+  },
 } as const;
