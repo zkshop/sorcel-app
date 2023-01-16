@@ -8,6 +8,7 @@ import orderReducer from './slices/order';
 
 import poapImageListReducer from './slices/poapImageList';
 import authReducer from './slices/auth';
+import deliveryTaxesReducer from './slices/deliveryTaxes';
 
 const rootReducer = combineReducers({
   poapImageList: poapImageListReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     order: orderReducer,
   }),
+  deliveryTaxes: deliveryTaxesReducer,
 });
 
 export const store = configureStore({

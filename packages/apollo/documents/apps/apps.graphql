@@ -1,8 +1,9 @@
 query getApp($appId: uuid!) {
-  app: app_by_pk(id: $appId)  {
+  app: app_by_pk(id: $appId) {
     id
     name
     imgUrl
+    deliveryTaxesTableName
   }
 }
 

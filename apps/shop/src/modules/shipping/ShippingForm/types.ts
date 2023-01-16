@@ -3,5 +3,6 @@ export type ShippingFormValues = {
   lastname: string;
   address: string;
   email: string;
+  country: string;
   phoneNumber: string;
 };

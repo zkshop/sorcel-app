@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { ShippingForm } from './ShippingForm';
 import type { ShippingFormValues } from './types';
-
+import omit from 'lodash/omit';
 import type { Product } from '@3shop/apollo';
 import { useCreateOrderMutation } from '@3shop/apollo';
 import { applyDiscount } from '@3shop/pure';
@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { storeOrder } from '@3shop/store/slices/order';
 import { useDispatch } from 'react-redux';
 import { envVars } from '@3shop/config';
+import { useAppSelector } from '@3shop/store';
 
 type ShippingFormContainerProps = {
   product: Product;
@@ -21,6 +22,9 @@ type ShippingFormContainerProps = {
 
 export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) => {
   const { id, price, name, image, discount, curation, poapId } = product;
+
+  const deliveryTaxes = useAppSelector((state) => state.deliveryTaxes);
+
   const methods = useForm<ShippingFormValues>({
     mode: 'onChange',
     resolver: yupResolver(SHIPPING_FORM_SCHEMA),
@@ -29,11 +33,16 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
   const {
     handleSubmit,
     formState: { isValid },
+    watch,
   } = methods;
 
   const [createOrder] = useCreateOrderMutation();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const country = watch('country');
+  const fees = deliveryTaxes.data.find((zone) => zone.name === country)?.fees;
 
   function showDiscount() {
     if (!curation && !poapId) return true;
@@ -42,15 +51,15 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
   }
 
   const isAnHolder = useIsAnHolder(product);
-  const amount = applyDiscount(price, showDiscount() ? Number(discount) : undefined);
+  const amount = applyDiscount(price + (fees || 0), showDiscount() ? Number(discount) : undefined);
 
   const onSubmit = async (data: ShippingFormValues) => {
-    dispatch(storeOrder(data));
+    dispatch(storeOrder({ ...data, amount }));
 
     if (amount === 0) {
       await createOrder({
         variables: {
-          ...data,
+          ...omit(data, 'country'),
           product_id: id,
           app_id: envVars.APP_ID,
         },
@@ -59,7 +68,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
       return navigate('/success');
     }
 
-    return navigate(location.pathname.replace('shipping', 'checkout'));
+    navigate(`/checkout/${id}`);
   };
 
   return (
@@ -85,7 +94,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
               </Stack>
             </Section>
 
-            <CartOrderSummary isDisabled={!isValid} amount={amount} />
+            <CartOrderSummary fees={fees} isDisabled={!isValid} amount={amount} />
           </VStack>
         </SimpleGrid>
       </form>
