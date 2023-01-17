@@ -1,11 +1,13 @@
 import { getPoapImageFromPoapList } from '@3shop/poap';
-import type { Product } from '@3shop/apollo';
+import type { Gate, Product } from '@3shop/apollo';
 import type { FormatedProductData } from '@3shop/types';
 
 export type GetProductCardPropsParams = Product & {
-  poapImageList: any[];
+  poapImageList: string[];
   poapIds: number[];
   collections: string[];
+  activeGate: Gate | null;
+  gates: Gate[];
 };
 
 export const formatProductData = ({
@@ -22,21 +24,23 @@ export const formatProductData = ({
   poapImageList,
   collections,
   poapIds,
+  activeGate,
+  gates,
 }: GetProductCardPropsParams): FormatedProductData => {
-  const isGated = Boolean(curation || poapId);
+  const isGated = Boolean(curation || poapId || gates.length);
   const isAPoapHolder = poapId ? poapIds.includes(poapId) : false;
   const isAnNftHolder = curation ? collections.includes(curation.toLowerCase()) : false;
   const isAnHolder = isAnNftHolder || isAPoapHolder;
-  const isLocked = isGated && !isAnHolder && !isDiscountGated;
+  const isLocked = isGated && !isAnHolder && !isDiscountGated && !activeGate;
   const poapUrl = `https://poap.gallery/event/${poapId}`;
   const poapImgUrl = getPoapImageFromPoapList(poapImageList, poapId);
 
-  const discountNumber = discount || 0;
-  const promoPercent = discount ? discountNumber / 100 : 0;
-  const priceReduced = discount ? price - price * promoPercent : 0;
+  const discountNumber = activeGate?.discount || discount || 0;
+  const promoPercent = discountNumber / 100;
+  const priceReduced = discountNumber ? price - price * promoPercent : 0;
 
   const showDiscount = (() => {
-    if (discount) {
+    if (activeGate?.discount || discount) {
       if (isDiscountGated) {
         return isAnHolder;
       }
@@ -52,7 +56,7 @@ export const formatProductData = ({
     poapImgUrl,
     srcItem: image,
     title: name,
-    discount: (showDiscount && discount) || 0,
+    discount: (showDiscount && (activeGate?.discount || discount)) || 0,
     description,
     price,
     priceReduced,

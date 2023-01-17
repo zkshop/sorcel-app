@@ -2,7 +2,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import { ThemeProvider } from '@3shop/ui-tbw';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './store';
-import { ApolloProvider, useApollo, APOLLO_STATE_PROP_NAME } from '@3shop/apollo';
+import { ApolloProvider, useApollo } from '@3shop/apollo';
 import { WagmiConfig } from 'wagmi';
 import { wagmiClient, chains } from './clients/wagmi';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
