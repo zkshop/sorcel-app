@@ -29,7 +29,8 @@ jobs:
       SECRET_STRIPE: "sk_test_51IKmYzFoww6uficX9MYFUvcgVdvs36tCEhzwTT4zd3eHAG2Je9Luen4fQwRAqQqvAdvV9FClZ3bUVDTa10NZ7Ccy00R4pBSVEk"
       SECRET_SUPABASE: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtxanl0Z3hidGV0emV3aXBpa2F4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY2NTczNzc5NSwiZXhwIjoxOTgxMzEzNzk1fQ.913rq_gUqPxJxDK4lYvrrmophNnupbN09LqCp6wUAQ4"
       SECRET_AIRTABLE: "pat3n1I1eIUG5j1It.bdd3f129a145d5194df40e0b5870ce527bcbdfef80f5b65f3045eb5228639f0a"
-
+      NETWORK: "ETHEREUM"
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { Nft, Alchemy, OwnedNft } from '@3shop/alchemy';
-import { Network, createAlchemy } from '@3shop/alchemy';
+import { createAlchemy } from '@3shop/alchemy';
 import type { NftClient } from '@3shop/domains';
 import { NftService } from '@3shop/domains';
 
@@ -20,8 +20,8 @@ const getAllWalletNtfs = async (
   return ownedNfts;
 };
 
-export function NftScrapperClient(network: Network): NftClient {
-  const api = createAlchemy(network);
+export function NftScrapperClient(): NftClient {
+  const api = createAlchemy();
 
   return {
     getWalletNfts: async (address: string, pageKey?: string) =>
@@ -31,7 +31,7 @@ export function NftScrapperClient(network: Network): NftClient {
   };
 }
 
-const WalletScrapper = NftService(NftScrapperClient(Network.MATIC_MAINNET));
+const WalletScrapper = NftService(NftScrapperClient());
 
 export const fetchNFTS = createAsyncThunk(
   'nfts/fetch',
