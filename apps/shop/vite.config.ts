@@ -15,6 +15,7 @@ const envVars = {
   SECRET_MAGIC: undefined,
   SECRET_POAP: undefined,
   SECRET_AIRTABLE: undefined,
+  NETWORK: undefined,
 };
 
 const dirname = __dirname;
