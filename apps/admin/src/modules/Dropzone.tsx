@@ -21,7 +21,7 @@ export const Dropzone = ({ onChange: originalOnChange, value }: DropzoneProps) =
       {typeof value === 'string' && (
         <>
           <Image src={value} maxHeight={200} alt="product" />
-          <input {...getInputProps()} />
+          <input data-testid="image" {...getInputProps()} />
           <Button>Update file</Button>
         </>
       )}
@@ -34,7 +34,7 @@ export const Dropzone = ({ onChange: originalOnChange, value }: DropzoneProps) =
           border="solid 1px"
           borderStyle="dashed"
         >
-          <input {...getInputProps()} />
+          <input data-testid="image" {...getInputProps()} />
           <p>Drag and drop your file or click on the area</p>
         </Box>
       )}

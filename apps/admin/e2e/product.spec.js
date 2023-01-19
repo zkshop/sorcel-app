@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
+import { resolve, dirname } from 'node:path';
 
 const createJsonWebTokenPayload = (appId, metadata) => ({
   ...metadata,
@@ -41,10 +42,9 @@ test('Add a product to the shop', async ({ context, page }) => {
   await page.getByPlaceholder('Price').press('Tab');
   await page.getByPlaceholder('Discount for holders').fill('10');
 
-  await page.getByPlaceholder('Image link').click();
   await page
-    .getByPlaceholder('Image link')
-    .fill('https://miro.medium.com/max/439/1*RgZCsBde433FEp_DA6sGBw.jpeg');
+    .locator('input[type="file"]')
+    .setInputFiles(resolve(dirname('.'), 'e2e/assets/3shop.png'));
 
   await page.getByRole('button', { name: 'Save' }).click();
   await page.waitForResponse(
@@ -82,12 +82,9 @@ test('Edit product from the shop', async ({ page, context }) => {
   await page.getByPlaceholder('Price').press('Tab');
   await page.getByPlaceholder('Discount for holders').fill('20');
 
-  await page.getByPlaceholder('Image link').click();
   await page
-    .getByPlaceholder('Image link')
-    .fill(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Logo_de_Free.png/800px-Logo_de_Free.png',
-    );
+    .locator('input[type="file"]')
+    .setInputFiles(resolve(dirname('.'), 'e2e/assets/3shop-logo.png'));
 
   await page.getByRole('button', { name: 'Save' }).click();
   await page.waitForResponse(
