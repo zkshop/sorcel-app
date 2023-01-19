@@ -20,15 +20,25 @@ export const OrderList = () => {
       <Table
         data={data.orders}
         heads={ORDER_ATTRIBUTES}
-        renderRow={({ address, email, firstname, id, lastname, product_id, status }) => (
+        renderRow={({
+          address,
+          email,
+          firstname,
+          id,
+          lastname,
+          status,
+          product_id,
+          product: { image },
+        }) => (
           <OrderListItem
             address={address}
             email={email}
             firstname={firstname}
             lastname={lastname}
             id={id}
-            productId={product_id}
+            productImage={image}
             status={status}
+            productId={product_id}
             key={`order-list-item-${id}`}
           />
         )}

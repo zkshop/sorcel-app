@@ -855,6 +855,8 @@ export type Order = {
   firstname: Scalars['String'];
   id: Scalars['uuid'];
   lastname: Scalars['String'];
+  /** An object relationship */
+  product: Product;
   product_id: Scalars['uuid'];
   status: Scalars['order_status'];
 };
@@ -891,6 +893,7 @@ export type Order_Bool_Exp = {
   firstname?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   lastname?: InputMaybe<String_Comparison_Exp>;
+  product?: InputMaybe<Product_Bool_Exp>;
   product_id?: InputMaybe<Uuid_Comparison_Exp>;
   status?: InputMaybe<Order_Status_Comparison_Exp>;
 };
@@ -925,6 +928,7 @@ export type Order_Insert_Input = {
   firstname?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   lastname?: InputMaybe<Scalars['String']>;
+  product?: InputMaybe<Product_Obj_Rel_Insert_Input>;
   product_id?: InputMaybe<Scalars['uuid']>;
   status?: InputMaybe<Scalars['order_status']>;
 };
@@ -979,6 +983,7 @@ export type Order_Order_By = {
   firstname?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   lastname?: InputMaybe<Order_By>;
+  product?: InputMaybe<Product_Order_By>;
   product_id?: InputMaybe<Order_By>;
   status?: InputMaybe<Order_By>;
 };
@@ -1216,6 +1221,13 @@ export type Product_Mutation_Response = {
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Product>;
+};
+
+/** input type for inserting object relation for remote table "product" */
+export type Product_Obj_Rel_Insert_Input = {
+  data: Product_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Product_On_Conflict>;
 };
 
 /** on_conflict condition type for table "product" */
@@ -2014,6 +2026,7 @@ export type GetOrdersQuery = {
     lastname: string;
     product_id: any;
     status: any;
+    product: { __typename?: 'product'; image: string };
   }>;
 };
 
@@ -2625,6 +2638,9 @@ export const GetOrdersDocument = gql`
       lastname
       product_id
       status
+      product {
+        image
+      }
     }
   }
 `;
