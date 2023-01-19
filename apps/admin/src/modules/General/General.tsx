@@ -9,6 +9,6 @@ type GeneralProps = {
 
 export const General = ({ app }: GeneralProps) => (
   <Box>
-    <GeneralForm defaultValues={{ imgUrl: app.imgUrl || '', name: app.name, id: app.id }} />
+    <GeneralForm app={app} />
   </Box>
 );

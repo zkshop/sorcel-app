@@ -1,30 +1,31 @@
-import { Box, Heading, HStack, Button, FormField, useToast } from '@3shop/ui';
-import { useForm } from 'react-hook-form';
+import { Box, Heading, HStack, Button, FormField, useToast, FormLabel } from '@3shop/ui';
+import { useForm, Controller } from 'react-hook-form';
 
+import type { App } from '@3shop/apollo';
 import { useUpdateAppMutation } from '@3shop/apollo';
 import { ImageStorageClient } from '@3shop/admin-infra';
 import { StorageService } from '@3shop/domains';
-import { blobFromURL } from '@3shop/pure';
 import { useState } from 'react';
 import { ERROR_MESSAGE } from '@3shop/messages';
+import { Dropzone } from '../Dropzone';
 
 type GeneralFormValues = {
   name: string;
-  imgUrl: string;
+  imgUrl?: File | string;
   id: string;
 };
 
 type GeneralFormProps = {
-  defaultValues: GeneralFormValues;
+  app: App;
 };
 
 const storage = StorageService(ImageStorageClient());
 
-export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
-  const { id } = defaultValues;
+export const GeneralForm = ({ app }: GeneralFormProps) => {
+  const { id } = app;
   const [isLoading, setIsLoading] = useState(false);
-  const { handleSubmit, register } = useForm<GeneralFormValues>({
-    defaultValues,
+  const { handleSubmit, register, control } = useForm<GeneralFormValues>({
+    defaultValues: { ...app, imgUrl: app.imgUrl || undefined },
   });
   const toast = useToast();
 
@@ -33,21 +34,14 @@ export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
   const onSubmit = async (data: GeneralFormValues) => {
     const variables = {
       newName: data.name,
-      newImgUrl: data.imgUrl,
       appId: id,
     };
 
     setIsLoading(true);
     try {
-      if (defaultValues.imgUrl && data.imgUrl !== defaultValues.imgUrl) {
-        const image = await blobFromURL(data.imgUrl);
-        const uploadUrl = await storage.updatePicture(image, defaultValues.imgUrl, 'products');
-
-        Object.assign(variables, { newImgUrl: uploadUrl });
-      } else if (!defaultValues.imgUrl) {
-        const image = await blobFromURL(data.imgUrl);
-        const uploadUrl = await storage.uploadPicture(image, 'products');
-
+      if (data.imgUrl && typeof data.imgUrl !== 'string') {
+        const uploadUrl = await storage.uploadPicture(data.imgUrl, 'products');
+        if (app.imgUrl) await storage.deletePicture(app.imgUrl, 'products');
         Object.assign(variables, { newImgUrl: uploadUrl });
       }
 
@@ -93,7 +87,14 @@ export const GeneralForm = ({ defaultValues }: GeneralFormProps) => {
 
           {/* TODO(refacto): Unecessary Box  */}
           <Box mt={4}>
-            <FormField label="Image" name="imgUrl" maxWidth={64} register={register} />
+            <FormLabel>Image</FormLabel>
+            <Controller
+              name="imgUrl"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <Dropzone value={value} onChange={onChange} />
+              )}
+            />
           </Box>
         </Box>
       </form>

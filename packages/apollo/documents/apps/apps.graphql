@@ -15,7 +15,7 @@ query getAdminApp {
   }
 }
 
-mutation UpdateApp($appId: uuid!, $newName: String!, $newImgUrl: String!) {
+mutation UpdateApp($appId: uuid!, $newName: String!, $newImgUrl: String) {
   update_app(where: { id: { _eq: $appId } }, _set: { name: $newName, imgUrl: $newImgUrl }) {
     returning {
       id
