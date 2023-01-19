@@ -7,9 +7,7 @@ export function ImageStorageClient(): StorageClient {
   return {
     uploadPicture: async (image, bucketName) => {
       const filename = uuid.v4();
-      const { error } = await supabase.storage.from(bucketName).upload(filename, image, {
-        contentType: 'image/jpeg',
-      });
+      const { error } = await supabase.storage.from(bucketName).upload(filename, image);
 
       if (error) {
         throw new Error(error.message);
