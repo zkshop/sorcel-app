@@ -1,4 +1,5 @@
-import { Td, Tr } from '@3shop/ui';
+import { Image, Td, Tr } from '@3shop/ui';
+import { Link } from 'react-router-dom';
 
 type OrderListItemProps = {
   id: string;
@@ -6,17 +7,19 @@ type OrderListItemProps = {
   firstname: string;
   email: string;
   lastname: string;
-  productId: string;
+  productImage: string;
   status: string;
+  productId: string;
 };
 
 export const OrderListItem = ({
   address,
   firstname,
   lastname,
-  productId,
   status,
   email,
+  productImage,
+  productId,
 }: OrderListItemProps) => (
   <Tr
     sx={{
@@ -30,6 +33,10 @@ export const OrderListItem = ({
     <Td>{email}</Td>
     <Td>{address}</Td>
     <Td>{status}</Td>
-    <Td>{productId}</Td>
+    <Td>
+      <Link to={`/app/product/edit/${productId}`}>
+        <Image height={50} src={productImage} alt="image" />
+      </Link>
+    </Td>
   </Tr>
 );
