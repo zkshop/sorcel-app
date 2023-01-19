@@ -1,6 +1,5 @@
 import { useToast } from '@3shop/ui';
 import { getAddProductSuccessMessage } from '@3shop/messages';
-import { blobFromURL } from '@3shop/pure';
 import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -37,8 +36,7 @@ export const AddProductFormContainer = () => {
     try {
       setStorageActionLoading(true);
 
-      const image = await blobFromURL(data.image);
-      const uploadUrl = await storage.uploadPicture(image, 'products');
+      const uploadUrl = await storage.uploadPicture(data.image, 'products');
 
       setStorageActionLoading(false);
 

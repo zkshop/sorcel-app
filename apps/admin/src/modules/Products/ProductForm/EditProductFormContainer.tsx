@@ -3,16 +3,16 @@ import { useForm, FormProvider } from 'react-hook-form';
 
 import { DeleteProductModal } from './DeleteProductModal';
 import { ProductForm } from './ProductForm';
-import type { AddProductFormValues } from './types';
+import type { EditProductFormValues } from './types';
 
-import type { Gate, Product } from '@3shop/apollo';
+import type { EditProductMutationVariables, Gate, Product } from '@3shop/apollo';
 import { useDeleteProductMutation, useEditProductMutation } from '@3shop/apollo';
 import {
   ERROR_MESSAGE,
   getDeleteProductSuccessMessage,
   getEditProductSuccessMessage,
 } from '@3shop/messages';
-import { blobFromURL, getObjectPathFromImageUrl } from '@3shop/pure';
+import { getObjectPathFromImageUrl } from '@3shop/pure';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ADD_PRODUCT_FORM_SCHEMA } from '../../../schemas';
@@ -29,12 +29,13 @@ const storage = StorageService(ImageStorageClient());
 
 export const EditProductFormContainer = ({ product, gates }: EditProductFormContainerProps) => {
   const [storageActionLoading, setStorageActionLoading] = useState(false);
-  const methods = useForm<AddProductFormValues>({
+  const methods = useForm<EditProductFormValues>({
     defaultValues: {
       ...product,
       price: product.price.toString(),
       discount: product.discount?.toString(),
       poapId: product.poapId?.toString(),
+      image: product.image,
     },
     resolver: yupResolver(ADD_PRODUCT_FORM_SCHEMA),
     mode: 'onChange',
@@ -74,9 +75,10 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
     }
   };
 
-  const onSubmit = async (data: AddProductFormValues) => {
-    const variables = {
+  const onSubmit = async (data: EditProductFormValues) => {
+    const variables: EditProductMutationVariables = {
       ...data,
+      image: data.image as string,
       id: product.id,
       price: Number(data.price),
       discount: Number(data.discount),
@@ -84,11 +86,11 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
     };
 
     try {
-      if (data.image !== product.image) {
+      if (typeof data.image !== 'string') {
         setStorageActionLoading(true);
 
-        const image = await blobFromURL(data.image);
-        const uploadUrl = await storage.updatePicture(image, product.image, 'products');
+        await storage.deletePicture(product.image, 'products');
+        const uploadUrl = await storage.uploadPicture(data.image, 'products');
 
         setStorageActionLoading(false);
         Object.assign(variables, { image: uploadUrl });

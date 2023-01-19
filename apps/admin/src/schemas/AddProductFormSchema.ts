@@ -14,7 +14,7 @@ export const ADD_PRODUCT_FORM_SCHEMA = FormValidation.object().shape({
     ),
   isDiscountGated: FormValidation.boolean(),
 
-  image: FormValidation.string().required(REQUIRED),
+  image: FormValidation.mixed().required(REQUIRED),
 
   collection: FormValidation.string(),
   curation: FormValidation.string(),
