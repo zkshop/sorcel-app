@@ -240,6 +240,7 @@ export enum App_Update_Column {
 export type App_Updates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<App_Set_Input>;
+  /** filter the rows which have to be updated */
   where: App_Bool_Exp;
 };
 
@@ -511,6 +512,7 @@ export type Gate_Updates = {
   _prepend?: InputMaybe<Gate_Prepend_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Gate_Set_Input>;
+  /** filter the rows which have to be updated */
   where: Gate_Bool_Exp;
 };
 
@@ -1074,6 +1076,7 @@ export enum Order_Update_Column {
 export type Order_Updates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Order_Set_Input>;
+  /** filter the rows which have to be updated */
   where: Order_Bool_Exp;
 };
 
@@ -1369,6 +1372,7 @@ export type Product_Updates = {
   _inc?: InputMaybe<Product_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Product_Set_Input>;
+  /** filter the rows which have to be updated */
   where: Product_Bool_Exp;
 };
 
@@ -1859,6 +1863,7 @@ export enum User_Update_Column {
 export type User_Updates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<User_Set_Input>;
+  /** filter the rows which have to be updated */
   where: User_Bool_Exp;
 };
 
@@ -1900,7 +1905,7 @@ export type GetAdminAppQuery = {
 export type UpdateAppMutationVariables = Exact<{
   appId: Scalars['uuid'];
   newName: Scalars['String'];
-  newImgUrl: Scalars['String'];
+  newImgUrl?: InputMaybe<Scalars['String']>;
 }>;
 
 export type UpdateAppMutation = {
@@ -2278,7 +2283,7 @@ export type GetAdminAppQueryResult = Apollo.QueryResult<
   GetAdminAppQueryVariables
 >;
 export const UpdateAppDocument = gql`
-  mutation UpdateApp($appId: uuid!, $newName: String!, $newImgUrl: String!) {
+  mutation UpdateApp($appId: uuid!, $newName: String!, $newImgUrl: String) {
     update_app(where: { id: { _eq: $appId } }, _set: { name: $newName, imgUrl: $newImgUrl }) {
       returning {
         id
