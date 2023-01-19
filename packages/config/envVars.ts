@@ -3,6 +3,7 @@ const GITHUB_ACTIONS = process.env.GITHUB_ACTIONS || false;
 
 function getAppId() {
   if (NODE_ENV === 'production' || GITHUB_ACTIONS) {
+    if (typeof window === 'undefined') return process.env.APP_ID;
     // @ts-ignore
     return window.__3SHOP_APP_ID__;
   }
