@@ -14,7 +14,6 @@ export const Dropzone = ({ onChange: originalOnChange, value }: DropzoneProps) =
   }
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
-  console.log({ value });
 
   return (
     <Box {...getRootProps()}>
