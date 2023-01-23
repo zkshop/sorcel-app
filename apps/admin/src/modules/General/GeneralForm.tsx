@@ -65,7 +65,7 @@ export const GeneralForm = ({ app }: GeneralFormProps) => {
   return (
     <Box>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Heading as="h2" minWidth="300px">
+        <Heading as="h2" minW="300px">
           <HStack justifyContent="space-between">
             <span> General </span>
             <Button isLoading={isLoading} isDisabled={isLoading} type="submit">

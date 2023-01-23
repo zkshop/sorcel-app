@@ -24,8 +24,8 @@ export const NftBadge = ({ title }: NftBadgeProps) => (
     _after={{
       content: "''",
       position: 'absolute',
-      width: '0px',
-      height: '0px',
+      w: 0,
+      h: 0,
       borderStyle: 'solid',
       right: '-4px',
       bottom: '-4px',

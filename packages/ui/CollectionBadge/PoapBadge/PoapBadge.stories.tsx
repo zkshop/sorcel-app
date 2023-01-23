@@ -12,11 +12,11 @@ const Template: ComponentStory<typeof PoapBadge> = (args) => (
   <Box
     sx={{
       position: 'relative',
-      width: '200px',
-      height: '300px',
-      margin: '50px auto',
+      w: '200px',
+      h: '300px',
+      m: '50px auto',
       border: '1px solid black',
-      background: 'white',
+      bg: 'white',
     }}
   >
     <PoapBadge {...args} />

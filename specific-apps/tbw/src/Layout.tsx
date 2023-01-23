@@ -9,6 +9,6 @@ export const Layout = ({ children, ...props }: LayoutProps) => (
   <Box {...props}>
     <NavBar />
 
-    <Box mt="32px">{children}</Box>
+    <Box mt={8}>{children}</Box>
   </Box>
 );

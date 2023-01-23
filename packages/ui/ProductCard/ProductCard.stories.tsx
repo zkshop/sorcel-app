@@ -9,7 +9,7 @@ export default {
 } as ComponentMeta<typeof ProductCard>;
 
 const Template: ComponentStory<typeof ProductCard> = (args) => (
-  <HStack width="216px" margin="auto">
+  <HStack w="216px" m="auto">
     <ProductCard {...args} />;
   </HStack>
 );

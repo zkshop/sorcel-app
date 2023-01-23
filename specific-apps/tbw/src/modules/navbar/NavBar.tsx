@@ -20,7 +20,7 @@ export const NavBar = () => {
   const { isConnected } = useAccount();
 
   return (
-    <VStack as="header" sx={{ p: 2, maxW: '875px', margin: 'auto' }} className={CLASSNAME}>
+    <VStack as="header" sx={{ p: 2, maxW: '875px', m: 'auto' }} className={CLASSNAME}>
       <HStack w="full">
         <HStack justifyContent="space-between" flex={1}>
           <Box

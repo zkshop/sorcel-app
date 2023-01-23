@@ -35,7 +35,7 @@ export const sizesList = [
 
 export const SizeSelector = () => (
   <Box py={6}>
-    <Text fontWeight="bold" color="black" background="#EEEEEF" width="fit-content">
+    <Text fontWeight="bold" color="black" bg="#EEEEEF" w="fit-content">
       Size
     </Text>
 
@@ -48,12 +48,12 @@ export const SizeSelector = () => (
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            minWidth: '48px',
-            height: '40px',
+            mW: '48px',
+            h: '40px',
             border: id == 3 ? '2px solid black' : '1px solid #dedde0',
           }}
         >
-          <Text fontWeight="bold" fontSize="14px" color="black" padding="2px">
+          <Text fontWeight="bold" fontSize="14px" color="black" p={0.5}>
             {name}
           </Text>
         </Box>

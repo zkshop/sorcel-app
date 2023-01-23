@@ -40,6 +40,7 @@ export const ProductCard = ({
       : {
           to,
         };
+
   return (
     <StyledProductCard
       className={classnames.PRODUCT_CARD}
@@ -65,8 +66,8 @@ export const ProductCard = ({
           fontWeight="bold"
           fontSize="14px"
           color="black"
-          marginTop="4px"
-          padding="2px"
+          mt={1}
+          p={0.5}
           textTransform="capitalize"
         >
           {title}
@@ -79,13 +80,13 @@ export const ProductCard = ({
               fontSize="14px"
               color="black"
               textDecoration={discount ? 'line-through' : 'none'}
-              marginRight={discount ? '2px' : 'none'}
+              mr={discount ? 0.5 : 0}
             >
               {`${price}€`}
             </Text>
 
             {discount && (
-              <Text fontWeight="bold" fontSize="14px" color="#FF5F1F" marginLeft="0 !important">
+              <Text fontWeight="bold" fontSize="14px" color="#FF5F1F" ml="0 !important">
                 {`${priceReduced}€`}
               </Text>
             )}
@@ -94,15 +95,15 @@ export const ProductCard = ({
           {discount !== 0 && (
             <Box
               border="1px gray solid"
-              width="50px"
+              w="50px"
               borderRadius="2xl"
-              padding="2px"
-              marginTop="4px"
+              p={0.5}
+              mt={1}
               display="flex"
               alignItems="center"
               justifyContent="center"
             >
-              <Text fontWeight="bold" fontSize="12px" color="black" padding="2px">
+              <Text fontWeight="bold" fontSize="12px" color="black" p={0.5}>
                 {`-${discount}%`}
               </Text>
             </Box>

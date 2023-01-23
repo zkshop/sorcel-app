@@ -19,7 +19,7 @@ export const CartItem = (props: CartItemProps) => {
       <CartProductMeta name={name} description={description} image={imageUrl} />
 
       {/* Desktop */}
-      <Flex width="full" justify="space-between" display={{ base: 'none', md: 'flex' }} flex={1}>
+      <Flex w="full" justify="space-between" display={{ base: 'none', md: 'flex' }} flex={1}>
         <PriceTag price={price} currency={currency} />
       </Flex>
 
@@ -27,7 +27,7 @@ export const CartItem = (props: CartItemProps) => {
       <Flex
         mt="4"
         align="center"
-        width="full"
+        w="full"
         justify="space-between"
         display={{ base: 'flex', md: 'none' }}
       >

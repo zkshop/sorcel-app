@@ -10,5 +10,7 @@ export const theme = extendTheme({
   ...borderRadius,
   ...colors,
   ...styles,
-  ...colors,
+  shadows: {
+    base: '1px 4px 4px rgb(0 0 0 / 25%)',
+  },
 });

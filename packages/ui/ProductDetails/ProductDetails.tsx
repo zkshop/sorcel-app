@@ -42,7 +42,7 @@ export const ProductDetails = ({
 
     <Flex alignItems="stretch" sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
       <Flex justifyContent="center">
-        <Image alt="product" height={400} width={400} src={srcItem} />
+        <Image alt="product" height={400} w={400} src={srcItem} />
       </Flex>
 
       <VStack flex={1} justifyContent="space-between">
@@ -54,9 +54,9 @@ export const ProductDetails = ({
               color="black"
               mt={1}
               p={1}
-              background="#EEEEEF"
+              bg="#EEEEEF"
               textTransform="capitalize"
-              width="fit-content"
+              w="fit-content"
             >
               {title}
             </Text>
@@ -73,21 +73,21 @@ export const ProductDetails = ({
           </Text>
         </VStack>
 
-        <VStack flex={1} width="100%" p={2} alignItems="stretch" justifyContent="end">
+        <VStack flex={1} w="100%" p={2} alignItems="stretch" justifyContent="end">
           {/* <SizeSelector /> */}
           <Box display="flex" justifyContent="space-between" alignItems="flex-end">
             {discount ? (
               <Box
                 border="1px #dedde0 solid"
-                width="50px"
+                w="50px"
                 borderRadius="2xl"
-                padding="2px"
-                marginTop="4px"
+                p={0.5}
+                mt={1}
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
               >
-                <Text fontWeight="bold" fontSize="14px" color="black" padding="2px">
+                <Text fontWeight="bold" fontSize="14px" color="black" p={0.5}>
                   {`-${discount}%`}
                 </Text>
               </Box>
@@ -100,14 +100,14 @@ export const ProductDetails = ({
                 fontWeight="bold"
                 fontSize="16px"
                 color="black"
-                padding="2px"
+                p={0.5}
                 textDecoration={discount ? 'line-through' : 'none'}
                 marginRight={discount ? '2px' : 'none'}
               >
                 {`${price}€`}
               </Text>
               {discount && (
-                <Text fontWeight="bold" fontSize="16px" color="#FF5F1F" padding="2px">
+                <Text fontWeight="bold" fontSize="16px" color="#FF5F1F" p={0.5}>
                   {`${priceReduced}€`}
                 </Text>
               )}
@@ -119,7 +119,7 @@ export const ProductDetails = ({
               <Button
                 as={Link}
                 height="48px"
-                width="100%"
+                w="100%"
                 borderRadius="2xl"
                 p={1}
                 isDisabled={isLocked}

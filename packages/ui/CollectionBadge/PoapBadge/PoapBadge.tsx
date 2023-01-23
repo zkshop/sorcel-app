@@ -25,8 +25,8 @@ export const PoapBadge = ({ imgUrl }: PoapBadgeProps) => {
         right: Math.round(-boxSize / 3),
         transition: 'width 2s, height 2s, background-color 2s, transform 3s',
       }}
-      width={boxSize}
-      height={boxSize}
+      w={boxSize}
+      h={boxSize}
     >
       <Image
         src={imgUrl}

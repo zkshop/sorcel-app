@@ -11,7 +11,7 @@ export const StyledProductDetails = styled.div(
   ({ theme }: StyledProductDetailsProps) => css`
     position: relative;
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+    box-shadow: ${theme?.shadows.base};
     margin-top: 32px !important;
     border-radius: ${theme?.radii['2xl']};
   `,

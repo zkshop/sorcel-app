@@ -11,9 +11,9 @@ export const StyledProductCard = styled('div')(
   ({ theme }: StyledProductCardProps) => css`
     position: relative;
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: ${theme?.shadows.base};
     margin-top: 32px !important;
     width: 100%;
-    border-radius: ${theme?.radii['2xl']};
+    border-radius: ${theme?.radii.md};
   `,
 );

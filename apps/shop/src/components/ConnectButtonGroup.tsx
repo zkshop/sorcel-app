@@ -36,8 +36,8 @@ export function ConnectButtonGroup({
           fontWeight="700"
           borderRadius="xl"
           sx={{
-            maxWidth: '150px',
-            minWidth: '150px',
+            maxW: '150px',
+            minW: '150px',
           }}
         >
           {truncate(userEmail)}
@@ -49,8 +49,8 @@ export function ConnectButtonGroup({
           fontWeight="700"
           borderRadius="xl"
           sx={{
-            maxWidth: '100px',
-            minWidth: '100px',
+            maxW: '100px',
+            minW: '100px',
           }}
         >
           Logout

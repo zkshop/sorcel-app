@@ -49,14 +49,14 @@ export const ProductCard = ({
         alt="product"
         src={srcItem}
         sx={{
-          height: '140px',
-          width: '100%',
+          h: '140px',
+          w: '100%',
         }}
       />
 
       <Box
         sx={{
-          height: '140px',
+          h: '140px',
           p: '8px',
         }}
       >
@@ -75,7 +75,7 @@ export const ProductCard = ({
             fontWeight: '400',
             fontSize: '16px',
             lineHeight: '17px',
-            marginTop: '8px',
+            mt: '8px',
           }}
         >
           {description}

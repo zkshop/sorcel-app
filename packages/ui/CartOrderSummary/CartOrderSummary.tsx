@@ -40,7 +40,7 @@ export const CartOrderSummary = ({ amount, isDisabled, fees = 0 }: CartOrderSumm
   <Stack
     spacing="8"
     rounded="lg"
-    width="full"
+    w="full"
     sx={{
       bg: 'white',
       p: 8,

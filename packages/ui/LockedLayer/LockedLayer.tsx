@@ -27,7 +27,7 @@ export const LockedLayer = ({ isLocked, collectionName = '', size = 'md' }: Lock
           flexDirection: 'column',
           alignItems: 'center',
           bg: 'black',
-          borderRadius: '2xl',
+          borderRadius: 'md',
         }}
       />
 
@@ -40,7 +40,7 @@ export const LockedLayer = ({ isLocked, collectionName = '', size = 'md' }: Lock
           textAlign: 'center',
           color: 'white',
           fontWeight: 'bold',
-          width: '100%',
+          w: '100%',
         }}
         top={size === 'lg' ? 190 : 90}
         fontSize={size === 'lg' ? '2xl' : 'lg'}

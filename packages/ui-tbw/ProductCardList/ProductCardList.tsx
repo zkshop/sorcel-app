@@ -37,7 +37,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
     className={CLASSNAME}
     sx={{
       maxW: '768px',
-      margin: '0 auto',
+      m: '0 auto',
     }}
   >
     <Grid gap={3} templateColumns={templateColumns}>
