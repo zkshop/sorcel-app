@@ -56,7 +56,8 @@ export const ProductCard = ({
           borderRadius="2xl"
           sx={{
             position: 'relative',
-            height: { xs: '150px', sm: '160px', md: '200px' },
+            height: { xs: '150px', sm: '160px', md: '256px' },
+            width: { xs: '150px', sm: '160px', md: '283px' },
           }}
         >
           <Image alt="product" src={srcItem} w="full" h="full" />
@@ -65,7 +66,7 @@ export const ProductCard = ({
         <Text
           fontWeight="bold"
           fontSize="14px"
-          color="black"
+          color="secondary"
           mt={1}
           p={0.5}
           textTransform="capitalize"
@@ -78,7 +79,7 @@ export const ProductCard = ({
             <Text
               fontWeight="bold"
               fontSize="14px"
-              color="black"
+              color="secondary"
               textDecoration={discount ? 'line-through' : 'none'}
               mr={discount ? 0.5 : 0}
             >
@@ -86,7 +87,7 @@ export const ProductCard = ({
             </Text>
 
             {discount && (
-              <Text fontWeight="bold" fontSize="14px" color="#FF5F1F" ml="0 !important">
+              <Text fontWeight="bold" fontSize="14px" color="discount" ml="0 !important">
                 {`${priceReduced}€`}
               </Text>
             )}
@@ -103,7 +104,7 @@ export const ProductCard = ({
               alignItems="center"
               justifyContent="center"
             >
-              <Text fontWeight="bold" fontSize="12px" color="black" p={0.5}>
+              <Text fontWeight="bold" fontSize="12px" color="secondary" p={0.5}>
                 {`-${discount}%`}
               </Text>
             </Box>

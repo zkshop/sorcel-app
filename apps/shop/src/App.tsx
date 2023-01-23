@@ -14,11 +14,10 @@ import { router } from './Router';
 
 export const App = () => {
   const apolloClient = useApollo();
-
   return (
     <ReduxProvider store={store}>
       <ApolloProvider client={apolloClient}>
-        <ThemeProvider>
+        <ThemeProvider mode="ALTERNATIVE">
           <WagmiConfig client={wagmiClient}>
             <RainbowKitProvider chains={chains}>
               <RouterProvider router={router} />

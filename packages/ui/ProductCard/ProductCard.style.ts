@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from '@chakra-ui/react';
+import type { Theme } from '@3shop/ui';
 
 import styled from '@emotion/styled';
 
@@ -10,9 +10,10 @@ type StyledProductCardProps = {
 export const StyledProductCard = styled('div')(
   ({ theme }: StyledProductCardProps) => css`
     position: relative;
-    background-color: white;
+    color: ${theme?.colors.secondary};
+    background-color: ${theme?.colors.primary};
     box-shadow: ${theme?.shadows.base};
-    margin-top: 32px !important;
+    margin-top: ${theme?.space[8]} !important;
     width: 100%;
     border-radius: ${theme?.radii.md};
   `,

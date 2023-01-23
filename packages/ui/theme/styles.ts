@@ -3,7 +3,6 @@ export const styles = {
     global: {
       body: {
         bg: 'white',
-        color: '#202249',
       },
     },
   },
