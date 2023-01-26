@@ -1,0 +1,12 @@
+{
+  "name": "@3shop/stripe",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix"
+  },
+  "dependencies": {
+    "@3shop/config": "*",
+    "stripe": "^11.7.0"
+  }
+}
