@@ -1,4 +1,4 @@
-import { queryHasura } from './queryHasura';
+import hasura from './hasura';
 
 // TODO: use generated documents from @3shop/apollo
 export async function getUser(email: string) {
@@ -17,7 +17,7 @@ export async function getUser(email: string) {
   };
 
   try {
-    const data = await queryHasura(payload);
+    const data = await hasura.query(payload);
 
     return data?.data?.user_by_pk;
   } catch (error) {
