@@ -38,12 +38,14 @@ export const formatProductData = ({
   })();
 
   const highlight = id === CONFIG_TBW_HIGHLIGHTED_PRODUCT_ID;
-  const externalLink = getExternalLink(id, gate, isAnNftHolder);
+  const externalLink = getExternalLink(id, gate, isAnNftHolder, !!curation);
+
   if (typeof window !== 'undefined') {
     setTimeout(() => {
       window?.MemberStack?.reload();
     }, 500);
   }
+
   const isLocked = !externalLink;
   const targetAttribute = getTargetAttribute(id);
 

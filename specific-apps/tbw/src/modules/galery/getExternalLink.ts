@@ -1,5 +1,9 @@
 import type { Gate } from '@3shop/apollo';
 
+// NFT PARIS TICKETS
+const NFT_PARIS_LINK_15_PRODUCT_ID = '8e290649-1080-4c95-946f-c5d688661ad4';
+const NFT_PARIS_LINK_15 = 'https://guts.events/vnl6vw/m0x69w';
+
 // AMA
 const AMA_PRODUCT_ID = '28f10d56-2585-4697-805b-51114ae34250';
 const AMA_LINK = 'https://pp1zlmd4hp1.typeform.com/to/AQHEscSY';
@@ -43,8 +47,16 @@ const getMemberStackLink = (gate: Gate) => {
   return `${MS_LINK_PREFIX}${correctplan}`;
 };
 
-export const getExternalLink = (productId: string, gate: Gate | null, isAnNftHolder: boolean) => {
+export const getExternalLink = (
+  productId: string,
+  gate: Gate | null,
+  isAnNftHolder: boolean,
+  curation: boolean,
+) => {
   if (!isAnNftHolder) {
+    if (!curation && productId === NFT_PARIS_LINK_15_PRODUCT_ID) {
+      return NFT_PARIS_LINK_15;
+    }
     return '';
   }
 
