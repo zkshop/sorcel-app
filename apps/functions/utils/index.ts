@@ -1,4 +1,4 @@
 export * from './getBlobFromURL';
 export * from './getUser';
-export * from './queryHasura';
+export * from './hasura';
 export * from './extractTokenFromBearerToken';
