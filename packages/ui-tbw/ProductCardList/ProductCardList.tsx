@@ -18,6 +18,7 @@ export type FormatedProductData = {
   highlight?: boolean;
   targetAttribute?: string;
   isWithHref?: boolean;
+  isNFTParisModal?: boolean;
 };
 
 type ProductCardListProps = {
@@ -54,6 +55,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
           highlight,
           isLocked,
           targetAttribute,
+          isNFTParisModal,
         }) => (
           <GridItem key={`products-${id}`} display="flex" justifyContent="center">
             <ProductCard
@@ -67,6 +69,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
               externalLink={externalLink}
               highlight={highlight}
               isLocked={isLocked}
+              isNFTParisModal={isNFTParisModal}
               targetAttribute={targetAttribute}
             />
           </GridItem>

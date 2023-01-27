@@ -1,9 +1,10 @@
-import { Buffer as BufferPolyfill } from 'buffer';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-declare let Buffer: typeof BufferPolyfill;
-globalThis.Buffer = BufferPolyfill;
+// TODO: uncomment this before building
+// import { Buffer as BufferPolyfill } from 'buffer';
+// // eslint-disable-next-line @typescript-eslint/no-unused-vars
+// declare let Buffer: typeof BufferPolyfill;
+// globalThis.Buffer = BufferPolyfill;
 
-(window.global as any) = globalThis;
+// (window.global as any) = globalThis;
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './App';
