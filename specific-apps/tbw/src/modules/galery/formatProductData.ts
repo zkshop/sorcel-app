@@ -9,6 +9,7 @@ export type GetProductCardPropsParams = Product & {
 };
 
 const CONFIG_TBW_HIGHLIGHTED_PRODUCT_ID = 'ebb24d16-6b6f-464b-bb54-897482b4bc67';
+const NFT_PARIS_LINK_50_PRODUCT_ID = '9b274f32-a5d8-41a2-b6d1-1f5042563967';
 
 export const formatProductData = ({
   image,
@@ -38,7 +39,10 @@ export const formatProductData = ({
   })();
 
   const highlight = id === CONFIG_TBW_HIGHLIGHTED_PRODUCT_ID;
+  const isNFTParisModal = id === NFT_PARIS_LINK_50_PRODUCT_ID && isAnNftHolder;
   const externalLink = getExternalLink(id, gate, isAnNftHolder, !!curation);
+  const isLocked = !externalLink && !isNFTParisModal;
+  const targetAttribute = getTargetAttribute(id);
 
   if (typeof window !== 'undefined') {
     setTimeout(() => {
@@ -46,11 +50,9 @@ export const formatProductData = ({
     }, 500);
   }
 
-  const isLocked = !externalLink;
-  const targetAttribute = getTargetAttribute(id);
-
   return {
     isLocked,
+    isNFTParisModal,
     highlight,
     externalLink,
     targetAttribute,
