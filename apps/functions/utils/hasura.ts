@@ -1,11 +1,6 @@
 import { envVars } from '@3shop/config';
 import axios from 'axios';
 
-type MutationPayload = {
-  mutation: string;
-  variables?: object;
-};
-
 type QueryPayload = {
   query: string;
   variables?: object;
@@ -26,7 +21,7 @@ export async function query(payload: QueryPayload) {
   return res.data;
 }
 
-export async function mutate(payload: MutationPayload) {
+export async function mutate(payload: QueryPayload) {
   const res = await axios(envVars.PUBLIC_HASURA_API_URL || '', {
     method: 'POST',
     headers: {

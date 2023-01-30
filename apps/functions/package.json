@@ -14,6 +14,7 @@
     "@3shop/poap": "*",
     "@3shop/pure": "*",
     "@3shop/sendinblue": "*",
+    "@3shop/stripe": "*",
     "@3shop/supabase": "*",
     "@types/jsonwebtoken": "^8.5.9",
     "@vercel/node": "^2.7.1",
