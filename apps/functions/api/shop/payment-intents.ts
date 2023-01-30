@@ -8,7 +8,7 @@ import { formatAmountForStripe } from '../../utils/formatAmountForStripe';
 import { allowCors } from '../../middlewares/allowCors';
 import { method } from '../../middlewares/method';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status';
-import { queryHasura } from '../../utils';
+import { query } from '../../utils';
 
 const stripe = new Stripe(envVars.SECRET_STRIPE || '', {
   apiVersion: '2022-11-15',
@@ -35,7 +35,7 @@ const getProductByIdQuery = `
 
 async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    const { data } = await queryHasura({
+    const { data } = await query({
       query: getProductByIdQuery,
       variables: { id: req.body.productId },
     });
