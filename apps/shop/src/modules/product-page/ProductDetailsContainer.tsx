@@ -1,6 +1,6 @@
 import { ProductDetails } from '@3shop/ui';
 
-import type { Product } from '@3shop/apollo';
+import type { Gate, Product } from '@3shop/apollo';
 import { useGetGatesQuery } from '@3shop/apollo';
 import { formatProductData } from '@3shop/pure';
 import { useAppSelector } from '@3shop/store';
@@ -10,6 +10,8 @@ import { gateVerifier } from '../shop/gateVerifier';
 type ProductDetailsContainerProps = {
   product: Product;
 };
+const getAssociatedGates = (gates: Gate[], productId: string) =>
+  gates.filter((gate) => gate.product_id === productId);
 
 export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProps) => {
   const nfts = useAppSelector((state) => state.user.nfts);
@@ -22,6 +24,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   const gates = data?.gates.slice() || [];
   const sortedGates = gates.sort((a, b) => b.discount - a.discount);
   const activeGate = gateVerifier(findProductGates(product.id, sortedGates), nfts);
+  const associatedGates = getAssociatedGates(gates, product.id);
 
   const {
     collection,
@@ -35,7 +38,14 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
     id,
     poapUrl,
     poapImgUrl,
-  } = formatProductData({ ...product, poapIds, collections, poapImageList, gates, activeGate });
+  } = formatProductData({
+    ...product,
+    poapIds,
+    collections,
+    poapImageList,
+    gates: associatedGates,
+    activeGate,
+  });
 
   return (
     <ProductDetails
