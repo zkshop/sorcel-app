@@ -62,7 +62,7 @@ export const NavBar = ({ admin }: NavBarProps) => {
   };
 
   return (
-    <VStack className={classnames.NAVBAR} as="header" sx={{ py: 3, px: { xs: 2, md: 4, lg: 6 } }}>
+    <VStack className={classnames.NAVBAR} as="header" sx={{ py: 2, px: { xs: 3, md: 6, lg: 8 } }}>
       <HStack w="full">
         <HStack justifyContent="space-between" flex={1}>
           <Link to="/">

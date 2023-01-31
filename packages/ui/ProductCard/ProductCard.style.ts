@@ -8,12 +8,10 @@ type StyledProductCardProps = {
 };
 
 export const StyledProductCard = styled('div')(
-  ({ theme }: StyledProductCardProps) => css`
+  ({}: StyledProductCardProps) => css`
     position: relative;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    margin-top: 32px !important;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    border-radius: ${theme?.radii['2xl']};
   `,
 );

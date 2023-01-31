@@ -1,16 +1,4 @@
-import {
-  Box,
-  Table,
-  TableContainer,
-  Tbody,
-  Th,
-  Thead,
-  Tr,
-  Link,
-  Button,
-  Header,
-  Spinner,
-} from '@3shop/ui';
+import { Box, Table, Link, Button, Header, Spinner } from '@3shop/ui';
 
 import { PRODUCT_ATTRIBUTES } from './constants';
 import { ProductListItem } from './ProductListItem';

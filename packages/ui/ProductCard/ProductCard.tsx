@@ -1,9 +1,9 @@
 import { Box, Text, HStack, Image } from '@chakra-ui/react';
-import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 import { StyledProductCard } from './ProductCard.style';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
 import { classnames } from '@3shop/config';
 import { Link } from 'react-router-dom';
+import { DiscountTag } from './DiscountTag';
 
 export type ProductCardProps = {
   id?: string;
@@ -21,6 +21,7 @@ export type ProductCardProps = {
 };
 
 export const ProductCard = ({
+  id,
   srcItem,
   title,
   discount,
@@ -28,9 +29,6 @@ export const ProductCard = ({
   priceReduced,
   collection,
   isLocked = false,
-  id,
-  poapUrl,
-  poapImgUrl,
   isWithHref = true,
 }: ProductCardProps) => {
   const to = `product/${id}`;
@@ -40,75 +38,73 @@ export const ProductCard = ({
       : {
           to,
         };
+  const isDiscount = !!discount;
+
   return (
     <StyledProductCard
-      className={classnames.PRODUCT_CARD}
+      className={classnames.PRODUCT_CARD.CONTAINER}
       as={isLocked ? 'div' : Link}
       {...additionalProps}
     >
-      <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} href={poapUrl} />
+      <Box
+        className={classnames.PRODUCT_CARD.IMG_CONTAINER}
+        sx={{
+          position: 'relative',
+          mb: 2,
+          bg: 'lightgray',
+          flex: 1,
+        }}
+      >
+        <Image
+          className={classnames.PRODUCT_CARD.IMG}
+          alt="product"
+          src={srcItem}
+          w="full"
+          h="full"
+          objectFit="cover"
+        />
+      </Box>
 
-      <LockedLayer isLocked={isLocked} collectionName={collection} />
+      <Text
+        className={classnames.PRODUCT_CARD.TITLE}
+        h="16px"
+        fontWeight="bold"
+        fontSize="14px"
+        color="black"
+        mb={2}
+        textTransform="capitalize"
+        letterSpacing={0.5}
+      >
+        {title}
+      </Text>
 
-      <Box p={2}>
-        <Box
-          borderRadius="2xl"
-          sx={{
-            position: 'relative',
-            height: { xs: '150px', sm: '160px', md: '200px' },
-          }}
-        >
-          <Image alt="product" src={srcItem} w="full" h="full" />
-        </Box>
-
+      <HStack className={classnames.PRODUCT_CARD.PRICING_ZONE} h="16px">
         <Text
+          className={classnames.PRODUCT_CARD.PRICE}
           fontWeight="bold"
           fontSize="14px"
           color="black"
-          marginTop="4px"
-          padding="2px"
-          textTransform="capitalize"
+          textDecoration={discount ? 'line-through' : 'none'}
+          marginRight={discount ? '2px' : 'none'}
         >
-          {title}
+          {`${price}€`}
         </Text>
 
-        <Box display="flex" justifyContent="space-between" alignItems="center" mt={4}>
-          <HStack px={1}>
-            <Text
-              fontWeight="bold"
-              fontSize="14px"
-              color="black"
-              textDecoration={discount ? 'line-through' : 'none'}
-              marginRight={discount ? '2px' : 'none'}
-            >
-              {`${price}€`}
-            </Text>
+        {isDiscount && (
+          <Text
+            className={classnames.PRODUCT_CARD.REDUCED_PRICE}
+            fontWeight="bold"
+            fontSize="14px"
+            color="red"
+            marginLeft="0 !important"
+          >
+            {`${priceReduced}€`}
+          </Text>
+        )}
+      </HStack>
 
-            {discount && (
-              <Text fontWeight="bold" fontSize="14px" color="#FF5F1F" marginLeft="0 !important">
-                {`${priceReduced}€`}
-              </Text>
-            )}
-          </HStack>
-
-          {discount !== 0 && (
-            <Box
-              border="1px gray solid"
-              width="50px"
-              borderRadius="2xl"
-              padding="2px"
-              marginTop="4px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Text fontWeight="bold" fontSize="12px" color="black" padding="2px">
-                {`-${discount}%`}
-              </Text>
-            </Box>
-          )}
-        </Box>
-      </Box>
+      {isLocked && <LockedLayer collectionName={collection} />}
+      {isDiscount && <DiscountTag discount={discount} />}
     </StyledProductCard>
   );
 };
