@@ -14,8 +14,8 @@ const templateColumns = {
 };
 
 export const ProductCardList = ({ products }: ProductCardListProps) => (
-  <Box className={classnames.PRODUCT_CARD_LIST}>
-    <Grid gap={8} templateColumns={templateColumns}>
+  <Box className={classnames.PRODUCT_CARD_LIST.CONTAINER}>
+    <Grid templateColumns={templateColumns} gridRowGap={6} gridColumnGap={3}>
       {products.map(
         ({
           id,
