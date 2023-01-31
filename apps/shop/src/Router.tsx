@@ -4,7 +4,7 @@ import { Success } from '@/routes/Success';
 import { Shipping } from '@/routes/Shipping';
 import { Product } from '@/routes/Product';
 import { Checkout } from '@/routes/Checkout';
-import { Layout } from './components/Layout';
+import { Layout } from '@/components/Layout';
 
 const router = createMemoryRouter(
   createRoutesFromElements(
