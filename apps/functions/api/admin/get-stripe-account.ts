@@ -8,9 +8,9 @@ import { method } from '../../middlewares/method';
 const account = MoneyAccountService(StripeAccountCreator());
 
 async function handler(req: VercelRequest, res: VercelResponse) {
-  try {
-    const { accountId } = req.query as { accountId: string };
+  const { accountId } = req.query as { accountId: string };
 
+  try {
     const retrievedAccount = await account.getAccount(accountId);
 
     return res.status(OK).send({ account: retrievedAccount });

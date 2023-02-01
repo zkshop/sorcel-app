@@ -25,5 +25,16 @@ export function JsonWebTokenClient(): AuthorizationTokenClient {
         throw new Error('Invalid JWT env');
       }
     },
+    decodeAppId: (token) => {
+      const decoded = jwt.decode(token, { complete: true });
+      if (!decoded || !decoded.payload) {
+        throw new Error('Could not decode JWT');
+      }
+
+      // @ts-ignore
+      const { 'https://hasura.io/jwt/claims': claims } = decoded.payload;
+
+      return claims['x-hasura-user-id'] as string;
+    },
   };
 }
