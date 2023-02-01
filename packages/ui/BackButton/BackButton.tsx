@@ -1,6 +1,7 @@
-import { HStack, Text } from '@chakra-ui/react';
+import { HStack } from '@chakra-ui/react';
 import { OutlineArrowLeftIcon } from '../Icons';
 import { Link } from 'react-router-dom';
+import { Text } from '../Text/Text';
 
 type BackButtonProps = {
   text?: string;
@@ -8,10 +9,10 @@ type BackButtonProps = {
 };
 
 export const BackButton = ({ text = 'Go back', href }: BackButtonProps) => (
-  <HStack as={Link} to={href} sx={{ w: '100%', cursor: 'pointer', textDecoration: 'underline' }}>
+  <HStack as={Link} to={href} w="full" cursor="pointer" textDecoration="underline">
     <OutlineArrowLeftIcon />
 
-    <Text fontSize="14px" fontWeight="bold">
+    <Text fontSize="14px" fontWeight="bold" py={2}>
       {text}
     </Text>
   </HStack>

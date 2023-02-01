@@ -1,4 +1,5 @@
-import { Box, HStack, Text } from '@chakra-ui/react';
+import { Box, HStack } from '@chakra-ui/react';
+import { Text } from '../Text/Text';
 
 export const sizesList = [
   {

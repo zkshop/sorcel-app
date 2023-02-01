@@ -32,7 +32,7 @@ export const Product = () => {
         }}
       />
 
-      <BackButton text="Go back" href="/" />
+      <BackButton href="/" />
 
       {product ? <ProductDetailsContainer product={product} /> : <Spinner />}
     </VStack>

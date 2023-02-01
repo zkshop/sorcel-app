@@ -10,6 +10,7 @@ export * from './CollectionBadge/NftBadge/NftBadge';
 export * from './CollectionBadge/PoapBadge/PoapBadge';
 export * from './FormField/FormField';
 export * from './Header/Header';
+export * from './Heading/Heading';
 export * from './Icons';
 export * from './MainLayout/MainLayout';
 export * from './ProductCard/ProductCard';
@@ -19,7 +20,9 @@ export * from './Section/Section';
 export * from './SizeSelector/SizeSelector';
 export * from './Spinner';
 export * from './Table';
+export * from './Text/Text';
 export * from './TextInput/TextInput';
+export * from './FormLabel/FormLabel';
 export * from './theme';
 export * from './VerticalMenu/VerticalMenu';
 
@@ -35,8 +38,6 @@ export {
   Flex,
   FormControl,
   FormErrorMessage,
-  FormLabel,
-  Heading,
   HStack,
   Input,
   Image,
@@ -61,7 +62,6 @@ export {
   Thead,
   Tr,
   Td,
-  Text,
   UnorderedList,
   useDisclosure,
   useToast,

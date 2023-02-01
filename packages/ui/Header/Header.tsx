@@ -1,6 +1,7 @@
-import { Heading, HStack } from '@chakra-ui/react';
+import { HStack } from '@chakra-ui/react';
 
 import type { WithOptionalChildren } from '@3shop/types';
+import { Heading } from '../Heading/Heading';
 
 type HeaderProps = WithOptionalChildren<{ title: string }>;
 

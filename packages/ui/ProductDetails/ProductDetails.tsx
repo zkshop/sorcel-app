@@ -1,9 +1,10 @@
-import { Box, Text, Button, VStack, Image, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Button, VStack, Image, Grid, GridItem } from '@chakra-ui/react';
 import { TriangleUpIcon } from '../Icons';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
 import { Link } from 'react-router-dom';
 import type { Nullable } from '@3shop/types';
 import { classnames } from '@3shop/config';
+import { Text } from '../Text/Text';
 
 type ProductDetailsProps = {
   id?: string;
@@ -64,7 +65,6 @@ export const ProductDetails = ({
               color="black"
               mt={1}
               p={1}
-              background="#EEEEEF"
               textTransform="capitalize"
               width="fit-content"
             >
