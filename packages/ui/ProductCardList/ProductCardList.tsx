@@ -15,7 +15,12 @@ const templateColumns = {
 
 export const ProductCardList = ({ products }: ProductCardListProps) => (
   <Box className={classnames.PRODUCT_CARD_LIST.CONTAINER}>
-    <Grid templateColumns={templateColumns} gridRowGap={6} gridColumnGap={3}>
+    <Grid
+      className={classnames.PRODUCT_CARD_LIST.GRID}
+      templateColumns={templateColumns}
+      gridRowGap={6}
+      gridColumnGap={3}
+    >
       {products.map(
         ({
           id,
@@ -30,7 +35,12 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
           discount,
           isWithHref,
         }) => (
-          <GridItem key={`products-${id}`} display="flex" justifyContent="center">
+          <GridItem
+            key={`products-${id}`}
+            className={classnames.PRODUCT_CARD_LIST.GRID_ITEM}
+            display="flex"
+            justifyContent="center"
+          >
             <ProductCard
               id={id}
               title={title}
