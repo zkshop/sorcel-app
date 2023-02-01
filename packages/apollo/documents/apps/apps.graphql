@@ -12,6 +12,7 @@ query getAdminApp {
     id
     name
     imgUrl
+    moneyAccountId
   }
 }
 

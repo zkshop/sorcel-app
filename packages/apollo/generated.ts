@@ -83,7 +83,7 @@ export type App = {
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   imgUrl?: Maybe<Scalars['String']>;
-  isZKP?: Maybe<Scalars['Boolean']>;
+  moneyAccountId?: Maybe<Scalars['String']>;
   name: Scalars['String'];
 };
 
@@ -116,7 +116,7 @@ export type App_Bool_Exp = {
   deliveryTaxesTableName?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   imgUrl?: InputMaybe<String_Comparison_Exp>;
-  isZKP?: InputMaybe<Boolean_Comparison_Exp>;
+  moneyAccountId?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -131,7 +131,7 @@ export type App_Insert_Input = {
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
-  isZKP?: InputMaybe<Scalars['Boolean']>;
+  moneyAccountId?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -141,6 +141,7 @@ export type App_Max_Fields = {
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   imgUrl?: Maybe<Scalars['String']>;
+  moneyAccountId?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
@@ -150,6 +151,7 @@ export type App_Min_Fields = {
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   imgUrl?: Maybe<Scalars['String']>;
+  moneyAccountId?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
@@ -174,7 +176,7 @@ export type App_Order_By = {
   deliveryTaxesTableName?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   imgUrl?: InputMaybe<Order_By>;
-  isZKP?: InputMaybe<Order_By>;
+  moneyAccountId?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
 };
 
@@ -192,7 +194,7 @@ export enum App_Select_Column {
   /** column name */
   ImgUrl = 'imgUrl',
   /** column name */
-  IsZkp = 'isZKP',
+  MoneyAccountId = 'moneyAccountId',
   /** column name */
   Name = 'name',
 }
@@ -202,7 +204,7 @@ export type App_Set_Input = {
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
-  isZKP?: InputMaybe<Scalars['Boolean']>;
+  moneyAccountId?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -219,7 +221,7 @@ export type App_Stream_Cursor_Value_Input = {
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
-  isZKP?: InputMaybe<Scalars['Boolean']>;
+  moneyAccountId?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -232,7 +234,7 @@ export enum App_Update_Column {
   /** column name */
   ImgUrl = 'imgUrl',
   /** column name */
-  IsZkp = 'isZKP',
+  MoneyAccountId = 'moneyAccountId',
   /** column name */
   Name = 'name',
 }
@@ -1911,7 +1913,13 @@ export type GetAdminAppQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetAdminAppQuery = {
   __typename?: 'query_root';
-  app: Array<{ __typename?: 'app'; id: any; name: string; imgUrl?: string | null }>;
+  app: Array<{
+    __typename?: 'app';
+    id: any;
+    name: string;
+    imgUrl?: string | null;
+    moneyAccountId?: string | null;
+  }>;
 };
 
 export type UpdateAppMutationVariables = Exact<{
@@ -2255,6 +2263,7 @@ export const GetAdminAppDocument = gql`
       id
       name
       imgUrl
+      moneyAccountId
     }
   }
 `;

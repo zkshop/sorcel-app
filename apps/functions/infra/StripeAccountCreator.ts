@@ -13,6 +13,7 @@ export function StripeAccountCreator(): MoneyAccountClient {
 
       return link.url;
     },
+
     createAccount: async () => {
       const account = await stripe.accounts.create({
         type: 'express',
@@ -28,7 +29,6 @@ export function StripeAccountCreator(): MoneyAccountClient {
     getAccount: async (accountId) => {
       const accountFromStripe = await stripe.accounts.retrieve(accountId);
       const pendingVerification = accountFromStripe.requirements?.pending_verification;
-      console.log(accountFromStripe);
 
       const account: MoneyAccount = {
         id: accountFromStripe.id,
