@@ -4,9 +4,9 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Heading,
   VStack,
   ChevronUpIcon,
+  Heading,
 } from '@3shop/ui';
 import type { NftAttribute } from '@3shop/domains';
 

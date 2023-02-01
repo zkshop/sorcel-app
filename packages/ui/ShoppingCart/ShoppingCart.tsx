@@ -1,6 +1,7 @@
-import { Stack, Heading } from '@chakra-ui/react';
+import { Stack } from '@chakra-ui/react';
 
 import { CartItem } from '../CartItem/CartItem';
+import { Heading } from '../Heading/Heading';
 
 import { cartData } from './_data';
 

@@ -1,15 +1,9 @@
-import {
-  Button,
-  Flex,
-  Heading,
-  Link,
-  Stack,
-  Text,
-  useColorModeValue as mode,
-} from '@chakra-ui/react';
+import { Button, Flex, Link, Stack, useColorModeValue as mode } from '@chakra-ui/react';
+import { Heading } from '../Heading/Heading';
 import { ArrowRightIcon } from '../Icons';
 
 import { formatPrice } from '../PriceTag/PriceTag';
+import { Text } from '../Text/Text';
 
 type CartOrderSummaryProps = {
   amount: number;
@@ -42,7 +36,6 @@ export const CartOrderSummary = ({ amount, isDisabled, fees = 0 }: CartOrderSumm
     rounded="lg"
     width="full"
     sx={{
-      bg: 'white',
       p: 8,
       border: '1px solid lightgrey',
     }}

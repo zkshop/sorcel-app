@@ -1,5 +1,6 @@
 import { classnames } from '@3shop/config';
-import { Box, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import { Text } from '../Text/Text';
 
 type DiscountTagProps = {
   discount: number;
