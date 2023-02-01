@@ -1,4 +1,4 @@
-import { VStack, BackButton } from '@3shop/ui';
+import { VStack, BackButton, Spinner } from '@3shop/ui';
 
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import { useAccount } from 'wagmi';
@@ -34,11 +34,7 @@ export const Product = () => {
 
       <BackButton text="Go back" href="/" />
 
-      {product ? (
-        <ProductDetailsContainer product={product} />
-      ) : (
-        <div> No corresponding product </div>
-      )}
+      {product ? <ProductDetailsContainer product={product} /> : <Spinner />}
     </VStack>
   );
 };

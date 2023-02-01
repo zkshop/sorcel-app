@@ -17,7 +17,7 @@ export const DiscountTag = ({ discount }: DiscountTagProps) => (
     letterSpacing={0.8}
     lineHeight="16px"
   >
-    <Text className={classnames.PRODUCT_CARD.DISCOUNT_TAG_LABEL} fontSize="12px" p={0.5}>
+    <Text className={classnames.PRODUCT_CARD.DISCOUNT_TAG_TEXT} fontSize="12px" p={0.5}>
       {`-${discount}%`}
     </Text>
   </Box>

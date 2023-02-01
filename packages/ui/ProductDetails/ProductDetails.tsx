@@ -1,10 +1,9 @@
-import { Box, Text, Button, HStack as Flex, VStack, Image } from '@chakra-ui/react';
-import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
+import { Box, Text, Button, VStack, Image, Grid, GridItem } from '@chakra-ui/react';
 import { TriangleUpIcon } from '../Icons';
-import { StyledProductDetails } from './ProductDetails.style';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
 import { Link } from 'react-router-dom';
 import type { Nullable } from '@3shop/types';
+import { classnames } from '@3shop/config';
 
 type ProductDetailsProps = {
   id?: string;
@@ -22,6 +21,11 @@ type ProductDetailsProps = {
   sendTransaction?: Function;
 };
 
+const templateColumns = {
+  xs: 'repeat(1, 1fr)',
+  md: 'repeat(2, 1fr)',
+};
+
 export const ProductDetails = ({
   id,
   title,
@@ -32,23 +36,29 @@ export const ProductDetails = ({
   priceReduced,
   isLocked = false,
   collection,
-  poapImgUrl,
-  poapUrl,
 }: ProductDetailsProps) => (
-  <StyledProductDetails>
-    <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} href={poapUrl} />
+  <Box className={classnames.PRODUCT_DETAILS.CONTAINER} w="full" position="relative">
+    {isLocked && <LockedLayer collectionName={collection} size="lg" />}
 
-    <LockedLayer isLocked={isLocked} collectionName={collection} size="lg" />
+    <Grid className={classnames.PRODUCT_DETAILS.GRID} templateColumns={templateColumns}>
+      <GridItem className={classnames.PRODUCT_DETAILS.GRID_ITEM}>
+        <Box className={classnames.PRODUCT_DETAILS.IMG_CONTAINER} mb={{ xs: 2, md: 0 }}>
+          <Image
+            className={classnames.PRODUCT_DETAILS.IMG}
+            alt="product"
+            w="full"
+            h="full"
+            objectFit="cover"
+            src={srcItem}
+          />
+        </Box>
+      </GridItem>
 
-    <Flex alignItems="stretch" sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
-      <Flex justifyContent="center">
-        <Image alt="product" height={400} width={400} src={srcItem} />
-      </Flex>
-
-      <VStack flex={1} justifyContent="space-between">
-        <VStack flex={1}>
-          <Box alignSelf="flex-start">
+      <GridItem className={classnames.PRODUCT_DETAILS.GRID_ITEM}>
+        <VStack flex={1} justifyContent="space-between" pl={{ xs: 0, md: 4 }}>
+          <Box alignSelf="flex-start" w="full">
             <Text
+              className={classnames.PRODUCT_DETAILS.TITLE}
               fontWeight="bold"
               fontSize="24px"
               color="black"
@@ -63,21 +73,19 @@ export const ProductDetails = ({
           </Box>
 
           <Text
-            sx={{
-              fontsize: '14px',
-              color: 'black',
-              p: 1,
-            }}
+            className={classnames.PRODUCT_DETAILS.DESCRIPTION}
+            w="full"
+            fontSize="14px"
+            color="black"
+            p={1}
           >
             {description}
           </Text>
-        </VStack>
 
-        <VStack flex={1} width="100%" p={2} alignItems="stretch" justifyContent="end">
-          {/* <SizeSelector /> */}
-          <Box display="flex" justifyContent="space-between" alignItems="flex-end">
-            {discount ? (
+          <Box w="full" display="flex" justifyContent="space-between" alignItems="flex-end">
+            {discount && (
               <Box
+                className={classnames.PRODUCT_DETAILS.DISCOUNT_TAG_CONTAINER}
                 border="1px #dedde0 solid"
                 width="50px"
                 borderRadius="2xl"
@@ -87,16 +95,21 @@ export const ProductDetails = ({
                 alignItems="center"
                 justifyContent="center"
               >
-                <Text fontWeight="bold" fontSize="14px" color="black" padding="2px">
+                <Text
+                  className={classnames.PRODUCT_DETAILS.DISCOUNT_TAG_TEXT}
+                  fontWeight="bold"
+                  fontSize="14px"
+                  color="black"
+                  padding="2px"
+                >
                   {`-${discount}%`}
                 </Text>
               </Box>
-            ) : (
-              <Box />
             )}
 
-            <Box display="flex">
+            <Box className={classnames.PRODUCT_DETAILS.PRICING_ZONE} display="flex">
               <Text
+                className={classnames.PRODUCT_DETAILS.PRICE}
                 fontWeight="bold"
                 fontSize="16px"
                 color="black"
@@ -107,53 +120,58 @@ export const ProductDetails = ({
                 {`${price}€`}
               </Text>
               {discount && (
-                <Text fontWeight="bold" fontSize="16px" color="#FF5F1F" padding="2px">
+                <Text
+                  className={classnames.PRODUCT_DETAILS.REDUCED_PRICE}
+                  fontWeight="bold"
+                  fontSize="16px"
+                  color="#FF5F1F"
+                  padding="2px"
+                >
                   {`${priceReduced}€`}
                 </Text>
               )}
             </Box>
           </Box>
 
-          {isLocked ? null : (
-            <Box mt={2}>
-              <Button
-                as={Link}
-                height="48px"
-                width="100%"
-                borderRadius="2xl"
-                p={1}
-                isDisabled={isLocked}
-                bg="#4473c3"
-                _hover={{
-                  bg: '#5686d8',
-                }}
-                to={`/shipping/${id}`}
-              >
-                <Box display="flex" justifyContent="space-between" alignItems="center">
-                  <Text
-                    fontWeight="bold"
-                    fontSize="16px"
-                    color="white"
-                    mr={1}
-                    textTransform="uppercase"
-                  >
-                    PAY
-                  </Text>
+          <Box mt={2} w="full">
+            <Button
+              className={classnames.PRODUCT_DETAILS.BUY_BUTTON}
+              as={isLocked ? 'div' : Link}
+              height="48px"
+              w="full"
+              p={1}
+              isDisabled={isLocked}
+              bg="black"
+              _hover={{
+                bg: 'black',
+              }}
+              {...(isLocked ? {} : { to: `/shipping/${id}` })}
+            >
+              <Box display="flex" justifyContent="space-between" alignItems="center">
+                <Text
+                  className={classnames.PRODUCT_DETAILS.BUY_BUTTON_TEXT}
+                  fontWeight="bold"
+                  fontSize="16px"
+                  color="white"
+                  mr={1}
+                  textTransform="uppercase"
+                >
+                  PAY
+                </Text>
 
-                  <Box borderRadius="2xl" display="flex">
-                    <TriangleUpIcon
-                      style={{
-                        marginLeft: '8px',
-                      }}
-                      color="white"
-                    />
-                  </Box>
+                <Box borderRadius="2xl" display="flex">
+                  <TriangleUpIcon
+                    style={{
+                      marginLeft: '8px',
+                    }}
+                    color="white"
+                  />
                 </Box>
-              </Button>
-            </Box>
-          )}
+              </Box>
+            </Button>
+          </Box>
         </VStack>
-      </VStack>
-    </Flex>
-  </StyledProductDetails>
+      </GridItem>
+    </Grid>
+  </Box>
 );
