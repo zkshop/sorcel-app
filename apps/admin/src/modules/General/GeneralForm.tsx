@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Button, FormField, useToast, FormLabel } from '@3shop/ui';
+import { Box, HStack, Button, FormField, useToast, FormLabel, Heading } from '@3shop/ui';
 import { useForm, Controller } from 'react-hook-form';
 
 import type { App } from '@3shop/apollo';

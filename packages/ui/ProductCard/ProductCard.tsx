@@ -1,9 +1,10 @@
-import { Box, Text, HStack, Image } from '@chakra-ui/react';
+import { Box, HStack, Image } from '@chakra-ui/react';
 import { StyledProductCard } from './ProductCard.style';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
 import { classnames } from '@3shop/config';
 import { Link } from 'react-router-dom';
 import { DiscountTag } from './DiscountTag';
+import { Text } from '../Text/Text';
 
 export type ProductCardProps = {
   id?: string;

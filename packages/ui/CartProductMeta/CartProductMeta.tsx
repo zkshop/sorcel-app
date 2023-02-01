@@ -1,4 +1,5 @@
-import { Box, Stack, Text, useColorModeValue as mode, Image } from '@chakra-ui/react';
+import { Box, Stack, useColorModeValue as mode, Image } from '@chakra-ui/react';
+import { Text } from '../Text/Text';
 
 export type CartProductMetaProps = {
   name: string;
