@@ -11,7 +11,6 @@ export const Section = ({ children, width = 'full', sx }: FormStackProps) => (
     width={width}
     mt={8}
     spacing={3}
-    backgroundColor="white"
     sx={{
       borderRadius: 'lg',
       p: 8,

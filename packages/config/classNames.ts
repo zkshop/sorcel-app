@@ -3,6 +3,7 @@
 const PREFIX = 'shop3-';
 
 export const classnames = {
+  TEXT: PREFIX + 'text',
   NAVBAR: PREFIX + 'header',
   LOCKED_LAYER: PREFIX + 'locked-layer',
   LOCKED_LAYER_TEXT: PREFIX + 'locked-layer' + '__text',
