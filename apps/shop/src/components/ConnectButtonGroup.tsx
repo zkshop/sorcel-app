@@ -1,3 +1,4 @@
+import { classnames } from '@3shop/config';
 import { Box, Flex, Button } from '@3shop/ui';
 
 import React from 'react';
@@ -68,6 +69,7 @@ export function ConnectButtonGroup({
       <ConnectWalletButton />
 
       <Button
+        className={classnames.EMAIL_LOGIN_BUTTON}
         isLoading={userLoading}
         onClick={handleOpenLoginModal}
         fontSize="16px"
