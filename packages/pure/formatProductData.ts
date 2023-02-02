@@ -1,8 +1,8 @@
 import { getPoapImageFromPoapList } from '@3shop/poap';
-import type { Gate, Product } from '@3shop/apollo';
+import type { Gate, GetProductsQuery } from '@3shop/apollo';
 import type { FormatedProductData } from '@3shop/types';
 
-export type GetProductCardPropsParams = Product & {
+export type GetProductCardPropsParams = GetProductsQuery['products'][0] & {
   poapImageList: string[];
   poapIds: number[];
   collections: string[];

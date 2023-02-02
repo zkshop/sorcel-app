@@ -23,14 +23,15 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
 
   useEffect(() => {
     async function updateClientSecret() {
+      if (!order) return;
       setIsPaymentIntentLoading(true);
-      const clientSecret = await getPaymentIntent(product.id);
+      const clientSecret = await getPaymentIntent(order.amount, product.app.moneyAccountId || '');
       setClientSecret(clientSecret);
       setIsPaymentIntentLoading(false);
     }
 
     updateClientSecret();
-  }, [product.id]);
+  }, [order, product.app.moneyAccountId, product.id]);
 
   async function handlePaymentSuccess() {
     if (!order) return;

@@ -1,5 +1,5 @@
 import { formatProductData } from './formatProductData';
-import type { Gate, Product } from '@3shop/apollo';
+import type { Gate, GetProductsQuery } from '@3shop/apollo';
 import { useGetGatesQuery } from '@3shop/apollo';
 import { ProductCardList } from '@3shop/ui-tbw';
 import { useAppSelector } from '../../store';
@@ -7,7 +7,7 @@ import type { Nft } from '@3shop/alchemy';
 import { findProductGates } from './findProductGates';
 
 type ProductListContainerProps = {
-  products: Product[];
+  products: GetProductsQuery['products'];
 };
 
 const isNftMatchingWithGate = (gate: Gate, nft: Nft): boolean => {
