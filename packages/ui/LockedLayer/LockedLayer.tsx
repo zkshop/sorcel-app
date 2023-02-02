@@ -7,7 +7,7 @@ type LockedLayerProps = {
   size?: 'md' | 'lg';
 };
 
-export const LockedLayer = ({ collectionName = '', size = 'md' }: LockedLayerProps) => (
+export const LockedLayer = ({ size = 'md' }: LockedLayerProps) => (
   <>
     <Box
       className={classnames.LOCKED_LAYER}
@@ -27,21 +27,29 @@ export const LockedLayer = ({ collectionName = '', size = 'md' }: LockedLayerPro
       }}
     />
 
-    <Text
-      className={classnames.LOCKED_LAYER_TEXT}
+    <Box
       sx={{
         zIndex: 1,
-        px: 1,
         position: 'absolute',
-        top: '30%',
-        textAlign: 'center',
-        color: 'white',
-        fontWeight: 'bold',
-        width: '100%',
+        display: 'flex',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
       }}
-      fontSize={size === 'lg' ? '2xl' : 'lg'}
     >
-      Connect your {collectionName} wallet to unlock
-    </Text>
+      <Text
+        className={classnames.LOCKED_LAYER_TEXT}
+        sx={{
+          textAlign: 'center',
+          color: 'white',
+          fontWeight: 'bold',
+          margin: 'auto',
+        }}
+        fontSize={size === 'lg' ? '2xl' : 'lg'}
+      >
+        Connect your wallet
+      </Text>
+    </Box>
   </>
 );

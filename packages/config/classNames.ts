@@ -4,7 +4,8 @@ const PREFIX = 'shop3-';
 
 export const classnames = {
   TEXT: PREFIX + 'text',
-  NAVBAR: PREFIX + 'header',
+  HEADER: PREFIX + 'header',
+  EMAIL_LOGIN_BUTTON: PREFIX + 'email-login-button',
   LOCKED_LAYER: PREFIX + 'locked-layer',
   LOCKED_LAYER_TEXT: PREFIX + 'locked-layer' + '__text',
   PRODUCT_CARD_LIST: {
@@ -18,6 +19,7 @@ export const classnames = {
     DISCOUNT_TAG_TEXT: PREFIX + 'product-card' + '__discount-tag-text',
     IMG_CONTAINER: PREFIX + 'product-card' + '__img-container',
     IMG: PREFIX + 'product-card' + '__img',
+    DETAILS: PREFIX + 'product-card' + '__details',
     PRICE: PREFIX + 'product-card' + '__price',
     PRICING_ZONE: PREFIX + 'product-card' + '__pricing-zone',
     REDUCED_PRICE: PREFIX + 'product-card' + '__reduced-price',

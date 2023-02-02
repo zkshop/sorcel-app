@@ -52,7 +52,6 @@ export const ProductCard = ({
         sx={{
           position: 'relative',
           mb: 2,
-          bg: 'lightgray',
           flex: 1,
         }}
       >
@@ -66,43 +65,46 @@ export const ProductCard = ({
         />
       </Box>
 
-      <Text
-        className={classnames.PRODUCT_CARD.TITLE}
-        h="16px"
-        fontWeight="bold"
-        fontSize="14px"
-        color="black"
-        mb={2}
-        textTransform="capitalize"
-        letterSpacing={0.5}
-      >
-        {title}
-      </Text>
-
-      <HStack className={classnames.PRODUCT_CARD.PRICING_ZONE} h="16px">
-        <Text
-          className={classnames.PRODUCT_CARD.PRICE}
-          fontWeight="bold"
-          fontSize="14px"
-          color="black"
-          textDecoration={discount ? 'line-through' : 'none'}
-          marginRight={discount ? '2px' : 'none'}
-        >
-          {`${price}€`}
-        </Text>
-
-        {isDiscount && (
+      <Box className={classnames.PRODUCT_CARD.DETAILS} display="flex" flexDirection="column">
+        <Box minH="16px">
           <Text
-            className={classnames.PRODUCT_CARD.REDUCED_PRICE}
+            className={classnames.PRODUCT_CARD.TITLE}
             fontWeight="bold"
             fontSize="14px"
-            color="red"
-            marginLeft="0 !important"
+            color="black"
+            mb={2}
+            textTransform="capitalize"
+            letterSpacing={0.5}
           >
-            {`${priceReduced}€`}
+            {title}
           </Text>
-        )}
-      </HStack>
+        </Box>
+
+        <HStack className={classnames.PRODUCT_CARD.PRICING_ZONE} h="20px">
+          <Text
+            className={classnames.PRODUCT_CARD.PRICE}
+            fontWeight="bold"
+            fontSize="14px"
+            color="black"
+            textDecoration={discount ? 'line-through' : 'none'}
+            marginRight={discount ? '2px' : 'none'}
+          >
+            {`${price}€`}
+          </Text>
+
+          {isDiscount && (
+            <Text
+              className={classnames.PRODUCT_CARD.REDUCED_PRICE}
+              fontWeight="bold"
+              fontSize="14px"
+              color="red"
+              marginLeft="0 !important"
+            >
+              {`${priceReduced}€`}
+            </Text>
+          )}
+        </HStack>
+      </Box>
 
       {isLocked && <LockedLayer collectionName={collection} />}
       {isDiscount && <DiscountTag discount={discount} />}
