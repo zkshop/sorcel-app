@@ -1,4 +1,4 @@
-import { Text } from '@3shop/ui';
+import { Spinner, Text } from '@3shop/ui';
 import { PaymentElement } from '@stripe/react-stripe-js';
 
 import { StyledCheckoutForm } from './CheckoutForm.style';
@@ -10,7 +10,8 @@ type CheckoutFormProps = {
 };
 
 export function CheckoutForm({ price, handlePaymentSuccess }: CheckoutFormProps) {
-  const { elements, handleSubmit, paymentMessage, stripe } = usePayment(handlePaymentSuccess);
+  const { elements, handleSubmit, paymentMessage, stripe, loading } =
+    usePayment(handlePaymentSuccess);
 
   return (
     <StyledCheckoutForm id="payment-form" onSubmit={handleSubmit}>
@@ -21,7 +22,7 @@ export function CheckoutForm({ price, handlePaymentSuccess }: CheckoutFormProps)
       </Text>
 
       <button disabled={!stripe || !elements} id="submit">
-        <span id="button-text">Pay now</span>
+        <span id="button-text">{loading ? <Spinner /> : 'Pay now'}</span>
       </button>
 
       {paymentMessage && <div id="payment-message">{paymentMessage}</div>}

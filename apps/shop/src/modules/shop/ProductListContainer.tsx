@@ -1,5 +1,5 @@
 import { formatProductData } from '@3shop/pure';
-import type { Gate, Product } from '@3shop/apollo';
+import type { Gate, GetProductsQuery } from '@3shop/apollo';
 import { useGetGatesQuery } from '@3shop/apollo';
 import { ProductCardList } from '@3shop/ui';
 import { useAppSelector } from '@3shop/store';
@@ -8,7 +8,7 @@ import { findProductGates } from './findProductGate';
 import { gateVerifier } from './gateVerifier';
 
 type ProductListContainerProps = {
-  products: Product[];
+  products: GetProductsQuery['products'];
 };
 
 const getAssociatedGates = (gates: Gate[], productId: string) =>
