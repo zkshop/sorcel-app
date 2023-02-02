@@ -10,13 +10,14 @@ const messages = {
   requires_action: '',
   requires_capture: '',
   requires_confirmation: '',
-  default: 'An unexpected error occurred.',
+  default: '',
 } as const;
 
 const getPaymentMessage = (status?: keyof typeof messages) =>
   status ? messages[status] : messages.default;
 
 export const usePayment = (paymentCallback: () => Promise<void>) => {
+  const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
   const [paymentMessage, setPaymentMessage] = useState<string | undefined>();
@@ -44,8 +45,10 @@ export const usePayment = (paymentCallback: () => Promise<void>) => {
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     if (!stripe || !elements) {
+      setLoading(false);
       return;
     }
 
@@ -57,15 +60,18 @@ export const usePayment = (paymentCallback: () => Promise<void>) => {
 
     if (error?.type === 'card_error' || error?.type === 'validation_error') {
       setPaymentMessage(error?.message);
-    } else {
+    } else if (error) {
       setPaymentMessage('An unexpected error occurred.');
     }
 
     if (paymentIntent?.status === 'succeeded') {
       await paymentCallback();
+      setLoading(false);
       navigate('/success');
     }
+
+    setLoading(false);
   };
 
-  return { handleSubmit, paymentMessage, stripe, elements };
+  return { handleSubmit, paymentMessage, stripe, elements, loading };
 };

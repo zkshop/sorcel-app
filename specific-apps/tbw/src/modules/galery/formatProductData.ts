@@ -1,9 +1,9 @@
-import type { Gate, Product } from '@3shop/apollo';
+import type { Gate, GetProductsQuery } from '@3shop/apollo';
 import type { FormatedProductData } from '@3shop/ui-tbw';
 import { getExternalLink } from './getExternalLink';
 import { getTargetAttribute } from './getTargetAttribute';
 
-export type GetProductCardPropsParams = Product & {
+export type GetProductCardPropsParams = GetProductsQuery['products'][0] & {
   collections: string[];
   gate: Gate | null;
 };

@@ -164,6 +164,13 @@ export type App_Mutation_Response = {
   returning: Array<App>;
 };
 
+/** input type for inserting object relation for remote table "app" */
+export type App_Obj_Rel_Insert_Input = {
+  data: App_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<App_On_Conflict>;
+};
+
 /** on_conflict condition type for table "app" */
 export type App_On_Conflict = {
   constraint: App_Constraint;
@@ -1090,6 +1097,8 @@ export type Order_Updates = {
 /** columns and relationships of "product" */
 export type Product = {
   __typename?: 'product';
+  /** An object relationship */
+  app: App;
   app_id: Scalars['uuid'];
   collection: Scalars['String'];
   curation?: Maybe<Scalars['String']>;
@@ -1145,6 +1154,7 @@ export type Product_Bool_Exp = {
   _and?: InputMaybe<Array<Product_Bool_Exp>>;
   _not?: InputMaybe<Product_Bool_Exp>;
   _or?: InputMaybe<Array<Product_Bool_Exp>>;
+  app?: InputMaybe<App_Bool_Exp>;
   app_id?: InputMaybe<Uuid_Comparison_Exp>;
   collection?: InputMaybe<String_Comparison_Exp>;
   curation?: InputMaybe<String_Comparison_Exp>;
@@ -1173,6 +1183,7 @@ export type Product_Inc_Input = {
 
 /** input type for inserting data into table "product" */
 export type Product_Insert_Input = {
+  app?: InputMaybe<App_Obj_Rel_Insert_Input>;
   app_id?: InputMaybe<Scalars['uuid']>;
   collection?: InputMaybe<Scalars['String']>;
   curation?: InputMaybe<Scalars['String']>;
@@ -1241,6 +1252,7 @@ export type Product_On_Conflict = {
 
 /** Ordering options when selecting data from "product". */
 export type Product_Order_By = {
+  app?: InputMaybe<App_Order_By>;
   app_id?: InputMaybe<Order_By>;
   collection?: InputMaybe<Order_By>;
   curation?: InputMaybe<Order_By>;
@@ -2163,6 +2175,14 @@ export type GetProductByIdQuery = {
     price: number;
     poapId?: number | null;
     isDiscountGated: boolean;
+    app: {
+      __typename?: 'app';
+      id: any;
+      deliveryTaxesTableName?: string | null;
+      imgUrl?: string | null;
+      name: string;
+      moneyAccountId?: string | null;
+    };
   } | null;
 };
 
@@ -3006,6 +3026,13 @@ export const GetProductByIdDocument = gql`
       price
       poapId
       isDiscountGated
+      app {
+        id
+        deliveryTaxesTableName
+        imgUrl
+        name
+        moneyAccountId
+      }
     }
   }
 `;

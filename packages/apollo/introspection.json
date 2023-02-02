@@ -2098,6 +2098,45 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "app_obj_rel_insert_input",
+        "description": "input type for inserting object relation for remote table \"app\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "app_insert_input",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "on_conflict",
+            "description": "upsert condition",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "app_on_conflict",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "app_on_conflict",
         "description": "on_conflict condition type for table \"app\"",
         "fields": null,
@@ -7727,6 +7766,22 @@
         "description": "columns and relationships of \"product\"",
         "fields": [
           {
+            "name": "app",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "app",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "app_id",
             "description": null,
             "args": [],
@@ -8229,6 +8284,18 @@
             "deprecationReason": null
           },
           {
+            "name": "app",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "app_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "app_id",
             "description": null,
             "type": {
@@ -8435,6 +8502,18 @@
         "description": "input type for inserting data into table \"product\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "app",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "app_obj_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "app_id",
             "description": null,
@@ -8993,6 +9072,18 @@
         "description": "Ordering options when selecting data from \"product\".",
         "fields": null,
         "inputFields": [
+          {
+            "name": "app",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "app_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "app_id",
             "description": null,
