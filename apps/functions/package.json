@@ -8,7 +8,6 @@
     "lint": "eslint \"**/*.ts\" --fix"
   },
   "dependencies": {
-    "@3shop/config": "*",
     "@3shop/domains": "*",
     "@3shop/magic-server-sdk": "*",
     "@3shop/poap": "*",
@@ -26,6 +25,7 @@
     "typescript": "*"
   },
   "peerDependencies": {
+    "@3shop/config": "*",
     "axios": "*",
     "typescript": "*"
   }
