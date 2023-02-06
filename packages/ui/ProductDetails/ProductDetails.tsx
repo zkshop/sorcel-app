@@ -83,29 +83,27 @@ export const ProductDetails = ({
           </Text>
 
           <Box w="full" display="flex" justifyContent="space-between" alignItems="flex-end">
-            {discount && (
-              <Box
-                className={classnames.PRODUCT_DETAILS.DISCOUNT_TAG_CONTAINER}
-                border="1px #dedde0 solid"
-                width="50px"
-                borderRadius="2xl"
+            <Box
+              className={classnames.PRODUCT_DETAILS.DISCOUNT_TAG_CONTAINER}
+              border={discount ? '1px #dedde0 solid' : undefined}
+              width="50px"
+              borderRadius="2xl"
+              padding="2px"
+              marginTop="4px"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Text
+                className={classnames.PRODUCT_DETAILS.DISCOUNT_TAG_TEXT}
+                fontWeight="bold"
+                fontSize="14px"
+                color="black"
                 padding="2px"
-                marginTop="4px"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
               >
-                <Text
-                  className={classnames.PRODUCT_DETAILS.DISCOUNT_TAG_TEXT}
-                  fontWeight="bold"
-                  fontSize="14px"
-                  color="black"
-                  padding="2px"
-                >
-                  {`-${discount}%`}
-                </Text>
-              </Box>
-            )}
+                {discount ? `-${discount}%` : ''}
+              </Text>
+            </Box>
 
             <Box className={classnames.PRODUCT_DETAILS.PRICING_ZONE} display="flex">
               <Text
@@ -119,7 +117,7 @@ export const ProductDetails = ({
               >
                 {`${price}€`}
               </Text>
-              {discount && (
+              {discount ? (
                 <Text
                   className={classnames.PRODUCT_DETAILS.REDUCED_PRICE}
                   fontWeight="bold"
@@ -129,7 +127,7 @@ export const ProductDetails = ({
                 >
                   {`${priceReduced}€`}
                 </Text>
-              )}
+              ) : null}
             </Box>
           </Box>
 
