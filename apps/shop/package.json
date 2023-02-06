@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
+    "build:ci": "tsc && node -r dotenv-vault-core/config ./node_modules/.bin/vite build",
     "dev": "vite",
     "lint": "eslint \"**/*.ts*\" --fix",
     "preview": "vite preview"

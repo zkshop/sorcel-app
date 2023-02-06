@@ -1,11 +1,15 @@
 import path from 'path';
 import react from '@vitejs/plugin-react';
-
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
-
 import EnvironmentPlugin from 'vite-plugin-environment';
+import dotenv from 'dotenv-vault-core';
+
+if (process.env.CI !== 'true') {
+  dotenv.config();
+  console.log(process.env);
+}
 
 export const createCommonConfig = (options) => {
   const { dirname, envVars = [] } = options;
