@@ -32,7 +32,7 @@ export const Integration = () => {
           Your onboarding link
         </Link>
       ) : (
-        <Button onClick={getOnboardingLink} isLoading={onboardingLinkloading}>
+        <Button onClick={() => getOnboardingLink()} isLoading={onboardingLinkloading}>
           Connect your account
         </Button>
       )}
