@@ -4,12 +4,6 @@ import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfil
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
 import EnvironmentPlugin from 'vite-plugin-environment';
-import dotenv from 'dotenv-vault-core';
-
-if (process.env.CI !== 'true') {
-  dotenv.config();
-  console.log(process.env);
-}
 
 export const createCommonConfig = (options) => {
   const { dirname, envVars = [] } = options;
