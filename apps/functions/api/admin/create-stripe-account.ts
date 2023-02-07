@@ -13,6 +13,7 @@ const token = AuthorizationTokenService(JsonWebTokenClient());
 
 async function handler(req: VercelRequest, res: VercelResponse) {
   const authorizationToken = extractTokenFromAuthorization(req.headers.authorization);
+  const { accountId } = req.body as { accountId?: string };
 
   if (!authorizationToken) throw new Error('No Authorization Token');
 
@@ -23,11 +24,15 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const accountId = await account.createAccount();
-    await addAccountIdToApp(accountId, appId);
+    if (!accountId) {
+      const newAccountId = await account.createAccount();
+      await addAccountIdToApp(newAccountId, appId);
+
+      const onboardingLink = await account.createOnboardingLink(newAccountId);
+      return res.status(OK).send({ onboarding_link: onboardingLink });
+    }
 
     const onboardingLink = await account.createOnboardingLink(accountId);
-
     return res.status(OK).send({ onboarding_link: onboardingLink });
   } catch (error) {
     console.error(error);
