@@ -12,11 +12,13 @@ export const useGetOnboardingLink = () => {
   const [onboardingLink, setOnboardingLink] = useState<string | null>(null);
   const { tokenCookie } = useCustomerTokenCookie();
 
-  async function getOnboardingLink() {
+  async function getOnboardingLink(accountId?: string) {
     setLoading(true);
     const response = await axios.post<CreateOnboardingLinkResponse>(
       `${envVars.PUBLIC_FUNCTIONS_URL}/api/admin/create-stripe-account`,
-      {},
+      {
+        accountId,
+      },
       {
         headers: {
           Authorization: 'Bearer ' + tokenCookie,
