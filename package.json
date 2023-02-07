@@ -21,6 +21,8 @@
     "dev:docs": "yarn dev --filter=docs...",
     "dev:functions": "yarn dev --filter=functions...",
     "dev:shop": "yarn dev --filter=shop...",
+    "dotenv-vault:link": "yarn dotenv-vault:shop",
+    "dotenv-vault:shop": "APP=apps/shop; cp .env.vault $APP/.env.vault",
     "dotenv:admin": "APP=apps/admin; rm -f $APP/.env && ln -s ../../.env $APP/.env",
     "dotenv:admin:e2e": "APP=apps/admin; rm -f $APP/.env.playwright && ln -s ../../.env $APP/.env.playwright",
     "dotenv:functions": "APP=apps/functions; rm -f $APP/.env && ln -s ../../.env $APP/.env",
