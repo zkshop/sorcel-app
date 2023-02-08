@@ -1,0 +1,5 @@
+mutation DeleteDeliveryZone($id: uuid!) {
+  delete_delivery_zone_by_pk(id: $id) {
+    id
+  }
+}
