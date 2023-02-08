@@ -51,3 +51,6 @@ storybook-static
 !.env.vault
 
 *.timestamp*
+
+# parcel
+.parcel-cache
