@@ -1,0 +1,9 @@
+query GetDeliveryZoneByAppId($_eq: uuid) {
+  delivery_zone(where: { app_id: { _eq: $_eq } }) {
+    name
+    id
+    fees
+    countries
+    app_id
+  }
+}
