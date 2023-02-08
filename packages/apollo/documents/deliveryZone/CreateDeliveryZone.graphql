@@ -1,0 +1,11 @@
+mutation CreateDeliveryZone($name: String, $fees: Int, $countries: jsonb) {
+  insert_delivery_zone(objects: { countries: $countries, fees: $fees, name: $name }) {
+    returning {
+      app_id
+      countries
+      fees
+      id
+      name
+    }
+  }
+}
