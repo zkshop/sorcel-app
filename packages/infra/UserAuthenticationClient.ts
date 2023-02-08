@@ -23,7 +23,7 @@ export function UserAuthenticationClient(): AuthClient {
         return initialAuthData;
       }
 
-      const didToken = await magicClient.auth.loginWithMagicLink({
+      const didToken = await magicClient.auth.loginWithEmailOTP({
         email,
       });
 
