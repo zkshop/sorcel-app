@@ -5,6 +5,7 @@ import { classnames } from '@3shop/config';
 import { Link } from 'react-router-dom';
 import { DiscountTag } from './DiscountTag';
 import { Text } from '../Text/Text';
+import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 
 export type ProductCardProps = {
   id?: string;
@@ -31,6 +32,8 @@ export const ProductCard = ({
   collection,
   isLocked = false,
   isWithHref = true,
+  poapImgUrl,
+  poapUrl,
 }: ProductCardProps) => {
   const to = `product/${id}`;
   const additionalProps =
@@ -47,6 +50,8 @@ export const ProductCard = ({
       as={isLocked ? 'div' : Link}
       {...additionalProps}
     >
+      <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} href={poapUrl} />
+
       <Box
         className={classnames.PRODUCT_CARD.IMG_CONTAINER}
         sx={{
