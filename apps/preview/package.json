@@ -4,7 +4,8 @@
   "source": "index.html",
   "scripts": {
     "build": "parcel build",
-    "dev": "parcel"
+    "dev": "parcel",
+    "preview": "parcel serve"
   },
   "devDependencies": {
     "parcel": "^2.8.3"
