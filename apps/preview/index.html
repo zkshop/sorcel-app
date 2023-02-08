@@ -2,25 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <title> 3shop App </title>
-
-  <script type="module">
-    var global = global || window;
-    window.__3SHOP_APP_ID__ = process.env.APP_ID;
-    (function () {
-      d = document;
-      s = d.createElement('script');
-      s.type = 'module';
-      s.src = process.env.NODE_ENV !== 'production' ? 'https://cdn-dev.3shop.co/app/index.js' : 'https://cdn.3shop.co/app/index.js';
-      s.async = 1;
-      d.getElementsByTagName('head')[0].appendChild(s);
-      l = d.createElement('link');
-      l.rel = 'stylesheet';
-      l.href = process.env.NODE_ENV !== 'production' ? 'https://cdn-dev.3shop.co/app/index.css' : 'https://cdn.3shop.co/app/index.css';
-      d.getElementsByTagName('head')[0].appendChild(l);
-    })();
-  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title> 3shop </title>
+  <script>var global = global || window;</script>
+  <script>window.__3SHOP_APP_ID__ = "3c2d6444-8db2-412b-9c7c-83bb91d6e050";</script>
+  <script type="module" async src="https://cdn.3shop.co/app/index.js"></script>
+  <link rel="stylesheet" href="https://cdn.3shop.co/app/index.css">
 </head>
 
 <body>
