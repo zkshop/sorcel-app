@@ -1,0 +1,9 @@
+query GetDeliveryZones {
+  delivery_zone {
+    app_id
+    countries
+    fees
+    id
+    name
+  }
+}
