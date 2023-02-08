@@ -261,6 +261,281 @@ export enum Cursor_Ordering {
   Desc = 'DESC',
 }
 
+/** columns and relationships of "delivery_zone" */
+export type Delivery_Zone = {
+  __typename?: 'delivery_zone';
+  /** An object relationship */
+  app: App;
+  app_id: Scalars['uuid'];
+  countries: Scalars['jsonb'];
+  fees: Scalars['Int'];
+  id: Scalars['uuid'];
+  name: Scalars['String'];
+};
+
+/** columns and relationships of "delivery_zone" */
+export type Delivery_ZoneCountriesArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregated selection of "delivery_zone" */
+export type Delivery_Zone_Aggregate = {
+  __typename?: 'delivery_zone_aggregate';
+  aggregate?: Maybe<Delivery_Zone_Aggregate_Fields>;
+  nodes: Array<Delivery_Zone>;
+};
+
+/** aggregate fields of "delivery_zone" */
+export type Delivery_Zone_Aggregate_Fields = {
+  __typename?: 'delivery_zone_aggregate_fields';
+  avg?: Maybe<Delivery_Zone_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Delivery_Zone_Max_Fields>;
+  min?: Maybe<Delivery_Zone_Min_Fields>;
+  stddev?: Maybe<Delivery_Zone_Stddev_Fields>;
+  stddev_pop?: Maybe<Delivery_Zone_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Delivery_Zone_Stddev_Samp_Fields>;
+  sum?: Maybe<Delivery_Zone_Sum_Fields>;
+  var_pop?: Maybe<Delivery_Zone_Var_Pop_Fields>;
+  var_samp?: Maybe<Delivery_Zone_Var_Samp_Fields>;
+  variance?: Maybe<Delivery_Zone_Variance_Fields>;
+};
+
+/** aggregate fields of "delivery_zone" */
+export type Delivery_Zone_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Delivery_Zone_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Delivery_Zone_Append_Input = {
+  countries?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** aggregate avg on columns */
+export type Delivery_Zone_Avg_Fields = {
+  __typename?: 'delivery_zone_avg_fields';
+  fees?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "delivery_zone". All fields are combined with a logical 'AND'. */
+export type Delivery_Zone_Bool_Exp = {
+  _and?: InputMaybe<Array<Delivery_Zone_Bool_Exp>>;
+  _not?: InputMaybe<Delivery_Zone_Bool_Exp>;
+  _or?: InputMaybe<Array<Delivery_Zone_Bool_Exp>>;
+  app?: InputMaybe<App_Bool_Exp>;
+  app_id?: InputMaybe<Uuid_Comparison_Exp>;
+  countries?: InputMaybe<Jsonb_Comparison_Exp>;
+  fees?: InputMaybe<Int_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "delivery_zone" */
+export enum Delivery_Zone_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  DeliveryZonePkey = 'delivery_zone_pkey',
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Delivery_Zone_Delete_At_Path_Input = {
+  countries?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Delivery_Zone_Delete_Elem_Input = {
+  countries?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Delivery_Zone_Delete_Key_Input = {
+  countries?: InputMaybe<Scalars['String']>;
+};
+
+/** input type for incrementing numeric columns in table "delivery_zone" */
+export type Delivery_Zone_Inc_Input = {
+  fees?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "delivery_zone" */
+export type Delivery_Zone_Insert_Input = {
+  app?: InputMaybe<App_Obj_Rel_Insert_Input>;
+  app_id?: InputMaybe<Scalars['uuid']>;
+  countries?: InputMaybe<Scalars['jsonb']>;
+  fees?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Delivery_Zone_Max_Fields = {
+  __typename?: 'delivery_zone_max_fields';
+  app_id?: Maybe<Scalars['uuid']>;
+  fees?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Delivery_Zone_Min_Fields = {
+  __typename?: 'delivery_zone_min_fields';
+  app_id?: Maybe<Scalars['uuid']>;
+  fees?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "delivery_zone" */
+export type Delivery_Zone_Mutation_Response = {
+  __typename?: 'delivery_zone_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Delivery_Zone>;
+};
+
+/** on_conflict condition type for table "delivery_zone" */
+export type Delivery_Zone_On_Conflict = {
+  constraint: Delivery_Zone_Constraint;
+  update_columns?: Array<Delivery_Zone_Update_Column>;
+  where?: InputMaybe<Delivery_Zone_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "delivery_zone". */
+export type Delivery_Zone_Order_By = {
+  app?: InputMaybe<App_Order_By>;
+  app_id?: InputMaybe<Order_By>;
+  countries?: InputMaybe<Order_By>;
+  fees?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: delivery_zone */
+export type Delivery_Zone_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Delivery_Zone_Prepend_Input = {
+  countries?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "delivery_zone" */
+export enum Delivery_Zone_Select_Column {
+  /** column name */
+  AppId = 'app_id',
+  /** column name */
+  Countries = 'countries',
+  /** column name */
+  Fees = 'fees',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+}
+
+/** input type for updating data in table "delivery_zone" */
+export type Delivery_Zone_Set_Input = {
+  app_id?: InputMaybe<Scalars['uuid']>;
+  countries?: InputMaybe<Scalars['jsonb']>;
+  fees?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Delivery_Zone_Stddev_Fields = {
+  __typename?: 'delivery_zone_stddev_fields';
+  fees?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Delivery_Zone_Stddev_Pop_Fields = {
+  __typename?: 'delivery_zone_stddev_pop_fields';
+  fees?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Delivery_Zone_Stddev_Samp_Fields = {
+  __typename?: 'delivery_zone_stddev_samp_fields';
+  fees?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "delivery_zone" */
+export type Delivery_Zone_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Delivery_Zone_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Delivery_Zone_Stream_Cursor_Value_Input = {
+  app_id?: InputMaybe<Scalars['uuid']>;
+  countries?: InputMaybe<Scalars['jsonb']>;
+  fees?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Delivery_Zone_Sum_Fields = {
+  __typename?: 'delivery_zone_sum_fields';
+  fees?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "delivery_zone" */
+export enum Delivery_Zone_Update_Column {
+  /** column name */
+  AppId = 'app_id',
+  /** column name */
+  Countries = 'countries',
+  /** column name */
+  Fees = 'fees',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+}
+
+export type Delivery_Zone_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: InputMaybe<Delivery_Zone_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: InputMaybe<Delivery_Zone_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: InputMaybe<Delivery_Zone_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: InputMaybe<Delivery_Zone_Delete_Key_Input>;
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Delivery_Zone_Inc_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: InputMaybe<Delivery_Zone_Prepend_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Delivery_Zone_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Delivery_Zone_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Delivery_Zone_Var_Pop_Fields = {
+  __typename?: 'delivery_zone_var_pop_fields';
+  fees?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Delivery_Zone_Var_Samp_Fields = {
+  __typename?: 'delivery_zone_var_samp_fields';
+  fees?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Delivery_Zone_Variance_Fields = {
+  __typename?: 'delivery_zone_variance_fields';
+  fees?: Maybe<Scalars['Float']>;
+};
+
 /** columns and relationships of "gate" */
 export type Gate = {
   __typename?: 'gate';
@@ -578,6 +853,10 @@ export type Mutation_Root = {
   delete_app?: Maybe<App_Mutation_Response>;
   /** delete single row from the table: "app" */
   delete_app_by_pk?: Maybe<App>;
+  /** delete data from the table: "delivery_zone" */
+  delete_delivery_zone?: Maybe<Delivery_Zone_Mutation_Response>;
+  /** delete single row from the table: "delivery_zone" */
+  delete_delivery_zone_by_pk?: Maybe<Delivery_Zone>;
   /** delete data from the table: "gate" */
   delete_gate?: Maybe<Gate_Mutation_Response>;
   /** delete single row from the table: "gate" */
@@ -598,6 +877,10 @@ export type Mutation_Root = {
   insert_app?: Maybe<App_Mutation_Response>;
   /** insert a single row into the table: "app" */
   insert_app_one?: Maybe<App>;
+  /** insert data into the table: "delivery_zone" */
+  insert_delivery_zone?: Maybe<Delivery_Zone_Mutation_Response>;
+  /** insert a single row into the table: "delivery_zone" */
+  insert_delivery_zone_one?: Maybe<Delivery_Zone>;
   /** insert data into the table: "gate" */
   insert_gate?: Maybe<Gate_Mutation_Response>;
   /** insert a single row into the table: "gate" */
@@ -620,6 +903,12 @@ export type Mutation_Root = {
   update_app_by_pk?: Maybe<App>;
   /** update multiples rows of table: "app" */
   update_app_many?: Maybe<Array<Maybe<App_Mutation_Response>>>;
+  /** update data of the table: "delivery_zone" */
+  update_delivery_zone?: Maybe<Delivery_Zone_Mutation_Response>;
+  /** update single row of the table: "delivery_zone" */
+  update_delivery_zone_by_pk?: Maybe<Delivery_Zone>;
+  /** update multiples rows of table: "delivery_zone" */
+  update_delivery_zone_many?: Maybe<Array<Maybe<Delivery_Zone_Mutation_Response>>>;
   /** update data of the table: "gate" */
   update_gate?: Maybe<Gate_Mutation_Response>;
   /** update single row of the table: "gate" */
@@ -653,6 +942,16 @@ export type Mutation_RootDelete_AppArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_App_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Delivery_ZoneArgs = {
+  where: Delivery_Zone_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Delivery_Zone_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -706,6 +1005,18 @@ export type Mutation_RootInsert_AppArgs = {
 export type Mutation_RootInsert_App_OneArgs = {
   object: App_Insert_Input;
   on_conflict?: InputMaybe<App_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Delivery_ZoneArgs = {
+  objects: Array<Delivery_Zone_Insert_Input>;
+  on_conflict?: InputMaybe<Delivery_Zone_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Delivery_Zone_OneArgs = {
+  object: Delivery_Zone_Insert_Input;
+  on_conflict?: InputMaybe<Delivery_Zone_On_Conflict>;
 };
 
 /** mutation root */
@@ -771,6 +1082,35 @@ export type Mutation_RootUpdate_App_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_App_ManyArgs = {
   updates: Array<App_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Delivery_ZoneArgs = {
+  _append?: InputMaybe<Delivery_Zone_Append_Input>;
+  _delete_at_path?: InputMaybe<Delivery_Zone_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Delivery_Zone_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Delivery_Zone_Delete_Key_Input>;
+  _inc?: InputMaybe<Delivery_Zone_Inc_Input>;
+  _prepend?: InputMaybe<Delivery_Zone_Prepend_Input>;
+  _set?: InputMaybe<Delivery_Zone_Set_Input>;
+  where: Delivery_Zone_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Delivery_Zone_By_PkArgs = {
+  _append?: InputMaybe<Delivery_Zone_Append_Input>;
+  _delete_at_path?: InputMaybe<Delivery_Zone_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Delivery_Zone_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Delivery_Zone_Delete_Key_Input>;
+  _inc?: InputMaybe<Delivery_Zone_Inc_Input>;
+  _prepend?: InputMaybe<Delivery_Zone_Prepend_Input>;
+  _set?: InputMaybe<Delivery_Zone_Set_Input>;
+  pk_columns: Delivery_Zone_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Delivery_Zone_ManyArgs = {
+  updates: Array<Delivery_Zone_Updates>;
 };
 
 /** mutation root */
@@ -1434,6 +1774,12 @@ export type Query_Root = {
   app_aggregate: App_Aggregate;
   /** fetch data from the table: "app" using primary key columns */
   app_by_pk?: Maybe<App>;
+  /** fetch data from the table: "delivery_zone" */
+  delivery_zone: Array<Delivery_Zone>;
+  /** fetch aggregated fields from the table: "delivery_zone" */
+  delivery_zone_aggregate: Delivery_Zone_Aggregate;
+  /** fetch data from the table: "delivery_zone" using primary key columns */
+  delivery_zone_by_pk?: Maybe<Delivery_Zone>;
   /** fetch data from the table: "gate" */
   gate: Array<Gate>;
   /** fetch aggregated fields from the table: "gate" */
@@ -1477,6 +1823,26 @@ export type Query_RootApp_AggregateArgs = {
 };
 
 export type Query_RootApp_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Query_RootDelivery_ZoneArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Zone_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Delivery_Zone_Order_By>>;
+  where?: InputMaybe<Delivery_Zone_Bool_Exp>;
+};
+
+export type Query_RootDelivery_Zone_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Zone_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Delivery_Zone_Order_By>>;
+  where?: InputMaybe<Delivery_Zone_Bool_Exp>;
+};
+
+export type Query_RootDelivery_Zone_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -1570,6 +1936,14 @@ export type Subscription_Root = {
   app_by_pk?: Maybe<App>;
   /** fetch data from the table in a streaming manner: "app" */
   app_stream: Array<App>;
+  /** fetch data from the table: "delivery_zone" */
+  delivery_zone: Array<Delivery_Zone>;
+  /** fetch aggregated fields from the table: "delivery_zone" */
+  delivery_zone_aggregate: Delivery_Zone_Aggregate;
+  /** fetch data from the table: "delivery_zone" using primary key columns */
+  delivery_zone_by_pk?: Maybe<Delivery_Zone>;
+  /** fetch data from the table in a streaming manner: "delivery_zone" */
+  delivery_zone_stream: Array<Delivery_Zone>;
   /** fetch data from the table: "gate" */
   gate: Array<Gate>;
   /** fetch aggregated fields from the table: "gate" */
@@ -1628,6 +2002,32 @@ export type Subscription_RootApp_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<App_Stream_Cursor_Input>>;
   where?: InputMaybe<App_Bool_Exp>;
+};
+
+export type Subscription_RootDelivery_ZoneArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Zone_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Delivery_Zone_Order_By>>;
+  where?: InputMaybe<Delivery_Zone_Bool_Exp>;
+};
+
+export type Subscription_RootDelivery_Zone_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Zone_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Delivery_Zone_Order_By>>;
+  where?: InputMaybe<Delivery_Zone_Bool_Exp>;
+};
+
+export type Subscription_RootDelivery_Zone_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Subscription_RootDelivery_Zone_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Delivery_Zone_Stream_Cursor_Input>>;
+  where?: InputMaybe<Delivery_Zone_Bool_Exp>;
 };
 
 export type Subscription_RootGateArgs = {
@@ -1946,6 +2346,66 @@ export type UpdateAppMutation = {
     __typename?: 'app_mutation_response';
     returning: Array<{ __typename?: 'app'; id: any; imgUrl?: string | null; name: string }>;
   } | null;
+};
+
+export type CreateDeliveryZoneMutationVariables = Exact<{
+  name?: InputMaybe<Scalars['String']>;
+  fees?: InputMaybe<Scalars['Int']>;
+  countries?: InputMaybe<Scalars['jsonb']>;
+}>;
+
+export type CreateDeliveryZoneMutation = {
+  __typename?: 'mutation_root';
+  insert_delivery_zone?: {
+    __typename?: 'delivery_zone_mutation_response';
+    returning: Array<{
+      __typename?: 'delivery_zone';
+      app_id: any;
+      countries: any;
+      fees: number;
+      id: any;
+      name: string;
+    }>;
+  } | null;
+};
+
+export type DeleteDeliveryZoneMutationVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+export type DeleteDeliveryZoneMutation = {
+  __typename?: 'mutation_root';
+  delete_delivery_zone_by_pk?: { __typename?: 'delivery_zone'; id: any } | null;
+};
+
+export type GetDeliveryZoneByAppIdQueryVariables = Exact<{
+  _eq?: InputMaybe<Scalars['uuid']>;
+}>;
+
+export type GetDeliveryZoneByAppIdQuery = {
+  __typename?: 'query_root';
+  delivery_zone: Array<{
+    __typename?: 'delivery_zone';
+    name: string;
+    id: any;
+    fees: number;
+    countries: any;
+    app_id: any;
+  }>;
+};
+
+export type GetDeliveryZonesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetDeliveryZonesQuery = {
+  __typename?: 'query_root';
+  delivery_zone: Array<{
+    __typename?: 'delivery_zone';
+    app_id: any;
+    countries: any;
+    fees: number;
+    id: any;
+    name: string;
+  }>;
 };
 
 export type CreateGateMutationVariables = Exact<{
@@ -2373,6 +2833,221 @@ export type UpdateAppMutationResult = Apollo.MutationResult<UpdateAppMutation>;
 export type UpdateAppMutationOptions = Apollo.BaseMutationOptions<
   UpdateAppMutation,
   UpdateAppMutationVariables
+>;
+export const CreateDeliveryZoneDocument = gql`
+  mutation CreateDeliveryZone($name: String, $fees: Int, $countries: jsonb) {
+    insert_delivery_zone(objects: { countries: $countries, fees: $fees, name: $name }) {
+      returning {
+        app_id
+        countries
+        fees
+        id
+        name
+      }
+    }
+  }
+`;
+export type CreateDeliveryZoneMutationFn = Apollo.MutationFunction<
+  CreateDeliveryZoneMutation,
+  CreateDeliveryZoneMutationVariables
+>;
+
+/**
+ * __useCreateDeliveryZoneMutation__
+ *
+ * To run a mutation, you first call `useCreateDeliveryZoneMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateDeliveryZoneMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createDeliveryZoneMutation, { data, loading, error }] = useCreateDeliveryZoneMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      fees: // value for 'fees'
+ *      countries: // value for 'countries'
+ *   },
+ * });
+ */
+export function useCreateDeliveryZoneMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateDeliveryZoneMutation,
+    CreateDeliveryZoneMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateDeliveryZoneMutation, CreateDeliveryZoneMutationVariables>(
+    CreateDeliveryZoneDocument,
+    options,
+  );
+}
+export type CreateDeliveryZoneMutationHookResult = ReturnType<typeof useCreateDeliveryZoneMutation>;
+export type CreateDeliveryZoneMutationResult = Apollo.MutationResult<CreateDeliveryZoneMutation>;
+export type CreateDeliveryZoneMutationOptions = Apollo.BaseMutationOptions<
+  CreateDeliveryZoneMutation,
+  CreateDeliveryZoneMutationVariables
+>;
+export const DeleteDeliveryZoneDocument = gql`
+  mutation DeleteDeliveryZone($id: uuid!) {
+    delete_delivery_zone_by_pk(id: $id) {
+      id
+    }
+  }
+`;
+export type DeleteDeliveryZoneMutationFn = Apollo.MutationFunction<
+  DeleteDeliveryZoneMutation,
+  DeleteDeliveryZoneMutationVariables
+>;
+
+/**
+ * __useDeleteDeliveryZoneMutation__
+ *
+ * To run a mutation, you first call `useDeleteDeliveryZoneMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteDeliveryZoneMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteDeliveryZoneMutation, { data, loading, error }] = useDeleteDeliveryZoneMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteDeliveryZoneMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DeleteDeliveryZoneMutation,
+    DeleteDeliveryZoneMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<DeleteDeliveryZoneMutation, DeleteDeliveryZoneMutationVariables>(
+    DeleteDeliveryZoneDocument,
+    options,
+  );
+}
+export type DeleteDeliveryZoneMutationHookResult = ReturnType<typeof useDeleteDeliveryZoneMutation>;
+export type DeleteDeliveryZoneMutationResult = Apollo.MutationResult<DeleteDeliveryZoneMutation>;
+export type DeleteDeliveryZoneMutationOptions = Apollo.BaseMutationOptions<
+  DeleteDeliveryZoneMutation,
+  DeleteDeliveryZoneMutationVariables
+>;
+export const GetDeliveryZoneByAppIdDocument = gql`
+  query GetDeliveryZoneByAppId($_eq: uuid) {
+    delivery_zone(where: { app_id: { _eq: $_eq } }) {
+      name
+      id
+      fees
+      countries
+      app_id
+    }
+  }
+`;
+
+/**
+ * __useGetDeliveryZoneByAppIdQuery__
+ *
+ * To run a query within a React component, call `useGetDeliveryZoneByAppIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDeliveryZoneByAppIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDeliveryZoneByAppIdQuery({
+ *   variables: {
+ *      _eq: // value for '_eq'
+ *   },
+ * });
+ */
+export function useGetDeliveryZoneByAppIdQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetDeliveryZoneByAppIdQuery,
+    GetDeliveryZoneByAppIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetDeliveryZoneByAppIdQuery, GetDeliveryZoneByAppIdQueryVariables>(
+    GetDeliveryZoneByAppIdDocument,
+    options,
+  );
+}
+export function useGetDeliveryZoneByAppIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetDeliveryZoneByAppIdQuery,
+    GetDeliveryZoneByAppIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetDeliveryZoneByAppIdQuery, GetDeliveryZoneByAppIdQueryVariables>(
+    GetDeliveryZoneByAppIdDocument,
+    options,
+  );
+}
+export type GetDeliveryZoneByAppIdQueryHookResult = ReturnType<
+  typeof useGetDeliveryZoneByAppIdQuery
+>;
+export type GetDeliveryZoneByAppIdLazyQueryHookResult = ReturnType<
+  typeof useGetDeliveryZoneByAppIdLazyQuery
+>;
+export type GetDeliveryZoneByAppIdQueryResult = Apollo.QueryResult<
+  GetDeliveryZoneByAppIdQuery,
+  GetDeliveryZoneByAppIdQueryVariables
+>;
+export const GetDeliveryZonesDocument = gql`
+  query GetDeliveryZones {
+    delivery_zone {
+      app_id
+      countries
+      fees
+      id
+      name
+    }
+  }
+`;
+
+/**
+ * __useGetDeliveryZonesQuery__
+ *
+ * To run a query within a React component, call `useGetDeliveryZonesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDeliveryZonesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDeliveryZonesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetDeliveryZonesQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetDeliveryZonesQuery, GetDeliveryZonesQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetDeliveryZonesQuery, GetDeliveryZonesQueryVariables>(
+    GetDeliveryZonesDocument,
+    options,
+  );
+}
+export function useGetDeliveryZonesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetDeliveryZonesQuery, GetDeliveryZonesQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetDeliveryZonesQuery, GetDeliveryZonesQueryVariables>(
+    GetDeliveryZonesDocument,
+    options,
+  );
+}
+export type GetDeliveryZonesQueryHookResult = ReturnType<typeof useGetDeliveryZonesQuery>;
+export type GetDeliveryZonesLazyQueryHookResult = ReturnType<typeof useGetDeliveryZonesLazyQuery>;
+export type GetDeliveryZonesQueryResult = Apollo.QueryResult<
+  GetDeliveryZonesQuery,
+  GetDeliveryZonesQueryVariables
 >;
 export const CreateGateDocument = gql`
   mutation CreateGate(

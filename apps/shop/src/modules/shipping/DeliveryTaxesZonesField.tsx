@@ -1,4 +1,6 @@
 import { useDeliveryTaxesZones } from '@/hooks/useDeliveryTaxesZones';
+import { useGetDeliveryZoneByAppIdQuery } from '@3shop/apollo';
+import { envVars } from '@3shop/config';
 import { Spinner } from '@3shop/ui/Spinner';
 import { Input, Select } from '@chakra-ui/react';
 import join from 'lodash/join';
@@ -9,17 +11,22 @@ import type { ShippingFormValues } from './ShippingForm';
 export const DeliveryTaxesZonesField = () => {
   const { register } = useFormContext<ShippingFormValues>();
 
-  const { loading, deliveryTaxesZones, deliveryTaxesType } = useDeliveryTaxesZones();
+  const { data, loading } = useGetDeliveryZoneByAppIdQuery({
+    variables: {
+      _eq: envVars.APP_ID,
+    },
+  });
 
   if (loading) return <Spinner />;
+  if (!data) return <>Error</>;
 
-  if (deliveryTaxesType === 'TEXT') {
+  if (data.delivery_zone.length === 0) {
     return <Input type="text" {...register(SHIPPING_FIELDS.country.name)} placeholder="Country" />;
   }
 
   return (
     <Select {...register(SHIPPING_FIELDS.country.name)} placeholder="Delivery Zone...">
-      {deliveryTaxesZones.map((zone) => (
+      {data.delivery_zone.map((zone) => (
         <option value={zone.name}>
           {zone.name} ({join(zone.countries, ', ')})
         </option>
