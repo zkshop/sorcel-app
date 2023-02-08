@@ -1,0 +1,12 @@
+{
+  "name": "preview",
+  "version": "1.0.0",
+  "source": "index.html",
+  "scripts": {
+    "build": "parcel build",
+    "dev": "parcel"
+  },
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  }
+}
