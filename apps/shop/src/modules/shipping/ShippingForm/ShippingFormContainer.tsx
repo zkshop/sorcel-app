@@ -5,7 +5,7 @@ import { ShippingForm } from './ShippingForm';
 import type { ShippingFormValues } from './types';
 import omit from 'lodash/omit';
 import type { Product } from '@3shop/apollo';
-import { useCreateOrderMutation } from '@3shop/apollo';
+import { useGetDeliveryZoneByAppIdQuery, useCreateOrderMutation } from '@3shop/apollo';
 import { applyDiscount } from '@3shop/pure';
 import { useIsAnHolder } from '@/hooks/useIsAnHolder';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -23,7 +23,11 @@ type ShippingFormContainerProps = {
 export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) => {
   const { id, price, name, image, discount, curation, poapId } = product;
 
-  const deliveryTaxes = useAppSelector((state) => state.deliveryTaxes);
+  const { data: deliveryZoneData } = useGetDeliveryZoneByAppIdQuery({
+    variables: {
+      _eq: envVars.APP_ID,
+    },
+  });
 
   const methods = useForm<ShippingFormValues>({
     mode: 'onChange',
@@ -42,7 +46,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
   const dispatch = useDispatch();
 
   const country = watch('country');
-  const fees = deliveryTaxes.data.find((zone) => zone.name === country)?.fees;
+  const fees = deliveryZoneData?.delivery_zone.find((zone) => zone.name === country)?.fees;
 
   function showDiscount() {
     if (!curation && !poapId) return true;
