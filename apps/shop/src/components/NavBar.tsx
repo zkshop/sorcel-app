@@ -55,6 +55,7 @@ export const NavBar = ({ admin }: NavBarProps) => {
 
   const onSubmit = async (data: { email: string }) => {
     dispatch(login(data.email));
+    onClose();
   };
 
   const handleOpenLoginModal = () => {
