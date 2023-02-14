@@ -2,8 +2,7 @@ import countries from './countryList.json';
 import type { UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
-import { Checkbox, CheckboxGroup, HStack, Input, Text } from '@chakra-ui/react';
-import { Button } from '@3shop/ui';
+import { Button, Checkbox, CheckboxGroup, HStack, Input, Text } from '@3shop/ui';
 import type { NewDeliveryZoneFormValues } from './DeliveryFeesContainer';
 
 type CountrySelectFieldProps = {

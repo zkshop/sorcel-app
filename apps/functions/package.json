@@ -8,25 +8,23 @@
     "lint": "eslint \"**/*.ts\" --fix"
   },
   "dependencies": {
-    "@3shop/domains": "*",
-    "@3shop/magic-server-sdk": "*",
-    "@3shop/poap": "*",
-    "@3shop/pure": "*",
-    "@3shop/sendinblue": "*",
-    "@3shop/stripe": "*",
-    "@3shop/supabase": "*",
-    "@types/jsonwebtoken": "^8.5.9",
+    "@3shop/config": "workspace:*",
+    "@3shop/domains": "workspace:*",
+    "@3shop/magic-server-sdk": "workspace:*",
+    "@3shop/poap": "workspace:*",
+    "@3shop/pure": "workspace:*",
+    "@3shop/sendinblue": "workspace:*",
+    "@3shop/stripe": "workspace:*",
+    "@3shop/supabase": "workspace:*",
     "@vercel/node": "^2.7.1",
-    "axios": "*",
+    "axios": "^1.1.3",
     "cross-fetch": "^3.1.5",
     "http-status": "^1.5.3",
     "jsonwebtoken": "^9.0.0",
-    "stripe": "^11.6.0",
-    "typescript": "*"
+    "stripe": "^11.6.0"
   },
-  "peerDependencies": {
-    "@3shop/config": "*",
-    "axios": "*",
-    "typescript": "*"
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.9",
+    "typescript": "latest"
   }
 }

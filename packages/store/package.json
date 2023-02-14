@@ -7,10 +7,11 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "@3shop/domains": "*",
-    "@3shop/infra": "*",
-    "@3shop/poap": "*",
-    "@3shop/pure": "*"
+    "@3shop/config": "workspace:*",
+    "@3shop/domains": "workspace:*",
+    "@3shop/infra": "workspace:*",
+    "@3shop/poap": "workspace:*",
+    "@3shop/pure": "workspace:*"
   },
   "peerDependencies": {
     "redux": "*"

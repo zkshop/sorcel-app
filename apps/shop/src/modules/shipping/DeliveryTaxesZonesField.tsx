@@ -1,8 +1,6 @@
-import { useDeliveryTaxesZones } from '@/hooks/useDeliveryTaxesZones';
 import { useGetDeliveryZoneByAppIdQuery } from '@3shop/apollo';
 import { envVars } from '@3shop/config';
-import { Spinner } from '@3shop/ui/Spinner';
-import { Input, Select } from '@chakra-ui/react';
+import { Spinner, Input, Select } from '@3shop/ui';
 import join from 'lodash/join';
 import { useFormContext } from 'react-hook-form';
 import { SHIPPING_FIELDS } from './constants';

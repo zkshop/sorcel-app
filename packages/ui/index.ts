@@ -9,6 +9,7 @@ export * from './CollectionBadge/CollectionBadge';
 export * from './CollectionBadge/NftBadge/NftBadge';
 export * from './CollectionBadge/PoapBadge/PoapBadge';
 export * from './FormField/FormField';
+export * from './FormLabel/FormLabel';
 export * from './Header/Header';
 export * from './Heading/Heading';
 export * from './Icons';
@@ -22,7 +23,6 @@ export * from './Spinner';
 export * from './Table';
 export * from './Text/Text';
 export * from './TextInput/TextInput';
-export * from './FormLabel/FormLabel';
 export * from './theme';
 export * from './VerticalMenu/VerticalMenu';
 
@@ -31,6 +31,7 @@ export {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
+  Badge,
   Box,
   ButtonGroup,
   Checkbox,
@@ -39,10 +40,11 @@ export {
   FormControl,
   FormErrorMessage,
   HStack,
-  Input,
   Image,
+  Input,
   InputGroup,
   InputLeftElement,
+  Link,
   ListItem,
   Modal,
   ModalBody,
@@ -53,20 +55,21 @@ export {
   ModalOverlay,
   NumberInput,
   NumberInputField,
+  Select,
+  SimpleGrid,
   Spinner,
-  VStack,
-  Link,
+  Stack,
   TableContainer,
   Tbody,
+  Td,
   Th,
   Thead,
   Tr,
-  Td,
   UnorderedList,
   useDisclosure,
   useToast,
-  SimpleGrid,
-  Stack,
+  VStack,
 } from '@chakra-ui/react';
 
 export type { UseToastOptions } from '@chakra-ui/react';
+export { default as styled } from '@emotion/styled';

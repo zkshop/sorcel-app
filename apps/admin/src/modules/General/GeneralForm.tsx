@@ -91,7 +91,7 @@ export const GeneralForm = ({ app }: GeneralFormProps) => {
             <Controller
               name="imgUrl"
               control={control}
-              render={({ field: { onChange, value } }) => (
+              render={({ field: { onChange, value } }: { field: any }) => (
                 <Dropzone value={value} onChange={onChange} />
               )}
             />

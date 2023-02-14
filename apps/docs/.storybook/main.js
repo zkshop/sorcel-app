@@ -10,7 +10,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@chakra-ui/storybook-addon',
-    'storybook-addon-react-router-v6'
+    'storybook-addon-react-router-v6',
   ],
   framework: '@storybook/react',
   core: {

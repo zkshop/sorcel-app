@@ -7,15 +7,14 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "@3shop/airtable": "*",
-    "@3shop/alchemy": "*",
-    "@3shop/config": "*",
-    "@3shop/domains": "*",
-    "@3shop/magic": "*",
-    "@3shop/pure": "*",
-    "@3shop/supabase": "*"
+    "@3shop/alchemy": "workspace:*",
+    "@3shop/config": "workspace:*",
+    "@3shop/domains": "workspace:*",
+    "@3shop/magic": "workspace:*",
+    "@3shop/pure": "workspace:*",
+    "@3shop/supabase": "workspace:*"
   },
   "devDependencies": {
-    "@3shop/tsconfig": "*"
+    "@3shop/tsconfig": "workspace:*"
   }
 }

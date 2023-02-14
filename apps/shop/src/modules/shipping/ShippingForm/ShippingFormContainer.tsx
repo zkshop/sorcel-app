@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 import { storeOrder } from '@3shop/store/slices/order';
 import { useDispatch } from 'react-redux';
 import { envVars } from '@3shop/config';
-import { useAppSelector } from '@3shop/store';
 
 type ShippingFormContainerProps = {
   product: Product;
