@@ -7,7 +7,7 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-} from '@chakra-ui/react';
+} from '@3shop/ui';
 
 type DeleteDeliveryZoneModalProps = {
   isOpen: boolean;

@@ -8,8 +8,7 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "@3shop/config": "*",
-    "@3shop/cookies": "*",
+    "@3shop/config": "workspace:*",
     "@apollo/client": "^3.7.0",
     "graphql": "^16.6.0"
   },
@@ -20,6 +19,14 @@
     "@graphql-codegen/typescript-graphql-files-modules": "2.2.1",
     "@graphql-codegen/typescript-operations": "^2.5.3",
     "@graphql-codegen/typescript-react-apollo": "^3.3.3",
+    "@types/js-cookie": "^3.0.2",
+    "@types/lodash": "^4.14.191",
+    "@types/react": "^18.0.24",
     "graphql-config": "^4.3.3"
+  },
+  "peerDependencies": {
+    "js-cookie": "*",
+    "lodash": "*",
+    "react": "*"
   }
 }

@@ -13,7 +13,7 @@ import {
   ModalOverlay,
   Spinner,
   useToast,
-} from '@chakra-ui/react';
+} from '@3shop/ui';
 import { useCreateGateMutation } from '@3shop/apollo';
 import { useParams } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';

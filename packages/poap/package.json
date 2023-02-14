@@ -6,9 +6,6 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "@3shop/config": "*"
-  },
-  "peerDependencies": {
-    "axios": "*"
+    "@3shop/config": "workspace:*"
   }
 }

@@ -5,8 +5,7 @@
   "scripts": {
     "lint": "eslint \"**/*.ts*\" --fix"
   },
-  "dependencies": {},
-  "peerDependencies": {
-    "@chakra-ui/react": "*"
+  "dependencies": {
+    "@3shop/ui": "workspace:*"
   }
 }

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import { styled } from '@3shop/ui';
 
 export const StyledCheckoutForm = styled.form`
   width: 30vw;

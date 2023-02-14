@@ -1,6 +1,9 @@
 import { defineConfig, loadEnv } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { createCommonConfig } from '@3shop/vite-config/vite.config.common.js';
+import dotenv from 'dotenv-vault-core';
+
+dotenv.config();
 
 const envVars = {
   APP_ID: null, // Optional: will not fail if the APP_ID environment variable is missing.

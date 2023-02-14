@@ -6,7 +6,8 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "@3shop/admin-infra": "*"
+    "@3shop/admin-infra": "workspace:*",
+    "@3shop/domains": "workspace:*"
   },
   "peerDependencies": {
     "redux": "*"
