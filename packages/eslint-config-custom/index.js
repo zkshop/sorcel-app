@@ -1,6 +1,5 @@
 module.exports = {
   extends: [
-    'next',
     'turbo',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
@@ -11,7 +10,6 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/no-explicit-any': 'off',
-    'import/no-duplicates': ['error', { considerQueryString: true }],
     'react/jsx-key': 'off',
     'import/no-anonymous-default-export': 'off',
     'react/jsx-uses-react': 'off',
@@ -25,5 +23,10 @@ module.exports = {
     ],
     'arrow-body-style': ['error', 'as-needed'],
     'linebreak-style': ['error', 'unix'],
+  },
+  settings: {
+    react: {
+      version: '18.2',
+    },
   },
 };

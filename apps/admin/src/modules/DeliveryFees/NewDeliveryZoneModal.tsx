@@ -13,7 +13,7 @@ import {
   ModalOverlay,
   Stack,
   useToast,
-} from '@chakra-ui/react';
+} from '@3shop/ui';
 import { useForm } from 'react-hook-form';
 import { DELIVERY_ZONE_FIELD } from './constants';
 import { CountrySelectField } from './CountrySelectField';

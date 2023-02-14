@@ -16,8 +16,8 @@ function wrappedDeliveryTaxesByZone(tableName: string): Promise<DeliveryTaxesDat
         view: GRID_VIEW,
         maxRecords: MAX_RECORDS,
       })
-      .eachPage((records) => {
-        const result = records.map((record) => ({
+      .eachPage((records: any) => {
+        const result = records.map((record: any) => ({
           name: record.get(DELIVERY_TAXES_ATTRIBUTES.name) as string,
           fees: record.get(DELIVERY_TAXES_ATTRIBUTES.fees) as number,
           countries: record.get(DELIVERY_TAXES_ATTRIBUTES.countries) as string[],

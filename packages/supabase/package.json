@@ -7,7 +7,7 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "@3shop/config": "*",
+    "@3shop/config": "workspace:*",
     "@supabase/supabase-js": "^2.0.0"
   }
 }
