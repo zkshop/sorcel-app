@@ -1,11 +1,14 @@
 import { envVars } from '@3shop/config';
 import { getDefaultWallets } from '@rainbow-me/rainbowkit';
-import { chain, configureChains, createClient } from 'wagmi';
+import { configureChains, createClient } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
+import { mainnet, polygon } from 'wagmi/chains';
+
+if (!envVars.SECRET_ALCHEMY) throw new Error('No Secret Key for Alchemy provider');
 
 export const { chains, provider } = configureChains(
-  [chain.polygon, chain.polygonMumbai, chain.mainnet, chain.optimism, chain.arbitrum],
+  [mainnet, polygon],
   [alchemyProvider({ apiKey: envVars.SECRET_ALCHEMY }), publicProvider()],
 );
 
@@ -14,7 +17,7 @@ const { connectors } = getDefaultWallets({
   chains,
 });
 
-export const wagmiClient = createClient({
+export const walletClient = createClient({
   autoConnect: true,
   connectors,
   provider,
