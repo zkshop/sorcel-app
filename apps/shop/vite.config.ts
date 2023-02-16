@@ -5,21 +5,25 @@ import dotenv from 'dotenv-vault-core';
 
 dotenv.config();
 
+/* 
+  null: will not fail if the environment variable is missing.
+  undefined: will fail if the environment variable is missing.
+*/
 const envVars = {
-  APP_ID: null, // Optional: will not fail if the APP_ID environment variable is missing.
-  GITHUB_ACTIONS: false, // Is this running in a GitHub Actions environment?
+  APP_ID: null,
+  GITHUB_ACTIONS: false,
+  NETWORK: null,
   PAPER_CLIENT_ID: undefined,
   PUBLIC_FUNCTIONS_URL: undefined,
   PUBLIC_HASURA_API_URL: undefined,
   PUBLIC_MAGIC_PUBLISHABLE_KEY: undefined,
   PUBLIC_STRIPE_PUBLISHABLE_KEY: undefined,
+  SECRET_AIRTABLE: undefined,
   SECRET_ALCHEMY: undefined,
   SECRET_HASURA: undefined,
   SECRET_MAGIC: undefined,
   SECRET_POAP: undefined,
-  SECRET_AIRTABLE: undefined,
   SECRET_RUDDERSTACK: undefined,
-  NETWORK: undefined,
 };
 
 const dirname = __dirname;
@@ -40,7 +44,10 @@ export default defineConfig(({ mode }) => {
         inject: {
           data: {
             SET_APP_ID: `
-              <script type="text/javascript">window.__3SHOP_APP_ID__ = "${process.env.APP_ID}";</script>
+              <script type="text/javascript">
+                window.__3SHOP_APP_ID__ = "${process.env.APP_ID}";
+                window.__3SHOP_NETWORK__ = "${process.env.NETWORK}";
+              </script>
             `,
           },
         },
