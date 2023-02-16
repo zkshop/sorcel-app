@@ -1,19 +1,21 @@
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const GITHUB_ACTIONS = process.env.GITHUB_ACTIONS || false;
 
-function getAppId() {
+type WindowEnvVar = 'APP_ID' | 'NETWORK';
+
+function getWindowEnvVar(name: WindowEnvVar) {
   if (NODE_ENV === 'production' || GITHUB_ACTIONS) {
-    if (typeof window === 'undefined') return process.env.APP_ID;
+    if (typeof window === 'undefined') return process.env[name];
     // @ts-ignore
-    return window.__3SHOP_APP_ID__;
+    return window[`__3SHOP_${name}__`];
   }
   return process.env.APP_ID;
 }
 
 const envVars = {
-  APP_ID: getAppId(),
+  APP_ID: getWindowEnvVar('APP_ID'),
   EMAIL_ORDER_TARGET: process.env.EMAIL_ORDER_TARGET,
-  NETWORK: process.env.NETWORK,
+  NETWORK: getWindowEnvVar('NETWORK'),
   NODE_ENV,
   PAPER_CLIENT_ID: process.env.PAPER_CLIENT_ID,
   PUBLIC_FUNCTIONS_URL: process.env.PUBLIC_FUNCTIONS_URL,
