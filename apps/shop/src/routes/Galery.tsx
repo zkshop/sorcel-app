@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import ReactCanvasConfetti from 'react-canvas-confetti';
-import { useAccount } from 'wagmi';
-
+import { useAccount } from '@3shop/wallet';
 import { ProductListContainer } from '@/modules';
 import { useAppDispatch } from '@3shop/store';
 import { fetchPOAPImageList } from '@3shop/store/slices/poapImageList';

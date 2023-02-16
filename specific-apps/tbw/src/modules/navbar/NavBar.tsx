@@ -1,7 +1,6 @@
 import { VStack, HStack, Box } from '@3shop/ui-tbw';
 
-import { useAccount } from 'wagmi';
-
+import { useAccount } from '@3shop/wallet';
 import { useGetAppQuery } from '@3shop/apollo';
 import { ConnectButtonGroup } from './ConnectButtonGroup';
 import { envVars } from '@3shop/config';

@@ -1,12 +1,12 @@
 import type { StorageClient } from '@3shop/domains';
-import uuid from 'uuid';
+import { v4 } from 'uuid';
 import { supabase } from '@3shop/supabase';
 import { getObjectPathFromImageUrl } from '@3shop/pure';
 
 export function ImageStorageClient(): StorageClient {
   return {
     uploadPicture: async (image, bucketName) => {
-      const filename = uuid.v4();
+      const filename = v4();
       const { error } = await supabase.storage.from(bucketName).upload(filename, image);
 
       if (error) {

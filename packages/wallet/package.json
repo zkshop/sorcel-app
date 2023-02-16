@@ -1,0 +1,14 @@
+{
+  "name": "@3shop/wallet",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix"
+  },
+  "dependencies": {
+    "@3shop/config": "*",
+    "@rainbow-me/rainbowkit": "0.10.0",
+    "ethers": "^5.7.2",
+    "wagmi": "0.11.5"
+  }
+}
