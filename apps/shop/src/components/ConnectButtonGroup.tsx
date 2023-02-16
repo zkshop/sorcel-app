@@ -1,8 +1,8 @@
+import React from 'react';
 import { classnames } from '@3shop/config';
 import { Box, Flex, Button } from '@3shop/ui';
+import { ConnectWalletButton } from '@3shop/wallet';
 
-import React from 'react';
-import ConnectWalletButton from './ConnectWalletButton';
 type ConnectButtonGroupProps = {
   handleOpenLoginModal(): void;
   handleLogout(): void;

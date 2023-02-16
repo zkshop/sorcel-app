@@ -560,11 +560,9 @@ importers:
       '@3shop/ui-tbw': workspace:*
       '@3shop/vite-config': workspace:*
       '@3shop/wallet': workspace:*
-      '@rainbow-me/rainbowkit': ^0.7.1
       '@types/react': ^18.0.24
       '@types/react-dom': ^18.0.8
       buffer: ^6.0.3
-      ethers: ^5.7.2
       posthog-js: ^1.37.0
       react: ^18.2.0
       react-canvas-confetti: ^1.3.0
@@ -572,7 +570,6 @@ importers:
       typescript: latest
       vite: ^3.2.3
       vite-plugin-html: ^3.2.0
-      wagmi: ^0.6.8
     dependencies:
       '@3shop/alchemy': link:../../packages/alchemy
       '@3shop/apollo': link:../../packages/apollo
@@ -581,13 +578,10 @@ importers:
       '@3shop/paper': link:../../packages/paper
       '@3shop/ui-tbw': link:../../packages/ui-tbw
       '@3shop/wallet': link:../../packages/wallet
-      '@rainbow-me/rainbowkit': 0.7.4_tsaxqbuzjmhwwsvvv7qcti3qeu
-      ethers: 5.7.2
       posthog-js: 1.37.0
       react: 18.2.0
       react-canvas-confetti: 1.3.0_react@18.2.0
       react-dom: 18.2.0_react@18.2.0
-      wagmi: 0.6.8_n2cgurg25g7cgftjzlbstkeb2y
     devDependencies:
       '@3shop/vite-config': link:../../packages/vite-config
       '@types/react': 18.0.26
@@ -5289,29 +5283,6 @@ packages:
       - '@types/react'
     dev: false
 
-  /@rainbow-me/rainbowkit/0.7.4_tsaxqbuzjmhwwsvvv7qcti3qeu:
-    resolution: {integrity: sha512-o3kwaHZw9O40gfK2DamJZzoqPbK7EHC+8++QtFy5AQ0Sw5P+U0tzb/87KHatSIXyIwrZTEGD0uciPjCGikJMjg==}
-    engines: {node: '>=12.4'}
-    peerDependencies:
-      ethers: '>=5.5.1'
-      react: '>=17'
-      react-dom: '>=17'
-      wagmi: 0.5.x || 0.6.x || 0.7.x
-    dependencies:
-      '@vanilla-extract/css': 1.9.1
-      '@vanilla-extract/dynamic': 2.0.2
-      '@vanilla-extract/sprinkles': 1.5.0_@vanilla-extract+css@1.9.1
-      clsx: 1.1.1
-      ethers: 5.7.2
-      qrcode: 1.5.0
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-remove-scroll: 2.5.4_kzbn2opkn2327fwg5yzwzya5o4
-      wagmi: 0.6.8_n2cgurg25g7cgftjzlbstkeb2y
-    transitivePeerDependencies:
-      - '@types/react'
-    dev: false
-
   /@reduxjs/toolkit/1.8.6_react-redux@8.0.4:
     resolution: {integrity: sha512-4Ia/Loc6WLmdSOzi7k5ff7dLK8CgG2b8aqpLsCAJhazAzGdp//YBUSaj0ceW6a3kDBDNRrq5CRwyCS0wBiL1ig==}
     peerDependencies:
@@ -7206,24 +7177,6 @@ packages:
       use-sync-external-store: 1.2.0
     dev: false
 
-  /@tanstack/react-query/4.16.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-PDE9u49wSDykPazlCoLFevUpceLjQ0Mm8i6038HgtTEKb/aoVnUZdlUP7C392ds3Cd75+EGlHU7qpEX06R7d9Q==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      '@tanstack/query-core': 4.15.1
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
-    dev: false
-
   /@testing-library/dom/8.18.1:
     resolution: {integrity: sha512-oEvsm2B/WtcHKE+IcEeeCqNU/ltFGaVyGbpcm4g/2ytuT49jrlH9x5qRKL/H3A6yfM4YAbSbC0ceT5+9CEXnLg==}
     engines: {node: '>=12'}
@@ -8010,28 +7963,6 @@ packages:
       ethers: 5.7.2
       eventemitter3: 4.0.7
       zustand: 4.1.4
-    transitivePeerDependencies:
-      - immer
-      - react
-    dev: false
-
-  /@wagmi/core/0.5.8_fvfv3pta3slihjsbm5wv65aspq:
-    resolution: {integrity: sha512-1mABf1bXyn3AOHyQkios4FTGqoARa8y1tf7GMH6t1c7q0nAMSbpXoTDdjEidUHy8qhWoG0y3Ez4PjCi8WQnmMg==}
-    peerDependencies:
-      '@coinbase/wallet-sdk': '>=3.3.0'
-      '@walletconnect/ethereum-provider': '>=1.7.5'
-      ethers: '>=5.5.1'
-    peerDependenciesMeta:
-      '@coinbase/wallet-sdk':
-        optional: true
-      '@walletconnect/ethereum-provider':
-        optional: true
-    dependencies:
-      '@coinbase/wallet-sdk': 3.4.0
-      '@walletconnect/ethereum-provider': 1.8.0
-      ethers: 5.7.2
-      eventemitter3: 4.0.7
-      zustand: 4.1.4_react@18.2.0
     transitivePeerDependencies:
       - immer
       - react
@@ -21838,14 +21769,6 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dev: false
 
-  /use-sync-external-store/1.2.0_react@18.2.0:
-    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      react: 18.2.0
-    dev: false
-
   /use/3.1.1:
     resolution: {integrity: sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==}
     engines: {node: '>=0.10.0'}
@@ -22132,34 +22055,6 @@ packages:
       use-sync-external-store: 1.2.0
     transitivePeerDependencies:
       - '@babel/core'
-      - bufferutil
-      - debug
-      - encoding
-      - immer
-      - react-dom
-      - react-native
-      - supports-color
-      - utf-8-validate
-    dev: false
-
-  /wagmi/0.6.8_n2cgurg25g7cgftjzlbstkeb2y:
-    resolution: {integrity: sha512-pIOn7I56KPfdPQ1WRIWzWnpC8eJZm1V25Rcn5fbgOJ2eV3kjGNchnIub/ERY1VMKywxkCAfgXfn2D/tqwCJsWw==}
-    peerDependencies:
-      ethers: '>=5.5.1'
-      react: '>=17.0.0'
-    dependencies:
-      '@coinbase/wallet-sdk': 3.4.0
-      '@tanstack/query-sync-storage-persister': 4.15.1
-      '@tanstack/react-query': 4.16.1_biqbaboplfbrettd7655fr4n2y
-      '@tanstack/react-query-persist-client': 4.16.1_fsy4krnncv4idvr4txy3aqiuqm
-      '@wagmi/core': 0.5.8_fvfv3pta3slihjsbm5wv65aspq
-      '@walletconnect/ethereum-provider': 1.8.0
-      ethers: 5.7.2
-      react: 18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@tanstack/query-core'
       - bufferutil
       - debug
       - encoding
@@ -23509,22 +23404,6 @@ packages:
         optional: true
     dependencies:
       use-sync-external-store: 1.2.0
-    dev: false
-
-  /zustand/4.1.4_react@18.2.0:
-    resolution: {integrity: sha512-k2jVOlWo8p4R83mQ+/uyB8ILPO2PCJOf+QVjcL+1PbMCk1w5OoPYpAIxy9zd93FSfmJqoH6lGdwzzjwqJIRU5A==}
-    engines: {node: '>=12.7.0'}
-    peerDependencies:
-      immer: '>=9.0'
-      react: '>=16.8'
-    peerDependenciesMeta:
-      immer:
-        optional: true
-      react:
-        optional: true
-    dependencies:
-      react: 18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
   /zustand/4.3.3:
