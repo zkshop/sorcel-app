@@ -19,7 +19,6 @@ export const VerticalMenu = ({ items }: VerticalMenuProps) => (
           fontWeight="bold"
           textAlign="left"
           justifyContent="flex-start"
-          w="120px"
         >
           {item.title}
         </Tab>
