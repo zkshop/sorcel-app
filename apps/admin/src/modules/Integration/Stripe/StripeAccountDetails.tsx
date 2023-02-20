@@ -18,7 +18,6 @@ export const StripeAccountDetails = ({ accountId }: StripeAccountDetailsProps) =
   const status = stripeAccount?.requirements.current_deadline?.length ? 'Pending' : 'Enabled';
 
   if (loading || !stripeAccount) return <Spinner />;
-  console.log({ onboardingLink });
 
   return (
     <Box>
