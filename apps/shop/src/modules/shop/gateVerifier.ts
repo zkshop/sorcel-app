@@ -6,7 +6,7 @@ const isNftMatchingWithGate = (gate: Gate, nft: Nft): boolean => {
 
   for (const gateAttribute of gate.attributes) {
     const nftAttribute = nft.rawMetadata.attributes.find(
-      (attribute: any) => attribute.trait_type === gateAttribute.name,
+      (attribute) => attribute.trait_type === gateAttribute.name,
     );
 
     if (!nftAttribute || nftAttribute.value !== gateAttribute.value) {

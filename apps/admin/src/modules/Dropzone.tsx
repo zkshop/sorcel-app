@@ -1,4 +1,4 @@
-import { Button, Box, Image } from '@3shop/ui';
+import { Button, Box, Image } from '@chakra-ui/react';
 
 import type { ChangeEvent } from 'react';
 import { useDropzone } from 'react-dropzone';
@@ -12,6 +12,7 @@ export const Dropzone = ({ onChange: originalOnChange, value }: DropzoneProps) =
   function onDrop(files: File[]) {
     originalOnChange(files[0]);
   }
+
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
@@ -23,7 +24,6 @@ export const Dropzone = ({ onChange: originalOnChange, value }: DropzoneProps) =
           <Button>Update file</Button>
         </>
       )}
-
       {typeof value === 'undefined' && (
         <Box
           display="flex"
@@ -37,11 +37,7 @@ export const Dropzone = ({ onChange: originalOnChange, value }: DropzoneProps) =
           <p>Drag and drop your file or click on the area</p>
         </Box>
       )}
-
-      {
-        // @ts-ignore
-        typeof value === 'object' && value.name
-      }
+      {typeof value === 'object' && value.name}
     </Box>
   );
 };

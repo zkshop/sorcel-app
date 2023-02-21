@@ -12,16 +12,13 @@ jobs:
       APP_ID: "b2b579e0-8681-485b-9b5c-332f74edae6b"
       SECRET_JWT: "bXYc5pXjGEAjydo8aNO@E1$KUhJl10HA"
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          version: 7
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: "pnpm"
-      - name: Install
-        run: pnpm install
+          node-version: "14.x"
+      - name: Install dependencies
+        run: yarn install
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
       - name: Run E2E tests
@@ -30,7 +27,7 @@ jobs:
           PUBLIC_HASURA_API_URL: ${{ env.PUBLIC_HASURA_API_URL }}
           APP_ID: ${{ env.APP_ID }}
           SECRET_JWT: ${{ env.SECRET_JWT }}
-        run: pnpm test:e2e:admin
+        run: yarn test:e2e:admin
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v3

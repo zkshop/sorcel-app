@@ -1,5 +1,7 @@
 import { useGetAdminAppQuery } from '@3shop/apollo';
-import { Spinner, Button, Heading, Link } from '@3shop/ui';
+import { Button } from '@3shop/ui';
+import { Spinner } from '@3shop/ui/Spinner';
+import { Heading, Link } from '@chakra-ui/react';
 import { StripeAccountDetails } from './Stripe/StripeAccountDetails';
 import { useGetOnboardingLink } from './useGetOnboardingLink';
 

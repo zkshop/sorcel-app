@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs';
 
 type VerticalMenuItem = {
   title: string;

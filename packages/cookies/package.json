@@ -1,12 +1,14 @@
 {
-  "name": "@3shop/events",
+  "name": "@3shop/cookies",
   "version": "0.0.0",
   "main": "index.ts",
   "scripts": {
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "@3shop/config": "*",
-    "@rudderstack/rudder-sdk-node": "^2.0.0"
+    "js-cookie": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.2"
   }
 }

@@ -1,4 +1,4 @@
-name: Deploy to 3shop
+name: Deploy to 3shop-dev
 
 on:
   push:
@@ -17,17 +17,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: "pnpm"
+          cache: "yarn"
       - name: Install
-        run: pnpm install --frozen-lockfile
+        run: yarn --frozen-lockfile --prefer-offline --frozen-lockfile
       - name: Build
-        run: pnpm build:shop:ci
+        run: yarn build:shop:ci
         env:
           DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
       - name: Archive staging artifacts
@@ -45,17 +42,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: "pnpm"
+          cache: "yarn"
       - name: Install
-        run: pnpm install --frozen-lockfile
+        run: yarn --frozen-lockfile --prefer-offline --frozen-lockfile
       - name: Build
-        run: pnpm build:shop:ci
+        run: yarn build:shop:ci
         env:
           DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
       - name: Archive prod artifacts

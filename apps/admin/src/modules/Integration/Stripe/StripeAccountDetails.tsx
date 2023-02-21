@@ -1,4 +1,6 @@
-import { Box, Button, Spinner, Badge, Link, VStack } from '@3shop/ui';
+import { Box, Button, Spinner } from '@3shop/ui';
+import { Badge, Link, VStack } from '@chakra-ui/react';
+import { logDebug } from 'alchemy-sdk/dist/src/util/logger';
 import { useGetOnboardingLink } from '../useGetOnboardingLink';
 
 import { useGetStripeAccountDetails } from '../useGetStripeAccountDetails';

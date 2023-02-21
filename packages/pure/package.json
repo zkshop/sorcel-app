@@ -7,16 +7,8 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "@3shop/alchemy": "workspace:*",
-    "@3shop/apollo": "workspace:*",
-    "@3shop/domains": "workspace:*",
-    "@3shop/poap": "workspace:*",
-    "@3shop/types": "workspace:*"
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.14.191"
-  },
-  "peerDependencies": {
-    "lodash": "*"
+    "@3shop/alchemy": "*",
+    "@3shop/domains": "*",
+    "@3shop/types": "*"
   }
 }
