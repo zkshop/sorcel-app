@@ -1,9 +1,11 @@
 import { Table as ChakraTable, TableContainer, Th, Thead, Tbody } from '@chakra-ui/react';
 
+export type WithIndex<T> = T & { index: number };
+
 type TableProps<Item> = {
   heads?: string[];
   data: Item[];
-  renderRow(item: Item): React.ReactNode;
+  renderRow(item: WithIndex<Item>): React.ReactNode;
 };
 
 export const Table = <Item extends object>({ heads = [], data, renderRow }: TableProps<Item>) => (
@@ -21,7 +23,7 @@ export const Table = <Item extends object>({ heads = [], data, renderRow }: Tabl
           <Th key={`order-list-th-${index}`}>{title}</Th>
         ))}
       </Thead>
-      <Tbody>{data.map((item) => renderRow(item))}</Tbody>
+      <Tbody>{data.map((item, index) => renderRow({ ...item, index }))}</Tbody>
     </ChakraTable>
   </TableContainer>
 );

@@ -5,6 +5,8 @@ import { ApolloProvider, createApolloClient } from '@3shop/apollo';
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 import { CookiesProvider } from 'react-cookie';
+import { CenterProvider } from '@center-inc/react';
+import { envVars } from '@3shop/config';
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -17,9 +19,14 @@ export const AppProvider = ({ children }: AppProviderProps) => (
     <CookiesProvider>
       <ApolloProvider client={apolloClient}>
         <ReduxProvider store={store}>
-          <BrowserRouter>
-            <ThemeProvider>{children}</ThemeProvider>
-          </BrowserRouter>
+          <CenterProvider
+            apiKey={envVars.SECRET_CENTER}
+            mode={envVars.NODE_ENV as 'development' | 'production'}
+          >
+            <BrowserRouter>
+              <ThemeProvider>{children}</ThemeProvider>
+            </BrowserRouter>
+          </CenterProvider>
         </ReduxProvider>
       </ApolloProvider>
     </CookiesProvider>

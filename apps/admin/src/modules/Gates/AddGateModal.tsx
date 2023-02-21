@@ -1,3 +1,4 @@
+import { addNftSegment, addPoapSegment } from '@3shop/admin-store';
 import {
   Modal,
   ModalOverlay,
@@ -20,13 +21,19 @@ import {
 import { Controller } from 'react-hook-form';
 
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { COLLECTION_FIELDS } from './constants';
 
-type AddGateModalFormValues = {
-  type: 'POAP' | 'NFT';
-  network: 'POLYGON' | 'ETHEREUM';
-  address: string;
-};
+type AddGateModalFormValues =
+  | {
+      type: 'NFT';
+      network: 'POLYGON' | 'ETHEREUM';
+      contractAddress: string;
+    }
+  | {
+      type: 'POAP';
+      poapId: string;
+    };
 
 type AddGateModalProps = {
   isOpen: boolean;
@@ -34,89 +41,99 @@ type AddGateModalProps = {
 };
 
 export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
-  const { watch, control } = useForm<AddGateModalFormValues>();
-
+  const { watch, control, handleSubmit, register } = useForm<AddGateModalFormValues>();
+  const dispatch = useDispatch();
   const typeValue = watch('type');
   const networkValue = watch('network');
+
+  const onSubmit = (data: AddGateModalFormValues) => {
+    if (data.type === 'POAP') {
+      dispatch(addPoapSegment(data));
+    } else {
+      dispatch(addNftSegment(data));
+    }
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add gate</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <FormControl>
-            <FormLabel mb={1}>{COLLECTION_FIELDS.type.label}</FormLabel>
-            <Controller
-              name={COLLECTION_FIELDS.type.name}
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <RadioGroup onChange={onChange} value={value}>
-                  <HStack>
-                    <Radio value={COLLECTION_FIELDS.type.nft.value}>
-                      {COLLECTION_FIELDS.type.nft.label}
-                    </Radio>
-                    <Radio value={COLLECTION_FIELDS.type.poap.value}>
-                      {COLLECTION_FIELDS.type.poap.label}
-                    </Radio>
-                  </HStack>
-                </RadioGroup>
-              )}
-            />
-          </FormControl>
-
-          {typeValue === 'NFT' ? (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <ModalHeader>Add gate</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
             <FormControl>
-              <FormLabel mb={1}>{COLLECTION_FIELDS.network.label}</FormLabel>
+              <FormLabel mb={1}>{COLLECTION_FIELDS.type.label}</FormLabel>
               <Controller
-                name={COLLECTION_FIELDS.network.name}
+                name={COLLECTION_FIELDS.type.name}
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <RadioGroup onChange={onChange} value={value}>
                     <HStack>
-                      <Radio value={COLLECTION_FIELDS.network.polygon.value}>
-                        {COLLECTION_FIELDS.network.polygon.label}
+                      <Radio value={COLLECTION_FIELDS.type.nft.value}>
+                        {COLLECTION_FIELDS.type.nft.label}
                       </Radio>
-                      <Radio value={COLLECTION_FIELDS.network.ethereum.value}>
-                        {COLLECTION_FIELDS.network.ethereum.label}
+                      <Radio value={COLLECTION_FIELDS.type.poap.value}>
+                        {COLLECTION_FIELDS.type.poap.label}
                       </Radio>
                     </HStack>
                   </RadioGroup>
                 )}
               />
             </FormControl>
-          ) : null}
 
-          {networkValue && typeValue !== 'POAP' ? (
-            <FormControl>
-              <FormLabel mt={1} mb={1}>
-                {COLLECTION_FIELDS.address.label}
-              </FormLabel>
-              <Input name={COLLECTION_FIELDS.address.name} />
-            </FormControl>
-          ) : null}
+            {typeValue === 'NFT' ? (
+              <FormControl>
+                <FormLabel mb={1}>{COLLECTION_FIELDS.network.label}</FormLabel>
+                <Controller
+                  name={COLLECTION_FIELDS.network.name}
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <RadioGroup onChange={onChange} value={value}>
+                      <HStack>
+                        <Radio value={COLLECTION_FIELDS.network.polygon.value}>
+                          {COLLECTION_FIELDS.network.polygon.label}
+                        </Radio>
+                        <Radio value={COLLECTION_FIELDS.network.ethereum.value}>
+                          {COLLECTION_FIELDS.network.ethereum.label}
+                        </Radio>
+                      </HStack>
+                    </RadioGroup>
+                  )}
+                />
+              </FormControl>
+            ) : null}
 
-          {typeValue === 'POAP' ? (
-            <FormControl>
-              <FormLabel mt={1} mb={1}>
-                {COLLECTION_FIELDS.poapId.label}
-              </FormLabel>
-              <NumberInput>
-                <NumberInputField name={COLLECTION_FIELDS.poapId.name} />
-              </NumberInput>
-            </FormControl>
-          ) : null}
-        </ModalBody>
+            {networkValue && typeValue !== 'POAP' ? (
+              <FormControl>
+                <FormLabel mt={1} mb={1}>
+                  {COLLECTION_FIELDS.contractAddress.label}
+                </FormLabel>
+                <Input {...register(COLLECTION_FIELDS.contractAddress.name)} />
+              </FormControl>
+            ) : null}
 
-        <ModalFooter>
-          <ButtonGroup spacing={3}>
-            <Button backgroundColor="red" color="white">
-              Close
-            </Button>
-            <Button>Save</Button>
-          </ButtonGroup>
-        </ModalFooter>
+            {typeValue === 'POAP' ? (
+              <FormControl>
+                <FormLabel mt={1} mb={1}>
+                  {COLLECTION_FIELDS.poapId.label}
+                </FormLabel>
+                <NumberInput>
+                  <NumberInputField {...register(COLLECTION_FIELDS.poapId.name)} />
+                </NumberInput>
+              </FormControl>
+            ) : null}
+          </ModalBody>
+
+          <ModalFooter>
+            <ButtonGroup spacing={3}>
+              <Button onClick={onClose} backgroundColor="red" color="white">
+                Close
+              </Button>
+              <Button type="submit">Save</Button>
+            </ButtonGroup>
+          </ModalFooter>
+        </form>
       </ModalContent>
     </Modal>
   );

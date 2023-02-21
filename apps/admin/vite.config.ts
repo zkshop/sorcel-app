@@ -10,6 +10,7 @@ const envVars = [
   'SECRET_MAGIC',
   'SECRET_SUPABASE',
   'SECRET_POAP',
+  'SECRET_CENTER',
 ];
 
 const dirname = __dirname;
