@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react';
-import { useAccount } from '@3shop/wallet';
+import { useAccount } from 'wagmi';
+
 import { fetchNFTS, reset } from '../store/reducer/nfts';
 import { useAppDispatch, useAppSelector } from '../store';
 

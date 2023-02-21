@@ -1,7 +1,8 @@
 import { VStack, BackButton, Spinner } from '@3shop/ui';
 
 import ReactCanvasConfetti from 'react-canvas-confetti';
-import { useAccount } from '@3shop/wallet';
+import { useAccount } from 'wagmi';
+
 import { ProductDetailsContainer } from '@/modules/product-page/ProductDetailsContainer';
 import { useGetProductByIdQuery } from '@3shop/apollo';
 import { useParams } from 'react-router-dom';

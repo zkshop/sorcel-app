@@ -5,7 +5,8 @@ import { useForm } from 'react-hook-form';
 
 import { useEffect } from 'react';
 
-import { useAccount } from '@3shop/wallet';
+import { useAccount } from 'wagmi';
+
 import { useGetAppQuery } from '@3shop/apollo';
 import { useAppDispatch, useAppSelector } from '@3shop/store';
 import { getCurrentUser, login, logoutUser } from '@3shop/store/slices/auth';

@@ -2,7 +2,8 @@ import { useCallback, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@3shop/store';
 import { fetchNFTS, reset } from '@3shop/store/slices/nfts';
 import { fetchPOAPS, reset as resetPoaps } from '@3shop/store/slices/poap';
-import { useAccount } from '@3shop/wallet';
+import { useAccount } from 'wagmi';
+
 const useUpdateThemeOnConnection = () => {
   const { isConnected, isDisconnected, address } = useAccount();
   const { nfts, poap } = useAppSelector((state) => state.user);

@@ -1,6 +1,12 @@
+import '@rainbow-me/rainbowkit/styles.css';
+
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { Provider as ReduxProvider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
-import { WalletProvider } from '@3shop/wallet';
+
+import { WagmiConfig } from 'wagmi';
+
+import { wagmiClient, chains } from '@/clients/wagmi';
 import { ApolloProvider, useApollo } from '@3shop/apollo';
 import { ThemeProvider } from '@3shop/ui';
 import { store } from '@3shop/store';
@@ -13,9 +19,11 @@ export const App = () => {
     <ReduxProvider store={store}>
       <ApolloProvider client={apolloClient}>
         <ThemeProvider>
-          <WalletProvider>
-            <RouterProvider router={router} />
-          </WalletProvider>
+          <WagmiConfig client={wagmiClient}>
+            <RainbowKitProvider chains={chains}>
+              <RouterProvider router={router} />
+            </RainbowKitProvider>
+          </WagmiConfig>
         </ThemeProvider>
       </ApolloProvider>
     </ReduxProvider>
