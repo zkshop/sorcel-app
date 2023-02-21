@@ -1,8 +1,7 @@
 import { Flex, Button } from '@3shop/ui-tbw';
 
 import { LoginWithPaper } from './LoginWithPaper';
-import { ConnectWalletButton } from '@3shop/wallet';
-
+import ConnectWalletButton from './ConnectWalletButton';
 type ConnectButtonGroupProps = {
   isConnectedByWallet: boolean;
 };
