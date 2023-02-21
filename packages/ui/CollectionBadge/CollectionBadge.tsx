@@ -7,9 +7,9 @@ type CollectionBadgeProps = {
   href?: string;
 };
 
-export const CollectionBadge = ({ collectionName, imgUrl }: CollectionBadgeProps) => {
+export const CollectionBadge = ({ collectionName, imgUrl, href = '' }: CollectionBadgeProps) => {
   if (imgUrl) {
-    return <PoapBadge imgUrl={imgUrl} />;
+    return <PoapBadge imgUrl={imgUrl} href={href} />;
   }
 
   if (collectionName) {
