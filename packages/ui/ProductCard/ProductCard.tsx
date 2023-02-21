@@ -5,7 +5,7 @@ import { classnames } from '@3shop/config';
 import { Link } from 'react-router-dom';
 import { DiscountTag } from './DiscountTag';
 import { Text } from '../Text/Text';
-import { PoapBadge } from '../CollectionBadge/PoapBadge/PoapBadge';
+import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 
 export type ProductCardProps = {
   id?: string;
@@ -108,7 +108,9 @@ export const ProductCard = ({
         </HStack>
       </Box>
 
-      {poapImgUrl && <PoapBadge imgUrl={poapImgUrl} />}
+      {(poapImgUrl || collection) && (
+        <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} />
+      )}
       {isLocked && <LockedLayer collectionName={collection} />}
       {isDiscount && <DiscountTag discount={discount} />}
     </StyledProductCard>
