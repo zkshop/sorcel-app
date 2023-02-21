@@ -63,7 +63,7 @@ export const NavBar = ({ admin }: NavBarProps) => {
 
   return (
     <VStack className={classnames.HEADER} as="header" sx={{ py: 2, px: { xs: 3, md: 6, lg: 8 } }}>
-      <HStack w="full">
+      <HStack w="full" maxW={1440}>
         <HStack justifyContent="space-between" flex={1}>
           <Link to="/">
             {imgUrl ? (
