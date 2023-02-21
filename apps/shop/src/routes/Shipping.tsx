@@ -17,7 +17,7 @@ export const Shipping = () => {
   return (
     <>
       <BackButton href={`/product/${product.id}`} />
-      <ShippingFormContainer product={product} />;
+      <ShippingFormContainer product={product} />
     </>
   );
 };
