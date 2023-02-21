@@ -154,7 +154,7 @@ export const ProductDetails = ({
                   mr={1}
                   textTransform="uppercase"
                 >
-                  PAY
+                  BUY IT NOW
                 </Text>
 
                 <Box borderRadius="2xl" display="flex">
