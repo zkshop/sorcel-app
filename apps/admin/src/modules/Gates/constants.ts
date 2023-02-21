@@ -45,9 +45,9 @@ export const COLLECTION_FIELDS = {
       value: 'ETHEREUM',
     },
   },
-  address: {
+  contractAddress: {
     label: 'NFT Contract Address',
-    name: 'address',
+    name: 'contractAddress',
   },
   poapId: {
     label: 'Poap Id',
