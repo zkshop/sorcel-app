@@ -23,7 +23,8 @@
     "SECRET_RUDDERSTACK",
     "SECRET_STRIPE",
     "SECRET_SUPABASE",
-    "STRIPE_SECRET_KEY"
+    "STRIPE_SECRET_KEY",
+    "SECRET_CENTER"
   ],
   "pipeline": {
     "build": {

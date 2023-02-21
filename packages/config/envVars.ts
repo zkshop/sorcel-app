@@ -31,6 +31,7 @@ const envVars = {
   SECRET_STRIPE: process.env.SECRET_STRIPE,
   SECRET_SUPABASE: process.env.SECRET_SUPABASE,
   SECRET_RUDDERSTACK: process.env.SECRET_RUDDERSTACK,
+  SECRET_CENTER: process.env.SECRET_CENTER,
 };
 
 export { envVars };

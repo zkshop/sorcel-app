@@ -2,40 +2,12 @@ import { AddGateModal } from './AddGateModal';
 import { PerkFields } from './PerkFields';
 import { GeneralFields } from './GeneralFields';
 import { AddGateFormHeader } from './AddGateFormHeader';
-import {
-  Button,
-  ButtonGroup,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Header,
-  Heading,
-  HStack,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  MainLayout,
-  Section,
-  VStack,
-  InputRightElement,
-  RadioGroup,
-  Radio,
-  NumberInputField,
-  NumberInput,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-} from '@3shop/ui';
+import { Button, Heading, MainLayout, Section, Table, useDisclosure } from '@3shop/ui';
 
 import { useEffect, useState } from 'react';
-import { Controller } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { GATE_FIELDS } from './constants';
+import { useAppSelector } from '@3shop/admin-store';
+import { SegmentTableItem } from './SegmentTableItem';
 
 export type AddGateFormValues = {
   name: string;
@@ -53,8 +25,8 @@ export const AddGate = () => {
     setValue,
   } = useForm<AddGateFormValues>();
 
+  const segments = useAppSelector((state) => state.segments);
   const perkValue = watch('perk');
-
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [showDiscountInput, setShowDiscountInput] = useState(false);
 
@@ -94,6 +66,8 @@ export const AddGate = () => {
               Add collection
             </Button>
           </Heading>
+
+          <Table data={segments} renderRow={SegmentTableItem} />
         </Section>
       </form>
 

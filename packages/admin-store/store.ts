@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import nftAttributesReducer from './slices/nftAttributes';
 import gateReducer from './slices/gate';
+import segmentReducer from './slices/segment';
 
 const rootReducer = combineReducers({
   gates: gateReducer,
   nftAttributes: nftAttributesReducer,
+  segments: segmentReducer,
 });
 
 export const store = configureStore({
