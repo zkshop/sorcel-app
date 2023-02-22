@@ -8,6 +8,7 @@ import { CheckoutForm } from './CheckoutForm/CheckoutForm';
 import { useAppSelector } from '@3shop/store';
 import { Navigate } from 'react-router-dom';
 import { envVars } from '@3shop/config';
+import { sendOrderConfirmation } from '@3shop/events';
 
 const stripe = getStripeObject();
 
@@ -42,6 +43,15 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
         product_id: product.id,
         app_id: envVars.APP_ID,
       },
+    });
+
+    sendOrderConfirmation(order.email, {
+      shop_logo_url: product.app?.imgUrl || '',
+      name: order.firstname,
+      product_name: product.name,
+      shop_name: product.app.name,
+      price: order.amount,
+      img_url: product.image,
     });
   }
 
