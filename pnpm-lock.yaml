@@ -148,7 +148,6 @@ importers:
       '@3shop/magic-server-sdk': workspace:*
       '@3shop/poap': workspace:*
       '@3shop/pure': workspace:*
-      '@3shop/sendinblue': workspace:*
       '@3shop/stripe': workspace:*
       '@3shop/supabase': workspace:*
       '@types/jsonwebtoken': ^8.5.9
@@ -165,7 +164,6 @@ importers:
       '@3shop/magic-server-sdk': link:../../packages/magic-server-sdk
       '@3shop/poap': link:../../packages/poap
       '@3shop/pure': link:../../packages/pure
-      '@3shop/sendinblue': link:../../packages/sendinblue
       '@3shop/stripe': link:../../packages/stripe
       '@3shop/supabase': link:../../packages/supabase
       '@vercel/node': 2.7.1
@@ -184,6 +182,7 @@ importers:
       '@3shop/apollo': workspace:*
       '@3shop/config': workspace:*
       '@3shop/domains': workspace:*
+      '@3shop/events': workspace:*
       '@3shop/messages': workspace:*
       '@3shop/pure': workspace:*
       '@3shop/store': workspace:*
@@ -210,6 +209,7 @@ importers:
       '@3shop/apollo': link:../../packages/apollo
       '@3shop/config': link:../../packages/config
       '@3shop/domains': link:../../packages/domains
+      '@3shop/events': link:../../packages/events
       '@3shop/messages': link:../../packages/messages
       '@3shop/pure': link:../../packages/pure
       '@3shop/store': link:../../packages/store
@@ -421,14 +421,6 @@ importers:
       '@3shop/types': link:../types
     devDependencies:
       '@types/lodash': 4.14.191
-
-  packages/sendinblue:
-    specifiers:
-      '@3shop/config': '*'
-      sib-api-v3-typescript: 2.2.3-beta.1
-    dependencies:
-      '@3shop/config': link:../config
-      sib-api-v3-typescript: 2.2.3-beta.1
 
   packages/store:
     specifiers:
@@ -20051,14 +20043,6 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
     dev: true
-
-  /sib-api-v3-typescript/2.2.3-beta.1:
-    resolution: {integrity: sha512-MQfgiceCeLBiuEJgcIv2Tb4w8s1R2bxjuEgTa2BM0Isg9JxIMeD+SmOgrctwRpwzwJKjgitBQ+N0CyM52jVPaw==}
-    dependencies:
-      bluebird: 3.7.2
-      lodash: 4.17.21
-      request: 2.88.2
-    dev: false
 
   /side-channel/1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}

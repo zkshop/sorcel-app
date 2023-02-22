@@ -13,7 +13,6 @@
     "@3shop/magic-server-sdk": "workspace:*",
     "@3shop/poap": "workspace:*",
     "@3shop/pure": "workspace:*",
-    "@3shop/sendinblue": "workspace:*",
     "@3shop/stripe": "workspace:*",
     "@3shop/supabase": "workspace:*",
     "@vercel/node": "^2.7.1",
