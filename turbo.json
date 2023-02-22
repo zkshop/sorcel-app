@@ -1,9 +1,6 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "globalDependencies": [
-    ".env",
-    "tsconfig.json"
-  ],
+  "globalDependencies": [".env", "tsconfig.json"],
   "globalEnv": [
     "APP_ID",
     "CI",
@@ -25,30 +22,18 @@
     "SECRET_PAPER",
     "SECRET_POAP",
     "SECRET_RUDDERSTACK",
-    "SECRET_SENDINBLUE",
     "SECRET_STRIPE",
     "SECRET_SUPABASE",
-    "SENDINBLUE_API_KEY",
     "STRIPE_SECRET_KEY"
   ],
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "dist/**",
-        "storybook-static/**"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "storybook-static/**"]
     },
     "build:ci": {
-      "dependsOn": [
-        "^build:ci"
-      ],
-      "outputs": [
-        "dist/**",
-        "storybook-static/**"
-      ]
+      "dependsOn": ["^build:ci"],
+      "outputs": ["dist/**", "storybook-static/**"]
     },
     "dev": {
       "dependsOn": [],
@@ -56,25 +41,15 @@
     },
     "test:e2e": {
       "cache": false,
-      "env": [
-        "PUBLIC_HASURA_API_URL",
-        "SECRET_JWT",
-        "APP_ID",
-        "PLAYWRIGHT_TEST_BASE_URL"
-      ]
+      "env": ["PUBLIC_HASURA_API_URL", "SECRET_JWT", "APP_ID", "PLAYWRIGHT_TEST_BASE_URL"]
     },
     "generate:graphql": {
       "cache": false,
-      "env": [
-        "PUBLIC_HASURA_API_URL",
-        "SECRET_HASURA"
-      ]
+      "env": ["PUBLIC_HASURA_API_URL", "SECRET_HASURA"]
     },
     "lint": {},
     "test": {
-      "dependsOn": [
-        "^build"
-      ]
+      "dependsOn": ["^build"]
     }
   }
 }
