@@ -4,7 +4,7 @@ import { createCommonConfig } from '@3shop/vite-config/vite.config.common';
 
 const envVars = {
   APP_ID: null,
-  NETWORK: undefined,
+  NETWORK: null,
   PAPER_CLIENT_ID: undefined,
   PUBLIC_FUNCTIONS_URL: undefined,
   PUBLIC_HASURA_API_URL: undefined,
@@ -32,7 +32,10 @@ export default defineConfig(({ command, mode }) => {
         inject: {
           data: {
             SET_APP_ID: `
-              <script type="text/javascript">window.__3SHOP_APP_ID__ = "${process.env.APP_ID}";</script>
+              <script type="text/javascript">
+                window.__3SHOP_APP_ID__ = "${process.env.APP_ID}";
+                window.__3SHOP_NETWORK__ = "${process.env.NETWORK}";
+              </script>
             `,
           },
         },

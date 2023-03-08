@@ -127,11 +127,11 @@ export const ProductCard = ({
       isOpen={isOpen}
       onOpen={onOpen}
       onClose={onClose}
-      title="NFT Paris Ticket (-50%)"
+      title="Claim your ticket"
       body={
         <form onSubmit={handleSubmit(handleModalSubmit)}>
           <FormControl isInvalid={Boolean(errors.email)}>
-            <FormLabel> Enter your email to get the ticket </FormLabel>
+            <FormLabel> Enter your email to receive the ticket </FormLabel>
             <Input placeholder="Enter your email" {...register('email')} />
             <FormErrorMessage> {errors.email?.message} </FormErrorMessage>
           </FormControl>
