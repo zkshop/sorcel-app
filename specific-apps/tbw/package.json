@@ -4,13 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc && APP_ID=$npm_package_config_app_id vite build",
-    "dev": "APP_ID=$npm_package_config_app_id vite",
+    "build": "tsc && APP_ID=$npm_package_config_app_id NETWORK=$npm_package_config_network vite build",
+    "dev": "APP_ID=$npm_package_config_app_id NETWORK=$npm_package_config_network vite",
     "lint": "eslint \"**/*.ts*\" --fix",
     "preview": "vite preview"
   },
   "config": {
-    "app_id": "d91635d8-1e59-4e73-969c-462768a74b16"
+    "app_id": "d91635d8-1e59-4e73-969c-462768a74b16",
+    "network": "POLYGON"
   },
   "dependencies": {
     "@3shop/alchemy": "workspace:*",
