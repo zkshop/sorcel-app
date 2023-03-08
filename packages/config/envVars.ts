@@ -9,7 +9,7 @@ function getWindowEnvVar(name: WindowEnvVar) {
     // @ts-ignore
     return window[`__3SHOP_${name}__`];
   }
-  return process.env.APP_ID;
+  return process.env[name];
 }
 
 const envVars = {
