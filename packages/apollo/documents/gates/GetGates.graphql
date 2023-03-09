@@ -1,9 +1,9 @@
 query GetGates {
-  gates: gate {
+  gates: gate(order_by: { discount: desc }) {
+    id
+    product_id
     attributes
     contractAddress
     discount
-    id
-    product_id
   }
 }

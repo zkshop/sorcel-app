@@ -4,7 +4,6 @@ import { useGetGatesQuery } from '@3shop/apollo';
 import { ProductCardList } from '@3shop/ui-tbw';
 import { useAppSelector } from '../../store';
 import type { Nft } from '@3shop/alchemy';
-import { findProductGates } from './findProductGates';
 
 type ProductListContainerProps = {
   products: GetProductsQuery['products'];
@@ -49,17 +48,25 @@ const getAssociatedGates = (gates: Gate[], productId: string) =>
   gates.filter((gate) => gate.product_id === productId);
 
 export const ProductListContainer = ({ products }: ProductListContainerProps) => {
-  const nfts = useAppSelector((state) => state.user.nfts);
-  const collections = nfts.map((nft) => nft.contract.address);
   const { data } = useGetGatesQuery();
-  const gates = data?.gates.slice() || [];
-  const sortedGates = gates.sort((a, b) => b.discount - a.discount);
+  const productsGates = data?.gates.slice() || [];
+
+  const userNFTs = useAppSelector((state) => state.user.nfts);
+  const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
 
   const formatedProducts = products.map((product) => {
-    const gate = gateVerifier(findProductGates(product.id, sortedGates), nfts);
+    const productGates = getAssociatedGates(productsGates, product.id);
+    const userMatchedProductGate = gateVerifier(productGates, userNFTs);
 
-    const associatedGates = getAssociatedGates(gates, product.id);
-    return formatProductData({ ...product, collections, gate, gates: associatedGates });
+    // Quick fix gate by attribute verification
+    const isLockedByGate = Boolean(productGates.length) && !userMatchedProductGate;
+
+    return formatProductData({
+      product,
+      userNFTContracts,
+      userMatchedProductGate,
+      isLockedByGate,
+    });
   });
 
   return <ProductCardList products={formatedProducts} />;
