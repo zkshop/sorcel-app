@@ -6,6 +6,7 @@ import { getTargetAttribute } from './getTargetAttribute';
 export type GetProductCardPropsParams = GetProductsQuery['products'][0] & {
   collections: string[];
   gate: Gate | null;
+  gates: Gate[];
 };
 
 const CONFIG_TBW_HIGHLIGHTED_PRODUCT_ID = 'ebb24d16-6b6f-464b-bb54-897482b4bc67';
@@ -23,6 +24,7 @@ export const formatProductData = ({
   isDiscountGated,
   collections,
   gate,
+  gates,
 }: GetProductCardPropsParams): FormatedProductData => {
   const isAnNftHolder = Boolean(curation && collections.includes(curation.toLowerCase()));
   const promoPercent = discount ? discount / 100 : 0;
@@ -41,7 +43,11 @@ export const formatProductData = ({
   const highlight = id === CONFIG_TBW_HIGHLIGHTED_PRODUCT_ID;
   const isNFTParisModal = id === NFT_PARIS_LINK_50_PRODUCT_ID && isAnNftHolder;
   const externalLink = getExternalLink(id, gate, isAnNftHolder, !!curation);
-  const isLocked = !externalLink && !isNFTParisModal;
+  const isLockedByGate = Boolean(gates.length) && !gate;
+  if (id === '9b274f32-a5d8-41a2-b6d1-1f5042563967') console.log({ gate, gates });
+
+  const isLocked = (!externalLink && !isNFTParisModal) || isLockedByGate;
+
   const targetAttribute = getTargetAttribute(id);
 
   if (typeof window !== 'undefined') {
