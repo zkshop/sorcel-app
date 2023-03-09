@@ -24,15 +24,15 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
       {products.map(
         ({
           id,
-          title,
+          name,
+          image,
+          price,
+          discount,
+          priceReduced,
           collection,
-          isLocked,
           poapUrl,
           poapImgUrl,
-          price,
-          priceReduced,
-          srcItem,
-          discount,
+          isLocked,
           isWithHref,
         }) => (
           <GridItem
@@ -43,15 +43,15 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
           >
             <ProductCard
               id={id}
-              title={title}
-              discount={discount}
-              srcItem={srcItem}
+              name={name}
+              image={image}
               price={price}
+              discount={discount}
               priceReduced={priceReduced}
+              collectionName={collection}
               poapUrl={poapUrl}
               poapImgUrl={poapImgUrl}
               isLocked={isLocked}
-              collection={collection}
               isWithHref={isWithHref}
             />
           </GridItem>

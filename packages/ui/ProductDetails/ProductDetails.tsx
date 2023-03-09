@@ -8,16 +8,16 @@ import { Text } from '../Text/Text';
 
 type ProductDetailsProps = {
   id?: string;
-  srcItem: string;
-  title: string;
-  discount?: Nullable<number>;
-  price: number;
-  collection?: string;
-  isLocked?: boolean;
+  name: string;
+  image: string;
   description?: string;
+  price: number;
+  discount?: Nullable<number>;
   priceReduced?: number;
+  collectionName?: string;
   poapUrl?: string;
   poapImgUrl?: string;
+  isLocked?: boolean;
   // eslint-disable-next-line @typescript-eslint/ban-types
   sendTransaction?: Function;
 };
@@ -29,17 +29,17 @@ const templateColumns = {
 
 export const ProductDetails = ({
   id,
-  title,
-  srcItem,
+  name,
+  image,
   description,
   price,
   discount,
   priceReduced,
+  collectionName,
   isLocked = false,
-  collection,
 }: ProductDetailsProps) => (
   <Box className={classnames.PRODUCT_DETAILS.CONTAINER} w="full" position="relative">
-    {isLocked && <LockedLayer collectionName={collection} size="lg" />}
+    {isLocked && <LockedLayer collectionName={collectionName} size="lg" />}
 
     <Grid className={classnames.PRODUCT_DETAILS.GRID} templateColumns={templateColumns}>
       <GridItem className={classnames.PRODUCT_DETAILS.GRID_ITEM}>
@@ -50,7 +50,7 @@ export const ProductDetails = ({
             w="full"
             h="full"
             objectFit="cover"
-            src={srcItem}
+            src={image}
           />
         </Box>
       </GridItem>
@@ -68,7 +68,7 @@ export const ProductDetails = ({
               textTransform="capitalize"
               width="fit-content"
             >
-              {title}
+              {name}
             </Text>
           </Box>
 

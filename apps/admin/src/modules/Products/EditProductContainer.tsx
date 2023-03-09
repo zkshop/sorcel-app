@@ -1,6 +1,6 @@
 import { BackButton, Spinner } from '@3shop/ui';
 
-import { useGetGateFromProductQuery, useGetProductByIdQuery } from '@3shop/apollo';
+import { useGetProductGateQuery, useGetProductByIdQuery } from '@3shop/apollo';
 import { EditProductFormContainer } from './ProductForm/EditProductFormContainer';
 
 type EditProductPageProps = {
@@ -18,7 +18,7 @@ const EditProductContainer = ({ productId }: EditProductPageProps) => {
     },
   });
 
-  const { data: gateData, loading: gatesLoading } = useGetGateFromProductQuery({
+  const { data: gateData, loading: gatesLoading } = useGetProductGateQuery({
     variables: {
       productId,
     },

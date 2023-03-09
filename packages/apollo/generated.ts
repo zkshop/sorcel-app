@@ -2453,11 +2453,11 @@ export type GetGatesQuery = {
   }>;
 };
 
-export type GetGateFromProductQueryVariables = Exact<{
+export type GetProductGateQueryVariables = Exact<{
   productId?: InputMaybe<Scalars['uuid']>;
 }>;
 
-export type GetGateFromProductQuery = {
+export type GetProductGateQuery = {
   __typename?: 'query_root';
   gates: Array<{
     __typename?: 'gate';
@@ -3203,8 +3203,8 @@ export function useGetGatesLazyQuery(
 export type GetGatesQueryHookResult = ReturnType<typeof useGetGatesQuery>;
 export type GetGatesLazyQueryHookResult = ReturnType<typeof useGetGatesLazyQuery>;
 export type GetGatesQueryResult = Apollo.QueryResult<GetGatesQuery, GetGatesQueryVariables>;
-export const GetGateFromProductDocument = gql`
-  query GetGateFromProduct($productId: uuid) {
+export const GetProductGateDocument = gql`
+  query GetProductGate($productId: uuid) {
     gates: gate(where: { product_id: { _eq: $productId } }) {
       attributes
       contractAddress
@@ -3216,49 +3216,44 @@ export const GetGateFromProductDocument = gql`
 `;
 
 /**
- * __useGetGateFromProductQuery__
+ * __useGetProductGateQuery__
  *
- * To run a query within a React component, call `useGetGateFromProductQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetGateFromProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetProductGateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductGateQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetGateFromProductQuery({
+ * const { data, loading, error } = useGetProductGateQuery({
  *   variables: {
  *      productId: // value for 'productId'
  *   },
  * });
  */
-export function useGetGateFromProductQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetGateFromProductQuery, GetGateFromProductQueryVariables>,
+export function useGetProductGateQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetProductGateQuery, GetProductGateQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetGateFromProductQuery, GetGateFromProductQueryVariables>(
-    GetGateFromProductDocument,
+  return Apollo.useQuery<GetProductGateQuery, GetProductGateQueryVariables>(
+    GetProductGateDocument,
     options,
   );
 }
-export function useGetGateFromProductLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetGateFromProductQuery,
-    GetGateFromProductQueryVariables
-  >,
+export function useGetProductGateLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetProductGateQuery, GetProductGateQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetGateFromProductQuery, GetGateFromProductQueryVariables>(
-    GetGateFromProductDocument,
+  return Apollo.useLazyQuery<GetProductGateQuery, GetProductGateQueryVariables>(
+    GetProductGateDocument,
     options,
   );
 }
-export type GetGateFromProductQueryHookResult = ReturnType<typeof useGetGateFromProductQuery>;
-export type GetGateFromProductLazyQueryHookResult = ReturnType<
-  typeof useGetGateFromProductLazyQuery
->;
-export type GetGateFromProductQueryResult = Apollo.QueryResult<
-  GetGateFromProductQuery,
-  GetGateFromProductQueryVariables
+export type GetProductGateQueryHookResult = ReturnType<typeof useGetProductGateQuery>;
+export type GetProductGateLazyQueryHookResult = ReturnType<typeof useGetProductGateLazyQuery>;
+export type GetProductGateQueryResult = Apollo.QueryResult<
+  GetProductGateQuery,
+  GetProductGateQueryVariables
 >;
 export const CreateOrderDocument = gql`
   mutation CreateOrder(

@@ -23,12 +23,12 @@ import axios from 'axios';
 
 export type ProductCardProps = {
   id?: string;
-  srcItem: string;
-  title: string;
-  discount?: number;
-  price: number;
-  priceReduced?: number;
+  name: string;
   description?: any;
+  image: string;
+  price: number;
+  discount?: number;
+  priceReduced?: number;
   externalLink?: string;
   highlight?: boolean;
   isNFTParisModal?: boolean;
@@ -70,9 +70,9 @@ const getAdditionalProps = (
 };
 
 export const ProductCard = ({
-  srcItem,
-  title,
+  name,
   description,
+  image,
   externalLink,
   highlight = false,
   isLocked = false,
@@ -164,7 +164,7 @@ export const ProductCard = ({
 
         <Image
           alt="product"
-          src={srcItem}
+          src={image}
           sx={{
             height: '140px',
             width: '100%',
@@ -179,7 +179,7 @@ export const ProductCard = ({
               lineHeight: '27px',
             }}
           >
-            {title}
+            {name}
           </Text>
 
           <Text
