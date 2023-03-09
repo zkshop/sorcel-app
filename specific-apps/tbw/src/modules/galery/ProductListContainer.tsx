@@ -45,6 +45,9 @@ const gateVerifier = (gates: Gate[], nfts: Nft[]): Gate | null => {
   return match.length ? match[0] : null;
 };
 
+const getAssociatedGates = (gates: Gate[], productId: string) =>
+  gates.filter((gate) => gate.product_id === productId);
+
 export const ProductListContainer = ({ products }: ProductListContainerProps) => {
   const nfts = useAppSelector((state) => state.user.nfts);
   const collections = nfts.map((nft) => nft.contract.address);
@@ -55,7 +58,8 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
   const formatedProducts = products.map((product) => {
     const gate = gateVerifier(findProductGates(product.id, sortedGates), nfts);
 
-    return formatProductData({ ...product, collections, gate });
+    const associatedGates = getAssociatedGates(gates, product.id);
+    return formatProductData({ ...product, collections, gate, gates: associatedGates });
   });
 
   return <ProductCardList products={formatedProducts} />;
