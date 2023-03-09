@@ -9,30 +9,29 @@ import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 
 export type ProductCardProps = {
   id?: string;
-  srcItem: string;
-  title: string;
-  discount?: number;
+  name: string;
+  image: string;
   price: number;
+  discount?: number;
   priceReduced?: number;
-  collection?: string;
-  isLocked?: boolean;
+  collectionName?: string;
   poapUrl?: string;
   poapImgUrl?: string;
-  description?: any;
+  isLocked?: boolean;
   isWithHref?: boolean;
 };
 
 export const ProductCard = ({
   id,
-  srcItem,
-  title,
-  discount,
+  name,
+  image,
   price,
+  discount,
   priceReduced,
-  collection,
+  collectionName,
+  poapImgUrl,
   isLocked = false,
   isWithHref = true,
-  poapImgUrl,
 }: ProductCardProps) => {
   const to = `product/${id}`;
   const additionalProps =
@@ -60,7 +59,7 @@ export const ProductCard = ({
         <Image
           className={classnames.PRODUCT_CARD.IMG}
           alt="product"
-          src={srcItem}
+          src={image}
           w="full"
           h="full"
           objectFit="cover"
@@ -78,7 +77,7 @@ export const ProductCard = ({
             textTransform="capitalize"
             letterSpacing={0.5}
           >
-            {title}
+            {name}
           </Text>
         </Box>
 
@@ -108,10 +107,10 @@ export const ProductCard = ({
         </HStack>
       </Box>
 
-      {(poapImgUrl || collection) && (
-        <CollectionBadge collectionName={collection} imgUrl={poapImgUrl} />
+      {(poapImgUrl || collectionName) && (
+        <CollectionBadge collectionName={collectionName} imgUrl={poapImgUrl} />
       )}
-      {isLocked && <LockedLayer collectionName={collection} />}
+      {isLocked && <LockedLayer collectionName={collectionName} />}
       {isDiscount && <DiscountTag discount={discount} />}
     </StyledProductCard>
   );
