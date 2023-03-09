@@ -1,9 +1,9 @@
-query GetGateFromProduct($productId: uuid) {
-  gates: gate(where: { product_id: { _eq: $productId } }) {
+query GetProductGate($productId: uuid) {
+  gates: gate(where: { product_id: { _eq: $productId } }, order_by: { discount: desc }) {
+    id
+    product_id
     attributes
     contractAddress
     discount
-    id
-    product_id
   }
 }

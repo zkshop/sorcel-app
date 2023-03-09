@@ -3,18 +3,18 @@ import { ProductCard } from '../ProductCard/ProductCard';
 
 export type FormatedProductData = {
   id?: string;
-  srcItem: string;
-  title: string;
-  discount?: number;
+  name: string;
+  description?: any;
+  image: string;
   price: number;
+  discount?: number;
   priceReduced?: number;
   collection?: string;
-  isLocked?: boolean;
-  isAnHolder?: boolean;
   poapUrl?: string;
   poapImgUrl?: string;
-  description?: any;
   externalLink?: string;
+  isLocked?: boolean;
+  isAnHolder?: boolean;
   highlight?: boolean;
   targetAttribute?: string;
   isWithHref?: boolean;
@@ -45,10 +45,10 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
       {products?.map(
         ({
           id,
-          title,
+          name,
           price,
           priceReduced,
-          srcItem,
+          image,
           discount,
           description,
           externalLink,
@@ -60,11 +60,11 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
           <GridItem key={`products-${id}`} display="flex" justifyContent="center">
             <ProductCard
               id={id}
-              title={title}
-              discount={discount}
+              name={name}
               description={description}
-              srcItem={srcItem}
+              image={image}
               price={price}
+              discount={discount}
               priceReduced={priceReduced}
               externalLink={externalLink}
               highlight={highlight}

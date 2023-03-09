@@ -4,7 +4,6 @@ import { useGetGatesQuery } from '@3shop/apollo';
 import { ProductCardList } from '@3shop/ui';
 import { useAppSelector } from '@3shop/store';
 
-import { findProductGates } from './findProductGate';
 import { gateVerifier } from './gateVerifier';
 
 type ProductListContainerProps = {
@@ -15,26 +14,25 @@ const getAssociatedGates = (gates: Gate[], productId: string) =>
   gates.filter((gate) => gate.product_id === productId);
 
 export const ProductListContainer = ({ products }: ProductListContainerProps) => {
-  const poap = useAppSelector((state) => state.user.poap);
-  const nfts = useAppSelector((state) => state.user.nfts);
-
-  const poapIds = poap.map((poap) => poap.event.id);
-  const poapImageList = useAppSelector((state) => state.poapImageList);
-  const collections = nfts.map((nft) => nft.contract.address);
   const { data } = useGetGatesQuery();
-  const gates = data?.gates.slice() || [];
-  const sortedGates = gates.sort((a, b) => b.discount - a.discount);
+  const productsGates = data?.gates.slice() || [];
+
+  const userNFTs = useAppSelector((state) => state.user.nfts);
+  const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
+  const userPoapIds = useAppSelector((state) => state.user.poap.map((poap: any) => poap.event.id));
+  const poapImageList = useAppSelector((state) => state.poapImageList);
 
   const formatedProducts = products.map((product) => {
-    const activeGate = gateVerifier(findProductGates(product.id, sortedGates), nfts);
-    const associatedGates = getAssociatedGates(gates, product.id);
+    const productGates = getAssociatedGates(productsGates, product.id);
+    const userMatchedProductGate = gateVerifier(productGates, userNFTs);
+
     return formatProductData({
-      ...product,
-      poapIds,
-      collections,
+      product,
+      productGates,
+      userPoapIds,
+      userNFTContracts,
+      userMatchedProductGate,
       poapImageList,
-      activeGate,
-      gates: associatedGates,
     });
   });
 

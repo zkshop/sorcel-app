@@ -1,65 +1,63 @@
 import { ProductDetails } from '@3shop/ui';
 
-import type { Gate, Product } from '@3shop/apollo';
-import { useGetGatesQuery } from '@3shop/apollo';
+import type { Product } from '@3shop/apollo';
+import { useGetProductGateQuery } from '@3shop/apollo';
 import { formatProductData } from '@3shop/pure';
 import { useAppSelector } from '@3shop/store';
-import { findProductGates } from '../shop/findProductGate';
 import { gateVerifier } from '../shop/gateVerifier';
 
 type ProductDetailsContainerProps = {
   product: Product;
 };
-const getAssociatedGates = (gates: Gate[], productId: string) =>
-  gates.filter((gate) => gate.product_id === productId);
 
 export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProps) => {
-  const nfts = useAppSelector((state) => state.user.nfts);
-  const collections = nfts.map(({ contract: { address } }) => address);
-  const poapIds = useAppSelector((state) => state.user.poap.map((poap: any) => poap.event.id));
-  const poapImageList = useAppSelector((state) => state.poapImageList);
-  const sendTransaction = () => null;
+  const { data } = useGetProductGateQuery({ variables: { productId: product.id } });
+  const productGates = data?.gates.slice() || [];
 
-  const { data } = useGetGatesQuery();
-  const gates = data?.gates.slice() || [];
-  const sortedGates = gates.sort((a, b) => b.discount - a.discount);
-  const activeGate = gateVerifier(findProductGates(product.id, sortedGates), nfts);
-  const associatedGates = getAssociatedGates(gates, product.id);
+  const userNFTs = useAppSelector((state) => state.user.nfts);
+  const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
+  const userPoapIds = useAppSelector((state) => state.user.poap.map((poap: any) => poap.event.id));
+  const userMatchedProductGate = gateVerifier(productGates, userNFTs);
+  const poapImageList = useAppSelector((state) => state.poapImageList);
+
+  const formatedProducts = formatProductData({
+    product,
+    productGates,
+    userPoapIds,
+    userNFTContracts,
+    userMatchedProductGate,
+    poapImageList,
+  });
 
   const {
-    collection,
-    isLocked,
+    id,
+    name,
+    image,
+    description,
     price,
     priceReduced,
-    description,
-    srcItem,
-    title,
     discount,
-    id,
+    collection,
     poapUrl,
     poapImgUrl,
-  } = formatProductData({
-    ...product,
-    poapIds,
-    collections,
-    poapImageList,
-    gates: associatedGates,
-    activeGate,
-  });
+    isLocked,
+  } = formatedProducts;
+
+  const sendTransaction = () => null;
 
   return (
     <ProductDetails
       id={id}
-      title={title}
+      name={name}
+      image={image}
       description={description}
       price={price}
-      priceReduced={priceReduced}
       discount={discount}
-      srcItem={srcItem}
-      isLocked={isLocked}
-      collection={collection}
+      priceReduced={priceReduced}
+      collectionName={collection}
       poapUrl={poapUrl}
       poapImgUrl={poapImgUrl}
+      isLocked={isLocked}
       sendTransaction={sendTransaction}
     />
   );
