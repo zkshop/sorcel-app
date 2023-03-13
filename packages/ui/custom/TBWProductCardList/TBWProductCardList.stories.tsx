@@ -1,13 +1,15 @@
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { ProductCardList } from './ProductCardList';
+import { TBWProductCardList } from './TBWProductCardList';
 
 export default {
-  title: 'The Big Whale/ProductCardList',
-  component: ProductCardList,
-} as ComponentMeta<typeof ProductCardList>;
+  title: 'The Big Whale/TBWProductCardList',
+  component: TBWProductCardList,
+} as ComponentMeta<typeof TBWProductCardList>;
 
-const Template: ComponentStory<typeof ProductCardList> = (args) => <ProductCardList {...args} />;
+const Template: ComponentStory<typeof TBWProductCardList> = (args) => (
+  <TBWProductCardList {...args} />
+);
 
 export const Primary = Template.bind({});
 Primary.args = {
@@ -61,7 +63,6 @@ Primary.args = {
       title: 'Invitation event TBW ',
       description: 'Le NFT fondateur donne accès à l’évènement TBW.',
       price: '0',
-      highlight: true,
     },
   ],
 };

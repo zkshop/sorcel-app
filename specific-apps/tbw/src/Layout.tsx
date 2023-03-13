@@ -1,14 +1,13 @@
-import { Box } from '@3shop/ui-tbw';
+import { Box } from '@3shop/ui';
+import { Outlet } from 'react-router-dom';
 import { NavBar } from './modules/navbar';
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-export const Layout = ({ children, ...props }: LayoutProps) => (
-  <Box {...props}>
+export const Layout = () => (
+  <Box>
     <NavBar />
 
-    <Box mt="32px">{children}</Box>
+    <Box mt="32px">
+      <Outlet />
+    </Box>
   </Box>
 );

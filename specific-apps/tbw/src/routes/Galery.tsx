@@ -1,8 +1,8 @@
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import { useAccount } from '@3shop/wallet';
 import { useGetProductsQuery } from '@3shop/apollo';
-import { ProductListContainer } from './ProductListContainer';
-import { useOnConnection } from '../../hook/useOnConnection';
+import { ProductListContainer } from '../modules/galery/ProductListContainer';
+import { useOnConnection } from '../hook/useOnConnection';
 import { envVars } from '@3shop/config';
 
 export const Galery = () => {

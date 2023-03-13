@@ -1,1 +1,1 @@
-export * from './Galery';
+export * from '../../routes/Galery';

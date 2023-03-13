@@ -32,13 +32,13 @@ export const formatProductData = ({
   const isNFTHolder = isNFTGated && userNFTContracts.includes(curation.toLowerCase());
   const isAnHolder = isNFTHolder || isPoapHolder;
 
+  const isLocked = isGated && !isAnHolder && !isDiscountGated && !userMatchedProductGate;
+
   const discountToApply = userMatchedProductGate?.discount || discount || 0;
   const discountInPercent = discountToApply / 100;
   const priceReduced = discountToApply ? price - price * discountInPercent : 0;
 
-  const poapUrl = `https://poap.gallery/event/${poapId}`;
   const poapImgUrl = getPoapImageFromPoapList(poapImageList, poapId);
-  const isLocked = isGated && !isAnHolder && !isDiscountGated && !userMatchedProductGate;
 
   const showDiscount = (() => {
     if (userMatchedProductGate?.discount || discount) {
@@ -54,7 +54,6 @@ export const formatProductData = ({
     ...product,
     discount: (showDiscount && (userMatchedProductGate?.discount || discount)) || 0,
     priceReduced,
-    poapUrl,
     poapImgUrl,
     isLocked,
   };

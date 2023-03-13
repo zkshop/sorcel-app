@@ -1,4 +1,4 @@
-import { VStack, HStack, Box } from '@3shop/ui-tbw';
+import { VStack, HStack, Box } from '@3shop/ui';
 
 import { useAccount } from '@3shop/wallet';
 import { useGetAppQuery } from '@3shop/apollo';

@@ -1,11 +1,13 @@
-import { Box, HStack, Image } from '@chakra-ui/react';
+import type { GetProductsQuery, Utility_Enum } from '@3shop/apollo';
+import { Box, HStack, Image, useDisclosure } from '@chakra-ui/react';
 import { StyledProductCard } from './ProductCard.style';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
 import { classnames } from '@3shop/config';
-import { Link } from 'react-router-dom';
 import { DiscountTag } from './DiscountTag';
 import { Text } from '../Text/Text';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
+import { ProductCardEmailModal } from './ProductCardEmailModal';
+import { getElementProps } from './getElementProps';
 
 export type ProductCardProps = {
   id?: string;
@@ -15,10 +17,10 @@ export type ProductCardProps = {
   discount?: number;
   priceReduced?: number;
   collectionName?: string;
-  poapUrl?: string;
   poapImgUrl?: string;
   isLocked?: boolean;
-  isWithHref?: boolean;
+  utility: Utility_Enum;
+  webhookUrl?: GetProductsQuery['products'][0]['webhookUrl'];
 };
 
 export const ProductCard = ({
@@ -31,23 +33,30 @@ export const ProductCard = ({
   collectionName,
   poapImgUrl,
   isLocked = false,
-  isWithHref = true,
+  utility,
+  webhookUrl,
 }: ProductCardProps) => {
-  const to = `product/${id}`;
-  const additionalProps =
-    isLocked || !isWithHref
-      ? {}
-      : {
-          to,
-        };
+  const { isOpen, onOpen, onClose } = useDisclosure({});
+  const productPageLink = `product/${id}`;
   const isDiscount = !!discount;
+
+  const { elementType: DynamicElement, elementProps } = getElementProps({
+    utility,
+    isLocked,
+    productPageLink,
+    onOpen,
+  });
 
   return (
     <StyledProductCard
       className={classnames.PRODUCT_CARD.CONTAINER}
-      as={isLocked ? 'div' : Link}
-      {...additionalProps}
+      as={DynamicElement}
+      {...elementProps}
     >
+      {utility === 'EMAIL_MODAL' && (
+        <ProductCardEmailModal isOpen={isOpen} onClose={onClose} webhookUrl={webhookUrl} />
+      )}
+
       <Box
         className={classnames.PRODUCT_CARD.IMG_CONTAINER}
         sx={{

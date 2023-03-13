@@ -15,7 +15,6 @@ type ProductDetailsProps = {
   discount?: Nullable<number>;
   priceReduced?: number;
   collectionName?: string;
-  poapUrl?: string;
   poapImgUrl?: string;
   isLocked?: boolean;
   // eslint-disable-next-line @typescript-eslint/ban-types

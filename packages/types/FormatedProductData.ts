@@ -1,3 +1,5 @@
+import type { GetProductsQuery, Utility_Enum } from '@3shop/apollo';
+
 export type FormatedProductData = {
   id?: string;
   name: string;
@@ -7,10 +9,10 @@ export type FormatedProductData = {
   discount?: number;
   priceReduced?: number;
   collection?: string;
-  poapUrl?: string;
   poapImgUrl?: string;
   externalLink?: string;
   isLocked?: boolean;
-  isAnHolder?: boolean;
-  isWithHref?: boolean;
+  targetAttribute?: string;
+  utility: Utility_Enum;
+  webhookUrl?: GetProductsQuery['products'][0]['webhookUrl'];
 };

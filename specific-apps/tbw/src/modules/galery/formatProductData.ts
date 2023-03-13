@@ -1,5 +1,5 @@
 import type { Gate, GetProductsQuery } from '@3shop/apollo';
-import type { FormatedProductData } from '@3shop/ui-tbw';
+import type { FormatedProductData } from '@3shop/types';
 import { getExternalLink } from './getExternalLink';
 import { getTargetAttribute } from './getTargetAttribute';
 
@@ -7,31 +7,31 @@ type Product = GetProductsQuery['products'][0];
 
 export type GetProductCardPropsParams = {
   product: Product;
+  productGates: Gate[];
   userNFTContracts: string[];
   userMatchedProductGate: Gate | null;
-  isLockedByGate: boolean;
 };
-
-const CONFIG_TBW_HIGHLIGHTED_PRODUCT_ID = 'ebb24d16-6b6f-464b-bb54-897482b4bc67';
-const NFT_PARIS_LINK_50_PRODUCT_ID = '9b274f32-a5d8-41a2-b6d1-1f5042563967';
 
 export const formatProductData = ({
   product,
+  productGates,
   userNFTContracts,
   userMatchedProductGate,
-  isLockedByGate,
 }: GetProductCardPropsParams): FormatedProductData => {
   const { id, price, discount, isDiscountGated, curation } = product;
-  const isAnNftHolder = Boolean(curation && userNFTContracts.includes(curation.toLowerCase()));
+
+  const isNFTGated = !!curation;
+  const isGatedByNFTAttributes = !!productGates?.length;
+  const isGated = isNFTGated || isGatedByNFTAttributes;
+
+  const isNFTHolder = isNFTGated && userNFTContracts.includes(curation.toLowerCase());
+
+  const isLocked = isGated && !isNFTHolder && !isDiscountGated && !userMatchedProductGate;
 
   const discountInPercent = discount ? discount / 100 : 0;
   const priceReduced = discount ? price - price * discountInPercent : 0;
 
-  const highlight = id === CONFIG_TBW_HIGHLIGHTED_PRODUCT_ID;
-  const isNFTParisModal = id === NFT_PARIS_LINK_50_PRODUCT_ID && isAnNftHolder;
-  const externalLink = getExternalLink(id, userMatchedProductGate, isAnNftHolder, !!curation);
-
-  const isLocked = (!externalLink && !isNFTParisModal) || isLockedByGate;
+  const externalLink = getExternalLink(id, userMatchedProductGate, isNFTHolder, !!curation);
 
   const targetAttribute = getTargetAttribute(id);
 
@@ -44,7 +44,7 @@ export const formatProductData = ({
   const showDiscount = (() => {
     if (discount) {
       if (isDiscountGated) {
-        return isAnNftHolder;
+        return isNFTHolder;
       }
       return true;
     }
@@ -55,8 +55,6 @@ export const formatProductData = ({
     ...product,
     discount: (showDiscount && discount) || 0,
     priceReduced,
-    isNFTParisModal,
-    highlight,
     isLocked,
     externalLink,
     targetAttribute,

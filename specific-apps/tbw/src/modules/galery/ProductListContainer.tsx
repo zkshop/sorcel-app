@@ -1,7 +1,7 @@
 import { formatProductData } from './formatProductData';
 import type { Gate, GetProductsQuery } from '@3shop/apollo';
 import { useGetGatesQuery } from '@3shop/apollo';
-import { ProductCardList } from '@3shop/ui-tbw';
+import { TBWProductCardList } from '@3shop/ui';
 import { useAppSelector } from '../../store';
 import type { Nft } from '@3shop/alchemy';
 
@@ -58,16 +58,13 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
     const productGates = getAssociatedGates(productsGates, product.id);
     const userMatchedProductGate = gateVerifier(productGates, userNFTs);
 
-    // Quick fix gate by attribute verification
-    const isLockedByGate = Boolean(productGates.length) && !userMatchedProductGate;
-
     return formatProductData({
       product,
+      productGates,
       userNFTContracts,
       userMatchedProductGate,
-      isLockedByGate,
     });
   });
 
-  return <ProductCardList products={formatedProducts} />;
+  return <TBWProductCardList products={formatedProducts} />;
 };

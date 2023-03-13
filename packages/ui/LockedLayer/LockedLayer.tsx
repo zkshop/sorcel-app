@@ -36,6 +36,9 @@ export const LockedLayer = ({ size = 'md' }: LockedLayerProps) => (
         left: 0,
         right: 0,
         bottom: 0,
+        fontWeight: 'bold',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <Text
@@ -44,7 +47,7 @@ export const LockedLayer = ({ size = 'md' }: LockedLayerProps) => (
           textAlign: 'center',
           color: 'white',
           fontWeight: 'bold',
-          margin: 'auto',
+          marginBottom: 9,
         }}
         fontSize={size === 'lg' ? '2xl' : 'lg'}
       >

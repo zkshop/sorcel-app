@@ -17,14 +17,13 @@ const Template: ComponentStory<typeof ProductCard> = (args) => (
 export const Primary = Template.bind({});
 Primary.args = {
   id: '1',
-  srcItem:
+  image:
     'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixid=Mnw0MDQ2MTh8MHwxfHNlYXJjaHwyN3x8cHJvZHVjdCUyMGZhc2hpb258ZW58MHx8fHwxNjc1MDg5NDI2&ixlib=rb-4.0.3',
-  title: 'Product Title',
+  name: 'Product Title',
   price: 100,
   discount: 10,
   priceReduced: 90,
-  collection: 'Collection Name',
+  collectionName: 'Collection Name',
   isLocked: false,
-  poapUrl: '',
   poapImgUrl: '',
 };

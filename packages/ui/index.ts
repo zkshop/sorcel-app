@@ -26,6 +26,9 @@ export * from './TextInput/TextInput';
 export * from './theme';
 export * from './VerticalMenu/VerticalMenu';
 
+export * from './custom/TBWProductCard/TBWProductCard';
+export * from './custom/TBWProductCardList/TBWProductCardList';
+
 export {
   Accordion,
   AccordionButton,

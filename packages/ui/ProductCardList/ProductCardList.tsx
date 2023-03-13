@@ -30,10 +30,10 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
           discount,
           priceReduced,
           collection,
-          poapUrl,
           poapImgUrl,
           isLocked,
-          isWithHref,
+          utility,
+          webhookUrl,
         }) => (
           <GridItem
             key={`products-${id}`}
@@ -49,10 +49,10 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
               discount={discount}
               priceReduced={priceReduced}
               collectionName={collection}
-              poapUrl={poapUrl}
               poapImgUrl={poapImgUrl}
               isLocked={isLocked}
-              isWithHref={isWithHref}
+              utility={utility}
+              webhookUrl={webhookUrl}
             />
           </GridItem>
         ),

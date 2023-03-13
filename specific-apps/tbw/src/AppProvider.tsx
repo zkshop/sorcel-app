@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@3shop/ui-tbw';
+import { ThemeProvider } from '@3shop/ui';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './store';
 import { ApolloProvider, useApollo } from '@3shop/apollo';
@@ -6,12 +6,10 @@ import { ApolloProvider, useApollo } from '@3shop/apollo';
 import { PaperSDKProvider } from '@3shop/paper';
 import { envVars } from '@3shop/config';
 import { WalletProvider } from '@3shop/wallet';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './Router';
 
-type AppProviderProps = {
-  children: React.ReactNode;
-};
-
-export const AppProvider = ({ children }: AppProviderProps) => {
+export const AppProvider = () => {
   const apolloClient = useApollo();
 
   return (
@@ -20,7 +18,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         <ThemeProvider>
           <WalletProvider>
             <PaperSDKProvider clientId={envVars.PAPER_CLIENT_ID} chainName="Polygon">
-              {children}
+              <RouterProvider router={router} />
             </PaperSDKProvider>
           </WalletProvider>
         </ThemeProvider>

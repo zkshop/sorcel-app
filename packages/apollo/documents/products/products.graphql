@@ -11,6 +11,8 @@ query GetProducts($appId: uuid!) {
     price
     poapId
     isDiscountGated
+    utility
+    webhookUrl
   }
 }
 
@@ -27,5 +29,7 @@ query GetAdminProducts {
     price
     poapId
     isDiscountGated
+    utility
+    webhookUrl
   }
 }

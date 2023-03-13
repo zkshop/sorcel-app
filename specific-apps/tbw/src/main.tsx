@@ -7,7 +7,6 @@
 // (window.global as any) = globalThis;
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { App } from './App';
 import { AppProvider } from './AppProvider';
 import posthog from 'posthog-js';
 
@@ -20,8 +19,6 @@ posthog.init('phc_NL98HSOKoKpH1YhIuYCEmFgXAl9yVUaGryiwutmYaeI', {
 
 ReactDOM.createRoot(document.getElementById('3shop-app') as HTMLElement).render(
   <React.StrictMode>
-    <AppProvider>
-      <App />
-    </AppProvider>
+    <AppProvider />
   </React.StrictMode>,
 );

@@ -16,15 +16,15 @@ const Template: ComponentStory<typeof ProductCardList> = (args) => (
 
 const product = {
   id: '1',
-  srcItem: '',
-  title: 'Product Title',
+  image: '',
+  name: 'Product Title',
   price: 100,
   discount: 10,
   priceReduced: 90,
-  collection: 'Collection Name',
+  collectionName: 'Collection Name',
   isLocked: false,
-  poapUrl: '',
   poapImgUrl: '',
+  utility: 'PRODUCT_PAGE',
 };
 
 const images = [

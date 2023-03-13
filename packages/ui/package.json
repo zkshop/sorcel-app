@@ -6,8 +6,10 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
+    "@3shop/apollo": "workspace:*",
     "@3shop/config": "workspace:*",
     "@3shop/pure": "workspace:*",
+    "@3shop/validation": "workspace:*",
     "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/react": "^2.5.0",
     "@emotion/react": "^11.10.5",

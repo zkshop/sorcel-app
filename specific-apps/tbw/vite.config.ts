@@ -7,6 +7,7 @@ const envVars = {
   NETWORK: null,
   PAPER_CLIENT_ID: undefined,
   PUBLIC_FUNCTIONS_URL: undefined,
+  PUBLIC_GATEWAY_WEBHOOK_URL: undefined,
   PUBLIC_HASURA_API_URL: undefined,
   PUBLIC_MAGIC_PUBLISHABLE_KEY: undefined,
   SECRET_AIRTABLE: undefined,

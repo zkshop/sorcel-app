@@ -1,16 +1,16 @@
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 import { HStack } from '@chakra-ui/react';
 
-import { ProductCard } from './ProductCard';
+import { TBWProductCard } from './TBWProductCard';
 
 export default {
-  title: 'The Big Whale/ProductCard',
-  component: ProductCard,
-} as ComponentMeta<typeof ProductCard>;
+  title: 'The Big Whale/TBWProductCard',
+  component: TBWProductCard,
+} as ComponentMeta<typeof TBWProductCard>;
 
-const Template: ComponentStory<typeof ProductCard> = (args) => (
+const Template: ComponentStory<typeof TBWProductCard> = (args) => (
   <HStack width="248px" margin="auto">
-    <ProductCard {...args} />;
+    <TBWProductCard {...args} />;
   </HStack>
 );
 

@@ -1,27 +1,8 @@
+import type { FormatedProductData } from '@3shop/types';
 import { Box, Grid, GridItem } from '@chakra-ui/react';
-import { ProductCard } from '../ProductCard/ProductCard';
+import { TBWProductCard } from '../TBWProductCard/TBWProductCard';
 
-export type FormatedProductData = {
-  id?: string;
-  name: string;
-  description?: any;
-  image: string;
-  price: number;
-  discount?: number;
-  priceReduced?: number;
-  collection?: string;
-  poapUrl?: string;
-  poapImgUrl?: string;
-  externalLink?: string;
-  isLocked?: boolean;
-  isAnHolder?: boolean;
-  highlight?: boolean;
-  targetAttribute?: string;
-  isWithHref?: boolean;
-  isNFTParisModal?: boolean;
-};
-
-type ProductCardListProps = {
+type TBWProductCardListProps = {
   products: FormatedProductData[];
 };
 
@@ -33,7 +14,7 @@ const templateColumns = {
   md: 'repeat(3, 1fr)',
 };
 
-export const ProductCardList = ({ products }: ProductCardListProps) => (
+export const TBWProductCardList = ({ products }: TBWProductCardListProps) => (
   <Box
     className={CLASSNAME}
     sx={{
@@ -52,13 +33,13 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
           discount,
           description,
           externalLink,
-          highlight,
           isLocked,
           targetAttribute,
-          isNFTParisModal,
+          utility,
+          webhookUrl,
         }) => (
           <GridItem key={`products-${id}`} display="flex" justifyContent="center">
-            <ProductCard
+            <TBWProductCard
               id={id}
               name={name}
               description={description}
@@ -67,10 +48,10 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
               discount={discount}
               priceReduced={priceReduced}
               externalLink={externalLink}
-              highlight={highlight}
               isLocked={isLocked}
-              isNFTParisModal={isNFTParisModal}
               targetAttribute={targetAttribute}
+              utility={utility}
+              webhookUrl={webhookUrl}
             />
           </GridItem>
         ),
