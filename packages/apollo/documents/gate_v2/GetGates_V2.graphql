@@ -1,0 +1,8 @@
+query GetGate_V2 {
+  gates: gate_v2 {
+    name
+    id
+    exclusive_access
+    discount
+  }
+}

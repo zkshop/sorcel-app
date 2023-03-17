@@ -4890,6 +4890,19 @@ export type CreateGateV2Mutation = {
   } | null;
 };
 
+export type GetGate_V2QueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetGate_V2Query = {
+  __typename?: 'query_root';
+  gates: Array<{
+    __typename?: 'gate_v2';
+    name: string;
+    id: any;
+    exclusive_access: boolean;
+    discount?: number | null;
+  }>;
+};
+
 export type CreateGateMutationVariables = Exact<{
   attributes: Scalars['jsonb'];
   contractAddress: Scalars['String'];
@@ -5703,6 +5716,50 @@ export type CreateGateV2MutationOptions = Apollo.BaseMutationOptions<
   CreateGateV2Mutation,
   CreateGateV2MutationVariables
 >;
+export const GetGate_V2Document = gql`
+  query GetGate_V2 {
+    gates: gate_v2 {
+      name
+      id
+      exclusive_access
+      discount
+    }
+  }
+`;
+
+/**
+ * __useGetGate_V2Query__
+ *
+ * To run a query within a React component, call `useGetGate_V2Query` and pass it any options that fit your needs.
+ * When your component renders, `useGetGate_V2Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetGate_V2Query({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetGate_V2Query(
+  baseOptions?: Apollo.QueryHookOptions<GetGate_V2Query, GetGate_V2QueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetGate_V2Query, GetGate_V2QueryVariables>(GetGate_V2Document, options);
+}
+export function useGetGate_V2LazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetGate_V2Query, GetGate_V2QueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetGate_V2Query, GetGate_V2QueryVariables>(
+    GetGate_V2Document,
+    options,
+  );
+}
+export type GetGate_V2QueryHookResult = ReturnType<typeof useGetGate_V2Query>;
+export type GetGate_V2LazyQueryHookResult = ReturnType<typeof useGetGate_V2LazyQuery>;
+export type GetGate_V2QueryResult = Apollo.QueryResult<GetGate_V2Query, GetGate_V2QueryVariables>;
 export const CreateGateDocument = gql`
   mutation CreateGate(
     $attributes: jsonb!
@@ -6690,6 +6747,7 @@ export const GetProductByIdDocument = gql`
         name
         moneyAccountId
       }
+      utility
     }
   }
 `;
