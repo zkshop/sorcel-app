@@ -19,5 +19,6 @@ query GetProductById($id: uuid!) {
       name
       moneyAccountId
     }
+    utility
   }
 }

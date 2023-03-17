@@ -16,7 +16,7 @@ import { useDispatch } from 'react-redux';
 import { envVars } from '@3shop/config';
 
 type ShippingFormContainerProps = {
-  product: Product;
+  product: Omit<Product, 'utility'>;
 };
 
 export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) => {
