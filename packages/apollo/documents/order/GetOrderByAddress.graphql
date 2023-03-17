@@ -1,0 +1,14 @@
+query GetOrdersByAddress($address: String!) {
+  orders: order(where: { address: { _eq: $address } }) {
+    address
+    email
+    id
+    firstname
+    lastname
+    product_id
+    status
+    product {
+      image
+    }
+  }
+}

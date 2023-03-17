@@ -1,10 +1,12 @@
-import { Box, Button, VStack, Image, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Button, VStack, Image, Grid, GridItem, useToast } from '@chakra-ui/react';
 import { TriangleUpIcon } from '../Icons';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
-import { Link } from 'react-router-dom';
 import type { Nullable } from '@3shop/types';
-import { classnames } from '@3shop/config';
+import { classnames, envVars } from '@3shop/config';
 import { Text } from '../Text/Text';
+import type { CreateSurveyOrderMutationFn, Utility_Enum } from '@3shop/apollo';
+import { getElementProps } from './getElementProps';
+import { useState } from 'react';
 
 type ProductDetailsProps = {
   id?: string;
@@ -20,6 +22,10 @@ type ProductDetailsProps = {
   isLocked?: boolean;
   // eslint-disable-next-line @typescript-eslint/ban-types
   sendTransaction?: Function;
+  createSurveyOrder: CreateSurveyOrderMutationFn;
+  utility: Utility_Enum;
+  walletAddress?: string;
+  userHasAlreadyOrdered?: boolean;
 };
 
 const templateColumns = {
@@ -37,139 +43,188 @@ export const ProductDetails = ({
   priceReduced,
   collectionName,
   isLocked = false,
-}: ProductDetailsProps) => (
-  <Box className={classnames.PRODUCT_DETAILS.CONTAINER} w="full" position="relative">
-    {isLocked && <LockedLayer collectionName={collectionName} size="lg" />}
+  utility,
+  createSurveyOrder,
+  walletAddress,
+  userHasAlreadyOrdered,
+}: ProductDetailsProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const toast = useToast();
+  const shippingLink = `/shipping/${id}`;
+  const BUY_BUTTON_LABEL = utility === 'SURVEY' ? 'VOTE' : 'BUY IT NOW';
 
-    <Grid className={classnames.PRODUCT_DETAILS.GRID} templateColumns={templateColumns}>
-      <GridItem className={classnames.PRODUCT_DETAILS.GRID_ITEM}>
-        <Box className={classnames.PRODUCT_DETAILS.IMG_CONTAINER} mb={{ xs: 2, md: 0 }}>
-          <Image
-            className={classnames.PRODUCT_DETAILS.IMG}
-            alt="product"
-            w="full"
-            h="full"
-            objectFit="cover"
-            src={image}
-          />
-        </Box>
-      </GridItem>
+  const handleClick = async () => {
+    setIsLoading(true);
+    if (!userHasAlreadyOrdered) {
+      await createSurveyOrder({
+        variables: {
+          firstname: '-',
+          lastname: '-',
+          address: walletAddress?.toLocaleLowerCase() || '-',
+          email: '-',
+          product_id: id,
+          app_id: envVars.APP_ID,
+        },
+        refetchQueries: ['GetOrdersByAddress'],
+      });
 
-      <GridItem className={classnames.PRODUCT_DETAILS.GRID_ITEM}>
-        <VStack flex={1} justifyContent="space-between" pl={{ xs: 0, md: 4 }}>
-          <Box alignSelf="flex-start" w="full">
-            <Text
-              className={classnames.PRODUCT_DETAILS.TITLE}
-              fontWeight="bold"
-              fontSize="24px"
-              color="black"
-              mt={1}
-              p={1}
-              textTransform="capitalize"
-              width="fit-content"
-            >
-              {name}
-            </Text>
+      toast({
+        status: 'success',
+        title: 'Voted successfully',
+        description: 'Thank you for your vote',
+      });
+    } else {
+      toast({
+        status: 'error',
+        title: 'You already voted',
+        description: 'You can only vote once',
+      });
+    }
+    setIsLoading(false);
+  };
+
+  const { elementType: DynamicElement, elementProps } = getElementProps({
+    utility,
+    isLocked,
+    shippingLink,
+    onClick: handleClick,
+  });
+
+  return (
+    <Box className={classnames.PRODUCT_DETAILS.CONTAINER} w="full" position="relative">
+      {isLocked && <LockedLayer collectionName={collectionName} size="lg" />}
+
+      <Grid className={classnames.PRODUCT_DETAILS.GRID} templateColumns={templateColumns}>
+        <GridItem className={classnames.PRODUCT_DETAILS.GRID_ITEM}>
+          <Box className={classnames.PRODUCT_DETAILS.IMG_CONTAINER} mb={{ xs: 2, md: 0 }}>
+            <Image
+              className={classnames.PRODUCT_DETAILS.IMG}
+              alt="product"
+              w="full"
+              h="full"
+              objectFit="cover"
+              src={image}
+            />
           </Box>
+        </GridItem>
 
-          <Text
-            className={classnames.PRODUCT_DETAILS.DESCRIPTION}
-            w="full"
-            fontSize="14px"
-            color="black"
-            p={1}
-          >
-            {description}
-          </Text>
-
-          <Box w="full" display="flex" justifyContent="space-between" alignItems="flex-end">
-            <Box
-              className={classnames.PRODUCT_DETAILS.DISCOUNT_TAG_CONTAINER}
-              border={discount ? '1px #dedde0 solid' : undefined}
-              width="50px"
-              borderRadius="2xl"
-              padding="2px"
-              marginTop="4px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
+        <GridItem className={classnames.PRODUCT_DETAILS.GRID_ITEM}>
+          <VStack flex={1} justifyContent="space-between" pl={{ xs: 0, md: 4 }}>
+            <Box alignSelf="flex-start" w="full">
               <Text
-                className={classnames.PRODUCT_DETAILS.DISCOUNT_TAG_TEXT}
+                className={classnames.PRODUCT_DETAILS.TITLE}
                 fontWeight="bold"
-                fontSize="14px"
+                fontSize="24px"
                 color="black"
-                padding="2px"
+                mt={1}
+                p={1}
+                textTransform="capitalize"
+                width="fit-content"
               >
-                {discount ? `-${discount}%` : ''}
+                {name}
               </Text>
             </Box>
 
-            <Box className={classnames.PRODUCT_DETAILS.PRICING_ZONE} display="flex">
-              <Text
-                className={classnames.PRODUCT_DETAILS.PRICE}
-                fontWeight="bold"
-                fontSize="16px"
-                color="black"
+            <Text
+              className={classnames.PRODUCT_DETAILS.DESCRIPTION}
+              w="full"
+              fontSize="14px"
+              color="black"
+              p={1}
+            >
+              {description}
+            </Text>
+
+            <Box w="full" display="flex" justifyContent="space-between" alignItems="flex-end">
+              <Box
+                className={classnames.PRODUCT_DETAILS.DISCOUNT_TAG_CONTAINER}
+                border={discount ? '1px #dedde0 solid' : undefined}
+                width="50px"
+                borderRadius="2xl"
                 padding="2px"
-                textDecoration={discount ? 'line-through' : 'none'}
-                marginRight={discount ? '2px' : 'none'}
+                marginTop="4px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
               >
-                {`${price}€`}
-              </Text>
-              {discount ? (
                 <Text
-                  className={classnames.PRODUCT_DETAILS.REDUCED_PRICE}
+                  className={classnames.PRODUCT_DETAILS.DISCOUNT_TAG_TEXT}
                   fontWeight="bold"
-                  fontSize="16px"
-                  color="#FF5F1F"
+                  fontSize="14px"
+                  color="black"
                   padding="2px"
                 >
-                  {`${priceReduced}€`}
+                  {discount ? `-${discount}%` : ''}
                 </Text>
-              ) : null}
-            </Box>
-          </Box>
+              </Box>
 
-          <Box mt={2} w="full">
-            <Button
-              className={classnames.PRODUCT_DETAILS.BUY_BUTTON}
-              as={isLocked ? 'div' : Link}
-              height="48px"
-              w="full"
-              p={1}
-              isDisabled={isLocked}
-              bg="black"
-              _hover={{
-                bg: 'black',
-              }}
-              {...(isLocked ? {} : { to: `/shipping/${id}` })}
-            >
-              <Box display="flex" justifyContent="space-between" alignItems="center">
+              <Box className={classnames.PRODUCT_DETAILS.PRICING_ZONE} display="flex">
                 <Text
-                  className={classnames.PRODUCT_DETAILS.BUY_BUTTON_TEXT}
+                  className={classnames.PRODUCT_DETAILS.PRICE}
                   fontWeight="bold"
                   fontSize="16px"
-                  color="white"
-                  mr={1}
-                  textTransform="uppercase"
+                  color="black"
+                  padding="2px"
+                  textDecoration={discount ? 'line-through' : 'none'}
+                  marginRight={discount ? '2px' : 'none'}
                 >
-                  BUY IT NOW
+                  {`${price}€`}
                 </Text>
-
-                <Box borderRadius="2xl" display="flex">
-                  <TriangleUpIcon
-                    style={{
-                      marginLeft: '8px',
-                    }}
-                    color="white"
-                  />
-                </Box>
+                {discount ? (
+                  <Text
+                    className={classnames.PRODUCT_DETAILS.REDUCED_PRICE}
+                    fontWeight="bold"
+                    fontSize="16px"
+                    color="#FF5F1F"
+                    padding="2px"
+                  >
+                    {`${priceReduced}€`}
+                  </Text>
+                ) : null}
               </Box>
-            </Button>
-          </Box>
-        </VStack>
-      </GridItem>
-    </Grid>
-  </Box>
-);
+            </Box>
+
+            <Box mt={2} w="full">
+              <Button
+                className={classnames.PRODUCT_DETAILS.BUY_BUTTON}
+                as={DynamicElement}
+                height="48px"
+                w="full"
+                p={1}
+                isDisabled={isLocked}
+                bg="black"
+                isLoading={isLoading}
+                _hover={{
+                  bg: 'black',
+                }}
+                {...elementProps}
+              >
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                  <Text
+                    className={classnames.PRODUCT_DETAILS.BUY_BUTTON_TEXT}
+                    fontWeight="bold"
+                    fontSize="16px"
+                    color="white"
+                    mr={1}
+                    textTransform="uppercase"
+                  >
+                    {BUY_BUTTON_LABEL}
+                  </Text>
+
+                  <Box borderRadius="2xl" display="flex">
+                    <TriangleUpIcon
+                      style={{
+                        marginLeft: '8px',
+                      }}
+                      color="white"
+                    />
+                  </Box>
+                </Box>
+              </Button>
+            </Box>
+          </VStack>
+        </GridItem>
+      </Grid>
+    </Box>
+  );
+};

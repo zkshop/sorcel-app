@@ -6,6 +6,7 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
+    "@3shop/apollo": "workspace:*",
     "@3shop/config": "workspace:*",
     "@3shop/pure": "workspace:*",
     "@chakra-ui/icons": "^2.0.17",
