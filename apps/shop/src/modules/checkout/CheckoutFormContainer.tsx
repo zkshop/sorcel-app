@@ -8,7 +8,7 @@ import { CheckoutForm } from './CheckoutForm/CheckoutForm';
 import { useAppSelector } from '@3shop/store';
 import { Navigate } from 'react-router-dom';
 import { envVars } from '@3shop/config';
-import { sendOrderConfirmation } from '@3shop/events';
+// import { sendOrderConfirmation } from '@3shop/events';
 
 const stripe = getStripeObject();
 
@@ -45,19 +45,20 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
       },
     });
 
-    sendOrderConfirmation(order.email, {
-      shop_logo_url: product.app?.imgUrl || '',
-      name: order.firstname,
-      product_name: product.name,
-      shop_name: product.app.name,
-      price: order.amount,
-      img_url: product.image,
-    });
+    // sendOrderConfirmation(order.email, {
+    //   shop_logo_url: product.app?.imgUrl || '',
+    //   name: order.firstname,
+    //   product_name: product.name,
+    //   shop_name: product.app.name,
+    //   price: order.amount,
+    //   img_url: product.image,
+    // });
   }
 
   if (!order) return <Navigate to="/" />;
 
   return (
+    // @ts-ignore
     <VStack justifyContent="center">
       <Heading as="h2" py={4}>
         Checkout
