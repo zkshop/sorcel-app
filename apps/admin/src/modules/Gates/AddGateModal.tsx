@@ -1,4 +1,4 @@
-import { addNftSegment, addPoapSegment } from '@3shop/admin-store';
+import { addNftSegment, addPoapSegment, formatPoapSegment } from '@3shop/admin-store';
 import {
   Modal,
   ModalOverlay,
@@ -13,16 +13,17 @@ import {
   FormControl,
   FormLabel,
   HStack,
-  NumberInput,
-  NumberInputField,
   Radio,
   RadioGroup,
+  FormErrorMessage,
 } from '@3shop/ui';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller } from 'react-hook-form';
 
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { COLLECTION_FIELDS } from './constants';
+import ADD_GATE_SCHEMA from './schemas';
 
 type AddGateModalFormValues =
   | {
@@ -32,7 +33,7 @@ type AddGateModalFormValues =
     }
   | {
       type: 'POAP';
-      poapId: string;
+      poapIds: string;
     };
 
 type AddGateModalProps = {
@@ -41,14 +42,22 @@ type AddGateModalProps = {
 };
 
 export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
-  const { watch, control, handleSubmit, register } = useForm<AddGateModalFormValues>();
+  const {
+    watch,
+    control,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<AddGateModalFormValues>({
+    resolver: yupResolver(ADD_GATE_SCHEMA),
+  });
   const dispatch = useDispatch();
   const typeValue = watch('type');
   const networkValue = watch('network');
 
   const onSubmit = (data: AddGateModalFormValues) => {
     if (data.type === 'POAP') {
-      dispatch(addPoapSegment(data));
+      dispatch(addPoapSegment({ ...data, poapIds: formatPoapSegment(data.poapIds) }));
     } else {
       dispatch(addNftSegment(data));
     }
@@ -62,7 +71,7 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
           <ModalHeader>Add gate</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FormControl>
+            <FormControl isRequired={Boolean(errors[COLLECTION_FIELDS.type.name])}>
               <FormLabel mb={1}>{COLLECTION_FIELDS.type.label}</FormLabel>
               <Controller
                 name={COLLECTION_FIELDS.type.name}
@@ -80,6 +89,7 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
                   </RadioGroup>
                 )}
               />
+              <FormErrorMessage>{errors[COLLECTION_FIELDS.type.name]?.message}</FormErrorMessage>
             </FormControl>
 
             {typeValue === 'NFT' ? (
@@ -116,11 +126,9 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
             {typeValue === 'POAP' ? (
               <FormControl>
                 <FormLabel mt={1} mb={1}>
-                  {COLLECTION_FIELDS.poapId.label}
+                  {COLLECTION_FIELDS.poapIds.label}
                 </FormLabel>
-                <NumberInput>
-                  <NumberInputField {...register(COLLECTION_FIELDS.poapId.name)} />
-                </NumberInput>
+                <Input {...register(COLLECTION_FIELDS.poapIds.name)} />
               </FormControl>
             ) : null}
           </ModalBody>
