@@ -182,7 +182,6 @@ importers:
       '@3shop/apollo': workspace:*
       '@3shop/config': workspace:*
       '@3shop/domains': workspace:*
-      '@3shop/events': workspace:*
       '@3shop/messages': workspace:*
       '@3shop/pure': workspace:*
       '@3shop/store': workspace:*
@@ -209,7 +208,6 @@ importers:
       '@3shop/apollo': link:../../packages/apollo
       '@3shop/config': link:../../packages/config
       '@3shop/domains': link:../../packages/domains
-      '@3shop/events': link:../../packages/events
       '@3shop/messages': link:../../packages/messages
       '@3shop/pure': link:../../packages/pure
       '@3shop/store': link:../../packages/store
