@@ -1,15 +1,34 @@
-import { Header, Box, Button, Table, Link } from '@3shop/ui';
+import { useGetGate_V2Query } from '@3shop/apollo';
+import type { Nullable } from '@3shop/types';
 
-const GATES_ATTRIBUTES = [''];
+import { Header, Box, Button, Table, Link, Spinner } from '@3shop/ui';
+import { GateListItem } from './GateListItem';
 
-export const Gates = () => (
-  <Box>
-    <Header title="Gates">
-      <Link href="/app/gate/add">
-        <Button>+ New Gate</Button>
-      </Link>
-    </Header>
+const GATES_ATTRIBUTES = ['name', 'perk'];
 
-    <Table data={[]} heads={GATES_ATTRIBUTES} renderRow={() => <div />} />
-  </Box>
-);
+export type GateItemType = {
+  name: string;
+  id: string;
+  exclusive_access: boolean;
+  discount?: Nullable<number>;
+};
+
+export const Gates = () => {
+  const { data, loading } = useGetGate_V2Query();
+
+  if (loading) return <Spinner />;
+
+  if (!data) return <>Error</>;
+
+  return (
+    <Box>
+      <Header title="Gates">
+        <Link href="/app/gate/add">
+          <Button>+ New Gate</Button>
+        </Link>
+      </Header>
+
+      <Table data={data.gates} heads={GATES_ATTRIBUTES} renderRow={GateListItem} />
+    </Box>
+  );
+};
