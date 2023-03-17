@@ -4872,6 +4872,24 @@ export type GetDeliveryZonesQuery = {
   }>;
 };
 
+export type CreateGateV2MutationVariables = Exact<{
+  discount?: InputMaybe<Scalars['Int']>;
+  exclusive_access?: InputMaybe<Scalars['Boolean']>;
+  name?: InputMaybe<Scalars['String']>;
+  product_id?: InputMaybe<Scalars['uuid']>;
+  segments?: InputMaybe<Segment_Arr_Rel_Insert_Input>;
+}>;
+
+export type CreateGateV2Mutation = {
+  __typename?: 'mutation_root';
+  insert_gate_v2_one?: {
+    __typename?: 'gate_v2';
+    id: any;
+    discount?: number | null;
+    name: string;
+  } | null;
+};
+
 export type CreateGateMutationVariables = Exact<{
   attributes: Scalars['jsonb'];
   contractAddress: Scalars['String'];
@@ -5620,6 +5638,70 @@ export type GetDeliveryZonesLazyQueryHookResult = ReturnType<typeof useGetDelive
 export type GetDeliveryZonesQueryResult = Apollo.QueryResult<
   GetDeliveryZonesQuery,
   GetDeliveryZonesQueryVariables
+>;
+export const CreateGateV2Document = gql`
+  mutation CreateGateV2(
+    $discount: Int
+    $exclusive_access: Boolean
+    $name: String
+    $product_id: uuid
+    $segments: segment_arr_rel_insert_input
+  ) {
+    insert_gate_v2_one(
+      object: {
+        discount: $discount
+        exclusive_access: $exclusive_access
+        name: $name
+        product_id: $product_id
+        segments: $segments
+      }
+    ) {
+      id
+      discount
+      name
+    }
+  }
+`;
+export type CreateGateV2MutationFn = Apollo.MutationFunction<
+  CreateGateV2Mutation,
+  CreateGateV2MutationVariables
+>;
+
+/**
+ * __useCreateGateV2Mutation__
+ *
+ * To run a mutation, you first call `useCreateGateV2Mutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateGateV2Mutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createGateV2Mutation, { data, loading, error }] = useCreateGateV2Mutation({
+ *   variables: {
+ *      discount: // value for 'discount'
+ *      exclusive_access: // value for 'exclusive_access'
+ *      name: // value for 'name'
+ *      product_id: // value for 'product_id'
+ *      segments: // value for 'segments'
+ *   },
+ * });
+ */
+export function useCreateGateV2Mutation(
+  baseOptions?: Apollo.MutationHookOptions<CreateGateV2Mutation, CreateGateV2MutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateGateV2Mutation, CreateGateV2MutationVariables>(
+    CreateGateV2Document,
+    options,
+  );
+}
+export type CreateGateV2MutationHookResult = ReturnType<typeof useCreateGateV2Mutation>;
+export type CreateGateV2MutationResult = Apollo.MutationResult<CreateGateV2Mutation>;
+export type CreateGateV2MutationOptions = Apollo.BaseMutationOptions<
+  CreateGateV2Mutation,
+  CreateGateV2MutationVariables
 >;
 export const CreateGateDocument = gql`
   mutation CreateGate(
