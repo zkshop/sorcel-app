@@ -873,6 +873,10 @@ export type Mutation_Root = {
   delete_user?: Maybe<User_Mutation_Response>;
   /** delete single row from the table: "user" */
   delete_user_by_pk?: Maybe<User>;
+  /** delete data from the table: "utility" */
+  delete_utility?: Maybe<Utility_Mutation_Response>;
+  /** delete single row from the table: "utility" */
+  delete_utility_by_pk?: Maybe<Utility>;
   /** insert data into the table: "app" */
   insert_app?: Maybe<App_Mutation_Response>;
   /** insert a single row into the table: "app" */
@@ -897,6 +901,10 @@ export type Mutation_Root = {
   insert_user?: Maybe<User_Mutation_Response>;
   /** insert a single row into the table: "user" */
   insert_user_one?: Maybe<User>;
+  /** insert data into the table: "utility" */
+  insert_utility?: Maybe<Utility_Mutation_Response>;
+  /** insert a single row into the table: "utility" */
+  insert_utility_one?: Maybe<Utility>;
   /** update data of the table: "app" */
   update_app?: Maybe<App_Mutation_Response>;
   /** update single row of the table: "app" */
@@ -933,6 +941,12 @@ export type Mutation_Root = {
   update_user_by_pk?: Maybe<User>;
   /** update multiples rows of table: "user" */
   update_user_many?: Maybe<Array<Maybe<User_Mutation_Response>>>;
+  /** update data of the table: "utility" */
+  update_utility?: Maybe<Utility_Mutation_Response>;
+  /** update single row of the table: "utility" */
+  update_utility_by_pk?: Maybe<Utility>;
+  /** update multiples rows of table: "utility" */
+  update_utility_many?: Maybe<Array<Maybe<Utility_Mutation_Response>>>;
 };
 
 /** mutation root */
@@ -993,6 +1007,16 @@ export type Mutation_RootDelete_UserArgs = {
 /** mutation root */
 export type Mutation_RootDelete_User_By_PkArgs = {
   email: Scalars['String'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_UtilityArgs = {
+  where: Utility_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Utility_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 /** mutation root */
@@ -1065,6 +1089,18 @@ export type Mutation_RootInsert_UserArgs = {
 export type Mutation_RootInsert_User_OneArgs = {
   object: User_Insert_Input;
   on_conflict?: InputMaybe<User_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_UtilityArgs = {
+  objects: Array<Utility_Insert_Input>;
+  on_conflict?: InputMaybe<Utility_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Utility_OneArgs = {
+  object: Utility_Insert_Input;
+  on_conflict?: InputMaybe<Utility_On_Conflict>;
 };
 
 /** mutation root */
@@ -1193,6 +1229,23 @@ export type Mutation_RootUpdate_User_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_User_ManyArgs = {
   updates: Array<User_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_UtilityArgs = {
+  _set?: InputMaybe<Utility_Set_Input>;
+  where: Utility_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Utility_By_PkArgs = {
+  _set?: InputMaybe<Utility_Set_Input>;
+  pk_columns: Utility_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Utility_ManyArgs = {
+  updates: Array<Utility_Updates>;
 };
 
 /** columns and relationships of "order" */
@@ -1450,6 +1503,7 @@ export type Product = {
   name: Scalars['String'];
   poapId?: Maybe<Scalars['Int']>;
   price: Scalars['Int'];
+  utility: Utility_Enum;
 };
 
 /** aggregated selection of "product" */
@@ -1506,6 +1560,7 @@ export type Product_Bool_Exp = {
   name?: InputMaybe<String_Comparison_Exp>;
   poapId?: InputMaybe<Int_Comparison_Exp>;
   price?: InputMaybe<Int_Comparison_Exp>;
+  utility?: InputMaybe<Utility_Enum_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "product" */
@@ -1535,6 +1590,7 @@ export type Product_Insert_Input = {
   name?: InputMaybe<Scalars['String']>;
   poapId?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
+  utility?: InputMaybe<Utility_Enum>;
 };
 
 /** aggregate max on columns */
@@ -1604,6 +1660,7 @@ export type Product_Order_By = {
   name?: InputMaybe<Order_By>;
   poapId?: InputMaybe<Order_By>;
   price?: InputMaybe<Order_By>;
+  utility?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: product */
@@ -1635,6 +1692,8 @@ export enum Product_Select_Column {
   PoapId = 'poapId',
   /** column name */
   Price = 'price',
+  /** column name */
+  Utility = 'utility',
 }
 
 /** input type for updating data in table "product" */
@@ -1650,6 +1709,7 @@ export type Product_Set_Input = {
   name?: InputMaybe<Scalars['String']>;
   poapId?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
+  utility?: InputMaybe<Utility_Enum>;
 };
 
 /** aggregate stddev on columns */
@@ -1697,6 +1757,7 @@ export type Product_Stream_Cursor_Value_Input = {
   name?: InputMaybe<Scalars['String']>;
   poapId?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
+  utility?: InputMaybe<Utility_Enum>;
 };
 
 /** aggregate sum on columns */
@@ -1731,6 +1792,8 @@ export enum Product_Update_Column {
   PoapId = 'poapId',
   /** column name */
   Price = 'price',
+  /** column name */
+  Utility = 'utility',
 }
 
 export type Product_Updates = {
@@ -1804,6 +1867,12 @@ export type Query_Root = {
   user_aggregate: User_Aggregate;
   /** fetch data from the table: "user" using primary key columns */
   user_by_pk?: Maybe<User>;
+  /** fetch data from the table: "utility" */
+  utility: Array<Utility>;
+  /** fetch aggregated fields from the table: "utility" */
+  utility_aggregate: Utility_Aggregate;
+  /** fetch data from the table: "utility" using primary key columns */
+  utility_by_pk?: Maybe<Utility>;
 };
 
 export type Query_RootAppArgs = {
@@ -1926,6 +1995,26 @@ export type Query_RootUser_By_PkArgs = {
   email: Scalars['String'];
 };
 
+export type Query_RootUtilityArgs = {
+  distinct_on?: InputMaybe<Array<Utility_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Utility_Order_By>>;
+  where?: InputMaybe<Utility_Bool_Exp>;
+};
+
+export type Query_RootUtility_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Utility_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Utility_Order_By>>;
+  where?: InputMaybe<Utility_Bool_Exp>;
+};
+
+export type Query_RootUtility_By_PkArgs = {
+  value: Scalars['String'];
+};
+
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** fetch data from the table: "app" */
@@ -1976,6 +2065,14 @@ export type Subscription_Root = {
   user_by_pk?: Maybe<User>;
   /** fetch data from the table in a streaming manner: "user" */
   user_stream: Array<User>;
+  /** fetch data from the table: "utility" */
+  utility: Array<Utility>;
+  /** fetch aggregated fields from the table: "utility" */
+  utility_aggregate: Utility_Aggregate;
+  /** fetch data from the table: "utility" using primary key columns */
+  utility_by_pk?: Maybe<Utility>;
+  /** fetch data from the table in a streaming manner: "utility" */
+  utility_stream: Array<Utility>;
 };
 
 export type Subscription_RootAppArgs = {
@@ -2132,6 +2229,32 @@ export type Subscription_RootUser_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<User_Stream_Cursor_Input>>;
   where?: InputMaybe<User_Bool_Exp>;
+};
+
+export type Subscription_RootUtilityArgs = {
+  distinct_on?: InputMaybe<Array<Utility_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Utility_Order_By>>;
+  where?: InputMaybe<Utility_Bool_Exp>;
+};
+
+export type Subscription_RootUtility_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Utility_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Utility_Order_By>>;
+  where?: InputMaybe<Utility_Bool_Exp>;
+};
+
+export type Subscription_RootUtility_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+export type Subscription_RootUtility_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Utility_Stream_Cursor_Input>>;
+  where?: InputMaybe<Utility_Bool_Exp>;
 };
 
 /** columns and relationships of "user" */
@@ -2293,6 +2416,143 @@ export type User_Updates = {
   where: User_Bool_Exp;
 };
 
+/** columns and relationships of "utility" */
+export type Utility = {
+  __typename?: 'utility';
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "utility" */
+export type Utility_Aggregate = {
+  __typename?: 'utility_aggregate';
+  aggregate?: Maybe<Utility_Aggregate_Fields>;
+  nodes: Array<Utility>;
+};
+
+/** aggregate fields of "utility" */
+export type Utility_Aggregate_Fields = {
+  __typename?: 'utility_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Utility_Max_Fields>;
+  min?: Maybe<Utility_Min_Fields>;
+};
+
+/** aggregate fields of "utility" */
+export type Utility_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Utility_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "utility". All fields are combined with a logical 'AND'. */
+export type Utility_Bool_Exp = {
+  _and?: InputMaybe<Array<Utility_Bool_Exp>>;
+  _not?: InputMaybe<Utility_Bool_Exp>;
+  _or?: InputMaybe<Array<Utility_Bool_Exp>>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "utility" */
+export enum Utility_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  UtilityPkey = 'utility_pkey',
+}
+
+export enum Utility_Enum {
+  Ecommerce = 'ECOMMERCE',
+  EmailModal = 'EMAIL_MODAL',
+  ExternalLink = 'EXTERNAL_LINK',
+  Survey = 'SURVEY',
+}
+
+/** Boolean expression to compare columns of type "utility_enum". All fields are combined with logical 'AND'. */
+export type Utility_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Utility_Enum>;
+  _in?: InputMaybe<Array<Utility_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Utility_Enum>;
+  _nin?: InputMaybe<Array<Utility_Enum>>;
+};
+
+/** input type for inserting data into table "utility" */
+export type Utility_Insert_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Utility_Max_Fields = {
+  __typename?: 'utility_max_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Utility_Min_Fields = {
+  __typename?: 'utility_min_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "utility" */
+export type Utility_Mutation_Response = {
+  __typename?: 'utility_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Utility>;
+};
+
+/** on_conflict condition type for table "utility" */
+export type Utility_On_Conflict = {
+  constraint: Utility_Constraint;
+  update_columns?: Array<Utility_Update_Column>;
+  where?: InputMaybe<Utility_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "utility". */
+export type Utility_Order_By = {
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: utility */
+export type Utility_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "utility" */
+export enum Utility_Select_Column {
+  /** column name */
+  Value = 'value',
+}
+
+/** input type for updating data in table "utility" */
+export type Utility_Set_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "utility" */
+export type Utility_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Utility_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Utility_Stream_Cursor_Value_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "utility" */
+export enum Utility_Update_Column {
+  /** column name */
+  Value = 'value',
+}
+
+export type Utility_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Utility_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Utility_Bool_Exp;
+};
+
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
 export type Uuid_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['uuid']>;
@@ -2445,11 +2705,11 @@ export type GetGatesQuery = {
   __typename?: 'query_root';
   gates: Array<{
     __typename?: 'gate';
+    id: any;
+    product_id: any;
     attributes?: any | null;
     contractAddress: string;
     discount: number;
-    id: any;
-    product_id: any;
   }>;
 };
 
@@ -2461,11 +2721,11 @@ export type GetProductGateQuery = {
   __typename?: 'query_root';
   gates: Array<{
     __typename?: 'gate';
+    id: any;
+    product_id: any;
     attributes?: any | null;
     contractAddress: string;
     discount: number;
-    id: any;
-    product_id: any;
   }>;
 };
 
@@ -2491,6 +2751,49 @@ export type CreateOrderMutation = {
     product_id: any;
     status: any;
   } | null;
+};
+
+export type CreateSurveyOrderMutationVariables = Exact<{
+  address: Scalars['String'];
+  email: Scalars['String'];
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
+  product_id: Scalars['uuid'];
+  app_id: Scalars['uuid'];
+}>;
+
+export type CreateSurveyOrderMutation = {
+  __typename?: 'mutation_root';
+  insert_order_one?: {
+    __typename?: 'order';
+    address: string;
+    app_id: any;
+    email: string;
+    firstname: string;
+    id: any;
+    lastname: string;
+    product_id: any;
+    status: any;
+  } | null;
+};
+
+export type GetOrdersByAddressQueryVariables = Exact<{
+  address: Scalars['String'];
+}>;
+
+export type GetOrdersByAddressQuery = {
+  __typename?: 'query_root';
+  orders: Array<{
+    __typename?: 'order';
+    address: string;
+    email: string;
+    id: any;
+    firstname: string;
+    lastname: string;
+    product_id: any;
+    status: any;
+    product: { __typename?: 'product'; image: string };
+  }>;
 };
 
 export type GetOrdersQueryVariables = Exact<{ [key: string]: never }>;
@@ -2635,6 +2938,7 @@ export type GetProductByIdQuery = {
     price: number;
     poapId?: number | null;
     isDiscountGated: boolean;
+    utility: Utility_Enum;
     app: {
       __typename?: 'app';
       id: any;
@@ -3163,12 +3467,12 @@ export type DeleteGateFromIdMutationOptions = Apollo.BaseMutationOptions<
 >;
 export const GetGatesDocument = gql`
   query GetGates {
-    gates: gate {
+    gates: gate(order_by: { discount: desc }) {
+      id
+      product_id
       attributes
       contractAddress
       discount
-      id
-      product_id
     }
   }
 `;
@@ -3205,12 +3509,12 @@ export type GetGatesLazyQueryHookResult = ReturnType<typeof useGetGatesLazyQuery
 export type GetGatesQueryResult = Apollo.QueryResult<GetGatesQuery, GetGatesQueryVariables>;
 export const GetProductGateDocument = gql`
   query GetProductGate($productId: uuid) {
-    gates: gate(where: { product_id: { _eq: $productId } }) {
+    gates: gate(where: { product_id: { _eq: $productId } }, order_by: { discount: desc }) {
+      id
+      product_id
       attributes
       contractAddress
       discount
-      id
-      product_id
     }
   }
 `;
@@ -3326,6 +3630,143 @@ export type CreateOrderMutationResult = Apollo.MutationResult<CreateOrderMutatio
 export type CreateOrderMutationOptions = Apollo.BaseMutationOptions<
   CreateOrderMutation,
   CreateOrderMutationVariables
+>;
+export const CreateSurveyOrderDocument = gql`
+  mutation CreateSurveyOrder(
+    $address: String!
+    $email: String!
+    $firstname: String!
+    $lastname: String!
+    $product_id: uuid!
+    $app_id: uuid!
+  ) {
+    insert_order_one(
+      object: {
+        address: $address
+        email: $email
+        firstname: $firstname
+        lastname: $lastname
+        product_id: $product_id
+        app_id: $app_id
+      }
+    ) {
+      address
+      app_id
+      email
+      firstname
+      id
+      lastname
+      product_id
+      status
+    }
+  }
+`;
+export type CreateSurveyOrderMutationFn = Apollo.MutationFunction<
+  CreateSurveyOrderMutation,
+  CreateSurveyOrderMutationVariables
+>;
+
+/**
+ * __useCreateSurveyOrderMutation__
+ *
+ * To run a mutation, you first call `useCreateSurveyOrderMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateSurveyOrderMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createSurveyOrderMutation, { data, loading, error }] = useCreateSurveyOrderMutation({
+ *   variables: {
+ *      address: // value for 'address'
+ *      email: // value for 'email'
+ *      firstname: // value for 'firstname'
+ *      lastname: // value for 'lastname'
+ *      product_id: // value for 'product_id'
+ *      app_id: // value for 'app_id'
+ *   },
+ * });
+ */
+export function useCreateSurveyOrderMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateSurveyOrderMutation,
+    CreateSurveyOrderMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateSurveyOrderMutation, CreateSurveyOrderMutationVariables>(
+    CreateSurveyOrderDocument,
+    options,
+  );
+}
+export type CreateSurveyOrderMutationHookResult = ReturnType<typeof useCreateSurveyOrderMutation>;
+export type CreateSurveyOrderMutationResult = Apollo.MutationResult<CreateSurveyOrderMutation>;
+export type CreateSurveyOrderMutationOptions = Apollo.BaseMutationOptions<
+  CreateSurveyOrderMutation,
+  CreateSurveyOrderMutationVariables
+>;
+export const GetOrdersByAddressDocument = gql`
+  query GetOrdersByAddress($address: String!) {
+    orders: order(where: { address: { _eq: $address } }) {
+      address
+      email
+      id
+      firstname
+      lastname
+      product_id
+      status
+      product {
+        image
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetOrdersByAddressQuery__
+ *
+ * To run a query within a React component, call `useGetOrdersByAddressQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOrdersByAddressQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOrdersByAddressQuery({
+ *   variables: {
+ *      address: // value for 'address'
+ *   },
+ * });
+ */
+export function useGetOrdersByAddressQuery(
+  baseOptions: Apollo.QueryHookOptions<GetOrdersByAddressQuery, GetOrdersByAddressQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetOrdersByAddressQuery, GetOrdersByAddressQueryVariables>(
+    GetOrdersByAddressDocument,
+    options,
+  );
+}
+export function useGetOrdersByAddressLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetOrdersByAddressQuery,
+    GetOrdersByAddressQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetOrdersByAddressQuery, GetOrdersByAddressQueryVariables>(
+    GetOrdersByAddressDocument,
+    options,
+  );
+}
+export type GetOrdersByAddressQueryHookResult = ReturnType<typeof useGetOrdersByAddressQuery>;
+export type GetOrdersByAddressLazyQueryHookResult = ReturnType<
+  typeof useGetOrdersByAddressLazyQuery
+>;
+export type GetOrdersByAddressQueryResult = Apollo.QueryResult<
+  GetOrdersByAddressQuery,
+  GetOrdersByAddressQueryVariables
 >;
 export const GetOrdersDocument = gql`
   query GetOrders {
@@ -3696,6 +4137,7 @@ export const GetProductByIdDocument = gql`
       price
       poapId
       isDiscountGated
+      utility
       app {
         id
         deliveryTaxesTableName

@@ -11,6 +11,7 @@ query GetProductById($id: uuid!) {
     price
     poapId
     isDiscountGated
+    utility
     app {
       id
       deliveryTaxesTableName

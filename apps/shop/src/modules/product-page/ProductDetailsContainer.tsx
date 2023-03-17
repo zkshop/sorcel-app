@@ -1,10 +1,13 @@
 import { ProductDetails } from '@3shop/ui';
 
 import type { Product } from '@3shop/apollo';
+import { useGetOrdersByAddressQuery } from '@3shop/apollo';
+import { useCreateSurveyOrderMutation } from '@3shop/apollo';
 import { useGetProductGateQuery } from '@3shop/apollo';
 import { formatProductData } from '@3shop/pure';
 import { useAppSelector } from '@3shop/store';
 import { gateVerifier } from '../shop/gateVerifier';
+import { useAccount } from '@3shop/wallet';
 
 type ProductDetailsContainerProps = {
   product: Product;
@@ -45,6 +48,16 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
 
   const sendTransaction = () => null;
 
+  /* SURVEY UTILITY */
+  const { utility } = product;
+  const [createSurveyOrder] = useCreateSurveyOrderMutation();
+  const { address: walletAddress } = useAccount();
+  const { data: ordersByAddress } = useGetOrdersByAddressQuery({
+    variables: { address: walletAddress?.toLocaleLowerCase() as string },
+  });
+  const userOrders = ordersByAddress?.orders || [];
+  const userHasAlreadyOrdered = userOrders.some((order) => order.product_id === id);
+
   return (
     <ProductDetails
       id={id}
@@ -59,6 +72,10 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
       poapImgUrl={poapImgUrl}
       isLocked={isLocked}
       sendTransaction={sendTransaction}
+      createSurveyOrder={createSurveyOrder}
+      utility={utility}
+      walletAddress={walletAddress}
+      userHasAlreadyOrdered={userHasAlreadyOrdered}
     />
   );
 };
