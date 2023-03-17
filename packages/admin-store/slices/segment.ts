@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export type PoapSegment = {
   type: 'POAP';
-  poapId: string;
+  poapIds: string[];
 };
 
 export type NftSegment = {
@@ -17,6 +17,9 @@ type PoapAction = { type: string; payload: PoapSegment };
 type NftAction = { type: string; payload: NftSegment };
 
 const initialState = [] as Segment[];
+
+export const formatPoapSegment = (poapIds: string): string[] =>
+  poapIds.split(',').map((id) => id.trim());
 
 const segmentSlice = createSlice({
   initialState,

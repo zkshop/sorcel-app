@@ -45,7 +45,7 @@ export const SegmentTableItem = (item: WithIndex<Segment>) => {
         network={item.network}
       />
     );
-  } else
+  } else if (item.type === 'POAP')
     return (
       <Tr
         sx={{
@@ -55,7 +55,8 @@ export const SegmentTableItem = (item: WithIndex<Segment>) => {
           },
         }}
       >
-        <Td>{item.poapId}</Td>
+        <Td>Poap List</Td>
+        <Td>{item.poapIds.join(', ')}</Td>
       </Tr>
     );
 };

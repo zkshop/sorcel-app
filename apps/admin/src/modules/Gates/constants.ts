@@ -49,8 +49,8 @@ export const COLLECTION_FIELDS = {
     label: 'NFT Contract Address',
     name: 'contractAddress',
   },
-  poapId: {
-    label: 'Poap Id',
-    name: 'poapId',
+  poapIds: {
+    label: 'Poap Ids',
+    name: 'poapIds',
   },
 } as const;
