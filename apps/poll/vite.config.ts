@@ -47,16 +47,16 @@ export default defineConfig(({ mode }) => {
     //     },
     //   }),
     // ],
-    build: {
-      ...commonConfig.build,
-      rollupOptions: {
-        ...commonConfig.build?.rollupOptions,
-        output: {
-          inlineDynamicImports: true,
-          entryFileNames: '[name].js',
-          assetFileNames: '[name].[ext]',
-        },
-      },
-    },
+    // build: {
+    //   ...commonConfig.build,
+    //   rollupOptions: {
+    //     ...commonConfig.build?.rollupOptions,
+    //     output: {
+    //       inlineDynamicImports: true,
+    //       entryFileNames: '[name].js',
+    //       assetFileNames: '[name].[ext]',
+    //     },
+    //   },
+    // },
   };
 });
