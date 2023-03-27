@@ -1,0 +1,16 @@
+fragment GateFields on gate_v2 {
+  app_id
+  product_id
+  id
+  name
+  discount
+  exclusive_access
+  segments {
+    id
+    gate_id
+    network
+    nft_contract_address
+    poap_ids
+    type
+  }
+}

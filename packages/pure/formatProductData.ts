@@ -1,58 +1,40 @@
-import { getPoapImageFromPoapList } from '@3shop/poap';
-import type { Gate, GetProductsQuery } from '@3shop/apollo';
+import { getPoapImageFromPoapList, getPoapURLFromId } from '@3shop/poap';
+import type { GetGates_V2_ByAppIdQuery, GetProductsQuery } from '@3shop/apollo';
 import type { FormatedProductData } from '@3shop/types';
+import { applyDiscount } from './applyDiscount';
 
 type Product = GetProductsQuery['products'][0];
+type ShopGate_v2 = GetGates_V2_ByAppIdQuery['gates'][0];
 
 export type GetProductCardPropsParams = {
   product: Product;
-  productGates: Gate[];
+  productGates: ShopGate_v2[];
   userPoapIds: number[];
   userNFTContracts: string[];
-  userMatchedProductGate: Gate | null;
+  userMatchedProductGate: ShopGate_v2 | null;
   poapImageList: string[];
 };
 
 export const formatProductData = ({
   product,
   productGates,
-  userPoapIds,
-  userNFTContracts,
   userMatchedProductGate,
   poapImageList,
 }: GetProductCardPropsParams): FormatedProductData => {
-  const { price, discount, isDiscountGated, curation, poapId } = product;
+  const { price, poapId } = product;
 
-  const isPoapGated = !!poapId;
-  const isNFTGated = !!curation;
-  const isGatedByNFTAttributes = !!productGates?.length;
-  const isGated = isPoapGated || isNFTGated || isGatedByNFTAttributes;
+  const isGated = productGates.length > 0 && productGates[0].exclusive_access;
 
-  const isPoapHolder = isPoapGated && userPoapIds.includes(poapId);
-  const isNFTHolder = isNFTGated && userNFTContracts.includes(curation.toLowerCase());
-  const isAnHolder = isNFTHolder || isPoapHolder;
+  const discountToApply = userMatchedProductGate?.discount;
+  const priceReduced = applyDiscount(price, discountToApply || 0);
 
-  const discountToApply = userMatchedProductGate?.discount || discount || 0;
-  const discountInPercent = discountToApply / 100;
-  const priceReduced = discountToApply ? price - price * discountInPercent : 0;
-
-  const poapUrl = `https://poap.gallery/event/${poapId}`;
+  const poapUrl = getPoapURLFromId(poapId as number);
   const poapImgUrl = getPoapImageFromPoapList(poapImageList, poapId);
-  const isLocked = isGated && !isAnHolder && !isDiscountGated && !userMatchedProductGate;
-
-  const showDiscount = (() => {
-    if (userMatchedProductGate?.discount || discount) {
-      if (isDiscountGated) {
-        return isAnHolder;
-      }
-      return true;
-    }
-    return false;
-  })();
+  const isLocked = isGated && !userMatchedProductGate;
 
   const formatedProductData = {
     ...product,
-    discount: (showDiscount && (userMatchedProductGate?.discount || discount)) || 0,
+    discount: userMatchedProductGate?.discount || 0,
     priceReduced,
     poapUrl,
     poapImgUrl,

@@ -4890,9 +4890,9 @@ export type CreateGateV2Mutation = {
   } | null;
 };
 
-export type GetGate_V2QueryVariables = Exact<{ [key: string]: never }>;
+export type GetGates_V2QueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetGate_V2Query = {
+export type GetGates_V2Query = {
   __typename?: 'query_root';
   gates: Array<{
     __typename?: 'gate_v2';
@@ -4900,6 +4900,30 @@ export type GetGate_V2Query = {
     id: any;
     exclusive_access: boolean;
     discount?: number | null;
+  }>;
+};
+
+export type GetGates_V2_ByAppIdQueryVariables = Exact<{
+  app_id?: InputMaybe<Scalars['uuid']>;
+}>;
+
+export type GetGates_V2_ByAppIdQuery = {
+  __typename?: 'query_root';
+  gates: Array<{
+    __typename?: 'gate_v2';
+    product_id: any;
+    name: string;
+    id: any;
+    exclusive_access: boolean;
+    discount?: number | null;
+    segments: Array<{
+      __typename?: 'segment';
+      type: Segment_Type_Enum;
+      nft_contract_address?: string | null;
+      poap_ids: any;
+      network?: Network_Enum | null;
+      id: any;
+    }>;
   }>;
 };
 
@@ -5218,13 +5242,32 @@ export type EditProductMutation = {
   } | null;
 };
 
+export type GateFieldsFragment = {
+  __typename?: 'gate_v2';
+  app_id?: any | null;
+  product_id: any;
+  id: any;
+  name: string;
+  discount?: number | null;
+  exclusive_access: boolean;
+  segments: Array<{
+    __typename?: 'segment';
+    id: any;
+    gate_id?: any | null;
+    network?: Network_Enum | null;
+    nft_contract_address?: string | null;
+    poap_ids: any;
+    type: Segment_Type_Enum;
+  }>;
+};
+
 export type GetProductByIdQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
 export type GetProductByIdQuery = {
   __typename?: 'query_root';
-  product_by_pk?: {
+  product?: {
     __typename?: 'product';
     app_id: any;
     collection: string;
@@ -5246,6 +5289,24 @@ export type GetProductByIdQuery = {
       name: string;
       moneyAccountId?: string | null;
     };
+    gate: Array<{
+      __typename?: 'gate_v2';
+      app_id?: any | null;
+      product_id: any;
+      id: any;
+      name: string;
+      discount?: number | null;
+      exclusive_access: boolean;
+      segments: Array<{
+        __typename?: 'segment';
+        id: any;
+        gate_id?: any | null;
+        network?: Network_Enum | null;
+        nft_contract_address?: string | null;
+        poap_ids: any;
+        type: Segment_Type_Enum;
+      }>;
+    }>;
   } | null;
 };
 
@@ -5268,6 +5329,24 @@ export type GetProductsQuery = {
     price: number;
     poapId?: number | null;
     isDiscountGated: boolean;
+    gate: Array<{
+      __typename?: 'gate_v2';
+      app_id?: any | null;
+      product_id: any;
+      id: any;
+      name: string;
+      discount?: number | null;
+      exclusive_access: boolean;
+      segments: Array<{
+        __typename?: 'segment';
+        id: any;
+        gate_id?: any | null;
+        network?: Network_Enum | null;
+        nft_contract_address?: string | null;
+        poap_ids: any;
+        type: Segment_Type_Enum;
+      }>;
+    }>;
   }>;
 };
 
@@ -5298,6 +5377,24 @@ export type GetUserQuery = {
   user: Array<{ __typename?: 'user'; app_id: any; id: any; role: string }>;
 };
 
+export const GateFieldsFragmentDoc = gql`
+  fragment GateFields on gate_v2 {
+    app_id
+    product_id
+    id
+    name
+    discount
+    exclusive_access
+    segments {
+      id
+      gate_id
+      network
+      nft_contract_address
+      poap_ids
+      type
+    }
+  }
+`;
 export const GetAppDocument = gql`
   query getApp($appId: uuid!) {
     app: app_by_pk(id: $appId) {
@@ -5716,8 +5813,8 @@ export type CreateGateV2MutationOptions = Apollo.BaseMutationOptions<
   CreateGateV2Mutation,
   CreateGateV2MutationVariables
 >;
-export const GetGate_V2Document = gql`
-  query GetGate_V2 {
+export const GetGates_V2Document = gql`
+  query GetGates_V2 {
     gates: gate_v2 {
       name
       id
@@ -5728,38 +5825,108 @@ export const GetGate_V2Document = gql`
 `;
 
 /**
- * __useGetGate_V2Query__
+ * __useGetGates_V2Query__
  *
- * To run a query within a React component, call `useGetGate_V2Query` and pass it any options that fit your needs.
- * When your component renders, `useGetGate_V2Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetGates_V2Query` and pass it any options that fit your needs.
+ * When your component renders, `useGetGates_V2Query` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetGate_V2Query({
+ * const { data, loading, error } = useGetGates_V2Query({
  *   variables: {
  *   },
  * });
  */
-export function useGetGate_V2Query(
-  baseOptions?: Apollo.QueryHookOptions<GetGate_V2Query, GetGate_V2QueryVariables>,
+export function useGetGates_V2Query(
+  baseOptions?: Apollo.QueryHookOptions<GetGates_V2Query, GetGates_V2QueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetGate_V2Query, GetGate_V2QueryVariables>(GetGate_V2Document, options);
+  return Apollo.useQuery<GetGates_V2Query, GetGates_V2QueryVariables>(GetGates_V2Document, options);
 }
-export function useGetGate_V2LazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<GetGate_V2Query, GetGate_V2QueryVariables>,
+export function useGetGates_V2LazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetGates_V2Query, GetGates_V2QueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetGate_V2Query, GetGate_V2QueryVariables>(
-    GetGate_V2Document,
+  return Apollo.useLazyQuery<GetGates_V2Query, GetGates_V2QueryVariables>(
+    GetGates_V2Document,
     options,
   );
 }
-export type GetGate_V2QueryHookResult = ReturnType<typeof useGetGate_V2Query>;
-export type GetGate_V2LazyQueryHookResult = ReturnType<typeof useGetGate_V2LazyQuery>;
-export type GetGate_V2QueryResult = Apollo.QueryResult<GetGate_V2Query, GetGate_V2QueryVariables>;
+export type GetGates_V2QueryHookResult = ReturnType<typeof useGetGates_V2Query>;
+export type GetGates_V2LazyQueryHookResult = ReturnType<typeof useGetGates_V2LazyQuery>;
+export type GetGates_V2QueryResult = Apollo.QueryResult<
+  GetGates_V2Query,
+  GetGates_V2QueryVariables
+>;
+export const GetGates_V2_ByAppIdDocument = gql`
+  query GetGates_V2_ByAppId($app_id: uuid) {
+    gates: gate_v2(where: { app_id: { _eq: $app_id } }) {
+      product_id
+      name
+      id
+      exclusive_access
+      discount
+      segments {
+        type
+        nft_contract_address
+        poap_ids
+        network
+        id
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetGates_V2_ByAppIdQuery__
+ *
+ * To run a query within a React component, call `useGetGates_V2_ByAppIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetGates_V2_ByAppIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetGates_V2_ByAppIdQuery({
+ *   variables: {
+ *      app_id: // value for 'app_id'
+ *   },
+ * });
+ */
+export function useGetGates_V2_ByAppIdQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetGates_V2_ByAppIdQuery,
+    GetGates_V2_ByAppIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetGates_V2_ByAppIdQuery, GetGates_V2_ByAppIdQueryVariables>(
+    GetGates_V2_ByAppIdDocument,
+    options,
+  );
+}
+export function useGetGates_V2_ByAppIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetGates_V2_ByAppIdQuery,
+    GetGates_V2_ByAppIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetGates_V2_ByAppIdQuery, GetGates_V2_ByAppIdQueryVariables>(
+    GetGates_V2_ByAppIdDocument,
+    options,
+  );
+}
+export type GetGates_V2_ByAppIdQueryHookResult = ReturnType<typeof useGetGates_V2_ByAppIdQuery>;
+export type GetGates_V2_ByAppIdLazyQueryHookResult = ReturnType<
+  typeof useGetGates_V2_ByAppIdLazyQuery
+>;
+export type GetGates_V2_ByAppIdQueryResult = Apollo.QueryResult<
+  GetGates_V2_ByAppIdQuery,
+  GetGates_V2_ByAppIdQueryVariables
+>;
 export const CreateGateDocument = gql`
   mutation CreateGate(
     $attributes: jsonb!
@@ -6727,7 +6894,7 @@ export type EditProductMutationOptions = Apollo.BaseMutationOptions<
 >;
 export const GetProductByIdDocument = gql`
   query GetProductById($id: uuid!) {
-    product_by_pk(id: $id) {
+    product: product_by_pk(id: $id) {
       app_id
       collection
       curation
@@ -6747,9 +6914,13 @@ export const GetProductByIdDocument = gql`
         name
         moneyAccountId
       }
+      gate {
+        ...GateFields
+      }
       utility
     }
   }
+  ${GateFieldsFragmentDoc}
 `;
 
 /**
@@ -6806,8 +6977,12 @@ export const GetProductsDocument = gql`
       price
       poapId
       isDiscountGated
+      gate {
+        ...GateFields
+      }
     }
   }
+  ${GateFieldsFragmentDoc}
 `;
 
 /**
