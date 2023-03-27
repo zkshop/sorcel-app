@@ -4,7 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { ShippingForm } from './ShippingForm';
 import type { ShippingFormValues } from './types';
 import omit from 'lodash/omit';
-import type { Product } from '@3shop/apollo';
+import type { GetProductByIdQuery, Product } from '@3shop/apollo';
 import { useGetDeliveryZoneByAppIdQuery, useCreateOrderMutation } from '@3shop/apollo';
 import { applyDiscount } from '@3shop/pure';
 import { useIsAnHolder } from '@/hooks/useIsAnHolder';
@@ -16,10 +16,11 @@ import { useDispatch } from 'react-redux';
 import { envVars } from '@3shop/config';
 
 type ShippingFormContainerProps = {
-  product: Omit<Product, 'utility'>;
+  product: GetProductByIdQuery['product'];
 };
 
 export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) => {
+  if (!product) return null;
   const { id, price, name, image, discount, curation, poapId } = product;
 
   const { data: deliveryZoneData } = useGetDeliveryZoneByAppIdQuery({
@@ -53,7 +54,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
     return false;
   }
 
-  const isAnHolder = useIsAnHolder(product);
+  const isAnHolder = useIsAnHolder(product as Product);
   const amount = applyDiscount(price + (fees || 0), showDiscount() ? Number(discount) : undefined);
 
   const onSubmit = async (data: ShippingFormValues) => {

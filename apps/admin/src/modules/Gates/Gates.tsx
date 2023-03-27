@@ -1,4 +1,4 @@
-import { useGetGate_V2Query } from '@3shop/apollo';
+import { useGetGates_V2Query } from '@3shop/apollo';
 import type { Nullable } from '@3shop/types';
 
 import { Header, Box, Button, Table, Link, Spinner } from '@3shop/ui';
@@ -14,7 +14,7 @@ export type GateItemType = {
 };
 
 export const Gates = () => {
-  const { data, loading } = useGetGate_V2Query();
+  const { data, loading } = useGetGates_V2Query();
 
   if (loading) return <Spinner />;
 

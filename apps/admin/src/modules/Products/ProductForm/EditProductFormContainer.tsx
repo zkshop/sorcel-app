@@ -5,7 +5,12 @@ import { DeleteProductModal } from './DeleteProductModal';
 import { ProductForm } from './ProductForm';
 import type { EditProductFormValues } from './types';
 
-import type { EditProductMutationVariables, Gate, Product } from '@3shop/apollo';
+import type {
+  EditProductMutationVariables,
+  Gate,
+  GetProductByIdQuery,
+  Product,
+} from '@3shop/apollo';
 import { useDeleteProductMutation, useEditProductMutation } from '@3shop/apollo';
 import {
   ERROR_MESSAGE,
@@ -21,7 +26,7 @@ import { ImageStorageClient } from '@3shop/admin-infra';
 import { useNavigate } from 'react-router-dom';
 
 type EditProductFormContainerProps = {
-  product: Product;
+  product: GetProductByIdQuery['product'];
   gates: Gate[];
 };
 
@@ -32,10 +37,10 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
   const methods = useForm<EditProductFormValues>({
     defaultValues: {
       ...product,
-      price: product.price.toString(),
-      discount: product.discount?.toString(),
-      poapId: product.poapId?.toString(),
-      image: product.image,
+      price: product?.price.toString(),
+      discount: product?.discount?.toString(),
+      poapId: product?.poapId?.toString(),
+      image: product?.image,
     },
     resolver: yupResolver(ADD_PRODUCT_FORM_SCHEMA),
     mode: 'onChange',
@@ -54,6 +59,7 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
   const [deleteProduct, { loading: isDeleteLoading }] = useDeleteProductMutation();
   const [editProduct, { loading: isEditLoading }] = useEditProductMutation();
 
+  if (!product) return null;
   const deleteProductOnClick = async () => {
     setStorageActionLoading(true);
     try {

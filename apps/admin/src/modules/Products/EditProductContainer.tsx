@@ -29,9 +29,9 @@ const EditProductContainer = ({ productId }: EditProductPageProps) => {
     return <Spinner />;
   }
 
-  if (!productData?.product_by_pk || !gateData || productError) return <>Error</>;
+  if (!productData?.product || !gateData || productError) return <>Error</>;
 
-  const product = productData?.product_by_pk;
+  const product = productData?.product;
   const gates = gateData?.gates;
 
   return (

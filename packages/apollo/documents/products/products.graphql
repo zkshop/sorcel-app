@@ -11,6 +11,9 @@ query GetProducts($appId: uuid!) {
     price
     poapId
     isDiscountGated
+    gate {
+      ...GateFields
+    }
   }
 }
 

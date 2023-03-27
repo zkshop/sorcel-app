@@ -11,7 +11,7 @@ export const Shipping = () => {
       id: productId,
     },
   });
-  const product = data?.product_by_pk;
+  const product = data?.product;
 
   if (!product) return null;
 

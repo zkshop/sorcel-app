@@ -21,7 +21,6 @@ type ProductDetailsProps = {
   poapImgUrl?: string;
   isLocked?: boolean;
   // eslint-disable-next-line @typescript-eslint/ban-types
-  sendTransaction?: Function;
   createSurveyOrder: CreateSurveyOrderMutationFn;
   walletAddress?: string;
   userHasAlreadyOrdered?: boolean;
