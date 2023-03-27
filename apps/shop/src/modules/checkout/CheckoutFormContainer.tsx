@@ -1,4 +1,4 @@
-import type { Product } from '@3shop/apollo';
+import type { GetProductByIdQuery, Product } from '@3shop/apollo';
 import { useCreateOrderMutation } from '@3shop/apollo';
 import { VStack, Heading, Spinner } from '@3shop/ui';
 import { Elements } from '@stripe/react-stripe-js';
@@ -13,10 +13,12 @@ import { envVars } from '@3shop/config';
 const stripe = getStripeObject();
 
 type CheckoutFormContainerProps = {
-  product: Product;
+  product: GetProductByIdQuery['product'];
 };
 
 export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) => {
+  if (!product) return null;
+
   const [isPaymentIntentLoading, setIsPaymentIntentLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const order = useAppSelector((state) => state.user.order);
@@ -26,7 +28,7 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
     async function updateClientSecret() {
       if (!order) return;
       setIsPaymentIntentLoading(true);
-      const clientSecret = await getPaymentIntent(order.amount, product.app.moneyAccountId || '');
+      const clientSecret = await getPaymentIntent(order.amount, product?.app.moneyAccountId || '');
       setClientSecret(clientSecret);
       setIsPaymentIntentLoading(false);
     }
@@ -40,7 +42,7 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
     await createOrder({
       variables: {
         ...order,
-        product_id: product.id,
+        product_id: product?.id,
         app_id: envVars.APP_ID,
       },
     });

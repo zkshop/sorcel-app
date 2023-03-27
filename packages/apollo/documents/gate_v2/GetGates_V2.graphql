@@ -1,8 +1,25 @@
-query GetGate_V2 {
+query GetGates_V2 {
   gates: gate_v2 {
     name
     id
     exclusive_access
     discount
+  }
+}
+
+query GetGates_V2_ByAppId($app_id: uuid) {
+  gates: gate_v2(where: { app_id: { _eq: $app_id } }) {
+    product_id
+    name
+    id
+    exclusive_access
+    discount
+    segments {
+      type
+      nft_contract_address
+      poap_ids
+      network
+      id
+    }
   }
 }

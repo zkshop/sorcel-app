@@ -1,25 +1,25 @@
 import { ProductDetails } from '@3shop/ui';
 
-import type { Product } from '@3shop/apollo';
 import { useGetOrdersByAddressQuery } from '@3shop/apollo';
 import { useCreateSurveyOrderMutation } from '@3shop/apollo';
-import { useGetProductGateQuery } from '@3shop/apollo';
 import { formatProductData } from '@3shop/pure';
 import { useAppSelector } from '@3shop/store';
 import { gateVerifier } from '../shop/gateVerifier';
 import { useAccount } from '@3shop/wallet';
+import type { ProductDetailsType } from '@/routes/Product';
 
 type ProductDetailsContainerProps = {
-  product: Product;
+  product: ProductDetailsType;
 };
 
 export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProps) => {
-  const { data } = useGetProductGateQuery({ variables: { productId: product.id } });
-  const productGates = data?.gates.slice() || [];
+  if (!product) return null;
+
+  const productGates = product.gate?.slice() || [];
 
   const userNFTs = useAppSelector((state) => state.user.nfts);
   const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
-  const userPoapIds = useAppSelector((state) => state.user.poap.map((poap: any) => poap.event.id));
+  const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
   const userMatchedProductGate = gateVerifier(productGates, userNFTs);
   const poapImageList = useAppSelector((state) => state.poapImageList);
 
@@ -46,8 +46,6 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
     isLocked,
   } = formatedProducts;
 
-  const sendTransaction = () => null;
-
   /* SURVEY UTILITY */
   const { utility } = product;
   const [createSurveyOrder] = useCreateSurveyOrderMutation();
@@ -71,7 +69,6 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
       poapUrl={poapUrl}
       poapImgUrl={poapImgUrl}
       isLocked={isLocked}
-      sendTransaction={sendTransaction}
       createSurveyOrder={createSurveyOrder}
       walletAddress={walletAddress}
       userHasAlreadyOrdered={userHasAlreadyOrdered}

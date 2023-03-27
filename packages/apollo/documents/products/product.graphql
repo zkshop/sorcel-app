@@ -1,5 +1,5 @@
 query GetProductById($id: uuid!) {
-  product_by_pk(id: $id) {
+  product: product_by_pk(id: $id) {
     app_id
     collection
     curation
@@ -18,6 +18,9 @@ query GetProductById($id: uuid!) {
       imgUrl
       name
       moneyAccountId
+    }
+    gate {
+      ...GateFields
     }
     utility
   }
