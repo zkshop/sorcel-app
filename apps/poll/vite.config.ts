@@ -14,9 +14,17 @@ const envVars = {
   PUBLIC_FUNCTIONS_URL: undefined,
   PUBLIC_HASURA_API_URL: undefined,
   PUBLIC_MAGIC_PUBLISHABLE_KEY: undefined,
+  PUBLIC_STRIPE_PUBLISHABLE_KEY: undefined,
+  SECRET_AIRTABLE: undefined,
   SECRET_ALCHEMY: undefined,
   SECRET_HASURA: undefined,
   SECRET_MAGIC: undefined,
+  SECRET_POAP: undefined,
+  SECRET_RUDDERSTACK: undefined,
+  SECRET_JWT: undefined,
+  SECRET_PAPER: undefined,
+  SECRET_STRIPE: undefined,
+  SECRET_SUPABASE: undefined,
 };
 
 const dirname = __dirname;

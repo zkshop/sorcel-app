@@ -4,7 +4,6 @@
   "globalEnv": [
     "APP_ID",
     "CI",
-    "EMAIL_ORDER_TARGET",
     "GITHUB_ACTIONS",
     "NETWORK",
     "NODE_ENV",

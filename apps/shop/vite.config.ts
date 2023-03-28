@@ -24,6 +24,10 @@ const envVars = {
   SECRET_MAGIC: undefined,
   SECRET_POAP: undefined,
   SECRET_RUDDERSTACK: undefined,
+  SECRET_JWT: undefined,
+  SECRET_PAPER: undefined,
+  SECRET_STRIPE: undefined,
+  SECRET_SUPABASE: undefined,
 };
 
 const dirname = __dirname;
