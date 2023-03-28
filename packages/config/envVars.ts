@@ -14,7 +14,6 @@ function getWindowEnvVar(name: WindowEnvVar) {
 
 const envVars = {
   APP_ID: getWindowEnvVar('APP_ID'),
-  EMAIL_ORDER_TARGET: process.env.EMAIL_ORDER_TARGET,
   NETWORK: getWindowEnvVar('NETWORK'),
   NODE_ENV,
   PAPER_CLIENT_ID: process.env.PAPER_CLIENT_ID,
