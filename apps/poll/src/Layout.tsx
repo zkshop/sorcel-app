@@ -1,4 +1,5 @@
 import { Grid, GridItem, Heading } from '@3shop/ui';
+import { ConnectWalletButton } from '@3shop/wallet';
 import { Outlet } from 'react-router-dom';
 
 function Layout() {
@@ -7,11 +8,13 @@ function Layout() {
       <GridItem
         display="flex"
         alignItems="center"
-        justifyContent="center"
+        justifyContent="space-between"
         rowSpan={1}
+        paddingX={15}
         borderBottom="solid 1px black"
       >
         <Heading verticalAlign="center">Human Divergence Poll</Heading>
+        <ConnectWalletButton />
       </GridItem>
       <GridItem rowSpan={9} padding={15}>
         <Outlet />

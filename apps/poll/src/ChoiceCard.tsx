@@ -8,7 +8,11 @@ import {
   Stat,
   StatLabel,
   StatNumber,
+  Flex,
 } from '@3shop/ui';
+import { Card } from './Card';
+import { CHOICE_CARD_BACKGROUND_COLOR, CHOICE_CARD_COLOR } from './constant';
+import { VoteButton } from './VoteButton';
 
 type ChoiceCardType = {
   title: string;
@@ -25,21 +29,25 @@ export const ChoiceCard = ({
   votes,
   alreadyVoted,
 }: ChoiceCardType) => (
-  <VStack border="solid 1px" padding={2}>
-    <Image src="/poll_image.jpeg" />
-    <Box>
-      <Text>{title}</Text>
-    </Box>
-    {alreadyVoted ? (
-      <Stat>
-        <StatLabel>Votes</StatLabel>
-        <StatNumber>{votes}</StatNumber>
-      </Stat>
-    ) : (
-      <Button display="flex" onClick={() => handleClickOnChoice(id)} justifyContent="space-between">
-        <Text marginRight={2}>Vote</Text>
-        <ApprovalIcon />
-      </Button>
-    )}
-  </VStack>
+  <Card>
+    <Flex p={15} minW={250} alignItems="center" justifyContent="center" flexDirection="column">
+      <Text textAlign="center">{title}</Text>
+      <Box mt={2}>
+        {alreadyVoted ? (
+          <Stat textAlign="center">
+            <StatLabel>Votes</StatLabel>
+            <StatNumber>{votes}</StatNumber>
+          </Stat>
+        ) : (
+          <VoteButton
+            display="flex"
+            onClick={() => handleClickOnChoice(id)}
+            justifyContent="space-between"
+          >
+            Vote
+          </VoteButton>
+        )}
+      </Box>
+    </Flex>
+  </Card>
 );
