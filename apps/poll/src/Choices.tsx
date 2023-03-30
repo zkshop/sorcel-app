@@ -4,6 +4,7 @@ import {
   Button,
   Flex,
   Heading,
+  Image,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -11,11 +12,14 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
   useDisclosure,
 } from '@3shop/ui';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Card } from './Card';
 import { ChoiceCard } from './ChoiceCard';
+import { CHOICE_CARD_BORDER_RADIUS } from './constant';
 
 const votes = [10, 25, 42];
 
@@ -33,13 +37,13 @@ export const Choices = () => {
   return (
     <>
       <Box>
-        <Heading>Choices for poll {id}</Heading>
-        <Flex mt={12} gap={2} justifyContent="space-around">
+        <Image borderRadius={35} src="choices_background.png" />
+        <Flex mt={12} gap={2} justifyContent="space-between">
           <ChoiceCard
             handleClickOnChoice={handleClickOnChoice}
             title="Choice 1"
             id="1000"
-            votes={votes[0]}
+            votes={votes[1]}
             alreadyVoted={alreadyVoted}
           />
           <ChoiceCard

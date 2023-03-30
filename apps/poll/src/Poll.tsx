@@ -1,4 +1,5 @@
-import { Image, Box, VStack, Text } from '@3shop/ui';
+import { Image, Box, Text } from '@3shop/ui';
+import { Card } from './Card';
 
 type PollType = {
   id: string;
@@ -7,10 +8,10 @@ type PollType = {
 };
 
 export const Poll = ({ id, title, image }: PollType) => (
-  <VStack>
-    <Image src="/poll_image.jpeg" />
+  <Card>
+    <Image src="/choices_background.png" />
     <Box>
       <Text>{title}</Text>
     </Box>
-  </VStack>
+  </Card>
 );
