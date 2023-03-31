@@ -3,6 +3,7 @@ import { VStack, BackButton, Spinner } from '@3shop/ui';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import { useAccount } from '@3shop/wallet';
 import { ProductDetailsContainer } from '@/modules/product-page/ProductDetailsContainer';
+import type { Product as ProductType } from '@3shop/apollo';
 import { useGetProductByIdQuery } from '@3shop/apollo';
 import { useParams } from 'react-router-dom';
 
@@ -33,7 +34,7 @@ export const Product = () => {
 
       <BackButton href="/" />
 
-      {product ? <ProductDetailsContainer product={product} /> : <Spinner />}
+      {product ? <ProductDetailsContainer product={product as ProductType} /> : <Spinner />}
     </VStack>
   );
 };

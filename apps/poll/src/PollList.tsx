@@ -1,18 +1,23 @@
-import { Box, Flex } from '@3shop/ui';
+import { Box, Flex, Spinner } from '@3shop/ui';
 import { Poll } from './Poll';
 import { Link } from 'react-router-dom';
+import { useGetPollsQuery } from '@3shop/apollo';
 
-export const PollList = () => (
-  <Flex justifyContent="flex-start" flexDirection="row" flexWrap="wrap" gap={2}>
-    <Box flex={1}>
-      <Link to="/choices/0000">
-        <Poll id="0000" title="Poll 1" />
-      </Link>
-    </Box>
-    <Box flex={1}>
-      <Link to="/choices/0001">
-        <Poll id="0001" title="Poll 2" />
-      </Link>
-    </Box>
-  </Flex>
-);
+export const PollList = () => {
+  const { loading, data } = useGetPollsQuery();
+
+  if (loading) return <Spinner />;
+  if (!data) return <>Error</>;
+
+  return (
+    <Flex justifyContent="flex-start" flexDirection="row" flexWrap="wrap" gap={2}>
+      {data.polls.map((poll) => (
+        <Box flex={1}>
+          <Link to={`/choices/${poll.id}`}>
+            <Poll id={poll.id} title={poll.title} />
+          </Link>
+        </Box>
+      ))}
+    </Flex>
+  );
+};

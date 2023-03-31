@@ -8,6 +8,7 @@ import {
 
 export const Card = ({ children }: WithChildren<object>) => (
   <VStack
+    flex={1}
     backgroundColor={CHOICE_CARD_BACKGROUND_COLOR}
     color={CHOICE_CARD_COLOR}
     borderRadius={CHOICE_CARD_BORDER_RADIUS}
