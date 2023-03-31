@@ -7,7 +7,7 @@ type PollType = {
   image?: string;
 };
 
-export const Poll = ({ id, title, image }: PollType) => (
+export const Poll = ({ title }: PollType) => (
   <Card>
     <Image src="/choices_background.png" />
     <Box>

@@ -1,0 +1,13 @@
+query getPollById($id: uuid!) {
+    poll: poll_by_pk(id: $id) {
+        choices {
+            id
+            poll_id
+            value
+        }
+        id
+        title
+        voter
+        description
+    }
+} 

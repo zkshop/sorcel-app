@@ -253,6 +253,190 @@ export type App_Updates = {
   where: App_Bool_Exp;
 };
 
+/** columns and relationships of "choice" */
+export type Choice = {
+  __typename?: 'choice';
+  id: Scalars['uuid'];
+  poll_id: Scalars['uuid'];
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "choice" */
+export type Choice_Aggregate = {
+  __typename?: 'choice_aggregate';
+  aggregate?: Maybe<Choice_Aggregate_Fields>;
+  nodes: Array<Choice>;
+};
+
+export type Choice_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Choice_Aggregate_Bool_Exp_Count>;
+};
+
+export type Choice_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Choice_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Choice_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "choice" */
+export type Choice_Aggregate_Fields = {
+  __typename?: 'choice_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Choice_Max_Fields>;
+  min?: Maybe<Choice_Min_Fields>;
+};
+
+/** aggregate fields of "choice" */
+export type Choice_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Choice_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "choice" */
+export type Choice_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Choice_Max_Order_By>;
+  min?: InputMaybe<Choice_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "choice" */
+export type Choice_Arr_Rel_Insert_Input = {
+  data: Array<Choice_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Choice_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "choice". All fields are combined with a logical 'AND'. */
+export type Choice_Bool_Exp = {
+  _and?: InputMaybe<Array<Choice_Bool_Exp>>;
+  _not?: InputMaybe<Choice_Bool_Exp>;
+  _or?: InputMaybe<Array<Choice_Bool_Exp>>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  poll_id?: InputMaybe<Uuid_Comparison_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "choice" */
+export enum Choice_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ChoicePkey = 'choice_pkey',
+}
+
+/** input type for inserting data into table "choice" */
+export type Choice_Insert_Input = {
+  id?: InputMaybe<Scalars['uuid']>;
+  poll_id?: InputMaybe<Scalars['uuid']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Choice_Max_Fields = {
+  __typename?: 'choice_max_fields';
+  id?: Maybe<Scalars['uuid']>;
+  poll_id?: Maybe<Scalars['uuid']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "choice" */
+export type Choice_Max_Order_By = {
+  id?: InputMaybe<Order_By>;
+  poll_id?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Choice_Min_Fields = {
+  __typename?: 'choice_min_fields';
+  id?: Maybe<Scalars['uuid']>;
+  poll_id?: Maybe<Scalars['uuid']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "choice" */
+export type Choice_Min_Order_By = {
+  id?: InputMaybe<Order_By>;
+  poll_id?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "choice" */
+export type Choice_Mutation_Response = {
+  __typename?: 'choice_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Choice>;
+};
+
+/** on_conflict condition type for table "choice" */
+export type Choice_On_Conflict = {
+  constraint: Choice_Constraint;
+  update_columns?: Array<Choice_Update_Column>;
+  where?: InputMaybe<Choice_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "choice". */
+export type Choice_Order_By = {
+  id?: InputMaybe<Order_By>;
+  poll_id?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: choice */
+export type Choice_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "choice" */
+export enum Choice_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PollId = 'poll_id',
+  /** column name */
+  Value = 'value',
+}
+
+/** input type for updating data in table "choice" */
+export type Choice_Set_Input = {
+  id?: InputMaybe<Scalars['uuid']>;
+  poll_id?: InputMaybe<Scalars['uuid']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "choice" */
+export type Choice_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Choice_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Choice_Stream_Cursor_Value_Input = {
+  id?: InputMaybe<Scalars['uuid']>;
+  poll_id?: InputMaybe<Scalars['uuid']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "choice" */
+export enum Choice_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PollId = 'poll_id',
+  /** column name */
+  Value = 'value',
+}
+
+export type Choice_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Choice_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Choice_Bool_Exp;
+};
+
 /** ordering argument of a cursor */
 export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
@@ -800,6 +984,393 @@ export type Gate_Updates = {
   where: Gate_Bool_Exp;
 };
 
+/** columns and relationships of "gate_v2" */
+export type Gate_V2 = {
+  __typename?: 'gate_v2';
+  app_id?: Maybe<Scalars['uuid']>;
+  discount?: Maybe<Scalars['Int']>;
+  exclusive_access: Scalars['Boolean'];
+  id: Scalars['uuid'];
+  name: Scalars['String'];
+  product_id: Scalars['uuid'];
+  /** An array relationship */
+  segments: Array<Segment>;
+  /** An aggregate relationship */
+  segments_aggregate: Segment_Aggregate;
+};
+
+/** columns and relationships of "gate_v2" */
+export type Gate_V2SegmentsArgs = {
+  distinct_on?: InputMaybe<Array<Segment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Segment_Order_By>>;
+  where?: InputMaybe<Segment_Bool_Exp>;
+};
+
+/** columns and relationships of "gate_v2" */
+export type Gate_V2Segments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Segment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Segment_Order_By>>;
+  where?: InputMaybe<Segment_Bool_Exp>;
+};
+
+/** aggregated selection of "gate_v2" */
+export type Gate_V2_Aggregate = {
+  __typename?: 'gate_v2_aggregate';
+  aggregate?: Maybe<Gate_V2_Aggregate_Fields>;
+  nodes: Array<Gate_V2>;
+};
+
+export type Gate_V2_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Gate_V2_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Gate_V2_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<Gate_V2_Aggregate_Bool_Exp_Count>;
+};
+
+export type Gate_V2_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Gate_V2_Select_Column_Gate_V2_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Gate_V2_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Gate_V2_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Gate_V2_Select_Column_Gate_V2_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Gate_V2_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Gate_V2_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Gate_V2_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Gate_V2_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "gate_v2" */
+export type Gate_V2_Aggregate_Fields = {
+  __typename?: 'gate_v2_aggregate_fields';
+  avg?: Maybe<Gate_V2_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Gate_V2_Max_Fields>;
+  min?: Maybe<Gate_V2_Min_Fields>;
+  stddev?: Maybe<Gate_V2_Stddev_Fields>;
+  stddev_pop?: Maybe<Gate_V2_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Gate_V2_Stddev_Samp_Fields>;
+  sum?: Maybe<Gate_V2_Sum_Fields>;
+  var_pop?: Maybe<Gate_V2_Var_Pop_Fields>;
+  var_samp?: Maybe<Gate_V2_Var_Samp_Fields>;
+  variance?: Maybe<Gate_V2_Variance_Fields>;
+};
+
+/** aggregate fields of "gate_v2" */
+export type Gate_V2_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Gate_V2_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "gate_v2" */
+export type Gate_V2_Aggregate_Order_By = {
+  avg?: InputMaybe<Gate_V2_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Gate_V2_Max_Order_By>;
+  min?: InputMaybe<Gate_V2_Min_Order_By>;
+  stddev?: InputMaybe<Gate_V2_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Gate_V2_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Gate_V2_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Gate_V2_Sum_Order_By>;
+  var_pop?: InputMaybe<Gate_V2_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Gate_V2_Var_Samp_Order_By>;
+  variance?: InputMaybe<Gate_V2_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "gate_v2" */
+export type Gate_V2_Arr_Rel_Insert_Input = {
+  data: Array<Gate_V2_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Gate_V2_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Gate_V2_Avg_Fields = {
+  __typename?: 'gate_v2_avg_fields';
+  discount?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "gate_v2" */
+export type Gate_V2_Avg_Order_By = {
+  discount?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "gate_v2". All fields are combined with a logical 'AND'. */
+export type Gate_V2_Bool_Exp = {
+  _and?: InputMaybe<Array<Gate_V2_Bool_Exp>>;
+  _not?: InputMaybe<Gate_V2_Bool_Exp>;
+  _or?: InputMaybe<Array<Gate_V2_Bool_Exp>>;
+  app_id?: InputMaybe<Uuid_Comparison_Exp>;
+  discount?: InputMaybe<Int_Comparison_Exp>;
+  exclusive_access?: InputMaybe<Boolean_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  product_id?: InputMaybe<Uuid_Comparison_Exp>;
+  segments?: InputMaybe<Segment_Bool_Exp>;
+  segments_aggregate?: InputMaybe<Segment_Aggregate_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "gate_v2" */
+export enum Gate_V2_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  GateV2Pkey = 'gate_v2_pkey',
+}
+
+/** input type for incrementing numeric columns in table "gate_v2" */
+export type Gate_V2_Inc_Input = {
+  discount?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "gate_v2" */
+export type Gate_V2_Insert_Input = {
+  app_id?: InputMaybe<Scalars['uuid']>;
+  discount?: InputMaybe<Scalars['Int']>;
+  exclusive_access?: InputMaybe<Scalars['Boolean']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  name?: InputMaybe<Scalars['String']>;
+  product_id?: InputMaybe<Scalars['uuid']>;
+  segments?: InputMaybe<Segment_Arr_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type Gate_V2_Max_Fields = {
+  __typename?: 'gate_v2_max_fields';
+  app_id?: Maybe<Scalars['uuid']>;
+  discount?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+  product_id?: Maybe<Scalars['uuid']>;
+};
+
+/** order by max() on columns of table "gate_v2" */
+export type Gate_V2_Max_Order_By = {
+  app_id?: InputMaybe<Order_By>;
+  discount?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  product_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Gate_V2_Min_Fields = {
+  __typename?: 'gate_v2_min_fields';
+  app_id?: Maybe<Scalars['uuid']>;
+  discount?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+  product_id?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "gate_v2" */
+export type Gate_V2_Min_Order_By = {
+  app_id?: InputMaybe<Order_By>;
+  discount?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  product_id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "gate_v2" */
+export type Gate_V2_Mutation_Response = {
+  __typename?: 'gate_v2_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Gate_V2>;
+};
+
+/** on_conflict condition type for table "gate_v2" */
+export type Gate_V2_On_Conflict = {
+  constraint: Gate_V2_Constraint;
+  update_columns?: Array<Gate_V2_Update_Column>;
+  where?: InputMaybe<Gate_V2_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "gate_v2". */
+export type Gate_V2_Order_By = {
+  app_id?: InputMaybe<Order_By>;
+  discount?: InputMaybe<Order_By>;
+  exclusive_access?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  product_id?: InputMaybe<Order_By>;
+  segments_aggregate?: InputMaybe<Segment_Aggregate_Order_By>;
+};
+
+/** primary key columns input for table: gate_v2 */
+export type Gate_V2_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "gate_v2" */
+export enum Gate_V2_Select_Column {
+  /** column name */
+  AppId = 'app_id',
+  /** column name */
+  Discount = 'discount',
+  /** column name */
+  ExclusiveAccess = 'exclusive_access',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  ProductId = 'product_id',
+}
+
+/** select "gate_v2_aggregate_bool_exp_bool_and_arguments_columns" columns of table "gate_v2" */
+export enum Gate_V2_Select_Column_Gate_V2_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  ExclusiveAccess = 'exclusive_access',
+}
+
+/** select "gate_v2_aggregate_bool_exp_bool_or_arguments_columns" columns of table "gate_v2" */
+export enum Gate_V2_Select_Column_Gate_V2_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  ExclusiveAccess = 'exclusive_access',
+}
+
+/** input type for updating data in table "gate_v2" */
+export type Gate_V2_Set_Input = {
+  app_id?: InputMaybe<Scalars['uuid']>;
+  discount?: InputMaybe<Scalars['Int']>;
+  exclusive_access?: InputMaybe<Scalars['Boolean']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  name?: InputMaybe<Scalars['String']>;
+  product_id?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate stddev on columns */
+export type Gate_V2_Stddev_Fields = {
+  __typename?: 'gate_v2_stddev_fields';
+  discount?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "gate_v2" */
+export type Gate_V2_Stddev_Order_By = {
+  discount?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Gate_V2_Stddev_Pop_Fields = {
+  __typename?: 'gate_v2_stddev_pop_fields';
+  discount?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "gate_v2" */
+export type Gate_V2_Stddev_Pop_Order_By = {
+  discount?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Gate_V2_Stddev_Samp_Fields = {
+  __typename?: 'gate_v2_stddev_samp_fields';
+  discount?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "gate_v2" */
+export type Gate_V2_Stddev_Samp_Order_By = {
+  discount?: InputMaybe<Order_By>;
+};
+
+/** Streaming cursor of the table "gate_v2" */
+export type Gate_V2_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Gate_V2_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Gate_V2_Stream_Cursor_Value_Input = {
+  app_id?: InputMaybe<Scalars['uuid']>;
+  discount?: InputMaybe<Scalars['Int']>;
+  exclusive_access?: InputMaybe<Scalars['Boolean']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  name?: InputMaybe<Scalars['String']>;
+  product_id?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate sum on columns */
+export type Gate_V2_Sum_Fields = {
+  __typename?: 'gate_v2_sum_fields';
+  discount?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "gate_v2" */
+export type Gate_V2_Sum_Order_By = {
+  discount?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "gate_v2" */
+export enum Gate_V2_Update_Column {
+  /** column name */
+  AppId = 'app_id',
+  /** column name */
+  Discount = 'discount',
+  /** column name */
+  ExclusiveAccess = 'exclusive_access',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  ProductId = 'product_id',
+}
+
+export type Gate_V2_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Gate_V2_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Gate_V2_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Gate_V2_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Gate_V2_Var_Pop_Fields = {
+  __typename?: 'gate_v2_var_pop_fields';
+  discount?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "gate_v2" */
+export type Gate_V2_Var_Pop_Order_By = {
+  discount?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Gate_V2_Var_Samp_Fields = {
+  __typename?: 'gate_v2_var_samp_fields';
+  discount?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "gate_v2" */
+export type Gate_V2_Var_Samp_Order_By = {
+  discount?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Gate_V2_Variance_Fields = {
+  __typename?: 'gate_v2_variance_fields';
+  discount?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "gate_v2" */
+export type Gate_V2_Variance_Order_By = {
+  discount?: InputMaybe<Order_By>;
+};
+
 /** aggregate var_pop on columns */
 export type Gate_Var_Pop_Fields = {
   __typename?: 'gate_var_pop_fields';
@@ -853,6 +1424,10 @@ export type Mutation_Root = {
   delete_app?: Maybe<App_Mutation_Response>;
   /** delete single row from the table: "app" */
   delete_app_by_pk?: Maybe<App>;
+  /** delete data from the table: "choice" */
+  delete_choice?: Maybe<Choice_Mutation_Response>;
+  /** delete single row from the table: "choice" */
+  delete_choice_by_pk?: Maybe<Choice>;
   /** delete data from the table: "delivery_zone" */
   delete_delivery_zone?: Maybe<Delivery_Zone_Mutation_Response>;
   /** delete single row from the table: "delivery_zone" */
@@ -861,14 +1436,34 @@ export type Mutation_Root = {
   delete_gate?: Maybe<Gate_Mutation_Response>;
   /** delete single row from the table: "gate" */
   delete_gate_by_pk?: Maybe<Gate>;
+  /** delete data from the table: "gate_v2" */
+  delete_gate_v2?: Maybe<Gate_V2_Mutation_Response>;
+  /** delete single row from the table: "gate_v2" */
+  delete_gate_v2_by_pk?: Maybe<Gate_V2>;
+  /** delete data from the table: "network" */
+  delete_network?: Maybe<Network_Mutation_Response>;
+  /** delete single row from the table: "network" */
+  delete_network_by_pk?: Maybe<Network>;
   /** delete data from the table: "order" */
   delete_order?: Maybe<Order_Mutation_Response>;
   /** delete single row from the table: "order" */
   delete_order_by_pk?: Maybe<Order>;
+  /** delete data from the table: "poll" */
+  delete_poll?: Maybe<Poll_Mutation_Response>;
+  /** delete single row from the table: "poll" */
+  delete_poll_by_pk?: Maybe<Poll>;
   /** delete data from the table: "product" */
   delete_product?: Maybe<Product_Mutation_Response>;
   /** delete single row from the table: "product" */
   delete_product_by_pk?: Maybe<Product>;
+  /** delete data from the table: "segment" */
+  delete_segment?: Maybe<Segment_Mutation_Response>;
+  /** delete single row from the table: "segment" */
+  delete_segment_by_pk?: Maybe<Segment>;
+  /** delete data from the table: "segment_type" */
+  delete_segment_type?: Maybe<Segment_Type_Mutation_Response>;
+  /** delete single row from the table: "segment_type" */
+  delete_segment_type_by_pk?: Maybe<Segment_Type>;
   /** delete data from the table: "user" */
   delete_user?: Maybe<User_Mutation_Response>;
   /** delete single row from the table: "user" */
@@ -881,6 +1476,10 @@ export type Mutation_Root = {
   insert_app?: Maybe<App_Mutation_Response>;
   /** insert a single row into the table: "app" */
   insert_app_one?: Maybe<App>;
+  /** insert data into the table: "choice" */
+  insert_choice?: Maybe<Choice_Mutation_Response>;
+  /** insert a single row into the table: "choice" */
+  insert_choice_one?: Maybe<Choice>;
   /** insert data into the table: "delivery_zone" */
   insert_delivery_zone?: Maybe<Delivery_Zone_Mutation_Response>;
   /** insert a single row into the table: "delivery_zone" */
@@ -889,14 +1488,34 @@ export type Mutation_Root = {
   insert_gate?: Maybe<Gate_Mutation_Response>;
   /** insert a single row into the table: "gate" */
   insert_gate_one?: Maybe<Gate>;
+  /** insert data into the table: "gate_v2" */
+  insert_gate_v2?: Maybe<Gate_V2_Mutation_Response>;
+  /** insert a single row into the table: "gate_v2" */
+  insert_gate_v2_one?: Maybe<Gate_V2>;
+  /** insert data into the table: "network" */
+  insert_network?: Maybe<Network_Mutation_Response>;
+  /** insert a single row into the table: "network" */
+  insert_network_one?: Maybe<Network>;
   /** insert data into the table: "order" */
   insert_order?: Maybe<Order_Mutation_Response>;
   /** insert a single row into the table: "order" */
   insert_order_one?: Maybe<Order>;
+  /** insert data into the table: "poll" */
+  insert_poll?: Maybe<Poll_Mutation_Response>;
+  /** insert a single row into the table: "poll" */
+  insert_poll_one?: Maybe<Poll>;
   /** insert data into the table: "product" */
   insert_product?: Maybe<Product_Mutation_Response>;
   /** insert a single row into the table: "product" */
   insert_product_one?: Maybe<Product>;
+  /** insert data into the table: "segment" */
+  insert_segment?: Maybe<Segment_Mutation_Response>;
+  /** insert a single row into the table: "segment" */
+  insert_segment_one?: Maybe<Segment>;
+  /** insert data into the table: "segment_type" */
+  insert_segment_type?: Maybe<Segment_Type_Mutation_Response>;
+  /** insert a single row into the table: "segment_type" */
+  insert_segment_type_one?: Maybe<Segment_Type>;
   /** insert data into the table: "user" */
   insert_user?: Maybe<User_Mutation_Response>;
   /** insert a single row into the table: "user" */
@@ -911,6 +1530,12 @@ export type Mutation_Root = {
   update_app_by_pk?: Maybe<App>;
   /** update multiples rows of table: "app" */
   update_app_many?: Maybe<Array<Maybe<App_Mutation_Response>>>;
+  /** update data of the table: "choice" */
+  update_choice?: Maybe<Choice_Mutation_Response>;
+  /** update single row of the table: "choice" */
+  update_choice_by_pk?: Maybe<Choice>;
+  /** update multiples rows of table: "choice" */
+  update_choice_many?: Maybe<Array<Maybe<Choice_Mutation_Response>>>;
   /** update data of the table: "delivery_zone" */
   update_delivery_zone?: Maybe<Delivery_Zone_Mutation_Response>;
   /** update single row of the table: "delivery_zone" */
@@ -923,18 +1548,48 @@ export type Mutation_Root = {
   update_gate_by_pk?: Maybe<Gate>;
   /** update multiples rows of table: "gate" */
   update_gate_many?: Maybe<Array<Maybe<Gate_Mutation_Response>>>;
+  /** update data of the table: "gate_v2" */
+  update_gate_v2?: Maybe<Gate_V2_Mutation_Response>;
+  /** update single row of the table: "gate_v2" */
+  update_gate_v2_by_pk?: Maybe<Gate_V2>;
+  /** update multiples rows of table: "gate_v2" */
+  update_gate_v2_many?: Maybe<Array<Maybe<Gate_V2_Mutation_Response>>>;
+  /** update data of the table: "network" */
+  update_network?: Maybe<Network_Mutation_Response>;
+  /** update single row of the table: "network" */
+  update_network_by_pk?: Maybe<Network>;
+  /** update multiples rows of table: "network" */
+  update_network_many?: Maybe<Array<Maybe<Network_Mutation_Response>>>;
   /** update data of the table: "order" */
   update_order?: Maybe<Order_Mutation_Response>;
   /** update single row of the table: "order" */
   update_order_by_pk?: Maybe<Order>;
   /** update multiples rows of table: "order" */
   update_order_many?: Maybe<Array<Maybe<Order_Mutation_Response>>>;
+  /** update data of the table: "poll" */
+  update_poll?: Maybe<Poll_Mutation_Response>;
+  /** update single row of the table: "poll" */
+  update_poll_by_pk?: Maybe<Poll>;
+  /** update multiples rows of table: "poll" */
+  update_poll_many?: Maybe<Array<Maybe<Poll_Mutation_Response>>>;
   /** update data of the table: "product" */
   update_product?: Maybe<Product_Mutation_Response>;
   /** update single row of the table: "product" */
   update_product_by_pk?: Maybe<Product>;
   /** update multiples rows of table: "product" */
   update_product_many?: Maybe<Array<Maybe<Product_Mutation_Response>>>;
+  /** update data of the table: "segment" */
+  update_segment?: Maybe<Segment_Mutation_Response>;
+  /** update single row of the table: "segment" */
+  update_segment_by_pk?: Maybe<Segment>;
+  /** update multiples rows of table: "segment" */
+  update_segment_many?: Maybe<Array<Maybe<Segment_Mutation_Response>>>;
+  /** update data of the table: "segment_type" */
+  update_segment_type?: Maybe<Segment_Type_Mutation_Response>;
+  /** update single row of the table: "segment_type" */
+  update_segment_type_by_pk?: Maybe<Segment_Type>;
+  /** update multiples rows of table: "segment_type" */
+  update_segment_type_many?: Maybe<Array<Maybe<Segment_Type_Mutation_Response>>>;
   /** update data of the table: "user" */
   update_user?: Maybe<User_Mutation_Response>;
   /** update single row of the table: "user" */
@@ -960,6 +1615,16 @@ export type Mutation_RootDelete_App_By_PkArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootDelete_ChoiceArgs = {
+  where: Choice_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Choice_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+/** mutation root */
 export type Mutation_RootDelete_Delivery_ZoneArgs = {
   where: Delivery_Zone_Bool_Exp;
 };
@@ -980,12 +1645,42 @@ export type Mutation_RootDelete_Gate_By_PkArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootDelete_Gate_V2Args = {
+  where: Gate_V2_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Gate_V2_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_NetworkArgs = {
+  where: Network_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Network_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+/** mutation root */
 export type Mutation_RootDelete_OrderArgs = {
   where: Order_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootDelete_Order_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_PollArgs = {
+  where: Poll_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Poll_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -997,6 +1692,26 @@ export type Mutation_RootDelete_ProductArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Product_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_SegmentArgs = {
+  where: Segment_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Segment_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Segment_TypeArgs = {
+  where: Segment_Type_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Segment_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 /** mutation root */
@@ -1032,6 +1747,18 @@ export type Mutation_RootInsert_App_OneArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootInsert_ChoiceArgs = {
+  objects: Array<Choice_Insert_Input>;
+  on_conflict?: InputMaybe<Choice_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Choice_OneArgs = {
+  object: Choice_Insert_Input;
+  on_conflict?: InputMaybe<Choice_On_Conflict>;
+};
+
+/** mutation root */
 export type Mutation_RootInsert_Delivery_ZoneArgs = {
   objects: Array<Delivery_Zone_Insert_Input>;
   on_conflict?: InputMaybe<Delivery_Zone_On_Conflict>;
@@ -1056,6 +1783,30 @@ export type Mutation_RootInsert_Gate_OneArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootInsert_Gate_V2Args = {
+  objects: Array<Gate_V2_Insert_Input>;
+  on_conflict?: InputMaybe<Gate_V2_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Gate_V2_OneArgs = {
+  object: Gate_V2_Insert_Input;
+  on_conflict?: InputMaybe<Gate_V2_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_NetworkArgs = {
+  objects: Array<Network_Insert_Input>;
+  on_conflict?: InputMaybe<Network_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Network_OneArgs = {
+  object: Network_Insert_Input;
+  on_conflict?: InputMaybe<Network_On_Conflict>;
+};
+
+/** mutation root */
 export type Mutation_RootInsert_OrderArgs = {
   objects: Array<Order_Insert_Input>;
   on_conflict?: InputMaybe<Order_On_Conflict>;
@@ -1068,6 +1819,18 @@ export type Mutation_RootInsert_Order_OneArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootInsert_PollArgs = {
+  objects: Array<Poll_Insert_Input>;
+  on_conflict?: InputMaybe<Poll_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Poll_OneArgs = {
+  object: Poll_Insert_Input;
+  on_conflict?: InputMaybe<Poll_On_Conflict>;
+};
+
+/** mutation root */
 export type Mutation_RootInsert_ProductArgs = {
   objects: Array<Product_Insert_Input>;
   on_conflict?: InputMaybe<Product_On_Conflict>;
@@ -1077,6 +1840,30 @@ export type Mutation_RootInsert_ProductArgs = {
 export type Mutation_RootInsert_Product_OneArgs = {
   object: Product_Insert_Input;
   on_conflict?: InputMaybe<Product_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_SegmentArgs = {
+  objects: Array<Segment_Insert_Input>;
+  on_conflict?: InputMaybe<Segment_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Segment_OneArgs = {
+  object: Segment_Insert_Input;
+  on_conflict?: InputMaybe<Segment_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Segment_TypeArgs = {
+  objects: Array<Segment_Type_Insert_Input>;
+  on_conflict?: InputMaybe<Segment_Type_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Segment_Type_OneArgs = {
+  object: Segment_Type_Insert_Input;
+  on_conflict?: InputMaybe<Segment_Type_On_Conflict>;
 };
 
 /** mutation root */
@@ -1118,6 +1905,23 @@ export type Mutation_RootUpdate_App_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_App_ManyArgs = {
   updates: Array<App_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_ChoiceArgs = {
+  _set?: InputMaybe<Choice_Set_Input>;
+  where: Choice_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Choice_By_PkArgs = {
+  _set?: InputMaybe<Choice_Set_Input>;
+  pk_columns: Choice_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Choice_ManyArgs = {
+  updates: Array<Choice_Updates>;
 };
 
 /** mutation root */
@@ -1179,6 +1983,42 @@ export type Mutation_RootUpdate_Gate_ManyArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootUpdate_Gate_V2Args = {
+  _inc?: InputMaybe<Gate_V2_Inc_Input>;
+  _set?: InputMaybe<Gate_V2_Set_Input>;
+  where: Gate_V2_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Gate_V2_By_PkArgs = {
+  _inc?: InputMaybe<Gate_V2_Inc_Input>;
+  _set?: InputMaybe<Gate_V2_Set_Input>;
+  pk_columns: Gate_V2_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Gate_V2_ManyArgs = {
+  updates: Array<Gate_V2_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_NetworkArgs = {
+  _set?: InputMaybe<Network_Set_Input>;
+  where: Network_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Network_By_PkArgs = {
+  _set?: InputMaybe<Network_Set_Input>;
+  pk_columns: Network_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Network_ManyArgs = {
+  updates: Array<Network_Updates>;
+};
+
+/** mutation root */
 export type Mutation_RootUpdate_OrderArgs = {
   _set?: InputMaybe<Order_Set_Input>;
   where: Order_Bool_Exp;
@@ -1193,6 +2033,33 @@ export type Mutation_RootUpdate_Order_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Order_ManyArgs = {
   updates: Array<Order_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_PollArgs = {
+  _append?: InputMaybe<Poll_Append_Input>;
+  _delete_at_path?: InputMaybe<Poll_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Poll_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Poll_Delete_Key_Input>;
+  _prepend?: InputMaybe<Poll_Prepend_Input>;
+  _set?: InputMaybe<Poll_Set_Input>;
+  where: Poll_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Poll_By_PkArgs = {
+  _append?: InputMaybe<Poll_Append_Input>;
+  _delete_at_path?: InputMaybe<Poll_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Poll_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Poll_Delete_Key_Input>;
+  _prepend?: InputMaybe<Poll_Prepend_Input>;
+  _set?: InputMaybe<Poll_Set_Input>;
+  pk_columns: Poll_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Poll_ManyArgs = {
+  updates: Array<Poll_Updates>;
 };
 
 /** mutation root */
@@ -1212,6 +2079,50 @@ export type Mutation_RootUpdate_Product_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Product_ManyArgs = {
   updates: Array<Product_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_SegmentArgs = {
+  _append?: InputMaybe<Segment_Append_Input>;
+  _delete_at_path?: InputMaybe<Segment_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Segment_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Segment_Delete_Key_Input>;
+  _prepend?: InputMaybe<Segment_Prepend_Input>;
+  _set?: InputMaybe<Segment_Set_Input>;
+  where: Segment_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Segment_By_PkArgs = {
+  _append?: InputMaybe<Segment_Append_Input>;
+  _delete_at_path?: InputMaybe<Segment_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Segment_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Segment_Delete_Key_Input>;
+  _prepend?: InputMaybe<Segment_Prepend_Input>;
+  _set?: InputMaybe<Segment_Set_Input>;
+  pk_columns: Segment_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Segment_ManyArgs = {
+  updates: Array<Segment_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Segment_TypeArgs = {
+  _set?: InputMaybe<Segment_Type_Set_Input>;
+  where: Segment_Type_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Segment_Type_By_PkArgs = {
+  _set?: InputMaybe<Segment_Type_Set_Input>;
+  pk_columns: Segment_Type_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Segment_Type_ManyArgs = {
+  updates: Array<Segment_Type_Updates>;
 };
 
 /** mutation root */
@@ -1246,6 +2157,141 @@ export type Mutation_RootUpdate_Utility_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Utility_ManyArgs = {
   updates: Array<Utility_Updates>;
+};
+
+/** columns and relationships of "network" */
+export type Network = {
+  __typename?: 'network';
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "network" */
+export type Network_Aggregate = {
+  __typename?: 'network_aggregate';
+  aggregate?: Maybe<Network_Aggregate_Fields>;
+  nodes: Array<Network>;
+};
+
+/** aggregate fields of "network" */
+export type Network_Aggregate_Fields = {
+  __typename?: 'network_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Network_Max_Fields>;
+  min?: Maybe<Network_Min_Fields>;
+};
+
+/** aggregate fields of "network" */
+export type Network_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Network_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "network". All fields are combined with a logical 'AND'. */
+export type Network_Bool_Exp = {
+  _and?: InputMaybe<Array<Network_Bool_Exp>>;
+  _not?: InputMaybe<Network_Bool_Exp>;
+  _or?: InputMaybe<Array<Network_Bool_Exp>>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "network" */
+export enum Network_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  NetworkPkey = 'network_pkey',
+}
+
+export enum Network_Enum {
+  Ethereum = 'ETHEREUM',
+  Polygon = 'POLYGON',
+}
+
+/** Boolean expression to compare columns of type "network_enum". All fields are combined with logical 'AND'. */
+export type Network_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Network_Enum>;
+  _in?: InputMaybe<Array<Network_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Network_Enum>;
+  _nin?: InputMaybe<Array<Network_Enum>>;
+};
+
+/** input type for inserting data into table "network" */
+export type Network_Insert_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Network_Max_Fields = {
+  __typename?: 'network_max_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Network_Min_Fields = {
+  __typename?: 'network_min_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "network" */
+export type Network_Mutation_Response = {
+  __typename?: 'network_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Network>;
+};
+
+/** on_conflict condition type for table "network" */
+export type Network_On_Conflict = {
+  constraint: Network_Constraint;
+  update_columns?: Array<Network_Update_Column>;
+  where?: InputMaybe<Network_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "network". */
+export type Network_Order_By = {
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: network */
+export type Network_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "network" */
+export enum Network_Select_Column {
+  /** column name */
+  Value = 'value',
+}
+
+/** input type for updating data in table "network" */
+export type Network_Set_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "network" */
+export type Network_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Network_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Network_Stream_Cursor_Value_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "network" */
+export enum Network_Update_Column {
+  /** column name */
+  Value = 'value',
+}
+
+export type Network_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Network_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Network_Bool_Exp;
 };
 
 /** columns and relationships of "order" */
@@ -1487,6 +2533,227 @@ export type Order_Updates = {
   where: Order_Bool_Exp;
 };
 
+/** columns and relationships of "poll" */
+export type Poll = {
+  __typename?: 'poll';
+  /** An array relationship */
+  choices: Array<Choice>;
+  /** An aggregate relationship */
+  choices_aggregate: Choice_Aggregate;
+  description: Scalars['String'];
+  id: Scalars['uuid'];
+  title: Scalars['String'];
+  voter: Scalars['jsonb'];
+};
+
+/** columns and relationships of "poll" */
+export type PollChoicesArgs = {
+  distinct_on?: InputMaybe<Array<Choice_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Choice_Order_By>>;
+  where?: InputMaybe<Choice_Bool_Exp>;
+};
+
+/** columns and relationships of "poll" */
+export type PollChoices_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Choice_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Choice_Order_By>>;
+  where?: InputMaybe<Choice_Bool_Exp>;
+};
+
+/** columns and relationships of "poll" */
+export type PollVoterArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregated selection of "poll" */
+export type Poll_Aggregate = {
+  __typename?: 'poll_aggregate';
+  aggregate?: Maybe<Poll_Aggregate_Fields>;
+  nodes: Array<Poll>;
+};
+
+/** aggregate fields of "poll" */
+export type Poll_Aggregate_Fields = {
+  __typename?: 'poll_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Poll_Max_Fields>;
+  min?: Maybe<Poll_Min_Fields>;
+};
+
+/** aggregate fields of "poll" */
+export type Poll_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Poll_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Poll_Append_Input = {
+  voter?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** Boolean expression to filter rows from the table "poll". All fields are combined with a logical 'AND'. */
+export type Poll_Bool_Exp = {
+  _and?: InputMaybe<Array<Poll_Bool_Exp>>;
+  _not?: InputMaybe<Poll_Bool_Exp>;
+  _or?: InputMaybe<Array<Poll_Bool_Exp>>;
+  choices?: InputMaybe<Choice_Bool_Exp>;
+  choices_aggregate?: InputMaybe<Choice_Aggregate_Bool_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  title?: InputMaybe<String_Comparison_Exp>;
+  voter?: InputMaybe<Jsonb_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "poll" */
+export enum Poll_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  PollPkey = 'poll_pkey',
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Poll_Delete_At_Path_Input = {
+  voter?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Poll_Delete_Elem_Input = {
+  voter?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Poll_Delete_Key_Input = {
+  voter?: InputMaybe<Scalars['String']>;
+};
+
+/** input type for inserting data into table "poll" */
+export type Poll_Insert_Input = {
+  choices?: InputMaybe<Choice_Arr_Rel_Insert_Input>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  title?: InputMaybe<Scalars['String']>;
+  voter?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** aggregate max on columns */
+export type Poll_Max_Fields = {
+  __typename?: 'poll_max_fields';
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Poll_Min_Fields = {
+  __typename?: 'poll_min_fields';
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "poll" */
+export type Poll_Mutation_Response = {
+  __typename?: 'poll_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Poll>;
+};
+
+/** on_conflict condition type for table "poll" */
+export type Poll_On_Conflict = {
+  constraint: Poll_Constraint;
+  update_columns?: Array<Poll_Update_Column>;
+  where?: InputMaybe<Poll_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "poll". */
+export type Poll_Order_By = {
+  choices_aggregate?: InputMaybe<Choice_Aggregate_Order_By>;
+  description?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  voter?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: poll */
+export type Poll_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Poll_Prepend_Input = {
+  voter?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "poll" */
+export enum Poll_Select_Column {
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  Voter = 'voter',
+}
+
+/** input type for updating data in table "poll" */
+export type Poll_Set_Input = {
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  title?: InputMaybe<Scalars['String']>;
+  voter?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** Streaming cursor of the table "poll" */
+export type Poll_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Poll_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Poll_Stream_Cursor_Value_Input = {
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  title?: InputMaybe<Scalars['String']>;
+  voter?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** update columns of table "poll" */
+export enum Poll_Update_Column {
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  Voter = 'voter',
+}
+
+export type Poll_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: InputMaybe<Poll_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: InputMaybe<Poll_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: InputMaybe<Poll_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: InputMaybe<Poll_Delete_Key_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: InputMaybe<Poll_Prepend_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Poll_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Poll_Bool_Exp;
+};
+
 /** columns and relationships of "product" */
 export type Product = {
   __typename?: 'product';
@@ -1497,6 +2764,10 @@ export type Product = {
   curation?: Maybe<Scalars['String']>;
   description: Scalars['String'];
   discount?: Maybe<Scalars['Int']>;
+  /** An array relationship */
+  gate: Array<Gate_V2>;
+  /** An aggregate relationship */
+  gate_aggregate: Gate_V2_Aggregate;
   id: Scalars['uuid'];
   image: Scalars['String'];
   isDiscountGated: Scalars['Boolean'];
@@ -1504,6 +2775,25 @@ export type Product = {
   poapId?: Maybe<Scalars['Int']>;
   price: Scalars['Int'];
   utility: Utility_Enum;
+  webhookUrl?: Maybe<Scalars['String']>;
+};
+
+/** columns and relationships of "product" */
+export type ProductGateArgs = {
+  distinct_on?: InputMaybe<Array<Gate_V2_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Gate_V2_Order_By>>;
+  where?: InputMaybe<Gate_V2_Bool_Exp>;
+};
+
+/** columns and relationships of "product" */
+export type ProductGate_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Gate_V2_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Gate_V2_Order_By>>;
+  where?: InputMaybe<Gate_V2_Bool_Exp>;
 };
 
 /** aggregated selection of "product" */
@@ -1554,6 +2844,8 @@ export type Product_Bool_Exp = {
   curation?: InputMaybe<String_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   discount?: InputMaybe<Int_Comparison_Exp>;
+  gate?: InputMaybe<Gate_V2_Bool_Exp>;
+  gate_aggregate?: InputMaybe<Gate_V2_Aggregate_Bool_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<String_Comparison_Exp>;
   isDiscountGated?: InputMaybe<Boolean_Comparison_Exp>;
@@ -1561,6 +2853,7 @@ export type Product_Bool_Exp = {
   poapId?: InputMaybe<Int_Comparison_Exp>;
   price?: InputMaybe<Int_Comparison_Exp>;
   utility?: InputMaybe<Utility_Enum_Comparison_Exp>;
+  webhookUrl?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "product" */
@@ -1584,6 +2877,7 @@ export type Product_Insert_Input = {
   curation?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   discount?: InputMaybe<Scalars['Int']>;
+  gate?: InputMaybe<Gate_V2_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['String']>;
   isDiscountGated?: InputMaybe<Scalars['Boolean']>;
@@ -1591,6 +2885,7 @@ export type Product_Insert_Input = {
   poapId?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
   utility?: InputMaybe<Utility_Enum>;
+  webhookUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
@@ -1606,6 +2901,7 @@ export type Product_Max_Fields = {
   name?: Maybe<Scalars['String']>;
   poapId?: Maybe<Scalars['Int']>;
   price?: Maybe<Scalars['Int']>;
+  webhookUrl?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
@@ -1621,6 +2917,7 @@ export type Product_Min_Fields = {
   name?: Maybe<Scalars['String']>;
   poapId?: Maybe<Scalars['Int']>;
   price?: Maybe<Scalars['Int']>;
+  webhookUrl?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "product" */
@@ -1654,6 +2951,7 @@ export type Product_Order_By = {
   curation?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   discount?: InputMaybe<Order_By>;
+  gate_aggregate?: InputMaybe<Gate_V2_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
   isDiscountGated?: InputMaybe<Order_By>;
@@ -1661,6 +2959,7 @@ export type Product_Order_By = {
   poapId?: InputMaybe<Order_By>;
   price?: InputMaybe<Order_By>;
   utility?: InputMaybe<Order_By>;
+  webhookUrl?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: product */
@@ -1694,6 +2993,8 @@ export enum Product_Select_Column {
   Price = 'price',
   /** column name */
   Utility = 'utility',
+  /** column name */
+  WebhookUrl = 'webhookUrl',
 }
 
 /** input type for updating data in table "product" */
@@ -1710,6 +3011,7 @@ export type Product_Set_Input = {
   poapId?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
   utility?: InputMaybe<Utility_Enum>;
+  webhookUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
@@ -1758,6 +3060,7 @@ export type Product_Stream_Cursor_Value_Input = {
   poapId?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
   utility?: InputMaybe<Utility_Enum>;
+  webhookUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate sum on columns */
@@ -1794,6 +3097,8 @@ export enum Product_Update_Column {
   Price = 'price',
   /** column name */
   Utility = 'utility',
+  /** column name */
+  WebhookUrl = 'webhookUrl',
 }
 
 export type Product_Updates = {
@@ -1837,6 +3142,12 @@ export type Query_Root = {
   app_aggregate: App_Aggregate;
   /** fetch data from the table: "app" using primary key columns */
   app_by_pk?: Maybe<App>;
+  /** fetch data from the table: "choice" */
+  choice: Array<Choice>;
+  /** fetch aggregated fields from the table: "choice" */
+  choice_aggregate: Choice_Aggregate;
+  /** fetch data from the table: "choice" using primary key columns */
+  choice_by_pk?: Maybe<Choice>;
   /** fetch data from the table: "delivery_zone" */
   delivery_zone: Array<Delivery_Zone>;
   /** fetch aggregated fields from the table: "delivery_zone" */
@@ -1849,18 +3160,48 @@ export type Query_Root = {
   gate_aggregate: Gate_Aggregate;
   /** fetch data from the table: "gate" using primary key columns */
   gate_by_pk?: Maybe<Gate>;
+  /** fetch data from the table: "gate_v2" */
+  gate_v2: Array<Gate_V2>;
+  /** fetch aggregated fields from the table: "gate_v2" */
+  gate_v2_aggregate: Gate_V2_Aggregate;
+  /** fetch data from the table: "gate_v2" using primary key columns */
+  gate_v2_by_pk?: Maybe<Gate_V2>;
+  /** fetch data from the table: "network" */
+  network: Array<Network>;
+  /** fetch aggregated fields from the table: "network" */
+  network_aggregate: Network_Aggregate;
+  /** fetch data from the table: "network" using primary key columns */
+  network_by_pk?: Maybe<Network>;
   /** fetch data from the table: "order" */
   order: Array<Order>;
   /** fetch aggregated fields from the table: "order" */
   order_aggregate: Order_Aggregate;
   /** fetch data from the table: "order" using primary key columns */
   order_by_pk?: Maybe<Order>;
+  /** fetch data from the table: "poll" */
+  poll: Array<Poll>;
+  /** fetch aggregated fields from the table: "poll" */
+  poll_aggregate: Poll_Aggregate;
+  /** fetch data from the table: "poll" using primary key columns */
+  poll_by_pk?: Maybe<Poll>;
   /** fetch data from the table: "product" */
   product: Array<Product>;
   /** fetch aggregated fields from the table: "product" */
   product_aggregate: Product_Aggregate;
   /** fetch data from the table: "product" using primary key columns */
   product_by_pk?: Maybe<Product>;
+  /** fetch data from the table: "segment" */
+  segment: Array<Segment>;
+  /** fetch aggregated fields from the table: "segment" */
+  segment_aggregate: Segment_Aggregate;
+  /** fetch data from the table: "segment" using primary key columns */
+  segment_by_pk?: Maybe<Segment>;
+  /** fetch data from the table: "segment_type" */
+  segment_type: Array<Segment_Type>;
+  /** fetch aggregated fields from the table: "segment_type" */
+  segment_type_aggregate: Segment_Type_Aggregate;
+  /** fetch data from the table: "segment_type" using primary key columns */
+  segment_type_by_pk?: Maybe<Segment_Type>;
   /** fetch data from the table: "user" */
   user: Array<User>;
   /** fetch aggregated fields from the table: "user" */
@@ -1892,6 +3233,26 @@ export type Query_RootApp_AggregateArgs = {
 };
 
 export type Query_RootApp_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Query_RootChoiceArgs = {
+  distinct_on?: InputMaybe<Array<Choice_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Choice_Order_By>>;
+  where?: InputMaybe<Choice_Bool_Exp>;
+};
+
+export type Query_RootChoice_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Choice_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Choice_Order_By>>;
+  where?: InputMaybe<Choice_Bool_Exp>;
+};
+
+export type Query_RootChoice_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -1935,6 +3296,46 @@ export type Query_RootGate_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
+export type Query_RootGate_V2Args = {
+  distinct_on?: InputMaybe<Array<Gate_V2_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Gate_V2_Order_By>>;
+  where?: InputMaybe<Gate_V2_Bool_Exp>;
+};
+
+export type Query_RootGate_V2_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Gate_V2_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Gate_V2_Order_By>>;
+  where?: InputMaybe<Gate_V2_Bool_Exp>;
+};
+
+export type Query_RootGate_V2_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Query_RootNetworkArgs = {
+  distinct_on?: InputMaybe<Array<Network_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Network_Order_By>>;
+  where?: InputMaybe<Network_Bool_Exp>;
+};
+
+export type Query_RootNetwork_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Network_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Network_Order_By>>;
+  where?: InputMaybe<Network_Bool_Exp>;
+};
+
+export type Query_RootNetwork_By_PkArgs = {
+  value: Scalars['String'];
+};
+
 export type Query_RootOrderArgs = {
   distinct_on?: InputMaybe<Array<Order_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1952,6 +3353,26 @@ export type Query_RootOrder_AggregateArgs = {
 };
 
 export type Query_RootOrder_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Query_RootPollArgs = {
+  distinct_on?: InputMaybe<Array<Poll_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Poll_Order_By>>;
+  where?: InputMaybe<Poll_Bool_Exp>;
+};
+
+export type Query_RootPoll_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Poll_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Poll_Order_By>>;
+  where?: InputMaybe<Poll_Bool_Exp>;
+};
+
+export type Query_RootPoll_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -1973,6 +3394,46 @@ export type Query_RootProduct_AggregateArgs = {
 
 export type Query_RootProduct_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+export type Query_RootSegmentArgs = {
+  distinct_on?: InputMaybe<Array<Segment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Segment_Order_By>>;
+  where?: InputMaybe<Segment_Bool_Exp>;
+};
+
+export type Query_RootSegment_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Segment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Segment_Order_By>>;
+  where?: InputMaybe<Segment_Bool_Exp>;
+};
+
+export type Query_RootSegment_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Query_RootSegment_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Segment_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Segment_Type_Order_By>>;
+  where?: InputMaybe<Segment_Type_Bool_Exp>;
+};
+
+export type Query_RootSegment_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Segment_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Segment_Type_Order_By>>;
+  where?: InputMaybe<Segment_Type_Bool_Exp>;
+};
+
+export type Query_RootSegment_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 export type Query_RootUserArgs = {
@@ -2015,6 +3476,395 @@ export type Query_RootUtility_By_PkArgs = {
   value: Scalars['String'];
 };
 
+/** columns and relationships of "segment" */
+export type Segment = {
+  __typename?: 'segment';
+  gate_id?: Maybe<Scalars['uuid']>;
+  id: Scalars['uuid'];
+  network?: Maybe<Network_Enum>;
+  nft_contract_address?: Maybe<Scalars['String']>;
+  poap_ids: Scalars['jsonb'];
+  type: Segment_Type_Enum;
+};
+
+/** columns and relationships of "segment" */
+export type SegmentPoap_IdsArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregated selection of "segment" */
+export type Segment_Aggregate = {
+  __typename?: 'segment_aggregate';
+  aggregate?: Maybe<Segment_Aggregate_Fields>;
+  nodes: Array<Segment>;
+};
+
+export type Segment_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Segment_Aggregate_Bool_Exp_Count>;
+};
+
+export type Segment_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Segment_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Segment_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "segment" */
+export type Segment_Aggregate_Fields = {
+  __typename?: 'segment_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Segment_Max_Fields>;
+  min?: Maybe<Segment_Min_Fields>;
+};
+
+/** aggregate fields of "segment" */
+export type Segment_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Segment_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "segment" */
+export type Segment_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Segment_Max_Order_By>;
+  min?: InputMaybe<Segment_Min_Order_By>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Segment_Append_Input = {
+  poap_ids?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** input type for inserting array relation for remote table "segment" */
+export type Segment_Arr_Rel_Insert_Input = {
+  data: Array<Segment_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Segment_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "segment". All fields are combined with a logical 'AND'. */
+export type Segment_Bool_Exp = {
+  _and?: InputMaybe<Array<Segment_Bool_Exp>>;
+  _not?: InputMaybe<Segment_Bool_Exp>;
+  _or?: InputMaybe<Array<Segment_Bool_Exp>>;
+  gate_id?: InputMaybe<Uuid_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  network?: InputMaybe<Network_Enum_Comparison_Exp>;
+  nft_contract_address?: InputMaybe<String_Comparison_Exp>;
+  poap_ids?: InputMaybe<Jsonb_Comparison_Exp>;
+  type?: InputMaybe<Segment_Type_Enum_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "segment" */
+export enum Segment_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  SegmentPkey = 'segment_pkey',
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Segment_Delete_At_Path_Input = {
+  poap_ids?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Segment_Delete_Elem_Input = {
+  poap_ids?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Segment_Delete_Key_Input = {
+  poap_ids?: InputMaybe<Scalars['String']>;
+};
+
+/** input type for inserting data into table "segment" */
+export type Segment_Insert_Input = {
+  gate_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  network?: InputMaybe<Network_Enum>;
+  nft_contract_address?: InputMaybe<Scalars['String']>;
+  poap_ids?: InputMaybe<Scalars['jsonb']>;
+  type?: InputMaybe<Segment_Type_Enum>;
+};
+
+/** aggregate max on columns */
+export type Segment_Max_Fields = {
+  __typename?: 'segment_max_fields';
+  gate_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['uuid']>;
+  nft_contract_address?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "segment" */
+export type Segment_Max_Order_By = {
+  gate_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  nft_contract_address?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Segment_Min_Fields = {
+  __typename?: 'segment_min_fields';
+  gate_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['uuid']>;
+  nft_contract_address?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "segment" */
+export type Segment_Min_Order_By = {
+  gate_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  nft_contract_address?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "segment" */
+export type Segment_Mutation_Response = {
+  __typename?: 'segment_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Segment>;
+};
+
+/** on_conflict condition type for table "segment" */
+export type Segment_On_Conflict = {
+  constraint: Segment_Constraint;
+  update_columns?: Array<Segment_Update_Column>;
+  where?: InputMaybe<Segment_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "segment". */
+export type Segment_Order_By = {
+  gate_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  network?: InputMaybe<Order_By>;
+  nft_contract_address?: InputMaybe<Order_By>;
+  poap_ids?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: segment */
+export type Segment_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Segment_Prepend_Input = {
+  poap_ids?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "segment" */
+export enum Segment_Select_Column {
+  /** column name */
+  GateId = 'gate_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Network = 'network',
+  /** column name */
+  NftContractAddress = 'nft_contract_address',
+  /** column name */
+  PoapIds = 'poap_ids',
+  /** column name */
+  Type = 'type',
+}
+
+/** input type for updating data in table "segment" */
+export type Segment_Set_Input = {
+  gate_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  network?: InputMaybe<Network_Enum>;
+  nft_contract_address?: InputMaybe<Scalars['String']>;
+  poap_ids?: InputMaybe<Scalars['jsonb']>;
+  type?: InputMaybe<Segment_Type_Enum>;
+};
+
+/** Streaming cursor of the table "segment" */
+export type Segment_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Segment_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Segment_Stream_Cursor_Value_Input = {
+  gate_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  network?: InputMaybe<Network_Enum>;
+  nft_contract_address?: InputMaybe<Scalars['String']>;
+  poap_ids?: InputMaybe<Scalars['jsonb']>;
+  type?: InputMaybe<Segment_Type_Enum>;
+};
+
+/** columns and relationships of "segment_type" */
+export type Segment_Type = {
+  __typename?: 'segment_type';
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "segment_type" */
+export type Segment_Type_Aggregate = {
+  __typename?: 'segment_type_aggregate';
+  aggregate?: Maybe<Segment_Type_Aggregate_Fields>;
+  nodes: Array<Segment_Type>;
+};
+
+/** aggregate fields of "segment_type" */
+export type Segment_Type_Aggregate_Fields = {
+  __typename?: 'segment_type_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Segment_Type_Max_Fields>;
+  min?: Maybe<Segment_Type_Min_Fields>;
+};
+
+/** aggregate fields of "segment_type" */
+export type Segment_Type_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Segment_Type_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "segment_type". All fields are combined with a logical 'AND'. */
+export type Segment_Type_Bool_Exp = {
+  _and?: InputMaybe<Array<Segment_Type_Bool_Exp>>;
+  _not?: InputMaybe<Segment_Type_Bool_Exp>;
+  _or?: InputMaybe<Array<Segment_Type_Bool_Exp>>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "segment_type" */
+export enum Segment_Type_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  SegmentTypePkey = 'segment_type_pkey',
+}
+
+export enum Segment_Type_Enum {
+  Nft = 'NFT',
+  Poap = 'POAP',
+}
+
+/** Boolean expression to compare columns of type "segment_type_enum". All fields are combined with logical 'AND'. */
+export type Segment_Type_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Segment_Type_Enum>;
+  _in?: InputMaybe<Array<Segment_Type_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Segment_Type_Enum>;
+  _nin?: InputMaybe<Array<Segment_Type_Enum>>;
+};
+
+/** input type for inserting data into table "segment_type" */
+export type Segment_Type_Insert_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Segment_Type_Max_Fields = {
+  __typename?: 'segment_type_max_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Segment_Type_Min_Fields = {
+  __typename?: 'segment_type_min_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "segment_type" */
+export type Segment_Type_Mutation_Response = {
+  __typename?: 'segment_type_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Segment_Type>;
+};
+
+/** on_conflict condition type for table "segment_type" */
+export type Segment_Type_On_Conflict = {
+  constraint: Segment_Type_Constraint;
+  update_columns?: Array<Segment_Type_Update_Column>;
+  where?: InputMaybe<Segment_Type_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "segment_type". */
+export type Segment_Type_Order_By = {
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: segment_type */
+export type Segment_Type_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "segment_type" */
+export enum Segment_Type_Select_Column {
+  /** column name */
+  Value = 'value',
+}
+
+/** input type for updating data in table "segment_type" */
+export type Segment_Type_Set_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "segment_type" */
+export type Segment_Type_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Segment_Type_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Segment_Type_Stream_Cursor_Value_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "segment_type" */
+export enum Segment_Type_Update_Column {
+  /** column name */
+  Value = 'value',
+}
+
+export type Segment_Type_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Segment_Type_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Segment_Type_Bool_Exp;
+};
+
+/** update columns of table "segment" */
+export enum Segment_Update_Column {
+  /** column name */
+  GateId = 'gate_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Network = 'network',
+  /** column name */
+  NftContractAddress = 'nft_contract_address',
+  /** column name */
+  PoapIds = 'poap_ids',
+  /** column name */
+  Type = 'type',
+}
+
+export type Segment_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: InputMaybe<Segment_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: InputMaybe<Segment_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: InputMaybe<Segment_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: InputMaybe<Segment_Delete_Key_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: InputMaybe<Segment_Prepend_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Segment_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Segment_Bool_Exp;
+};
+
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** fetch data from the table: "app" */
@@ -2025,6 +3875,14 @@ export type Subscription_Root = {
   app_by_pk?: Maybe<App>;
   /** fetch data from the table in a streaming manner: "app" */
   app_stream: Array<App>;
+  /** fetch data from the table: "choice" */
+  choice: Array<Choice>;
+  /** fetch aggregated fields from the table: "choice" */
+  choice_aggregate: Choice_Aggregate;
+  /** fetch data from the table: "choice" using primary key columns */
+  choice_by_pk?: Maybe<Choice>;
+  /** fetch data from the table in a streaming manner: "choice" */
+  choice_stream: Array<Choice>;
   /** fetch data from the table: "delivery_zone" */
   delivery_zone: Array<Delivery_Zone>;
   /** fetch aggregated fields from the table: "delivery_zone" */
@@ -2041,6 +3899,22 @@ export type Subscription_Root = {
   gate_by_pk?: Maybe<Gate>;
   /** fetch data from the table in a streaming manner: "gate" */
   gate_stream: Array<Gate>;
+  /** fetch data from the table: "gate_v2" */
+  gate_v2: Array<Gate_V2>;
+  /** fetch aggregated fields from the table: "gate_v2" */
+  gate_v2_aggregate: Gate_V2_Aggregate;
+  /** fetch data from the table: "gate_v2" using primary key columns */
+  gate_v2_by_pk?: Maybe<Gate_V2>;
+  /** fetch data from the table in a streaming manner: "gate_v2" */
+  gate_v2_stream: Array<Gate_V2>;
+  /** fetch data from the table: "network" */
+  network: Array<Network>;
+  /** fetch aggregated fields from the table: "network" */
+  network_aggregate: Network_Aggregate;
+  /** fetch data from the table: "network" using primary key columns */
+  network_by_pk?: Maybe<Network>;
+  /** fetch data from the table in a streaming manner: "network" */
+  network_stream: Array<Network>;
   /** fetch data from the table: "order" */
   order: Array<Order>;
   /** fetch aggregated fields from the table: "order" */
@@ -2049,6 +3923,14 @@ export type Subscription_Root = {
   order_by_pk?: Maybe<Order>;
   /** fetch data from the table in a streaming manner: "order" */
   order_stream: Array<Order>;
+  /** fetch data from the table: "poll" */
+  poll: Array<Poll>;
+  /** fetch aggregated fields from the table: "poll" */
+  poll_aggregate: Poll_Aggregate;
+  /** fetch data from the table: "poll" using primary key columns */
+  poll_by_pk?: Maybe<Poll>;
+  /** fetch data from the table in a streaming manner: "poll" */
+  poll_stream: Array<Poll>;
   /** fetch data from the table: "product" */
   product: Array<Product>;
   /** fetch aggregated fields from the table: "product" */
@@ -2057,6 +3939,22 @@ export type Subscription_Root = {
   product_by_pk?: Maybe<Product>;
   /** fetch data from the table in a streaming manner: "product" */
   product_stream: Array<Product>;
+  /** fetch data from the table: "segment" */
+  segment: Array<Segment>;
+  /** fetch aggregated fields from the table: "segment" */
+  segment_aggregate: Segment_Aggregate;
+  /** fetch data from the table: "segment" using primary key columns */
+  segment_by_pk?: Maybe<Segment>;
+  /** fetch data from the table in a streaming manner: "segment" */
+  segment_stream: Array<Segment>;
+  /** fetch data from the table: "segment_type" */
+  segment_type: Array<Segment_Type>;
+  /** fetch aggregated fields from the table: "segment_type" */
+  segment_type_aggregate: Segment_Type_Aggregate;
+  /** fetch data from the table: "segment_type" using primary key columns */
+  segment_type_by_pk?: Maybe<Segment_Type>;
+  /** fetch data from the table in a streaming manner: "segment_type" */
+  segment_type_stream: Array<Segment_Type>;
   /** fetch data from the table: "user" */
   user: Array<User>;
   /** fetch aggregated fields from the table: "user" */
@@ -2099,6 +3997,32 @@ export type Subscription_RootApp_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<App_Stream_Cursor_Input>>;
   where?: InputMaybe<App_Bool_Exp>;
+};
+
+export type Subscription_RootChoiceArgs = {
+  distinct_on?: InputMaybe<Array<Choice_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Choice_Order_By>>;
+  where?: InputMaybe<Choice_Bool_Exp>;
+};
+
+export type Subscription_RootChoice_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Choice_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Choice_Order_By>>;
+  where?: InputMaybe<Choice_Bool_Exp>;
+};
+
+export type Subscription_RootChoice_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Subscription_RootChoice_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Choice_Stream_Cursor_Input>>;
+  where?: InputMaybe<Choice_Bool_Exp>;
 };
 
 export type Subscription_RootDelivery_ZoneArgs = {
@@ -2153,6 +4077,58 @@ export type Subscription_RootGate_StreamArgs = {
   where?: InputMaybe<Gate_Bool_Exp>;
 };
 
+export type Subscription_RootGate_V2Args = {
+  distinct_on?: InputMaybe<Array<Gate_V2_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Gate_V2_Order_By>>;
+  where?: InputMaybe<Gate_V2_Bool_Exp>;
+};
+
+export type Subscription_RootGate_V2_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Gate_V2_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Gate_V2_Order_By>>;
+  where?: InputMaybe<Gate_V2_Bool_Exp>;
+};
+
+export type Subscription_RootGate_V2_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Subscription_RootGate_V2_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Gate_V2_Stream_Cursor_Input>>;
+  where?: InputMaybe<Gate_V2_Bool_Exp>;
+};
+
+export type Subscription_RootNetworkArgs = {
+  distinct_on?: InputMaybe<Array<Network_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Network_Order_By>>;
+  where?: InputMaybe<Network_Bool_Exp>;
+};
+
+export type Subscription_RootNetwork_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Network_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Network_Order_By>>;
+  where?: InputMaybe<Network_Bool_Exp>;
+};
+
+export type Subscription_RootNetwork_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+export type Subscription_RootNetwork_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Network_Stream_Cursor_Input>>;
+  where?: InputMaybe<Network_Bool_Exp>;
+};
+
 export type Subscription_RootOrderArgs = {
   distinct_on?: InputMaybe<Array<Order_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2179,6 +4155,32 @@ export type Subscription_RootOrder_StreamArgs = {
   where?: InputMaybe<Order_Bool_Exp>;
 };
 
+export type Subscription_RootPollArgs = {
+  distinct_on?: InputMaybe<Array<Poll_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Poll_Order_By>>;
+  where?: InputMaybe<Poll_Bool_Exp>;
+};
+
+export type Subscription_RootPoll_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Poll_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Poll_Order_By>>;
+  where?: InputMaybe<Poll_Bool_Exp>;
+};
+
+export type Subscription_RootPoll_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Subscription_RootPoll_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Poll_Stream_Cursor_Input>>;
+  where?: InputMaybe<Poll_Bool_Exp>;
+};
+
 export type Subscription_RootProductArgs = {
   distinct_on?: InputMaybe<Array<Product_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2203,6 +4205,58 @@ export type Subscription_RootProduct_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Product_Stream_Cursor_Input>>;
   where?: InputMaybe<Product_Bool_Exp>;
+};
+
+export type Subscription_RootSegmentArgs = {
+  distinct_on?: InputMaybe<Array<Segment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Segment_Order_By>>;
+  where?: InputMaybe<Segment_Bool_Exp>;
+};
+
+export type Subscription_RootSegment_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Segment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Segment_Order_By>>;
+  where?: InputMaybe<Segment_Bool_Exp>;
+};
+
+export type Subscription_RootSegment_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Subscription_RootSegment_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Segment_Stream_Cursor_Input>>;
+  where?: InputMaybe<Segment_Bool_Exp>;
+};
+
+export type Subscription_RootSegment_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Segment_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Segment_Type_Order_By>>;
+  where?: InputMaybe<Segment_Type_Bool_Exp>;
+};
+
+export type Subscription_RootSegment_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Segment_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Segment_Type_Order_By>>;
+  where?: InputMaybe<Segment_Type_Bool_Exp>;
+};
+
+export type Subscription_RootSegment_Type_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+export type Subscription_RootSegment_Type_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Segment_Type_Stream_Cursor_Input>>;
+  where?: InputMaybe<Segment_Type_Bool_Exp>;
 };
 
 export type Subscription_RootUserArgs = {
@@ -2461,7 +4515,6 @@ export enum Utility_Enum {
   Ecommerce = 'ECOMMERCE',
   EmailModal = 'EMAIL_MODAL',
   ExternalLink = 'EXTERNAL_LINK',
-  Survey = 'SURVEY',
 }
 
 /** Boolean expression to compare columns of type "utility_enum". All fields are combined with logical 'AND'. */
@@ -2811,6 +4864,57 @@ export type GetOrdersQuery = {
     status: any;
     product: { __typename?: 'product'; image: string };
   }>;
+};
+
+export type GetPollByIdQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+export type GetPollByIdQuery = {
+  __typename?: 'query_root';
+  poll?: {
+    __typename?: 'poll';
+    id: any;
+    title: string;
+    voter: any;
+    description: string;
+    choices: Array<{ __typename?: 'choice'; id: any; poll_id: any; value: string }>;
+  } | null;
+};
+
+export type GetPollsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetPollsQuery = {
+  __typename?: 'query_root';
+  polls: Array<{
+    __typename?: 'poll';
+    id: any;
+    title: string;
+    voter: any;
+    description: string;
+    choices: Array<{ __typename?: 'choice'; id: any; poll_id: any; value: string }>;
+  }>;
+};
+
+export type CreatePollMutationVariables = Exact<{
+  choices?: InputMaybe<Choice_Arr_Rel_Insert_Input>;
+  description?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+}>;
+
+export type CreatePollMutation = {
+  __typename?: 'mutation_root';
+  insert_poll?: {
+    __typename?: 'poll_mutation_response';
+    returning: Array<{
+      __typename?: 'poll';
+      id: any;
+      title: string;
+      voter: any;
+      description: string;
+      choices: Array<{ __typename?: 'choice'; value: string; poll_id: any; id: any }>;
+    }>;
+  } | null;
 };
 
 export type CreateProductMutationVariables = Exact<{
@@ -3815,6 +5919,161 @@ export function useGetOrdersLazyQuery(
 export type GetOrdersQueryHookResult = ReturnType<typeof useGetOrdersQuery>;
 export type GetOrdersLazyQueryHookResult = ReturnType<typeof useGetOrdersLazyQuery>;
 export type GetOrdersQueryResult = Apollo.QueryResult<GetOrdersQuery, GetOrdersQueryVariables>;
+export const GetPollByIdDocument = gql`
+  query getPollById($id: uuid!) {
+    poll: poll_by_pk(id: $id) {
+      choices {
+        id
+        poll_id
+        value
+      }
+      id
+      title
+      voter
+      description
+    }
+  }
+`;
+
+/**
+ * __useGetPollByIdQuery__
+ *
+ * To run a query within a React component, call `useGetPollByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPollByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPollByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetPollByIdQuery(
+  baseOptions: Apollo.QueryHookOptions<GetPollByIdQuery, GetPollByIdQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetPollByIdQuery, GetPollByIdQueryVariables>(GetPollByIdDocument, options);
+}
+export function useGetPollByIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetPollByIdQuery, GetPollByIdQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetPollByIdQuery, GetPollByIdQueryVariables>(
+    GetPollByIdDocument,
+    options,
+  );
+}
+export type GetPollByIdQueryHookResult = ReturnType<typeof useGetPollByIdQuery>;
+export type GetPollByIdLazyQueryHookResult = ReturnType<typeof useGetPollByIdLazyQuery>;
+export type GetPollByIdQueryResult = Apollo.QueryResult<
+  GetPollByIdQuery,
+  GetPollByIdQueryVariables
+>;
+export const GetPollsDocument = gql`
+  query GetPolls {
+    polls: poll {
+      id
+      title
+      voter
+      description
+      choices {
+        id
+        poll_id
+        value
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetPollsQuery__
+ *
+ * To run a query within a React component, call `useGetPollsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPollsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPollsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetPollsQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetPollsQuery, GetPollsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetPollsQuery, GetPollsQueryVariables>(GetPollsDocument, options);
+}
+export function useGetPollsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetPollsQuery, GetPollsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetPollsQuery, GetPollsQueryVariables>(GetPollsDocument, options);
+}
+export type GetPollsQueryHookResult = ReturnType<typeof useGetPollsQuery>;
+export type GetPollsLazyQueryHookResult = ReturnType<typeof useGetPollsLazyQuery>;
+export type GetPollsQueryResult = Apollo.QueryResult<GetPollsQuery, GetPollsQueryVariables>;
+export const CreatePollDocument = gql`
+  mutation CreatePoll($choices: choice_arr_rel_insert_input, $description: String, $title: String) {
+    insert_poll(objects: { choices: $choices, description: $description, title: $title }) {
+      returning {
+        id
+        title
+        voter
+        description
+        choices {
+          value
+          poll_id
+          id
+        }
+      }
+    }
+  }
+`;
+export type CreatePollMutationFn = Apollo.MutationFunction<
+  CreatePollMutation,
+  CreatePollMutationVariables
+>;
+
+/**
+ * __useCreatePollMutation__
+ *
+ * To run a mutation, you first call `useCreatePollMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePollMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPollMutation, { data, loading, error }] = useCreatePollMutation({
+ *   variables: {
+ *      choices: // value for 'choices'
+ *      description: // value for 'description'
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useCreatePollMutation(
+  baseOptions?: Apollo.MutationHookOptions<CreatePollMutation, CreatePollMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreatePollMutation, CreatePollMutationVariables>(
+    CreatePollDocument,
+    options,
+  );
+}
+export type CreatePollMutationHookResult = ReturnType<typeof useCreatePollMutation>;
+export type CreatePollMutationResult = Apollo.MutationResult<CreatePollMutation>;
+export type CreatePollMutationOptions = Apollo.BaseMutationOptions<
+  CreatePollMutation,
+  CreatePollMutationVariables
+>;
 export const CreateProductDocument = gql`
   mutation CreateProduct(
     $appId: uuid!
