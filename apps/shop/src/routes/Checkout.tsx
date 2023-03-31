@@ -1,3 +1,4 @@
+import type { Product } from '@3shop/apollo';
 import { useGetProductByIdQuery } from '@3shop/apollo';
 import { CheckoutFormContainer } from '@/modules/checkout/CheckoutFormContainer';
 import { useParams } from 'react-router-dom';
@@ -16,5 +17,5 @@ export const Checkout = () => {
 
   if (!product) return null;
 
-  return <CheckoutFormContainer product={product} />;
+  return <CheckoutFormContainer product={product as Product} />;
 };

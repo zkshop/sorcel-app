@@ -1,0 +1,29 @@
+query GetPolls {
+  polls: poll {
+    id
+    title
+    voter
+    description
+    choices {
+      id
+      poll_id
+      value
+    }
+  }
+}
+
+mutation CreatePoll($choices: choice_arr_rel_insert_input, $description: String, $title: String) {
+  insert_poll(objects: { choices: $choices, description: $description, title: $title }) {
+    returning {
+      id
+      title
+      voter
+      description
+      choices {
+        value
+        poll_id
+        id
+      }
+    }
+  }
+}

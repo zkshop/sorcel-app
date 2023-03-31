@@ -1,5 +1,6 @@
 import { BackButton, Spinner } from '@3shop/ui';
 
+import type { Product } from '@3shop/apollo';
 import { useGetProductGateQuery, useGetProductByIdQuery } from '@3shop/apollo';
 import { EditProductFormContainer } from './ProductForm/EditProductFormContainer';
 
@@ -36,7 +37,7 @@ const EditProductContainer = ({ productId }: EditProductPageProps) => {
   return (
     <>
       <BackButton href="/app" />
-      <EditProductFormContainer gates={gates} product={product} />
+      <EditProductFormContainer gates={gates} product={product as Product} />
     </>
   );
 };

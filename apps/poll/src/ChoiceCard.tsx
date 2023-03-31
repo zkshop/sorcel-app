@@ -1,17 +1,5 @@
-import {
-  VStack,
-  Box,
-  Image,
-  Text,
-  Button,
-  ApprovalIcon,
-  Stat,
-  StatLabel,
-  StatNumber,
-  Flex,
-} from '@3shop/ui';
+import { Box, Text, Stat, StatLabel, StatNumber, Flex } from '@3shop/ui';
 import { Card } from './Card';
-import { CHOICE_CARD_BACKGROUND_COLOR, CHOICE_CARD_COLOR } from './constant';
 import { VoteButton } from './VoteButton';
 
 type ChoiceCardType = {
@@ -24,7 +12,7 @@ type ChoiceCardType = {
 
 export const ChoiceCard = ({
   title,
-  id,
+
   handleClickOnChoice,
   votes,
   alreadyVoted,
@@ -41,7 +29,7 @@ export const ChoiceCard = ({
         ) : (
           <VoteButton
             display="flex"
-            onClick={() => handleClickOnChoice(id)}
+            onClick={() => handleClickOnChoice(title)}
             justifyContent="space-between"
           >
             Vote

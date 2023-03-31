@@ -51,7 +51,7 @@ export const ProductDetails = ({
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const shippingLink = `/shipping/${id}`;
-  const BUY_BUTTON_LABEL = utility === 'SURVEY' ? 'VOTE' : 'BUY IT NOW';
+  const BUY_BUTTON_LABEL = 'BUY IT NOW';
 
   const handleClick = async () => {
     setIsLoading(true);
