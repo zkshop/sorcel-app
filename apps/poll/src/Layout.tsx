@@ -1,6 +1,6 @@
-import { Grid, GridItem, Heading } from '@3shop/ui';
+import { Grid, GridItem, Image } from '@3shop/ui';
 import { ConnectWalletButton } from '@3shop/wallet';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 function Layout() {
   return (
@@ -9,11 +9,13 @@ function Layout() {
         display="flex"
         alignItems="center"
         justifyContent="space-between"
+        overflow="hidden"
         rowSpan={1}
         paddingX={15}
-        borderBottom="solid 1px black"
       >
-        <Heading verticalAlign="center">Human Divergence Poll</Heading>
+        <Link to="/">
+          <Image maxWidth={120} src="icon.png" />
+        </Link>
         <ConnectWalletButton />
       </GridItem>
       <GridItem rowSpan={9} padding={15}>

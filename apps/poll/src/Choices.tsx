@@ -1,8 +1,8 @@
 import { VoteModal } from './VoteModal';
 import { useGetPollByIdQuery, useVoteMutation } from '@3shop/apollo';
 import type { Nullable } from '@3shop/types';
-import { Box, Flex, Image, Spinner, useDisclosure, Heading } from '@3shop/ui';
-import { LockedLayer } from '@3shop/ui/LockedLayer/LockedLayer';
+import { Box, Flex, Spinner, useDisclosure, Heading } from '@3shop/ui';
+
 import { useAccount } from '@3shop/wallet';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { useAppSelector } from './store/store';
 import type { ChoiceType } from './utils';
 import { isHolder } from './utils';
 import { haveAlreadyVote } from './utils/haveAlreadyVote';
+import { Image } from './Image';
 
 export const Choices = () => {
   const { id } = useParams() as { id: string };
@@ -21,7 +22,7 @@ export const Choices = () => {
   const [choice, setChoice] = useState<Nullable<ChoiceType>>(null);
   const [vote, { loading: voteLoading }] = useVoteMutation();
 
-  const isLocked = data?.poll?.gate && !isHolder(nfts, data.poll.gate);
+  const isLocked = Boolean(data?.poll?.gate && !isHolder(nfts, data.poll.gate));
 
   if (loading) return <Spinner />;
   if (!data || !data.poll) return <>Error</>;
@@ -40,17 +41,22 @@ export const Choices = () => {
   return (
     <>
       <Box height="100%" display="flex" flexDir="column">
-        <Box position="relative" flex={1}>
-          {isLocked && <LockedLayer />}
-          <Image borderRadius={35} src="choices_background.png" />
+        <Box
+          flex={1}
+          display="flex"
+          justifyContent="center"
+          alignItems="baseline"
+          position="relative"
+        >
+          <Image locked={isLocked} src="choices_background.png" />
         </Box>
-        <Box display="flex" justifyContent="center" alignItems="center" flex={1}>
+        <Box flex={1} display="flex" justifyContent="center" alignItems="baseline">
           {isLocked ? (
             <Heading textAlign="center" fontSize="x-large">
               Connect your wallet with Human Divergence NFT to vote
             </Heading>
           ) : (
-            <Flex mt={12} gap={2} justifyContent="space-between">
+            <Flex gap={2} justifyContent="space-between" flexWrap="wrap">
               {data.poll.choices.map((choice) => (
                 <ChoiceCard
                   handleClickOnChoice={handleClickOnChoice}
@@ -58,7 +64,6 @@ export const Choices = () => {
                   id={choice.id}
                   votes={choice.count}
                   alreadyVoted={alreadyVoted}
-                  loading={voteLoading}
                 />
               ))}
             </Flex>
@@ -66,7 +71,13 @@ export const Choices = () => {
         </Box>
       </Box>
 
-      <VoteModal isOpen={isOpen} onClose={onClose} choice={choice} handleVote={handleVote} />
+      <VoteModal
+        loading={voteLoading}
+        isOpen={isOpen}
+        onClose={onClose}
+        choice={choice}
+        handleVote={handleVote}
+      />
     </>
   );
 };

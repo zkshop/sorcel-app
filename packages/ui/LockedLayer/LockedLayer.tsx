@@ -11,41 +11,27 @@ export const LockedLayer = ({ size = 'md' }: LockedLayerProps) => (
   <>
     <Box
       className={classnames.LOCKED_LAYER}
-      sx={{
-        zIndex: 1,
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        opacity: 0.5,
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-        bg: 'black',
-      }}
+      zIndex={0}
+      position="absolute"
+      top={0}
+      left={0}
+      bottom={0}
+      right={0}
+      bg="black"
+      opacity={0.5}
+      display="flex"
+      justifyContent="center"
+      flexDirection="column"
+      alignItems="center"
     />
 
-    <Box
-      sx={{
-        zIndex: 1,
-        position: 'absolute',
-        display: 'flex',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-      }}
-    >
+    <Box zIndex={1} position="absolute" display="flex" top={0} left={0} right={0} bottom={0}>
       <Text
         className={classnames.LOCKED_LAYER_TEXT}
-        sx={{
-          textAlign: 'center',
-          color: 'white',
-          fontWeight: 'bold',
-          margin: 'auto',
-        }}
+        textAlign="center"
+        fontWeight="bold"
+        margin="auto"
+        color="white"
         fontSize={size === 'lg' ? '2xl' : 'lg'}
       >
         Connect your wallet
