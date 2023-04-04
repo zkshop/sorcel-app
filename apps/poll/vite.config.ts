@@ -1,6 +1,7 @@
 import { defineConfig, loadEnv } from 'vite';
 import { createCommonConfig } from '@3shop/vite-config/vite.config.common.js';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import Unfonts from 'unplugin-fonts/vite';
 
 import dotenv from 'dotenv-vault-core';
 
@@ -40,20 +41,21 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 4001,
     },
-    // plugins: [
-    //   ...commonConfig.plugins,
-    //   createHtmlPlugin({
-    //     inject: {
-    //       data: {
-    //         SET_APP_ID: `
-    //           <script type="text/javascript">
-    //             window.__3SHOP_NETWORK__ = "${process.env.NETWORK}";
-    //           </script>
-    //         `,
-    //       },
-    //     },
-    //   }),
-    // ],
+    plugins: [
+      ...commonConfig.plugins,
+      Unfonts({ google: { families: ['Inter'] } }),
+      createHtmlPlugin({
+        inject: {
+          data: {
+            SET_APP_ID: `
+              <script type="text/javascript">
+                window.__3SHOP_NETWORK__ = "${process.env.NETWORK}";
+              </script>
+            `,
+          },
+        },
+      }),
+    ],
     // build: {
     //   ...commonConfig.build,
     //   rollupOptions: {

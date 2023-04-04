@@ -9,7 +9,6 @@ type ChoiceCardType = {
   handleClickOnChoice(choice: ChoiceType): void;
   votes: number;
   alreadyVoted: boolean;
-  loading: boolean;
 };
 
 export const ChoiceCard = ({
@@ -18,7 +17,6 @@ export const ChoiceCard = ({
   handleClickOnChoice,
   votes,
   alreadyVoted,
-  loading,
 }: ChoiceCardType) => (
   <Card>
     <Flex p={15} minW={250} alignItems="center" justifyContent="center" flexDirection="column">
@@ -34,8 +32,6 @@ export const ChoiceCard = ({
             display="flex"
             onClick={() => handleClickOnChoice({ count: votes, value: title, id })}
             justifyContent="space-between"
-            isDisabled={loading}
-            isLoading={loading}
           >
             Vote
           </VoteButton>
