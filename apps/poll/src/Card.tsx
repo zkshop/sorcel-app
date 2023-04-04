@@ -12,7 +12,6 @@ export const Card = ({ children }: WithChildren<object>) => (
     backgroundColor={CHOICE_CARD_BACKGROUND_COLOR}
     color={CHOICE_CARD_COLOR}
     borderRadius={CHOICE_CARD_BORDER_RADIUS}
-    paddingBottom={4}
     overflow="hidden"
   >
     {children}

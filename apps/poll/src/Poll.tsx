@@ -1,5 +1,6 @@
-import { Image, Box, Text } from '@3shop/ui';
+import { Image, Text, Flex } from '@3shop/ui';
 import { Card } from './Card';
+import { VoteButton } from './VoteButton';
 
 type PollType = {
   id: string;
@@ -10,8 +11,11 @@ type PollType = {
 export const Poll = ({ title }: PollType) => (
   <Card>
     <Image src="/choices_background.png" />
-    <Box>
-      <Text>{title}</Text>
-    </Box>
+    <Flex paddingY={2} gap={2} direction="column" justifyContent="center" alignItems="center">
+      <Text fontFamily="Inter" fontWeight="800">
+        {title}
+      </Text>
+      <VoteButton>Vote</VoteButton>
+    </Flex>
   </Card>
 );

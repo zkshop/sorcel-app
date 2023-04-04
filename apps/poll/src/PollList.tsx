@@ -10,9 +10,17 @@ export const PollList = () => {
   if (!data) return <>Error</>;
 
   return (
-    <Flex justifyContent="flex-start" flexDirection="row" flexWrap="wrap" gap={2}>
+    <Flex
+      flexBasis={0}
+      justifyContent="flex-start"
+      margin="auto"
+      flexDirection="row"
+      flexWrap="wrap"
+      columnGap={2}
+      rowGap={24}
+    >
       {data.polls.map((poll) => (
-        <Box flex={1}>
+        <Box width="24%">
           <Link to={`/choices/${poll.id}`}>
             <Poll id={poll.id} title={poll.title} />
           </Link>
