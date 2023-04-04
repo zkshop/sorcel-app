@@ -8,6 +8,7 @@ query GetPolls {
       id
       poll_id
       value
+      count
     }
   }
 }
@@ -17,7 +18,7 @@ mutation CreatePoll($choices: choice_arr_rel_insert_input, $description: String,
     returning {
       id
       title
-      
+
       description
       choices {
         value
