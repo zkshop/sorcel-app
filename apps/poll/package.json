@@ -9,7 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@3shop/alchemy": "workspace:*",
     "@3shop/apollo": "workspace:*",
+    "@3shop/config": "workspace:*",
+    "@3shop/domains": "workspace:*",
     "@3shop/ui": "workspace:*",
     "@3shop/wallet": "workspace:*",
     "react": "^18.2.0",

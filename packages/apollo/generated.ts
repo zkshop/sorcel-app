@@ -256,6 +256,7 @@ export type App_Updates = {
 /** columns and relationships of "choice" */
 export type Choice = {
   __typename?: 'choice';
+  count: Scalars['Int'];
   id: Scalars['uuid'];
   poll_id: Scalars['uuid'];
   value: Scalars['String'];
@@ -282,9 +283,17 @@ export type Choice_Aggregate_Bool_Exp_Count = {
 /** aggregate fields of "choice" */
 export type Choice_Aggregate_Fields = {
   __typename?: 'choice_aggregate_fields';
+  avg?: Maybe<Choice_Avg_Fields>;
   count: Scalars['Int'];
   max?: Maybe<Choice_Max_Fields>;
   min?: Maybe<Choice_Min_Fields>;
+  stddev?: Maybe<Choice_Stddev_Fields>;
+  stddev_pop?: Maybe<Choice_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Choice_Stddev_Samp_Fields>;
+  sum?: Maybe<Choice_Sum_Fields>;
+  var_pop?: Maybe<Choice_Var_Pop_Fields>;
+  var_samp?: Maybe<Choice_Var_Samp_Fields>;
+  variance?: Maybe<Choice_Variance_Fields>;
 };
 
 /** aggregate fields of "choice" */
@@ -295,9 +304,17 @@ export type Choice_Aggregate_FieldsCountArgs = {
 
 /** order by aggregate values of table "choice" */
 export type Choice_Aggregate_Order_By = {
+  avg?: InputMaybe<Choice_Avg_Order_By>;
   count?: InputMaybe<Order_By>;
   max?: InputMaybe<Choice_Max_Order_By>;
   min?: InputMaybe<Choice_Min_Order_By>;
+  stddev?: InputMaybe<Choice_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Choice_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Choice_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Choice_Sum_Order_By>;
+  var_pop?: InputMaybe<Choice_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Choice_Var_Samp_Order_By>;
+  variance?: InputMaybe<Choice_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "choice" */
@@ -307,11 +324,23 @@ export type Choice_Arr_Rel_Insert_Input = {
   on_conflict?: InputMaybe<Choice_On_Conflict>;
 };
 
+/** aggregate avg on columns */
+export type Choice_Avg_Fields = {
+  __typename?: 'choice_avg_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "choice" */
+export type Choice_Avg_Order_By = {
+  count?: InputMaybe<Order_By>;
+};
+
 /** Boolean expression to filter rows from the table "choice". All fields are combined with a logical 'AND'. */
 export type Choice_Bool_Exp = {
   _and?: InputMaybe<Array<Choice_Bool_Exp>>;
   _not?: InputMaybe<Choice_Bool_Exp>;
   _or?: InputMaybe<Array<Choice_Bool_Exp>>;
+  count?: InputMaybe<Int_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   poll_id?: InputMaybe<Uuid_Comparison_Exp>;
   value?: InputMaybe<String_Comparison_Exp>;
@@ -323,8 +352,14 @@ export enum Choice_Constraint {
   ChoicePkey = 'choice_pkey',
 }
 
+/** input type for incrementing numeric columns in table "choice" */
+export type Choice_Inc_Input = {
+  count?: InputMaybe<Scalars['Int']>;
+};
+
 /** input type for inserting data into table "choice" */
 export type Choice_Insert_Input = {
+  count?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
   poll_id?: InputMaybe<Scalars['uuid']>;
   value?: InputMaybe<Scalars['String']>;
@@ -333,6 +368,7 @@ export type Choice_Insert_Input = {
 /** aggregate max on columns */
 export type Choice_Max_Fields = {
   __typename?: 'choice_max_fields';
+  count?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   poll_id?: Maybe<Scalars['uuid']>;
   value?: Maybe<Scalars['String']>;
@@ -340,6 +376,7 @@ export type Choice_Max_Fields = {
 
 /** order by max() on columns of table "choice" */
 export type Choice_Max_Order_By = {
+  count?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   poll_id?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
@@ -348,6 +385,7 @@ export type Choice_Max_Order_By = {
 /** aggregate min on columns */
 export type Choice_Min_Fields = {
   __typename?: 'choice_min_fields';
+  count?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   poll_id?: Maybe<Scalars['uuid']>;
   value?: Maybe<Scalars['String']>;
@@ -355,6 +393,7 @@ export type Choice_Min_Fields = {
 
 /** order by min() on columns of table "choice" */
 export type Choice_Min_Order_By = {
+  count?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   poll_id?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
@@ -378,6 +417,7 @@ export type Choice_On_Conflict = {
 
 /** Ordering options when selecting data from "choice". */
 export type Choice_Order_By = {
+  count?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   poll_id?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
@@ -391,6 +431,8 @@ export type Choice_Pk_Columns_Input = {
 /** select columns of table "choice" */
 export enum Choice_Select_Column {
   /** column name */
+  Count = 'count',
+  /** column name */
   Id = 'id',
   /** column name */
   PollId = 'poll_id',
@@ -400,9 +442,43 @@ export enum Choice_Select_Column {
 
 /** input type for updating data in table "choice" */
 export type Choice_Set_Input = {
+  count?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
   poll_id?: InputMaybe<Scalars['uuid']>;
   value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Choice_Stddev_Fields = {
+  __typename?: 'choice_stddev_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "choice" */
+export type Choice_Stddev_Order_By = {
+  count?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Choice_Stddev_Pop_Fields = {
+  __typename?: 'choice_stddev_pop_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "choice" */
+export type Choice_Stddev_Pop_Order_By = {
+  count?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Choice_Stddev_Samp_Fields = {
+  __typename?: 'choice_stddev_samp_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "choice" */
+export type Choice_Stddev_Samp_Order_By = {
+  count?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "choice" */
@@ -415,13 +491,27 @@ export type Choice_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Choice_Stream_Cursor_Value_Input = {
+  count?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
   poll_id?: InputMaybe<Scalars['uuid']>;
   value?: InputMaybe<Scalars['String']>;
 };
 
+/** aggregate sum on columns */
+export type Choice_Sum_Fields = {
+  __typename?: 'choice_sum_fields';
+  count?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "choice" */
+export type Choice_Sum_Order_By = {
+  count?: InputMaybe<Order_By>;
+};
+
 /** update columns of table "choice" */
 export enum Choice_Update_Column {
+  /** column name */
+  Count = 'count',
   /** column name */
   Id = 'id',
   /** column name */
@@ -431,10 +521,45 @@ export enum Choice_Update_Column {
 }
 
 export type Choice_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Choice_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Choice_Set_Input>;
   /** filter the rows which have to be updated */
   where: Choice_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Choice_Var_Pop_Fields = {
+  __typename?: 'choice_var_pop_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "choice" */
+export type Choice_Var_Pop_Order_By = {
+  count?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Choice_Var_Samp_Fields = {
+  __typename?: 'choice_var_samp_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "choice" */
+export type Choice_Var_Samp_Order_By = {
+  count?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Choice_Variance_Fields = {
+  __typename?: 'choice_variance_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "choice" */
+export type Choice_Variance_Order_By = {
+  count?: InputMaybe<Order_By>;
 };
 
 /** ordering argument of a cursor */
@@ -1909,12 +2034,14 @@ export type Mutation_RootUpdate_App_ManyArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_ChoiceArgs = {
+  _inc?: InputMaybe<Choice_Inc_Input>;
   _set?: InputMaybe<Choice_Set_Input>;
   where: Choice_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Choice_By_PkArgs = {
+  _inc?: InputMaybe<Choice_Inc_Input>;
   _set?: InputMaybe<Choice_Set_Input>;
   pk_columns: Choice_Pk_Columns_Input;
 };
@@ -2541,9 +2668,10 @@ export type Poll = {
   /** An aggregate relationship */
   choices_aggregate: Choice_Aggregate;
   description: Scalars['String'];
+  gate?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   title: Scalars['String'];
-  voter: Scalars['jsonb'];
+  voters: Scalars['jsonb'];
 };
 
 /** columns and relationships of "poll" */
@@ -2565,7 +2693,7 @@ export type PollChoices_AggregateArgs = {
 };
 
 /** columns and relationships of "poll" */
-export type PollVoterArgs = {
+export type PollVotersArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
 
@@ -2592,7 +2720,7 @@ export type Poll_Aggregate_FieldsCountArgs = {
 
 /** append existing jsonb value of filtered columns with new jsonb value */
 export type Poll_Append_Input = {
-  voter?: InputMaybe<Scalars['jsonb']>;
+  voters?: InputMaybe<Scalars['jsonb']>;
 };
 
 /** Boolean expression to filter rows from the table "poll". All fields are combined with a logical 'AND'. */
@@ -2603,9 +2731,10 @@ export type Poll_Bool_Exp = {
   choices?: InputMaybe<Choice_Bool_Exp>;
   choices_aggregate?: InputMaybe<Choice_Aggregate_Bool_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
+  gate?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
-  voter?: InputMaybe<Jsonb_Comparison_Exp>;
+  voters?: InputMaybe<Jsonb_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "poll" */
@@ -2616,32 +2745,34 @@ export enum Poll_Constraint {
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type Poll_Delete_At_Path_Input = {
-  voter?: InputMaybe<Array<Scalars['String']>>;
+  voters?: InputMaybe<Array<Scalars['String']>>;
 };
 
 /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
 export type Poll_Delete_Elem_Input = {
-  voter?: InputMaybe<Scalars['Int']>;
+  voters?: InputMaybe<Scalars['Int']>;
 };
 
 /** delete key/value pair or string element. key/value pairs are matched based on their key value */
 export type Poll_Delete_Key_Input = {
-  voter?: InputMaybe<Scalars['String']>;
+  voters?: InputMaybe<Scalars['String']>;
 };
 
 /** input type for inserting data into table "poll" */
 export type Poll_Insert_Input = {
   choices?: InputMaybe<Choice_Arr_Rel_Insert_Input>;
   description?: InputMaybe<Scalars['String']>;
+  gate?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   title?: InputMaybe<Scalars['String']>;
-  voter?: InputMaybe<Scalars['jsonb']>;
+  voters?: InputMaybe<Scalars['jsonb']>;
 };
 
 /** aggregate max on columns */
 export type Poll_Max_Fields = {
   __typename?: 'poll_max_fields';
   description?: Maybe<Scalars['String']>;
+  gate?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   title?: Maybe<Scalars['String']>;
 };
@@ -2650,6 +2781,7 @@ export type Poll_Max_Fields = {
 export type Poll_Min_Fields = {
   __typename?: 'poll_min_fields';
   description?: Maybe<Scalars['String']>;
+  gate?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   title?: Maybe<Scalars['String']>;
 };
@@ -2674,9 +2806,10 @@ export type Poll_On_Conflict = {
 export type Poll_Order_By = {
   choices_aggregate?: InputMaybe<Choice_Aggregate_Order_By>;
   description?: InputMaybe<Order_By>;
+  gate?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
-  voter?: InputMaybe<Order_By>;
+  voters?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: poll */
@@ -2686,7 +2819,7 @@ export type Poll_Pk_Columns_Input = {
 
 /** prepend existing jsonb value of filtered columns with new jsonb value */
 export type Poll_Prepend_Input = {
-  voter?: InputMaybe<Scalars['jsonb']>;
+  voters?: InputMaybe<Scalars['jsonb']>;
 };
 
 /** select columns of table "poll" */
@@ -2694,19 +2827,22 @@ export enum Poll_Select_Column {
   /** column name */
   Description = 'description',
   /** column name */
+  Gate = 'gate',
+  /** column name */
   Id = 'id',
   /** column name */
   Title = 'title',
   /** column name */
-  Voter = 'voter',
+  Voters = 'voters',
 }
 
 /** input type for updating data in table "poll" */
 export type Poll_Set_Input = {
   description?: InputMaybe<Scalars['String']>;
+  gate?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   title?: InputMaybe<Scalars['String']>;
-  voter?: InputMaybe<Scalars['jsonb']>;
+  voters?: InputMaybe<Scalars['jsonb']>;
 };
 
 /** Streaming cursor of the table "poll" */
@@ -2720,9 +2856,10 @@ export type Poll_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Poll_Stream_Cursor_Value_Input = {
   description?: InputMaybe<Scalars['String']>;
+  gate?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   title?: InputMaybe<Scalars['String']>;
-  voter?: InputMaybe<Scalars['jsonb']>;
+  voters?: InputMaybe<Scalars['jsonb']>;
 };
 
 /** update columns of table "poll" */
@@ -2730,11 +2867,13 @@ export enum Poll_Update_Column {
   /** column name */
   Description = 'description',
   /** column name */
+  Gate = 'gate',
+  /** column name */
   Id = 'id',
   /** column name */
   Title = 'title',
   /** column name */
-  Voter = 'voter',
+  Voters = 'voters',
 }
 
 export type Poll_Updates = {
@@ -2774,7 +2913,7 @@ export type Product = {
   name: Scalars['String'];
   poapId?: Maybe<Scalars['Int']>;
   price: Scalars['Int'];
-  utility: Utility_Enum;
+  utility?: Maybe<Utility_Enum>;
   webhookUrl?: Maybe<Scalars['String']>;
 };
 
@@ -4874,11 +5013,12 @@ export type GetPollByIdQuery = {
   __typename?: 'query_root';
   poll?: {
     __typename?: 'poll';
+    gate?: string | null;
     id: any;
     title: string;
-    voter: any;
+    voters: any;
     description: string;
-    choices: Array<{ __typename?: 'choice'; id: any; poll_id: any; value: string }>;
+    choices: Array<{ __typename?: 'choice'; id: any; poll_id: any; value: string; count: number }>;
   } | null;
 };
 
@@ -4890,7 +5030,7 @@ export type GetPollsQuery = {
     __typename?: 'poll';
     id: any;
     title: string;
-    voter: any;
+    voters: any;
     description: string;
     choices: Array<{ __typename?: 'choice'; id: any; poll_id: any; value: string }>;
   }>;
@@ -4910,7 +5050,6 @@ export type CreatePollMutation = {
       __typename?: 'poll';
       id: any;
       title: string;
-      voter: any;
       description: string;
       choices: Array<{ __typename?: 'choice'; value: string; poll_id: any; id: any }>;
     }>;
@@ -5042,7 +5181,7 @@ export type GetProductByIdQuery = {
     price: number;
     poapId?: number | null;
     isDiscountGated: boolean;
-    utility: Utility_Enum;
+    utility?: Utility_Enum | null;
     app: {
       __typename?: 'app';
       id: any;
@@ -5926,10 +6065,12 @@ export const GetPollByIdDocument = gql`
         id
         poll_id
         value
+        count
       }
+      gate
       id
       title
-      voter
+      voters
       description
     }
   }
@@ -5977,7 +6118,7 @@ export const GetPollsDocument = gql`
     polls: poll {
       id
       title
-      voter
+      voters
       description
       choices {
         id
@@ -6024,7 +6165,6 @@ export const CreatePollDocument = gql`
       returning {
         id
         title
-        voter
         description
         choices {
           value
