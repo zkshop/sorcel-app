@@ -1,5 +1,5 @@
 import type { Nft } from '@3shop/alchemy';
-import { useGetPollByIdQuery } from '@3shop/apollo';
+import { useGetPollByIdQuery, useVoteMutation } from '@3shop/apollo';
 import type { Nullable } from '@3shop/types';
 import {
   Box,
@@ -18,10 +18,13 @@ import {
   Heading,
 } from '@3shop/ui';
 import { LockedLayer } from '@3shop/ui/LockedLayer/LockedLayer';
+import { useAccount } from '@3shop/wallet';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ChoiceCard } from './ChoiceCard';
 import { useAppSelector } from './store/store';
+
+export type ChoiceType = { id: string; value: string; count: number };
 
 const isHolder = (nfts: Nft[], contractAddress: string) => {
   for (const nft of nfts) {
@@ -31,23 +34,32 @@ const isHolder = (nfts: Nft[], contractAddress: string) => {
   return false;
 };
 
+const haveAlreadyVote = (voters: string[], address?: string) =>
+  address ? voters.includes(address) : false;
+
 export const Choices = () => {
   const { id } = useParams() as { id: string };
   const nfts = useAppSelector((state) => state.nfts);
+  const { address } = useAccount();
   const { loading, data } = useGetPollByIdQuery({ variables: { id } });
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [choice, setChoice] = useState<Nullable<string>>(null);
-  const [alreadyVoted, setAlreadyVoted] = useState(false);
-  console.log('data', data);
-  console.log('data', isHolder(nfts, data?.poll?.gate || ''));
+  const [choice, setChoice] = useState<Nullable<ChoiceType>>(null);
+  const [vote, { loading: voteLoading }] = useVoteMutation();
+
   const isLocked = data?.poll?.gate && !isHolder(nfts, data.poll.gate);
 
   if (loading) return <Spinner />;
   if (!data || !data.poll) return <>Error</>;
 
-  const handleClickOnChoice = (text: string) => {
-    setChoice(text);
+  const alreadyVoted = haveAlreadyVote(data.poll.voters, address);
+
+  const handleClickOnChoice = (choice: ChoiceType) => {
+    setChoice(choice);
     onOpen();
+  };
+
+  const handleVote = async (choiceId: string) => {
+    await vote({ variables: { choiceId, pollId: id, voters: [address] } });
   };
 
   return (
@@ -71,6 +83,7 @@ export const Choices = () => {
                   id={choice.id}
                   votes={choice.count}
                   alreadyVoted={alreadyVoted}
+                  loading={voteLoading}
                 />
               ))}
             </Flex>
@@ -81,16 +94,19 @@ export const Choices = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Vote for {choice}</ModalHeader>
+          <ModalHeader>Vote for {choice?.value}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>Vote for poll choice {'"' + choice + '"'} ? You can vote only once.</ModalBody>
+          <ModalBody>
+            Vote for poll choice {'"' + choice?.value + '"'} ? You can vote only once.
+          </ModalBody>
           <ModalFooter>
             <Button backgroundColor="red" color="white" onClick={onClose} mr={3}>
               No
             </Button>
             <Button
               onClick={() => {
-                setAlreadyVoted(true);
+                if (!choice) return;
+                handleVote(choice.id);
                 onClose();
               }}
             >

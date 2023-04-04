@@ -5032,7 +5032,7 @@ export type GetPollsQuery = {
     title: string;
     voters: any;
     description: string;
-    choices: Array<{ __typename?: 'choice'; id: any; poll_id: any; value: string }>;
+    choices: Array<{ __typename?: 'choice'; id: any; poll_id: any; value: string; count: number }>;
   }>;
 };
 
@@ -5054,6 +5054,18 @@ export type CreatePollMutation = {
       choices: Array<{ __typename?: 'choice'; value: string; poll_id: any; id: any }>;
     }>;
   } | null;
+};
+
+export type VoteMutationVariables = Exact<{
+  pollId: Scalars['uuid'];
+  voters?: InputMaybe<Scalars['jsonb']>;
+  choiceId: Scalars['uuid'];
+}>;
+
+export type VoteMutation = {
+  __typename?: 'mutation_root';
+  update_choice_by_pk?: { __typename?: 'choice'; id: any; count: number } | null;
+  update_poll_by_pk?: { __typename?: 'poll'; id: any } | null;
 };
 
 export type CreateProductMutationVariables = Exact<{
@@ -6124,6 +6136,7 @@ export const GetPollsDocument = gql`
         id
         poll_id
         value
+        count
       }
     }
   }
@@ -6214,6 +6227,47 @@ export type CreatePollMutationOptions = Apollo.BaseMutationOptions<
   CreatePollMutation,
   CreatePollMutationVariables
 >;
+export const VoteDocument = gql`
+  mutation Vote($pollId: uuid!, $voters: jsonb, $choiceId: uuid!) {
+    update_choice_by_pk(pk_columns: { id: $choiceId }, _inc: { count: 1 }) {
+      id
+      count
+    }
+    update_poll_by_pk(pk_columns: { id: $pollId }, _append: { voters: $voters }) {
+      id
+    }
+  }
+`;
+export type VoteMutationFn = Apollo.MutationFunction<VoteMutation, VoteMutationVariables>;
+
+/**
+ * __useVoteMutation__
+ *
+ * To run a mutation, you first call `useVoteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useVoteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [voteMutation, { data, loading, error }] = useVoteMutation({
+ *   variables: {
+ *      pollId: // value for 'pollId'
+ *      voters: // value for 'voters'
+ *      choiceId: // value for 'choiceId'
+ *   },
+ * });
+ */
+export function useVoteMutation(
+  baseOptions?: Apollo.MutationHookOptions<VoteMutation, VoteMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<VoteMutation, VoteMutationVariables>(VoteDocument, options);
+}
+export type VoteMutationHookResult = ReturnType<typeof useVoteMutation>;
+export type VoteMutationResult = Apollo.MutationResult<VoteMutation>;
+export type VoteMutationOptions = Apollo.BaseMutationOptions<VoteMutation, VoteMutationVariables>;
 export const CreateProductDocument = gql`
   mutation CreateProduct(
     $appId: uuid!
