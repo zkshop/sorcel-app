@@ -1,6 +1,6 @@
 import { Box, Text, Stat, StatLabel, StatNumber, Flex } from '@3shop/ui';
 import { Card } from './Card';
-import type { ChoiceType } from './Choices';
+import type { ChoiceType } from './utils';
 import { VoteButton } from './VoteButton';
 
 type ChoiceCardType = {

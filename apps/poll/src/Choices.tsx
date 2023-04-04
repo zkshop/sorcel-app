@@ -1,41 +1,16 @@
-import type { Nft } from '@3shop/alchemy';
+import { VoteModal } from './VoteModal';
 import { useGetPollByIdQuery, useVoteMutation } from '@3shop/apollo';
 import type { Nullable } from '@3shop/types';
-import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Spinner,
-  useDisclosure,
-  Heading,
-} from '@3shop/ui';
+import { Box, Flex, Image, Spinner, useDisclosure, Heading } from '@3shop/ui';
 import { LockedLayer } from '@3shop/ui/LockedLayer/LockedLayer';
 import { useAccount } from '@3shop/wallet';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ChoiceCard } from './ChoiceCard';
 import { useAppSelector } from './store/store';
-
-export type ChoiceType = { id: string; value: string; count: number };
-
-const isHolder = (nfts: Nft[], contractAddress: string) => {
-  for (const nft of nfts) {
-    if (nft.contract.address === contractAddress) return true;
-  }
-
-  return false;
-};
-
-const haveAlreadyVote = (voters: string[], address?: string) =>
-  address ? voters.includes(address) : false;
+import type { ChoiceType } from './utils';
+import { isHolder } from './utils';
+import { haveAlreadyVote } from './utils/haveAlreadyVote';
 
 export const Choices = () => {
   const { id } = useParams() as { id: string };
@@ -91,30 +66,7 @@ export const Choices = () => {
         </Box>
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Vote for {choice?.value}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            Vote for poll choice {'"' + choice?.value + '"'} ? You can vote only once.
-          </ModalBody>
-          <ModalFooter>
-            <Button backgroundColor="red" color="white" onClick={onClose} mr={3}>
-              No
-            </Button>
-            <Button
-              onClick={() => {
-                if (!choice) return;
-                handleVote(choice.id);
-                onClose();
-              }}
-            >
-              Yes
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <VoteModal isOpen={isOpen} onClose={onClose} choice={choice} handleVote={handleVote} />
     </>
   );
 };

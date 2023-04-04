@@ -40,30 +40,30 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 4001,
     },
-    plugins: [
-      ...commonConfig.plugins,
-      createHtmlPlugin({
-        inject: {
-          data: {
-            SET_APP_ID: `
-              <script type="text/javascript">
-                window.__3SHOP_NETWORK__ = "${process.env.NETWORK}";
-              </script>
-            `,
-          },
-        },
-      }),
-    ],
-    build: {
-      ...commonConfig.build,
-      rollupOptions: {
-        ...commonConfig.build?.rollupOptions,
-        output: {
-          inlineDynamicImports: true,
-          entryFileNames: '[name].js',
-          assetFileNames: '[name].[ext]',
-        },
-      },
-    },
+    // plugins: [
+    //   ...commonConfig.plugins,
+    //   createHtmlPlugin({
+    //     inject: {
+    //       data: {
+    //         SET_APP_ID: `
+    //           <script type="text/javascript">
+    //             window.__3SHOP_NETWORK__ = "${process.env.NETWORK}";
+    //           </script>
+    //         `,
+    //       },
+    //     },
+    //   }),
+    // ],
+    // build: {
+    //   ...commonConfig.build,
+    //   rollupOptions: {
+    //     ...commonConfig.build?.rollupOptions,
+    //     output: {
+    //       inlineDynamicImports: true,
+    //       entryFileNames: '[name].js',
+    //       assetFileNames: '[name].[ext]',
+    //     },
+    //   },
+    // },
   };
 });
