@@ -73,7 +73,6 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
       isLocked={isLocked}
       sendTransaction={sendTransaction}
       createSurveyOrder={createSurveyOrder}
-      utility={utility}
       walletAddress={walletAddress}
       userHasAlreadyOrdered={userHasAlreadyOrdered}
     />

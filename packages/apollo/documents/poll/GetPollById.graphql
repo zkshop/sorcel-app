@@ -4,10 +4,12 @@ query getPollById($id: uuid!) {
             id
             poll_id
             value
+            count
         }
+        gate
         id
         title
-        voter
+        voters
         description
     }
 } 

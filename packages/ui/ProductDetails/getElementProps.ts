@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Button } from '../Button/Button';
 
 type GetElementPropsType = {
-  utility: Utility_Enum;
   isLocked: boolean;
   shippingLink?: string;
   onClick: () => void;
@@ -24,18 +23,11 @@ const STATES = {
 };
 
 export const getElementProps = ({
-  utility,
   isLocked,
   shippingLink,
   onClick,
 }: GetElementPropsType): GetElementPropsReturnType => {
-  let elementState;
-
-  if (isLocked) {
-    elementState = STATES.LOCKED;
-  } else {
-    elementState = STATES[utility];
-  }
+  const elementState = STATES.LOCKED;
 
   switch (elementState) {
     case STATES.LOCKED:
