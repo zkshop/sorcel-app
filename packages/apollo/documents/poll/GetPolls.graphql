@@ -2,7 +2,7 @@ query GetPolls {
   polls: poll {
     id
     title
-    voter
+    voters
     description
     choices {
       id
@@ -17,7 +17,7 @@ mutation CreatePoll($choices: choice_arr_rel_insert_input, $description: String,
     returning {
       id
       title
-      voter
+      
       description
       choices {
         value

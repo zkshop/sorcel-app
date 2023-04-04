@@ -4,7 +4,7 @@ import { LockedLayer } from '../LockedLayer/LockedLayer';
 import type { Nullable } from '@3shop/types';
 import { classnames, envVars } from '@3shop/config';
 import { Text } from '../Text/Text';
-import type { CreateSurveyOrderMutationFn, Utility_Enum } from '@3shop/apollo';
+import type { CreateSurveyOrderMutationFn } from '@3shop/apollo';
 import { getElementProps } from './getElementProps';
 import { useState } from 'react';
 
@@ -23,7 +23,6 @@ type ProductDetailsProps = {
   // eslint-disable-next-line @typescript-eslint/ban-types
   sendTransaction?: Function;
   createSurveyOrder: CreateSurveyOrderMutationFn;
-  utility: Utility_Enum;
   walletAddress?: string;
   userHasAlreadyOrdered?: boolean;
 };
@@ -43,7 +42,6 @@ export const ProductDetails = ({
   priceReduced,
   collectionName,
   isLocked = false,
-  utility,
   createSurveyOrder,
   walletAddress,
   userHasAlreadyOrdered,
@@ -84,7 +82,6 @@ export const ProductDetails = ({
   };
 
   const { elementType: DynamicElement, elementProps } = getElementProps({
-    utility,
     isLocked,
     shippingLink,
     onClick: handleClick,
