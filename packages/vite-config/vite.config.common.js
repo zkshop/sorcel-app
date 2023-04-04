@@ -25,7 +25,6 @@ export const createCommonConfig = (options) => {
           NodeGlobalsPolyfillPlugin({
             process: true,
             buffer: true,
-            crypto: true,
           }),
           NodeModulesPolyfillPlugin(),
         ],
