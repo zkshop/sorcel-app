@@ -5077,8 +5077,8 @@ export type VoteMutationVariables = Exact<{
 
 export type VoteMutation = {
   __typename?: 'mutation_root';
-  update_choice_by_pk?: { __typename?: 'choice'; id: any; count: number } | null;
-  update_poll_by_pk?: { __typename?: 'poll'; id: any } | null;
+  choice?: { __typename?: 'choice'; id: any; count: number } | null;
+  poll?: { __typename?: 'poll'; id: any; voters: any } | null;
 };
 
 export type CreateProductMutationVariables = Exact<{
@@ -6238,12 +6238,13 @@ export type CreatePollMutationOptions = Apollo.BaseMutationOptions<
 >;
 export const VoteDocument = gql`
   mutation Vote($pollId: uuid!, $voters: jsonb, $choiceId: uuid!) {
-    update_choice_by_pk(pk_columns: { id: $choiceId }, _inc: { count: 1 }) {
+    choice: update_choice_by_pk(pk_columns: { id: $choiceId }, _inc: { count: 1 }) {
       id
       count
     }
-    update_poll_by_pk(pk_columns: { id: $pollId }, _append: { voters: $voters }) {
+    poll: update_poll_by_pk(pk_columns: { id: $pollId }, _append: { voters: $voters }) {
       id
+      voters
     }
   }
 `;
