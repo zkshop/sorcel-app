@@ -1,7 +1,7 @@
 import { VoteModal } from './VoteModal';
 import { useGetPollByIdQuery, useVoteMutation } from '@3shop/apollo';
 import type { Nullable } from '@3shop/types';
-import { Box, Flex, Spinner, useDisclosure, Heading } from '@3shop/ui';
+import { Box, Flex, Spinner, useDisclosure, Heading, useToast } from '@3shop/ui';
 
 import { useAccount } from '@3shop/wallet';
 import { useState } from 'react';
@@ -12,6 +12,7 @@ import type { ChoiceType } from './utils';
 import { isHolder } from './utils';
 import { haveAlreadyVote } from './utils/haveAlreadyVote';
 import { Image } from './Image';
+import { updateCacheAfterVote } from './cache';
 
 export const Choices = () => {
   const { id } = useParams() as { id: string };
@@ -20,8 +21,8 @@ export const Choices = () => {
   const { loading, data } = useGetPollByIdQuery({ variables: { id } });
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [choice, setChoice] = useState<Nullable<ChoiceType>>(null);
-  const [vote, { loading: voteLoading }] = useVoteMutation();
-
+  const [vote, { loading: voteLoading, error: voteError }] = useVoteMutation();
+  const toast = useToast();
   const isLocked = Boolean(data?.poll?.gate && !isHolder(nfts, data.poll.gate));
 
   if (loading) return <Spinner />;
@@ -35,7 +36,25 @@ export const Choices = () => {
   };
 
   const handleVote = async (choiceId: string) => {
-    await vote({ variables: { choiceId, pollId: id, voters: [address] } });
+    await vote({
+      variables: { choiceId, pollId: id, voters: [address] },
+      update: updateCacheAfterVote,
+    });
+
+    if (voteError) {
+      toast({
+        title: 'An Error occured',
+        status: 'error',
+        duration: 2000,
+        description: 'Try again later or contact us to report the issue',
+      });
+    } else {
+      toast({
+        title: 'You voted successfully',
+        status: 'success',
+        duration: 2000,
+      });
+    }
   };
 
   return (
