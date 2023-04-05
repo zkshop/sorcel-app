@@ -2670,6 +2670,7 @@ export type Poll = {
   description: Scalars['String'];
   gate?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
+  image?: Maybe<Scalars['String']>;
   title: Scalars['String'];
   voters: Scalars['jsonb'];
 };
@@ -2733,6 +2734,7 @@ export type Poll_Bool_Exp = {
   description?: InputMaybe<String_Comparison_Exp>;
   gate?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  image?: InputMaybe<String_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
   voters?: InputMaybe<Jsonb_Comparison_Exp>;
 };
@@ -2764,6 +2766,7 @@ export type Poll_Insert_Input = {
   description?: InputMaybe<Scalars['String']>;
   gate?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
+  image?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   voters?: InputMaybe<Scalars['jsonb']>;
 };
@@ -2774,6 +2777,7 @@ export type Poll_Max_Fields = {
   description?: Maybe<Scalars['String']>;
   gate?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
+  image?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -2783,6 +2787,7 @@ export type Poll_Min_Fields = {
   description?: Maybe<Scalars['String']>;
   gate?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
+  image?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -2808,6 +2813,7 @@ export type Poll_Order_By = {
   description?: InputMaybe<Order_By>;
   gate?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   voters?: InputMaybe<Order_By>;
 };
@@ -2831,6 +2837,8 @@ export enum Poll_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Image = 'image',
+  /** column name */
   Title = 'title',
   /** column name */
   Voters = 'voters',
@@ -2841,6 +2849,7 @@ export type Poll_Set_Input = {
   description?: InputMaybe<Scalars['String']>;
   gate?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
+  image?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   voters?: InputMaybe<Scalars['jsonb']>;
 };
@@ -2858,6 +2867,7 @@ export type Poll_Stream_Cursor_Value_Input = {
   description?: InputMaybe<Scalars['String']>;
   gate?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
+  image?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   voters?: InputMaybe<Scalars['jsonb']>;
 };
@@ -2870,6 +2880,8 @@ export enum Poll_Update_Column {
   Gate = 'gate',
   /** column name */
   Id = 'id',
+  /** column name */
+  Image = 'image',
   /** column name */
   Title = 'title',
   /** column name */
@@ -5018,6 +5030,7 @@ export type GetPollByIdQuery = {
     title: string;
     voters: any;
     description: string;
+    image?: string | null;
     choices: Array<{ __typename?: 'choice'; id: any; poll_id: any; value: string; count: number }>;
   } | null;
 };
@@ -5026,14 +5039,7 @@ export type GetPollsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetPollsQuery = {
   __typename?: 'query_root';
-  polls: Array<{
-    __typename?: 'poll';
-    id: any;
-    title: string;
-    voters: any;
-    description: string;
-    choices: Array<{ __typename?: 'choice'; id: any; poll_id: any; value: string; count: number }>;
-  }>;
+  polls: Array<{ __typename?: 'poll'; id: any; title: string; voters: any; description: string }>;
 };
 
 export type CreatePollMutationVariables = Exact<{
@@ -6084,6 +6090,7 @@ export const GetPollByIdDocument = gql`
       title
       voters
       description
+      image
     }
   }
 `;
@@ -6132,12 +6139,6 @@ export const GetPollsDocument = gql`
       title
       voters
       description
-      choices {
-        id
-        poll_id
-        value
-        count
-      }
     }
   }
 `;
