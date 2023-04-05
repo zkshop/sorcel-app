@@ -1,9 +1,11 @@
 mutation Vote($pollId: uuid!, $voters: jsonb, $choiceId: uuid!) {
-  update_choice_by_pk(pk_columns: { id: $choiceId }, _inc: { count: 1 }) {
+  choice: update_choice_by_pk(pk_columns: { id: $choiceId }, _inc: { count: 1 }) {
     id
     count
   }
-  update_poll_by_pk(pk_columns: { id: $pollId }, _append: { voters: $voters }) {
+
+  poll: update_poll_by_pk(pk_columns: { id: $pollId }, _append: { voters: $voters }) {
     id
+    voters
   }
 }

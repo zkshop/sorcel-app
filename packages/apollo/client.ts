@@ -38,7 +38,7 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const ssrHttpLink = new HttpLink({
+const shopHttpLink = new HttpLink({
   uri: envVars.PUBLIC_HASURA_API_URL,
   credentials: 'same-origin',
   headers: {
@@ -55,43 +55,13 @@ export function createApolloClient() {
   });
 }
 
-function createApolloSsrClient() {
+export function createApolloShopClient() {
   return new ApolloClient({
-    ssrMode: typeof window === 'undefined',
-    link: from([errorLink, ssrHttpLink]),
+    link: from([errorLink, shopHttpLink]),
     cache: new InMemoryCache({
       typePolicies: {},
     }),
   });
-}
-
-export function initializeApollo(initialState = null) {
-  const _apolloClient = apolloClient ?? createApolloSsrClient();
-
-  // If your page has Next.js data fetching methods that use Apollo Client, the initial state
-  // gets hydrated here
-  if (initialState) {
-    // Get existing cache, loaded during client side data fetching
-    const existingCache = _apolloClient.extract();
-
-    // Merge the initialState from getStaticProps/getServerSideProps in the existing cache
-    const data = merge(existingCache, initialState, {
-      // combine arrays using object equality (like in sets)
-      arrayMerge: (destinationArray, sourceArray) => [
-        ...sourceArray,
-        ...destinationArray.filter((d) => sourceArray.every((s) => !isEqual(d, s))),
-      ],
-    });
-
-    // Restore the cache with the merged data
-    _apolloClient.cache.restore(data);
-  }
-  // For SSG and SSR always create a new Apollo Client
-  if (typeof window === 'undefined') return _apolloClient;
-  // Create the Apollo Client once in the client
-  if (!apolloClient) apolloClient = _apolloClient;
-
-  return _apolloClient;
 }
 
 export function addApolloState(client: any, pageProps: any) {
@@ -100,8 +70,4 @@ export function addApolloState(client: any, pageProps: any) {
   }
 
   return pageProps;
-}
-
-export function useApollo() {
-  return useMemo(() => initializeApollo(), []);
 }
