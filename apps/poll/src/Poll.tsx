@@ -13,7 +13,7 @@ export const Poll = ({ title, image }: PollType) => (
   <Card>
     <Image isLocked={false} src={image} />
     <Flex paddingY={2} gap={2} direction="column" justifyContent="center" alignItems="center">
-      <Text fontFamily="Inter" fontWeight="800">
+      <Text textAlign="center" noOfLines={1} fontFamily="Inter" fontWeight="800">
         {title}
       </Text>
       <VoteButton>Vote</VoteButton>

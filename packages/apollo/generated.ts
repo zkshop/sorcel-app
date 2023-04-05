@@ -5039,7 +5039,14 @@ export type GetPollsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetPollsQuery = {
   __typename?: 'query_root';
-  polls: Array<{ __typename?: 'poll'; id: any; title: string; voters: any; description: string }>;
+  polls: Array<{
+    __typename?: 'poll';
+    id: any;
+    title: string;
+    voters: any;
+    description: string;
+    image?: string | null;
+  }>;
 };
 
 export type CreatePollMutationVariables = Exact<{
@@ -6139,6 +6146,7 @@ export const GetPollsDocument = gql`
       title
       voters
       description
+      image
     }
   }
 `;
