@@ -48,7 +48,7 @@ export const Choices = () => {
           alignItems="baseline"
           position="relative"
         >
-          <Image locked={isLocked} src="choices_background.png" />
+          <Image isLocked={isLocked} src={data.poll.image || undefined} />
         </Box>
         <Box flex={1} display="flex" justifyContent="center" alignItems="baseline">
           {isLocked ? (
@@ -59,6 +59,7 @@ export const Choices = () => {
             <Flex gap={2} justifyContent="space-between" flexWrap="wrap">
               {data.poll.choices.map((choice) => (
                 <ChoiceCard
+                  key={`choice-${choice.id}`}
                   handleClickOnChoice={handleClickOnChoice}
                   title={choice.value}
                   id={choice.id}

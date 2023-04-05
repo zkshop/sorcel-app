@@ -11,5 +11,6 @@ query getPollById($id: uuid!) {
         title
         voters
         description
+        image
     }
 } 
