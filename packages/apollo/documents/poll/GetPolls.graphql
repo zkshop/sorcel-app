@@ -4,6 +4,7 @@ query GetPolls {
     title
     voters
     description
+    image
   }
 }
 
