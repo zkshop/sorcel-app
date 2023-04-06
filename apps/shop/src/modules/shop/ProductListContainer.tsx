@@ -1,5 +1,5 @@
 import { formatProductData } from '@3shop/pure';
-import type { GateFieldsFragment, GetGates_V2_ByAppIdQuery, GetProductsQuery } from '@3shop/apollo';
+import type { GateFieldsFragment, GetProductsQuery } from '@3shop/apollo';
 import { useGetGates_V2_ByAppIdQuery } from '@3shop/apollo';
 import { useAppSelector } from '@3shop/store';
 

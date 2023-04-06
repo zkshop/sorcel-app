@@ -1,10 +1,10 @@
-import { Box, Button, VStack, Image, Grid, GridItem, useToast } from '@chakra-ui/react';
+import { Box, Button, VStack, Image, Grid, GridItem } from '@chakra-ui/react';
 import { TriangleUpIcon } from '../Icons';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
 import type { Nullable } from '@3shop/types';
-import { classnames, envVars } from '@3shop/config';
+import { classnames } from '@3shop/config';
 import { Text } from '../Text/Text';
-import type { CreateSurveyOrderMutationFn } from '@3shop/apollo';
+
 import { getElementProps } from './getElementProps';
 import { useState } from 'react';
 
@@ -20,8 +20,7 @@ type ProductDetailsProps = {
   poapUrl?: string;
   poapImgUrl?: string;
   isLocked?: boolean;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  createSurveyOrder: CreateSurveyOrderMutationFn;
+
   walletAddress?: string;
   userHasAlreadyOrdered?: boolean;
 };
@@ -41,42 +40,13 @@ export const ProductDetails = ({
   priceReduced,
   collectionName,
   isLocked = false,
-  createSurveyOrder,
-  walletAddress,
-  userHasAlreadyOrdered,
 }: ProductDetailsProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const toast = useToast();
   const shippingLink = `/shipping/${id}`;
-  const BUY_BUTTON_LABEL = 'BUY IT NOW';
 
   const handleClick = async () => {
     setIsLoading(true);
-    if (!userHasAlreadyOrdered) {
-      await createSurveyOrder({
-        variables: {
-          firstname: '-',
-          lastname: '-',
-          address: walletAddress?.toLocaleLowerCase() || '-',
-          email: '-',
-          product_id: id,
-          app_id: envVars.APP_ID,
-        },
-        refetchQueries: ['GetOrdersByAddress'],
-      });
 
-      toast({
-        status: 'success',
-        title: 'Voted successfully',
-        description: 'Thank you for your vote',
-      });
-    } else {
-      toast({
-        status: 'error',
-        title: 'You already voted',
-        description: 'You can only vote once',
-      });
-    }
     setIsLoading(false);
   };
 
@@ -204,7 +174,7 @@ export const ProductDetails = ({
                     mr={1}
                     textTransform="uppercase"
                   >
-                    {BUY_BUTTON_LABEL}
+                    GET IT NOW
                   </Text>
 
                   <Box borderRadius="2xl" display="flex">
