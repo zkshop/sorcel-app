@@ -1,5 +1,6 @@
 import { getPoapImageFromPoapList, getPoapURLFromId } from '@3shop/poap';
 import type { GetGates_V2_ByAppIdQuery, GetProductsQuery } from '@3shop/apollo';
+import { Segment_Type_Enum } from '@3shop/apollo';
 import type { FormatedProductData } from '@3shop/types';
 import { applyDiscount } from './applyDiscount';
 
@@ -29,7 +30,11 @@ export const formatProductData = ({
   const priceReduced = applyDiscount(price, discountToApply || 0);
 
   const poapUrl = getPoapURLFromId(poapId as number);
-  const poapImgUrl = getPoapImageFromPoapList(poapImageList, poapId);
+  const firstPoapId = productGates.filter(
+    (gate) => gate.segments?.[0].type === Segment_Type_Enum.Poap,
+  )?.[0]?.segments?.[0]?.poap_ids?.[0];
+  const poapImgUrl = getPoapImageFromPoapList(poapImageList, Number(firstPoapId));
+
   const isLocked = isGated && !userMatchedProductGate;
 
   const formatedProductData = {

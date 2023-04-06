@@ -40,7 +40,7 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
 
   const formatedProducts = products.map((product) => {
     const productGates = getAssociatedGates(sortedGates, product.id);
-    const userMatchedProductGate = gateVerifier(productGates, userNFTs);
+    const userMatchedProductGate = gateVerifier(productGates, userNFTs, userPoapIds);
 
     return formatProductData({
       product,

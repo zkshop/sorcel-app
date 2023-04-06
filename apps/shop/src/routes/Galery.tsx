@@ -5,7 +5,8 @@ import { ProductListContainer } from '@/modules';
 import { useAppDispatch } from '@3shop/store';
 import { fetchPOAPImageList } from '@3shop/store/slices/poapImageList';
 import { envVars } from '@3shop/config';
-import { useGetProductsQuery } from '@3shop/apollo';
+import { Segment_Type_Enum, useGetProductsQuery } from '@3shop/apollo';
+import { flattenDeep } from 'lodash';
 
 export const Galery = () => {
   const { data, loading, error } = useGetProductsQuery({
@@ -21,9 +22,15 @@ export const Galery = () => {
     if (data) {
       dispatch(
         fetchPOAPImageList(
-          data.products
-            .filter(({ poapId }) => poapId !== 0)
-            .map(({ poapId }) => (poapId as number).toString()),
+          flattenDeep(
+            data.products.map((product) =>
+              product.gate.map((gate) =>
+                gate.segments
+                  .filter((segment) => segment.type === Segment_Type_Enum.Poap)
+                  .map((segment) => segment.poap_ids),
+              ),
+            ),
+          ),
         ),
       );
     }
