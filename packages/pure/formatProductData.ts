@@ -31,7 +31,7 @@ export const formatProductData = ({
 
   const poapUrl = getPoapURLFromId(poapId as number);
   const firstPoapId = productGates.filter(
-    (gate) => gate.segments?.[0].type === Segment_Type_Enum.Poap,
+    (gate) => gate?.segments?.[0]?.type === Segment_Type_Enum.Poap,
   )?.[0]?.segments?.[0]?.poap_ids?.[0];
   const poapImgUrl = getPoapImageFromPoapList(poapImageList, Number(firstPoapId));
 
