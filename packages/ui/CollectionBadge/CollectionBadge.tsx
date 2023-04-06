@@ -8,8 +8,6 @@ type CollectionBadgeProps = {
 };
 
 export const CollectionBadge = ({ collectionName, imgUrl }: CollectionBadgeProps) => {
-  console.log({ imgUrl });
-
   if (imgUrl) {
     return <PoapBadge imgUrl={imgUrl} />;
   }

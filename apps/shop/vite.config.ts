@@ -29,6 +29,7 @@ const envVars = {
   SECRET_STRIPE: undefined,
   SECRET_SUPABASE: undefined,
   SECRET_CENTER: undefined,
+  NODE_DEBUG: false,
 };
 
 const dirname = __dirname;
