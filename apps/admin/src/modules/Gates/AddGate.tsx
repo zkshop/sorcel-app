@@ -46,7 +46,7 @@ export const AddGate = () => {
           }
         : {
             type: Segment_Type_Enum.Poap,
-            poapIds: segment.poapIds,
+            poap_ids: segment.poapIds,
             network: undefined,
             nft_contract_address: undefined,
           },
