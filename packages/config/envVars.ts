@@ -9,8 +9,7 @@ function getWindowEnvVar(name: WindowEnvVar) {
     // @ts-ignore
     return window[`__3SHOP_${name}__`];
   }
-  console.log({ name });
-  console.log(process.env[name]);
+
   return process.env[name];
 }
 

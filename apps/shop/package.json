@@ -16,6 +16,7 @@
     "@3shop/config": "workspace:*",
     "@3shop/domains": "workspace:*",
     "@3shop/messages": "workspace:*",
+    "@3shop/poap": "workspace:*",
     "@3shop/pure": "workspace:*",
     "@3shop/store": "workspace:*",
     "@3shop/ui": "workspace:*",

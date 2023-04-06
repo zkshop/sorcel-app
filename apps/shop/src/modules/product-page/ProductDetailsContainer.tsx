@@ -20,8 +20,8 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   const userNFTs = useAppSelector((state) => state.user.nfts);
   const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
   const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
-  const userMatchedProductGate = gateVerifier(productGates, userNFTs);
   const poapImageList = useAppSelector((state) => state.poapImageList);
+  const userMatchedProductGate = gateVerifier(productGates, userNFTs, poapImageList);
 
   const formatedProducts = formatProductData({
     product,
