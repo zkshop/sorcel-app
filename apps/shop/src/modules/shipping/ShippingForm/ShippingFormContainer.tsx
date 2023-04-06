@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { storeOrder } from '@3shop/store/slices/order';
 import { useDispatch } from 'react-redux';
 import { envVars } from '@3shop/config';
+import { sendOrderConfirmation } from '@3shop/events';
 
 type ShippingFormContainerProps = {
   product: GetProductByIdQuery['product'];
@@ -67,6 +68,15 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
           product_id: id,
           app_id: envVars.APP_ID,
         },
+      });
+
+      sendOrderConfirmation(data.email, {
+        shop_logo_url: product.app?.imgUrl || '',
+        name: data.firstname,
+        product_name: product.name,
+        shop_name: product.app.name,
+        price: 0,
+        img_url: product.image,
       });
 
       return navigate('/success');

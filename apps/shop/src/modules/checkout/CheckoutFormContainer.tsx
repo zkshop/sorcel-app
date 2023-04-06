@@ -1,4 +1,4 @@
-import type { GetProductByIdQuery, Product } from '@3shop/apollo';
+import type { GetProductByIdQuery } from '@3shop/apollo';
 import { useCreateOrderMutation } from '@3shop/apollo';
 import { VStack, Heading, Spinner } from '@3shop/ui';
 import { Elements } from '@stripe/react-stripe-js';
@@ -8,7 +8,7 @@ import { CheckoutForm } from './CheckoutForm/CheckoutForm';
 import { useAppSelector } from '@3shop/store';
 import { Navigate } from 'react-router-dom';
 import { envVars } from '@3shop/config';
-// import { sendOrderConfirmation } from '@3shop/events';
+import { sendOrderConfirmation } from '@3shop/events';
 
 const stripe = getStripeObject();
 
@@ -37,7 +37,7 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
   }, [order, product.app.moneyAccountId, product.id]);
 
   async function handlePaymentSuccess() {
-    if (!order) return;
+    if (!order || !product) return;
 
     await createOrder({
       variables: {
@@ -47,20 +47,19 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
       },
     });
 
-    // sendOrderConfirmation(order.email, {
-    //   shop_logo_url: product.app?.imgUrl || '',
-    //   name: order.firstname,
-    //   product_name: product.name,
-    //   shop_name: product.app.name,
-    //   price: order.amount,
-    //   img_url: product.image,
-    // });
+    sendOrderConfirmation(order.email, {
+      shop_logo_url: product.app?.imgUrl || '',
+      name: order.firstname,
+      product_name: product.name,
+      shop_name: product.app.name,
+      price: order.amount,
+      img_url: product.image,
+    });
   }
 
   if (!order) return <Navigate to="/" />;
 
   return (
-    // @ts-ignore
     <VStack justifyContent="center">
       <Heading as="h2" py={4}>
         Checkout

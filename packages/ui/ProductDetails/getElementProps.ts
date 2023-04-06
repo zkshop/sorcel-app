@@ -25,9 +25,8 @@ const STATES = {
 export const getElementProps = ({
   isLocked,
   shippingLink,
-  onClick,
 }: GetElementPropsType): GetElementPropsReturnType => {
-  const elementState = STATES.LOCKED;
+  const elementState = isLocked ? STATES.LOCKED : STATES.ECOMMERCE;
 
   switch (elementState) {
     case STATES.LOCKED:
@@ -35,14 +34,7 @@ export const getElementProps = ({
         elementType: 'div',
         elementProps: {},
       };
-    case STATES.SURVEY:
-      return {
-        elementType: Button,
-        elementProps: {
-          onClick,
-          style: { cursor: 'pointer' },
-        },
-      };
+
     case STATES.ECOMMERCE:
     default:
       return {

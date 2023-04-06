@@ -1,7 +1,6 @@
 import { ProductDetails } from '@3shop/ui';
 
 import { useGetOrdersByAddressQuery } from '@3shop/apollo';
-import { useCreateSurveyOrderMutation } from '@3shop/apollo';
 import { formatProductData } from '@3shop/pure';
 import { useAppSelector } from '@3shop/store';
 import { gateVerifier } from '../shop/gateVerifier';
@@ -46,9 +45,6 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
     isLocked,
   } = formatedProducts;
 
-  /* SURVEY UTILITY */
-  const { utility } = product;
-  const [createSurveyOrder] = useCreateSurveyOrderMutation();
   const { address: walletAddress } = useAccount();
   const { data: ordersByAddress } = useGetOrdersByAddressQuery({
     variables: { address: walletAddress?.toLocaleLowerCase() as string },
@@ -69,7 +65,6 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
       poapUrl={poapUrl}
       poapImgUrl={poapImgUrl}
       isLocked={isLocked}
-      createSurveyOrder={createSurveyOrder}
       walletAddress={walletAddress}
       userHasAlreadyOrdered={userHasAlreadyOrdered}
     />
