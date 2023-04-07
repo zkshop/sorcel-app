@@ -7,6 +7,7 @@ import { Text } from '../Text/Text';
 
 import { getElementProps } from './getElementProps';
 import { useState } from 'react';
+import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 
 type ProductDetailsProps = {
   id?: string;
@@ -40,6 +41,8 @@ export const ProductDetails = ({
   priceReduced,
   collectionName,
   isLocked = false,
+  poapImgList,
+  userHasAlreadyOrdered,
 }: ProductDetailsProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const shippingLink = `/shipping/${id}`;
@@ -58,8 +61,14 @@ export const ProductDetails = ({
 
   return (
     <Box className={classnames.PRODUCT_DETAILS.CONTAINER} w="full" position="relative">
-      {isLocked && <LockedLayer collectionName={collectionName} size="lg" />}
-
+      {(isLocked || userHasAlreadyOrdered) && (
+        <LockedLayer
+          text={userHasAlreadyOrdered ? 'Already Ordered' : undefined}
+          collectionName={collectionName}
+          size="lg"
+        />
+      )}
+      {poapImgList && <CollectionBadge poapImgList={poapImgList} />}
       <Grid className={classnames.PRODUCT_DETAILS.GRID} templateColumns={templateColumns}>
         <GridItem className={classnames.PRODUCT_DETAILS.GRID_ITEM}>
           <Box className={classnames.PRODUCT_DETAILS.IMG_CONTAINER} mb={{ xs: 2, md: 0 }}>

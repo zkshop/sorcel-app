@@ -4890,6 +4890,32 @@ export type CreateGateV2Mutation = {
   } | null;
 };
 
+export type GetGatesV2ByProductIdQueryVariables = Exact<{
+  productId?: InputMaybe<Scalars['uuid']>;
+}>;
+
+export type GetGatesV2ByProductIdQuery = {
+  __typename?: 'query_root';
+  gate_v2: Array<{
+    __typename?: 'gate_v2';
+    app_id?: any | null;
+    discount?: number | null;
+    exclusive_access: boolean;
+    id: any;
+    name: string;
+    product_id: any;
+    segments: Array<{
+      __typename?: 'segment';
+      type: Segment_Type_Enum;
+      poap_ids: any;
+      nft_contract_address?: string | null;
+      network?: Network_Enum | null;
+      id: any;
+      gate_id?: any | null;
+    }>;
+  }>;
+};
+
 export type GetGates_V2QueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetGates_V2Query = {
@@ -5280,7 +5306,6 @@ export type GetProductByIdQuery = {
     price: number;
     poapId?: number | null;
     isDiscountGated: boolean;
-    utility?: Utility_Enum | null;
     app: {
       __typename?: 'app';
       id: any;
@@ -5812,6 +5837,75 @@ export type CreateGateV2MutationResult = Apollo.MutationResult<CreateGateV2Mutat
 export type CreateGateV2MutationOptions = Apollo.BaseMutationOptions<
   CreateGateV2Mutation,
   CreateGateV2MutationVariables
+>;
+export const GetGatesV2ByProductIdDocument = gql`
+  query GetGatesV2ByProductId($productId: uuid) {
+    gate_v2(where: { product_id: { _eq: $productId } }) {
+      app_id
+      discount
+      exclusive_access
+      id
+      name
+      product_id
+      segments {
+        type
+        poap_ids
+        nft_contract_address
+        network
+        id
+        gate_id
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetGatesV2ByProductIdQuery__
+ *
+ * To run a query within a React component, call `useGetGatesV2ByProductIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetGatesV2ByProductIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetGatesV2ByProductIdQuery({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useGetGatesV2ByProductIdQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetGatesV2ByProductIdQuery,
+    GetGatesV2ByProductIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetGatesV2ByProductIdQuery, GetGatesV2ByProductIdQueryVariables>(
+    GetGatesV2ByProductIdDocument,
+    options,
+  );
+}
+export function useGetGatesV2ByProductIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetGatesV2ByProductIdQuery,
+    GetGatesV2ByProductIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetGatesV2ByProductIdQuery, GetGatesV2ByProductIdQueryVariables>(
+    GetGatesV2ByProductIdDocument,
+    options,
+  );
+}
+export type GetGatesV2ByProductIdQueryHookResult = ReturnType<typeof useGetGatesV2ByProductIdQuery>;
+export type GetGatesV2ByProductIdLazyQueryHookResult = ReturnType<
+  typeof useGetGatesV2ByProductIdLazyQuery
+>;
+export type GetGatesV2ByProductIdQueryResult = Apollo.QueryResult<
+  GetGatesV2ByProductIdQuery,
+  GetGatesV2ByProductIdQueryVariables
 >;
 export const GetGates_V2Document = gql`
   query GetGates_V2 {
@@ -6906,7 +7000,6 @@ export const GetProductByIdDocument = gql`
       price
       poapId
       isDiscountGated
-      utility
       app {
         id
         deliveryTaxesTableName
@@ -6917,7 +7010,6 @@ export const GetProductByIdDocument = gql`
       gate {
         ...GateFields
       }
-      utility
     }
   }
   ${GateFieldsFragmentDoc}

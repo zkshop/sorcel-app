@@ -1,6 +1,6 @@
 import { ProductDetails } from '@3shop/ui';
 
-import { useGetOrdersByAddressQuery } from '@3shop/apollo';
+import { useGetGatesV2ByProductIdQuery, useGetOrdersByAddressQuery } from '@3shop/apollo';
 import { formatProductData } from '@3shop/pure';
 import { useAppSelector } from '@3shop/store';
 import { gateVerifier } from '../shop/gateVerifier';
@@ -12,19 +12,19 @@ type ProductDetailsContainerProps = {
 };
 
 export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProps) => {
+  const { data } = useGetGatesV2ByProductIdQuery({ variables: { productId: product?.id } });
   if (!product) return null;
-
-  const productGates = product.gate?.slice() || [];
+  const productGates = data?.gate_v2;
 
   const userNFTs = useAppSelector((state) => state.user.nfts);
   const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
   const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
-  const userMatchedProductGate = gateVerifier(productGates, userNFTs, poapImageList);
+  const userMatchedProductGate = gateVerifier(productGates || [], userNFTs, userPoapIds);
 
   const formatedProducts = formatProductData({
     product,
-    productGates,
+    productGates: productGates || [],
     userPoapIds,
     userNFTContracts,
     userMatchedProductGate,
@@ -50,7 +50,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
     variables: { address: walletAddress?.toLocaleLowerCase() as string },
   });
   const userOrders = ordersByAddress?.orders || [];
-  const userHasAlreadyOrdered = userOrders.some((order) => order.product_id === id);
+  const userHasAlreadyOrdered = false; //userOrders.some((order) => order.product_id === id);
 
   return (
     <ProductDetails

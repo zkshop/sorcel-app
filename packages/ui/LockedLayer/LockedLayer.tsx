@@ -5,9 +5,10 @@ import { Text } from '../Text/Text';
 type LockedLayerProps = {
   collectionName?: string;
   size?: 'md' | 'lg';
+  text?: string;
 };
 
-export const LockedLayer = ({ size = 'md' }: LockedLayerProps) => (
+export const LockedLayer = ({ size = 'md', text = 'Connect your wallet' }: LockedLayerProps) => (
   <>
     <Box
       className={classnames.LOCKED_LAYER}
@@ -34,7 +35,7 @@ export const LockedLayer = ({ size = 'md' }: LockedLayerProps) => (
         color="white"
         fontSize={size === 'lg' ? '2xl' : 'lg'}
       >
-        Connect your wallet
+        {text}
       </Text>
     </Box>
   </>
