@@ -26,6 +26,7 @@ const envVars = {
   SECRET_PAPER: null,
   SECRET_STRIPE: null,
   SECRET_SUPABASE: null,
+  SECRET_CENTER: null,
 };
 
 const dirname = __dirname;

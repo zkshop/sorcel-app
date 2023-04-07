@@ -1,0 +1,18 @@
+query GetGatesV2ByProductId($productId: uuid) {
+  gate_v2(where: {product_id: {_eq: $productId}}) {
+    app_id
+    discount
+    exclusive_access
+    id
+    name
+    product_id
+    segments {
+      type
+      poap_ids
+      nft_contract_address
+      network
+      id
+      gate_id
+    }
+  }
+}
