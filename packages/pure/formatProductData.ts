@@ -30,10 +30,12 @@ export const formatProductData = ({
   const priceReduced = applyDiscount(price, discountToApply || 0);
 
   const poapUrl = getPoapURLFromId(poapId as number);
-  const firstPoapId = productGates.filter(
+  const poapIds = productGates.filter(
     (gate) => gate?.segments?.[0]?.type === Segment_Type_Enum.Poap,
-  )?.[0]?.segments?.[0]?.poap_ids?.[0];
-  const poapImgUrl = getPoapImageFromPoapList(poapImageList, Number(firstPoapId));
+  )?.[0]?.segments?.[0]?.poap_ids;
+  const poapImgListToDisplay = poapIds?.map((poapId: string) =>
+    getPoapImageFromPoapList(poapImageList, Number(poapId)),
+  );
 
   const isLocked = isGated && !userMatchedProductGate;
 
@@ -42,7 +44,7 @@ export const formatProductData = ({
     discount: userMatchedProductGate?.discount || 0,
     priceReduced,
     poapUrl,
-    poapImgUrl,
+    poapImgList: poapImgListToDisplay,
     isLocked,
   };
 

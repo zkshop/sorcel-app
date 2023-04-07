@@ -16,7 +16,7 @@ export type ProductCardProps = {
   priceReduced?: number;
   collectionName?: string;
   poapUrl?: string;
-  poapImgUrl?: string;
+  poapImgList?: string[];
   isLocked?: boolean;
   isWithHref?: boolean;
 };
@@ -29,7 +29,7 @@ export const ProductCard = ({
   discount,
   priceReduced,
   collectionName,
-  poapImgUrl,
+  poapImgList,
   isLocked = false,
   isWithHref = true,
 }: ProductCardProps) => {
@@ -107,8 +107,8 @@ export const ProductCard = ({
         </HStack>
       </Box>
 
-      {(poapImgUrl || collectionName) && (
-        <CollectionBadge collectionName={collectionName} imgUrl={poapImgUrl} />
+      {(poapImgList || collectionName) && (
+        <CollectionBadge collectionName={collectionName} poapImgList={poapImgList} />
       )}
       {isLocked && <LockedLayer collectionName={collectionName} />}
       {isDiscount && <DiscountTag discount={discount} />}
