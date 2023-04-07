@@ -2,6 +2,7 @@ import { Box, useMediaQuery, Image } from '@chakra-ui/react';
 
 type PoapBadgeProps = {
   imgUrl: string;
+  index?: number;
   href?: string;
 };
 
@@ -11,7 +12,7 @@ const sizeToBoxSize = {
   lg: 100,
 };
 
-export const PoapBadge = ({ imgUrl }: PoapBadgeProps) => {
+export const PoapBadge = ({ imgUrl, index = 0 }: PoapBadgeProps) => {
   // TODO: use UseBreakpointValue hook here
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   const boxSize = sizeToBoxSize[isLargerThan768 ? 'md' : 'sm'];
@@ -22,7 +23,7 @@ export const PoapBadge = ({ imgUrl }: PoapBadgeProps) => {
         zIndex: 2,
         position: 'absolute',
         top: Math.round(-boxSize / 3),
-        right: Math.round(-boxSize / 3),
+        right: Math.round(-boxSize / 3) + index * Math.round(boxSize / 2.5),
         transition: 'width 2s, height 2s, background-color 2s, transform 3s',
       }}
       width={boxSize}

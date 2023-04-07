@@ -18,7 +18,7 @@ type ProductDetailsProps = {
   priceReduced?: number;
   collectionName?: string;
   poapUrl?: string;
-  poapImgUrl?: string;
+  poapImgList?: string[];
   isLocked?: boolean;
 
   walletAddress?: string;

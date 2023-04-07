@@ -41,7 +41,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
     discount,
     collection,
     poapUrl,
-    poapImgUrl,
+    poapImgList,
     isLocked,
   } = formatedProducts;
 
@@ -63,7 +63,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
       priceReduced={priceReduced}
       collectionName={collection}
       poapUrl={poapUrl}
-      poapImgUrl={poapImgUrl}
+      poapImgList={poapImgList}
       isLocked={isLocked}
       walletAddress={walletAddress}
       userHasAlreadyOrdered={userHasAlreadyOrdered}

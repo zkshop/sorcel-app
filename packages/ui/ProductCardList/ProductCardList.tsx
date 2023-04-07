@@ -31,7 +31,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
           priceReduced,
           collection,
           poapUrl,
-          poapImgUrl,
+          poapImgList,
           isLocked,
           isWithHref,
         }) => (
@@ -50,7 +50,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
               priceReduced={priceReduced}
               collectionName={collection}
               poapUrl={poapUrl}
-              poapImgUrl={poapImgUrl}
+              poapImgList={poapImgList}
               isLocked={isLocked}
               isWithHref={isWithHref}
             />
