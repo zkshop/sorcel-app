@@ -10,6 +10,7 @@
     "build:docs": "pnpm build --filter=docs...",
     "build:functions": "pnpm build --filter=functions...",
     "build:poll": "pnpm build --filter=poll...",
+    "build:poll:ci": "pnpm build --filter=poll...",
     "build:shop": "pnpm build --filter=shop...",
     "build:shop:ci": "pnpm build:ci --filter=shop...",
     "dev": "turbo run dev --parallel",
