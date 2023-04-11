@@ -2,6 +2,9 @@ import { Button, Grid, GridItem, Image } from '@3shop/ui';
 import { ConnectWalletButton } from '@3shop/wallet';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
+const ICON_URL =
+  'https://kqjytgxbtetzewipikax.supabase.co/storage/v1/object/public/humandivergence/icon.png';
+
 const BackButton = () => {
   const navigate = useNavigate();
 
@@ -32,7 +35,7 @@ function Layout() {
         paddingX={15}
       >
         <Link to="/">
-          <Image maxWidth={120} src="icon.png" />
+          <Image maxWidth={120} src={ICON_URL} />
         </Link>
         <ConnectWalletButton />
       </GridItem>
