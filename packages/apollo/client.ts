@@ -1,17 +1,12 @@
-import type { NormalizedCacheObject } from '@apollo/client';
 import { ApolloClient, HttpLink, InMemoryCache, from } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
-import merge from 'deepmerge';
 import Cookies from 'js-cookie';
-import isEqual from 'lodash/isEqual';
-import { useMemo } from 'react';
 import { envVars } from '@3shop/config';
+// import nodeFetch from 'node-fetch';
 
 const CUSTOMER_TOKEN_NAME = 'customer-token';
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
-
-let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -25,6 +20,12 @@ const httpLink = new HttpLink({
   uri: envVars.PUBLIC_HASURA_API_URL, // Server URL (must be absolute)
   credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 });
+
+// const backendHttpLink = new HttpLink({
+//   uri: envVars.PUBLIC_HASURA_API_URL, // Server URL (must be absolute)
+//   credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
+//   fetch: nodeFetch as any,
+// });
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
