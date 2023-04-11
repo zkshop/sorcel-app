@@ -23,4 +23,4 @@ const Main = () => (
   </React.StrictMode>
 );
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<Main />);
+ReactDOM.createRoot(document.getElementById('3shop-app') as HTMLElement).render(<Main />);
