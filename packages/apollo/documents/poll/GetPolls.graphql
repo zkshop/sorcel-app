@@ -1,5 +1,5 @@
 query GetPolls {
-  polls: poll {
+  polls: poll(order_by: {created_at: desc}) {
     id
     title
     voters
@@ -7,6 +7,7 @@ query GetPolls {
     image
   }
 }
+
 
 mutation CreatePoll($choices: choice_arr_rel_insert_input, $description: String, $title: String) {
   insert_poll(objects: { choices: $choices, description: $description, title: $title }) {

@@ -5,11 +5,11 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { mainnet, polygon } from 'wagmi/chains';
 
-if (!envVars.SECRET_ALCHEMY) throw new Error('No Secret Key for Alchemy provider');
+// if (!envVars.SECRET_ALCHEMY) throw new Error('No Secret Key for Alchemy provider');
 
 export const { chains, provider } = configureChains(
   [mainnet, polygon],
-  [alchemyProvider({ apiKey: envVars.SECRET_ALCHEMY }), publicProvider()],
+  [alchemyProvider({ apiKey: envVars.SECRET_ALCHEMY || '' }), publicProvider()],
 );
 
 const { connectors } = getDefaultWallets({
