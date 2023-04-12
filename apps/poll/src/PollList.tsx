@@ -18,10 +18,6 @@ const PollListContainer = styled(Flex)`
   justify-content: flex-start;
   flex-wrap: wrap;
   flex-basis: 0;
-
-  @media (min-width: 1024px) {
-    justify-content: space-between;
-  }
 `;
 
 export const PollList = () => {

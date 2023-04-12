@@ -13,7 +13,7 @@ const BackButton = () => {
   }
 
   return (
-    <Button onClick={goBack} background="#383838" position="absolute" left={4} bottom={4}>
+    <Button onClick={goBack} background="#383838" position="fixed" left={4} bottom={4}>
       Back
     </Button>
   );

@@ -1,42 +1,35 @@
-import { Box, Text, Stat, StatLabel, StatNumber, Flex } from '@3shop/ui';
-import { Card } from './Card';
-import type { ChoiceType } from './utils';
-import { VoteButton } from './VoteButton';
+import type { WithChildren } from '@3shop/types';
+import { VStack, styled } from '@3shop/ui';
+import {
+  CHOICE_CARD_BACKGROUND_COLOR,
+  CHOICE_CARD_BORDER_RADIUS,
+  CHOICE_CARD_COLOR,
+} from './constant';
 
-type ChoiceCardType = {
-  title: string;
-  id: string;
-  handleClickOnChoice(choice: ChoiceType): void;
-  votes: number;
-  alreadyVoted: boolean;
-};
+const ChoiceCardContainer = styled(VStack)`
+  background-color: ${CHOICE_CARD_BACKGROUND_COLOR};
+  color: ${CHOICE_CARD_COLOR};
+  border-radius: ${CHOICE_CARD_BORDER_RADIUS};
+  overflow: hidden;
 
-export const ChoiceCard = ({
-  id,
-  title,
-  handleClickOnChoice,
-  votes,
-  alreadyVoted,
-}: ChoiceCardType) => (
-  <Card>
-    <Flex p={15} minW={250} alignItems="center" justifyContent="center" flexDirection="column">
-      <Text textAlign="center">{title}</Text>
-      <Box mt={2}>
-        {alreadyVoted ? (
-          <Stat textAlign="center">
-            <StatLabel>Votes</StatLabel>
-            <StatNumber>{votes}</StatNumber>
-          </Stat>
-        ) : (
-          <VoteButton
-            display="flex"
-            onClick={() => handleClickOnChoice({ count: votes, value: title, id })}
-            justifyContent="space-between"
-          >
-            Vote
-          </VoteButton>
-        )}
-      </Box>
-    </Flex>
-  </Card>
+  // media queries
+  @media (max-width: 1440px) {
+    flex-basis: 16%;
+  }
+
+  @media (max-width: 1024px) {
+    flex-basis: 20%;
+  }
+
+  @media (max-width: 768px) {
+    flex-basis: 25%;
+  }
+
+  @media (max-width: 425px) {
+    flex-basis: 49%;
+  }
+`;
+
+export const ChoiceCard = ({ children }: WithChildren<object>) => (
+  <ChoiceCardContainer>{children}</ChoiceCardContainer>
 );

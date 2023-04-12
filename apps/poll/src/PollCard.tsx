@@ -6,7 +6,7 @@ import {
   CHOICE_CARD_COLOR,
 } from './constant';
 
-export const Card = ({ children }: WithChildren<object>) => (
+export const PollCard = ({ children }: WithChildren<object>) => (
   <VStack
     flex={1}
     backgroundColor={CHOICE_CARD_BACKGROUND_COLOR}
