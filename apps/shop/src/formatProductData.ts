@@ -2,7 +2,7 @@ import { getPoapImageFromPoapList, getPoapURLFromId } from '@3shop/poap';
 import type { GetGates_V2_ByAppIdQuery, GetProductsQuery } from '@3shop/apollo';
 import { Segment_Type_Enum } from '@3shop/apollo';
 import type { FormatedProductData } from '@3shop/types';
-import { applyDiscount } from './applyDiscount';
+import { applyDiscount } from '@3shop/pure/applyDiscount';
 
 type Product = GetProductsQuery['products'][0];
 type ShopGate_v2 = GetGates_V2_ByAppIdQuery['gates'][0];

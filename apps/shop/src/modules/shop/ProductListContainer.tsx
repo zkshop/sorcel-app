@@ -1,8 +1,7 @@
-import { formatProductData } from '@3shop/pure';
 import type { GateFieldsFragment, GetProductsQuery } from '@3shop/apollo';
 import { useGetGates_V2_ByAppIdQuery } from '@3shop/apollo';
 import { useAppSelector } from '@3shop/store';
-
+import { formatProductData } from '../../formatProductData';
 import { gateVerifier } from './gateVerifier';
 import { envVars } from '@3shop/config';
 import { ProductCardList } from '@3shop/ui';

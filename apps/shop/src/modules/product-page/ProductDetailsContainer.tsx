@@ -1,11 +1,11 @@
 import { ProductDetails } from '@3shop/ui';
 
 import { useGetGatesV2ByProductIdQuery, useGetOrdersByAddressQuery } from '@3shop/apollo';
-import { formatProductData } from '@3shop/pure';
 import { useAppSelector } from '@3shop/store';
 import { gateVerifier } from '../shop/gateVerifier';
 import { useAccount } from '@3shop/wallet';
 import type { ProductDetailsType } from '@/routes/Product';
+import { formatProductData } from '@/formatProductData';
 
 type ProductDetailsContainerProps = {
   product: ProductDetailsType;

@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "@3shop/alchemy": "workspace:*",
-    "@3shop/apollo": "workspace:*",
     "@3shop/domains": "workspace:*",
     "@3shop/poap": "workspace:*",
     "@3shop/types": "workspace:*"
