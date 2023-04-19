@@ -35,4 +35,6 @@ const envVars = {
   SECRET_CENTER: process.env.SECRET_CENTER,
 };
 
+console.log(envVars.PUBLIC_STRIPE_PUBLISHABLE_KEY);
+
 export { envVars };
