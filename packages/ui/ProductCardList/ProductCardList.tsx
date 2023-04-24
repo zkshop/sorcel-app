@@ -5,6 +5,7 @@ import { ProductCard } from '../ProductCard/ProductCard';
 
 type ProductCardListProps = {
   products: FormatedProductData[];
+  isWalletConnected?: boolean;
 };
 
 const templateColumns = {
@@ -13,7 +14,7 @@ const templateColumns = {
   lg: 'repeat(4, 1fr)',
 };
 
-export const ProductCardList = ({ products }: ProductCardListProps) => (
+export const ProductCardList = ({ products, isWalletConnected }: ProductCardListProps) => (
   <Box className={classnames.PRODUCT_CARD_LIST.CONTAINER}>
     <Grid
       className={classnames.PRODUCT_CARD_LIST.GRID}
@@ -53,6 +54,7 @@ export const ProductCardList = ({ products }: ProductCardListProps) => (
               poapImgList={poapImgList}
               isLocked={isLocked}
               isWithHref={isWithHref}
+              isWalletConnected={isWalletConnected}
             />
           </GridItem>
         ),
