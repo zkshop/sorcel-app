@@ -4,16 +4,17 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { ShippingForm } from './ShippingForm';
 import type { ShippingFormValues } from './types';
 import omit from 'lodash/omit';
-import type { GetProductByIdQuery, Product } from '@3shop/apollo';
+import type { Gate_V2, GetProductByIdQuery } from '@3shop/apollo';
 import { useGetDeliveryZoneByAppIdQuery, useCreateOrderMutation } from '@3shop/apollo';
 import { applyDiscount } from '@3shop/pure';
-import { useIsAnHolder } from '@/hooks/useIsAnHolder';
+import { useFilteredGates } from '@/hooks/useFilteredGates';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SHIPPING_FORM_SCHEMA } from '@/schemas';
 import { useNavigate } from 'react-router-dom';
 import { storeOrder } from '@3shop/store/slices/order';
 import { useDispatch } from 'react-redux';
 import { envVars } from '@3shop/config';
+import { get } from 'lodash';
 // import { sendOrderConfirmation } from '@3shop/events';
 
 type ShippingFormContainerProps = {
@@ -22,7 +23,9 @@ type ShippingFormContainerProps = {
 
 export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) => {
   if (!product) return null;
-  const { id, price, name, image, discount, curation, poapId } = product;
+  const { id, price, name, image, gate } = product;
+
+  const discount = get(gate, '[0].discount', 0);
 
   const { data: deliveryZoneData } = useGetDeliveryZoneByAppIdQuery({
     variables: {
@@ -50,12 +53,13 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
   const fees = deliveryZoneData?.delivery_zone.find((zone) => zone.name === country)?.fees;
 
   function showDiscount() {
-    if (!curation && !poapId) return true;
-    if (isAnHolder) return true;
+    if (activatedGates.length > 0) {
+      return activatedGates[0].discount && activatedGates[0].discount > 0;
+    }
     return false;
   }
 
-  const isAnHolder = useIsAnHolder(product as Product);
+  const activatedGates = useFilteredGates(product.gate as Gate_V2[]);
   const amount = applyDiscount(price + (fees || 0), showDiscount() ? Number(discount) : undefined);
 
   const onSubmit = async (data: ShippingFormValues) => {
