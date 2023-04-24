@@ -19,6 +19,7 @@ export type ProductCardProps = {
   poapImgList?: string[];
   isLocked?: boolean;
   isWithHref?: boolean;
+  isWalletConnected?: boolean;
 };
 
 export const ProductCard = ({
@@ -32,6 +33,7 @@ export const ProductCard = ({
   poapImgList,
   isLocked = false,
   isWithHref = true,
+  isWalletConnected = false,
 }: ProductCardProps) => {
   const to = `product/${id}`;
   const additionalProps =
@@ -101,7 +103,7 @@ export const ProductCard = ({
               color="red"
               marginLeft="0 !important"
             >
-              {`${priceReduced}€`}
+              {`${priceReduced} €`}
             </Text>
           )}
         </HStack>
@@ -110,7 +112,14 @@ export const ProductCard = ({
       {(poapImgList || collectionName) && (
         <CollectionBadge collectionName={collectionName} poapImgList={poapImgList} />
       )}
-      {isLocked && <LockedLayer collectionName={collectionName} />}
+      {isLocked && (
+        <LockedLayer
+          text={
+            isWalletConnected ? "You don't have the right digital assets" : 'Connect your wallet'
+          }
+          collectionName={collectionName}
+        />
+      )}
       {isDiscount && <DiscountTag discount={discount} />}
     </StyledProductCard>
   );
