@@ -4,25 +4,9 @@ mutation CreateProduct(
   $name: String!
   $description: String!
   $image: String!
-  $discount: Int
-  $curation: String
-  $collection: String
-  $poapId: Int
-  $isDiscountGated: Boolean
 ) {
   insert_product_one(
-    object: {
-      app_id: $appId
-      discount: $discount
-      image: $image
-      name: $name
-      description: $description
-      price: $price
-      curation: $curation
-      collection: $collection
-      poapId: $poapId
-      isDiscountGated: $isDiscountGated
-    }
+    object: { app_id: $appId, image: $image, name: $name, description: $description, price: $price }
   ) {
     app_id
     collection
@@ -38,29 +22,9 @@ mutation CreateProduct(
   }
 }
 
-mutation CreateAdminProduct(
-  $price: Int!
-  $name: String!
-  $description: String!
-  $image: String!
-  $discount: Int
-  $curation: String
-  $collection: String
-  $poapId: Int
-  $isDiscountGated: Boolean
-) {
+mutation CreateAdminProduct($price: Int!, $name: String!, $description: String!, $image: String!) {
   insert_product_one(
-    object: {
-      discount: $discount
-      image: $image
-      name: $name
-      description: $description
-      price: $price
-      curation: $curation
-      collection: $collection
-      poapId: $poapId
-      isDiscountGated: $isDiscountGated
-    }
+    object: { image: $image, name: $name, description: $description, price: $price }
   ) {
     app_id
     collection

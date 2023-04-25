@@ -5208,11 +5208,6 @@ export type CreateProductMutationVariables = Exact<{
   name: Scalars['String'];
   description: Scalars['String'];
   image: Scalars['String'];
-  discount?: InputMaybe<Scalars['Int']>;
-  curation?: InputMaybe<Scalars['String']>;
-  collection?: InputMaybe<Scalars['String']>;
-  poapId?: InputMaybe<Scalars['Int']>;
-  isDiscountGated?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 export type CreateProductMutation = {
@@ -5238,11 +5233,6 @@ export type CreateAdminProductMutationVariables = Exact<{
   name: Scalars['String'];
   description: Scalars['String'];
   image: Scalars['String'];
-  discount?: InputMaybe<Scalars['Int']>;
-  curation?: InputMaybe<Scalars['String']>;
-  collection?: InputMaybe<Scalars['String']>;
-  poapId?: InputMaybe<Scalars['Int']>;
-  isDiscountGated?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 export type CreateAdminProductMutation = {
@@ -6720,24 +6710,14 @@ export const CreateProductDocument = gql`
     $name: String!
     $description: String!
     $image: String!
-    $discount: Int
-    $curation: String
-    $collection: String
-    $poapId: Int
-    $isDiscountGated: Boolean
   ) {
     insert_product_one(
       object: {
         app_id: $appId
-        discount: $discount
         image: $image
         name: $name
         description: $description
         price: $price
-        curation: $curation
-        collection: $collection
-        poapId: $poapId
-        isDiscountGated: $isDiscountGated
       }
     ) {
       app_id
@@ -6777,11 +6757,6 @@ export type CreateProductMutationFn = Apollo.MutationFunction<
  *      name: // value for 'name'
  *      description: // value for 'description'
  *      image: // value for 'image'
- *      discount: // value for 'discount'
- *      curation: // value for 'curation'
- *      collection: // value for 'collection'
- *      poapId: // value for 'poapId'
- *      isDiscountGated: // value for 'isDiscountGated'
  *   },
  * });
  */
@@ -6806,24 +6781,9 @@ export const CreateAdminProductDocument = gql`
     $name: String!
     $description: String!
     $image: String!
-    $discount: Int
-    $curation: String
-    $collection: String
-    $poapId: Int
-    $isDiscountGated: Boolean
   ) {
     insert_product_one(
-      object: {
-        discount: $discount
-        image: $image
-        name: $name
-        description: $description
-        price: $price
-        curation: $curation
-        collection: $collection
-        poapId: $poapId
-        isDiscountGated: $isDiscountGated
-      }
+      object: { image: $image, name: $name, description: $description, price: $price }
     ) {
       app_id
       collection
@@ -6861,11 +6821,6 @@ export type CreateAdminProductMutationFn = Apollo.MutationFunction<
  *      name: // value for 'name'
  *      description: // value for 'description'
  *      image: // value for 'image'
- *      discount: // value for 'discount'
- *      curation: // value for 'curation'
- *      collection: // value for 'collection'
- *      poapId: // value for 'poapId'
- *      isDiscountGated: // value for 'isDiscountGated'
  *   },
  * });
  */
