@@ -40,7 +40,6 @@ test('Add a product to the shop', async ({ context, page }) => {
   await page.getByPlaceholder('Description').press('Tab');
   await page.getByPlaceholder('Price').fill('50');
   await page.getByPlaceholder('Price').press('Tab');
-  await page.getByPlaceholder('Discount for holders').fill('10');
 
   await page
     .locator('input[type="file"]')
@@ -80,7 +79,6 @@ test('Edit product from the shop', async ({ page, context }) => {
   await page.getByPlaceholder('Description').press('Tab');
   await page.getByPlaceholder('Price').fill('100');
   await page.getByPlaceholder('Price').press('Tab');
-  await page.getByPlaceholder('Discount for holders').fill('20');
 
   await page
     .locator('input[type="file"]')
