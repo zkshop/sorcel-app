@@ -98,7 +98,7 @@ export const Choices = () => {
         </Box>
         <Box marginTop={8} flex={1} display="flex" justifyContent="center" alignItems="center">
           {isLocked ? (
-            <Heading textAlign="center" fontSize="x-large">
+            <Heading color="black" textAlign="center" fontSize="x-large">
               Connect your wallet with Human Divergence NFT to vote
             </Heading>
           ) : (

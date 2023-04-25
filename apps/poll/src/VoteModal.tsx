@@ -30,7 +30,7 @@ export function VoteModal({ isOpen, onClose, choice, handleVote, loading }: Vote
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent color="black">
         <ModalHeader>Vote for {choice?.value}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
