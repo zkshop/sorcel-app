@@ -32,12 +32,11 @@ const EditProductContainer = ({ productId }: EditProductPageProps) => {
   if (!productData?.product || !gateData || productError) return <>Error</>;
 
   const product = productData?.product;
-  const gates = gateData?.gates;
 
   return (
     <>
       <BackButton href="/app" />
-      <EditProductFormContainer gates={gates} product={product as Product} />
+      <EditProductFormContainer product={product as Product} />
     </>
   );
 };
