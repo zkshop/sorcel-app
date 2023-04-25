@@ -2682,7 +2682,7 @@ export type Poll = {
   choices: Array<Choice>;
   /** An aggregate relationship */
   choices_aggregate: Choice_Aggregate;
-  created_at: Scalars['timestamptz'];
+  created_at?: Maybe<Scalars['timestamptz']>;
   description: Scalars['String'];
   gate?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
@@ -5277,15 +5277,10 @@ export type DeleteProductMutation = {
 
 export type EditProductMutationVariables = Exact<{
   id: Scalars['uuid'];
-  collection: Scalars['String'];
-  curation?: InputMaybe<Scalars['String']>;
-  discount?: InputMaybe<Scalars['Int']>;
   image: Scalars['String'];
   name?: InputMaybe<Scalars['String']>;
   description: Scalars['String'];
   price: Scalars['Int'];
-  poapId?: InputMaybe<Scalars['Int']>;
-  isDiscountGated?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 export type EditProductMutation = {
@@ -6581,7 +6576,7 @@ export type GetPollByIdQueryResult = Apollo.QueryResult<
 >;
 export const GetPollsDocument = gql`
   query GetPolls {
-    polls: poll {
+    polls: poll(order_by: { created_at: desc }) {
       id
       title
       voters
@@ -6941,28 +6936,13 @@ export type DeleteProductMutationOptions = Apollo.BaseMutationOptions<
 export const EditProductDocument = gql`
   mutation EditProduct(
     $id: uuid!
-    $collection: String!
-    $curation: String
-    $discount: Int
     $image: String!
     $name: String
     $description: String!
     $price: Int!
-    $poapId: Int
-    $isDiscountGated: Boolean
   ) {
     update_product(
-      _set: {
-        collection: $collection
-        curation: $curation
-        discount: $discount
-        image: $image
-        name: $name
-        description: $description
-        price: $price
-        poapId: $poapId
-        isDiscountGated: $isDiscountGated
-      }
+      _set: { image: $image, name: $name, description: $description, price: $price }
       where: { id: { _eq: $id } }
     ) {
       returning {
@@ -6999,15 +6979,10 @@ export type EditProductMutationFn = Apollo.MutationFunction<
  * const [editProductMutation, { data, loading, error }] = useEditProductMutation({
  *   variables: {
  *      id: // value for 'id'
- *      collection: // value for 'collection'
- *      curation: // value for 'curation'
- *      discount: // value for 'discount'
  *      image: // value for 'image'
  *      name: // value for 'name'
  *      description: // value for 'description'
  *      price: // value for 'price'
- *      poapId: // value for 'poapId'
- *      isDiscountGated: // value for 'isDiscountGated'
  *   },
  * });
  */

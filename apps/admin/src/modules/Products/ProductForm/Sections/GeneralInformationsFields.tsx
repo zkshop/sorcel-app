@@ -5,8 +5,6 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
-  Checkbox,
-  HStack,
   FormErrorMessage,
   Section,
   ChatRightTextIcon,
@@ -64,28 +62,6 @@ export const GeneralInformationsFields = () => {
         </NumberInput>
 
         <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
-      </FormControl>
-
-      {/* Discount */}
-      <FormControl isInvalid={Boolean(errors.discount)}>
-        <FormLabel mb={1}>Discount (in %)</FormLabel>
-
-        <NumberInput min={0} max={100}>
-          <NumberInputField placeholder="Discount for holders" {...register('discount')} />
-        </NumberInput>
-
-        <FormErrorMessage>{errors.discount?.message}</FormErrorMessage>
-      </FormControl>
-
-      {/* isDiscountGated */}
-      <FormControl isInvalid={Boolean(errors.isDiscountGated)}>
-        <HStack>
-          <Checkbox {...register('isDiscountGated')} />
-
-          <FormLabel>Enable discount only for holders</FormLabel>
-        </HStack>
-
-        <FormErrorMessage>{errors.isDiscountGated?.message}</FormErrorMessage>
       </FormControl>
     </Section>
   );

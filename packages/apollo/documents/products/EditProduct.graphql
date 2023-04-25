@@ -1,26 +1,16 @@
 mutation EditProduct(
   $id: uuid!
-  $collection: String!
-  $curation: String
-  $discount: Int
   $image: String!
   $name: String
   $description: String!
   $price: Int!
-  $poapId: Int
-  $isDiscountGated: Boolean
 ) {
   update_product(
     _set: {
-      collection: $collection
-      curation: $curation
-      discount: $discount
       image: $image
       name: $name
       description: $description
       price: $price
-      poapId: $poapId
-      isDiscountGated: $isDiscountGated
     }
     where: { id: { _eq: $id } }
   ) {

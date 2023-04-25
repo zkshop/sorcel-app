@@ -1,9 +1,8 @@
 import { MainLayout } from '@3shop/ui';
 
 import { ProductFormHeader } from './ProductFormHeader';
-import { GeneralInformationsFields, MediaFields, OnChainDataFields } from './Sections';
+import { GeneralInformationsFields, MediaFields } from './Sections';
 import type { AddProductFormValues } from './types';
-import { GateSection } from '../GateForm';
 import type { Gate } from '@3shop/apollo';
 
 type BaseProductFormProps = {
@@ -14,10 +13,9 @@ type BaseProductFormProps = {
   isDisabled: boolean;
 };
 
-type AddProductFormProps = { onOpen?: undefined; gates?: undefined } & BaseProductFormProps;
+type AddProductFormProps = { onOpen?: undefined } & BaseProductFormProps;
 type EditProductFormProps = {
   onOpen(): void;
-  gates: Gate[];
 } & BaseProductFormProps;
 
 export const ProductForm = ({
@@ -26,7 +24,6 @@ export const ProductForm = ({
   onOpen,
   isLoading,
   isDisabled,
-  gates,
 }: EditProductFormProps | AddProductFormProps) => (
   <MainLayout>
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -35,9 +32,6 @@ export const ProductForm = ({
       <GeneralInformationsFields />
 
       <MediaFields />
-
-      <OnChainDataFields />
     </form>
-    {onOpen && <GateSection gates={gates} />}
   </MainLayout>
 );

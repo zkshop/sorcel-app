@@ -5,12 +5,7 @@ import { DeleteProductModal } from './DeleteProductModal';
 import { ProductForm } from './ProductForm';
 import type { EditProductFormValues } from './types';
 
-import type {
-  EditProductMutationVariables,
-  Gate,
-  GetProductByIdQuery,
-  Product,
-} from '@3shop/apollo';
+import type { EditProductMutationVariables, Gate, GetProductByIdQuery } from '@3shop/apollo';
 import { useDeleteProductMutation, useEditProductMutation } from '@3shop/apollo';
 import {
   ERROR_MESSAGE,
@@ -27,19 +22,16 @@ import { useNavigate } from 'react-router-dom';
 
 type EditProductFormContainerProps = {
   product: GetProductByIdQuery['product'];
-  gates: Gate[];
 };
 
 const storage = StorageService(ImageStorageClient());
 
-export const EditProductFormContainer = ({ product, gates }: EditProductFormContainerProps) => {
+export const EditProductFormContainer = ({ product }: EditProductFormContainerProps) => {
   const [storageActionLoading, setStorageActionLoading] = useState(false);
   const methods = useForm<EditProductFormValues>({
     defaultValues: {
       ...product,
       price: product?.price.toString(),
-      discount: product?.discount?.toString(),
-      poapId: product?.poapId?.toString(),
       image: product?.image,
     },
     resolver: yupResolver(ADD_PRODUCT_FORM_SCHEMA),
@@ -87,8 +79,6 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
       image: data.image as string,
       id: product.id,
       price: Number(data.price),
-      discount: Number(data.discount),
-      poapId: Number(data.poapId),
     };
 
     try {
@@ -122,7 +112,6 @@ export const EditProductFormContainer = ({ product, gates }: EditProductFormCont
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         isLoading={storageActionLoading || isEditLoading}
-        gates={gates}
       />
 
       <DeleteProductModal

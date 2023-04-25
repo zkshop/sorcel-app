@@ -45,8 +45,6 @@ export const AddProductFormContainer = () => {
           ...data,
           image: uploadUrl,
           price: Number(data.price),
-          discount: Number(data.discount),
-          poapId: Number(data.poapId),
         },
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),
       });
