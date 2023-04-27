@@ -1,4 +1,3 @@
-import type { Nullable } from '@3shop/types';
 import { Tr, Td, Image } from '@3shop/ui';
 
 type ProductListItemProps = {
@@ -6,9 +5,7 @@ type ProductListItemProps = {
   image: string;
   name: string;
   price: number;
-  discount?: Nullable<number>;
-  collection?: Nullable<string>;
-  collectionAddress?: Nullable<string>;
+
   goToProduct(): void;
 };
 
@@ -16,9 +13,7 @@ export const ProductListItem = ({
   image,
   name,
   price,
-  discount,
-  collection,
-  collectionAddress,
+
   goToProduct,
 }: ProductListItemProps) => (
   <Tr
@@ -35,11 +30,5 @@ export const ProductListItem = ({
     </Td>
     <Td>{name}</Td>
     <Td>{price}</Td>
-    <Td>{discount}</Td>
-    <Td>
-      {collectionAddress?.slice(0, 3)}...
-      {collectionAddress?.slice(-3)}
-    </Td>
-    <Td>{collection}</Td>
   </Tr>
 );

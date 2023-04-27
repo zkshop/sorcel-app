@@ -18,7 +18,6 @@ type ProductDetailsProps = {
   discount?: Nullable<number>;
   priceReduced?: number;
   collectionName?: string;
-  poapUrl?: string;
   poapImgList?: string[];
   isLocked?: boolean;
 

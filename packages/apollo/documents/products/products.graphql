@@ -1,16 +1,11 @@
 query GetProducts($appId: uuid!) {
   products: product(where: { app_id: { _eq: $appId } }) {
     app_id
-    collection
-    curation
-    discount
     id
     image
     name
     description
     price
-    poapId
-    isDiscountGated
     gate {
       ...GateFields
     }
@@ -20,15 +15,10 @@ query GetProducts($appId: uuid!) {
 query GetAdminProducts {
   products: product {
     app_id
-    collection
-    curation
-    discount
     id
     image
     name
     description
     price
-    poapId
-    isDiscountGated
   }
 }

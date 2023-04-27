@@ -1,7 +1,5 @@
-import type { Utility_Enum } from '@3shop/apollo';
 import type { ElementType } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '../Button/Button';
 
 type GetElementPropsType = {
   isLocked: boolean;

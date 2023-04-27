@@ -15,16 +15,11 @@ mutation EditProduct(
     where: { id: { _eq: $id } }
   ) {
     returning {
-      collection
-      curation
-      discount
       id
       image
       name
       description
       price
-      poapId
-      isDiscountGated
     }
   }
 }
