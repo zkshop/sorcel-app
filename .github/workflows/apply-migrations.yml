@@ -12,11 +12,15 @@ jobs:
     environment: ${{ github.event.pull_request.base.ref == 'prod' && 'production' || 'staging' }}
 
     steps:
-      - name: Télécharger Hasura CLI
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Download Hasura CLI
         run: curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
 
-      - name: Appliquer les migrations
-        env:
-          HASURA_ENDPOINT: ${{ secrets.HASURA_ENDPOINT }}
-          HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
-        run: hasura migrate apply --endpoint $HASURA_ENDPOINT --admin-secret $HASURA_ADMIN_SECRET
+      - name: Apply migrations
+        working-directory: apps/api
+        run: hasura migrate apply --endpoint ${{ secrets.HASURA_ENDPOINT }} --admin-secret ${{ secrets.HASURA_ADMIN_SECRET }} --database-name dev-3shop
