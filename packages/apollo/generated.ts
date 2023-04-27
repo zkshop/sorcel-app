@@ -2938,22 +2938,15 @@ export type Product = {
   /** An object relationship */
   app: App;
   app_id: Scalars['uuid'];
-  collection: Scalars['String'];
-  curation?: Maybe<Scalars['String']>;
   description: Scalars['String'];
-  discount?: Maybe<Scalars['Int']>;
   /** An array relationship */
   gate: Array<Gate_V2>;
   /** An aggregate relationship */
   gate_aggregate: Gate_V2_Aggregate;
   id: Scalars['uuid'];
   image: Scalars['String'];
-  isDiscountGated: Scalars['Boolean'];
   name: Scalars['String'];
-  poapId?: Maybe<Scalars['Int']>;
   price: Scalars['Int'];
-  utility?: Maybe<Utility_Enum>;
-  webhookUrl?: Maybe<Scalars['String']>;
 };
 
 /** columns and relationships of "product" */
@@ -3006,8 +2999,6 @@ export type Product_Aggregate_FieldsCountArgs = {
 /** aggregate avg on columns */
 export type Product_Avg_Fields = {
   __typename?: 'product_avg_fields';
-  discount?: Maybe<Scalars['Float']>;
-  poapId?: Maybe<Scalars['Float']>;
   price?: Maybe<Scalars['Float']>;
 };
 
@@ -3018,20 +3009,13 @@ export type Product_Bool_Exp = {
   _or?: InputMaybe<Array<Product_Bool_Exp>>;
   app?: InputMaybe<App_Bool_Exp>;
   app_id?: InputMaybe<Uuid_Comparison_Exp>;
-  collection?: InputMaybe<String_Comparison_Exp>;
-  curation?: InputMaybe<String_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
-  discount?: InputMaybe<Int_Comparison_Exp>;
   gate?: InputMaybe<Gate_V2_Bool_Exp>;
   gate_aggregate?: InputMaybe<Gate_V2_Aggregate_Bool_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<String_Comparison_Exp>;
-  isDiscountGated?: InputMaybe<Boolean_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
-  poapId?: InputMaybe<Int_Comparison_Exp>;
   price?: InputMaybe<Int_Comparison_Exp>;
-  utility?: InputMaybe<Utility_Enum_Comparison_Exp>;
-  webhookUrl?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "product" */
@@ -3042,8 +3026,6 @@ export enum Product_Constraint {
 
 /** input type for incrementing numeric columns in table "product" */
 export type Product_Inc_Input = {
-  discount?: InputMaybe<Scalars['Int']>;
-  poapId?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
 };
 
@@ -3051,51 +3033,34 @@ export type Product_Inc_Input = {
 export type Product_Insert_Input = {
   app?: InputMaybe<App_Obj_Rel_Insert_Input>;
   app_id?: InputMaybe<Scalars['uuid']>;
-  collection?: InputMaybe<Scalars['String']>;
-  curation?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
-  discount?: InputMaybe<Scalars['Int']>;
   gate?: InputMaybe<Gate_V2_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['String']>;
-  isDiscountGated?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
-  poapId?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
-  utility?: InputMaybe<Utility_Enum>;
-  webhookUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
 export type Product_Max_Fields = {
   __typename?: 'product_max_fields';
   app_id?: Maybe<Scalars['uuid']>;
-  collection?: Maybe<Scalars['String']>;
-  curation?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  discount?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  poapId?: Maybe<Scalars['Int']>;
   price?: Maybe<Scalars['Int']>;
-  webhookUrl?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
 export type Product_Min_Fields = {
   __typename?: 'product_min_fields';
   app_id?: Maybe<Scalars['uuid']>;
-  collection?: Maybe<Scalars['String']>;
-  curation?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  discount?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  poapId?: Maybe<Scalars['Int']>;
   price?: Maybe<Scalars['Int']>;
-  webhookUrl?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "product" */
@@ -3125,19 +3090,12 @@ export type Product_On_Conflict = {
 export type Product_Order_By = {
   app?: InputMaybe<App_Order_By>;
   app_id?: InputMaybe<Order_By>;
-  collection?: InputMaybe<Order_By>;
-  curation?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
-  discount?: InputMaybe<Order_By>;
   gate_aggregate?: InputMaybe<Gate_V2_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
-  isDiscountGated?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
-  poapId?: InputMaybe<Order_By>;
   price?: InputMaybe<Order_By>;
-  utility?: InputMaybe<Order_By>;
-  webhookUrl?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: product */
@@ -3150,69 +3108,42 @@ export enum Product_Select_Column {
   /** column name */
   AppId = 'app_id',
   /** column name */
-  Collection = 'collection',
-  /** column name */
-  Curation = 'curation',
-  /** column name */
   Description = 'description',
-  /** column name */
-  Discount = 'discount',
   /** column name */
   Id = 'id',
   /** column name */
   Image = 'image',
   /** column name */
-  IsDiscountGated = 'isDiscountGated',
-  /** column name */
   Name = 'name',
   /** column name */
-  PoapId = 'poapId',
-  /** column name */
   Price = 'price',
-  /** column name */
-  Utility = 'utility',
-  /** column name */
-  WebhookUrl = 'webhookUrl',
 }
 
 /** input type for updating data in table "product" */
 export type Product_Set_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
-  collection?: InputMaybe<Scalars['String']>;
-  curation?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
-  discount?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['String']>;
-  isDiscountGated?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
-  poapId?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
-  utility?: InputMaybe<Utility_Enum>;
-  webhookUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
 export type Product_Stddev_Fields = {
   __typename?: 'product_stddev_fields';
-  discount?: Maybe<Scalars['Float']>;
-  poapId?: Maybe<Scalars['Float']>;
   price?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Product_Stddev_Pop_Fields = {
   __typename?: 'product_stddev_pop_fields';
-  discount?: Maybe<Scalars['Float']>;
-  poapId?: Maybe<Scalars['Float']>;
   price?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Product_Stddev_Samp_Fields = {
   __typename?: 'product_stddev_samp_fields';
-  discount?: Maybe<Scalars['Float']>;
-  poapId?: Maybe<Scalars['Float']>;
   price?: Maybe<Scalars['Float']>;
 };
 
@@ -3227,25 +3158,16 @@ export type Product_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Product_Stream_Cursor_Value_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
-  collection?: InputMaybe<Scalars['String']>;
-  curation?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
-  discount?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['String']>;
-  isDiscountGated?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
-  poapId?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
-  utility?: InputMaybe<Utility_Enum>;
-  webhookUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate sum on columns */
 export type Product_Sum_Fields = {
   __typename?: 'product_sum_fields';
-  discount?: Maybe<Scalars['Int']>;
-  poapId?: Maybe<Scalars['Int']>;
   price?: Maybe<Scalars['Int']>;
 };
 
@@ -3254,29 +3176,15 @@ export enum Product_Update_Column {
   /** column name */
   AppId = 'app_id',
   /** column name */
-  Collection = 'collection',
-  /** column name */
-  Curation = 'curation',
-  /** column name */
   Description = 'description',
-  /** column name */
-  Discount = 'discount',
   /** column name */
   Id = 'id',
   /** column name */
   Image = 'image',
   /** column name */
-  IsDiscountGated = 'isDiscountGated',
-  /** column name */
   Name = 'name',
   /** column name */
-  PoapId = 'poapId',
-  /** column name */
   Price = 'price',
-  /** column name */
-  Utility = 'utility',
-  /** column name */
-  WebhookUrl = 'webhookUrl',
 }
 
 export type Product_Updates = {
@@ -3291,24 +3199,18 @@ export type Product_Updates = {
 /** aggregate var_pop on columns */
 export type Product_Var_Pop_Fields = {
   __typename?: 'product_var_pop_fields';
-  discount?: Maybe<Scalars['Float']>;
-  poapId?: Maybe<Scalars['Float']>;
   price?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
 export type Product_Var_Samp_Fields = {
   __typename?: 'product_var_samp_fields';
-  discount?: Maybe<Scalars['Float']>;
-  poapId?: Maybe<Scalars['Float']>;
   price?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
 export type Product_Variance_Fields = {
   __typename?: 'product_variance_fields';
-  discount?: Maybe<Scalars['Float']>;
-  poapId?: Maybe<Scalars['Float']>;
   price?: Maybe<Scalars['Float']>;
 };
 
@@ -4702,21 +4604,6 @@ export enum Utility_Constraint {
   UtilityPkey = 'utility_pkey',
 }
 
-export enum Utility_Enum {
-  Ecommerce = 'ECOMMERCE',
-  EmailModal = 'EMAIL_MODAL',
-  ExternalLink = 'EXTERNAL_LINK',
-}
-
-/** Boolean expression to compare columns of type "utility_enum". All fields are combined with logical 'AND'. */
-export type Utility_Enum_Comparison_Exp = {
-  _eq?: InputMaybe<Utility_Enum>;
-  _in?: InputMaybe<Array<Utility_Enum>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _neq?: InputMaybe<Utility_Enum>;
-  _nin?: InputMaybe<Array<Utility_Enum>>;
-};
-
 /** input type for inserting data into table "utility" */
 export type Utility_Insert_Input = {
   value?: InputMaybe<Scalars['String']>;
@@ -5215,16 +5102,11 @@ export type CreateProductMutation = {
   insert_product_one?: {
     __typename?: 'product';
     app_id: any;
-    collection: string;
-    curation?: string | null;
-    discount?: number | null;
     id: any;
     image: string;
     name: string;
     description: string;
     price: number;
-    poapId?: number | null;
-    isDiscountGated: boolean;
   } | null;
 };
 
@@ -5240,16 +5122,11 @@ export type CreateAdminProductMutation = {
   insert_product_one?: {
     __typename?: 'product';
     app_id: any;
-    collection: string;
-    curation?: string | null;
-    discount?: number | null;
     id: any;
     image: string;
     name: string;
     description: string;
     price: number;
-    poapId?: number | null;
-    isDiscountGated: boolean;
   } | null;
 };
 
@@ -5279,16 +5156,11 @@ export type EditProductMutation = {
     __typename?: 'product_mutation_response';
     returning: Array<{
       __typename?: 'product';
-      collection: string;
-      curation?: string | null;
-      discount?: number | null;
       id: any;
       image: string;
       name: string;
       description: string;
       price: number;
-      poapId?: number | null;
-      isDiscountGated: boolean;
     }>;
   } | null;
 };
@@ -5321,16 +5193,11 @@ export type GetProductByIdQuery = {
   product?: {
     __typename?: 'product';
     app_id: any;
-    collection: string;
-    curation?: string | null;
-    discount?: number | null;
     id: any;
     image: string;
     name: string;
     description: string;
     price: number;
-    poapId?: number | null;
-    isDiscountGated: boolean;
     app: {
       __typename?: 'app';
       id: any;
@@ -5369,16 +5236,11 @@ export type GetProductsQuery = {
   products: Array<{
     __typename?: 'product';
     app_id: any;
-    collection: string;
-    curation?: string | null;
-    discount?: number | null;
     id: any;
     image: string;
     name: string;
     description: string;
     price: number;
-    poapId?: number | null;
-    isDiscountGated: boolean;
     gate: Array<{
       __typename?: 'gate_v2';
       app_id?: any | null;
@@ -5407,16 +5269,11 @@ export type GetAdminProductsQuery = {
   products: Array<{
     __typename?: 'product';
     app_id: any;
-    collection: string;
-    curation?: string | null;
-    discount?: number | null;
     id: any;
     image: string;
     name: string;
     description: string;
     price: number;
-    poapId?: number | null;
-    isDiscountGated: boolean;
   }>;
 };
 
@@ -6721,16 +6578,11 @@ export const CreateProductDocument = gql`
       }
     ) {
       app_id
-      collection
-      curation
-      discount
       id
       image
       name
       description
       price
-      poapId
-      isDiscountGated
     }
   }
 `;
@@ -6786,16 +6638,11 @@ export const CreateAdminProductDocument = gql`
       object: { image: $image, name: $name, description: $description, price: $price }
     ) {
       app_id
-      collection
-      curation
-      discount
       id
       image
       name
       description
       price
-      poapId
-      isDiscountGated
     }
   }
 `;
@@ -6901,16 +6748,11 @@ export const EditProductDocument = gql`
       where: { id: { _eq: $id } }
     ) {
       returning {
-        collection
-        curation
-        discount
         id
         image
         name
         description
         price
-        poapId
-        isDiscountGated
       }
     }
   }
@@ -6960,16 +6802,11 @@ export const GetProductByIdDocument = gql`
   query GetProductById($id: uuid!) {
     product: product_by_pk(id: $id) {
       app_id
-      collection
-      curation
-      discount
       id
       image
       name
       description
       price
-      poapId
-      isDiscountGated
       app {
         id
         deliveryTaxesTableName
@@ -7029,16 +6866,11 @@ export const GetProductsDocument = gql`
   query GetProducts($appId: uuid!) {
     products: product(where: { app_id: { _eq: $appId } }) {
       app_id
-      collection
-      curation
-      discount
       id
       image
       name
       description
       price
-      poapId
-      isDiscountGated
       gate {
         ...GateFields
       }
@@ -7088,16 +6920,11 @@ export const GetAdminProductsDocument = gql`
   query GetAdminProducts {
     products: product {
       app_id
-      collection
-      curation
-      discount
       id
       image
       name
       description
       price
-      poapId
-      isDiscountGated
     }
   }
 `;

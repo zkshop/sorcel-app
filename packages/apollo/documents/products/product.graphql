@@ -1,16 +1,11 @@
 query GetProductById($id: uuid!) {
   product: product_by_pk(id: $id) {
     app_id
-    collection
-    curation
-    discount
     id
     image
     name
     description
     price
-    poapId
-    isDiscountGated
     app {
       id
       deliveryTaxesTableName

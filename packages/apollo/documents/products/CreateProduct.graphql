@@ -9,16 +9,11 @@ mutation CreateProduct(
     object: { app_id: $appId, image: $image, name: $name, description: $description, price: $price }
   ) {
     app_id
-    collection
-    curation
-    discount
     id
     image
     name
     description
     price
-    poapId
-    isDiscountGated
   }
 }
 
@@ -27,15 +22,10 @@ mutation CreateAdminProduct($price: Int!, $name: String!, $description: String!,
     object: { image: $image, name: $name, description: $description, price: $price }
   ) {
     app_id
-    collection
-    curation
-    discount
     id
     image
     name
     description
     price
-    poapId
-    isDiscountGated
   }
 }

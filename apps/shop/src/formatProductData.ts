@@ -1,4 +1,4 @@
-import { getPoapImageFromPoapList, getPoapURLFromId } from '@3shop/poap';
+import { getPoapImageFromPoapList } from '@3shop/poap';
 import type { GetGates_V2_ByAppIdQuery, GetProductsQuery } from '@3shop/apollo';
 import { Segment_Type_Enum } from '@3shop/apollo';
 import type { FormatedProductData } from '@3shop/types';
@@ -22,14 +22,13 @@ export const formatProductData = ({
   userMatchedProductGate,
   poapImageList,
 }: GetProductCardPropsParams): FormatedProductData => {
-  const { price, poapId } = product;
+  const { price } = product;
 
   const isGated = productGates.length > 0 && productGates[0].exclusive_access;
 
   const discountToApply = userMatchedProductGate?.discount;
   const priceReduced = applyDiscount(price, discountToApply || 0);
 
-  const poapUrl = getPoapURLFromId(poapId as number);
   const poapIds = productGates.filter(
     (gate) => gate?.segments?.[0]?.type === Segment_Type_Enum.Poap,
   )?.[0]?.segments?.[0]?.poap_ids;
@@ -43,7 +42,6 @@ export const formatProductData = ({
     ...product,
     discount: userMatchedProductGate?.discount || 0,
     priceReduced,
-    poapUrl,
     poapImgList: poapImgListToDisplay,
     isLocked,
   };

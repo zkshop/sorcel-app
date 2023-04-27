@@ -10,7 +10,6 @@ export type FormatedProductData = {
   discount?: number;
   priceReduced?: number;
   collection?: string;
-  poapUrl?: string;
   poapImgUrl?: string;
   externalLink?: string;
   isLocked?: boolean;

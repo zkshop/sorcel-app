@@ -31,7 +31,6 @@ export const ProductCardList = ({ products, isWalletConnected }: ProductCardList
           discount,
           priceReduced,
           collection,
-          poapUrl,
           poapImgList,
           isLocked,
           isWithHref,
@@ -50,7 +49,6 @@ export const ProductCardList = ({ products, isWalletConnected }: ProductCardList
               discount={discount}
               priceReduced={priceReduced}
               collectionName={collection}
-              poapUrl={poapUrl}
               poapImgList={poapImgList}
               isLocked={isLocked}
               isWithHref={isWithHref}

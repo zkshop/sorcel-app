@@ -21,7 +21,10 @@ export const formatProductData = ({
   userMatchedProductGate,
   isLockedByGate,
 }: GetProductCardPropsParams): FormatedProductData => {
-  const { id, price, discount, isDiscountGated, curation } = product;
+  const { id, price } = product;
+  const discount = 0;
+  const curation = '0xe7c96dbdef402eac651ede6330f46fbbdd97f175';
+  const isDiscountGated = true;
   const isAnNftHolder = Boolean(curation && userNFTContracts.includes(curation.toLowerCase()));
 
   const discountInPercent = discount ? discount / 100 : 0;
