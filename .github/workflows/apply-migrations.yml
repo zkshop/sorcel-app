@@ -1,7 +1,7 @@
 name: Apply migrations via Hasura
 
 on:
-  pull_request:
+  push:
     branches:
       - dev
       - main
@@ -9,7 +9,7 @@ on:
 jobs:
   apply-migrations:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.pull_request.base.ref == 'prod' && 'production' || 'staging' }}
+    environment: ${{ github.event.pull_request.base.ref == 'main' && 'production' || 'staging' }}
 
     steps:
       - uses: actions/checkout@v3
