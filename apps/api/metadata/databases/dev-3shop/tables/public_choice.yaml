@@ -1,0 +1,11 @@
+table:
+  name: choice
+  schema: public
+select_permissions:
+  - role: customer
+    permission:
+      columns:
+        - value
+        - id
+        - poll_id
+      filter: {}

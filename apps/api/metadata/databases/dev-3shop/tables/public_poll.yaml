@@ -1,0 +1,22 @@
+table:
+  name: poll
+  schema: public
+array_relationships:
+  - name: choices
+    using:
+      manual_configuration:
+        column_mapping:
+          id: poll_id
+        insertion_order: null
+        remote_table:
+          name: choice
+          schema: public
+select_permissions:
+  - role: customer
+    permission:
+      columns:
+        - voters
+        - description
+        - title
+        - id
+      filter: {}

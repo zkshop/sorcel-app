@@ -13,7 +13,7 @@ export const Integration = () => {
   const { data, loading: getAdminAppLoading } = useGetAdminAppQuery();
 
   if (getAdminAppLoading) return <Spinner />;
-
+  if (!data?.app[0]) return null;
   if (data?.app[0].moneyAccountId)
     return (
       <>
