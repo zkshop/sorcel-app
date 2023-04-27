@@ -1,0 +1,29 @@
+table:
+  name: app
+  schema: public
+select_permissions:
+  - role: customer
+    permission:
+      columns:
+        - deliveryTaxesTableName
+        - imgUrl
+        - moneyAccountId
+        - name
+        - id
+      filter:
+        _and:
+          - id:
+              _eq: X-Hasura-User-Id
+update_permissions:
+  - role: customer
+    permission:
+      columns:
+        - deliveryTaxesTableName
+        - imgUrl
+        - moneyAccountId
+        - name
+      filter:
+        _and:
+          - id:
+              _eq: X-Hasura-User-Id
+      check: null
