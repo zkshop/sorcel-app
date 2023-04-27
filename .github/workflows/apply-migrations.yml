@@ -1,0 +1,22 @@
+name: Apply migrations via Hasura
+
+on:
+  pull_request:
+    branches:
+      - dev
+      - main
+
+jobs:
+  apply-migrations:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.pull_request.base.ref == 'prod' && 'production' || 'staging' }}
+
+    steps:
+      - name: Télécharger Hasura CLI
+        run: curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
+
+      - name: Appliquer les migrations
+        env:
+          HASURA_ENDPOINT: ${{ secrets.HASURA_ENDPOINT }}
+          HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
+        run: hasura migrate apply --endpoint $HASURA_ENDPOINT --admin-secret $HASURA_ADMIN_SECRET
