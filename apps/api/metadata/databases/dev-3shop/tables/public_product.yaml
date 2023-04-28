@@ -22,34 +22,20 @@ insert_permissions:
       set:
         app_id: x-hasura-User-Id
       columns:
-        - collection
-        - curation
         - description
-        - discount
         - image
-        - isDiscountGated
         - name
-        - poapId
         - price
-        - utility
-        - webhookUrl
 select_permissions:
   - role: customer
     permission:
       columns:
-        - app_id
-        - collection
-        - curation
-        - description
-        - discount
-        - id
-        - image
-        - isDiscountGated
-        - name
-        - poapId
         - price
-        - utility
-        - webhookUrl
+        - description
+        - image
+        - name
+        - app_id
+        - id
       filter:
         app_id:
           _eq: X-Hasura-User-Id
@@ -57,17 +43,12 @@ update_permissions:
   - role: customer
     permission:
       columns:
-        - collection
-        - curation
-        - description
-        - discount
-        - image
-        - isDiscountGated
-        - name
-        - poapId
         - price
-        - utility
-        - webhookUrl
+        - description
+        - image
+        - name
+        - app_id
+        - id
       filter:
         app_id:
           _eq: X-Hasura-User-Id
