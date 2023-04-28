@@ -15,18 +15,6 @@ export const PRODUCTS_FIELDS = {
     name: 'price',
     label: 'Price',
   },
-  discount: {
-    name: 'discount',
-    label: 'Discount',
-  },
-  curation: {
-    name: 'curation',
-    label: 'Curation',
-  },
-  collection: {
-    name: 'collection',
-    label: 'Collection',
-  },
 };
 
-export const PRODUCT_ATTRIBUTES = ['Image', 'Name', 'Price', 'Discount', 'Curation', 'Collection'];
+export const PRODUCT_ATTRIBUTES = ['Image', 'Name', 'Price'];
