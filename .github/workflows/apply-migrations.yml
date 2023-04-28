@@ -1,13 +1,16 @@
 name: Apply migrations via Hasura
 
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
       - dev
       - main
 
 jobs:
   apply-migrations:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     environment: ${{ github.event.pull_request.base.ref == 'main' && 'production' || 'staging' }}
 
