@@ -3,7 +3,6 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { ShippingForm } from './ShippingForm';
 import type { ShippingFormValues } from './types';
-import omit from 'lodash/omit';
 import type { Gate_V2, GetProductByIdQuery } from '@3shop/apollo';
 import { useGetDeliveryZoneByAppIdQuery, useCreateOrderMutation } from '@3shop/apollo';
 import { applyDiscount } from '@3shop/pure';
@@ -14,8 +13,8 @@ import { useNavigate } from 'react-router-dom';
 import { storeOrder } from '@3shop/store/slices/order';
 import { useDispatch } from 'react-redux';
 import { envVars } from '@3shop/config';
-import { get } from 'lodash';
-// import { sendOrderConfirmation } from '@3shop/events';
+import { get, omit } from 'lodash';
+import { sendOrderConfirmation } from '@3shop/events';
 
 type ShippingFormContainerProps = {
   product: GetProductByIdQuery['product'];
@@ -74,14 +73,14 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
         },
       });
 
-      // sendOrderConfirmation(data.email, {
-      //   shop_logo_url: product.app?.imgUrl || '',
-      //   name: data.firstname,
-      //   product_name: product.name,
-      //   shop_name: product.app.name,
-      //   price: 0,
-      //   img_url: product.image,
-      // });
+      sendOrderConfirmation(data.email, {
+        shop_logo_url: product.app?.imgUrl || '',
+        name: data.firstname,
+        product_name: product.name,
+        shop_name: product.app.name,
+        price: 0,
+        img_url: product.image,
+      });
 
       return navigate('/success');
     }

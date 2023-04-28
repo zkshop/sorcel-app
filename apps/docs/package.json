@@ -4,7 +4,6 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "build": "build-storybook",
     "dev": "start-storybook -p 6006",
     "lint": "eslint \".storybook/*.{t,j}s\" --fix"
   },
