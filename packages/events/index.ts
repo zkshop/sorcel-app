@@ -1,11 +1,12 @@
-import RudderAnalytics from '@rudderstack/rudder-sdk-node';
+import * as analytics from 'rudder-sdk-js';
+
 import { envVars } from '@3shop/config';
 
 const RUDDERSTACK_URL = 'https://shopadrien.dataplane.rudderstack.com';
 
-export const eventClient = new RudderAnalytics(envVars.SECRET_RUDDERSTACK || '', {
-  dataPlaneUrl: RUDDERSTACK_URL,
-});
+analytics.load(envVars.SECRET_RUDDERSTACK || '', RUDDERSTACK_URL);
+
+export const eventClient = analytics;
 
 export const ORDER_CONFIRMATION = 'Order Confirmation';
 
@@ -19,5 +20,6 @@ type OrderConfirmationEventData = {
 };
 
 export const sendOrderConfirmation = (email: string, eventData: OrderConfirmationEventData) => {
-  eventClient.track({ event: ORDER_CONFIRMATION, userId: email, properties: eventData });
+  analytics.identify(email, { email });
+  analytics.track(ORDER_CONFIRMATION, { properties: { ...eventData } });
 };
