@@ -34,6 +34,7 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
   const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
   const { isConnected } = useAccount();
+  const auth = useAppSelector((state) => state.user.auth);
   const { data } = useGetGates_V2_ByAppIdQuery({ variables: { app_id: envVars.APP_ID } });
   const gates = data?.gates.slice() || [];
   const sortedGates = gates.sort(sortGates);
@@ -52,5 +53,10 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
     });
   });
 
-  return <ProductCardList products={formatedProducts} isWalletConnected={isConnected} />;
+  return (
+    <ProductCardList
+      products={formatedProducts}
+      isWalletConnected={Boolean(isConnected || auth.email)}
+    />
+  );
 };
