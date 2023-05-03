@@ -10,8 +10,6 @@ export const eventClient = analytics;
 
 export const ORDER_CONFIRMATION = 'Order Confirmation';
 
-console.log({ rudderstack: envVars.SECRET_RUDDERSTACK });
-
 type OrderConfirmationEventData = {
   shop_logo_url: string;
   name: string;

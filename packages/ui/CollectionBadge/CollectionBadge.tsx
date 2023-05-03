@@ -3,7 +3,7 @@ import { PoapBadge } from './PoapBadge/PoapBadge';
 
 type CollectionBadgeProps = {
   collectionName?: string;
-  poapImgList?: string[];
+  poapImgList?: { id: string; url: string }[];
   href?: string;
 };
 
@@ -11,8 +11,8 @@ export const CollectionBadge = ({ collectionName, poapImgList }: CollectionBadge
   if (poapImgList) {
     return (
       <>
-        {poapImgList.map((imgUrl, index) => (
-          <PoapBadge index={index} imgUrl={imgUrl} />
+        {poapImgList.map((poap, index) => (
+          <PoapBadge index={index} imgUrl={poap.url} />
         ))}
       </>
     );

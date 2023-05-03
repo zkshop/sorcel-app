@@ -32,9 +32,11 @@ export const formatProductData = ({
   const poapIds = productGates.filter(
     (gate) => gate?.segments?.[0]?.type === Segment_Type_Enum.Poap,
   )?.[0]?.segments?.[0]?.poap_ids;
-  const poapImgListToDisplay = poapIds?.map((poapId: string) =>
-    getPoapImageFromPoapList(poapImageList, Number(poapId)),
-  );
+
+  const poapImgListToDisplay = poapIds?.map((poapId: string) => ({
+    id: poapId,
+    url: getPoapImageFromPoapList(poapImageList, Number(poapId)),
+  }));
 
   const isLocked = isGated && !userMatchedProductGate;
 

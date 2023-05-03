@@ -8,7 +8,7 @@ export type FormatedProductData = {
   priceReduced?: number;
   collection?: string;
   poapUrl?: string;
-  poapImgList?: string[];
+  poapImgList?: { id: string; url: string }[];
   externalLink?: string;
   isLocked?: boolean;
   isAnHolder?: boolean;

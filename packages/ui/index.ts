@@ -25,6 +25,7 @@ export * from './Text/Text';
 export * from './TextInput/TextInput';
 export * from './theme';
 export * from './VerticalMenu/VerticalMenu';
+export * from './PoapLink';
 
 export {
   Accordion,

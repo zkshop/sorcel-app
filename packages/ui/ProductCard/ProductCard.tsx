@@ -1,11 +1,28 @@
-import { Box, HStack, Image } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  HStack,
+  Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+  Link as ExternalLink,
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+
 import { StyledProductCard } from './ProductCard.style';
 import { LockedLayer } from '../LockedLayer/LockedLayer';
 import { classnames } from '@3shop/config';
-import { Link } from 'react-router-dom';
+
 import { DiscountTag } from './DiscountTag';
 import { Text } from '../Text/Text';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
+import { PoapLink } from '../PoapLink';
 
 export type ProductCardProps = {
   id?: string;
@@ -16,7 +33,7 @@ export type ProductCardProps = {
   priceReduced?: number;
   collectionName?: string;
   poapUrl?: string;
-  poapImgList?: string[];
+  poapImgList?: { id: string; url: string }[];
   isLocked?: boolean;
   isWithHref?: boolean;
   isWalletConnected?: boolean;
@@ -35,6 +52,7 @@ export const ProductCard = ({
   isWithHref = true,
   isWalletConnected = false,
 }: ProductCardProps) => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const to = `product/${id}`;
   const additionalProps =
     isLocked || !isWithHref
@@ -108,10 +126,11 @@ export const ProductCard = ({
           )}
         </HStack>
       </Box>
-
-      {(poapImgList || collectionName) && (
-        <CollectionBadge collectionName={collectionName} poapImgList={poapImgList} />
-      )}
+      <Box onClick={onOpen}>
+        {(poapImgList || collectionName) && (
+          <CollectionBadge collectionName={collectionName} poapImgList={poapImgList} />
+        )}
+      </Box>
       {isLocked && (
         <LockedLayer
           text={
@@ -121,6 +140,26 @@ export const ProductCard = ({
         />
       )}
       {isDiscount && <DiscountTag discount={discount} />}
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Poap to unlock {name}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <HStack justifyContent="center" padding={2}>
+              {poapImgList?.map((poap) => (
+                <PoapLink key={`poap-link-${poap.id}`} poapId={poap.id} imgUrl={poap.url} />
+              ))}
+            </HStack>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose} mr={3}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </StyledProductCard>
   );
 };
