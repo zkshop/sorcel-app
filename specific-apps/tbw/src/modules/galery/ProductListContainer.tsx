@@ -58,7 +58,6 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
     const productGates = getAssociatedGates(productsGates, product.id);
     const userMatchedProductGate = gateVerifier(productGates, userNFTs);
 
-    // Quick fix gate by attribute verification
     const isLockedByGate = Boolean(productGates.length) && !userMatchedProductGate;
 
     return formatProductData({
