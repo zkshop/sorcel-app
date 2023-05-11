@@ -134,7 +134,9 @@ export const ProductCard = ({
       {isLocked && (
         <LockedLayer
           text={
-            isWalletConnected ? "You don't have the right digital assets" : 'Connect your wallet'
+            isWalletConnected
+              ? "You don't have the right digital assets"
+              : 'Connect your email or wallet'
           }
           collectionName={collectionName}
         />
