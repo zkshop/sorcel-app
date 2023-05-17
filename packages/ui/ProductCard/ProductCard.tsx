@@ -110,7 +110,7 @@ export const ProductCard = ({
             textDecoration={discount ? 'line-through' : 'none'}
             marginRight={discount ? '2px' : 'none'}
           >
-            {`${price}€`}
+            {price ? `${price}€` : <span style={{ color: 'red' }}>FREE</span>}
           </Text>
 
           {isDiscount && (
@@ -121,7 +121,7 @@ export const ProductCard = ({
               color="red"
               marginLeft="0 !important"
             >
-              {`${priceReduced} €`}
+              {priceReduced ? `${priceReduced} €` : <span style={{ color: 'red' }}>FREE</span>}
             </Text>
           )}
         </HStack>
