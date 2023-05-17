@@ -1,12 +1,16 @@
 import type { Gate_V2, Segment } from '@3shop/apollo';
 import { Network_Enum, Segment_Type_Enum } from '@3shop/apollo';
 import { useAppSelector } from '@3shop/store/store';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 export const useFilteredGates = (gates: Gate_V2[]): Gate_V2[] => {
   const [filteredGates, setFilteredGates] = useState<Gate_V2[]>([]);
-  const poapList = useAppSelector((state) => state.user.poap).map(({ event: { id } }) => id);
-  const nfts = useAppSelector((state) => state.user.nfts).map((nft) => nft.contract.address);
+
+  const poapState = useAppSelector((state) => state.user.poap);
+  const poapList = useMemo(() => poapState.map(({ event: { id } }) => id), [poapState]);
+
+  const nftState = useAppSelector((state) => state.user.nfts);
+  const nfts = useMemo(() => nftState.map((nft) => nft.contract.address), [nftState]);
 
   useEffect(() => {
     const filterGates = () => {
