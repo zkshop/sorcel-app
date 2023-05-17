@@ -1,4 +1,3 @@
-import type { Product } from '@3shop/apollo';
 import { useGetProductByIdQuery } from '@3shop/apollo';
 import { ShippingFormContainer } from '@/modules';
 import { useParams } from 'react-router-dom';
@@ -11,6 +10,7 @@ export const Shipping = () => {
       id: productId,
     },
   });
+
   const product = data?.product;
 
   if (!product) return null;
@@ -18,7 +18,7 @@ export const Shipping = () => {
   return (
     <>
       <BackButton href={`/product/${product.id}`} />
-      <ShippingFormContainer product={product as Product} />
+      <ShippingFormContainer product={product} />
     </>
   );
 };

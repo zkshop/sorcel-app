@@ -1,0 +1,6 @@
+mutation PushClaims($gate_id: uuid!, $claims: jsonb!) {
+  update_gate_v2_by_pk(_append: {claims: $claims}, pk_columns: {id: $gate_id}) {
+    id
+    claims
+  }
+}
