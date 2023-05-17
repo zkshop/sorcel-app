@@ -6,6 +6,7 @@ query GetGatesV2ByProductId($productId: uuid) {
     id
     name
     product_id
+    claims
     segments {
       type
       poap_ids

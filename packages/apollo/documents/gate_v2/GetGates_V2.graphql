@@ -14,6 +14,7 @@ query GetGates_V2_ByAppId($app_id: uuid) {
     id
     exclusive_access
     discount
+    claims
     segments {
       type
       nft_contract_address

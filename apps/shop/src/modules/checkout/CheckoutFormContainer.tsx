@@ -1,4 +1,5 @@
 import type { GetProductByIdQuery } from '@3shop/apollo';
+import { usePushClaimsMutation } from '@3shop/apollo';
 import { useCreateOrderMutation } from '@3shop/apollo';
 import { VStack, Heading, Spinner } from '@3shop/ui';
 import { Elements } from '@stripe/react-stripe-js';
@@ -23,6 +24,7 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const order = useAppSelector((state) => state.user.order);
   const [createOrder] = useCreateOrderMutation();
+  const [pushClaims] = usePushClaimsMutation();
 
   useEffect(() => {
     async function updateClientSecret() {
@@ -38,10 +40,11 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
 
   async function handlePaymentSuccess() {
     if (!order || !product) return;
+    const { gateId, claims, ...rest } = order;
 
     await createOrder({
       variables: {
-        ...order,
+        ...rest,
         product_id: product?.id,
         app_id: envVars.APP_ID,
       },
@@ -55,6 +58,15 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
       price: order.amount,
       img_url: product.image,
     });
+
+    if (gateId) {
+      await pushClaims({
+        variables: {
+          gate_id: gateId,
+          claims: claims as string,
+        },
+      });
+    }
   }
 
   if (!order) return <Navigate to="/" />;
