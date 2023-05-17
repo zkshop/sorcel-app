@@ -35,7 +35,6 @@ export const ProductDetails = ({
   name,
   image,
   description,
-  price,
   discount,
   priceReduced,
   collectionName,
@@ -142,7 +141,7 @@ export const ProductDetails = ({
                   textDecoration={discount ? 'line-through' : 'none'}
                   marginRight={discount ? '2px' : 'none'}
                 >
-                  {`${price}€`}
+                  {priceReduced ? `${priceReduced} €` : <span style={{ color: 'red' }}>FREE</span>}
                 </Text>
                 {discount ? (
                   <Text
@@ -152,7 +151,11 @@ export const ProductDetails = ({
                     color="#FF5F1F"
                     padding="2px"
                   >
-                    {`${priceReduced}€`}
+                    {priceReduced ? (
+                      `${priceReduced} €`
+                    ) : (
+                      <span style={{ color: 'red' }}>FREE</span>
+                    )}
                   </Text>
                 ) : null}
               </Box>
