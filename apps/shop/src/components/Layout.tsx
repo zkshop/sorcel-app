@@ -1,4 +1,4 @@
-import { Box, HStack, Image, MainLayout, Text } from '@3shop/ui';
+import { Link, Box, HStack, Image, MainLayout, Text } from '@3shop/ui';
 import { Outlet } from 'react-router-dom';
 
 import { NavBar } from './NavBar';
@@ -11,9 +11,15 @@ export const Layout = () => (
       <Outlet />
     </MainLayout>
     <footer>
-      <HStack marginY={8} justifyContent="center">
-        <Text fontWeight="bold">Powered by</Text> <Image maxW={24} src="/logo.png" />
-      </HStack>
+      <Link href="www.3shop.co">
+        <HStack marginY={8} justifyContent="center">
+          <Text fontWeight="bold">Powered by</Text>{' '}
+          <Image
+            maxW={24}
+            src="https://kqjytgxbtetzewipikax.supabase.co/storage/v1/object/public/logo/logo"
+          />
+        </HStack>
+      </Link>
     </footer>
   </Box>
 );
