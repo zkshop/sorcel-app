@@ -1128,6 +1128,7 @@ export type Gate_Updates = {
 export type Gate_V2 = {
   __typename?: 'gate_v2';
   app_id?: Maybe<Scalars['uuid']>;
+  claims: Scalars['jsonb'];
   discount?: Maybe<Scalars['Int']>;
   exclusive_access: Scalars['Boolean'];
   id: Scalars['uuid'];
@@ -1137,6 +1138,11 @@ export type Gate_V2 = {
   segments: Array<Segment>;
   /** An aggregate relationship */
   segments_aggregate: Segment_Aggregate;
+};
+
+/** columns and relationships of "gate_v2" */
+export type Gate_V2ClaimsArgs = {
+  path?: InputMaybe<Scalars['String']>;
 };
 
 /** columns and relationships of "gate_v2" */
@@ -1228,6 +1234,11 @@ export type Gate_V2_Aggregate_Order_By = {
   variance?: InputMaybe<Gate_V2_Variance_Order_By>;
 };
 
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Gate_V2_Append_Input = {
+  claims?: InputMaybe<Scalars['jsonb']>;
+};
+
 /** input type for inserting array relation for remote table "gate_v2" */
 export type Gate_V2_Arr_Rel_Insert_Input = {
   data: Array<Gate_V2_Insert_Input>;
@@ -1252,6 +1263,7 @@ export type Gate_V2_Bool_Exp = {
   _not?: InputMaybe<Gate_V2_Bool_Exp>;
   _or?: InputMaybe<Array<Gate_V2_Bool_Exp>>;
   app_id?: InputMaybe<Uuid_Comparison_Exp>;
+  claims?: InputMaybe<Jsonb_Comparison_Exp>;
   discount?: InputMaybe<Int_Comparison_Exp>;
   exclusive_access?: InputMaybe<Boolean_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -1267,6 +1279,21 @@ export enum Gate_V2_Constraint {
   GateV2Pkey = 'gate_v2_pkey',
 }
 
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Gate_V2_Delete_At_Path_Input = {
+  claims?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Gate_V2_Delete_Elem_Input = {
+  claims?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Gate_V2_Delete_Key_Input = {
+  claims?: InputMaybe<Scalars['String']>;
+};
+
 /** input type for incrementing numeric columns in table "gate_v2" */
 export type Gate_V2_Inc_Input = {
   discount?: InputMaybe<Scalars['Int']>;
@@ -1275,6 +1302,7 @@ export type Gate_V2_Inc_Input = {
 /** input type for inserting data into table "gate_v2" */
 export type Gate_V2_Insert_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
+  claims?: InputMaybe<Scalars['jsonb']>;
   discount?: InputMaybe<Scalars['Int']>;
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -1340,6 +1368,7 @@ export type Gate_V2_On_Conflict = {
 /** Ordering options when selecting data from "gate_v2". */
 export type Gate_V2_Order_By = {
   app_id?: InputMaybe<Order_By>;
+  claims?: InputMaybe<Order_By>;
   discount?: InputMaybe<Order_By>;
   exclusive_access?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -1353,10 +1382,17 @@ export type Gate_V2_Pk_Columns_Input = {
   id: Scalars['uuid'];
 };
 
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Gate_V2_Prepend_Input = {
+  claims?: InputMaybe<Scalars['jsonb']>;
+};
+
 /** select columns of table "gate_v2" */
 export enum Gate_V2_Select_Column {
   /** column name */
   AppId = 'app_id',
+  /** column name */
+  Claims = 'claims',
   /** column name */
   Discount = 'discount',
   /** column name */
@@ -1384,6 +1420,7 @@ export enum Gate_V2_Select_Column_Gate_V2_Aggregate_Bool_Exp_Bool_Or_Arguments_C
 /** input type for updating data in table "gate_v2" */
 export type Gate_V2_Set_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
+  claims?: InputMaybe<Scalars['jsonb']>;
   discount?: InputMaybe<Scalars['Int']>;
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -1435,6 +1472,7 @@ export type Gate_V2_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Gate_V2_Stream_Cursor_Value_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
+  claims?: InputMaybe<Scalars['jsonb']>;
   discount?: InputMaybe<Scalars['Int']>;
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -1458,6 +1496,8 @@ export enum Gate_V2_Update_Column {
   /** column name */
   AppId = 'app_id',
   /** column name */
+  Claims = 'claims',
+  /** column name */
   Discount = 'discount',
   /** column name */
   ExclusiveAccess = 'exclusive_access',
@@ -1470,8 +1510,18 @@ export enum Gate_V2_Update_Column {
 }
 
 export type Gate_V2_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: InputMaybe<Gate_V2_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: InputMaybe<Gate_V2_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: InputMaybe<Gate_V2_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: InputMaybe<Gate_V2_Delete_Key_Input>;
   /** increments the numeric columns with given value of the filtered values */
   _inc?: InputMaybe<Gate_V2_Inc_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: InputMaybe<Gate_V2_Prepend_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Gate_V2_Set_Input>;
   /** filter the rows which have to be updated */
@@ -2126,14 +2176,24 @@ export type Mutation_RootUpdate_Gate_ManyArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Gate_V2Args = {
+  _append?: InputMaybe<Gate_V2_Append_Input>;
+  _delete_at_path?: InputMaybe<Gate_V2_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Gate_V2_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Gate_V2_Delete_Key_Input>;
   _inc?: InputMaybe<Gate_V2_Inc_Input>;
+  _prepend?: InputMaybe<Gate_V2_Prepend_Input>;
   _set?: InputMaybe<Gate_V2_Set_Input>;
   where: Gate_V2_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Gate_V2_By_PkArgs = {
+  _append?: InputMaybe<Gate_V2_Append_Input>;
+  _delete_at_path?: InputMaybe<Gate_V2_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Gate_V2_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Gate_V2_Delete_Key_Input>;
   _inc?: InputMaybe<Gate_V2_Inc_Input>;
+  _prepend?: InputMaybe<Gate_V2_Prepend_Input>;
   _set?: InputMaybe<Gate_V2_Set_Input>;
   pk_columns: Gate_V2_Pk_Columns_Input;
 };
@@ -4831,6 +4891,7 @@ export type GetGatesV2ByProductIdQuery = {
     id: any;
     name: string;
     product_id: any;
+    claims: any;
     segments: Array<{
       __typename?: 'segment';
       type: Segment_Type_Enum;
@@ -4869,6 +4930,7 @@ export type GetGates_V2_ByAppIdQuery = {
     id: any;
     exclusive_access: boolean;
     discount?: number | null;
+    claims: any;
     segments: Array<{
       __typename?: 'segment';
       type: Segment_Type_Enum;
@@ -4878,6 +4940,16 @@ export type GetGates_V2_ByAppIdQuery = {
       id: any;
     }>;
   }>;
+};
+
+export type PushClaimsMutationVariables = Exact<{
+  gate_id: Scalars['uuid'];
+  claims: Scalars['jsonb'];
+}>;
+
+export type PushClaimsMutation = {
+  __typename?: 'mutation_root';
+  update_gate_v2_by_pk?: { __typename?: 'gate_v2'; id: any; claims: any } | null;
 };
 
 export type CreateGateMutationVariables = Exact<{
@@ -5173,6 +5245,7 @@ export type GateFieldsFragment = {
   name: string;
   discount?: number | null;
   exclusive_access: boolean;
+  claims: any;
   segments: Array<{
     __typename?: 'segment';
     id: any;
@@ -5214,6 +5287,7 @@ export type GetProductByIdQuery = {
       name: string;
       discount?: number | null;
       exclusive_access: boolean;
+      claims: any;
       segments: Array<{
         __typename?: 'segment';
         id: any;
@@ -5249,6 +5323,7 @@ export type GetProductsQuery = {
       name: string;
       discount?: number | null;
       exclusive_access: boolean;
+      claims: any;
       segments: Array<{
         __typename?: 'segment';
         id: any;
@@ -5300,6 +5375,7 @@ export const GateFieldsFragmentDoc = gql`
       poap_ids
       type
     }
+    claims
   }
 `;
 export const GetAppDocument = gql`
@@ -5729,6 +5805,7 @@ export const GetGatesV2ByProductIdDocument = gql`
       id
       name
       product_id
+      claims
       segments {
         type
         poap_ids
@@ -5844,6 +5921,7 @@ export const GetGates_V2_ByAppIdDocument = gql`
       id
       exclusive_access
       discount
+      claims
       segments {
         type
         nft_contract_address
@@ -5902,6 +5980,52 @@ export type GetGates_V2_ByAppIdLazyQueryHookResult = ReturnType<
 export type GetGates_V2_ByAppIdQueryResult = Apollo.QueryResult<
   GetGates_V2_ByAppIdQuery,
   GetGates_V2_ByAppIdQueryVariables
+>;
+export const PushClaimsDocument = gql`
+  mutation PushClaims($gate_id: uuid!, $claims: jsonb!) {
+    update_gate_v2_by_pk(_append: { claims: $claims }, pk_columns: { id: $gate_id }) {
+      id
+      claims
+    }
+  }
+`;
+export type PushClaimsMutationFn = Apollo.MutationFunction<
+  PushClaimsMutation,
+  PushClaimsMutationVariables
+>;
+
+/**
+ * __usePushClaimsMutation__
+ *
+ * To run a mutation, you first call `usePushClaimsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePushClaimsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [pushClaimsMutation, { data, loading, error }] = usePushClaimsMutation({
+ *   variables: {
+ *      gate_id: // value for 'gate_id'
+ *      claims: // value for 'claims'
+ *   },
+ * });
+ */
+export function usePushClaimsMutation(
+  baseOptions?: Apollo.MutationHookOptions<PushClaimsMutation, PushClaimsMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<PushClaimsMutation, PushClaimsMutationVariables>(
+    PushClaimsDocument,
+    options,
+  );
+}
+export type PushClaimsMutationHookResult = ReturnType<typeof usePushClaimsMutation>;
+export type PushClaimsMutationResult = Apollo.MutationResult<PushClaimsMutation>;
+export type PushClaimsMutationOptions = Apollo.BaseMutationOptions<
+  PushClaimsMutation,
+  PushClaimsMutationVariables
 >;
 export const CreateGateDocument = gql`
   mutation CreateGate(

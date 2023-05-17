@@ -13,4 +13,5 @@ fragment GateFields on gate_v2 {
     poap_ids
     type
   }
+  claims
 }

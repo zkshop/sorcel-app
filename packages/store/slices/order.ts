@@ -8,6 +8,8 @@ type ShippingInformations = {
   email: string;
   phoneNumber: string;
   amount: number;
+  gateId?: string;
+  claims?: string;
 };
 
 type State = ShippingInformations | null;
