@@ -11,7 +11,7 @@ export const Layout = () => (
       <Outlet />
     </MainLayout>
     <footer>
-      <Link href="www.3shop.co">
+      <Link href="https://www.3shop.co" target="_blank">
         <HStack marginY={8} justifyContent="center">
           <Text fontWeight="bold">Powered by</Text>{' '}
           <Image
