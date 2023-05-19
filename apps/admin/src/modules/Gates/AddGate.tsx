@@ -16,6 +16,7 @@ export type AddGateFormValues = {
   name: string;
   perk: string;
   discount: number | undefined;
+  uniqueClaim: boolean;
   product_id: string;
 };
 
@@ -57,6 +58,7 @@ export const AddGate = () => {
         segments: {
           data: input,
         },
+        unique_claim: data.uniqueClaim,
         discount: data.discount,
         exclusive_access: data.perk === 'exclusiveAccess',
         name: data.name,

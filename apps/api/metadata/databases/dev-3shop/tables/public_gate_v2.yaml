@@ -24,6 +24,7 @@ insert_permissions:
         - exclusive_access
         - name
         - product_id
+        - unique_claim
 select_permissions:
   - role: customer
     permission:
@@ -34,6 +35,7 @@ select_permissions:
         - id
         - name
         - product_id
+        - unique_claim
       filter:
         app_id:
           _eq: X-Hasura-User-Id
@@ -45,6 +47,7 @@ update_permissions:
         - exclusive_access
         - name
         - product_id
+        - unique_claim
       filter:
         app_id:
           _eq: X-Hasura-User-Id
