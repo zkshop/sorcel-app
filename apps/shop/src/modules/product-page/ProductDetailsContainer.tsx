@@ -1,6 +1,6 @@
 import { ProductDetails } from '@3shop/ui';
 
-import { useGetGatesV2ByProductIdQuery, useGetOrdersByAddressQuery } from '@3shop/apollo';
+import { useGetGatesV2ByProductIdQuery } from '@3shop/apollo';
 import { useAppSelector } from '@3shop/store';
 import { gateVerifier } from '../shop/gateVerifier';
 import { useAccount } from '@3shop/wallet';
@@ -45,11 +45,11 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   } = formatedProducts;
 
   const { address: walletAddress } = useAccount();
-  const { data: ordersByAddress } = useGetOrdersByAddressQuery({
-    variables: { address: walletAddress?.toLocaleLowerCase() as string },
-  });
-  const userOrders = ordersByAddress?.orders || [];
-  const userHasAlreadyOrdered = false; //userOrders.some((order) => order.product_id === id);
+  const email = useAppSelector((state) => state.user.auth.email);
+
+  const userHasAlreadyOrdered =
+    userMatchedProductGate?.unique_claim &&
+    userMatchedProductGate?.claims.includes(walletAddress || email);
 
   return (
     <ProductDetails
