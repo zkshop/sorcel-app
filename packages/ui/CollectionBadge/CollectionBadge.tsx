@@ -12,7 +12,7 @@ export const CollectionBadge = ({ collectionName, poapImgList }: CollectionBadge
     return (
       <>
         {poapImgList.map((poap, index) => (
-          <PoapBadge index={index} imgUrl={poap.url} />
+          <PoapBadge key={`badge-${index}-${poap.id}`} index={index} imgUrl={poap.url} />
         ))}
       </>
     );
