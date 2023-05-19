@@ -1138,6 +1138,7 @@ export type Gate_V2 = {
   segments: Array<Segment>;
   /** An aggregate relationship */
   segments_aggregate: Segment_Aggregate;
+  unique_claim: Scalars['Boolean'];
 };
 
 /** columns and relationships of "gate_v2" */
@@ -1271,6 +1272,7 @@ export type Gate_V2_Bool_Exp = {
   product_id?: InputMaybe<Uuid_Comparison_Exp>;
   segments?: InputMaybe<Segment_Bool_Exp>;
   segments_aggregate?: InputMaybe<Segment_Aggregate_Bool_Exp>;
+  unique_claim?: InputMaybe<Boolean_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "gate_v2" */
@@ -1309,6 +1311,7 @@ export type Gate_V2_Insert_Input = {
   name?: InputMaybe<Scalars['String']>;
   product_id?: InputMaybe<Scalars['uuid']>;
   segments?: InputMaybe<Segment_Arr_Rel_Insert_Input>;
+  unique_claim?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate max on columns */
@@ -1375,6 +1378,7 @@ export type Gate_V2_Order_By = {
   name?: InputMaybe<Order_By>;
   product_id?: InputMaybe<Order_By>;
   segments_aggregate?: InputMaybe<Segment_Aggregate_Order_By>;
+  unique_claim?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: gate_v2 */
@@ -1403,18 +1407,24 @@ export enum Gate_V2_Select_Column {
   Name = 'name',
   /** column name */
   ProductId = 'product_id',
+  /** column name */
+  UniqueClaim = 'unique_claim',
 }
 
 /** select "gate_v2_aggregate_bool_exp_bool_and_arguments_columns" columns of table "gate_v2" */
 export enum Gate_V2_Select_Column_Gate_V2_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
   /** column name */
   ExclusiveAccess = 'exclusive_access',
+  /** column name */
+  UniqueClaim = 'unique_claim',
 }
 
 /** select "gate_v2_aggregate_bool_exp_bool_or_arguments_columns" columns of table "gate_v2" */
 export enum Gate_V2_Select_Column_Gate_V2_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
   /** column name */
   ExclusiveAccess = 'exclusive_access',
+  /** column name */
+  UniqueClaim = 'unique_claim',
 }
 
 /** input type for updating data in table "gate_v2" */
@@ -1426,6 +1436,7 @@ export type Gate_V2_Set_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
   product_id?: InputMaybe<Scalars['uuid']>;
+  unique_claim?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate stddev on columns */
@@ -1478,6 +1489,7 @@ export type Gate_V2_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
   product_id?: InputMaybe<Scalars['uuid']>;
+  unique_claim?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate sum on columns */
@@ -1507,6 +1519,8 @@ export enum Gate_V2_Update_Column {
   Name = 'name',
   /** column name */
   ProductId = 'product_id',
+  /** column name */
+  UniqueClaim = 'unique_claim',
 }
 
 export type Gate_V2_Updates = {
@@ -4865,6 +4879,7 @@ export type CreateGateV2MutationVariables = Exact<{
   name?: InputMaybe<Scalars['String']>;
   product_id?: InputMaybe<Scalars['uuid']>;
   segments?: InputMaybe<Segment_Arr_Rel_Insert_Input>;
+  unique_claim?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 export type CreateGateV2Mutation = {
@@ -4892,6 +4907,7 @@ export type GetGatesV2ByProductIdQuery = {
     name: string;
     product_id: any;
     claims: any;
+    unique_claim: boolean;
     segments: Array<{
       __typename?: 'segment';
       type: Segment_Type_Enum;
@@ -4931,6 +4947,7 @@ export type GetGates_V2_ByAppIdQuery = {
     exclusive_access: boolean;
     discount?: number | null;
     claims: any;
+    unique_claim: boolean;
     segments: Array<{
       __typename?: 'segment';
       type: Segment_Type_Enum;
@@ -5245,6 +5262,7 @@ export type GateFieldsFragment = {
   name: string;
   discount?: number | null;
   exclusive_access: boolean;
+  unique_claim: boolean;
   claims: any;
   segments: Array<{
     __typename?: 'segment';
@@ -5287,6 +5305,7 @@ export type GetProductByIdQuery = {
       name: string;
       discount?: number | null;
       exclusive_access: boolean;
+      unique_claim: boolean;
       claims: any;
       segments: Array<{
         __typename?: 'segment';
@@ -5323,6 +5342,7 @@ export type GetProductsQuery = {
       name: string;
       discount?: number | null;
       exclusive_access: boolean;
+      unique_claim: boolean;
       claims: any;
       segments: Array<{
         __typename?: 'segment';
@@ -5367,6 +5387,7 @@ export const GateFieldsFragmentDoc = gql`
     name
     discount
     exclusive_access
+    unique_claim
     segments {
       id
       gate_id
@@ -5739,6 +5760,7 @@ export const CreateGateV2Document = gql`
     $name: String
     $product_id: uuid
     $segments: segment_arr_rel_insert_input
+    $unique_claim: Boolean = false
   ) {
     insert_gate_v2_one(
       object: {
@@ -5747,6 +5769,7 @@ export const CreateGateV2Document = gql`
         name: $name
         product_id: $product_id
         segments: $segments
+        unique_claim: $unique_claim
       }
     ) {
       id
@@ -5778,6 +5801,7 @@ export type CreateGateV2MutationFn = Apollo.MutationFunction<
  *      name: // value for 'name'
  *      product_id: // value for 'product_id'
  *      segments: // value for 'segments'
+ *      unique_claim: // value for 'unique_claim'
  *   },
  * });
  */
@@ -5806,6 +5830,7 @@ export const GetGatesV2ByProductIdDocument = gql`
       name
       product_id
       claims
+      unique_claim
       segments {
         type
         poap_ids
@@ -5922,6 +5947,7 @@ export const GetGates_V2_ByAppIdDocument = gql`
       exclusive_access
       discount
       claims
+      unique_claim
       segments {
         type
         nft_contract_address
