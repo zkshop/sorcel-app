@@ -3,6 +3,8 @@ import type { GetGates_V2_ByAppIdQuery, GetProductsQuery } from '@3shop/apollo';
 import { Segment_Type_Enum } from '@3shop/apollo';
 import type { FormatedProductData } from '@3shop/types';
 import { applyDiscount } from '@3shop/pure/applyDiscount';
+import { useAccount } from '@3shop/wallet';
+import { useAppSelector } from '@3shop/store';
 
 type Product = GetProductsQuery['products'][0];
 type ShopGate_v2 = GetGates_V2_ByAppIdQuery['gates'][0];
@@ -22,6 +24,9 @@ export const formatProductData = ({
   userMatchedProductGate,
   poapImageList,
 }: GetProductCardPropsParams): FormatedProductData => {
+  const { address } = useAccount();
+  const email = useAppSelector((state) => state.user.auth.email);
+
   const { price } = product;
 
   const isGated = productGates.length > 0 && productGates[0].exclusive_access;
@@ -38,7 +43,11 @@ export const formatProductData = ({
     url: getPoapImageFromPoapList(poapImageList, Number(poapId)),
   }));
 
-  const isLocked = isGated && !userMatchedProductGate;
+  const isLocked =
+    isGated &&
+    (!userMatchedProductGate ||
+      (userMatchedProductGate.unique_claim &&
+        userMatchedProductGate.claims?.includes(address || email)));
 
   const formatedProductData = {
     ...product,
