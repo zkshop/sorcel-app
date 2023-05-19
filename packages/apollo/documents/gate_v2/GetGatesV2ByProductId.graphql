@@ -1,5 +1,5 @@
 query GetGatesV2ByProductId($productId: uuid) {
-  gate_v2(where: {product_id: {_eq: $productId}}) {
+  gate_v2(where: { product_id: { _eq: $productId } }) {
     app_id
     discount
     exclusive_access
@@ -7,6 +7,7 @@ query GetGatesV2ByProductId($productId: uuid) {
     name
     product_id
     claims
+    unique_claim
     segments {
       type
       poap_ids

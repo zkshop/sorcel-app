@@ -1,5 +1,5 @@
-mutation CreateGateV2($discount: Int, $exclusive_access: Boolean, $name: String, $product_id: uuid, $segments: segment_arr_rel_insert_input) {
-  insert_gate_v2_one(object: {discount: $discount, exclusive_access: $exclusive_access, name: $name, product_id: $product_id, segments: $segments}) {
+mutation CreateGateV2($discount: Int, $exclusive_access: Boolean, $name: String, $product_id: uuid, $segments: segment_arr_rel_insert_input, $unique_claim: Boolean = false) {
+  insert_gate_v2_one(object: {discount: $discount, exclusive_access: $exclusive_access, name: $name, product_id: $product_id, segments: $segments, unique_claim: $unique_claim}) {
     id
     discount
     name
