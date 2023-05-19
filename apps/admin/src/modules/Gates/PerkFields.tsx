@@ -10,6 +10,9 @@ import {
   NumberInput,
   NumberInputField,
   InputRightElement,
+  Checkbox,
+  FormLabel,
+  Text,
 } from '@3shop/ui';
 import type { Control, UseFormRegister } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
@@ -50,6 +53,14 @@ export const PerkFields = ({ control, showDiscountInput, register }: PerkFieldsP
           </RadioGroup>
         )}
       />
+
+      <FormControl mt={4}>
+        <FormLabel mb={1}>Options</FormLabel>
+        <HStack>
+          <Checkbox verticalAlign="middle" {...register(GATE_FIELDS.perk.uniqueClaim.value)} />{' '}
+          <Text ml={1}>{GATE_FIELDS.perk.uniqueClaim.label}</Text>
+        </HStack>
+      </FormControl>
     </FormControl>
   </Section>
 );

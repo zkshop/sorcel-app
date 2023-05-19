@@ -9,6 +9,10 @@ export const GATE_FIELDS = {
   },
   perk: {
     name: 'perk',
+    uniqueClaim: {
+      label: 'Can be claimed only once',
+      value: 'uniqueClaim',
+    },
     exclusiveAccess: {
       label: 'Exclusive Access',
       value: 'exclusiveAccess',
