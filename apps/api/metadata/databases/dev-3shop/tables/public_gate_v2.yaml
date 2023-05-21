@@ -30,6 +30,7 @@ select_permissions:
     permission:
       columns:
         - app_id
+        - claims
         - discount
         - exclusive_access
         - id
