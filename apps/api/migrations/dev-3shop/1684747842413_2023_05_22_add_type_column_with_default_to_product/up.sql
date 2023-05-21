@@ -1,0 +1,3 @@
+ALTER TABLE product
+ADD COLUMN "type" TEXT NOT NULL DEFAULT 'COMMERCE',
+ADD FOREIGN KEY (type) REFERENCES product_type(value)

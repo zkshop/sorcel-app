@@ -27,3 +27,7 @@ jobs:
       - name: Apply migrations
         working-directory: apps/api
         run: hasura migrate apply --endpoint ${{ secrets.HASURA_ENDPOINT }} --admin-secret ${{ secrets.HASURA_ADMIN_SECRET }} --database-name dev-3shop
+
+      - name: Apply metadata
+        working-directory: apps/api
+        run: hasura metadata apply --endpoint ${{ secrets.HASURA_ENDPOINT }} --admin-secret ${{ secrets.HASURA_ADMIN_SECRET }}
