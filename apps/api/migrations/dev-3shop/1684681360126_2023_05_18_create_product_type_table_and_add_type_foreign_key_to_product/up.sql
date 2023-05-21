@@ -1,4 +1,0 @@
-CREATE TYPE product_type AS ENUM ('COMMERCE', 'MODAL');
-
-ALTER TABLE product
-ADD COLUMN type product_type NOT NULL DEFAULT 'COMMERCE';

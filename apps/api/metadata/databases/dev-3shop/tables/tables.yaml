@@ -7,6 +7,7 @@
 - "!include public_order.yaml"
 - "!include public_poll.yaml"
 - "!include public_product.yaml"
+- "!include public_product_type.yaml"
 - "!include public_segment.yaml"
 - "!include public_segment_type.yaml"
 - "!include public_user.yaml"
