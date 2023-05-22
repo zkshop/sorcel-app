@@ -10,6 +10,9 @@ import {
   ChatRightTextIcon,
   NumberInput,
   NumberInputField,
+  Switch,
+  HStack,
+  Text,
 } from '@3shop/ui';
 import { useFormContext } from 'react-hook-form';
 
@@ -24,7 +27,16 @@ export const GeneralInformationsFields = () => {
 
   return (
     <Section>
-      <Heading fontSize="xl"> General Information </Heading>
+      <HStack justifyContent="space-between">
+        <Heading fontSize="xl">
+          <Text>General Information</Text>
+        </Heading>
+        <HStack>
+          <Text>Commerce</Text>
+          <Switch {...register('isModal')} />
+          <Text>Modal</Text>
+        </HStack>
+      </HStack>
 
       {/* Name */}
       <FormControl isInvalid={Boolean(errors.name)}>

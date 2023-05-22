@@ -3,6 +3,7 @@ export type AddProductFormValues = {
   description: string;
   image: File;
   name: string;
+  isModal: boolean;
 };
 
 export type EditProductFormValues = {
