@@ -17,9 +17,15 @@ mutation CreateProduct(
   }
 }
 
-mutation CreateAdminProduct($price: Int!, $name: String!, $description: String!, $image: String!) {
+mutation CreateAdminProduct(
+  $price: Int!
+  $name: String!
+  $description: String!
+  $image: String!
+  $type: product_type_enum!
+) {
   insert_product_one(
-    object: { image: $image, name: $name, description: $description, price: $price }
+    object: { image: $image, name: $name, description: $description, price: $price, type: $type }
   ) {
     app_id
     id
