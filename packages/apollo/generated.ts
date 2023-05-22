@@ -1660,6 +1660,10 @@ export type Mutation_Root = {
   delete_product?: Maybe<Product_Mutation_Response>;
   /** delete single row from the table: "product" */
   delete_product_by_pk?: Maybe<Product>;
+  /** delete data from the table: "product_type" */
+  delete_product_type?: Maybe<Product_Type_Mutation_Response>;
+  /** delete single row from the table: "product_type" */
+  delete_product_type_by_pk?: Maybe<Product_Type>;
   /** delete data from the table: "segment" */
   delete_segment?: Maybe<Segment_Mutation_Response>;
   /** delete single row from the table: "segment" */
@@ -1712,6 +1716,10 @@ export type Mutation_Root = {
   insert_product?: Maybe<Product_Mutation_Response>;
   /** insert a single row into the table: "product" */
   insert_product_one?: Maybe<Product>;
+  /** insert data into the table: "product_type" */
+  insert_product_type?: Maybe<Product_Type_Mutation_Response>;
+  /** insert a single row into the table: "product_type" */
+  insert_product_type_one?: Maybe<Product_Type>;
   /** insert data into the table: "segment" */
   insert_segment?: Maybe<Segment_Mutation_Response>;
   /** insert a single row into the table: "segment" */
@@ -1782,6 +1790,12 @@ export type Mutation_Root = {
   update_product_by_pk?: Maybe<Product>;
   /** update multiples rows of table: "product" */
   update_product_many?: Maybe<Array<Maybe<Product_Mutation_Response>>>;
+  /** update data of the table: "product_type" */
+  update_product_type?: Maybe<Product_Type_Mutation_Response>;
+  /** update single row of the table: "product_type" */
+  update_product_type_by_pk?: Maybe<Product_Type>;
+  /** update multiples rows of table: "product_type" */
+  update_product_type_many?: Maybe<Array<Maybe<Product_Type_Mutation_Response>>>;
   /** update data of the table: "segment" */
   update_segment?: Maybe<Segment_Mutation_Response>;
   /** update single row of the table: "segment" */
@@ -1896,6 +1910,16 @@ export type Mutation_RootDelete_ProductArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Product_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Product_TypeArgs = {
+  where: Product_Type_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Product_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 /** mutation root */
@@ -2044,6 +2068,18 @@ export type Mutation_RootInsert_ProductArgs = {
 export type Mutation_RootInsert_Product_OneArgs = {
   object: Product_Insert_Input;
   on_conflict?: InputMaybe<Product_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Product_TypeArgs = {
+  objects: Array<Product_Type_Insert_Input>;
+  on_conflict?: InputMaybe<Product_Type_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Product_Type_OneArgs = {
+  object: Product_Type_Insert_Input;
+  on_conflict?: InputMaybe<Product_Type_On_Conflict>;
 };
 
 /** mutation root */
@@ -2295,6 +2331,23 @@ export type Mutation_RootUpdate_Product_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Product_ManyArgs = {
   updates: Array<Product_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Product_TypeArgs = {
+  _set?: InputMaybe<Product_Type_Set_Input>;
+  where: Product_Type_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Product_Type_By_PkArgs = {
+  _set?: InputMaybe<Product_Type_Set_Input>;
+  pk_columns: Product_Type_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Product_Type_ManyArgs = {
+  updates: Array<Product_Type_Updates>;
 };
 
 /** mutation root */
@@ -3021,6 +3074,7 @@ export type Product = {
   image: Scalars['String'];
   name: Scalars['String'];
   price: Scalars['Int'];
+  type: Product_Type_Enum;
 };
 
 /** columns and relationships of "product" */
@@ -3090,6 +3144,7 @@ export type Product_Bool_Exp = {
   image?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   price?: InputMaybe<Int_Comparison_Exp>;
+  type?: InputMaybe<Product_Type_Enum_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "product" */
@@ -3113,6 +3168,7 @@ export type Product_Insert_Input = {
   image?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
+  type?: InputMaybe<Product_Type_Enum>;
 };
 
 /** aggregate max on columns */
@@ -3170,6 +3226,7 @@ export type Product_Order_By = {
   image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   price?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: product */
@@ -3191,6 +3248,8 @@ export enum Product_Select_Column {
   Name = 'name',
   /** column name */
   Price = 'price',
+  /** column name */
+  Type = 'type',
 }
 
 /** input type for updating data in table "product" */
@@ -3201,6 +3260,7 @@ export type Product_Set_Input = {
   image?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
+  type?: InputMaybe<Product_Type_Enum>;
 };
 
 /** aggregate stddev on columns */
@@ -3237,12 +3297,148 @@ export type Product_Stream_Cursor_Value_Input = {
   image?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
+  type?: InputMaybe<Product_Type_Enum>;
 };
 
 /** aggregate sum on columns */
 export type Product_Sum_Fields = {
   __typename?: 'product_sum_fields';
   price?: Maybe<Scalars['Int']>;
+};
+
+/** columns and relationships of "product_type" */
+export type Product_Type = {
+  __typename?: 'product_type';
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "product_type" */
+export type Product_Type_Aggregate = {
+  __typename?: 'product_type_aggregate';
+  aggregate?: Maybe<Product_Type_Aggregate_Fields>;
+  nodes: Array<Product_Type>;
+};
+
+/** aggregate fields of "product_type" */
+export type Product_Type_Aggregate_Fields = {
+  __typename?: 'product_type_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Product_Type_Max_Fields>;
+  min?: Maybe<Product_Type_Min_Fields>;
+};
+
+/** aggregate fields of "product_type" */
+export type Product_Type_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Product_Type_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "product_type". All fields are combined with a logical 'AND'. */
+export type Product_Type_Bool_Exp = {
+  _and?: InputMaybe<Array<Product_Type_Bool_Exp>>;
+  _not?: InputMaybe<Product_Type_Bool_Exp>;
+  _or?: InputMaybe<Array<Product_Type_Bool_Exp>>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "product_type" */
+export enum Product_Type_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  ProductTypePkey = 'product_type_pkey',
+}
+
+export enum Product_Type_Enum {
+  Commerce = 'COMMERCE',
+  Modal = 'MODAL',
+}
+
+/** Boolean expression to compare columns of type "product_type_enum". All fields are combined with logical 'AND'. */
+export type Product_Type_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Product_Type_Enum>;
+  _in?: InputMaybe<Array<Product_Type_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Product_Type_Enum>;
+  _nin?: InputMaybe<Array<Product_Type_Enum>>;
+};
+
+/** input type for inserting data into table "product_type" */
+export type Product_Type_Insert_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Product_Type_Max_Fields = {
+  __typename?: 'product_type_max_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Product_Type_Min_Fields = {
+  __typename?: 'product_type_min_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "product_type" */
+export type Product_Type_Mutation_Response = {
+  __typename?: 'product_type_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Product_Type>;
+};
+
+/** on_conflict condition type for table "product_type" */
+export type Product_Type_On_Conflict = {
+  constraint: Product_Type_Constraint;
+  update_columns?: Array<Product_Type_Update_Column>;
+  where?: InputMaybe<Product_Type_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "product_type". */
+export type Product_Type_Order_By = {
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: product_type */
+export type Product_Type_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "product_type" */
+export enum Product_Type_Select_Column {
+  /** column name */
+  Value = 'value',
+}
+
+/** input type for updating data in table "product_type" */
+export type Product_Type_Set_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "product_type" */
+export type Product_Type_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Product_Type_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Product_Type_Stream_Cursor_Value_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "product_type" */
+export enum Product_Type_Update_Column {
+  /** column name */
+  Value = 'value',
+}
+
+export type Product_Type_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Product_Type_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Product_Type_Bool_Exp;
 };
 
 /** update columns of table "product" */
@@ -3259,6 +3455,8 @@ export enum Product_Update_Column {
   Name = 'name',
   /** column name */
   Price = 'price',
+  /** column name */
+  Type = 'type',
 }
 
 export type Product_Updates = {
@@ -3344,6 +3542,12 @@ export type Query_Root = {
   product_aggregate: Product_Aggregate;
   /** fetch data from the table: "product" using primary key columns */
   product_by_pk?: Maybe<Product>;
+  /** fetch data from the table: "product_type" */
+  product_type: Array<Product_Type>;
+  /** fetch aggregated fields from the table: "product_type" */
+  product_type_aggregate: Product_Type_Aggregate;
+  /** fetch data from the table: "product_type" using primary key columns */
+  product_type_by_pk?: Maybe<Product_Type>;
   /** fetch data from the table: "segment" */
   segment: Array<Segment>;
   /** fetch aggregated fields from the table: "segment" */
@@ -3548,6 +3752,26 @@ export type Query_RootProduct_AggregateArgs = {
 
 export type Query_RootProduct_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+export type Query_RootProduct_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Product_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Product_Type_Order_By>>;
+  where?: InputMaybe<Product_Type_Bool_Exp>;
+};
+
+export type Query_RootProduct_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Product_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Product_Type_Order_By>>;
+  where?: InputMaybe<Product_Type_Bool_Exp>;
+};
+
+export type Query_RootProduct_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 export type Query_RootSegmentArgs = {
@@ -4093,6 +4317,14 @@ export type Subscription_Root = {
   product_by_pk?: Maybe<Product>;
   /** fetch data from the table in a streaming manner: "product" */
   product_stream: Array<Product>;
+  /** fetch data from the table: "product_type" */
+  product_type: Array<Product_Type>;
+  /** fetch aggregated fields from the table: "product_type" */
+  product_type_aggregate: Product_Type_Aggregate;
+  /** fetch data from the table: "product_type" using primary key columns */
+  product_type_by_pk?: Maybe<Product_Type>;
+  /** fetch data from the table in a streaming manner: "product_type" */
+  product_type_stream: Array<Product_Type>;
   /** fetch data from the table: "segment" */
   segment: Array<Segment>;
   /** fetch aggregated fields from the table: "segment" */
@@ -4359,6 +4591,32 @@ export type Subscription_RootProduct_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Product_Stream_Cursor_Input>>;
   where?: InputMaybe<Product_Bool_Exp>;
+};
+
+export type Subscription_RootProduct_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Product_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Product_Type_Order_By>>;
+  where?: InputMaybe<Product_Type_Bool_Exp>;
+};
+
+export type Subscription_RootProduct_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Product_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Product_Type_Order_By>>;
+  where?: InputMaybe<Product_Type_Bool_Exp>;
+};
+
+export type Subscription_RootProduct_Type_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+export type Subscription_RootProduct_Type_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Product_Type_Stream_Cursor_Input>>;
+  where?: InputMaybe<Product_Type_Bool_Exp>;
 };
 
 export type Subscription_RootSegmentArgs = {
@@ -5204,6 +5462,7 @@ export type CreateAdminProductMutationVariables = Exact<{
   name: Scalars['String'];
   description: Scalars['String'];
   image: Scalars['String'];
+  type: Product_Type_Enum;
 }>;
 
 export type CreateAdminProductMutation = {
@@ -5289,6 +5548,7 @@ export type GetProductByIdQuery = {
     name: string;
     description: string;
     price: number;
+    type: Product_Type_Enum;
     app: {
       __typename?: 'app';
       id: any;
@@ -5334,6 +5594,7 @@ export type GetProductsQuery = {
     name: string;
     description: string;
     price: number;
+    type: Product_Type_Enum;
     gate: Array<{
       __typename?: 'gate_v2';
       app_id?: any | null;
@@ -5369,6 +5630,7 @@ export type GetAdminProductsQuery = {
     name: string;
     description: string;
     price: number;
+    type: Product_Type_Enum;
   }>;
 };
 
@@ -6783,9 +7045,10 @@ export const CreateAdminProductDocument = gql`
     $name: String!
     $description: String!
     $image: String!
+    $type: product_type_enum!
   ) {
     insert_product_one(
-      object: { image: $image, name: $name, description: $description, price: $price }
+      object: { image: $image, name: $name, description: $description, price: $price, type: $type }
     ) {
       app_id
       id
@@ -6818,6 +7081,7 @@ export type CreateAdminProductMutationFn = Apollo.MutationFunction<
  *      name: // value for 'name'
  *      description: // value for 'description'
  *      image: // value for 'image'
+ *      type: // value for 'type'
  *   },
  * });
  */
@@ -6957,6 +7221,7 @@ export const GetProductByIdDocument = gql`
       name
       description
       price
+      type
       app {
         id
         deliveryTaxesTableName
@@ -7021,6 +7286,7 @@ export const GetProductsDocument = gql`
       name
       description
       price
+      type
       gate {
         ...GateFields
       }
@@ -7075,6 +7341,7 @@ export const GetAdminProductsDocument = gql`
       name
       description
       price
+      type
     }
   }
 `;
