@@ -1,14 +1,13 @@
 import { MainLayout } from '@3shop/ui';
+import type { UseFormHandleSubmit } from 'react-hook-form';
 
 import { ProductFormHeader } from './ProductFormHeader';
 import { GeneralInformationsFields, MediaFields } from './Sections';
-import type { AddProductFormValues } from './types';
-import type { Gate } from '@3shop/apollo';
+import type { AddProductFormValues, EditProductFormValues } from './types';
 
 type BaseProductFormProps = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  handleSubmit: Function;
-  onSubmit(data: AddProductFormValues): Promise<void>;
+  handleSubmit: UseFormHandleSubmit<AddProductFormValues | EditProductFormValues>;
+  onSubmit(data: AddProductFormValues | EditProductFormValues): Promise<void>;
   isLoading: boolean;
   isDisabled: boolean;
 };
