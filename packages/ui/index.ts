@@ -65,6 +65,7 @@ export {
   Stat,
   StatLabel,
   StatNumber,
+  Switch,
   TableContainer,
   Tbody,
   Td,

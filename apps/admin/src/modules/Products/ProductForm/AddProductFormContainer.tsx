@@ -9,7 +9,7 @@ import { ADD_PRODUCT_FORM_SCHEMA } from '../../../schemas';
 import { StorageService } from '@3shop/domains';
 import { ImageStorageClient } from '@3shop/admin-infra';
 import { useNavigate } from 'react-router-dom';
-import { useCreateAdminProductMutation } from '@3shop/apollo';
+import { Product_Type_Enum, useCreateAdminProductMutation } from '@3shop/apollo';
 
 const storage = StorageService(ImageStorageClient());
 
@@ -45,6 +45,7 @@ export const AddProductFormContainer = () => {
           ...data,
           image: uploadUrl,
           price: Number(data.price),
+          type: data.isModal ? Product_Type_Enum.Modal : Product_Type_Enum.Commerce,
         },
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),
       });
