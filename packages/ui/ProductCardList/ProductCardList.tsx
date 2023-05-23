@@ -35,6 +35,7 @@ export const ProductCardList = ({ products, isWalletConnected }: ProductCardList
           isLocked,
           isWithHref,
           type,
+          webhookUrl,
         }) => (
           <GridItem
             key={`products-${id}`}
@@ -55,6 +56,7 @@ export const ProductCardList = ({ products, isWalletConnected }: ProductCardList
               isWithHref={isWithHref}
               isWalletConnected={isWalletConnected}
               type={type}
+              webhookUrl={webhookUrl}
             />
           </GridItem>
         ),

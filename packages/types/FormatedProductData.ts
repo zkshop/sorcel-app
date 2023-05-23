@@ -16,4 +16,5 @@ export type FormatedProductData = {
   isAnHolder?: boolean;
   isWithHref?: boolean;
   type: Product_Type_Enum;
+  webhookUrl?: string;
 };
