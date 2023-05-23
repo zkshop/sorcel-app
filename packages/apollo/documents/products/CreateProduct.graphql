@@ -23,9 +23,17 @@ mutation CreateAdminProduct(
   $description: String!
   $image: String!
   $type: product_type_enum!
+  $webhookUrl: String
 ) {
   insert_product_one(
-    object: { image: $image, name: $name, description: $description, price: $price, type: $type }
+    object: {
+      image: $image
+      name: $name
+      description: $description
+      price: $price
+      type: $type
+      webhookUrl: $webhookUrl
+    }
   ) {
     app_id
     id
@@ -33,5 +41,6 @@ mutation CreateAdminProduct(
     name
     description
     price
+    webhookUrl
   }
 }

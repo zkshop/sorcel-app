@@ -7,6 +7,7 @@ query GetProducts($appId: uuid!) {
     description
     price
     type
+    webhookUrl
     gate {
       ...GateFields
     }
@@ -22,5 +23,6 @@ query GetAdminProducts {
     description
     price
     type
+    webhookUrl
   }
 }
