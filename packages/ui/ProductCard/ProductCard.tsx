@@ -39,6 +39,7 @@ export type ProductCardProps = {
   isWithHref?: boolean;
   isWalletConnected?: boolean;
   type: Product_Type_Enum;
+  webhookUrl?: string;
 };
 
 export const ProductCard = ({
@@ -54,6 +55,7 @@ export const ProductCard = ({
   isWithHref = true,
   isWalletConnected = false,
   type,
+  webhookUrl,
 }: ProductCardProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const {
@@ -174,6 +176,7 @@ export const ProductCard = ({
       </Modal>
 
       <ProductCardModal
+        webhookUrl={webhookUrl || ''}
         isOpen={isProductModalOpen}
         onClose={onProductModalClose}
         title={name}
