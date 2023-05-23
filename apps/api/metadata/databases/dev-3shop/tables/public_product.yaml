@@ -27,6 +27,7 @@ insert_permissions:
         - name
         - price
         - type
+        - webhookUrl
 select_permissions:
   - role: customer
     permission:
@@ -38,6 +39,7 @@ select_permissions:
         - name
         - price
         - type
+        - webhookUrl
       filter:
         app_id:
           _eq: X-Hasura-User-Id
