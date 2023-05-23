@@ -3075,6 +3075,7 @@ export type Product = {
   name: Scalars['String'];
   price: Scalars['Int'];
   type: Product_Type_Enum;
+  webhookUrl?: Maybe<Scalars['String']>;
 };
 
 /** columns and relationships of "product" */
@@ -3145,6 +3146,7 @@ export type Product_Bool_Exp = {
   name?: InputMaybe<String_Comparison_Exp>;
   price?: InputMaybe<Int_Comparison_Exp>;
   type?: InputMaybe<Product_Type_Enum_Comparison_Exp>;
+  webhookUrl?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "product" */
@@ -3169,6 +3171,7 @@ export type Product_Insert_Input = {
   name?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
   type?: InputMaybe<Product_Type_Enum>;
+  webhookUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
@@ -3180,6 +3183,7 @@ export type Product_Max_Fields = {
   image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['Int']>;
+  webhookUrl?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
@@ -3191,6 +3195,7 @@ export type Product_Min_Fields = {
   image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['Int']>;
+  webhookUrl?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "product" */
@@ -3227,6 +3232,7 @@ export type Product_Order_By = {
   name?: InputMaybe<Order_By>;
   price?: InputMaybe<Order_By>;
   type?: InputMaybe<Order_By>;
+  webhookUrl?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: product */
@@ -3250,6 +3256,8 @@ export enum Product_Select_Column {
   Price = 'price',
   /** column name */
   Type = 'type',
+  /** column name */
+  WebhookUrl = 'webhookUrl',
 }
 
 /** input type for updating data in table "product" */
@@ -3261,6 +3269,7 @@ export type Product_Set_Input = {
   name?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
   type?: InputMaybe<Product_Type_Enum>;
+  webhookUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
@@ -3298,6 +3307,7 @@ export type Product_Stream_Cursor_Value_Input = {
   name?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
   type?: InputMaybe<Product_Type_Enum>;
+  webhookUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate sum on columns */
@@ -3457,6 +3467,8 @@ export enum Product_Update_Column {
   Price = 'price',
   /** column name */
   Type = 'type',
+  /** column name */
+  WebhookUrl = 'webhookUrl',
 }
 
 export type Product_Updates = {
@@ -5463,6 +5475,7 @@ export type CreateAdminProductMutationVariables = Exact<{
   description: Scalars['String'];
   image: Scalars['String'];
   type: Product_Type_Enum;
+  webhookUrl?: InputMaybe<Scalars['String']>;
 }>;
 
 export type CreateAdminProductMutation = {
@@ -5475,6 +5488,7 @@ export type CreateAdminProductMutation = {
     name: string;
     description: string;
     price: number;
+    webhookUrl?: string | null;
   } | null;
 };
 
@@ -5549,6 +5563,7 @@ export type GetProductByIdQuery = {
     description: string;
     price: number;
     type: Product_Type_Enum;
+    webhookUrl?: string | null;
     app: {
       __typename?: 'app';
       id: any;
@@ -5595,6 +5610,7 @@ export type GetProductsQuery = {
     description: string;
     price: number;
     type: Product_Type_Enum;
+    webhookUrl?: string | null;
     gate: Array<{
       __typename?: 'gate_v2';
       app_id?: any | null;
@@ -5631,6 +5647,7 @@ export type GetAdminProductsQuery = {
     description: string;
     price: number;
     type: Product_Type_Enum;
+    webhookUrl?: string | null;
   }>;
 };
 
@@ -7046,9 +7063,17 @@ export const CreateAdminProductDocument = gql`
     $description: String!
     $image: String!
     $type: product_type_enum!
+    $webhookUrl: String
   ) {
     insert_product_one(
-      object: { image: $image, name: $name, description: $description, price: $price, type: $type }
+      object: {
+        image: $image
+        name: $name
+        description: $description
+        price: $price
+        type: $type
+        webhookUrl: $webhookUrl
+      }
     ) {
       app_id
       id
@@ -7056,6 +7081,7 @@ export const CreateAdminProductDocument = gql`
       name
       description
       price
+      webhookUrl
     }
   }
 `;
@@ -7082,6 +7108,7 @@ export type CreateAdminProductMutationFn = Apollo.MutationFunction<
  *      description: // value for 'description'
  *      image: // value for 'image'
  *      type: // value for 'type'
+ *      webhookUrl: // value for 'webhookUrl'
  *   },
  * });
  */
@@ -7222,6 +7249,7 @@ export const GetProductByIdDocument = gql`
       description
       price
       type
+      webhookUrl
       app {
         id
         deliveryTaxesTableName
@@ -7287,6 +7315,7 @@ export const GetProductsDocument = gql`
       description
       price
       type
+      webhookUrl
       gate {
         ...GateFields
       }
@@ -7342,6 +7371,7 @@ export const GetAdminProductsDocument = gql`
       description
       price
       type
+      webhookUrl
     }
   }
 `;
