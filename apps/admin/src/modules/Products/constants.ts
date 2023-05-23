@@ -15,6 +15,10 @@ export const PRODUCTS_FIELDS = {
     name: 'price',
     label: 'Price',
   },
-};
+  webhookUrl: {
+    name: 'webhookUrl',
+    label: 'Webhook URL',
+  },
+} as const;
 
 export const PRODUCT_ATTRIBUTES = ['Image', 'Name', 'Type', 'Price'];

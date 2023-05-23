@@ -23,7 +23,10 @@ export const GeneralInformationsFields = () => {
   const {
     register,
     formState: { errors },
+    watch,
   } = useFormContext<AddProductFormValues>();
+
+  const isModalValue = watch('isModal');
 
   return (
     <Section>
@@ -75,6 +78,17 @@ export const GeneralInformationsFields = () => {
 
         <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
       </FormControl>
+
+      {/* Webhook URL */}
+      {isModalValue && (
+        <FormControl isInvalid={Boolean(errors.webhookUrl)}>
+          <FormLabel mb={1}>{PRODUCTS_FIELDS.webhookUrl.label}</FormLabel>
+
+          <Input placeholder="Webhook URL" {...register(PRODUCTS_FIELDS.webhookUrl.name)} />
+
+          <FormErrorMessage>{errors.webhookUrl?.message}</FormErrorMessage>
+        </FormControl>
+      )}
     </Section>
   );
 };
