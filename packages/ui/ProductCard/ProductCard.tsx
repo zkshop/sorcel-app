@@ -23,7 +23,7 @@ import { Text } from '../Text/Text';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 import { PoapLink } from '../PoapLink';
 import { Product_Type_Enum } from '@3shop/apollo';
-import { CustomModal } from '..';
+import { ProductCardModal } from './ProductCardModal';
 
 export type ProductCardProps = {
   id?: string;
@@ -173,12 +173,11 @@ export const ProductCard = ({
         </ModalContent>
       </Modal>
 
-      <CustomModal
-        title="Product Modal"
-        body={<></>}
+      <ProductCardModal
         isOpen={isProductModalOpen}
-        onOpen={onProductModalOpen}
         onClose={onProductModalClose}
+        title={name}
+        onOpen={onProductModalOpen}
       />
     </StyledProductCard>
   );
