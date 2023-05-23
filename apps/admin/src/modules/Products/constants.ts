@@ -17,4 +17,4 @@ export const PRODUCTS_FIELDS = {
   },
 };
 
-export const PRODUCT_ATTRIBUTES = ['Image', 'Name', 'Price'];
+export const PRODUCT_ATTRIBUTES = ['Image', 'Name', 'Type', 'Price'];
