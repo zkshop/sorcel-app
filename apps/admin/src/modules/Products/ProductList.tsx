@@ -29,13 +29,14 @@ export const Products = () => {
       <Table
         data={data.products}
         heads={PRODUCT_ATTRIBUTES}
-        renderRow={({ id, image, name, price }) => (
+        renderRow={({ id, image, name, price, type }) => (
           <ProductListItem
             key={id}
             id={id}
             image={image}
             name={name}
             price={price}
+            type={type}
             goToProduct={() => navigate(getEditProductIdRoute(id))}
           />
         )}
