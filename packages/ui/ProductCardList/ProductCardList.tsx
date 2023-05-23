@@ -34,6 +34,7 @@ export const ProductCardList = ({ products, isWalletConnected }: ProductCardList
           poapImgList,
           isLocked,
           isWithHref,
+          type,
         }) => (
           <GridItem
             key={`products-${id}`}
@@ -53,6 +54,7 @@ export const ProductCardList = ({ products, isWalletConnected }: ProductCardList
               isLocked={isLocked}
               isWithHref={isWithHref}
               isWalletConnected={isWalletConnected}
+              type={type}
             />
           </GridItem>
         ),

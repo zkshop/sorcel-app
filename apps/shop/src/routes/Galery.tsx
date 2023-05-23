@@ -59,7 +59,7 @@ export const Galery = () => {
         }}
       />
 
-      <ProductListContainer products={data?.products} />
+      <ProductListContainer products={data.products} />
     </>
   );
 };

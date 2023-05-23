@@ -55,6 +55,7 @@ export const formatProductData = ({
     priceReduced,
     poapImgList: poapImgListToDisplay,
     isLocked,
+    type: product.type,
   };
 
   return formatedProductData;

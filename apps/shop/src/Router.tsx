@@ -29,6 +29,7 @@ const router = createMemoryRouter(
     <Route path="/" element={<Layout />}>
       <Route errorElement={<ErrorBoundary />}>
         <Route index element={<Galery />} />
+        <Route path="/modal/:productId" element={<Galery />} />
         <Route path="/product/:productId" element={<Product />} />
         <Route path="/shipping/:productId" element={<Shipping />} />
         <Route path="/checkout/:productId" element={<Checkout />} />

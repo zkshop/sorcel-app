@@ -1,3 +1,5 @@
+import type { Product_Type_Enum } from '@3shop/apollo';
+
 export type FormatedProductData = {
   id?: string;
   name: string;
@@ -13,4 +15,5 @@ export type FormatedProductData = {
   isLocked?: boolean;
   isAnHolder?: boolean;
   isWithHref?: boolean;
+  type: Product_Type_Enum;
 };
