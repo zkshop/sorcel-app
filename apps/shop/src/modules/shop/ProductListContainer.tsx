@@ -9,6 +9,7 @@ import { useAccount } from '@3shop/wallet';
 
 type ProductListContainerProps = {
   products: GetProductsQuery['products'];
+  modal?: boolean;
 };
 
 export type ShopGate_v2 = GateFieldsFragment;
@@ -54,9 +55,11 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
   });
 
   return (
-    <ProductCardList
-      products={formatedProducts}
-      isWalletConnected={Boolean(isConnected || auth.email)}
-    />
+    <>
+      <ProductCardList
+        products={formatedProducts}
+        isWalletConnected={Boolean(isConnected || auth.email)}
+      />
+    </>
   );
 };
