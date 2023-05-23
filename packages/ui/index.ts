@@ -26,6 +26,7 @@ export * from './TextInput/TextInput';
 export * from './theme';
 export * from './VerticalMenu/VerticalMenu';
 export * from './PoapLink';
+export { Modal as CustomModal } from './Modal/Modal';
 
 export {
   Accordion,

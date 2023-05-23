@@ -10,5 +10,8 @@
   ],
   "scripts": {
     "lint": "eslint \"**/*.ts*\" --fix"
+  },
+  "dependencies": {
+    "@3shop/apollo": "workspace:*"
   }
 }

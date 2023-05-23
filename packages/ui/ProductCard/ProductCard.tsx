@@ -11,7 +11,6 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  Link as ExternalLink,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
@@ -23,6 +22,8 @@ import { DiscountTag } from './DiscountTag';
 import { Text } from '../Text/Text';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 import { PoapLink } from '../PoapLink';
+import { Product_Type_Enum } from '@3shop/apollo';
+import { CustomModal } from '..';
 
 export type ProductCardProps = {
   id?: string;
@@ -37,6 +38,7 @@ export type ProductCardProps = {
   isLocked?: boolean;
   isWithHref?: boolean;
   isWalletConnected?: boolean;
+  type: Product_Type_Enum;
 };
 
 export const ProductCard = ({
@@ -51,11 +53,18 @@ export const ProductCard = ({
   isLocked = false,
   isWithHref = true,
   isWalletConnected = false,
+  type,
 }: ProductCardProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const {
+    isOpen: isProductModalOpen,
+    onClose: onProductModalClose,
+    onOpen: onProductModalOpen,
+  } = useDisclosure();
   const to = `product/${id}`;
+
   const additionalProps =
-    isLocked || !isWithHref
+    (isLocked || !isWithHref) && type === Product_Type_Enum.Commerce
       ? {}
       : {
           to,
@@ -65,7 +74,8 @@ export const ProductCard = ({
   return (
     <StyledProductCard
       className={classnames.PRODUCT_CARD.CONTAINER}
-      as={isLocked ? 'div' : Link}
+      as={isLocked || type === Product_Type_Enum.Modal ? 'div' : Link}
+      onClick={!isLocked && type === Product_Type_Enum.Modal ? onProductModalOpen : undefined}
       {...additionalProps}
     >
       <Box
@@ -162,6 +172,14 @@ export const ProductCard = ({
           </ModalFooter>
         </ModalContent>
       </Modal>
+
+      <CustomModal
+        title="Product Modal"
+        body={<></>}
+        isOpen={isProductModalOpen}
+        onOpen={onProductModalOpen}
+        onClose={onProductModalClose}
+      />
     </StyledProductCard>
   );
 };
