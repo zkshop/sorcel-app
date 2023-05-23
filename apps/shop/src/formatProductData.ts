@@ -56,6 +56,7 @@ export const formatProductData = ({
     poapImgList: poapImgListToDisplay,
     isLocked,
     type: product.type,
+    webhookUrl: product.webhookUrl || '',
   };
 
   return formatedProductData;
