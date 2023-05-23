@@ -4,6 +4,7 @@ export type AddProductFormValues = {
   image: File;
   name: string;
   isModal: boolean;
+  webhookUrl?: string;
 };
 
 export type EditProductFormValues = {
