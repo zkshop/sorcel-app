@@ -47,19 +47,30 @@ export const ProductCardModal = ({
 
   const onSubmit = async (data: { email: string }) => {
     setLoading(true);
+    try {
+      await axios.post(`${webhookUrl}?email=${data.email}`);
 
-    await axios.post(`${webhookUrl}?email=${data.email}`);
+      toast({
+        title: 'Success',
+        description: 'Your email has been sent',
+        position: 'top-right',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (e) {
+      toast({
+        title: 'Error',
+        description: 'An error occured. Please try again later.',
+        position: 'top-right',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
 
-    toast({
-      title: 'Success',
-      description: 'Your email has been sent',
-      position: 'top-right',
-      status: 'success',
-      duration: 5000,
-      isClosable: true,
-    });
-
-    setLoading(false);
     reset();
     onClose();
   };
