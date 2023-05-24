@@ -1,9 +1,13 @@
 import { Header, ButtonGroup, Button } from '@3shop/ui';
 
-export const AddGateFormHeader = ({}) => (
+type AddGateFormHeaderProps = {
+  loading: boolean;
+};
+
+export const AddGateFormHeader = ({ loading }: AddGateFormHeaderProps) => (
   <Header title="Add Gate">
     <ButtonGroup>
-      <Button isDisabled={false} isLoading={false} type="submit">
+      <Button isDisabled={loading} isLoading={loading} type="submit">
         Save
       </Button>
     </ButtonGroup>
