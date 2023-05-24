@@ -2,7 +2,7 @@ import { AddGateModal } from './AddGateModal';
 import { PerkFields } from './PerkFields';
 import { GeneralFields } from './GeneralFields';
 import { AddGateFormHeader } from './AddGateFormHeader';
-import { Button, Heading, MainLayout, Section, Table, useDisclosure } from '@3shop/ui';
+import { BackButton, Button, Heading, MainLayout, Section, Table, useDisclosure } from '@3shop/ui';
 
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -83,7 +83,7 @@ export const AddGate = () => {
     <MainLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
         <AddGateFormHeader />
-
+        <BackButton href="/app" />
         <GeneralFields register={register} errors={errors} />
 
         <PerkFields control={control} showDiscountInput={showDiscountInput} register={register} />
