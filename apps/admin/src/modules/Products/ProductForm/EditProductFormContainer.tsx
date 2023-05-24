@@ -5,7 +5,8 @@ import { DeleteProductModal } from './DeleteProductModal';
 import { ProductForm } from './ProductForm';
 import type { EditProductFormValues } from './types';
 
-import type { EditProductMutationVariables, Gate, GetProductByIdQuery } from '@3shop/apollo';
+import type { EditProductMutationVariables, GetProductByIdQuery } from '@3shop/apollo';
+import { Product_Type_Enum } from '@3shop/apollo';
 import { useDeleteProductMutation, useEditProductMutation } from '@3shop/apollo';
 import {
   ERROR_MESSAGE,
@@ -33,6 +34,8 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
       ...product,
       price: product?.price.toString(),
       image: product?.image,
+      isModal: product?.type === Product_Type_Enum.Modal,
+      webhookUrl: product?.webhookUrl || '',
     },
     resolver: yupResolver(ADD_PRODUCT_FORM_SCHEMA),
     mode: 'onChange',
