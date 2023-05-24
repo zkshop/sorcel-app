@@ -5239,6 +5239,15 @@ export type PushClaimsMutation = {
   update_gate_v2_by_pk?: { __typename?: 'gate_v2'; id: any; claims: any } | null;
 };
 
+export type DeleteGateV2MutationVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+export type DeleteGateV2Mutation = {
+  __typename?: 'mutation_root';
+  delete_gate_v2_by_pk?: { __typename?: 'gate_v2'; id: any } | null;
+};
+
 export type CreateGateMutationVariables = Exact<{
   attributes: Scalars['jsonb'];
   contractAddress: Scalars['String'];
@@ -6331,6 +6340,50 @@ export type PushClaimsMutationResult = Apollo.MutationResult<PushClaimsMutation>
 export type PushClaimsMutationOptions = Apollo.BaseMutationOptions<
   PushClaimsMutation,
   PushClaimsMutationVariables
+>;
+export const DeleteGateV2Document = gql`
+  mutation DeleteGateV2($id: uuid!) {
+    delete_gate_v2_by_pk(id: $id) {
+      id
+    }
+  }
+`;
+export type DeleteGateV2MutationFn = Apollo.MutationFunction<
+  DeleteGateV2Mutation,
+  DeleteGateV2MutationVariables
+>;
+
+/**
+ * __useDeleteGateV2Mutation__
+ *
+ * To run a mutation, you first call `useDeleteGateV2Mutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteGateV2Mutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteGateV2Mutation, { data, loading, error }] = useDeleteGateV2Mutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteGateV2Mutation(
+  baseOptions?: Apollo.MutationHookOptions<DeleteGateV2Mutation, DeleteGateV2MutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<DeleteGateV2Mutation, DeleteGateV2MutationVariables>(
+    DeleteGateV2Document,
+    options,
+  );
+}
+export type DeleteGateV2MutationHookResult = ReturnType<typeof useDeleteGateV2Mutation>;
+export type DeleteGateV2MutationResult = Apollo.MutationResult<DeleteGateV2Mutation>;
+export type DeleteGateV2MutationOptions = Apollo.BaseMutationOptions<
+  DeleteGateV2Mutation,
+  DeleteGateV2MutationVariables
 >;
 export const CreateGateDocument = gql`
   mutation CreateGate(
