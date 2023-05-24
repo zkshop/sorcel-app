@@ -1,4 +1,4 @@
-import { useGetAdminProductsQuery, useGetProductsQuery } from '@3shop/apollo';
+import { useGetAdminProductsQuery } from '@3shop/apollo';
 import { Select, Spinner } from '@3shop/ui';
 import type { UseFormRegister } from 'react-hook-form';
 import type { AddGateFormValues } from './AddGate';

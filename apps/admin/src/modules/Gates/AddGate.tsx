@@ -2,7 +2,16 @@ import { AddGateModal } from './AddGateModal';
 import { PerkFields } from './PerkFields';
 import { GeneralFields } from './GeneralFields';
 import { AddGateFormHeader } from './AddGateFormHeader';
-import { BackButton, Button, Heading, MainLayout, Section, Table, useDisclosure } from '@3shop/ui';
+import {
+  BackButton,
+  Button,
+  Heading,
+  MainLayout,
+  Section,
+  Table,
+  useDisclosure,
+  useToast,
+} from '@3shop/ui';
 
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -11,6 +20,8 @@ import { SegmentTableItem } from './SegmentTableItem';
 import type { Segment_Insert_Input } from '@3shop/apollo';
 import { Network_Enum, Segment_Type_Enum, useCreateGateV2Mutation } from '@3shop/apollo';
 import { ProductSelectField } from './ProductSelectField';
+import segmentInputCreator from './segmentInputCreator';
+import { useNavigate } from 'react-router-dom';
 
 export type AddGateFormValues = {
   name: string;
@@ -34,37 +45,45 @@ export const AddGate = () => {
   const perkValue = watch('perk');
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [showDiscountInput, setShowDiscountInput] = useState(false);
-  const [createGate] = useCreateGateV2Mutation();
+  const [createGate, { loading }] = useCreateGateV2Mutation();
+  const toast = useToast();
+  const navigate = useNavigate();
 
-  const onSubmit = (data: AddGateFormValues) => {
-    const input: Segment_Insert_Input[] = segments.map((segment) =>
-      segment.type === 'NFT'
-        ? {
-            type: Segment_Type_Enum.Nft,
-            network: segment.network === 'ETHEREUM' ? Network_Enum.Ethereum : Network_Enum.Polygon,
-            nft_contract_address: segment.contractAddress,
-            poapIds: undefined,
-          }
-        : {
-            type: Segment_Type_Enum.Poap,
-            poap_ids: segment.poapIds,
-            network: undefined,
-            nft_contract_address: undefined,
+  const onSubmit = async (data: AddGateFormValues) => {
+    const input: Segment_Insert_Input[] = segments.map(segmentInputCreator);
+
+    try {
+      await createGate({
+        variables: {
+          segments: {
+            data: input,
           },
-    );
-
-    createGate({
-      variables: {
-        segments: {
-          data: input,
+          unique_claim: data.uniqueClaim,
+          discount: data.discount,
+          exclusive_access: data.perk === 'exclusiveAccess',
+          name: data.name,
+          product_id: data.product_id,
         },
-        unique_claim: data.uniqueClaim,
-        discount: data.discount,
-        exclusive_access: data.perk === 'exclusiveAccess',
-        name: data.name,
-        product_id: data.product_id,
-      },
-    });
+      });
+
+      toast({
+        title: 'Success',
+        description: `Gate ${data.name} created`,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+
+      navigate('/app');
+    } catch {
+      toast({
+        title: 'Error',
+        description: 'Something went wrong',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
 
   useEffect(() => {
@@ -82,7 +101,7 @@ export const AddGate = () => {
   return (
     <MainLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <AddGateFormHeader />
+        <AddGateFormHeader loading={loading} />
         <BackButton href="/app" />
         <GeneralFields register={register} errors={errors} />
 
