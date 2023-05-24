@@ -1,0 +1,5 @@
+mutation DeleteGateV2($id: uuid!) {
+  delete_gate_v2_by_pk(id: $id) {
+    id
+  }
+}

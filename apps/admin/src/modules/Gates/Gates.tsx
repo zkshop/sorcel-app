@@ -1,20 +1,66 @@
-import { useGetGates_V2Query } from '@3shop/apollo';
+import { useDeleteGateV2Mutation, useGetGates_V2Query } from '@3shop/apollo';
 import type { Nullable } from '@3shop/types';
 
-import { Header, Box, Button, Table, Link, Spinner } from '@3shop/ui';
+import {
+  Header,
+  Box,
+  Button,
+  Table,
+  Link,
+  Spinner,
+  useDisclosure,
+  CustomModal,
+  HStack,
+  Text,
+  useToast,
+} from '@3shop/ui';
+import { useState } from 'react';
 import { GateListItem } from './GateListItem';
 
-const GATES_ATTRIBUTES = ['name', 'perk'];
+const GATES_ATTRIBUTES = ['name', 'perk', ''];
 
 export type GateItemType = {
   name: string;
   id: string;
   exclusive_access: boolean;
   discount?: Nullable<number>;
+  handleOpenDeleteGateModal(gate: { id: string; name: string }): void;
 };
 
 export const Gates = () => {
   const { data, loading } = useGetGates_V2Query();
+  const [deleteGate, { loading: deleteGateLoading }] = useDeleteGateV2Mutation();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedGate, setSelectedGate] = useState<Nullable<{ id: string; name: string }>>(null);
+  const toast = useToast();
+
+  const handleOpenDeleteGateModal = async (gate: { id: string; name: string }) => {
+    setSelectedGate(gate);
+    onOpen();
+  };
+
+  const handleCloseDeleteGateModal = async () => {
+    setSelectedGate(null);
+    onClose();
+  };
+
+  const handleDeleteGate = async () => {
+    if (!selectedGate) return;
+    try {
+      await deleteGate({ variables: { id: selectedGate.id } });
+
+      onClose();
+      toast({
+        status: 'success',
+        title: 'Gate Deleted Successfully',
+        description: `Gate ${selectedGate.name} has been successfully deleted`,
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (loading) return <Spinner />;
 
@@ -28,7 +74,44 @@ export const Gates = () => {
         </Link>
       </Header>
 
-      <Table data={data.gates} heads={GATES_ATTRIBUTES} renderRow={GateListItem} />
+      <Table
+        data={data.gates}
+        heads={GATES_ATTRIBUTES}
+        renderRow={({ id, exclusive_access, name, discount }) => (
+          <GateListItem
+            id={id}
+            exclusive_access={exclusive_access}
+            name={name}
+            discount={discount}
+            handleOpenDeleteGateModal={handleOpenDeleteGateModal}
+          />
+        )}
+      />
+      <CustomModal
+        onOpen={onOpen}
+        isOpen={isOpen}
+        onClose={handleCloseDeleteGateModal}
+        title={`Delete Gate ${selectedGate?.name}`}
+        body={
+          <Box>
+            <Text>Are you sure you want to delete {selectedGate?.name} gate?</Text>
+            <HStack mt={4} justifyContent="flex-end">
+              <Button mr={2} onClick={onClose}>
+                Cancel
+              </Button>
+
+              <Button
+                colorScheme="red"
+                onClick={handleDeleteGate}
+                isDisabled={deleteGateLoading}
+                isLoading={deleteGateLoading}
+              >
+                Delete
+              </Button>
+            </HStack>
+          </Box>
+        }
+      />
     </Box>
   );
 };

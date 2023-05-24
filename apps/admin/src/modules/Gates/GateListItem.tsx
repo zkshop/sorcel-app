@@ -1,7 +1,13 @@
-import { Td, Tr } from '@3shop/ui';
+import { CloseIcon, Td, Tr } from '@3shop/ui';
 import type { GateItemType } from './Gates';
 
-export const GateListItem = ({ exclusive_access, name, discount }: GateItemType) => (
+export const GateListItem = ({
+  exclusive_access,
+  name,
+  discount,
+  id,
+  handleOpenDeleteGateModal,
+}: GateItemType) => (
   <Tr
     sx={{
       _hover: {
@@ -12,5 +18,8 @@ export const GateListItem = ({ exclusive_access, name, discount }: GateItemType)
   >
     <Td>{name}</Td>
     <Td>{exclusive_access ? 'Exclusive Access' : `Discount ${discount}%`}</Td>
+    <Td>
+      <CloseIcon onClick={() => handleOpenDeleteGateModal({ id, name })} />
+    </Td>
   </Tr>
 );
