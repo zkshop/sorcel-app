@@ -1,4 +1,4 @@
-import { MainLayout } from '@3shop/ui';
+import { BackButton, MainLayout } from '@3shop/ui';
 import type { UseFormHandleSubmit } from 'react-hook-form';
 
 import { ProductFormHeader } from './ProductFormHeader';
@@ -27,7 +27,7 @@ export const ProductForm = ({
   <MainLayout>
     <form onSubmit={handleSubmit(onSubmit)}>
       <ProductFormHeader isDisabled={isDisabled} isLoading={isLoading} onOpen={onOpen} />
-
+      <BackButton href="/app" />
       <GeneralInformationsFields />
 
       <MediaFields />
