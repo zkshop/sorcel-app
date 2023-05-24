@@ -12,4 +12,6 @@ export type EditProductFormValues = {
   description: string;
   image: File | string;
   name: string;
+  isModal: boolean;
+  webhookUrl?: string;
 };
