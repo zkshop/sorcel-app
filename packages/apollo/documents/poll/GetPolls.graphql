@@ -5,6 +5,7 @@ query GetPolls {
     voters
     description
     image
+    completed
   }
 }
 

@@ -2809,6 +2809,7 @@ export type Poll = {
   choices: Array<Choice>;
   /** An aggregate relationship */
   choices_aggregate: Choice_Aggregate;
+  completed: Scalars['Boolean'];
   created_at?: Maybe<Scalars['timestamptz']>;
   description: Scalars['String'];
   gate?: Maybe<Scalars['String']>;
@@ -2874,6 +2875,7 @@ export type Poll_Bool_Exp = {
   _or?: InputMaybe<Array<Poll_Bool_Exp>>;
   choices?: InputMaybe<Choice_Bool_Exp>;
   choices_aggregate?: InputMaybe<Choice_Aggregate_Bool_Exp>;
+  completed?: InputMaybe<Boolean_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   gate?: InputMaybe<String_Comparison_Exp>;
@@ -2907,6 +2909,7 @@ export type Poll_Delete_Key_Input = {
 /** input type for inserting data into table "poll" */
 export type Poll_Insert_Input = {
   choices?: InputMaybe<Choice_Arr_Rel_Insert_Input>;
+  completed?: InputMaybe<Scalars['Boolean']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
   gate?: InputMaybe<Scalars['String']>;
@@ -2957,6 +2960,7 @@ export type Poll_On_Conflict = {
 /** Ordering options when selecting data from "poll". */
 export type Poll_Order_By = {
   choices_aggregate?: InputMaybe<Choice_Aggregate_Order_By>;
+  completed?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   gate?: InputMaybe<Order_By>;
@@ -2979,6 +2983,8 @@ export type Poll_Prepend_Input = {
 /** select columns of table "poll" */
 export enum Poll_Select_Column {
   /** column name */
+  Completed = 'completed',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   Description = 'description',
@@ -2996,6 +3002,7 @@ export enum Poll_Select_Column {
 
 /** input type for updating data in table "poll" */
 export type Poll_Set_Input = {
+  completed?: InputMaybe<Scalars['Boolean']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
   gate?: InputMaybe<Scalars['String']>;
@@ -3015,6 +3022,7 @@ export type Poll_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Poll_Stream_Cursor_Value_Input = {
+  completed?: InputMaybe<Scalars['Boolean']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
   gate?: InputMaybe<Scalars['String']>;
@@ -3026,6 +3034,8 @@ export type Poll_Stream_Cursor_Value_Input = {
 
 /** update columns of table "poll" */
 export enum Poll_Update_Column {
+  /** column name */
+  Completed = 'completed',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -5422,6 +5432,7 @@ export type GetPollsQuery = {
     voters: any;
     description: string;
     image?: string | null;
+    completed: boolean;
   }>;
 };
 
@@ -6911,6 +6922,7 @@ export const GetPollsDocument = gql`
       voters
       description
       image
+      completed
     }
   }
 `;
