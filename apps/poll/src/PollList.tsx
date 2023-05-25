@@ -13,7 +13,6 @@ const PollContainer = styled(Box)`
   }
 `;
 
-// @ts-ignore
 const PollListContainer = styled(Flex)`
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -31,7 +30,12 @@ export const PollList = () => {
       {data.polls.map((poll) => (
         <PollContainer key={`poll-${poll.id}`}>
           <Link to={`/choices/${poll.id}`}>
-            <Poll image={poll.image || undefined} id={poll.id} title={poll.title} />
+            <Poll
+              completed={poll.completed}
+              image={poll.image || undefined}
+              id={poll.id}
+              title={poll.title}
+            />
           </Link>
         </PollContainer>
       ))}
