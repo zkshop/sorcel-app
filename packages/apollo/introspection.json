@@ -18256,6 +18256,22 @@
             "deprecationReason": null
           },
           {
+            "name": "completed",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "created_at",
             "description": null,
             "args": [],
@@ -18611,6 +18627,18 @@
             "deprecationReason": null
           },
           {
+            "name": "completed",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Boolean_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "created_at",
             "description": null,
             "type": {
@@ -18805,6 +18833,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "choice_arr_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "completed",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -19199,6 +19239,18 @@
             "deprecationReason": null
           },
           {
+            "name": "completed",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "created_at",
             "description": null,
             "type": {
@@ -19346,6 +19398,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "completed",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "created_at",
             "description": "column name",
             "isDeprecated": false,
@@ -19396,6 +19454,18 @@
         "description": "input type for updating data in table \"poll\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "completed",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "created_at",
             "description": null,
@@ -19531,6 +19601,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "completed",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "created_at",
             "description": null,
             "type": {
@@ -19627,6 +19709,12 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
+          {
+            "name": "completed",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "created_at",
             "description": "column name",
