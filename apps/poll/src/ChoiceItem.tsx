@@ -9,6 +9,7 @@ type ChoiceItemType = {
   handleClickOnChoice(choice: ChoiceType): void;
   votes: number;
   alreadyVoted: boolean;
+  completed: boolean;
 };
 
 export const ChoiceItem = ({
@@ -17,12 +18,13 @@ export const ChoiceItem = ({
   handleClickOnChoice,
   votes,
   alreadyVoted,
+  completed,
 }: ChoiceItemType) => (
   <ChoiceCard>
     <Flex p={15} alignItems="center" justifyContent="center" flexDirection="column">
       <Text textAlign="center">{title}</Text>
       <Box mt={2}>
-        {alreadyVoted ? (
+        {alreadyVoted || completed ? (
           <Stat textAlign="center">
             <StatLabel>Votes</StatLabel>
             <StatNumber>{votes}</StatNumber>

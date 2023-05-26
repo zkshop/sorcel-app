@@ -25,7 +25,7 @@ export const Poll = ({ title, image, completed }: PollType) => (
       <Text textAlign="center" noOfLines={1} fontFamily="Inter" fontWeight="800">
         {title}
       </Text>
-      <VoteButton isDisabled={completed}>Vote</VoteButton>
+      <VoteButton>Vote</VoteButton>
     </Flex>
   </PollCard>
 );
