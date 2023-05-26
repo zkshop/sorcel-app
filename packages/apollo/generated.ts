@@ -5417,6 +5417,7 @@ export type GetPollByIdQuery = {
     voters: any;
     description: string;
     image?: string | null;
+    completed: boolean;
     choices: Array<{ __typename?: 'choice'; id: any; poll_id: any; value: string; count: number }>;
   } | null;
 };
@@ -6873,6 +6874,7 @@ export const GetPollByIdDocument = gql`
       voters
       description
       image
+      completed
     }
   }
 `;

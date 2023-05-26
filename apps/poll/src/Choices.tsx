@@ -69,6 +69,8 @@ export const Choices = () => {
     }
   };
 
+  const completed = data.poll.completed;
+
   return (
     <>
       <Box height="100%">
@@ -96,6 +98,7 @@ export const Choices = () => {
                   id={choice.id}
                   votes={choice.count}
                   alreadyVoted={alreadyVoted}
+                  completed={completed}
                 />
               ))}
             </Flex>

@@ -12,5 +12,6 @@ query getPollById($id: uuid!) {
         voters
         description
         image
+        completed
     }
 } 
