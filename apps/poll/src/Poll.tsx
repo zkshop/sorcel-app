@@ -16,7 +16,7 @@ export const Poll = ({ title, image, completed }: PollType) => (
     <Box position="relative">
       {completed && (
         <TitleLayer>
-          <Text>Completed</Text>
+          <Text fontWeight="bold">Completed</Text>
         </TitleLayer>
       )}
       <PollImage completed={completed} isLocked={true} src={image} />
@@ -25,7 +25,7 @@ export const Poll = ({ title, image, completed }: PollType) => (
       <Text textAlign="center" noOfLines={1} fontFamily="Inter" fontWeight="800">
         {title}
       </Text>
-      <VoteButton>Vote</VoteButton>
+      <VoteButton isDisabled={completed}>Vote</VoteButton>
     </Flex>
   </PollCard>
 );

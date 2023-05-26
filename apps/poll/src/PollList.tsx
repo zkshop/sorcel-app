@@ -29,7 +29,7 @@ export const PollList = () => {
     <PollListContainer columnGap={2} rowGap={24}>
       {data.polls.map((poll) => (
         <PollContainer key={`poll-${poll.id}`}>
-          <Link to={`/choices/${poll.id}`}>
+          <Link to={poll.completed ? '/' : `/choices/${poll.id}`}>
             <Poll
               completed={poll.completed}
               image={poll.image || undefined}
