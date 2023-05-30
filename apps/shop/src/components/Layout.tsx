@@ -11,12 +11,12 @@ export const Layout = () => (
       <Outlet />
     </MainLayout>
     <footer>
-      <Link href="https://www.3shop.co" target="_blank">
+      <Link href="https://www.sorcel.co" target="_blank">
         <HStack marginY={8} justifyContent="center">
           <Text fontWeight="bold">Powered by</Text>{' '}
           <Image
             maxW={24}
-            src="https://kqjytgxbtetzewipikax.supabase.co/storage/v1/object/public/logo/logo"
+            src="https://kqjytgxbtetzewipikax.supabase.co/storage/v1/object/public/logo/logo.png"
           />
         </HStack>
       </Link>
