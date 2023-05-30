@@ -5,6 +5,7 @@ import { GeneralContainer } from '../modules/General/GeneralContainer';
 import { Integration } from '../modules/Integration/Integration';
 import { OrderList } from '../modules/Order/OrderList';
 import { Products } from '../modules/Products';
+import { Poll } from './Poll';
 
 export const Home = () => {
   const items = [
@@ -14,6 +15,7 @@ export const Home = () => {
     { title: 'Orders', content: <OrderList /> },
     { title: 'Integrations', content: <Integration /> },
     { title: 'Delivery Fees', content: <DeliveryFeesContainer /> },
+    { title: 'Poll', content: <Poll /> },
   ];
 
   return <VerticalMenu items={items} />;
