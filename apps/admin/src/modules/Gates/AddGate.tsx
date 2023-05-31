@@ -18,7 +18,7 @@ import { useForm } from 'react-hook-form';
 import { useAppSelector } from '@3shop/admin-store';
 import { SegmentTableItem } from './SegmentTableItem';
 import type { Segment_Insert_Input } from '@3shop/apollo';
-import { Network_Enum, Segment_Type_Enum, useCreateGateV2Mutation } from '@3shop/apollo';
+import { useCreateGateV2Mutation } from '@3shop/apollo';
 import { ProductSelectField } from './ProductSelectField';
 import segmentInputCreator from './segmentInputCreator';
 import { useNavigate } from 'react-router-dom';
