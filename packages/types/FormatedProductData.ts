@@ -1,4 +1,5 @@
 import type { Product_Type_Enum } from '@3shop/apollo';
+import type { Nullable } from './utils';
 
 export type FormatedProductData = {
   id?: string;
@@ -17,4 +18,8 @@ export type FormatedProductData = {
   isWithHref?: boolean;
   type: Product_Type_Enum;
   webhookUrl?: string;
+  gate: Nullable<{
+    id: string;
+    claims: string[];
+  }>;
 };

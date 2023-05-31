@@ -57,6 +57,12 @@ export const formatProductData = ({
     isLocked,
     type: product.type,
     webhookUrl: product.webhookUrl || '',
+    gate: productGates[0]
+      ? {
+          id: productGates[0].id,
+          claims: productGates[0].claims,
+        }
+      : null,
   };
 
   return formatedProductData;
