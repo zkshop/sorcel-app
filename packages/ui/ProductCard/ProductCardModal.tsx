@@ -20,6 +20,7 @@ type ProductCardModalProps = {
   onOpen: () => void;
   title: string;
   webhookUrl: string;
+  description?: string;
 };
 
 const EMAIL_SCHEMA = FormValidation.object().shape({
@@ -32,6 +33,7 @@ export const ProductCardModal = ({
   title,
   onOpen,
   webhookUrl,
+  description = 'Enter your email to receive the ticket',
 }: ProductCardModalProps) => {
   const [loading, setLoading] = useState(false);
   const {
@@ -81,7 +83,7 @@ export const ProductCardModal = ({
       body={
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl isInvalid={Boolean(errors.email)}>
-            <FormLabel> Enter your email to receive the ticket </FormLabel>
+            <FormLabel>{description}</FormLabel>
             <Input placeholder="Enter your email" {...register('email')} />
             <FormErrorMessage> {errors.email?.message} </FormErrorMessage>
           </FormControl>
