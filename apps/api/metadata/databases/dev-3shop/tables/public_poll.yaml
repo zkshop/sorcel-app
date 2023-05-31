@@ -11,6 +11,19 @@ array_relationships:
         remote_table:
           name: choice
           schema: public
+insert_permissions:
+  - role: customer
+    permission:
+      check:
+        app_id:
+          _eq: X-Hasura-User-Id
+      set:
+        app_id: x-hasura-User-Id
+      columns:
+        - description
+        - gate
+        - image
+        - title
 select_permissions:
   - role: customer
     permission:
