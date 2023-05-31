@@ -7,6 +7,12 @@ query getApp($appId: uuid!) {
   }
 }
 
+query getPlan($appId: uuid!) {
+  app: app_by_pk(id: $appId) {
+    id
+    plan
+  }
+}
 query getAdminApp {
   app {
     id
