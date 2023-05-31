@@ -81,7 +81,7 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
       ...data,
       image: data.image as string,
       id: product.id,
-      price: Number(data.price),
+      price: data.isModal ? 0 : Number(data.price),
       webhookUrl: data.isModal ? data.webhookUrl : undefined,
     };
 
