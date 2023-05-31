@@ -5,6 +5,7 @@
 - "!include public_gate_v2.yaml"
 - "!include public_network.yaml"
 - "!include public_order.yaml"
+- "!include public_plan.yaml"
 - "!include public_poll.yaml"
 - "!include public_product.yaml"
 - "!include public_product_type.yaml"
