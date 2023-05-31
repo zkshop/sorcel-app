@@ -6,6 +6,7 @@ import { ProductCard } from '../ProductCard/ProductCard';
 type ProductCardListProps = {
   products: FormatedProductData[];
   isWalletConnected?: boolean;
+  auth?: string;
 };
 
 const templateColumns = {
@@ -14,7 +15,7 @@ const templateColumns = {
   lg: 'repeat(4, 1fr)',
 };
 
-export const ProductCardList = ({ products, isWalletConnected }: ProductCardListProps) => (
+export const ProductCardList = ({ products, isWalletConnected, auth }: ProductCardListProps) => (
   <Box className={classnames.PRODUCT_CARD_LIST.CONTAINER}>
     <Grid
       className={classnames.PRODUCT_CARD_LIST.GRID}
@@ -37,6 +38,7 @@ export const ProductCardList = ({ products, isWalletConnected }: ProductCardList
           type,
           webhookUrl,
           description,
+          gate,
         }) => (
           <GridItem
             key={`products-${id}`}
@@ -59,6 +61,8 @@ export const ProductCardList = ({ products, isWalletConnected }: ProductCardList
               type={type}
               webhookUrl={webhookUrl}
               description={description}
+              gate={gate}
+              auth={auth}
             />
           </GridItem>
         ),

@@ -34,7 +34,7 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
   const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
   const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const auth = useAppSelector((state) => state.user.auth);
   const { data } = useGetGates_V2_ByAppIdQuery({ variables: { app_id: envVars.APP_ID } });
   const gates = data?.gates.slice() || [];
@@ -59,6 +59,7 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
       <ProductCardList
         products={formatedProducts}
         isWalletConnected={Boolean(isConnected || auth.email)}
+        auth={address || auth.email || undefined}
       />
     </>
   );
