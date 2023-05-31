@@ -44,7 +44,7 @@ export const AddProductFormContainer = () => {
         variables: {
           ...data,
           image: uploadUrl,
-          price: Number(data.price),
+          price: data.isModal ? 0 : Number(data.price),
           type: data.isModal ? Product_Type_Enum.Modal : Product_Type_Enum.Commerce,
         },
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),

@@ -69,15 +69,17 @@ export const GeneralInformationsFields = () => {
       </FormControl>
 
       {/* Price */}
-      <FormControl isInvalid={Boolean(errors.price)}>
-        <FormLabel mb={1}>{PRODUCTS_FIELDS.price.label}</FormLabel>
+      {!isModalValue && (
+        <FormControl isInvalid={Boolean(errors.price)}>
+          <FormLabel mb={1}>{PRODUCTS_FIELDS.price.label}</FormLabel>
 
-        <NumberInput min={0}>
-          <NumberInputField placeholder="Price" {...register('price')} />
-        </NumberInput>
+          <NumberInput min={0}>
+            <NumberInputField placeholder="Price" {...register('price')} />
+          </NumberInput>
 
-        <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
-      </FormControl>
+          <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
+        </FormControl>
+      )}
 
       {/* Webhook URL */}
       {isModalValue && (
