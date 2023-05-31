@@ -13,6 +13,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FormValidation } from '@3shop/validation';
 import { useState } from 'react';
 import axios from 'axios';
+import { usePushClaimsMutation } from '@3shop/apollo';
+import type { FormatedProductData } from '@3shop/types';
 
 type ProductCardModalProps = {
   isOpen: boolean;
@@ -21,6 +23,8 @@ type ProductCardModalProps = {
   title: string;
   webhookUrl: string;
   description?: string;
+  gate: FormatedProductData['gate'];
+  auth?: string;
 };
 
 const EMAIL_SCHEMA = FormValidation.object().shape({
@@ -34,6 +38,8 @@ export const ProductCardModal = ({
   onOpen,
   webhookUrl,
   description = 'Enter your email to receive the ticket',
+  gate,
+  auth,
 }: ProductCardModalProps) => {
   const [loading, setLoading] = useState(false);
   const {
@@ -46,11 +52,21 @@ export const ProductCardModal = ({
     resolver: yupResolver(EMAIL_SCHEMA),
   });
   const toast = useToast();
+  const [pushClaims] = usePushClaimsMutation();
 
   const onSubmit = async (data: { email: string }) => {
     setLoading(true);
     try {
       await axios.post(`${webhookUrl}?email=${data.email}`);
+
+      if (gate) {
+        await pushClaims({
+          variables: {
+            gate_id: gate.id,
+            claims: auth,
+          },
+        });
+      }
 
       toast({
         title: 'Success',

@@ -24,6 +24,7 @@ import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
 import { PoapLink } from '../PoapLink';
 import { Product_Type_Enum } from '@3shop/apollo';
 import { ProductCardModal } from './ProductCardModal';
+import type { FormatedProductData } from '@3shop/types';
 
 export type ProductCardProps = {
   id?: string;
@@ -41,6 +42,8 @@ export type ProductCardProps = {
   type: Product_Type_Enum;
   webhookUrl?: string;
   description?: string;
+  gate: FormatedProductData['gate'];
+  auth?: string;
 };
 
 export const ProductCard = ({
@@ -58,6 +61,8 @@ export const ProductCard = ({
   type,
   webhookUrl,
   description,
+  gate,
+  auth,
 }: ProductCardProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const {
@@ -184,6 +189,8 @@ export const ProductCard = ({
         onClose={onProductModalClose}
         title={name}
         onOpen={onProductModalOpen}
+        gate={gate}
+        auth={auth}
       />
     </StyledProductCard>
   );
