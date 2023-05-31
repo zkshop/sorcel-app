@@ -54,6 +54,7 @@ update_permissions:
         - name
         - price
         - type
+        - webhookUrl
       filter:
         app_id:
           _eq: X-Hasura-User-Id

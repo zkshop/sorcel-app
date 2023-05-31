@@ -5798,6 +5798,7 @@ export type EditProductMutationVariables = Exact<{
   name?: InputMaybe<Scalars['String']>;
   description: Scalars['String'];
   price: Scalars['Int'];
+  webhookUrl?: InputMaybe<Scalars['String']>;
 }>;
 
 export type EditProductMutation = {
@@ -7557,9 +7558,16 @@ export const EditProductDocument = gql`
     $name: String
     $description: String!
     $price: Int!
+    $webhookUrl: String
   ) {
     update_product(
-      _set: { image: $image, name: $name, description: $description, price: $price }
+      _set: {
+        image: $image
+        name: $name
+        description: $description
+        price: $price
+        webhookUrl: $webhookUrl
+      }
       where: { id: { _eq: $id } }
     ) {
       returning {
@@ -7595,6 +7603,7 @@ export type EditProductMutationFn = Apollo.MutationFunction<
  *      name: // value for 'name'
  *      description: // value for 'description'
  *      price: // value for 'price'
+ *      webhookUrl: // value for 'webhookUrl'
  *   },
  * });
  */
