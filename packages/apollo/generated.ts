@@ -86,6 +86,7 @@ export type App = {
   imgUrl?: Maybe<Scalars['String']>;
   moneyAccountId?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+  plan?: Maybe<Plan_Enum>;
 };
 
 /** aggregated selection of "app" */
@@ -119,6 +120,7 @@ export type App_Bool_Exp = {
   imgUrl?: InputMaybe<String_Comparison_Exp>;
   moneyAccountId?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  plan?: InputMaybe<Plan_Enum_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "app" */
@@ -134,6 +136,7 @@ export type App_Insert_Input = {
   imgUrl?: InputMaybe<Scalars['String']>;
   moneyAccountId?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  plan?: InputMaybe<Plan_Enum>;
 };
 
 /** aggregate max on columns */
@@ -186,6 +189,7 @@ export type App_Order_By = {
   imgUrl?: InputMaybe<Order_By>;
   moneyAccountId?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  plan?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: app */
@@ -205,6 +209,8 @@ export enum App_Select_Column {
   MoneyAccountId = 'moneyAccountId',
   /** column name */
   Name = 'name',
+  /** column name */
+  Plan = 'plan',
 }
 
 /** input type for updating data in table "app" */
@@ -214,6 +220,7 @@ export type App_Set_Input = {
   imgUrl?: InputMaybe<Scalars['String']>;
   moneyAccountId?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  plan?: InputMaybe<Plan_Enum>;
 };
 
 /** Streaming cursor of the table "app" */
@@ -231,6 +238,7 @@ export type App_Stream_Cursor_Value_Input = {
   imgUrl?: InputMaybe<Scalars['String']>;
   moneyAccountId?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  plan?: InputMaybe<Plan_Enum>;
 };
 
 /** update columns of table "app" */
@@ -245,6 +253,8 @@ export enum App_Update_Column {
   MoneyAccountId = 'moneyAccountId',
   /** column name */
   Name = 'name',
+  /** column name */
+  Plan = 'plan',
 }
 
 export type App_Updates = {
@@ -1652,6 +1662,10 @@ export type Mutation_Root = {
   delete_order?: Maybe<Order_Mutation_Response>;
   /** delete single row from the table: "order" */
   delete_order_by_pk?: Maybe<Order>;
+  /** delete data from the table: "plan" */
+  delete_plan?: Maybe<Plan_Mutation_Response>;
+  /** delete single row from the table: "plan" */
+  delete_plan_by_pk?: Maybe<Plan>;
   /** delete data from the table: "poll" */
   delete_poll?: Maybe<Poll_Mutation_Response>;
   /** delete single row from the table: "poll" */
@@ -1708,6 +1722,10 @@ export type Mutation_Root = {
   insert_order?: Maybe<Order_Mutation_Response>;
   /** insert a single row into the table: "order" */
   insert_order_one?: Maybe<Order>;
+  /** insert data into the table: "plan" */
+  insert_plan?: Maybe<Plan_Mutation_Response>;
+  /** insert a single row into the table: "plan" */
+  insert_plan_one?: Maybe<Plan>;
   /** insert data into the table: "poll" */
   insert_poll?: Maybe<Poll_Mutation_Response>;
   /** insert a single row into the table: "poll" */
@@ -1778,6 +1796,12 @@ export type Mutation_Root = {
   update_order_by_pk?: Maybe<Order>;
   /** update multiples rows of table: "order" */
   update_order_many?: Maybe<Array<Maybe<Order_Mutation_Response>>>;
+  /** update data of the table: "plan" */
+  update_plan?: Maybe<Plan_Mutation_Response>;
+  /** update single row of the table: "plan" */
+  update_plan_by_pk?: Maybe<Plan>;
+  /** update multiples rows of table: "plan" */
+  update_plan_many?: Maybe<Array<Maybe<Plan_Mutation_Response>>>;
   /** update data of the table: "poll" */
   update_poll?: Maybe<Poll_Mutation_Response>;
   /** update single row of the table: "poll" */
@@ -1890,6 +1914,16 @@ export type Mutation_RootDelete_OrderArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Order_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_PlanArgs = {
+  where: Plan_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Plan_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 /** mutation root */
@@ -2044,6 +2078,18 @@ export type Mutation_RootInsert_OrderArgs = {
 export type Mutation_RootInsert_Order_OneArgs = {
   object: Order_Insert_Input;
   on_conflict?: InputMaybe<Order_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_PlanArgs = {
+  objects: Array<Plan_Insert_Input>;
+  on_conflict?: InputMaybe<Plan_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Plan_OneArgs = {
+  object: Plan_Insert_Input;
+  on_conflict?: InputMaybe<Plan_On_Conflict>;
 };
 
 /** mutation root */
@@ -2285,6 +2331,23 @@ export type Mutation_RootUpdate_Order_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Order_ManyArgs = {
   updates: Array<Order_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_PlanArgs = {
+  _set?: InputMaybe<Plan_Set_Input>;
+  where: Plan_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Plan_By_PkArgs = {
+  _set?: InputMaybe<Plan_Set_Input>;
+  pk_columns: Plan_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Plan_ManyArgs = {
+  updates: Array<Plan_Updates>;
 };
 
 /** mutation root */
@@ -2800,6 +2863,141 @@ export type Order_Updates = {
   _set?: InputMaybe<Order_Set_Input>;
   /** filter the rows which have to be updated */
   where: Order_Bool_Exp;
+};
+
+/** columns and relationships of "plan" */
+export type Plan = {
+  __typename?: 'plan';
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "plan" */
+export type Plan_Aggregate = {
+  __typename?: 'plan_aggregate';
+  aggregate?: Maybe<Plan_Aggregate_Fields>;
+  nodes: Array<Plan>;
+};
+
+/** aggregate fields of "plan" */
+export type Plan_Aggregate_Fields = {
+  __typename?: 'plan_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Plan_Max_Fields>;
+  min?: Maybe<Plan_Min_Fields>;
+};
+
+/** aggregate fields of "plan" */
+export type Plan_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Plan_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "plan". All fields are combined with a logical 'AND'. */
+export type Plan_Bool_Exp = {
+  _and?: InputMaybe<Array<Plan_Bool_Exp>>;
+  _not?: InputMaybe<Plan_Bool_Exp>;
+  _or?: InputMaybe<Array<Plan_Bool_Exp>>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "plan" */
+export enum Plan_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  PlanPkey = 'plan_pkey',
+}
+
+export enum Plan_Enum {
+  Free = 'FREE',
+  Pro = 'PRO',
+}
+
+/** Boolean expression to compare columns of type "plan_enum". All fields are combined with logical 'AND'. */
+export type Plan_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Plan_Enum>;
+  _in?: InputMaybe<Array<Plan_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Plan_Enum>;
+  _nin?: InputMaybe<Array<Plan_Enum>>;
+};
+
+/** input type for inserting data into table "plan" */
+export type Plan_Insert_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Plan_Max_Fields = {
+  __typename?: 'plan_max_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Plan_Min_Fields = {
+  __typename?: 'plan_min_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "plan" */
+export type Plan_Mutation_Response = {
+  __typename?: 'plan_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Plan>;
+};
+
+/** on_conflict condition type for table "plan" */
+export type Plan_On_Conflict = {
+  constraint: Plan_Constraint;
+  update_columns?: Array<Plan_Update_Column>;
+  where?: InputMaybe<Plan_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "plan". */
+export type Plan_Order_By = {
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: plan */
+export type Plan_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "plan" */
+export enum Plan_Select_Column {
+  /** column name */
+  Value = 'value',
+}
+
+/** input type for updating data in table "plan" */
+export type Plan_Set_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "plan" */
+export type Plan_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Plan_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Plan_Stream_Cursor_Value_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "plan" */
+export enum Plan_Update_Column {
+  /** column name */
+  Value = 'value',
+}
+
+export type Plan_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Plan_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Plan_Bool_Exp;
 };
 
 /** columns and relationships of "poll" */
@@ -3552,6 +3750,12 @@ export type Query_Root = {
   order_aggregate: Order_Aggregate;
   /** fetch data from the table: "order" using primary key columns */
   order_by_pk?: Maybe<Order>;
+  /** fetch data from the table: "plan" */
+  plan: Array<Plan>;
+  /** fetch aggregated fields from the table: "plan" */
+  plan_aggregate: Plan_Aggregate;
+  /** fetch data from the table: "plan" using primary key columns */
+  plan_by_pk?: Maybe<Plan>;
   /** fetch data from the table: "poll" */
   poll: Array<Poll>;
   /** fetch aggregated fields from the table: "poll" */
@@ -3734,6 +3938,26 @@ export type Query_RootOrder_AggregateArgs = {
 
 export type Query_RootOrder_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+export type Query_RootPlanArgs = {
+  distinct_on?: InputMaybe<Array<Plan_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Plan_Order_By>>;
+  where?: InputMaybe<Plan_Bool_Exp>;
+};
+
+export type Query_RootPlan_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Plan_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Plan_Order_By>>;
+  where?: InputMaybe<Plan_Bool_Exp>;
+};
+
+export type Query_RootPlan_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 export type Query_RootPollArgs = {
@@ -4323,6 +4547,14 @@ export type Subscription_Root = {
   order_by_pk?: Maybe<Order>;
   /** fetch data from the table in a streaming manner: "order" */
   order_stream: Array<Order>;
+  /** fetch data from the table: "plan" */
+  plan: Array<Plan>;
+  /** fetch aggregated fields from the table: "plan" */
+  plan_aggregate: Plan_Aggregate;
+  /** fetch data from the table: "plan" using primary key columns */
+  plan_by_pk?: Maybe<Plan>;
+  /** fetch data from the table in a streaming manner: "plan" */
+  plan_stream: Array<Plan>;
   /** fetch data from the table: "poll" */
   poll: Array<Poll>;
   /** fetch aggregated fields from the table: "poll" */
@@ -4561,6 +4793,32 @@ export type Subscription_RootOrder_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Order_Stream_Cursor_Input>>;
   where?: InputMaybe<Order_Bool_Exp>;
+};
+
+export type Subscription_RootPlanArgs = {
+  distinct_on?: InputMaybe<Array<Plan_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Plan_Order_By>>;
+  where?: InputMaybe<Plan_Bool_Exp>;
+};
+
+export type Subscription_RootPlan_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Plan_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Plan_Order_By>>;
+  where?: InputMaybe<Plan_Bool_Exp>;
+};
+
+export type Subscription_RootPlan_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+export type Subscription_RootPlan_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Plan_Stream_Cursor_Input>>;
+  where?: InputMaybe<Plan_Bool_Exp>;
 };
 
 export type Subscription_RootPollArgs = {
@@ -5064,6 +5322,15 @@ export type GetAppQuery = {
     imgUrl?: string | null;
     deliveryTaxesTableName?: string | null;
   } | null;
+};
+
+export type GetPlanQueryVariables = Exact<{
+  appId: Scalars['uuid'];
+}>;
+
+export type GetPlanQuery = {
+  __typename?: 'query_root';
+  app?: { __typename?: 'app'; id: any; plan?: Plan_Enum | null } | null;
 };
 
 export type GetAdminAppQueryVariables = Exact<{ [key: string]: never }>;
@@ -5741,6 +6008,46 @@ export function useGetAppLazyQuery(
 export type GetAppQueryHookResult = ReturnType<typeof useGetAppQuery>;
 export type GetAppLazyQueryHookResult = ReturnType<typeof useGetAppLazyQuery>;
 export type GetAppQueryResult = Apollo.QueryResult<GetAppQuery, GetAppQueryVariables>;
+export const GetPlanDocument = gql`
+  query getPlan($appId: uuid!) {
+    app: app_by_pk(id: $appId) {
+      id
+      plan
+    }
+  }
+`;
+
+/**
+ * __useGetPlanQuery__
+ *
+ * To run a query within a React component, call `useGetPlanQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPlanQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPlanQuery({
+ *   variables: {
+ *      appId: // value for 'appId'
+ *   },
+ * });
+ */
+export function useGetPlanQuery(
+  baseOptions: Apollo.QueryHookOptions<GetPlanQuery, GetPlanQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetPlanQuery, GetPlanQueryVariables>(GetPlanDocument, options);
+}
+export function useGetPlanLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetPlanQuery, GetPlanQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetPlanQuery, GetPlanQueryVariables>(GetPlanDocument, options);
+}
+export type GetPlanQueryHookResult = ReturnType<typeof useGetPlanQuery>;
+export type GetPlanLazyQueryHookResult = ReturnType<typeof useGetPlanLazyQuery>;
+export type GetPlanQueryResult = Apollo.QueryResult<GetPlanQuery, GetPlanQueryVariables>;
 export const GetAdminAppDocument = gql`
   query getAdminApp {
     app {
