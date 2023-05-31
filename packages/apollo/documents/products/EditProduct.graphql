@@ -4,6 +4,7 @@ mutation EditProduct(
   $name: String
   $description: String!
   $price: Int!
+  $webhookUrl: String
 ) {
   update_product(
     _set: {
@@ -11,6 +12,7 @@ mutation EditProduct(
       name: $name
       description: $description
       price: $price
+      webhookUrl: $webhookUrl
     }
     where: { id: { _eq: $id } }
   ) {
