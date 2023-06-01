@@ -28,6 +28,7 @@ type AddPollProps = {
   addChoice(): void;
   deleteChoice(index: number): void;
   fields: FieldArrayWithId<AddPollFormValues, 'choices', 'id'>[];
+  loading: boolean;
 };
 
 export const AddPoll = ({
@@ -39,10 +40,11 @@ export const AddPoll = ({
   deleteChoice,
   addChoice,
   fields,
+  loading,
 }: AddPollProps) => (
   <MainLayout>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <AddPollFormHeader loading={false} />
+      <AddPollFormHeader loading={loading} />
       <BackButton href="/app" />
 
       <Section>
