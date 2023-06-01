@@ -28,8 +28,33 @@ select_permissions:
   - role: customer
     permission:
       columns:
-        - voters
+        - app_id
+        - completed
+        - created_at
         - description
-        - title
+        - gate
         - id
+        - image
+        - title
+        - voters
       filter: {}
+update_permissions:
+  - role: customer
+    permission:
+      columns:
+        - completed
+        - description
+        - gate
+        - image
+        - title
+        - voters
+      filter:
+        app_id:
+          _eq: X-Hasura-User-Id
+      check: null
+delete_permissions:
+  - role: customer
+    permission:
+      filter:
+        app_id:
+          _eq: X-Hasura-User-Id
