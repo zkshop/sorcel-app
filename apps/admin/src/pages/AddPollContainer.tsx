@@ -7,6 +7,7 @@ import { StorageService } from '@3shop/domains';
 import { ImageStorageClient } from '@3shop/admin-infra';
 import { useToastMessage } from '@3shop/ui';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export type AddPollFormValues = {
   poll: string;
@@ -40,6 +41,7 @@ export const AddPollContainer = () => {
   } = useForm<AddPollFormValues>({
     resolver: yupResolver(ADD_POLL_SCHEMA),
   });
+  const navigate = useNavigate();
 
   const toast = useToastMessage();
 
@@ -71,6 +73,7 @@ export const AddPollContainer = () => {
       });
 
       toast.success('Poll created successfully');
+      navigate('/app');
     } catch (e) {
       console.error(e);
       toast.error('An error occurred while creating poll');
