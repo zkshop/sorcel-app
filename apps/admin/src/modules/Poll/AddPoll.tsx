@@ -11,7 +11,7 @@ import {
   MainLayout,
   Section,
 } from '@3shop/ui';
-import type { FieldArrayWithId, FieldErrors, UseFormRegister } from 'react-hook-form';
+import type { FieldArrayWithId, FieldErrors, UseFormRegister, Control } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { AddPollFormHeader } from './AddPollFormHeader';
 import { POLL_FIELDS } from './constants';
@@ -23,7 +23,7 @@ type AddPollProps = {
   onSubmit: (data: AddPollFormValues) => void;
   handleSubmit: UseFormHandleSubmit<AddPollFormValues>;
   register: UseFormRegister<AddPollFormValues>;
-  control: any;
+  control: Control<AddPollFormValues>;
   errors: FieldErrors<AddPollFormValues>;
   addChoice(): void;
   deleteChoice(index: number): void;
@@ -53,6 +53,13 @@ export const AddPoll = ({
           <FormLabel mb={1}>{POLL_FIELDS.poll.label}</FormLabel>
           <Input {...register(POLL_FIELDS.poll.name)} />
           <FormErrorMessage>{errors[POLL_FIELDS.poll.name]?.message}</FormErrorMessage>
+        </FormControl>
+
+        {/* Gate */}
+        <FormControl isInvalid={Boolean(errors[POLL_FIELDS.gate.name])}>
+          <FormLabel mb={1}>{POLL_FIELDS.gate.label}</FormLabel>
+          <Input {...register(POLL_FIELDS.gate.name)} />
+          <FormErrorMessage>{errors[POLL_FIELDS.gate.name]?.message}</FormErrorMessage>
         </FormControl>
 
         {/* Image */}
