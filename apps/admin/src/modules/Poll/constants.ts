@@ -7,6 +7,10 @@ export const POLL_FIELDS = {
     name: 'image',
     label: 'Image',
   },
+  gate: {
+    name: 'gate',
+    label: 'Gate (Smart Contract Address)',
+  },
   choices: {
     name: 'choices',
     label: 'Choice',

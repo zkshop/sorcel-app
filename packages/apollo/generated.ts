@@ -3003,6 +3003,7 @@ export type Plan_Updates = {
 /** columns and relationships of "poll" */
 export type Poll = {
   __typename?: 'poll';
+  app_id?: Maybe<Scalars['uuid']>;
   /** An array relationship */
   choices: Array<Choice>;
   /** An aggregate relationship */
@@ -3071,6 +3072,7 @@ export type Poll_Bool_Exp = {
   _and?: InputMaybe<Array<Poll_Bool_Exp>>;
   _not?: InputMaybe<Poll_Bool_Exp>;
   _or?: InputMaybe<Array<Poll_Bool_Exp>>;
+  app_id?: InputMaybe<Uuid_Comparison_Exp>;
   choices?: InputMaybe<Choice_Bool_Exp>;
   choices_aggregate?: InputMaybe<Choice_Aggregate_Bool_Exp>;
   completed?: InputMaybe<Boolean_Comparison_Exp>;
@@ -3106,6 +3108,7 @@ export type Poll_Delete_Key_Input = {
 
 /** input type for inserting data into table "poll" */
 export type Poll_Insert_Input = {
+  app_id?: InputMaybe<Scalars['uuid']>;
   choices?: InputMaybe<Choice_Arr_Rel_Insert_Input>;
   completed?: InputMaybe<Scalars['Boolean']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
@@ -3120,6 +3123,7 @@ export type Poll_Insert_Input = {
 /** aggregate max on columns */
 export type Poll_Max_Fields = {
   __typename?: 'poll_max_fields';
+  app_id?: Maybe<Scalars['uuid']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   gate?: Maybe<Scalars['String']>;
@@ -3131,6 +3135,7 @@ export type Poll_Max_Fields = {
 /** aggregate min on columns */
 export type Poll_Min_Fields = {
   __typename?: 'poll_min_fields';
+  app_id?: Maybe<Scalars['uuid']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   gate?: Maybe<Scalars['String']>;
@@ -3157,6 +3162,7 @@ export type Poll_On_Conflict = {
 
 /** Ordering options when selecting data from "poll". */
 export type Poll_Order_By = {
+  app_id?: InputMaybe<Order_By>;
   choices_aggregate?: InputMaybe<Choice_Aggregate_Order_By>;
   completed?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
@@ -3181,6 +3187,8 @@ export type Poll_Prepend_Input = {
 /** select columns of table "poll" */
 export enum Poll_Select_Column {
   /** column name */
+  AppId = 'app_id',
+  /** column name */
   Completed = 'completed',
   /** column name */
   CreatedAt = 'created_at',
@@ -3200,6 +3208,7 @@ export enum Poll_Select_Column {
 
 /** input type for updating data in table "poll" */
 export type Poll_Set_Input = {
+  app_id?: InputMaybe<Scalars['uuid']>;
   completed?: InputMaybe<Scalars['Boolean']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
@@ -3220,6 +3229,7 @@ export type Poll_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Poll_Stream_Cursor_Value_Input = {
+  app_id?: InputMaybe<Scalars['uuid']>;
   completed?: InputMaybe<Scalars['Boolean']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
@@ -3232,6 +3242,8 @@ export type Poll_Stream_Cursor_Value_Input = {
 
 /** update columns of table "poll" */
 export enum Poll_Update_Column {
+  /** column name */
+  AppId = 'app_id',
   /** column name */
   Completed = 'completed',
   /** column name */
@@ -5670,6 +5682,19 @@ export type GetOrdersQuery = {
   }>;
 };
 
+export type CreatePollMutationVariables = Exact<{
+  title: Scalars['String'];
+  image: Scalars['String'];
+  gate: Scalars['String'];
+  description?: InputMaybe<Scalars['String']>;
+  data?: InputMaybe<Array<Choice_Insert_Input> | Choice_Insert_Input>;
+}>;
+
+export type CreatePollMutation = {
+  __typename?: 'mutation_root';
+  insert_poll?: { __typename?: 'poll_mutation_response'; affected_rows: number } | null;
+};
+
 export type GetPollByIdQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
@@ -5702,26 +5727,6 @@ export type GetPollsQuery = {
     image?: string | null;
     completed: boolean;
   }>;
-};
-
-export type CreatePollMutationVariables = Exact<{
-  choices?: InputMaybe<Choice_Arr_Rel_Insert_Input>;
-  description?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
-}>;
-
-export type CreatePollMutation = {
-  __typename?: 'mutation_root';
-  insert_poll?: {
-    __typename?: 'poll_mutation_response';
-    returning: Array<{
-      __typename?: 'poll';
-      id: any;
-      title: string;
-      description: string;
-      choices: Array<{ __typename?: 'choice'; value: string; poll_id: any; id: any }>;
-    }>;
-  } | null;
 };
 
 export type VoteMutationVariables = Exact<{
@@ -7167,6 +7172,68 @@ export function useGetOrdersLazyQuery(
 export type GetOrdersQueryHookResult = ReturnType<typeof useGetOrdersQuery>;
 export type GetOrdersLazyQueryHookResult = ReturnType<typeof useGetOrdersLazyQuery>;
 export type GetOrdersQueryResult = Apollo.QueryResult<GetOrdersQuery, GetOrdersQueryVariables>;
+export const CreatePollDocument = gql`
+  mutation CreatePoll(
+    $title: String!
+    $image: String!
+    $gate: String!
+    $description: String = ""
+    $data: [choice_insert_input!] = {}
+  ) {
+    insert_poll(
+      objects: {
+        title: $title
+        image: $image
+        gate: $gate
+        description: $description
+        choices: { data: $data }
+      }
+    ) {
+      affected_rows
+    }
+  }
+`;
+export type CreatePollMutationFn = Apollo.MutationFunction<
+  CreatePollMutation,
+  CreatePollMutationVariables
+>;
+
+/**
+ * __useCreatePollMutation__
+ *
+ * To run a mutation, you first call `useCreatePollMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePollMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPollMutation, { data, loading, error }] = useCreatePollMutation({
+ *   variables: {
+ *      title: // value for 'title'
+ *      image: // value for 'image'
+ *      gate: // value for 'gate'
+ *      description: // value for 'description'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreatePollMutation(
+  baseOptions?: Apollo.MutationHookOptions<CreatePollMutation, CreatePollMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreatePollMutation, CreatePollMutationVariables>(
+    CreatePollDocument,
+    options,
+  );
+}
+export type CreatePollMutationHookResult = ReturnType<typeof useCreatePollMutation>;
+export type CreatePollMutationResult = Apollo.MutationResult<CreatePollMutation>;
+export type CreatePollMutationOptions = Apollo.BaseMutationOptions<
+  CreatePollMutation,
+  CreatePollMutationVariables
+>;
 export const GetPollByIdDocument = gql`
   query getPollById($id: uuid!) {
     poll: poll_by_pk(id: $id) {
@@ -7267,61 +7334,6 @@ export function useGetPollsLazyQuery(
 export type GetPollsQueryHookResult = ReturnType<typeof useGetPollsQuery>;
 export type GetPollsLazyQueryHookResult = ReturnType<typeof useGetPollsLazyQuery>;
 export type GetPollsQueryResult = Apollo.QueryResult<GetPollsQuery, GetPollsQueryVariables>;
-export const CreatePollDocument = gql`
-  mutation CreatePoll($choices: choice_arr_rel_insert_input, $description: String, $title: String) {
-    insert_poll(objects: { choices: $choices, description: $description, title: $title }) {
-      returning {
-        id
-        title
-        description
-        choices {
-          value
-          poll_id
-          id
-        }
-      }
-    }
-  }
-`;
-export type CreatePollMutationFn = Apollo.MutationFunction<
-  CreatePollMutation,
-  CreatePollMutationVariables
->;
-
-/**
- * __useCreatePollMutation__
- *
- * To run a mutation, you first call `useCreatePollMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreatePollMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createPollMutation, { data, loading, error }] = useCreatePollMutation({
- *   variables: {
- *      choices: // value for 'choices'
- *      description: // value for 'description'
- *      title: // value for 'title'
- *   },
- * });
- */
-export function useCreatePollMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreatePollMutation, CreatePollMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreatePollMutation, CreatePollMutationVariables>(
-    CreatePollDocument,
-    options,
-  );
-}
-export type CreatePollMutationHookResult = ReturnType<typeof useCreatePollMutation>;
-export type CreatePollMutationResult = Apollo.MutationResult<CreatePollMutation>;
-export type CreatePollMutationOptions = Apollo.BaseMutationOptions<
-  CreatePollMutation,
-  CreatePollMutationVariables
->;
 export const VoteDocument = gql`
   mutation Vote($pollId: uuid!, $voters: jsonb, $choiceId: uuid!) {
     choice: update_choice_by_pk(pk_columns: { id: $choiceId }, _inc: { count: 1 }) {
