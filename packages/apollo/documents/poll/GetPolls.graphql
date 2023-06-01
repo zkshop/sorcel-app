@@ -1,26 +1,10 @@
 query GetPolls {
-  polls: poll(order_by: {created_at: desc}) {
+  polls: poll(order_by: { created_at: desc }) {
     id
     title
     voters
     description
     image
     completed
-  }
-}
-
-
-mutation CreatePoll($choices: choice_arr_rel_insert_input, $description: String, $title: String) {
-  insert_poll(objects: { choices: $choices, description: $description, title: $title }) {
-    returning {
-      id
-      title
-      description
-      choices {
-        value
-        poll_id
-        id
-      }
-    }
   }
 }

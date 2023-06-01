@@ -1,6 +1,14 @@
 table:
   name: choice
   schema: public
+insert_permissions:
+  - role: customer
+    permission:
+      check: {}
+      columns:
+        - count
+        - poll_id
+        - value
 select_permissions:
   - role: customer
     permission:

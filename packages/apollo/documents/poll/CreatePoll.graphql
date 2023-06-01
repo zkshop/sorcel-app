@@ -1,0 +1,19 @@
+mutation CreatePoll(
+  $title: String!
+  $image: String!
+  $gate: String!
+  $description: String = ""
+  $data: [choice_insert_input!] = {}
+) {
+  insert_poll(
+    objects: {
+      title: $title
+      image: $image
+      gate: $gate
+      description: $description
+      choices: { data: $data }
+    }
+  ) {
+    affected_rows
+  }
+}
