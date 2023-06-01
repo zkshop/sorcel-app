@@ -5,6 +5,8 @@ import { AddPoll } from '../modules/Poll/AddPoll';
 import { useCreatePollMutation, useGetAdminAppQuery } from '@3shop/apollo';
 import { StorageService } from '@3shop/domains';
 import { ImageStorageClient } from '@3shop/admin-infra';
+import { useToastMessage } from '@3shop/ui';
+import { useState } from 'react';
 
 export type AddPollFormValues = {
   poll: string;
@@ -28,6 +30,7 @@ const ADD_POLL_SCHEMA = FormValidation.object().shape({
 const storage = StorageService(ImageStorageClient());
 
 export const AddPollContainer = () => {
+  const [loading, setLoading] = useState(false);
   const { data: appData } = useGetAdminAppQuery();
   const {
     handleSubmit,
@@ -37,6 +40,8 @@ export const AddPollContainer = () => {
   } = useForm<AddPollFormValues>({
     resolver: yupResolver(ADD_POLL_SCHEMA),
   });
+
+  const toast = useToastMessage();
 
   const [createPoll] = useCreatePollMutation();
 
@@ -52,6 +57,7 @@ export const AddPollContainer = () => {
 
   const onSubmit = async (data: AddPollFormValues) => {
     if (!appData) return;
+    setLoading(true);
 
     try {
       const imageUrl = await storage.uploadPicture(data.image, `polls/${appData.app[0].id}`);
@@ -63,8 +69,13 @@ export const AddPollContainer = () => {
           data: data.choices,
         },
       });
+
+      toast.success('Poll created successfully');
     } catch (e) {
       console.error(e);
+      toast.error('An error occurred while creating poll');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -78,6 +89,7 @@ export const AddPollContainer = () => {
       register={register}
       addChoice={addChoice}
       deleteChoice={deleteChoice}
+      loading={loading}
     />
   );
 };
