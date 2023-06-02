@@ -18,16 +18,19 @@ import { POLL_FIELDS } from './constants';
 import type { AddPollFormValues } from '../../pages/AddPollContainer';
 import type { UseFormHandleSubmit } from 'react-hook-form/dist/types';
 import { Dropzone } from '../Dropzone';
+import type { EditPollFormValues } from './EditPollFormContainer';
+
+type PollFormValues = AddPollFormValues | EditPollFormValues;
 
 type AddPollProps = {
-  onSubmit: (data: AddPollFormValues) => void;
-  handleSubmit: UseFormHandleSubmit<AddPollFormValues>;
-  register: UseFormRegister<AddPollFormValues>;
-  control: Control<AddPollFormValues>;
-  errors: FieldErrors<AddPollFormValues>;
+  onSubmit: (data: PollFormValues) => Promise<void>;
+  handleSubmit: UseFormHandleSubmit<PollFormValues>;
+  register: UseFormRegister<PollFormValues>;
+  control: Control<PollFormValues>;
+  errors: FieldErrors<PollFormValues>;
   addChoice(): void;
   deleteChoice(index: number): void;
-  fields: FieldArrayWithId<AddPollFormValues, 'choices', 'id'>[];
+  fields: FieldArrayWithId<PollFormValues, 'choices', 'id'>[];
   loading: boolean;
 };
 
