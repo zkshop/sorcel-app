@@ -4,6 +4,7 @@ import { useUpdatePollMutation } from '@3shop/apollo';
 import { AddPoll } from './AddPoll';
 import { ImageStorageClient } from '@3shop/admin-infra';
 import { StorageService } from '@3shop/domains';
+import { useState } from 'react';
 
 type EditPollFormContainerProps = {
   poll: GetPollByIdQuery['poll'];
@@ -19,6 +20,7 @@ export type EditPollFormValues = {
 const storage = StorageService(ImageStorageClient());
 
 export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
+  const [loading, setLoading] = useState(false);
   const {
     control,
     handleSubmit,
@@ -33,7 +35,7 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
     },
   });
 
-  const [updatePoll, { data: updatePollData }] = useUpdatePollMutation();
+  const [updatePoll] = useUpdatePollMutation();
 
   const { append, remove, fields } = useFieldArray({ control, name: 'choices' });
 
@@ -47,7 +49,11 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
 
   const onSubmit = async (data: EditPollFormValues) => {
     if (!poll) return;
-    const choicesIds = poll?.choices.map(({ id }) => id) || [];
+    setLoading(true);
+    const choicesIdsToDelete = touchedFields.choices ? poll.choices.map(({ id }) => id) : [];
+    const choices_to_insert = touchedFields.choices
+      ? data.choices.map(({ value }) => ({ value, poll_id: poll.id }))
+      : [];
 
     try {
       const image =
@@ -57,10 +63,8 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
 
       await updatePoll({
         variables: {
-          choice_to_delete: touchedFields.choices ? choicesIds : [],
-          choice_to_insert: touchedFields.choices
-            ? data.choices.map(({ value }) => ({ value, poll_id: poll.id }))
-            : [],
+          choice_to_delete: choicesIdsToDelete,
+          choice_to_insert: choices_to_insert,
           gate: data.gate,
           id: poll.id,
           image,
@@ -71,7 +75,7 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
     } catch (e) {
       console.error(e);
     } finally {
-      console.log(updatePollData);
+      setLoading(false);
     }
   };
 
@@ -84,7 +88,7 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
       control={control}
       fields={fields}
       errors={errors}
-      loading={false}
+      loading={loading}
       onSubmit={onSubmit}
     />
   );
