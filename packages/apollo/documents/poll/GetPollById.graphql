@@ -1,5 +1,6 @@
 query getPollById($id: uuid!) {
     poll: poll_by_pk(id: $id) {
+        app_id
         choices {
             id
             poll_id

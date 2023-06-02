@@ -6,7 +6,7 @@ import { Heading } from '../Heading/Heading';
 type HeaderProps = WithOptionalChildren<{ title: string }>;
 
 export const Header = ({ title, children }: HeaderProps) => (
-  <Heading as="h2">
+  <Heading as="h2" mb={2}>
     <HStack justifyContent="space-between">
       <span> {title} </span>
       {children}

@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 export type AddPollFormValues = {
   poll: string;
-  image: File;
+  image: File | string;
   choices: { value: string }[];
   gate: string;
 };
@@ -62,7 +62,10 @@ export const AddPollContainer = () => {
     setLoading(true);
 
     try {
-      const imageUrl = await storage.uploadPicture(data.image, `polls/${appData.app[0].id}`);
+      const imageUrl = await storage.uploadPicture(
+        data.image as File,
+        `polls/${appData.app[0].id}`,
+      );
       await createPoll({
         variables: {
           gate: data.gate,
