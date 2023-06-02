@@ -13,7 +13,20 @@ select_permissions:
   - role: customer
     permission:
       columns:
-        - value
+        - count
+        - created_at
         - id
         - poll_id
+        - value
+      filter: {}
+update_permissions:
+  - role: customer
+    permission:
+      columns:
+        - value
+      filter: {}
+      check: null
+delete_permissions:
+  - role: customer
+    permission:
       filter: {}

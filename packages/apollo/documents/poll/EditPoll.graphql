@@ -1,0 +1,31 @@
+mutation updatePoll(
+  $id: uuid!
+  $description: String
+  $gate: String
+  $image: String
+  $title: String
+  $choice_to_delete: [uuid!] = {}
+  $choice_to_insert: [choice_insert_input!] = {}
+) {
+  update_poll_by_pk(
+    pk_columns: { id: $id }
+    _set: { description: $description, gate: $gate, image: $image, title: $title }
+  ) {
+    id
+    app_id
+    description
+    gate
+    choices {
+      count
+      id
+      poll_id
+      value
+    }
+  }
+  delete_choice(where: { id: { _in: $choice_to_delete } }) {
+    affected_rows
+  }
+  insert_choice(objects: $choice_to_insert) {
+    affected_rows
+  }
+}

@@ -69,7 +69,7 @@ export const Poll = () => {
 
   return (
     <Box>
-      <Header title="Products">
+      <Header title="Polls">
         <Link href="/app/poll/add">
           <Button>+ New Poll</Button>
         </Link>
@@ -77,7 +77,7 @@ export const Poll = () => {
 
       <Table
         data={data.polls}
-        heads={['image', 'title', 'completed']}
+        heads={['image', 'title', 'completed', '']}
         renderRow={({ id, image, title, completed }) => (
           <PollListItem
             key={id}

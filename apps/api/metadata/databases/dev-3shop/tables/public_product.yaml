@@ -47,9 +47,7 @@ update_permissions:
   - role: customer
     permission:
       columns:
-        - app_id
         - description
-        - id
         - image
         - name
         - price

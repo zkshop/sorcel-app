@@ -5704,6 +5704,30 @@ export type DeletePollMutation = {
   delete_poll_by_pk?: { __typename?: 'poll'; id: any } | null;
 };
 
+export type UpdatePollMutationVariables = Exact<{
+  id: Scalars['uuid'];
+  description?: InputMaybe<Scalars['String']>;
+  gate?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+  choice_to_delete?: InputMaybe<Array<Scalars['uuid']> | Scalars['uuid']>;
+  choice_to_insert?: InputMaybe<Array<Choice_Insert_Input> | Choice_Insert_Input>;
+}>;
+
+export type UpdatePollMutation = {
+  __typename?: 'mutation_root';
+  update_poll_by_pk?: {
+    __typename?: 'poll';
+    id: any;
+    app_id?: any | null;
+    description: string;
+    gate?: string | null;
+    choices: Array<{ __typename?: 'choice'; count: number; id: any; poll_id: any; value: string }>;
+  } | null;
+  delete_choice?: { __typename?: 'choice_mutation_response'; affected_rows: number } | null;
+  insert_choice?: { __typename?: 'choice_mutation_response'; affected_rows: number } | null;
+};
+
 export type GetPollByIdQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
@@ -5712,6 +5736,7 @@ export type GetPollByIdQuery = {
   __typename?: 'query_root';
   poll?: {
     __typename?: 'poll';
+    app_id?: any | null;
     gate?: string | null;
     id: any;
     title: string;
@@ -7287,9 +7312,86 @@ export type DeletePollMutationOptions = Apollo.BaseMutationOptions<
   DeletePollMutation,
   DeletePollMutationVariables
 >;
+export const UpdatePollDocument = gql`
+  mutation updatePoll(
+    $id: uuid!
+    $description: String
+    $gate: String
+    $image: String
+    $title: String
+    $choice_to_delete: [uuid!] = {}
+    $choice_to_insert: [choice_insert_input!] = {}
+  ) {
+    update_poll_by_pk(
+      pk_columns: { id: $id }
+      _set: { description: $description, gate: $gate, image: $image, title: $title }
+    ) {
+      id
+      app_id
+      description
+      gate
+      choices {
+        count
+        id
+        poll_id
+        value
+      }
+    }
+    delete_choice(where: { id: { _in: $choice_to_delete } }) {
+      affected_rows
+    }
+    insert_choice(objects: $choice_to_insert) {
+      affected_rows
+    }
+  }
+`;
+export type UpdatePollMutationFn = Apollo.MutationFunction<
+  UpdatePollMutation,
+  UpdatePollMutationVariables
+>;
+
+/**
+ * __useUpdatePollMutation__
+ *
+ * To run a mutation, you first call `useUpdatePollMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePollMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePollMutation, { data, loading, error }] = useUpdatePollMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      description: // value for 'description'
+ *      gate: // value for 'gate'
+ *      image: // value for 'image'
+ *      title: // value for 'title'
+ *      choice_to_delete: // value for 'choice_to_delete'
+ *      choice_to_insert: // value for 'choice_to_insert'
+ *   },
+ * });
+ */
+export function useUpdatePollMutation(
+  baseOptions?: Apollo.MutationHookOptions<UpdatePollMutation, UpdatePollMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<UpdatePollMutation, UpdatePollMutationVariables>(
+    UpdatePollDocument,
+    options,
+  );
+}
+export type UpdatePollMutationHookResult = ReturnType<typeof useUpdatePollMutation>;
+export type UpdatePollMutationResult = Apollo.MutationResult<UpdatePollMutation>;
+export type UpdatePollMutationOptions = Apollo.BaseMutationOptions<
+  UpdatePollMutation,
+  UpdatePollMutationVariables
+>;
 export const GetPollByIdDocument = gql`
   query getPollById($id: uuid!) {
     poll: poll_by_pk(id: $id) {
+      app_id
       choices {
         id
         poll_id
