@@ -16,7 +16,7 @@ import { Controller } from 'react-hook-form';
 import { AddPollFormHeader } from './AddPollFormHeader';
 import { POLL_FIELDS } from './constants';
 import type { AddPollFormValues } from '../../pages/AddPollContainer';
-import type { UseFormHandleSubmit } from 'react-hook-form/dist/types';
+import type { UseFormHandleSubmit } from 'react-hook-form';
 import { Dropzone } from '../Dropzone';
 import type { EditPollFormValues } from './EditPollFormContainer';
 
@@ -34,7 +34,7 @@ type AddPollProps = {
   loading: boolean;
 };
 
-export const AddPoll = ({
+export const PollForm = ({
   onSubmit,
   handleSubmit,
   register,
