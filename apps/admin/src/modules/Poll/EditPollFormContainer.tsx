@@ -5,6 +5,7 @@ import { AddPoll } from './AddPoll';
 import { ImageStorageClient } from '@3shop/admin-infra';
 import { StorageService } from '@3shop/domains';
 import { useState } from 'react';
+import { useToastMessage } from '@3shop/ui';
 
 type EditPollFormContainerProps = {
   poll: GetPollByIdQuery['poll'];
@@ -34,6 +35,8 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
       poll: poll?.title,
     },
   });
+
+  const toast = useToastMessage();
 
   const [updatePoll] = useUpdatePollMutation();
 
@@ -72,8 +75,10 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
           description: data.poll,
         },
       });
+
+      toast.success(`Poll ${data.poll} updated successfully`);
     } catch (e) {
-      console.error(e);
+      toast.error('An error occurred while updating poll');
     } finally {
       setLoading(false);
     }
