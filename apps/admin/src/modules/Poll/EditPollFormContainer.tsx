@@ -1,7 +1,7 @@
 import { useFieldArray, useForm } from 'react-hook-form';
 import type { GetPollByIdQuery } from '@3shop/apollo';
 import { useUpdatePollMutation } from '@3shop/apollo';
-import { AddPoll } from './AddPoll';
+import { PollForm } from './PollForm';
 import { ImageStorageClient } from '@3shop/admin-infra';
 import { StorageService } from '@3shop/domains';
 import { useState } from 'react';
@@ -85,7 +85,7 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
   };
 
   return (
-    <AddPoll
+    <PollForm
       addChoice={addChoice}
       deleteChoice={deleteChoice}
       handleSubmit={handleSubmit}

@@ -1,7 +1,7 @@
 import { useForm, useFieldArray } from 'react-hook-form';
 import { FormValidation } from '@3shop/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { AddPoll } from '../modules/Poll/AddPoll';
+import { PollForm } from '../modules/Poll/PollForm';
 import { useCreatePollMutation, useGetAdminAppQuery } from '@3shop/apollo';
 import { StorageService } from '@3shop/domains';
 import { ImageStorageClient } from '@3shop/admin-infra';
@@ -86,7 +86,7 @@ export const AddPollContainer = () => {
   };
 
   return (
-    <AddPoll
+    <PollForm
       control={control}
       errors={errors}
       fields={fields}
