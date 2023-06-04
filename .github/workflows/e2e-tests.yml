@@ -31,9 +31,3 @@ jobs:
           APP_ID: ${{ env.APP_ID }}
           SECRET_JWT: ${{ env.SECRET_JWT }}
         run: pnpm test:e2e:admin
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: playwright-report
-          path: apps/admin/playwright-report
