@@ -22,7 +22,9 @@ export function JsonWebTokenClient(): AuthorizationTokenClient {
 
         return token;
       } catch (e) {
-        throw new Error('Invalid JWT env');
+        console.log(e);
+
+        throw new Error('An error occured ! Invalid secret or token expired');
       }
     },
     decodeAppId: (token) => {

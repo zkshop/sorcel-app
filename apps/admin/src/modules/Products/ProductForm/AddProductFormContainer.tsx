@@ -1,6 +1,6 @@
 import { useToast } from '@3shop/ui';
 import { getAddProductSuccessMessage } from '@3shop/messages';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ProductForm } from './ProductForm';
@@ -24,7 +24,16 @@ export const AddProductFormContainer = () => {
   const {
     handleSubmit,
     formState: { isValid },
+    watch,
   } = methods;
+
+  const isModalValue = watch('isModal');
+
+  useEffect(() => {
+    if (isModalValue) {
+      methods.setValue('price', '0');
+    }
+  }, [isModalValue]);
 
   const navigate = useNavigate();
 
