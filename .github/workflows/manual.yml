@@ -1,0 +1,31 @@
+name: Delete Artifacts
+
+on:
+  workflow_dispatch
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Remove old artifacts
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Replace with your token
+      run: |
+        # Get the list of artifacts
+        artifacts=$(curl \
+          -H "Authorization: token $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts)
+
+        # Iterate over each artifact
+        for artifact in $(echo "${artifacts}" | jq -c '.artifacts[]'); do
+          id=$(echo "${artifact}" | jq -r '.id')
+
+          # Delete the artifact
+          curl \
+            -X DELETE \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}
+        done
