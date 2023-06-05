@@ -5748,9 +5748,26 @@ export type GetPollByIdQuery = {
   } | null;
 };
 
-export type GetPollsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetPollsQueryVariables = Exact<{
+  app_id: Scalars['uuid'];
+}>;
 
 export type GetPollsQuery = {
+  __typename?: 'query_root';
+  polls: Array<{
+    __typename?: 'poll';
+    id: any;
+    title: string;
+    voters: any;
+    description: string;
+    image?: string | null;
+    completed: boolean;
+  }>;
+};
+
+export type GetAdminPollsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAdminPollsQuery = {
   __typename?: 'query_root';
   polls: Array<{
     __typename?: 'poll';
@@ -7447,8 +7464,8 @@ export type GetPollByIdQueryResult = Apollo.QueryResult<
   GetPollByIdQueryVariables
 >;
 export const GetPollsDocument = gql`
-  query GetPolls {
-    polls: poll(order_by: { created_at: desc }) {
+  query GetPolls($app_id: uuid!) {
+    polls: poll(where: { app_id: { _eq: $app_id } }, order_by: { created_at: desc }) {
       id
       title
       voters
@@ -7471,11 +7488,12 @@ export const GetPollsDocument = gql`
  * @example
  * const { data, loading, error } = useGetPollsQuery({
  *   variables: {
+ *      app_id: // value for 'app_id'
  *   },
  * });
  */
 export function useGetPollsQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetPollsQuery, GetPollsQueryVariables>,
+  baseOptions: Apollo.QueryHookOptions<GetPollsQuery, GetPollsQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<GetPollsQuery, GetPollsQueryVariables>(GetPollsDocument, options);
@@ -7489,6 +7507,58 @@ export function useGetPollsLazyQuery(
 export type GetPollsQueryHookResult = ReturnType<typeof useGetPollsQuery>;
 export type GetPollsLazyQueryHookResult = ReturnType<typeof useGetPollsLazyQuery>;
 export type GetPollsQueryResult = Apollo.QueryResult<GetPollsQuery, GetPollsQueryVariables>;
+export const GetAdminPollsDocument = gql`
+  query GetAdminPolls {
+    polls: poll(order_by: { created_at: desc }) {
+      id
+      title
+      voters
+      description
+      image
+      completed
+    }
+  }
+`;
+
+/**
+ * __useGetAdminPollsQuery__
+ *
+ * To run a query within a React component, call `useGetAdminPollsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAdminPollsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAdminPollsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAdminPollsQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetAdminPollsQuery, GetAdminPollsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetAdminPollsQuery, GetAdminPollsQueryVariables>(
+    GetAdminPollsDocument,
+    options,
+  );
+}
+export function useGetAdminPollsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetAdminPollsQuery, GetAdminPollsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetAdminPollsQuery, GetAdminPollsQueryVariables>(
+    GetAdminPollsDocument,
+    options,
+  );
+}
+export type GetAdminPollsQueryHookResult = ReturnType<typeof useGetAdminPollsQuery>;
+export type GetAdminPollsLazyQueryHookResult = ReturnType<typeof useGetAdminPollsLazyQuery>;
+export type GetAdminPollsQueryResult = Apollo.QueryResult<
+  GetAdminPollsQuery,
+  GetAdminPollsQueryVariables
+>;
 export const VoteDocument = gql`
   mutation Vote($pollId: uuid!, $voters: jsonb, $choiceId: uuid!) {
     choice: update_choice_by_pk(pk_columns: { id: $choiceId }, _inc: { count: 1 }) {
