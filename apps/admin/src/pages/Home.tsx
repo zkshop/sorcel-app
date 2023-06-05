@@ -16,6 +16,7 @@ export const Home = () => {
     { title: 'Integrations', content: <Integration /> },
     { title: 'Delivery Fees', content: <DeliveryFeesContainer /> },
     { title: 'Poll', content: <Poll /> },
+    { title: 'Customization', content: <div /> },
   ];
 
   return <VerticalMenu items={items} />;
