@@ -1,4 +1,4 @@
-import { useDeletePollMutation, useGetAdminPollsQuery, useGetPollsQuery } from '@3shop/apollo';
+import { useDeletePollMutation, useGetAdminPollsQuery } from '@3shop/apollo';
 import {
   Box,
   Button,

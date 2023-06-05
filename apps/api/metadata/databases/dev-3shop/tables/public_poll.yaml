@@ -37,7 +37,9 @@ select_permissions:
         - image
         - title
         - voters
-      filter: {}
+      filter:
+        app_id:
+          _eq: X-Hasura-User-Id
 update_permissions:
   - role: customer
     permission:
