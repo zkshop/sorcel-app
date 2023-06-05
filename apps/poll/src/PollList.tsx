@@ -21,7 +21,9 @@ const PollListContainer = styled(Flex)`
 `;
 
 export const PollList = () => {
-  const { loading, data } = useGetPollsQuery({ variables: { app_id: envVars.APP_ID } });
+  const { loading, data } = useGetPollsQuery({
+    variables: { app_id: envVars.APP_ID || '0690ce03-9bbd-486e-a66e-752e48e299cf' },
+  });
 
   if (loading) return <Spinner />;
   if (!data) return <>Error</>;
