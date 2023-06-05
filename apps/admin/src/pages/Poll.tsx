@@ -1,4 +1,4 @@
-import { useDeletePollMutation, useGetPollsQuery } from '@3shop/apollo';
+import { useDeletePollMutation, useGetAdminPollsQuery, useGetPollsQuery } from '@3shop/apollo';
 import {
   Box,
   Button,
@@ -28,7 +28,7 @@ export type DeletePollState = {
 const storage = StorageService(ImageStorageClient());
 
 export const Poll = () => {
-  const { data, loading, error } = useGetPollsQuery();
+  const { data, loading, error } = useGetAdminPollsQuery();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [selectedPoll, setSelectedPoll] = useState<Nullable<DeletePollState>>(null);
   const [deletePollLoading, setDeletePollLoading] = useState(false);

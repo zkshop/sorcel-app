@@ -1,4 +1,16 @@
-query GetPolls {
+query GetPolls($app_id: uuid!) {
+  polls: poll(where: { app_id: { _eq: $app_id } }, order_by: { created_at: desc }) {
+    id
+    title
+    voters
+    description
+    image
+    completed
+  }
+}
+
+
+query GetAdminPolls {
   polls: poll(order_by: { created_at: desc }) {
     id
     title

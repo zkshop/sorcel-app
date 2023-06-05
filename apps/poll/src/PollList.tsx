@@ -2,6 +2,7 @@ import { Box, Flex, Spinner, styled } from '@3shop/ui';
 import { Poll } from './Poll';
 import { Link } from 'react-router-dom';
 import { useGetPollsQuery } from '@3shop/apollo';
+import { envVars } from '@3shop/config';
 
 const PollContainer = styled(Box)`
   width: 24%;
@@ -20,7 +21,7 @@ const PollListContainer = styled(Flex)`
 `;
 
 export const PollList = () => {
-  const { loading, data } = useGetPollsQuery();
+  const { loading, data } = useGetPollsQuery({ variables: { app_id: envVars.APP_ID } });
 
   if (loading) return <Spinner />;
   if (!data) return <>Error</>;
