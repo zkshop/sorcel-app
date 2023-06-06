@@ -48,7 +48,7 @@ export const PollForm = ({
   <MainLayout>
     <form onSubmit={handleSubmit(onSubmit)}>
       <AddPollFormHeader loading={loading} />
-      <BackButton href="/app" />
+      <BackButton href="/app/poll" />
 
       <Section>
         <Heading fontSize="xl">Poll</Heading>
