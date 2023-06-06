@@ -6,7 +6,7 @@ import { ProductListItem } from './ProductListItem';
 import { useGetAdminProductsQuery } from '@3shop/apollo';
 import { useNavigate } from 'react-router-dom';
 
-const getEditProductIdRoute = (id: string) => `product/edit/${id}`;
+const getEditProductIdRoute = (id: string) => `edit/${id}`;
 
 export const Products = () => {
   const { data, error, loading } = useGetAdminProductsQuery();

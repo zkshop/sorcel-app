@@ -6,6 +6,7 @@ import { Integration } from '../modules/Integration/Integration';
 import { OrderList } from '../modules/Order/OrderList';
 import { Products } from '../modules/Products';
 import { Poll } from './Poll';
+import { Customization } from './Customization';
 
 export const Home = () => {
   const items = [
@@ -16,7 +17,7 @@ export const Home = () => {
     { title: 'Integrations', content: <Integration /> },
     { title: 'Delivery Fees', content: <DeliveryFeesContainer /> },
     { title: 'Poll', content: <Poll /> },
-    { title: 'Customization', content: <div /> },
+    { title: 'Customization', content: <Customization /> },
   ];
 
   return <VerticalMenu items={items} />;
