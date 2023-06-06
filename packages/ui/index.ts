@@ -1,3 +1,4 @@
+export { Select as SearchSelect } from 'chakra-react-select';
 export * from './VerticalMenu/VerticalMenu';
 export * from './useToastMessage';
 export * from './theme';
