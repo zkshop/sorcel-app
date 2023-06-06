@@ -8,6 +8,7 @@ import { ImageStorageClient } from '@3shop/admin-infra';
 import { useToastMessage } from '@3shop/ui';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES_PATH } from '../routes/Routes';
 
 export type AddPollFormValues = {
   poll: string;
@@ -76,7 +77,7 @@ export const AddPollContainer = () => {
       });
 
       toast.success('Poll created successfully');
-      navigate('/app');
+      navigate(ROUTES_PATH.PROTECTED.POLL);
     } catch (e) {
       console.error(e);
       toast.error('An error occurred while creating poll');

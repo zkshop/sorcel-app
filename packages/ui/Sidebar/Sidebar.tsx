@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import type { BoxProps, FlexProps } from '@chakra-ui/react';
 import { Image } from '@chakra-ui/react';
 import {
@@ -30,9 +29,9 @@ import {
   FiCreditCard,
   FiThumbsUp,
   FiTool,
-  FiTruck,
 } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
+import type { WithChildren } from '@3shop/types';
 
 interface LinkItemProps {
   name: string;
@@ -49,7 +48,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Integrations', icon: FiTool, href: '/app/integrations' },
 ];
 
-export function SidebarWithHeader({ children }: { children: ReactNode }) {
+export function SidebarWithHeader({ children }: WithChildren<object>) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -69,7 +68,7 @@ export function SidebarWithHeader({ children }: { children: ReactNode }) {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box minH="calc(100vh - 5rem)" ml={{ base: 0, md: 60 }} p="4" backgroundColor="white">
         {children}
       </Box>
     </Box>
@@ -186,9 +185,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => (
                 spacing="1px"
                 ml="2"
               >
-                <Text fontSize="sm">Justina Clark</Text>
+                <Text fontSize="sm">sin.sim@outlook.fr</Text>
                 <Text fontSize="xs" color="gray.600">
-                  Admin
+                  Customer
                 </Text>
               </VStack>
               <Box display={{ base: 'none', md: 'flex' }}>
