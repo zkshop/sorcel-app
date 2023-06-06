@@ -28,7 +28,7 @@ export * from './Box';
 export * from './Banner/Banner';
 export * from './BackButton/BackButton';
 export { Modal as CustomModal } from './Modal/Modal';
-
+export * from './Sidebar';
 export {
   Accordion,
   AccordionButton,
