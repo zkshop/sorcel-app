@@ -18,6 +18,7 @@ import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
 import { useNavigate } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
 import { useState } from 'react';
+import { ROUTES_PATH } from '../routes/Routes';
 
 type LoginFormValues = {
   email: string;
@@ -53,7 +54,7 @@ export const Login = () => {
     if (res.token) {
       setCustomerTokenCookie(res.token);
 
-      navigate('/app');
+      navigate(ROUTES_PATH.PROTECTED.GENERAL);
     }
 
     setIsLoginLoading(false);

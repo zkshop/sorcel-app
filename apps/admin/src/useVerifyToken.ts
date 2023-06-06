@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCustomerTokenCookie } from './useCustomerTokenCookie';
+import { ROUTES_PATH } from './routes/Routes';
 
 export const useVerifyToken = (fromAdminRoute = false) => {
   const { tokenCookie } = useCustomerTokenCookie();
@@ -28,10 +29,10 @@ export const useVerifyToken = (fromAdminRoute = false) => {
         );
         setLoading(false);
 
-        if (!fromAdminRoute) navigate('/app');
+        if (!fromAdminRoute) navigate(ROUTES_PATH.PROTECTED.GENERAL);
       } catch (error) {
         console.error(error);
-        if (fromAdminRoute) navigate('/');
+        if (fromAdminRoute) navigate(ROUTES_PATH.PUBLIC.LOGIN);
       }
     }
 

@@ -18,6 +18,7 @@ import type { Nullable } from '@3shop/types';
 import { useNavigate } from 'react-router-dom';
 import { ImageStorageClient } from '@3shop/admin-infra';
 import { StorageService } from '@3shop/domains';
+import { ROUTES_PATH } from '../routes/Routes';
 
 export type DeletePollState = {
   id: string;
@@ -48,7 +49,7 @@ export const Poll = () => {
   };
 
   const goToPoll = (id: string) => {
-    navigate(`/app/poll/edit/${id}`);
+    navigate(`${ROUTES_PATH.PROTECTED.PRODUCT}/edit/${id}`);
   };
 
   const handleDeletePoll = async () => {
@@ -70,7 +71,7 @@ export const Poll = () => {
   return (
     <Box>
       <Header title="Polls">
-        <Link href="/app/poll/add">
+        <Link href={ROUTES_PATH.PROTECTED.POLL}>
           <Button>+ New Poll</Button>
         </Link>
       </Header>

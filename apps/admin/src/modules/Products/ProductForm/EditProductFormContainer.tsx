@@ -20,6 +20,7 @@ import { ADD_PRODUCT_FORM_SCHEMA } from '../../../schemas';
 import { StorageService } from '@3shop/domains';
 import { ImageStorageClient } from '@3shop/admin-infra';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES_PATH } from '../../../routes/Routes';
 
 type EditProductFormContainerProps = {
   product: GetProductByIdQuery['product'];
@@ -68,7 +69,7 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
         onCompleted: () => toast(getDeleteProductSuccessMessage(product.name)),
         onError: () => toast(ERROR_MESSAGE),
       });
-      navigate('/app');
+      navigate(ROUTES_PATH.PROTECTED.PRODUCT);
     } catch (e) {
       console.error(e);
     } finally {

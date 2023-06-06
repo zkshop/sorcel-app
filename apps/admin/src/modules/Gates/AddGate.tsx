@@ -22,6 +22,7 @@ import { useCreateGateV2Mutation } from '@3shop/apollo';
 import { ProductSelectField } from './ProductSelectField';
 import segmentInputCreator from './segmentInputCreator';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES_PATH } from '../../routes/Routes';
 
 export type AddGateFormValues = {
   name: string;
@@ -74,7 +75,7 @@ export const AddGate = () => {
         isClosable: true,
       });
 
-      navigate('/app');
+      navigate(ROUTES_PATH.PROTECTED.GATE);
     } catch {
       toast({
         title: 'Error',
