@@ -16,6 +16,7 @@ import {
 } from '@3shop/ui';
 import { useState } from 'react';
 import { GateListItem } from './GateListItem';
+import { ROUTES_PATH } from '../../routes/Routes';
 
 const GATES_ATTRIBUTES = ['name', 'perk', ''];
 
@@ -69,7 +70,7 @@ export const Gates = () => {
   return (
     <Box>
       <Header title="Gates">
-        <Link href="/app/gate/add">
+        <Link href={`${ROUTES_PATH.PROTECTED.GATE}/add`}>
           <Button>+ New Gate</Button>
         </Link>
       </Header>

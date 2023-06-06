@@ -1,5 +1,6 @@
 import { Image, Td, Tr } from '@3shop/ui';
 import { Link } from 'react-router-dom';
+import { ROUTES_PATH } from '../../routes/Routes';
 
 type OrderListItemProps = {
   id: string;
@@ -34,7 +35,7 @@ export const OrderListItem = ({
     <Td>{address}</Td>
     <Td>{status}</Td>
     <Td>
-      <Link to={`/app/product/edit/${productId}`}>
+      <Link to={`${ROUTES_PATH.PROTECTED.PRODUCT}/edit/${productId}`}>
         <Image height={50} src={productImage} alt="image" />
       </Link>
     </Td>

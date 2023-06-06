@@ -5,6 +5,7 @@ import { ProductListItem } from './ProductListItem';
 
 import { useGetAdminProductsQuery } from '@3shop/apollo';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES_PATH } from '../../routes/Routes';
 
 const getEditProductIdRoute = (id: string) => `edit/${id}`;
 
@@ -21,7 +22,7 @@ export const Products = () => {
   return (
     <Box>
       <Header title="Products">
-        <Link href="/app/product/add">
+        <Link href={`${ROUTES_PATH.PROTECTED.PRODUCT}/add`}>
           <Button>+ New Product</Button>
         </Link>
       </Header>

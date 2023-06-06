@@ -1,14 +1,39 @@
-import React from 'react';
-import { Box } from '@chakra-ui/react';
-import type { WithChildren } from '@3shop/types';
+import {
+  Box,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Header,
+  Heading,
+  Input,
+  Section,
+  Text,
+} from '@3shop/ui';
 
-const FullScreenComponent = ({ children }: WithChildren<object>) => (
-  <Box h="100%" w="100%" display="flex" alignItems="center" justifyContent="center">
-    {/* Contenu du composant */}
-    <Box bg="blue.500" color="white" p={4}>
-      {children}
-    </Box>
+export const Customization = () => (
+  <Box>
+    <Header title="Customization" />
+
+    <Section>
+      <Heading fontSize="xl">
+        <Text>General Information</Text>
+      </Heading>
+
+      {/* Background color */}
+      <FormControl>
+        <FormLabel mb={1}>Background color</FormLabel>
+
+        <Input placeholder="#FFFFFF" />
+        <FormErrorMessage></FormErrorMessage>
+      </FormControl>
+
+      {/* Text color */}
+      <FormControl>
+        <FormLabel mb={1}>Text color</FormLabel>
+
+        <Input placeholder="#000000" />
+        <FormErrorMessage></FormErrorMessage>
+      </FormControl>
+    </Section>
   </Box>
 );
-
-export const Customization = () => <FullScreenComponent>Customization</FullScreenComponent>;

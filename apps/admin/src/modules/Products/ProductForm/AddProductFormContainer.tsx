@@ -10,6 +10,7 @@ import { StorageService } from '@3shop/domains';
 import { ImageStorageClient } from '@3shop/admin-infra';
 import { useNavigate } from 'react-router-dom';
 import { Product_Type_Enum, useCreateAdminProductMutation } from '@3shop/apollo';
+import { ROUTES_PATH } from '../../../routes/Routes';
 
 const storage = StorageService(ImageStorageClient());
 
@@ -59,7 +60,7 @@ export const AddProductFormContainer = () => {
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),
       });
 
-      navigate('/app');
+      navigate(ROUTES_PATH.PROTECTED.PRODUCT);
     } catch (e) {
       console.error(e);
     } finally {
