@@ -5,11 +5,15 @@ select_permissions:
   - role: customer
     permission:
       columns:
+        - background_color
         - deliveryTaxesTableName
+        - font
+        - font_color
+        - id
         - imgUrl
         - moneyAccountId
         - name
-        - id
+        - plan
       filter:
         _and:
           - id:
@@ -18,7 +22,10 @@ update_permissions:
   - role: customer
     permission:
       columns:
+        - background_color
         - deliveryTaxesTableName
+        - font
+        - font_color
         - imgUrl
         - moneyAccountId
         - name
