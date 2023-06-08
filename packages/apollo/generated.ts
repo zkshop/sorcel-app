@@ -81,7 +81,10 @@ export type String_Comparison_Exp = {
 /** app table */
 export type App = {
   __typename?: 'app';
+  background_color?: Maybe<Scalars['String']>;
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
+  font?: Maybe<Scalars['String']>;
+  font_color?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   imgUrl?: Maybe<Scalars['String']>;
   moneyAccountId?: Maybe<Scalars['String']>;
@@ -115,7 +118,10 @@ export type App_Bool_Exp = {
   _and?: InputMaybe<Array<App_Bool_Exp>>;
   _not?: InputMaybe<App_Bool_Exp>;
   _or?: InputMaybe<Array<App_Bool_Exp>>;
+  background_color?: InputMaybe<String_Comparison_Exp>;
   deliveryTaxesTableName?: InputMaybe<String_Comparison_Exp>;
+  font?: InputMaybe<String_Comparison_Exp>;
+  font_color?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   imgUrl?: InputMaybe<String_Comparison_Exp>;
   moneyAccountId?: InputMaybe<String_Comparison_Exp>;
@@ -131,7 +137,10 @@ export enum App_Constraint {
 
 /** input type for inserting data into table "app" */
 export type App_Insert_Input = {
+  background_color?: InputMaybe<Scalars['String']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
+  font?: InputMaybe<Scalars['String']>;
+  font_color?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
   moneyAccountId?: InputMaybe<Scalars['String']>;
@@ -142,7 +151,10 @@ export type App_Insert_Input = {
 /** aggregate max on columns */
 export type App_Max_Fields = {
   __typename?: 'app_max_fields';
+  background_color?: Maybe<Scalars['String']>;
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
+  font?: Maybe<Scalars['String']>;
+  font_color?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   imgUrl?: Maybe<Scalars['String']>;
   moneyAccountId?: Maybe<Scalars['String']>;
@@ -152,7 +164,10 @@ export type App_Max_Fields = {
 /** aggregate min on columns */
 export type App_Min_Fields = {
   __typename?: 'app_min_fields';
+  background_color?: Maybe<Scalars['String']>;
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
+  font?: Maybe<Scalars['String']>;
+  font_color?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   imgUrl?: Maybe<Scalars['String']>;
   moneyAccountId?: Maybe<Scalars['String']>;
@@ -184,7 +199,10 @@ export type App_On_Conflict = {
 
 /** Ordering options when selecting data from "app". */
 export type App_Order_By = {
+  background_color?: InputMaybe<Order_By>;
   deliveryTaxesTableName?: InputMaybe<Order_By>;
+  font?: InputMaybe<Order_By>;
+  font_color?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   imgUrl?: InputMaybe<Order_By>;
   moneyAccountId?: InputMaybe<Order_By>;
@@ -200,7 +218,13 @@ export type App_Pk_Columns_Input = {
 /** select columns of table "app" */
 export enum App_Select_Column {
   /** column name */
+  BackgroundColor = 'background_color',
+  /** column name */
   DeliveryTaxesTableName = 'deliveryTaxesTableName',
+  /** column name */
+  Font = 'font',
+  /** column name */
+  FontColor = 'font_color',
   /** column name */
   Id = 'id',
   /** column name */
@@ -215,7 +239,10 @@ export enum App_Select_Column {
 
 /** input type for updating data in table "app" */
 export type App_Set_Input = {
+  background_color?: InputMaybe<Scalars['String']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
+  font?: InputMaybe<Scalars['String']>;
+  font_color?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
   moneyAccountId?: InputMaybe<Scalars['String']>;
@@ -233,7 +260,10 @@ export type App_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type App_Stream_Cursor_Value_Input = {
+  background_color?: InputMaybe<Scalars['String']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
+  font?: InputMaybe<Scalars['String']>;
+  font_color?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
   moneyAccountId?: InputMaybe<Scalars['String']>;
@@ -244,7 +274,13 @@ export type App_Stream_Cursor_Value_Input = {
 /** update columns of table "app" */
 export enum App_Update_Column {
   /** column name */
+  BackgroundColor = 'background_color',
+  /** column name */
   DeliveryTaxesTableName = 'deliveryTaxesTableName',
+  /** column name */
+  Font = 'font',
+  /** column name */
+  FontColor = 'font_color',
   /** column name */
   Id = 'id',
   /** column name */
@@ -5355,6 +5391,9 @@ export type GetAdminAppQuery = {
     name: string;
     imgUrl?: string | null;
     moneyAccountId?: string | null;
+    background_color?: string | null;
+    font?: string | null;
+    font_color?: string | null;
   }>;
 };
 
@@ -5369,6 +5408,23 @@ export type UpdateAppMutation = {
   update_app?: {
     __typename?: 'app_mutation_response';
     returning: Array<{ __typename?: 'app'; id: any; imgUrl?: string | null; name: string }>;
+  } | null;
+};
+
+export type UpdateCustomizationFieldsMutationVariables = Exact<{
+  id: Scalars['uuid'];
+  background_color?: InputMaybe<Scalars['String']>;
+  font_color?: InputMaybe<Scalars['String']>;
+  font?: InputMaybe<Scalars['String']>;
+}>;
+
+export type UpdateCustomizationFieldsMutation = {
+  __typename?: 'mutation_root';
+  update_app_by_pk?: {
+    __typename?: 'app';
+    background_color?: string | null;
+    font?: string | null;
+    font_color?: string | null;
   } | null;
 };
 
@@ -6112,6 +6168,9 @@ export const GetAdminAppDocument = gql`
       name
       imgUrl
       moneyAccountId
+      background_color
+      font
+      font_color
     }
   }
 `;
@@ -6201,6 +6260,69 @@ export type UpdateAppMutationResult = Apollo.MutationResult<UpdateAppMutation>;
 export type UpdateAppMutationOptions = Apollo.BaseMutationOptions<
   UpdateAppMutation,
   UpdateAppMutationVariables
+>;
+export const UpdateCustomizationFieldsDocument = gql`
+  mutation updateCustomizationFields(
+    $id: uuid!
+    $background_color: String
+    $font_color: String
+    $font: String
+  ) {
+    update_app_by_pk(
+      pk_columns: { id: $id }
+      _set: { background_color: $background_color, font_color: $font_color, font: $font }
+    ) {
+      background_color
+      font
+      font_color
+    }
+  }
+`;
+export type UpdateCustomizationFieldsMutationFn = Apollo.MutationFunction<
+  UpdateCustomizationFieldsMutation,
+  UpdateCustomizationFieldsMutationVariables
+>;
+
+/**
+ * __useUpdateCustomizationFieldsMutation__
+ *
+ * To run a mutation, you first call `useUpdateCustomizationFieldsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateCustomizationFieldsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateCustomizationFieldsMutation, { data, loading, error }] = useUpdateCustomizationFieldsMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      background_color: // value for 'background_color'
+ *      font_color: // value for 'font_color'
+ *      font: // value for 'font'
+ *   },
+ * });
+ */
+export function useUpdateCustomizationFieldsMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateCustomizationFieldsMutation,
+    UpdateCustomizationFieldsMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateCustomizationFieldsMutation,
+    UpdateCustomizationFieldsMutationVariables
+  >(UpdateCustomizationFieldsDocument, options);
+}
+export type UpdateCustomizationFieldsMutationHookResult = ReturnType<
+  typeof useUpdateCustomizationFieldsMutation
+>;
+export type UpdateCustomizationFieldsMutationResult =
+  Apollo.MutationResult<UpdateCustomizationFieldsMutation>;
+export type UpdateCustomizationFieldsMutationOptions = Apollo.BaseMutationOptions<
+  UpdateCustomizationFieldsMutation,
+  UpdateCustomizationFieldsMutationVariables
 >;
 export const CreateDeliveryZoneDocument = gql`
   mutation CreateDeliveryZone($name: String, $fees: Int, $countries: jsonb) {
