@@ -19,6 +19,9 @@ query getAdminApp {
     name
     imgUrl
     moneyAccountId
+    background_color
+    font
+    font_color
   }
 }
 
@@ -31,3 +34,12 @@ mutation UpdateApp($appId: uuid!, $newName: String!, $newImgUrl: String) {
     }
   }
 }
+
+mutation updateCustomizationFields($id: uuid!, $background_color: String, $font_color: String, $font: String) {
+  update_app_by_pk(pk_columns: {id: $id}, _set: {background_color: $background_color, font_color: $font_color, font: $font}) {
+    background_color
+    font
+    font_color
+  }
+}
+
