@@ -9,27 +9,50 @@ import {
   Input,
   SearchSelect,
   Section,
+  Spinner,
   Text,
 } from '@3shop/ui';
 import fonts from '../assets/fonts.json';
 import { Controller, useForm } from 'react-hook-form';
+import { useGetAdminAppQuery, useUpdateCustomizationFieldsMutation } from '@3shop/apollo';
 
 export type CustomizationFormValues = {
   backgroundColor: string;
-  textColor: string;
+  fontColor: string;
   font: string;
 };
 
 const CUSTOMIZATION_FIELDS = {
   backgroundColor: { value: 'backgroundColor', label: 'Background color', placeholder: '#FFFFFF' },
-  textColor: { value: 'textColor', label: 'Text color', placeholder: '#000000' },
+  fontColor: { value: 'fontColor', label: 'Text color', placeholder: '#000000' },
   font: { value: 'font', label: 'Font' },
 } as const;
 
 export const Customization = () => {
-  const { handleSubmit, register, control } = useForm<CustomizationFormValues>();
+  const { data: appData, loading: appDataLoading } = useGetAdminAppQuery();
+  const { handleSubmit, register, control } = useForm<CustomizationFormValues>({
+    defaultValues: {
+      backgroundColor: appData?.app[0].background_color || '',
+      fontColor: appData?.app[0].font_color || '',
+      font: appData?.app[0].font || '',
+    },
+  });
+  const [updateCustomization] = useUpdateCustomizationFieldsMutation();
 
-  const onSubmit = (data: CustomizationFormValues) => console.log(data);
+  if (appDataLoading) return <Spinner />;
+
+  if (!appData) return <>Error</>;
+
+  const onSubmit = async (data: CustomizationFormValues) => {
+    updateCustomization({
+      variables: {
+        id: appData.app[0].id,
+        background_color: data.backgroundColor,
+        font_color: data.fontColor,
+        font: data.font,
+      },
+    });
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -56,11 +79,11 @@ export const Customization = () => {
 
           {/* Text color */}
           <FormControl>
-            <FormLabel mb={1}>{CUSTOMIZATION_FIELDS.textColor.label}</FormLabel>
+            <FormLabel mb={1}>{CUSTOMIZATION_FIELDS.fontColor.label}</FormLabel>
 
             <Input
-              placeholder={CUSTOMIZATION_FIELDS.textColor.placeholder}
-              {...register(CUSTOMIZATION_FIELDS.textColor.value)}
+              placeholder={CUSTOMIZATION_FIELDS.fontColor.placeholder}
+              {...register(CUSTOMIZATION_FIELDS.fontColor.value)}
             />
             <FormErrorMessage></FormErrorMessage>
           </FormControl>
