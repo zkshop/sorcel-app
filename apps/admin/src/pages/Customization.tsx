@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -11,40 +12,81 @@ import {
   Text,
 } from '@3shop/ui';
 import fonts from '../assets/fonts.json';
+import { Controller, useForm } from 'react-hook-form';
 
-export const Customization = () => (
-  <Box>
-    <Header title="Customization" />
+export type CustomizationFormValues = {
+  backgroundColor: string;
+  textColor: string;
+  font: string;
+};
 
-    <Section>
-      <Heading fontSize="xl">
-        <Text>General Information</Text>
-      </Heading>
+const CUSTOMIZATION_FIELDS = {
+  backgroundColor: { value: 'backgroundColor', label: 'Background color', placeholder: '#FFFFFF' },
+  textColor: { value: 'textColor', label: 'Text color', placeholder: '#000000' },
+  font: { value: 'font', label: 'Font' },
+} as const;
 
-      {/* Background color */}
-      <FormControl>
-        <FormLabel mb={1}>Background color</FormLabel>
+export const Customization = () => {
+  const { handleSubmit, register, control } = useForm<CustomizationFormValues>();
 
-        <Input placeholder="#FFFFFF" />
-        <FormErrorMessage></FormErrorMessage>
-      </FormControl>
+  const onSubmit = (data: CustomizationFormValues) => console.log(data);
 
-      {/* Text color */}
-      <FormControl>
-        <FormLabel mb={1}>Text color</FormLabel>
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Box>
+        <Header title="Customization">
+          <Button type="submit">Save</Button>
+        </Header>
 
-        <Input placeholder="#000000" />
-        <FormErrorMessage></FormErrorMessage>
-      </FormControl>
+        <Section>
+          <Heading fontSize="xl">
+            <Text>General Information</Text>
+          </Heading>
 
-      {/* Font */}
+          {/* Background color */}
+          <FormControl>
+            <FormLabel mb={1}>{CUSTOMIZATION_FIELDS.backgroundColor.label}</FormLabel>
 
-      <FormControl>
-        <FormLabel mb={1}>Font</FormLabel>
+            <Input
+              placeholder={CUSTOMIZATION_FIELDS.backgroundColor.placeholder}
+              {...register(CUSTOMIZATION_FIELDS.backgroundColor.value)}
+            />
+            <FormErrorMessage></FormErrorMessage>
+          </FormControl>
 
-        <SearchSelect useBasicStyles name="fonts" options={fonts} />
-        <FormErrorMessage></FormErrorMessage>
-      </FormControl>
-    </Section>
-  </Box>
-);
+          {/* Text color */}
+          <FormControl>
+            <FormLabel mb={1}>{CUSTOMIZATION_FIELDS.textColor.label}</FormLabel>
+
+            <Input
+              placeholder={CUSTOMIZATION_FIELDS.textColor.placeholder}
+              {...register(CUSTOMIZATION_FIELDS.textColor.value)}
+            />
+            <FormErrorMessage></FormErrorMessage>
+          </FormControl>
+
+          {/* Font */}
+
+          <FormControl>
+            <FormLabel mb={1}>{CUSTOMIZATION_FIELDS.font.label}</FormLabel>
+
+            <Controller
+              name={CUSTOMIZATION_FIELDS.font.value}
+              control={control}
+              render={({ field }) => (
+                <SearchSelect
+                  useBasicStyles
+                  value={fonts.find((c) => c.value === field.value)}
+                  onChange={(val) => field.onChange(val?.value)}
+                  options={fonts}
+                />
+              )}
+            />
+
+            <FormErrorMessage></FormErrorMessage>
+          </FormControl>
+        </Section>
+      </Box>
+    </form>
+  );
+};
