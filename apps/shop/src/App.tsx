@@ -11,7 +11,7 @@ const apolloClient = createApolloShopClient();
 export const App = () => (
   <ReduxProvider store={store}>
     <ApolloProvider client={apolloClient}>
-      <ThemeProvider>
+      <ThemeProvider customTheme>
         <WalletProvider>
           <RouterProvider router={router} />
         </WalletProvider>

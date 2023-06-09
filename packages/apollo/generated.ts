@@ -5381,6 +5381,21 @@ export type GetPlanQuery = {
   app?: { __typename?: 'app'; id: any; plan?: Plan_Enum | null } | null;
 };
 
+export type GetAppThemeQueryVariables = Exact<{
+  appId: Scalars['uuid'];
+}>;
+
+export type GetAppThemeQuery = {
+  __typename?: 'query_root';
+  app?: {
+    __typename?: 'app';
+    id: any;
+    background_color?: string | null;
+    font?: string | null;
+    font_color?: string | null;
+  } | null;
+};
+
 export type GetAdminAppQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetAdminAppQuery = {
@@ -6161,6 +6176,54 @@ export function useGetPlanLazyQuery(
 export type GetPlanQueryHookResult = ReturnType<typeof useGetPlanQuery>;
 export type GetPlanLazyQueryHookResult = ReturnType<typeof useGetPlanLazyQuery>;
 export type GetPlanQueryResult = Apollo.QueryResult<GetPlanQuery, GetPlanQueryVariables>;
+export const GetAppThemeDocument = gql`
+  query getAppTheme($appId: uuid!) {
+    app: app_by_pk(id: $appId) {
+      id
+      background_color
+      font
+      font_color
+    }
+  }
+`;
+
+/**
+ * __useGetAppThemeQuery__
+ *
+ * To run a query within a React component, call `useGetAppThemeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAppThemeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAppThemeQuery({
+ *   variables: {
+ *      appId: // value for 'appId'
+ *   },
+ * });
+ */
+export function useGetAppThemeQuery(
+  baseOptions: Apollo.QueryHookOptions<GetAppThemeQuery, GetAppThemeQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetAppThemeQuery, GetAppThemeQueryVariables>(GetAppThemeDocument, options);
+}
+export function useGetAppThemeLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetAppThemeQuery, GetAppThemeQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetAppThemeQuery, GetAppThemeQueryVariables>(
+    GetAppThemeDocument,
+    options,
+  );
+}
+export type GetAppThemeQueryHookResult = ReturnType<typeof useGetAppThemeQuery>;
+export type GetAppThemeLazyQueryHookResult = ReturnType<typeof useGetAppThemeLazyQuery>;
+export type GetAppThemeQueryResult = Apollo.QueryResult<
+  GetAppThemeQuery,
+  GetAppThemeQueryVariables
+>;
 export const GetAdminAppDocument = gql`
   query getAdminApp {
     app {
