@@ -22,6 +22,7 @@ type CustomizationFormProps = {
   register: UseFormRegister<CustomizationFormValues>;
   control: Control<CustomizationFormValues>;
   onSubmit: (data: CustomizationFormValues) => void;
+  loading?: boolean;
 };
 
 export const CustomizationForm = ({
@@ -29,11 +30,14 @@ export const CustomizationForm = ({
   onSubmit,
   register,
   control,
+  loading,
 }: CustomizationFormProps) => (
   <form onSubmit={handleSubmit(onSubmit)}>
     <Box>
       <Header title="Customization">
-        <Button type="submit">Save</Button>
+        <Button isLoading={loading} type="submit">
+          Save
+        </Button>
       </Header>
 
       <Section>
