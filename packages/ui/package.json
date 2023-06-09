@@ -18,10 +18,12 @@
     "chakra-react-select": "^4.6.0",
     "framer-motion": "^7.5.3",
     "react-hook-form": "^7.37.0",
-    "react-icons": "^4.4.0"
+    "react-icons": "^4.4.0",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "@types/react": "^18.0.28"
+    "@types/react": "^18.0.28",
+    "@types/webfontloader": "^1.6.35"
   },
   "peerDependencies": {
     "react": "^18.2.0"
