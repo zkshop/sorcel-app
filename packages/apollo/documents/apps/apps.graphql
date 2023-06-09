@@ -13,6 +13,16 @@ query getPlan($appId: uuid!) {
     plan
   }
 }
+
+query getAppTheme($appId: uuid!) {
+  app: app_by_pk(id: $appId) {
+    id
+    background_color
+    font
+    font_color
+  }
+}
+
 query getAdminApp {
   app {
     id
@@ -35,11 +45,18 @@ mutation UpdateApp($appId: uuid!, $newName: String!, $newImgUrl: String) {
   }
 }
 
-mutation updateCustomizationFields($id: uuid!, $background_color: String, $font_color: String, $font: String) {
-  update_app_by_pk(pk_columns: {id: $id}, _set: {background_color: $background_color, font_color: $font_color, font: $font}) {
+mutation updateCustomizationFields(
+  $id: uuid!
+  $background_color: String
+  $font_color: String
+  $font: String
+) {
+  update_app_by_pk(
+    pk_columns: { id: $id }
+    _set: { background_color: $background_color, font_color: $font_color, font: $font }
+  ) {
     background_color
     font
     font_color
   }
 }
-
