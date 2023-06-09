@@ -5,6 +5,7 @@ import { useGetAppThemeLazyQuery } from '@3shop/apollo';
 import { envVars } from '@3shop/config';
 import { merge } from 'lodash';
 import { theme as baseTheme } from './theme';
+import WebFont from 'webfontloader';
 
 type Props = {
   children?: React.ReactNode;
@@ -29,6 +30,13 @@ export const ThemeProvider = ({ children, customTheme = false }: Props) => {
         if (!response.data) throw new Error('Theme not found');
 
         const { background_color, font, font_color } = response.data.app as CustomTheme;
+
+        if (font)
+          WebFont.load({
+            google: {
+              families: [font],
+            },
+          });
 
         const newTheme = extendTheme(
           merge({
