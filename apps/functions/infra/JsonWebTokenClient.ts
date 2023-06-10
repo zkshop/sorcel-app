@@ -35,7 +35,6 @@ export function JsonWebTokenClient(): AuthorizationTokenClient {
 
       // @ts-ignore
       const { 'https://hasura.io/jwt/claims': claims } = decoded.payload;
-      console.log(decoded.payload);
 
       return claims['x-hasura-user-id'] as string;
     },

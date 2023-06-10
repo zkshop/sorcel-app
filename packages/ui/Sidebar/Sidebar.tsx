@@ -48,10 +48,12 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Integrations', icon: FiTool, href: '/app/integrations' },
 ];
 
-export function SidebarWithHeader({
-  children,
-  user,
-}: WithChildren<{ user: Nullable<{ email: string; appId: string }> }>) {
+type SidebarWithHeaderProps = WithChildren<{
+  user: Nullable<{ email: string; appId: string }>;
+  signOut: () => void;
+}>;
+
+export function SidebarWithHeader({ children, user, signOut }: SidebarWithHeaderProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -70,7 +72,7 @@ export function SidebarWithHeader({
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav user={user} onOpen={onOpen} />
+      <MobileNav signOut={signOut} user={user} onOpen={onOpen} />
       <Box minH="calc(100vh - 5rem)" ml={{ base: 0, md: 60 }} p="4" backgroundColor="white">
         {children}
       </Box>
@@ -148,8 +150,9 @@ const NavItem = ({ icon, children, href = '#', ...rest }: NavItemProps) => (
 interface MobileProps extends FlexProps {
   onOpen: () => void;
   user: Nullable<{ email: string; appId: string }>;
+  signOut: () => void;
 }
-const MobileNav = ({ onOpen, user, ...rest }: MobileProps) => (
+const MobileNav = ({ onOpen, signOut, user, ...rest }: MobileProps) => (
   <Flex
     ml={{ base: 0, md: 60 }}
     px={{ base: 4, md: 4 }}
@@ -200,7 +203,7 @@ const MobileNav = ({ onOpen, user, ...rest }: MobileProps) => (
             bg={useColorModeValue('white', 'gray.900')}
             borderColor={useColorModeValue('gray.200', 'gray.700')}
           >
-            <MenuItem>Sign out</MenuItem>
+            <MenuItem onClick={signOut}>Sign out</MenuItem>
           </MenuList>
         </Menu>
       </Flex>
