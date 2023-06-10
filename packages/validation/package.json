@@ -7,6 +7,10 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
+    "tinycolor2": "^1.6.0",
     "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/tinycolor2": "^1.4.3"
   }
 }

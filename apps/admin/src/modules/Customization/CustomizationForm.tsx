@@ -1,4 +1,10 @@
-import type { Control, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
+import type {
+  Control,
+  FieldErrors,
+  FormState,
+  UseFormHandleSubmit,
+  UseFormRegister,
+} from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import type { CustomizationFormValues } from '../../pages/Customization';
 import fonts from '../../assets/fonts.json';
@@ -22,6 +28,7 @@ type CustomizationFormProps = {
   register: UseFormRegister<CustomizationFormValues>;
   control: Control<CustomizationFormValues>;
   onSubmit: (data: CustomizationFormValues) => void;
+  errors: FieldErrors<CustomizationFormValues>;
   loading?: boolean;
 };
 
@@ -31,6 +38,7 @@ export const CustomizationForm = ({
   register,
   control,
   loading,
+  errors,
 }: CustomizationFormProps) => (
   <form onSubmit={handleSubmit(onSubmit)}>
     <Box>
@@ -46,30 +54,34 @@ export const CustomizationForm = ({
         </Heading>
 
         {/* Background color */}
-        <FormControl>
+        <FormControl isInvalid={Boolean(errors[CUSTOMIZATION_FIELDS.backgroundColor.value])}>
           <FormLabel mb={1}>{CUSTOMIZATION_FIELDS.backgroundColor.label}</FormLabel>
 
           <Input
             placeholder={CUSTOMIZATION_FIELDS.backgroundColor.placeholder}
             {...register(CUSTOMIZATION_FIELDS.backgroundColor.value)}
           />
-          <FormErrorMessage></FormErrorMessage>
+          <FormErrorMessage>
+            {errors[CUSTOMIZATION_FIELDS.backgroundColor.value]?.message}
+          </FormErrorMessage>
         </FormControl>
 
         {/* Text color */}
-        <FormControl>
+        <FormControl isInvalid={Boolean(errors[CUSTOMIZATION_FIELDS.fontColor.value])}>
           <FormLabel mb={1}>{CUSTOMIZATION_FIELDS.fontColor.label}</FormLabel>
 
           <Input
             placeholder={CUSTOMIZATION_FIELDS.fontColor.placeholder}
             {...register(CUSTOMIZATION_FIELDS.fontColor.value)}
           />
-          <FormErrorMessage></FormErrorMessage>
+          <FormErrorMessage>
+            {errors[CUSTOMIZATION_FIELDS.fontColor.value]?.message}
+          </FormErrorMessage>
         </FormControl>
 
         {/* Font */}
 
-        <FormControl>
+        <FormControl isInvalid={Boolean(errors[CUSTOMIZATION_FIELDS.font.value])}>
           <FormLabel mb={1}>{CUSTOMIZATION_FIELDS.font.label}</FormLabel>
 
           <Controller
@@ -85,7 +97,7 @@ export const CustomizationForm = ({
             )}
           />
 
-          <FormErrorMessage></FormErrorMessage>
+          <FormErrorMessage>{errors[CUSTOMIZATION_FIELDS.font.value]?.message}</FormErrorMessage>
         </FormControl>
       </Section>
     </Box>
