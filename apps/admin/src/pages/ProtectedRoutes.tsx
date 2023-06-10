@@ -3,7 +3,7 @@ import { SidebarWithHeader, Spinner } from '@3shop/ui';
 import { useVerifyToken } from '../useVerifyToken';
 
 export const ProtectedRoutes = () => {
-  const { loading } = useVerifyToken(true);
+  const { loading, user } = useVerifyToken(true);
 
-  return <SidebarWithHeader>{loading ? <Spinner /> : <Outlet />}</SidebarWithHeader>;
+  return <SidebarWithHeader user={user}>{loading ? <Spinner /> : <Outlet />}</SidebarWithHeader>;
 };
