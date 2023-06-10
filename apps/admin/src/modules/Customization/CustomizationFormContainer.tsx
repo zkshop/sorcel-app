@@ -2,13 +2,20 @@ import { CustomizationForm } from './CustomizationForm';
 import { useForm } from 'react-hook-form';
 import type { CustomizationFormValues } from '../../pages/Customization';
 import { useUpdateCustomizationFieldsMutation } from '@3shop/apollo';
-import { useState } from 'react';
 import { useToastMessage } from '@3shop/ui';
+import { FormValidation } from '@3shop/validation';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 type CustomizationFormContainerProps = {
   appId: string;
   defaultValues: Partial<CustomizationFormValues>;
 };
+
+const CUSTOMIZATION_FIELDS = FormValidation.object({
+  backgroundColor: FormValidation.string().color(),
+  fontColor: FormValidation.string().color(),
+  font: FormValidation.string().required(),
+});
 
 export const CustomizationFormContainer = ({
   appId,
@@ -16,12 +23,19 @@ export const CustomizationFormContainer = ({
 }: CustomizationFormContainerProps) => {
   const toast = useToastMessage();
 
-  const { handleSubmit, register, control } = useForm<CustomizationFormValues>({
+  const {
+    handleSubmit,
+    register,
+    control,
+    formState: { errors },
+  } = useForm<CustomizationFormValues>({
+    mode: 'onBlur',
     defaultValues: {
       backgroundColor: defaultValues.backgroundColor,
       fontColor: defaultValues.fontColor,
       font: defaultValues.font,
     },
+    resolver: yupResolver(CUSTOMIZATION_FIELDS),
   });
 
   const [updateCustomization, { loading }] = useUpdateCustomizationFieldsMutation();
@@ -50,6 +64,7 @@ export const CustomizationFormContainer = ({
       register={register}
       control={control}
       loading={loading}
+      errors={errors}
     />
   );
 };
