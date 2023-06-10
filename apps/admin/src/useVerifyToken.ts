@@ -4,10 +4,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCustomerTokenCookie } from './useCustomerTokenCookie';
 import { ROUTES_PATH } from './routes/Routes';
+import type { Nullable } from '@3shop/types';
+
+type UserData = Nullable<{ email: string; appId: string }>;
 
 export const useVerifyToken = (fromAdminRoute = false) => {
   const { tokenCookie } = useCustomerTokenCookie();
-
+  const [user, setUser] = useState<UserData>(null);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -19,7 +22,7 @@ export const useVerifyToken = (fromAdminRoute = false) => {
       try {
         if (!tokenCookie) throw new Error();
 
-        await axios.get<{ token: string | null }>(
+        const user = await axios.get<UserData>(
           `${envVars.PUBLIC_FUNCTIONS_URL}/api/admin/auth/verify`,
           {
             headers: {
@@ -27,6 +30,8 @@ export const useVerifyToken = (fromAdminRoute = false) => {
             },
           },
         );
+
+        setUser(user.data);
         setLoading(false);
 
         if (!fromAdminRoute) navigate(ROUTES_PATH.PROTECTED.GENERAL);
@@ -39,5 +44,5 @@ export const useVerifyToken = (fromAdminRoute = false) => {
     verifyToken(tokenCookie);
   }, [fromAdminRoute, navigate, tokenCookie]);
 
-  return { loading };
+  return { loading, user };
 };

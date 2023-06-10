@@ -31,7 +31,7 @@ import {
   FiTool,
 } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
-import type { WithChildren } from '@3shop/types';
+import type { Nullable, WithChildren } from '@3shop/types';
 
 interface LinkItemProps {
   name: string;
@@ -48,7 +48,10 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Integrations', icon: FiTool, href: '/app/integrations' },
 ];
 
-export function SidebarWithHeader({ children }: WithChildren<object>) {
+export function SidebarWithHeader({
+  children,
+  user,
+}: WithChildren<{ user: Nullable<{ email: string; appId: string }> }>) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -67,7 +70,7 @@ export function SidebarWithHeader({ children }: WithChildren<object>) {
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav onOpen={onOpen} />
+      <MobileNav user={user} onOpen={onOpen} />
       <Box minH="calc(100vh - 5rem)" ml={{ base: 0, md: 60 }} p="4" backgroundColor="white">
         {children}
       </Box>
@@ -144,8 +147,9 @@ const NavItem = ({ icon, children, href = '#', ...rest }: NavItemProps) => (
 
 interface MobileProps extends FlexProps {
   onOpen: () => void;
+  user: Nullable<{ email: string; appId: string }>;
 }
-const MobileNav = ({ onOpen, ...rest }: MobileProps) => (
+const MobileNav = ({ onOpen, user, ...rest }: MobileProps) => (
   <Flex
     ml={{ base: 0, md: 60 }}
     px={{ base: 4, md: 4 }}
@@ -185,10 +189,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => (
                 spacing="1px"
                 ml="2"
               >
-                <Text fontSize="sm">sin.sim@outlook.fr</Text>
-                <Text fontSize="xs" color="gray.600">
-                  Customer
-                </Text>
+                <Text fontSize="sm">{user?.email}</Text>
               </VStack>
               <Box display={{ base: 'none', md: 'flex' }}>
                 <FiChevronDown />
@@ -199,10 +200,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => (
             bg={useColorModeValue('white', 'gray.900')}
             borderColor={useColorModeValue('gray.200', 'gray.700')}
           >
-            {/* <MenuItem>Profile</MenuItem>
-            <MenuItem>Settings</MenuItem>
-            <MenuItem>Billing</MenuItem>
-            <MenuDivider /> */}
             <MenuItem>Sign out</MenuItem>
           </MenuList>
         </Menu>

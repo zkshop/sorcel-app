@@ -35,8 +35,20 @@ export function JsonWebTokenClient(): AuthorizationTokenClient {
 
       // @ts-ignore
       const { 'https://hasura.io/jwt/claims': claims } = decoded.payload;
+      console.log(decoded.payload);
 
       return claims['x-hasura-user-id'] as string;
+    },
+
+    getUserPayload: (token) => {
+      const decoded = jwt.decode(token, { complete: true });
+      if (!decoded || !decoded.payload) {
+        throw new Error('Could not decode JWT');
+      }
+      // @ts-ignore
+      const { 'https://hasura.io/jwt/claims': claims, email } = decoded.payload;
+
+      return { email, appId: claims['x-hasura-user-id'] };
     },
   };
 }
