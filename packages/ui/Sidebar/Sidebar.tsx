@@ -39,7 +39,7 @@ interface LinkItemProps {
   href?: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'General', href: '', icon: FiHome },
+  { name: 'General', href: '/app', icon: FiHome },
   { name: 'Customization', href: '/app/customization', icon: FiLayout },
   { name: 'Products', icon: FiStar, href: '/app/product' },
   { name: 'Gates', icon: FiLock, href: '/app/gate' },
