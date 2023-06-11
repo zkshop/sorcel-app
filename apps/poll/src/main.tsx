@@ -11,15 +11,15 @@ const apolloClient = createApolloShopClient();
 
 const Main = () => (
   <React.StrictMode>
-    <ThemeProvider>
-      <ApolloProvider client={apolloClient}>
-        <StoreProvider store={store}>
-          <WalletProvider>
+    <ApolloProvider client={apolloClient}>
+      <StoreProvider store={store}>
+        <WalletProvider>
+          <ThemeProvider>
             <App />
-          </WalletProvider>
-        </StoreProvider>
-      </ApolloProvider>
-    </ThemeProvider>
+          </ThemeProvider>
+        </WalletProvider>
+      </StoreProvider>
+    </ApolloProvider>
   </React.StrictMode>
 );
 
