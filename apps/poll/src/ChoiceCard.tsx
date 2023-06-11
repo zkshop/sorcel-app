@@ -12,7 +12,6 @@ const ChoiceCardContainer = styled(VStack)`
   border-radius: ${CHOICE_CARD_BORDER_RADIUS};
   overflow: hidden;
 
-  // media queries
   @media (max-width: 1440px) {
     flex-basis: 16%;
   }
