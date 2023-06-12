@@ -34,6 +34,7 @@ export const CustomizationFormContainer = ({
       backgroundColor: defaultValues.backgroundColor,
       fontColor: defaultValues.fontColor,
       font: defaultValues.font,
+      showBrand: defaultValues.showBrand,
     },
     resolver: yupResolver(CUSTOMIZATION_FIELDS),
   });
@@ -48,6 +49,7 @@ export const CustomizationFormContainer = ({
           background_color: data.backgroundColor,
           font_color: data.fontColor,
           font: data.font,
+          show_brand: data.showBrand,
         },
       });
 

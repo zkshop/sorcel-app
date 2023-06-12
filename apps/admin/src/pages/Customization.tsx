@@ -21,7 +21,7 @@ export const Customization = () => {
     backgroundColor: appData.app[0].background_color || undefined,
     fontColor: appData.app[0].font_color || undefined,
     font: appData.app[0].font || undefined,
-    showBrand: false,
+    showBrand: appData.app[0].show_brand || undefined,
   };
 
   return <CustomizationFormContainer appId={appId} defaultValues={defaultValues} />;

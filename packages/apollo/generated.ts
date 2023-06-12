@@ -90,6 +90,7 @@ export type App = {
   moneyAccountId?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   plan?: Maybe<Plan_Enum>;
+  show_brand?: Maybe<Scalars['Boolean']>;
 };
 
 /** aggregated selection of "app" */
@@ -127,6 +128,7 @@ export type App_Bool_Exp = {
   moneyAccountId?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   plan?: InputMaybe<Plan_Enum_Comparison_Exp>;
+  show_brand?: InputMaybe<Boolean_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "app" */
@@ -146,6 +148,7 @@ export type App_Insert_Input = {
   moneyAccountId?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   plan?: InputMaybe<Plan_Enum>;
+  show_brand?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate max on columns */
@@ -208,6 +211,7 @@ export type App_Order_By = {
   moneyAccountId?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   plan?: InputMaybe<Order_By>;
+  show_brand?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: app */
@@ -235,6 +239,8 @@ export enum App_Select_Column {
   Name = 'name',
   /** column name */
   Plan = 'plan',
+  /** column name */
+  ShowBrand = 'show_brand',
 }
 
 /** input type for updating data in table "app" */
@@ -248,6 +254,7 @@ export type App_Set_Input = {
   moneyAccountId?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   plan?: InputMaybe<Plan_Enum>;
+  show_brand?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Streaming cursor of the table "app" */
@@ -269,6 +276,7 @@ export type App_Stream_Cursor_Value_Input = {
   moneyAccountId?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   plan?: InputMaybe<Plan_Enum>;
+  show_brand?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** update columns of table "app" */
@@ -291,6 +299,8 @@ export enum App_Update_Column {
   Name = 'name',
   /** column name */
   Plan = 'plan',
+  /** column name */
+  ShowBrand = 'show_brand',
 }
 
 export type App_Updates = {
@@ -5409,6 +5419,7 @@ export type GetAdminAppQuery = {
     background_color?: string | null;
     font?: string | null;
     font_color?: string | null;
+    show_brand?: boolean | null;
   }>;
 };
 
@@ -5431,6 +5442,7 @@ export type UpdateCustomizationFieldsMutationVariables = Exact<{
   background_color?: InputMaybe<Scalars['String']>;
   font_color?: InputMaybe<Scalars['String']>;
   font?: InputMaybe<Scalars['String']>;
+  show_brand?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 export type UpdateCustomizationFieldsMutation = {
@@ -5440,6 +5452,7 @@ export type UpdateCustomizationFieldsMutation = {
     background_color?: string | null;
     font?: string | null;
     font_color?: string | null;
+    show_brand?: boolean | null;
   } | null;
 };
 
@@ -6234,6 +6247,7 @@ export const GetAdminAppDocument = gql`
       background_color
       font
       font_color
+      show_brand
     }
   }
 `;
@@ -6330,14 +6344,21 @@ export const UpdateCustomizationFieldsDocument = gql`
     $background_color: String
     $font_color: String
     $font: String
+    $show_brand: Boolean
   ) {
     update_app_by_pk(
       pk_columns: { id: $id }
-      _set: { background_color: $background_color, font_color: $font_color, font: $font }
+      _set: {
+        background_color: $background_color
+        font_color: $font_color
+        font: $font
+        show_brand: $show_brand
+      }
     ) {
       background_color
       font
       font_color
+      show_brand
     }
   }
 `;
@@ -6363,6 +6384,7 @@ export type UpdateCustomizationFieldsMutationFn = Apollo.MutationFunction<
  *      background_color: // value for 'background_color'
  *      font_color: // value for 'font_color'
  *      font: // value for 'font'
+ *      show_brand: // value for 'show_brand'
  *   },
  * });
  */
