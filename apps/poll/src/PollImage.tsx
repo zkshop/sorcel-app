@@ -4,7 +4,6 @@ import { CHOICE_CARD_BORDER_RADIUS } from './constant';
 
 type ImageProps = {
   src?: string;
-  isLocked: boolean;
   completed?: boolean;
 };
 
@@ -26,11 +25,6 @@ const StyledImage = styled(ChakraImage)<{ completed: boolean }>`
   ${({ completed }) => completed && 'opacity: 0.5;'}
 `;
 
-export const PollImage = ({ src = DEFAULT_IMAGE, isLocked, completed = true }: ImageProps) => (
-  <StyledImage
-    completed={completed}
-    isLocked={isLocked}
-    src={src}
-    borderTopRadius={CHOICE_CARD_BORDER_RADIUS}
-  />
+export const PollImage = ({ src = DEFAULT_IMAGE, completed = true }: ImageProps) => (
+  <StyledImage completed={completed} src={src} borderTopRadius={CHOICE_CARD_BORDER_RADIUS} />
 );
