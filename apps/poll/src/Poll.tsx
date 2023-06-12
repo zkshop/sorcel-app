@@ -9,6 +9,7 @@ type PollType = {
   title: string;
   image?: string;
   completed: boolean;
+  isLocked?: boolean;
 };
 
 export const Poll = ({ title, image, completed }: PollType) => (
@@ -19,7 +20,7 @@ export const Poll = ({ title, image, completed }: PollType) => (
           <Text fontWeight="bold">Completed</Text>
         </TitleLayer>
       )}
-      <PollImage completed={completed} isLocked={true} src={image} />
+      <PollImage completed={completed} src={image} />
     </Box>
     <Flex paddingY={2} gap={2} direction="column" justifyContent="center" alignItems="center">
       <Text textAlign="center" noOfLines={1} fontFamily="Inter" fontWeight="800">
