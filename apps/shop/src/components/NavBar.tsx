@@ -1,6 +1,6 @@
 import { ConnectButtonGroup } from './ConnectButtonGroup';
 import { LoginModal } from './LoginModal';
-import { VStack, HStack, useDisclosure, Box, Image } from '@3shop/ui';
+import { VStack, HStack, useDisclosure, Box, Image, Text, Grid, Flex } from '@3shop/ui';
 import { useForm } from 'react-hook-form';
 
 import { useEffect } from 'react';
@@ -26,6 +26,7 @@ export const NavBar = ({ admin }: NavBarProps) => {
   });
   const appName = data?.data?.app?.name;
   const imgUrl = data?.data?.app?.imgUrl;
+  const showBrand = data?.data?.app?.show_brand;
 
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -63,24 +64,29 @@ export const NavBar = ({ admin }: NavBarProps) => {
 
   return (
     <VStack className={classnames.HEADER} as="header" sx={{ py: 2, px: { xs: 3, md: 6, lg: 8 } }}>
-      <HStack w="full" maxW={1440}>
-        <HStack justifyContent="space-between" flex={1}>
-          <Link to="/">
+      <Flex w="full" maxW={1440} justifyContent="space-between">
+        {showBrand ? (
+          <Box as={Link} to="/" display="block">
             {imgUrl ? (
               <Image h={70} w={210} src={imgUrl || ''} alt="3shop" style={{ cursor: 'pointer' }} />
             ) : (
-              <Box
+              <Text
+                w="fit-content"
                 sx={{
                   fontSize: '24px',
                   textTransform: 'uppercase',
                 }}
               >
                 {appName}
-              </Box>
+              </Text>
             )}
-          </Link>
+          </Box>
+        ) : (
+          <Box />
+        )}
 
-          {!admin && (
+        {!admin && (
+          <Box>
             <ConnectButtonGroup
               isConnectedByWallet={isConnected}
               userEmail={user.email}
@@ -88,9 +94,9 @@ export const NavBar = ({ admin }: NavBarProps) => {
               handleOpenLoginModal={handleOpenLoginModal}
               handleLogout={handleLogout}
             />
-          )}
-        </HStack>
-      </HStack>
+          </Box>
+        )}
+      </Flex>
 
       <LoginModal
         isOpen={isOpen}
