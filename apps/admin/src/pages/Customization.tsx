@@ -6,6 +6,7 @@ export type CustomizationFormValues = {
   backgroundColor: string;
   fontColor: string;
   font: string;
+  showBrand: boolean;
 };
 
 export const Customization = () => {
@@ -20,6 +21,7 @@ export const Customization = () => {
     backgroundColor: appData.app[0].background_color || undefined,
     fontColor: appData.app[0].font_color || undefined,
     font: appData.app[0].font || undefined,
+    showBrand: false,
   };
 
   return <CustomizationFormContainer appId={appId} defaultValues={defaultValues} />;
