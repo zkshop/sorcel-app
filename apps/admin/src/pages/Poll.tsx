@@ -49,7 +49,7 @@ export const Poll = () => {
   };
 
   const goToPoll = (id: string) => {
-    navigate(`${ROUTES_PATH.PROTECTED.PRODUCT}/edit/${id}`);
+    navigate(`${ROUTES_PATH.PROTECTED.POLL}/edit/${id}`);
   };
 
   const handleDeletePoll = async () => {
@@ -71,7 +71,7 @@ export const Poll = () => {
   return (
     <Box>
       <Header title="Polls">
-        <Link href={ROUTES_PATH.PROTECTED.POLL}>
+        <Link href={`${ROUTES_PATH.PROTECTED.POLL}/add`}>
           <Button>+ New Poll</Button>
         </Link>
       </Header>
