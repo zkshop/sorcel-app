@@ -1,10 +1,4 @@
-import type {
-  Control,
-  FieldErrors,
-  FormState,
-  UseFormHandleSubmit,
-  UseFormRegister,
-} from 'react-hook-form';
+import type { Control, FieldErrors, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import type { CustomizationFormValues } from '../../pages/Customization';
 import fonts from '../../assets/fonts.json';
@@ -20,6 +14,7 @@ import {
   FormErrorMessage,
   SearchSelect,
   Text,
+  Switch,
 } from '@3shop/ui';
 import { CUSTOMIZATION_FIELDS } from './constants';
 
@@ -98,6 +93,13 @@ export const CustomizationForm = ({
           />
 
           <FormErrorMessage>{errors[CUSTOMIZATION_FIELDS.font.value]?.message}</FormErrorMessage>
+        </FormControl>
+
+        {/* Show Brand */}
+        <FormControl>
+          <FormLabel mb={1}>{CUSTOMIZATION_FIELDS.showBrand.label}</FormLabel>
+
+          <Switch {...register(CUSTOMIZATION_FIELDS.showBrand.value)} />
         </FormControl>
       </Section>
     </Box>
