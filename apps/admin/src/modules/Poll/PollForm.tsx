@@ -32,6 +32,7 @@ type AddPollProps = {
   deleteChoice(index: number): void;
   fields: FieldArrayWithId<PollFormValues, 'choices', 'id'>[];
   loading: boolean;
+  handleOpenDeleteModal?(): void;
 };
 
 export const PollForm = ({
@@ -44,10 +45,11 @@ export const PollForm = ({
   addChoice,
   fields,
   loading,
+  handleOpenDeleteModal,
 }: AddPollProps) => (
   <MainLayout>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <AddPollFormHeader loading={loading} />
+      <AddPollFormHeader handleOpenDeleteModal={handleOpenDeleteModal} loading={loading} />
       <BackButton href="/app/poll" />
 
       <Section>

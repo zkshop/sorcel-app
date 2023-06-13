@@ -116,7 +116,6 @@ export const ProductCardModal = ({
         </form>
       }
       isOpen={isOpen}
-      onOpen={onOpen}
       onClose={onClose}
     />
   );

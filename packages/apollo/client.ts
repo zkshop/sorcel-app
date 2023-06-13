@@ -3,10 +3,8 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import Cookies from 'js-cookie';
 import { envVars } from '@3shop/config';
-// import nodeFetch from 'node-fetch';
 
 const CUSTOMER_TOKEN_NAME = 'customer-token';
-export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -20,12 +18,6 @@ const httpLink = new HttpLink({
   uri: envVars.PUBLIC_HASURA_API_URL, // Server URL (must be absolute)
   credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 });
-
-// const backendHttpLink = new HttpLink({
-//   uri: envVars.PUBLIC_HASURA_API_URL, // Server URL (must be absolute)
-//   credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-//   fetch: nodeFetch as any,
-// });
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -61,12 +53,4 @@ export function createApolloShopClient() {
       typePolicies: {},
     }),
   });
-}
-
-export function addApolloState(client: any, pageProps: any) {
-  if (pageProps?.props) {
-    pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract();
-  }
-
-  return pageProps;
 }

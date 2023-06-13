@@ -94,7 +94,6 @@ export const Poll = () => {
 
       <CustomModal
         isOpen={isOpen}
-        onOpen={onOpen}
         onClose={onClose}
         title="Delete Poll"
         body={
