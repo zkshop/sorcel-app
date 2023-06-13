@@ -10,6 +10,15 @@ insert_permissions:
         - poll_id
         - value
 select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - count
+        - value
+        - created_at
+        - id
+        - poll_id
+      filter: {}
   - role: customer
     permission:
       columns:
@@ -20,6 +29,12 @@ select_permissions:
         - value
       filter: {}
 update_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - count
+      filter: {}
+      check: null
   - role: customer
     permission:
       columns:

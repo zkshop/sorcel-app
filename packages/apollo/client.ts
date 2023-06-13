@@ -42,9 +42,7 @@ const authLink = setContext((_, { headers }) => {
 const shopHttpLink = new HttpLink({
   uri: envVars.PUBLIC_HASURA_API_URL,
   credentials: 'same-origin',
-  headers: {
-    'x-hasura-admin-secret': envVars.SECRET_HASURA || '',
-  },
+  headers: {},
 });
 
 export function createApolloClient() {

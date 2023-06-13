@@ -26,6 +26,18 @@ insert_permissions:
         - product_id
         - unique_claim
 select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - exclusive_access
+        - unique_claim
+        - discount
+        - claims
+        - name
+        - app_id
+        - id
+        - product_id
+      filter: {}
   - role: customer
     permission:
       columns:
@@ -41,6 +53,12 @@ select_permissions:
         app_id:
           _eq: X-Hasura-User-Id
 update_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - claims
+      filter: {}
+      check: null
   - role: customer
     permission:
       columns:

@@ -18,6 +18,15 @@ insert_permissions:
         - fees
         - name
 select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - fees
+        - countries
+        - name
+        - app_id
+        - id
+      filter: {}
   - role: customer
     permission:
       columns:
