@@ -1,0 +1,6 @@
+mutation TogglePollCompleted($id: uuid!, $completed: Boolean!) {
+  update_poll_by_pk(pk_columns: {id: $id}, _set: {completed: $completed}) {
+    id
+    completed
+  }
+}

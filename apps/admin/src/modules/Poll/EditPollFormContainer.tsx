@@ -25,7 +25,7 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
   const navigate = useNavigate();
 
   const [updatePollLoading, setUpdatePollLoading] = useState(false);
-
+  const [deletePollLoading, setDeletePollLoading] = useState(false);
   const {
     control,
     handleSubmit,
@@ -44,19 +44,22 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
   const toast = useToastMessage();
 
   const [updatePoll] = useUpdatePollMutation();
-  const [deletePoll, { loading: deletePollLoading }] = useDeletePollMutation();
+  const [deletePoll] = useDeletePollMutation();
 
   const { append, remove, fields } = useFieldArray({ control, name: 'choices' });
 
   const handleDeletePoll = async () => {
     if (!poll) return;
+    setDeletePollLoading(true);
     try {
       await deletePoll({ variables: { id: poll.id } });
-
+      await storage.deletePicture(poll.image || '', 'polls');
       toast.success(`Poll ${poll.title} deleted successfully`);
       navigate('/app/poll');
     } catch (e) {
       toast.error('An error occurred while deleting poll');
+    } finally {
+      setDeletePollLoading(false);
     }
   };
 
@@ -129,7 +132,7 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
         title="Delete Poll"
         body={
           <Box>
-            <Text>Are you sure you want to set &quot;{poll?.title}&quot; as completed?</Text>
+            <Text>Are you sure you want to delte &quot;{poll?.title}&quot; poll?</Text>
             <HStack mt={4} justifyContent="flex-end">
               <Button mr={2} onClick={onClose}>
                 Cancel
