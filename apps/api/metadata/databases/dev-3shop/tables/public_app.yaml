@@ -2,6 +2,20 @@ table:
   name: app
   schema: public
 select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - show_brand
+        - background_color
+        - deliveryTaxesTableName
+        - font
+        - font_color
+        - imgUrl
+        - moneyAccountId
+        - name
+        - plan
+        - id
+      filter: {}
   - role: customer
     permission:
       columns:

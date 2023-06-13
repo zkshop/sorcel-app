@@ -29,6 +29,18 @@ insert_permissions:
         - type
         - webhookUrl
 select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - price
+        - description
+        - image
+        - name
+        - type
+        - webhookUrl
+        - app_id
+        - id
+      filter: {}
   - role: customer
     permission:
       columns:

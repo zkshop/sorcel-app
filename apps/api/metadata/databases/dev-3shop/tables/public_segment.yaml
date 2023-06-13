@@ -12,6 +12,16 @@ insert_permissions:
         - poap_ids
         - type
 select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - poap_ids
+        - network
+        - nft_contract_address
+        - type
+        - gate_id
+        - id
+      filter: {}
   - role: customer
     permission:
       columns:
