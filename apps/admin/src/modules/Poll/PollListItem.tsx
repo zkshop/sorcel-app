@@ -1,5 +1,5 @@
-import { CloseIcon, Image, Td, Tr } from '@3shop/ui';
-import type { DeletePollState } from '../../pages/Poll';
+import { CloseIcon, Image, Switch, Td, Tr } from '@3shop/ui';
+import type { ToggleCompletedPollState } from '../../pages/Poll';
 
 type PollListItemProps = {
   id: string;
@@ -7,7 +7,7 @@ type PollListItemProps = {
   title: string;
   completed: boolean;
   goToPoll?(): void;
-  onDeletePoll(poll: DeletePollState): void;
+  onToggleCompletedPoll(poll: ToggleCompletedPollState): void;
 };
 
 export const PollListItem = ({
@@ -16,7 +16,7 @@ export const PollListItem = ({
   title,
   completed,
   goToPoll,
-  onDeletePoll,
+  onToggleCompletedPoll,
 }: PollListItemProps) => (
   <Tr
     sx={{
@@ -32,7 +32,10 @@ export const PollListItem = ({
     <Td onClick={goToPoll}>{title}</Td>
     <Td onClick={goToPoll}>{completed ? 'COMPLETED' : 'IN PROGRESS'}</Td>
     <Td>
-      <CloseIcon onClick={() => onDeletePoll({ id, image, title })} />
+      <Switch
+        isChecked={completed}
+        onChange={() => onToggleCompletedPoll({ id, image, title, completed })}
+      />
     </Td>
   </Tr>
 );

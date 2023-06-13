@@ -5865,6 +5865,16 @@ export type GetAdminPollsQuery = {
   }>;
 };
 
+export type TogglePollCompletedMutationVariables = Exact<{
+  id: Scalars['uuid'];
+  completed: Scalars['Boolean'];
+}>;
+
+export type TogglePollCompletedMutation = {
+  __typename?: 'mutation_root';
+  update_poll_by_pk?: { __typename?: 'poll'; id: any; completed: boolean } | null;
+};
+
 export type VoteMutationVariables = Exact<{
   pollId: Scalars['uuid'];
   voters?: InputMaybe<Scalars['jsonb']>;
@@ -7767,6 +7777,57 @@ export type GetAdminPollsLazyQueryHookResult = ReturnType<typeof useGetAdminPoll
 export type GetAdminPollsQueryResult = Apollo.QueryResult<
   GetAdminPollsQuery,
   GetAdminPollsQueryVariables
+>;
+export const TogglePollCompletedDocument = gql`
+  mutation TogglePollCompleted($id: uuid!, $completed: Boolean!) {
+    update_poll_by_pk(pk_columns: { id: $id }, _set: { completed: $completed }) {
+      id
+      completed
+    }
+  }
+`;
+export type TogglePollCompletedMutationFn = Apollo.MutationFunction<
+  TogglePollCompletedMutation,
+  TogglePollCompletedMutationVariables
+>;
+
+/**
+ * __useTogglePollCompletedMutation__
+ *
+ * To run a mutation, you first call `useTogglePollCompletedMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useTogglePollCompletedMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [togglePollCompletedMutation, { data, loading, error }] = useTogglePollCompletedMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      completed: // value for 'completed'
+ *   },
+ * });
+ */
+export function useTogglePollCompletedMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    TogglePollCompletedMutation,
+    TogglePollCompletedMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<TogglePollCompletedMutation, TogglePollCompletedMutationVariables>(
+    TogglePollCompletedDocument,
+    options,
+  );
+}
+export type TogglePollCompletedMutationHookResult = ReturnType<
+  typeof useTogglePollCompletedMutation
+>;
+export type TogglePollCompletedMutationResult = Apollo.MutationResult<TogglePollCompletedMutation>;
+export type TogglePollCompletedMutationOptions = Apollo.BaseMutationOptions<
+  TogglePollCompletedMutation,
+  TogglePollCompletedMutationVariables
 >;
 export const VoteDocument = gql`
   mutation Vote($pollId: uuid!, $voters: jsonb, $choiceId: uuid!) {

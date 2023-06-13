@@ -1,4 +1,4 @@
-import { useDeletePollMutation, useGetAdminPollsQuery } from '@3shop/apollo';
+import { useGetAdminPollsQuery, useTogglePollCompletedMutation } from '@3shop/apollo';
 import {
   Box,
   Button,
@@ -16,24 +16,20 @@ import { PollListItem } from '../modules/Poll/PollListItem';
 import { useState } from 'react';
 import type { Nullable } from '@3shop/types';
 import { useNavigate } from 'react-router-dom';
-import { ImageStorageClient } from '@3shop/admin-infra';
-import { StorageService } from '@3shop/domains';
 import { ROUTES_PATH } from '../routes/Routes';
 
-export type DeletePollState = {
+export type ToggleCompletedPollState = {
   id: string;
   image: string;
   title: string;
+  completed: boolean;
 };
-
-const storage = StorageService(ImageStorageClient());
 
 export const Poll = () => {
   const { data, loading, error } = useGetAdminPollsQuery();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [selectedPoll, setSelectedPoll] = useState<Nullable<DeletePollState>>(null);
-  const [deletePollLoading, setDeletePollLoading] = useState(false);
-  const [deletePoll] = useDeletePollMutation();
+  const [selectedPoll, setSelectedPoll] = useState<Nullable<ToggleCompletedPollState>>(null);
+  const [togglePoll, { loading: updatePollLoading }] = useTogglePollCompletedMutation();
   const navigate = useNavigate();
   const toast = useToastMessage();
 
@@ -43,7 +39,7 @@ export const Poll = () => {
     return <div>Error</div>;
   }
 
-  const handleClickOnDeletePoll = (poll: DeletePollState) => {
+  const handleClickOnDeletePoll = (poll: ToggleCompletedPollState) => {
     setSelectedPoll(poll);
     onOpen();
   };
@@ -52,19 +48,16 @@ export const Poll = () => {
     navigate(`${ROUTES_PATH.PROTECTED.POLL}/edit/${id}`);
   };
 
-  const handleDeletePoll = async () => {
+  const onToggleCompletedPoll = async () => {
     if (!selectedPoll) return;
-    setDeletePollLoading(true);
+
     try {
-      await deletePoll({ variables: { id: selectedPoll.id } });
-      await storage.deletePicture(selectedPoll.image, 'polls');
+      await togglePoll({ variables: { id: selectedPoll.id, completed: !selectedPoll.completed } });
+      toast.success(`Poll ${selectedPoll.title} updated Successfully`);
       onClose();
-      toast.success(`Poll ${selectedPoll.title} Deleted Successfully`);
     } catch (error) {
       console.log(error);
-      toast.error('An error occurred while deleting poll');
-    } finally {
-      setDeletePollLoading(false);
+      toast.error('An error occurred while updating poll status');
     }
   };
 
@@ -87,7 +80,7 @@ export const Poll = () => {
             completed={completed}
             title={title}
             goToPoll={() => goToPoll(id)}
-            onDeletePoll={handleClickOnDeletePoll}
+            onToggleCompletedPoll={handleClickOnDeletePoll}
           />
         )}
       />
@@ -95,22 +88,24 @@ export const Poll = () => {
       <CustomModal
         isOpen={isOpen}
         onClose={onClose}
-        title="Delete Poll"
+        title="Change status"
         body={
           <Box>
-            <Text>Are you sure you want to delete {selectedPoll?.title} poll?</Text>
+            <Text>
+              Are you sure you want to set {selectedPoll?.title} poll as{' '}
+              {selectedPoll?.completed ? 'In Progress' : 'Completed'}?
+            </Text>
             <HStack mt={4} justifyContent="flex-end">
-              <Button mr={2} onClick={onClose}>
+              <Button colorScheme="red" mr={2} onClick={onClose}>
                 Cancel
               </Button>
 
               <Button
-                colorScheme="red"
-                onClick={handleDeletePoll}
-                isDisabled={deletePollLoading}
-                isLoading={deletePollLoading}
+                onClick={onToggleCompletedPoll}
+                isDisabled={updatePollLoading}
+                isLoading={updatePollLoading}
               >
-                Delete
+                Confirm
               </Button>
             </HStack>
           </Box>
