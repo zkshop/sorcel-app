@@ -11,7 +11,6 @@ type ModalProps = {
   title: string;
   body: React.ReactNode;
   isOpen: boolean;
-  onOpen: () => void;
   onClose: () => void;
 };
 

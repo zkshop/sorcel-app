@@ -89,7 +89,6 @@ export const Gates = () => {
         )}
       />
       <CustomModal
-        onOpen={onOpen}
         isOpen={isOpen}
         onClose={handleCloseDeleteGateModal}
         title={`Delete Gate ${selectedGate?.name}`}
