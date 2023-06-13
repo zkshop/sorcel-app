@@ -88,7 +88,6 @@ export const ProductDetails = ({
                 className={classnames.PRODUCT_DETAILS.TITLE}
                 fontWeight="bold"
                 fontSize="24px"
-                color="black"
                 mt={1}
                 p={1}
                 textTransform="capitalize"
@@ -98,13 +97,7 @@ export const ProductDetails = ({
               </Text>
             </Box>
 
-            <Text
-              className={classnames.PRODUCT_DETAILS.DESCRIPTION}
-              w="full"
-              fontSize="14px"
-              color="black"
-              p={1}
-            >
+            <Text className={classnames.PRODUCT_DETAILS.DESCRIPTION} w="full" fontSize="14px" p={1}>
               {description}
             </Text>
 

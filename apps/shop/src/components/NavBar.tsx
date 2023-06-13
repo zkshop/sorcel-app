@@ -1,6 +1,6 @@
 import { ConnectButtonGroup } from './ConnectButtonGroup';
 import { LoginModal } from './LoginModal';
-import { VStack, HStack, useDisclosure, Box, Image, Text, Grid, Flex } from '@3shop/ui';
+import { VStack, useDisclosure, Box, Image, Text, Flex } from '@3shop/ui';
 import { useForm } from 'react-hook-form';
 
 import { useEffect } from 'react';

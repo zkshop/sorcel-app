@@ -111,7 +111,6 @@ export const ProductCard = ({
             className={classnames.PRODUCT_CARD.TITLE}
             fontWeight="bold"
             fontSize="14px"
-            color="black"
             mb={2}
             textTransform="capitalize"
             letterSpacing={0.5}
@@ -125,7 +124,6 @@ export const ProductCard = ({
             className={classnames.PRODUCT_CARD.PRICE}
             fontWeight="bold"
             fontSize="14px"
-            color="black"
             textDecoration={discount ? 'line-through' : 'none'}
             marginRight={discount ? '2px' : 'none'}
           >

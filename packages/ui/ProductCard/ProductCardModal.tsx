@@ -99,7 +99,7 @@ export const ProductCardModal = ({
       body={
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl isInvalid={Boolean(errors.email)}>
-            <FormLabel>{description}</FormLabel>
+            <FormLabel color="black">{description}</FormLabel>
             <Input placeholder="Enter your email" {...register('email')} />
             <FormErrorMessage> {errors.email?.message} </FormErrorMessage>
           </FormControl>
