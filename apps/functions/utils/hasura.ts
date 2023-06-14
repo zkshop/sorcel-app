@@ -21,7 +21,7 @@ export async function query(payload: QueryPayload) {
   return res.data;
 }
 
-export async function mutate(payload: QueryPayload) {
+export async function mutate<T extends object>(payload: QueryPayload): Promise<T> {
   const res = await axios(envVars.PUBLIC_HASURA_API_URL || '', {
     method: 'POST',
     headers: {
@@ -32,6 +32,9 @@ export async function mutate(payload: QueryPayload) {
     },
     data: JSON.stringify(payload),
   });
+
+  console.log('url', envVars.PUBLIC_HASURA_API_URL);
+  console.log('response', { errors: res.data.errors });
 
   return res.data;
 }
