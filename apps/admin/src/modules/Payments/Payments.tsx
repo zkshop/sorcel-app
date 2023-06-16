@@ -27,7 +27,7 @@ export const Payments = () => {
       <Heading as="h2">Stripe</Heading>
       {!data?.app[0].moneyAccountId && onboardingLink ? (
         <Link href={onboardingLink} target="_blank">
-          Your onboarding link
+          Your onboarding link. Click to set up payments on your app.
         </Link>
       ) : (
         <Button onClick={() => getOnboardingLink()} isLoading={onboardingLinkloading}>
