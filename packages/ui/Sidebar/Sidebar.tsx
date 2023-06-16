@@ -29,6 +29,7 @@ import {
   FiCreditCard,
   FiThumbsUp,
   FiTool,
+  FiDollarSign,
 } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 import type { Nullable, WithChildren } from '@3shop/types';
@@ -45,7 +46,8 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Gates', icon: FiLock, href: '/app/gate' },
   { name: 'Orders', icon: FiCreditCard, href: '/app/orders' },
   { name: 'Poll', icon: FiThumbsUp, href: '/app/poll' },
-  { name: 'Integrations', icon: FiTool, href: '/app/integrations' },
+  { name: 'Payments', icon: FiDollarSign, href: '/app/Payments' },
+  // { name: 'Integrations', icon: FiTool, href: '/app/integrations' },
 ];
 
 type SidebarWithHeaderProps = WithChildren<{
