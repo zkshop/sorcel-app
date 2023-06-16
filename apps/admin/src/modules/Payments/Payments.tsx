@@ -3,7 +3,7 @@ import { Spinner, Button, Heading, Link } from '@3shop/ui';
 import { StripeAccountDetails } from './Stripe/StripeAccountDetails';
 import { useGetOnboardingLink } from './useGetOnboardingLink';
 
-export const Integration = () => {
+export const Payments = () => {
   const {
     loading: onboardingLinkloading,
     onboardingLink,

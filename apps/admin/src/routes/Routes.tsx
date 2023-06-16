@@ -5,7 +5,7 @@ import { GateRoutes } from './GateRoutes';
 import { ProductRoutes } from './ProductRoutes';
 import { PollRoutes } from './PollRoutes';
 import { OrderList } from '../modules/Order/OrderList';
-import { Integration } from '../modules/Integration/Integration';
+import { Payments } from '../modules/Payments/Payments';
 import { Customization } from '../pages/Customization';
 
 export const ROUTES_PATH = {
@@ -19,6 +19,7 @@ export const ROUTES_PATH = {
     GATE: '/app/gate',
     ORDERS: '/app/orders',
     POLL: '/app/poll',
+    PAYMENTS: '/app/payments',
     INTEGRATIONS: '/app/integrations',
   },
 } as const;
@@ -33,7 +34,8 @@ const Routes = () => (
       <Route path="gate/*" element={<GateRoutes />} />
       <Route path="orders" element={<OrderList />} />
       <Route path="poll/*" element={<PollRoutes />} />
-      <Route path="integrations" element={<Integration />} />
+      <Route path="payments" element={<Payments />} />
+      <Route path="integrations" element={<Payments />} />
     </Route>
   </OriginalRoutes>
 );
