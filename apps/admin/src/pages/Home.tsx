@@ -2,7 +2,7 @@ import { VerticalMenu } from '@3shop/ui';
 import { DeliveryFeesContainer } from '../modules/DeliveryFees/DeliveryFeesContainer';
 import { Gates } from '../modules/Gates';
 import { GeneralContainer } from '../modules/General/GeneralContainer';
-import { Integration } from '../modules/Integration/Integration';
+import { Payments } from '../modules/Payments/Payments';
 import { OrderList } from '../modules/Order/OrderList';
 import { Products } from '../modules/Products';
 import { Poll } from './Poll';
@@ -14,7 +14,7 @@ export const Home = () => {
     { title: 'Products', content: <Products /> },
     { title: 'Gates', content: <Gates /> },
     { title: 'Orders', content: <OrderList /> },
-    { title: 'Integrations', content: <Integration /> },
+    { title: 'Integrations', content: <Payments /> },
     { title: 'Delivery Fees', content: <DeliveryFeesContainer /> },
     { title: 'Poll', content: <Poll /> },
     { title: 'Customization', content: <Customization /> },
