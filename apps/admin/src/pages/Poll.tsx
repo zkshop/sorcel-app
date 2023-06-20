@@ -5,13 +5,13 @@ import {
   CustomModal,
   HStack,
   Header,
-  Link,
   Spinner,
   Table,
   Text,
   useDisclosure,
   useToastMessage,
 } from '@3shop/ui';
+import { Link } from 'react-router-dom';
 import { PollListItem } from '../modules/Poll/PollListItem';
 import { useState } from 'react';
 import type { Nullable } from '@3shop/types';
@@ -64,7 +64,7 @@ export const Poll = () => {
   return (
     <Box>
       <Header title="Polls">
-        <Link href={`${ROUTES_PATH.PROTECTED.POLL}/add`}>
+        <Link to={`${ROUTES_PATH.PROTECTED.POLL}/add`}>
           <Button>+ New Poll</Button>
         </Link>
       </Header>

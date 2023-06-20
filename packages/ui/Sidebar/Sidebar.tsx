@@ -1,6 +1,7 @@
 import type { BoxProps, FlexProps } from '@chakra-ui/react';
-import { Image } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import {
+  Image,
   IconButton,
   Box,
   CloseButton,
@@ -9,7 +10,6 @@ import {
   VStack,
   Icon,
   useColorModeValue,
-  Link,
   Drawer,
   DrawerContent,
   Text,
@@ -120,7 +120,7 @@ interface NavItemProps extends FlexProps {
   children: string | number;
 }
 const NavItem = ({ icon, children, href = '#', ...rest }: NavItemProps) => (
-  <Link href={href} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+  <Box as={Link} to={href} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
     <Flex
       align="center"
       p="4"
@@ -146,7 +146,7 @@ const NavItem = ({ icon, children, href = '#', ...rest }: NavItemProps) => (
       )}
       {children}
     </Flex>
-  </Link>
+  </Box>
 );
 
 interface MobileProps extends FlexProps {
