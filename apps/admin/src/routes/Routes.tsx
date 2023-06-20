@@ -8,6 +8,7 @@ import { OrderList } from '../modules/Order/OrderList';
 import { Payments } from '../modules/Payments/Payments';
 import { Customization } from '../pages/Customization';
 import { Integrations } from '../pages/Integrations';
+import { Plan } from '../pages/Plan';
 
 export const ROUTES_PATH = {
   PUBLIC: {
@@ -37,6 +38,7 @@ const Routes = () => (
       <Route path="poll/*" element={<PollRoutes />} />
       <Route path="payments" element={<Payments />} />
       <Route path="integrations" element={<Integrations />} />
+      <Route path="plan" element={<Plan />} />
     </Route>
   </OriginalRoutes>
 );
