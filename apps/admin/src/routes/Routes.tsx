@@ -7,6 +7,7 @@ import { PollRoutes } from './PollRoutes';
 import { OrderList } from '../modules/Order/OrderList';
 import { Payments } from '../modules/Payments/Payments';
 import { Customization } from '../pages/Customization';
+import { Integrations } from '../pages/Integrations';
 
 export const ROUTES_PATH = {
   PUBLIC: {
@@ -35,7 +36,7 @@ const Routes = () => (
       <Route path="orders" element={<OrderList />} />
       <Route path="poll/*" element={<PollRoutes />} />
       <Route path="payments" element={<Payments />} />
-      <Route path="integrations" element={<Payments />} />
+      <Route path="integrations" element={<Integrations />} />
     </Route>
   </OriginalRoutes>
 );
