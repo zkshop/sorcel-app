@@ -40,6 +40,7 @@ export {
   ButtonGroup,
   Checkbox,
   CheckboxGroup,
+  Code,
   Flex,
   FormControl,
   FormErrorMessage,
