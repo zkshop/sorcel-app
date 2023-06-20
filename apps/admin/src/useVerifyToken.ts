@@ -34,7 +34,6 @@ export const useVerifyToken = (fromAdminRoute = false) => {
         );
 
         setUser(user.data);
-        console.log({ user: user.data });
 
         setValidity(true);
         setLoading(false);
@@ -47,8 +46,6 @@ export const useVerifyToken = (fromAdminRoute = false) => {
     }
 
     if (!isValid) {
-      console.log({ isValid });
-
       verifyToken(tokenCookie);
     }
   }, [fromAdminRoute, navigate, tokenCookie]);
