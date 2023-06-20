@@ -47,7 +47,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Orders', icon: FiCreditCard, href: '/app/orders' },
   { name: 'Poll', icon: FiThumbsUp, href: '/app/poll' },
   { name: 'Payments', icon: FiDollarSign, href: '/app/Payments' },
-  // { name: 'Integrations', icon: FiTool, href: '/app/integrations' },
+  { name: 'Integrations', icon: FiTool, href: '/app/integrations' },
 ];
 
 type SidebarWithHeaderProps = WithChildren<{
@@ -154,6 +154,7 @@ interface MobileProps extends FlexProps {
   user: Nullable<{ email: string; appId: string }>;
   signOut: () => void;
 }
+
 const MobileNav = ({ onOpen, signOut, user, ...rest }: MobileProps) => (
   <Flex
     ml={{ base: 0, md: 60 }}
