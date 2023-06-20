@@ -1,12 +1,13 @@
 import { useDeleteGateV2Mutation, useGetGates_V2Query } from '@3shop/apollo';
 import type { Nullable } from '@3shop/types';
 
+import { Link } from 'react-router-dom';
+
 import {
   Header,
   Box,
   Button,
   Table,
-  Link,
   Spinner,
   useDisclosure,
   CustomModal,
@@ -70,8 +71,8 @@ export const Gates = () => {
   return (
     <Box>
       <Header title="Gates">
-        <Link href={`${ROUTES_PATH.PROTECTED.GATE}/add`}>
-          <Button>+ New Gate</Button>
+        <Link to={`${ROUTES_PATH.PROTECTED.GATE}/add`}>
+          <Button as={Link}>+ New Gate</Button>
         </Link>
       </Header>
 

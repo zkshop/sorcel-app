@@ -7,6 +7,7 @@ import React from 'react';
 import { CookiesProvider } from 'react-cookie';
 import { CenterProvider } from '@center-inc/react';
 import { envVars } from '@3shop/config';
+import { TokenValidityProvider } from './context';
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -16,19 +17,21 @@ const apolloClient = createApolloClient();
 
 export const AppProvider = ({ children }: AppProviderProps) => (
   <React.StrictMode>
-    <CookiesProvider>
-      <ApolloProvider client={apolloClient}>
-        <ReduxProvider store={store}>
-          <CenterProvider
-            apiKey={envVars.SECRET_CENTER}
-            mode={envVars.NODE_ENV as 'development' | 'production'}
-          >
-            <BrowserRouter>
-              <ThemeProvider>{children}</ThemeProvider>
-            </BrowserRouter>
-          </CenterProvider>
-        </ReduxProvider>
-      </ApolloProvider>
-    </CookiesProvider>
+    <TokenValidityProvider>
+      <CookiesProvider>
+        <ApolloProvider client={apolloClient}>
+          <ReduxProvider store={store}>
+            <CenterProvider
+              apiKey={envVars.SECRET_CENTER}
+              mode={envVars.NODE_ENV as 'development' | 'production'}
+            >
+              <BrowserRouter>
+                <ThemeProvider>{children}</ThemeProvider>
+              </BrowserRouter>
+            </CenterProvider>
+          </ReduxProvider>
+        </ApolloProvider>
+      </CookiesProvider>
+    </TokenValidityProvider>
   </React.StrictMode>
 );
