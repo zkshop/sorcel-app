@@ -1,4 +1,5 @@
-import { Box, Table, Link, Button, Header, Spinner } from '@3shop/ui';
+import { Box, Table, Button, Header, Spinner } from '@3shop/ui';
+import { Link } from 'react-router-dom';
 
 import { PRODUCT_ATTRIBUTES } from './constants';
 import { ProductListItem } from './ProductListItem';
@@ -22,7 +23,7 @@ export const Products = () => {
   return (
     <Box>
       <Header title="Products">
-        <Link href={`${ROUTES_PATH.PROTECTED.PRODUCT}/add`}>
+        <Link to={`${ROUTES_PATH.PROTECTED.PRODUCT}/add`}>
           <Button>+ New Product</Button>
         </Link>
       </Header>
