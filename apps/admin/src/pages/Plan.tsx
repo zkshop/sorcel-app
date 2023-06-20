@@ -1,6 +1,8 @@
-import { Box, Button, Divider, HStack, Header, Heading, Switch, Tag, VStack } from '@3shop/ui';
+import { Box, Button, HStack, Header, Heading, Link, Switch, Tag, VStack } from '@3shop/ui';
 import { useState } from 'react';
 import { CheckCircleIcon } from '@3shop/ui';
+import { envVars } from '@3shop/config';
+
 type PlanType = 'yearly' | 'monthly';
 
 export const Plan = () => {
@@ -9,6 +11,11 @@ export const Plan = () => {
   const handlePlanTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPlanType(e.target.checked ? 'monthly' : 'yearly');
   };
+
+  const proPlanCheckoutLink =
+    planType === 'monthly'
+      ? envVars.MONTHLY_PRO_PLAN_CHECKOUT_LINK
+      : envVars.YEARLY_PRO_PLAN_CHECKOUT_LINK;
 
   return (
     <Box>
@@ -52,7 +59,9 @@ export const Plan = () => {
 
         <Box fontWeight="bold">
           <span>{planType === 'yearly' ? '300$' : '30$'}</span>
-          <Button float="right">Get Access</Button>
+          <Link href={proPlanCheckoutLink} target="_blank">
+            <Button float="right">Get Access</Button>
+          </Link>
         </Box>
       </Box>
     </Box>
