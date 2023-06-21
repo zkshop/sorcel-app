@@ -4,6 +4,7 @@ export type AppData = {
   name: string;
   id: string;
   plan: Plan_Enum;
+  moneyAccountId?: string;
 };
 
 type ReturnType =
@@ -34,6 +35,7 @@ export const useAppData = (): ReturnType => {
     name: appData?.app[0].name || '',
     id: appData?.app[0].id || '',
     plan: appData?.app[0].plan || Plan_Enum.Free,
+    moneyAccountId: appData?.app[0].moneyAccountId || undefined,
   };
 
   return { data, loading: false, error: null };
