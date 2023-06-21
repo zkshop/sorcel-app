@@ -5421,6 +5421,7 @@ export type GetAdminAppQuery = {
     font?: string | null;
     font_color?: string | null;
     show_brand?: boolean | null;
+    plan?: Plan_Enum | null;
   }>;
 };
 
@@ -6260,6 +6261,7 @@ export const GetAdminAppDocument = gql`
       font
       font_color
       show_brand
+      plan
     }
   }
 `;
