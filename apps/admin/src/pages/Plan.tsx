@@ -1,21 +1,39 @@
-import { Box, Button, HStack, Header, Heading, Link, Switch, Tag, VStack } from '@3shop/ui';
+import {
+  Box,
+  Button,
+  HStack,
+  Header,
+  Heading,
+  Link,
+  Spinner,
+  Switch,
+  Tag,
+  VStack,
+} from '@3shop/ui';
 import { useState } from 'react';
 import { CheckCircleIcon } from '@3shop/ui';
 import { envVars } from '@3shop/config';
+import { useGetAdminAppQuery } from '@3shop/apollo';
 
 type PlanType = 'yearly' | 'monthly';
 
 export const Plan = () => {
+  const { data, loading, error } = useGetAdminAppQuery();
   const [planType, setPlanType] = useState<PlanType>('yearly');
 
   const handlePlanTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPlanType(e.target.checked ? 'monthly' : 'yearly');
   };
 
+  if (loading) return <Spinner />;
+  if (!data || error) return <p>Error</p>;
+
   const proPlanCheckoutLink =
     planType === 'monthly'
       ? envVars.MONTHLY_PRO_PLAN_CHECKOUT_LINK
       : envVars.YEARLY_PRO_PLAN_CHECKOUT_LINK;
+
+  const proPlanCheckoutLinkWithId = `${proPlanCheckoutLink}?client_reference_id=${data.app[0].id}`;
 
   return (
     <Box>
@@ -59,7 +77,7 @@ export const Plan = () => {
 
         <Box fontWeight="bold">
           <span>{planType === 'yearly' ? '300$' : '30$'}</span>
-          <Link href={proPlanCheckoutLink} target="_blank">
+          <Link href={proPlanCheckoutLinkWithId} target="_blank">
             <Button float="right">Get Access</Button>
           </Link>
         </Box>
