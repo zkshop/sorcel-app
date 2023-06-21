@@ -78,7 +78,7 @@ export const Plan = () => {
         <Box fontWeight="bold">
           <span>{planType === 'yearly' ? '300$' : '30$'}</span>
           <Link href={proPlanCheckoutLinkWithId} target="_blank">
-            <Button float="right">Get Access</Button>
+            <Button float="right">Upgrade to PRO</Button>
           </Link>
         </Box>
       </Box>
