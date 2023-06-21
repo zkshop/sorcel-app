@@ -34,6 +34,7 @@ query getAdminApp {
     font
     font_color
     show_brand
+    plan
   }
 }
 
