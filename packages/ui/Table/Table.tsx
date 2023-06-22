@@ -1,4 +1,4 @@
-import { Table as ChakraTable, TableContainer, Th, Thead, Tbody } from '@chakra-ui/react';
+import { Table as ChakraTable, TableContainer, Th, Thead, Tbody, Tr } from '@chakra-ui/react';
 
 export type WithIndex<T> = T & { index: number };
 
@@ -19,9 +19,11 @@ export const Table = <Item extends object>({ heads = [], data, renderRow }: Tabl
   >
     <ChakraTable>
       <Thead>
-        {heads.map((title, index) => (
-          <Th key={`order-list-th-${index}`}>{title}</Th>
-        ))}
+        <Tr>
+          {heads.map((title, index) => (
+            <Th key={`order-list-th-${index}`}>{title}</Th>
+          ))}
+        </Tr>
       </Thead>
       <Tbody>{data.map((item, index) => renderRow({ ...item, index }))}</Tbody>
     </ChakraTable>
