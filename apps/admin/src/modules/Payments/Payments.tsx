@@ -17,16 +17,6 @@ export const Payments = () => {
   if (loading) return <Spinner />;
   if (error) return <>Error</>;
 
-  if (data.plan === Plan_Enum.Free)
-    return (
-      <>
-        <p>You need to upgrade to the Pro plan to connect your bank account and enable payments.</p>
-        <RouterLink to="/app/plan">
-          <Button>Upgrade to Pro</Button>
-        </RouterLink>
-      </>
-    );
-
   if (data.moneyAccountId)
     return (
       <>
