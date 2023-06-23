@@ -1,3 +1,5 @@
+import { useColorMode } from '@chakra-ui/react';
+
 export { Select as SearchSelect } from 'chakra-react-select';
 export * from './VerticalMenu/VerticalMenu';
 export * from './useToastMessage';
@@ -30,6 +32,7 @@ export * from './Banner/Banner';
 export * from './BackButton/BackButton';
 export { Modal as CustomModal } from './Modal/Modal';
 export * from './Sidebar';
+
 export {
   Accordion,
   AccordionButton,
@@ -79,6 +82,7 @@ export {
   Thead,
   Tr,
   UnorderedList,
+  useColorMode,
   useDisclosure,
   useToast,
   VStack,

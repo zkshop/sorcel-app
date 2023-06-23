@@ -1,5 +1,5 @@
 import { withRouter } from 'storybook-addon-react-router-v6';
-import { theme } from '../../../packages/ui/theme/theme';
+import { Switch, theme, useColorMode } from '@3shop/ui';
 
 export const decorators = [withRouter];
 
@@ -13,5 +13,14 @@ export const parameters = {
   },
   chakra: {
     theme,
+    resetCSS: true,
   },
+  decorators: [
+    (Story) => {
+      const [colorMode, toggleColorMode] = useColorMode()
+      return (
+        <Switch onChange={toggleColorMode} />
+      );
+    }
+  ]
 };
