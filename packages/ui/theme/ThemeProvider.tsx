@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript, extendTheme } from '@chakra-ui/react';
 import type { Nullable } from '@3shop/types';
 import { useGetAppThemeLazyQuery } from '@3shop/apollo';
 import { envVars } from '@3shop/config';
@@ -67,6 +67,7 @@ export const ThemeProvider = ({ children, customTheme = false }: Props) => {
 
   return (
     <ChakraProvider resetCSS theme={theme} cssVarsRoot="body">
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       {children}
     </ChakraProvider>
   );

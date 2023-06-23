@@ -8,6 +8,7 @@
     "lint": "eslint \".storybook/*.{t,j}s\" --fix"
   },
   "dependencies": {
+    "@3shop/ui": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

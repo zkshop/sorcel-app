@@ -6,7 +6,5 @@ type ButtonProps = {
 } & ChakraButtonProps;
 
 export const Button = ({ children, ...props }: ButtonProps) => (
-  <ChakraButton colorScheme="messenger" {...props}>
-    {children}
-  </ChakraButton>
+  <ChakraButton {...props}>{children}</ChakraButton>
 );
