@@ -8,6 +8,11 @@ export const InputStyle: ComponentStyleConfig = {
     borderColor: '#E5E5E5',
     color: 'greyscales.900',
     padding: '1rem',
+    outline: 'unset',
+
+    _placeholder: {
+      color: 'greyscales.400',
+    },
 
     _disabled: {
       backgroundColor: 'greyscales.200',

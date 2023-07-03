@@ -15,12 +15,4 @@ export const parameters = {
     theme,
     resetCSS: true,
   },
-  decorators: [
-    (Story) => {
-      const [colorMode, toggleColorMode] = useColorMode()
-      return (
-        <Switch onChange={toggleColorMode} />
-      );
-    }
-  ]
 };
