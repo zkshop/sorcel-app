@@ -50,7 +50,11 @@ importers:
       prettier: 3.0.0
       sort-package-json: 2.1.0
       ts-jest: 29.0.3_4ujeant6qa46bovwtz5iqeqiqm
+<<<<<<< HEAD
       turbo: 1.10.7
+=======
+      turbo: 1.10.6
+>>>>>>> 719a07d (feat: :lipstick: input, text input and radio button)
       typescript: 4.9.5
 
   apps/admin:
@@ -131,11 +135,13 @@ importers:
       babel-loader: ^8.2.5
       react: ^18.2.0
       react-dom: ^18.2.0
+      react-hook-form: ^7.37.0
       storybook-addon-react-router-v6: ^0.2.1
     dependencies:
       '@3shop/ui': link:../../packages/ui
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-hook-form: 7.37.0_react@18.2.0
     devDependencies:
       '@babel/core': 7.19.6
       '@chakra-ui/storybook-addon': 4.0.12_biqbaboplfbrettd7655fr4n2y
@@ -387,6 +393,7 @@ importers:
       eslint-plugin-prettier: 5.0.0-alpha.2
       eslint-plugin-react: latest
     devDependencies:
+<<<<<<< HEAD
       '@typescript-eslint/eslint-plugin': 6.0.0_vx4g46bbq3n2ecj27rlvssnmpi
       '@typescript-eslint/parser': 6.0.0_eslint@8.44.0
       eslint: 8.44.0
@@ -395,6 +402,16 @@ importers:
       eslint-plugin-import: 2.27.5_vx4g46bbq3n2ecj27rlvssnmpi
       eslint-plugin-prettier: 5.0.0-alpha.2_sxjyn6genzwwmwqf3actnuqwey
       eslint-plugin-react: 7.32.2_eslint@8.44.0
+=======
+      '@typescript-eslint/eslint-plugin': 5.60.0_csvgoyt7i2a6lgns4ftkdghrre
+      '@typescript-eslint/parser': 5.60.0_eslint@8.43.0
+      eslint: 8.43.0
+      eslint-config-prettier: 8.8.0_eslint@8.43.0
+      eslint-config-turbo: 1.10.6_eslint@8.43.0
+      eslint-plugin-import: 2.27.5_csvgoyt7i2a6lgns4ftkdghrre
+      eslint-plugin-prettier: 4.2.1_n7dmkrns7rrm5xusezv3cppb3q
+      eslint-plugin-react: 7.32.2_eslint@8.43.0
+>>>>>>> 719a07d (feat: :lipstick: input, text input and radio button)
 
   packages/events:
     specifiers:
@@ -13753,6 +13770,7 @@ packages:
       eslint: 8.44.0
     dev: true
 
+<<<<<<< HEAD
   /eslint-config-turbo/1.10.7_eslint@8.44.0:
     resolution: {integrity: sha512-0yHt5UlXVph8S4SOvP6gYehLvYjJj6XFKTYOG/WUQbjlcF0OU4pOT1a1juqmmBPWYlvJ0evt7v+RekY4tOopPQ==}
     peerDependencies:
@@ -13760,6 +13778,15 @@ packages:
     dependencies:
       eslint: 8.44.0
       eslint-plugin-turbo: 1.10.7_eslint@8.44.0
+=======
+  /eslint-config-turbo/1.10.6_eslint@8.43.0:
+    resolution: {integrity: sha512-iZ63etePRUdEIDY5MxdUhU2ekV9TDbVdHg0BK00QqVFgQTXUYuJ7rsQj/wUKTsw3jwhbLfaY6H5sknAgYyWZ2g==}
+    peerDependencies:
+      eslint: '>6.6.0'
+    dependencies:
+      eslint: 8.43.0
+      eslint-plugin-turbo: 1.10.6_eslint@8.43.0
+>>>>>>> 719a07d (feat: :lipstick: input, text input and radio button)
     dev: true
 
   /eslint-import-resolver-node/0.3.7:
@@ -13878,8 +13905,13 @@ packages:
       string.prototype.matchall: 4.0.8
     dev: true
 
+<<<<<<< HEAD
   /eslint-plugin-turbo/1.10.7_eslint@8.44.0:
     resolution: {integrity: sha512-YikBHc75DY9VV1vAFUIBekHLQlxqVT5zTNibK8zBQInCUhF7PvyPJc0xXw5FSz8EYtt4uOV3r0Km3CmFRclS4Q==}
+=======
+  /eslint-plugin-turbo/1.10.6_eslint@8.43.0:
+    resolution: {integrity: sha512-jlzfxYaK8hcz1DTk8Glxxi1r0kgdy85191a4CbFOTiiBulmKHMLJgzhsyE9Ong796MA62n91KFpc20BiKjlHwg==}
+>>>>>>> 719a07d (feat: :lipstick: input, text input and radio button)
     peerDependencies:
       eslint: '>6.6.0'
     dependencies:
@@ -22526,54 +22558,85 @@ packages:
       safe-buffer: 5.2.1
     dev: false
 
+<<<<<<< HEAD
   /turbo-darwin-64/1.10.7:
     resolution: {integrity: sha512-N2MNuhwrl6g7vGuz4y3fFG2aR1oCs0UZ5HKl8KSTn/VC2y2YIuLGedQ3OVbo0TfEvygAlF3QGAAKKtOCmGPNKA==}
+=======
+  /turbo-darwin-64/1.10.6:
+    resolution: {integrity: sha512-s2Gc7i9Ud+H9GDcrGJjPIyscJfzDGQ6il4Sl2snfvwngJs4/TaqKuBoX3HNt/7F4NiFRs7ZhlLV1/Yu9zGBRhw==}
+>>>>>>> 719a07d (feat: :lipstick: input, text input and radio button)
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
+<<<<<<< HEAD
   /turbo-darwin-arm64/1.10.7:
     resolution: {integrity: sha512-WbJkvjU+6qkngp7K4EsswOriO3xrNQag7YEGRtfLoDdMTk4O4QTeU6sfg2dKfDsBpTidTvEDwgIYJhYVGzrz9Q==}
+=======
+  /turbo-darwin-arm64/1.10.6:
+    resolution: {integrity: sha512-tgl70t5PBLyRcNTdP9N6NjvdvQ5LUk8Z60JGUhBhnc+oCOdA4pltrDJNPyel3tQAXXt1dDpl8pp9vUrbwoVyGg==}
+>>>>>>> 719a07d (feat: :lipstick: input, text input and radio button)
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
+<<<<<<< HEAD
   /turbo-linux-64/1.10.7:
     resolution: {integrity: sha512-x1CF2CDP1pDz/J8/B2T0hnmmOQI2+y11JGIzNP0KtwxDM7rmeg3DDTtDM/9PwGqfPotN9iVGgMiMvBuMFbsLhg==}
+=======
+  /turbo-linux-64/1.10.6:
+    resolution: {integrity: sha512-h7eyAA3xtAVpamcYJYUwe0xm0LWdbv7/I7QiM09AZ67TTNpyUgqW8giFN3h793BHEQ2Rcnk9FNkpIbjWBbyamg==}
+>>>>>>> 719a07d (feat: :lipstick: input, text input and radio button)
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
+<<<<<<< HEAD
   /turbo-linux-arm64/1.10.7:
     resolution: {integrity: sha512-JtnBmaBSYbs7peJPkXzXxsRGSGBmBEIb6/kC8RRmyvPAMyqF8wIex0pttsI+9plghREiGPtRWv/lfQEPRlXnNQ==}
+=======
+  /turbo-linux-arm64/1.10.6:
+    resolution: {integrity: sha512-8cZhOeLqu3QZ27yLd6bw4FNaB8y5pLdWeRLJeiWHkIb/cptKnRKJFP+keBJzJi8ovaMqdBpabrxiBRN2lhau5Q==}
+>>>>>>> 719a07d (feat: :lipstick: input, text input and radio button)
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
+<<<<<<< HEAD
   /turbo-windows-64/1.10.7:
     resolution: {integrity: sha512-7A/4CByoHdolWS8dg3DPm99owfu1aY/W0V0+KxFd0o2JQMTQtoBgIMSvZesXaWM57z3OLsietFivDLQPuzE75w==}
+=======
+  /turbo-windows-64/1.10.6:
+    resolution: {integrity: sha512-qx5jcfCJodN1Mh0KtSVQau7pK8CxDvtif7+joPHI2HbQPAADgdUl0LHfA5tFHh6aWgfvhxbvIXqJd6v7Mqkj9g==}
+>>>>>>> 719a07d (feat: :lipstick: input, text input and radio button)
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
+<<<<<<< HEAD
   /turbo-windows-arm64/1.10.7:
     resolution: {integrity: sha512-D36K/3b6+hqm9IBAymnuVgyePktwQ+F0lSXr2B9JfAdFPBktSqGmp50JNC7pahxhnuCLj0Vdpe9RqfnJw5zATA==}
+=======
+  /turbo-windows-arm64/1.10.6:
+    resolution: {integrity: sha512-vTQaRG3/s2XTreOBr6J9HKFtjzusvwGQg0GtuW2+9Z7fizdzP8MuhaDbN6FhKHcWC81PQPD61TBIKTVTsYOEZg==}
+>>>>>>> 719a07d (feat: :lipstick: input, text input and radio button)
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
+<<<<<<< HEAD
   /turbo/1.10.7:
     resolution: {integrity: sha512-xm0MPM28TWx1e6TNC3wokfE5eaDqlfi0G24kmeHupDUZt5Wd0OzHFENEHMPqEaNKJ0I+AMObL6nbSZonZBV2HA==}
     hasBin: true
@@ -22585,6 +22648,19 @@ packages:
       turbo-linux-arm64: 1.10.7
       turbo-windows-64: 1.10.7
       turbo-windows-arm64: 1.10.7
+=======
+  /turbo/1.10.6:
+    resolution: {integrity: sha512-0/wbjw4HvmPP1abVWHTdeFRfCA9cn5oxCPP5bDixagLzvDgGWE3xfdlsyGmq779Ekr9vjtDPgC2Y4JlXEhyryw==}
+    hasBin: true
+    requiresBuild: true
+    optionalDependencies:
+      turbo-darwin-64: 1.10.6
+      turbo-darwin-arm64: 1.10.6
+      turbo-linux-64: 1.10.6
+      turbo-linux-arm64: 1.10.6
+      turbo-windows-64: 1.10.6
+      turbo-windows-arm64: 1.10.6
+>>>>>>> 719a07d (feat: :lipstick: input, text input and radio button)
     dev: true
 
   /tweetnacl/0.14.5:
