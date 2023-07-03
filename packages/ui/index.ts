@@ -1,10 +1,9 @@
-import { useColorMode } from '@chakra-ui/react';
-
 export { Select as SearchSelect } from 'chakra-react-select';
 export * from './VerticalMenu/VerticalMenu';
 export * from './useToastMessage';
 export * from './theme';
 export * from './TextInput/TextInput';
+export * from './Input';
 export * from './Text/Text';
 export * from './Table';
 export * from './Spinner';
@@ -26,7 +25,6 @@ export * from './CollectionBadge/CollectionBadge';
 export * from './CartOrderSummary/CartOrderSummary';
 export * from './CartItem/CartItem';
 export * from './Button/Button';
-export * from './Box';
 export * from './Box';
 export * from './Banner/Banner';
 export * from './BackButton/BackButton';
@@ -52,7 +50,6 @@ export {
   GridItem,
   HStack,
   Image,
-  Input,
   InputGroup,
   InputLeftElement,
   Link,

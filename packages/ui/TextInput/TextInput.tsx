@@ -1,16 +1,19 @@
+import type { InputProps } from '@chakra-ui/react';
 import { Box, FormLabel, Input } from '@chakra-ui/react';
 import type { UseFormRegister } from 'react-hook-form';
 
-type TextInputProps = {
+type TextInputProps = InputProps & {
   name: string;
   label: string;
   register: UseFormRegister<any>;
 };
 
-export const TextInput = ({ name, label, register }: TextInputProps) => (
+export const TextInput = ({ name, label, register, ...rest }: TextInputProps) => (
   <Box w="full">
-    <FormLabel textAlign="left">{label}</FormLabel>
-    <Input type="text" {...register(name)} />
+    <FormLabel htmlFor={name} textAlign="left">
+      {label}
+    </FormLabel>
+    <Input type="text" {...rest} {...register(name)} />
   </Box>
 );
 

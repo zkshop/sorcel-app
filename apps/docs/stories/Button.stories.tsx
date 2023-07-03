@@ -16,7 +16,9 @@ type Story = StoryObj<typeof Button>;
  * to learn how to use render functions.
  */
 
-export const Primary = <Button>Label</Button>;
+export const Primary: Story = {
+  render: () => <Button>Label</Button>,
+};
 
 export const Small: Story = {
   render: () => <Button size="small">Label</Button>,
