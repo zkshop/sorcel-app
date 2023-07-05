@@ -12,7 +12,7 @@ export default meta;
 type SignupSectionStory = ComponentStory<typeof SignupSection>;
 
 const Template: SignupSectionStory = (args) => (
-  <Box width="30vw" h="90vh">
+  <Box width="50vw" h="90vh">
     <SignupSection />
   </Box>
 );
