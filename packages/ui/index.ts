@@ -1,6 +1,5 @@
 export { Modal as CustomModal } from './Modal/Modal';
 export { Select as SearchSelect } from 'chakra-react-select';
-
 export * from './BackButton/BackButton';
 export * from './Banner/Banner';
 export * from './Box';
@@ -15,7 +14,6 @@ export * from './FormLabel/FormLabel';
 export * from './Header/Header';
 export * from './Heading/Heading';
 export * from './Icons';
-export * from './Input';
 export * from './MainLayout/MainLayout';
 export * from './PoapLink';
 export * from './ProductCard/ProductCard';
@@ -44,6 +42,7 @@ export {
   Checkbox,
   CheckboxGroup,
   Code,
+  Container,
   Divider,
   Flex,
   FormControl,
@@ -52,6 +51,7 @@ export {
   GridItem,
   HStack,
   Image,
+  Input,
   InputGroup,
   InputLeftElement,
   Link,
