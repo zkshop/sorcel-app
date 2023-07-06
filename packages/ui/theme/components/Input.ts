@@ -3,10 +3,6 @@ import type { ComponentStyleConfig } from '@chakra-ui/react';
 export const InputStyle: ComponentStyleConfig = {
   baseStyle: {
     borderRadius: 'sm',
-    border: '1px solid greyscales.200',
-    background: 'white',
-    borderColor: '#E5E5E5',
-    color: 'greyscales.900',
     padding: '1rem',
     outline: 'unset',
 
@@ -16,6 +12,19 @@ export const InputStyle: ComponentStyleConfig = {
 
     _disabled: {
       backgroundColor: 'greyscales.200',
+    },
+
+    variants: {
+      default: {
+        field: {
+          border: '1px solid',
+          borderColor: '#E5E5E5',
+        },
+      },
+    },
+
+    defaultProps: {
+      variant: 'default',
     },
   },
 };
