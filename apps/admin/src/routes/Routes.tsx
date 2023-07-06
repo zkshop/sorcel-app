@@ -9,6 +9,7 @@ import { Payments } from '../modules/Payments/Payments';
 import { Customization } from '../pages/Customization';
 import { Integrations } from '../pages/Integrations';
 import { Plan } from '../pages/Plan';
+import { Signup } from '../pages/Signup';
 
 export const ROUTES_PATH = {
   PUBLIC: {
@@ -29,6 +30,7 @@ export const ROUTES_PATH = {
 const Routes = () => (
   <OriginalRoutes>
     <Route path="/" index element={<Login />} />
+    <Route path="/signup" element={<Signup />} />
     <Route path="/app" element={<ProtectedRoutes />}>
       <Route index element={<General />} />
       <Route path="customization" element={<Customization />} />
