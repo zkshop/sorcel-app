@@ -6,6 +6,8 @@ export const classnames = {
   TEXT: PREFIX + 'text',
   HEADER: PREFIX + 'header',
   EMAIL_LOGIN_BUTTON: PREFIX + 'email-login-button',
+  WALLET_CONNECT_BUTTON: PREFIX + 'wallet-connect-button',
+  GROUP_CONNECT_BUTTON: PREFIX + 'group-connect-button',
   LOCKED_LAYER: PREFIX + 'locked-layer',
   LOCKED_LAYER_TEXT: PREFIX + 'locked-layer' + '__text',
   PRODUCT_CARD_LIST: {
