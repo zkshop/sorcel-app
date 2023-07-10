@@ -24,13 +24,7 @@ export function ConnectButtonGroup({
 
   if (userEmail)
     return (
-      <Box
-        gap={1}
-        sx={{
-          display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
-        }}
-      >
+      <Box gap={1} className={classnames.GROUP_CONNECT_BUTTON} display="flex" flexDirection="row">
         <Button
           isActive={false}
           fontSize="16px"
@@ -60,12 +54,7 @@ export function ConnectButtonGroup({
     );
 
   return (
-    <Flex
-      gap={1}
-      sx={{
-        flexDirection: { xs: 'column', sm: 'row' },
-      }}
-    >
+    <Flex gap={1} flexDirection="row" className={classnames.GROUP_CONNECT_BUTTON}>
       <ConnectWalletButton />
 
       <Button
