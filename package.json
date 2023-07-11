@@ -4,6 +4,7 @@
   "private": true,
   "repository": "https://github.com/zkshop/zkshop-app.git",
   "scripts": {
+    "api:migrate": "turbo run migrate --filter=api...",
     "build": "turbo run build",
     "build:admin": "pnpm build --filter=admin...",
     "build:ci": "turbo run build:ci",
@@ -32,7 +33,6 @@
     "init:env": "pnpm dotenv:admin && pnpm dotenv:functions && pnpm dotenv:shop && pnpm dotenv:tbw && pnpm dotenv:admin:e2e",
     "preinstall": "npx only-allow pnpm",
     "lint": "turbo run lint",
-    "api:migrate": "turbo run migrate --filter=api...",
     "prepare": "husky install",
     "sort": "sort-package-json package.json apps/*/package.json packages/*/package.json specific-apps/*/package.json",
     "test": "turbo run test",
@@ -78,7 +78,7 @@
     "sort-package-json": "^2.1.0",
     "ts-jest": "^29.0.3",
     "turbo": "latest",
-    "typescript": "4.9.5"
+    "typescript": "5.1.6"
   },
   "packageManager": "pnpm@7.26.2",
   "engines": {
