@@ -12,7 +12,7 @@ export const { chains, publicClient } = configureChains(
 
 const { connectors } = getDefaultWallets({
   appName: 'Sorcel',
-  projectId: 'Sorcel',
+  projectId: 'c7eab94604b36836a194849de4342b19',
   chains,
 });
 
