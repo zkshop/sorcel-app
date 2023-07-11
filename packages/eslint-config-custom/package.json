@@ -13,7 +13,7 @@
     "eslint-config-prettier": "latest",
     "eslint-config-turbo": "latest",
     "eslint-plugin-import": "latest",
-    "eslint-plugin-prettier": "latest",
+    "eslint-plugin-prettier": "5.0.0-alpha.2",
     "eslint-plugin-react": "latest"
   },
   "publishConfig": {
