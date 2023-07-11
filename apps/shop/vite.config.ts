@@ -44,6 +44,9 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 4000,
     },
+    optimizeDeps: {
+      ...commonConfig.optimizeDeps,
+    },
     plugins: [
       ...commonConfig.plugins,
       createHtmlPlugin({

@@ -28,6 +28,9 @@ export const createCommonConfig = (options) => {
           }),
           NodeModulesPolyfillPlugin(),
         ],
+        supported: {
+          bigint: true,
+        },
       },
     },
     build: {
