@@ -605,11 +605,13 @@ importers:
   packages/wallet:
     specifiers:
       '@3shop/config': '*'
+      '@3shop/ui': '*'
       '@rainbow-me/rainbowkit': 1.0.5
       viem: 1.2.12
       wagmi: 1.3.8
     dependencies:
       '@3shop/config': link:../config
+      '@3shop/ui': link:../ui
       '@rainbow-me/rainbowkit': 1.0.5_viem@1.2.12+wagmi@1.3.8
       viem: 1.2.12
       wagmi: 1.3.8_viem@1.2.12
