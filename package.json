@@ -26,6 +26,7 @@
     "dotenv:admin": "APP=apps/admin; rm -f $APP/.env && ln -s ../../.env $APP/.env",
     "dotenv:admin:e2e": "APP=apps/admin; rm -f $APP/.env.playwright && ln -s ../../.env $APP/.env.playwright",
     "dotenv:functions": "APP=apps/functions; rm -f $APP/.env && ln -s ../../.env $APP/.env",
+    "dotenv:poll": "APP=apps/poll; rm -f $APP/.env && ln -s ../../.env $APP/.env",
     "dotenv:shop": "APP=apps/shop; rm -f $APP/.env && ln -s ../../.env $APP/.env",
     "dotenv:tbw": "APP=specific-apps/tbw; rm -f $APP/.env && ln -s ../../.env $APP/.env",
     "generate:graphql": "turbo run generate:graphql",
