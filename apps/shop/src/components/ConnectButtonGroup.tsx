@@ -29,7 +29,6 @@ export function ConnectButtonGroup({
           isActive={false}
           fontSize="16px"
           fontWeight="700"
-          borderRadius="xl"
           sx={{
             maxWidth: '150px',
             minWidth: '150px',
@@ -42,7 +41,6 @@ export function ConnectButtonGroup({
           onClick={handleLogout}
           fontSize="16px"
           fontWeight="700"
-          borderRadius="xl"
           sx={{
             maxWidth: '100px',
             minWidth: '100px',
@@ -55,18 +53,16 @@ export function ConnectButtonGroup({
 
   return (
     <Flex gap={1} flexDirection="row" className={classnames.GROUP_CONNECT_BUTTON}>
-      <ConnectWalletButton />
-
       <Button
         className={classnames.EMAIL_LOGIN_BUTTON}
         isLoading={userLoading}
         onClick={handleOpenLoginModal}
         fontSize="16px"
         fontWeight="700"
-        borderRadius="xl"
       >
         E-mail login
       </Button>
+      <ConnectWalletButton />
     </Flex>
   );
 }
