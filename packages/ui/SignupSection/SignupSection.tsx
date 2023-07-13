@@ -15,9 +15,6 @@ export const SignupSection = () => (
       <Button width="full" variant="secondary">
         Continue With Google
       </Button>
-      <Button width="full" variant="secondary">
-        Continue With Github
-      </Button>
 
       <Divider my="4" width="full" borderColor="greyscales.350" />
 
