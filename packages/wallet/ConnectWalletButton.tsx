@@ -76,11 +76,14 @@ export const ConnectWalletButton = () => (
                   )}
                   {chain.name}
                 </Button>
-                <Button overflow="hidden" onClick={openAccountModal} type="button">
-                  <Text fontSize={{ xs: 'x-small', sm: 'small', md: 'md' }}>
-                    {account.displayName}
-                    {account.displayBalance ? ` (${account.displayBalance})` : ''}
-                  </Text>
+                <Button
+                  overflow="hidden"
+                  onClick={openAccountModal}
+                  type="button"
+                  fontSize={{ xs: 'x-small', sm: 'small', md: 'md' }}
+                >
+                  {account.displayName}
+                  {account.displayBalance ? ` (${account.displayBalance})` : ''}
                 </Button>
               </div>
             );
