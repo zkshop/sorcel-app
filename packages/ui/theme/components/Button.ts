@@ -18,6 +18,7 @@ export const ButtonStyle: ComponentStyleConfig = {
     xsmall: {
       h: '48px',
       w: '140px',
+      fontsize: 'small',
     },
   },
 
