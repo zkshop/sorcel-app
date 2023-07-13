@@ -15,6 +15,10 @@ export const ButtonStyle: ComponentStyleConfig = {
     small: {
       h: '48px',
     },
+    xsmall: {
+      h: '48px',
+      w: '140px',
+    },
   },
 
   variants: {
