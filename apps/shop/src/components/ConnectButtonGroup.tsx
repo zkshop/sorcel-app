@@ -24,7 +24,13 @@ export function ConnectButtonGroup({
 
   if (userEmail)
     return (
-      <Box gap={1} className={classnames.GROUP_CONNECT_BUTTON} display="flex" flexDirection="row">
+      <Box
+        gap={1}
+        className={classnames.GROUP_CONNECT_BUTTON}
+        display="flex"
+        justifyContent={{ sm: 'center' }}
+        flexDirection="row"
+      >
         <Button
           isActive={false}
           fontSize="16px"

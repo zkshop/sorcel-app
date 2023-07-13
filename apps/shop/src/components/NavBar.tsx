@@ -86,15 +86,13 @@ export const NavBar = ({ admin }: NavBarProps) => {
         )}
 
         {!admin && (
-          <Box>
-            <ConnectButtonGroup
-              isConnectedByWallet={isConnected}
-              userEmail={user.email}
-              userLoading={user.loading}
-              handleOpenLoginModal={handleOpenLoginModal}
-              handleLogout={handleLogout}
-            />
-          </Box>
+          <ConnectButtonGroup
+            isConnectedByWallet={isConnected}
+            userEmail={user.email}
+            userLoading={user.loading}
+            handleOpenLoginModal={handleOpenLoginModal}
+            handleLogout={handleLogout}
+          />
         )}
       </Flex>
 
