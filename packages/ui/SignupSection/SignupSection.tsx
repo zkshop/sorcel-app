@@ -23,9 +23,16 @@ type SignupSectionProps = {
   handleSubmit: UseFormHandleSubmit<SignupFormValues>;
   register: UseFormRegister<SignupFormValues>;
   errors: UseFormStateReturn<SignupFormValues>['errors'];
+  loading?: boolean;
 };
 
-export const SignupSection = ({ onSubmit, handleSubmit, register, errors }: SignupSectionProps) => (
+export const SignupSection = ({
+  onSubmit,
+  handleSubmit,
+  register,
+  errors,
+  loading,
+}: SignupSectionProps) => (
   <VStack height="full" justifyContent="space-between">
     <Image w={32} h={12} src={logo} />
     <VStack as="form" width="full" onSubmit={handleSubmit(onSubmit)}>
@@ -47,7 +54,7 @@ export const SignupSection = ({ onSubmit, handleSubmit, register, errors }: Sign
         <Input borderColor="#E5E5E5" placeholder="elon@tesla.com" {...register('email')} />
         <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
       </FormControl>
-      <Button width="full" variant="primary" type="submit">
+      <Button width="full" variant="primary" type="submit" isLoading={loading}>
         Continue with email
       </Button>
 
