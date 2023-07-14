@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FormValidation } from '@3shop/validation';
 import axios from 'axios';
 import { useState } from 'react';
+import { envVars } from '@3shop/config';
 
 type SignupFormValues = {
   email: string;
@@ -28,7 +29,10 @@ export const Signup = () => {
   const onSubmit = async (data: SignupFormValues) => {
     try {
       setLoading(true);
-      await axios.post('/api/create-app', { email: data.email, name: `${data.email}'s app` });
+      await axios.post(`${envVars.PUBLIC_FUNCTIONS_URL}/api/create-app`, {
+        email: data.email,
+        name: `${data.email}'s app`,
+      });
       toast.success('App created successfully');
     } catch (error) {
       console.error(error);
@@ -53,7 +57,14 @@ export const Signup = () => {
           loading={loading}
         />
       </GridItem>
-      <GridItem bgColor="#D9D9D9" colSpan={2} />
+      <GridItem
+        bgColor="#D9D9D9"
+        colSpan={2}
+        backgroundImage="magic-city.png"
+        backgroundRepeat="no-repeat"
+        background="url('magic-city.png') no-repeat"
+        backgroundSize="cover"
+      />
     </Grid>
   );
 };
