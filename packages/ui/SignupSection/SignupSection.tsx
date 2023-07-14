@@ -12,11 +12,11 @@ export const SignupSection = () => (
       <Text mb="1rem" as="h1" variant="title">
         Sign Up
       </Text>
-      <Button width="full" variant="secondary">
+      {/* <Button width="full" variant="secondary">
         Continue With Google
-      </Button>
+      </Button> */}
 
-      <Divider my="4" width="full" borderColor="greyscales.350" />
+      {/* <Divider my="4" width="full" borderColor="greyscales.350" /> */}
 
       <FormLabel mt={5} alignSelf="flex-start">
         <Text variant="H300" color="greyscales.450">
