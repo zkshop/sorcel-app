@@ -1,6 +1,6 @@
 import type { AppCreator } from '@3shop/domains';
 import { createApp } from '../utils/createApp';
-import { createAdmin } from '../utils/createadmin';
+import { createAdmin } from '../utils/createAdmin';
 
 export function SorcelAppCreator(): AppCreator {
   return {

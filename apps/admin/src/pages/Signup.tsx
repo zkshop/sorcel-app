@@ -1,7 +1,9 @@
-import { Grid, GridItem, SignupSection } from '@3shop/ui';
+import { Grid, GridItem, SignupSection, useToastMessage } from '@3shop/ui';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormValidation } from '@3shop/validation';
+import axios from 'axios';
+import { useState } from 'react';
 
 type SignupFormValues = {
   email: string;
@@ -12,6 +14,7 @@ const SIGNUP_SCHEMA = FormValidation.object().shape({
 });
 
 export const Signup = () => {
+  const [loading, setLoading] = useState(false);
   const {
     handleSubmit,
     register,
@@ -20,8 +23,20 @@ export const Signup = () => {
     resolver: yupResolver(SIGNUP_SCHEMA),
     mode: 'onBlur',
   });
+  const toast = useToastMessage();
 
-  const onSubmit = async (data: SignupFormValues) => console.log(data);
+  const onSubmit = async (data: SignupFormValues) => {
+    try {
+      setLoading(true);
+      await axios.post('/api/create-app', { email: data.email, name: `${data.email}'s app` });
+      toast.success('App created successfully');
+    } catch (error) {
+      console.error(error);
+      toast.error('Something went wrong');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Grid
@@ -35,6 +50,7 @@ export const Signup = () => {
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           register={register}
+          loading={loading}
         />
       </GridItem>
       <GridItem bgColor="#D9D9D9" colSpan={2} />
