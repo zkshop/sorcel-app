@@ -35,7 +35,6 @@ export const ProductCardModal = ({
   isOpen,
   onClose,
   title,
-  onOpen,
   webhookUrl,
   description = 'Enter your email to receive the ticket',
   gate,
@@ -57,7 +56,7 @@ export const ProductCardModal = ({
   const onSubmit = async (data: { email: string }) => {
     setLoading(true);
     try {
-      await axios.post(`${webhookUrl}?email=${data.email}`);
+      await axios.post(`${webhookUrl}?email=${data.email}&wallet=${auth || ''}`);
 
       if (gate) {
         await pushClaims({
