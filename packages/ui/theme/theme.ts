@@ -8,8 +8,7 @@ import { styles } from './styles';
 import { components } from './components';
 
 const config: ThemeConfig = {
-  initialColorMode: 'system',
-  useSystemColorMode: true,
+  initialColorMode: 'light',
 };
 
 export const theme = extendTheme({
