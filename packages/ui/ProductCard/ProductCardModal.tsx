@@ -56,7 +56,7 @@ export const ProductCardModal = ({
   const onSubmit = async (data: { email: string }) => {
     setLoading(true);
     try {
-      await axios.post(`${webhookUrl}?email=${data.email}&wallet=${auth || ''}`);
+      await axios.post(`${webhookUrl}?email=${data.email || ''}&wallet=${auth || ''}`);
 
       if (gate) {
         await pushClaims({
@@ -98,7 +98,7 @@ export const ProductCardModal = ({
       body={
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl isInvalid={Boolean(errors.email)}>
-            <FormLabel color="black">{description}</FormLabel>
+            <FormLabel color="white">{description}</FormLabel>
             <Input placeholder="Enter your email" {...register('email')} />
             <FormErrorMessage> {errors.email?.message} </FormErrorMessage>
           </FormControl>
