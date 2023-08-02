@@ -28,7 +28,7 @@ type ProductCardModalProps = {
 };
 
 const EMAIL_SCHEMA = FormValidation.object().shape({
-  email: FormValidation.string().email().required('This field is required.'),
+  email: FormValidation.string().email(),
 });
 
 export const ProductCardModal = ({
