@@ -1,38 +1,32 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Image, useMediaQuery } from '@chakra-ui/react';
 
 type NftBadgeProps = {
-  title: string;
+  imgUrl: string;
 };
 
-export const NftBadge = ({ title }: NftBadgeProps) => (
-  <Box
-    sx={{
-      zIndex: 2,
-      position: 'absolute',
-      top: -2,
-      right: -1,
-      bgGradient: 'linear(to-r, #0987A0, #805AD5)',
-      borderRadius: '0px 12px',
-      p: 1,
-      boxShadow: 'rgba(0, 0, 0, 0.8) 0px 5px 15px',
-      color: 'white',
-      fontSize: '14px',
-      fontWeight: 'bold',
-      textTransform: 'capitalize',
-      padding: '6px 12px 4px',
-    }}
-    _after={{
-      content: "''",
-      position: 'absolute',
-      width: '0px',
-      height: '0px',
-      borderStyle: 'solid',
-      right: '-4px',
-      bottom: '-4px',
-      borderWidth: '0px 4px 4px 4px',
-      borderColor: 'rgb(128, 90, 213) transparent transparent rgb(128, 90, 213)',
-    }}
-  >
-    {title}
-  </Box>
-);
+const sizeToBoxSize = {
+  sm: 50,
+  md: 70,
+  lg: 100,
+};
+
+export const NftBadge = ({ imgUrl }: NftBadgeProps) => {
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
+  const boxSize = sizeToBoxSize[isLargerThan768 ? 'md' : 'sm'];
+
+  return (
+    <Box
+      sx={{
+        zIndex: 2,
+        position: 'absolute',
+        top: Math.round(-boxSize / 3),
+        right: Math.round(-boxSize / 3) * Math.round(boxSize / 2.5),
+        transition: 'width 2s, height 2s, background-color 2s, transform 3s',
+      }}
+      width={boxSize}
+      height={boxSize}
+    >
+      <Image src={imgUrl} alt="poap" h={50} />
+    </Box>
+  );
+};

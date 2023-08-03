@@ -1,4 +1,4 @@
-import type { Product_Type_Enum } from '@3shop/apollo';
+import type { Network_Enum, Product_Type_Enum } from '@3shop/apollo';
 import type { Nullable } from './utils';
 
 export type FormatedProductData = {
@@ -21,5 +21,7 @@ export type FormatedProductData = {
   gate: Nullable<{
     id: string;
     claims: string[];
+    contractAddress: string;
+    network?: Network_Enum | null;
   }>;
 };
