@@ -25,6 +25,7 @@ import { PoapLink } from '../PoapLink';
 import { Product_Type_Enum } from '@3shop/apollo';
 import { ProductCardModal } from './ProductCardModal';
 import type { FormatedProductData } from '@3shop/types';
+import { useCollection } from '@center-inc/react';
 
 export type ProductCardProps = {
   id?: string;
@@ -71,6 +72,13 @@ export const ProductCard = ({
     onOpen: onProductModalOpen,
   } = useDisclosure();
   const to = `product/${id}`;
+
+  const result = useCollection({
+    address: gate?.contractAddress || '',
+    network: gate?.network === 'ETHEREUM' ? 'ethereum-mainnet' : 'polygon-mainnet',
+  });
+
+  console.log({ result, gate });
 
   const additionalProps =
     (isLocked || !isWithHref) && type === Product_Type_Enum.Commerce
@@ -144,8 +152,8 @@ export const ProductCard = ({
         </HStack>
       </Box>
       <Box onClick={onOpen}>
-        {(poapImgList || collectionName) && (
-          <CollectionBadge collectionName={collectionName} poapImgList={poapImgList} />
+        {(poapImgList || result) && (
+          <CollectionBadge nftUrl={result?.smallPreviewImageUrl} poapImgList={poapImgList} />
         )}
       </Box>
       {isLocked && (

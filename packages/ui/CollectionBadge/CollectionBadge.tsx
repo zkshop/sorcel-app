@@ -4,10 +4,11 @@ import { PoapBadge } from './PoapBadge/PoapBadge';
 type CollectionBadgeProps = {
   collectionName?: string;
   poapImgList?: { id: string; url: string }[];
+  nftUrl?: string;
   href?: string;
 };
 
-export const CollectionBadge = ({ collectionName, poapImgList }: CollectionBadgeProps) => {
+export const CollectionBadge = ({ poapImgList, nftUrl }: CollectionBadgeProps) => {
   if (poapImgList) {
     return (
       <>
@@ -18,8 +19,8 @@ export const CollectionBadge = ({ collectionName, poapImgList }: CollectionBadge
     );
   }
 
-  if (collectionName) {
-    return <NftBadge title={collectionName} />;
+  if (nftUrl) {
+    return <NftBadge imgUrl={nftUrl} />;
   }
 
   return null;

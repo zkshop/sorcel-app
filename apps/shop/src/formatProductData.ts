@@ -61,6 +61,8 @@ export const formatProductData = ({
       ? {
           id: productGates[0].id,
           claims: productGates[0].claims,
+          contractAddress: productGates[0].segments[0].nft_contract_address || '',
+          network: productGates[0].segments[0].network,
         }
       : null,
   };
