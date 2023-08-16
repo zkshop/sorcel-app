@@ -5,9 +5,9 @@ type NftBadgeProps = {
 };
 
 const sizeToBoxSize = {
-  sm: 50,
-  md: 70,
-  lg: 100,
+  sm: 25,
+  md: 50,
+  lg: 75,
 };
 
 export const NftBadge = ({ imgUrl }: NftBadgeProps) => {
@@ -15,18 +15,8 @@ export const NftBadge = ({ imgUrl }: NftBadgeProps) => {
   const boxSize = sizeToBoxSize[isLargerThan768 ? 'md' : 'sm'];
 
   return (
-    <Box
-      sx={{
-        zIndex: 2,
-        position: 'absolute',
-        top: Math.round(-boxSize / 3),
-        right: Math.round(-boxSize / 3) * Math.round(boxSize / 2.5),
-        transition: 'width 2s, height 2s, background-color 2s, transform 3s',
-      }}
-      width={boxSize}
-      height={boxSize}
-    >
-      <Image src={imgUrl} alt="poap" h={50} />
+    <Box position="absolute" top={Math.round(-boxSize / 3)} right={-5} zIndex={2}>
+      <Image src={imgUrl} alt="poap" h={sizeToBoxSize} />
     </Box>
   );
 };

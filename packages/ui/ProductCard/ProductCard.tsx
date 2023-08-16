@@ -78,8 +78,6 @@ export const ProductCard = ({
     network: gate?.network === 'ETHEREUM' ? 'ethereum-mainnet' : 'polygon-mainnet',
   });
 
-  console.log({ result, gate });
-
   const additionalProps =
     (isLocked || !isWithHref) && type === Product_Type_Enum.Commerce
       ? {}
@@ -151,7 +149,7 @@ export const ProductCard = ({
           )}
         </HStack>
       </Box>
-      <Box onClick={onOpen}>
+      <Box right={0} onClick={onOpen}>
         {(poapImgList || result) && (
           <CollectionBadge nftUrl={result?.smallPreviewImageUrl} poapImgList={poapImgList} />
         )}
