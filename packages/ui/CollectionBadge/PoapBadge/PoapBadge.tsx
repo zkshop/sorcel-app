@@ -30,7 +30,7 @@ export const PoapBadge = ({ imgUrl, index = 0 }: PoapBadgeProps) => {
       height={boxSize}
     >
       <Image
-        src={imgUrl}
+        src={imgUrl + '?size=small'}
         alt="poap"
         w="100%"
         h="100%"

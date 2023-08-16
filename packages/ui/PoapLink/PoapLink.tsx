@@ -17,12 +17,8 @@ export const PoapLink = ({ poapId, imgUrl }: PoapLinkProps) => {
   const width = imageWidth[isLargerThan768 ? 'lg' : 'sm'];
 
   return (
-    <Link
-      href={`${POAP_WEBSITE_URL}/event/${poapId}?size=small`}
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <Image width={width} src={imgUrl} />
+    <Link href={`${POAP_WEBSITE_URL}/event/${poapId}`} target="_blank" rel="noreferrer noopener">
+      <Image width={width} src={imgUrl + '?size=small'} />
     </Link>
   );
 };
