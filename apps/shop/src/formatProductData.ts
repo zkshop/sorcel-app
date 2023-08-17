@@ -5,6 +5,7 @@ import type { FormatedProductData } from '@3shop/types';
 import { applyDiscount } from '@3shop/pure/applyDiscount';
 import { useAccount } from '@3shop/wallet';
 import { useAppSelector } from '@3shop/store';
+import { get } from 'lodash';
 
 type Product = GetProductsQuery['products'][0];
 type ShopGate_v2 = GetGates_V2_ByAppIdQuery['gates'][0];
@@ -34,9 +35,11 @@ export const formatProductData = ({
   const discountToApply = userMatchedProductGate?.discount;
   const priceReduced = applyDiscount(price, discountToApply || 0);
 
-  const poapIds = productGates.filter(
-    (gate) => gate?.segments?.[0]?.type === Segment_Type_Enum.Poap,
-  )?.[0]?.segments?.[0]?.poap_ids;
+  const filteredProductGates = productGates.filter(
+    (gate) => get(gate, 'segments[0].type') === Segment_Type_Enum.Poap,
+  );
+
+  const poapIds = filteredProductGates?.[0]?.segments?.[0]?.poap_ids;
 
   const poapImgListToDisplay = poapIds?.map((poapId: string) => ({
     id: poapId,
