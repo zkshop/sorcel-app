@@ -46,11 +46,12 @@ export const formatProductData = ({
     url: getPoapImageFromPoapList(poapImageList, Number(poapId)),
   }));
 
-  const isLocked =
-    isGated &&
-    (!userMatchedProductGate ||
-      (userMatchedProductGate.unique_claim &&
-        userMatchedProductGate.claims?.includes(address || email)));
+  const hasAlreadyClaimed =
+    !userMatchedProductGate ||
+    (userMatchedProductGate.unique_claim &&
+      userMatchedProductGate?.claims?.includes(address || email));
+
+  const isLocked = isGated && hasAlreadyClaimed;
 
   const formatedProductData = {
     ...product,
