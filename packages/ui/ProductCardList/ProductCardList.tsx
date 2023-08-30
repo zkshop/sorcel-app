@@ -1,12 +1,11 @@
-import { Box, Grid, GridItem } from '@chakra-ui/react';
-import type { FormatedProductData } from '@3shop/types';
+import { Box, Grid } from '@chakra-ui/react';
+
 import { classnames } from '@3shop/config';
-import { ProductCard } from '../ProductCard/ProductCard';
+
+import React from 'react';
 
 type ProductCardListProps = {
-  products: FormatedProductData[];
-  isWalletConnected?: boolean;
-  auth?: string;
+  children: React.ReactNode;
 };
 
 const templateColumns = {
@@ -15,7 +14,7 @@ const templateColumns = {
   lg: 'repeat(4, 1fr)',
 };
 
-export const ProductCardList = ({ products, isWalletConnected, auth }: ProductCardListProps) => (
+export const ProductCardList = ({ children }: ProductCardListProps) => (
   <Box className={classnames.PRODUCT_CARD_LIST.CONTAINER}>
     <Grid
       className={classnames.PRODUCT_CARD_LIST.GRID}
@@ -23,50 +22,7 @@ export const ProductCardList = ({ products, isWalletConnected, auth }: ProductCa
       gridRowGap={6}
       gridColumnGap={3}
     >
-      {products.map(
-        ({
-          id,
-          name,
-          image,
-          price,
-          discount,
-          priceReduced,
-          collection,
-          poapImgList,
-          isLocked,
-          isWithHref,
-          type,
-          webhookUrl,
-          description,
-          gate,
-        }) => (
-          <GridItem
-            key={`products-${id}`}
-            className={classnames.PRODUCT_CARD_LIST.GRID_ITEM}
-            display="flex"
-            justifyContent="center"
-          >
-            <ProductCard
-              id={id}
-              name={name}
-              image={image}
-              price={price}
-              discount={discount}
-              priceReduced={priceReduced}
-              collectionName={collection}
-              poapImgList={poapImgList}
-              isLocked={isLocked}
-              isWithHref={isWithHref}
-              isWalletConnected={isWalletConnected}
-              type={type}
-              webhookUrl={webhookUrl}
-              description={description}
-              gate={gate}
-              auth={auth}
-            />
-          </GridItem>
-        ),
-      )}
+      {children}
     </Grid>
   </Box>
 );

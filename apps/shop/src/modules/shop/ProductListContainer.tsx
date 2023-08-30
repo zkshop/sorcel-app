@@ -3,8 +3,8 @@ import { useGetGates_V2_ByAppIdQuery } from '@3shop/apollo';
 import { useAppSelector } from '@3shop/store';
 import { formatProductData } from '../../formatProductData';
 import { gateVerifier } from './gateVerifier';
-import { envVars } from '@3shop/config';
-import { ProductCardList } from '@3shop/ui';
+import { classnames, envVars } from '@3shop/config';
+import { GridItem, ProductCard, ProductCardList } from '@3shop/ui';
 import { useAccount } from '@3shop/wallet';
 
 type ProductListContainerProps = {
@@ -35,10 +35,13 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
   const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
   const { isConnected, address } = useAccount();
-  const auth = useAppSelector((state) => state.user.auth);
+  const authState = useAppSelector((state) => state.user.auth);
   const { data } = useGetGates_V2_ByAppIdQuery({ variables: { app_id: envVars.APP_ID } });
   const gates = data?.gates.slice() || [];
   const sortedGates = gates.sort(sortGates);
+
+  const isWalletConnected = Boolean(isConnected || authState.email);
+  const auth = address || authState.email || undefined;
 
   const formatedProducts = products.map((product) => {
     const productGates = getAssociatedGates(sortedGates, product.id);
@@ -55,12 +58,51 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
   });
 
   return (
-    <>
-      <ProductCardList
-        products={formatedProducts}
-        isWalletConnected={Boolean(isConnected || auth.email)}
-        auth={address || auth.email || undefined}
-      />
-    </>
+    <ProductCardList>
+      {formatedProducts.map(
+        ({
+          id,
+          name,
+          image,
+          price,
+          discount,
+          priceReduced,
+          collection,
+          poapImgList,
+          isLocked,
+          isWithHref,
+          type,
+          webhookUrl,
+          description,
+          gate,
+        }) => (
+          <GridItem
+            key={`products-${id}`}
+            className={classnames.PRODUCT_CARD_LIST.GRID_ITEM}
+            display="flex"
+            justifyContent="center"
+          >
+            <ProductCard
+              id={id}
+              name={name}
+              image={image}
+              price={price}
+              discount={discount}
+              priceReduced={priceReduced}
+              collectionName={collection}
+              poapImgList={poapImgList}
+              isLocked={isLocked}
+              isWithHref={isWithHref}
+              isWalletConnected={isWalletConnected}
+              type={type}
+              webhookUrl={webhookUrl}
+              description={description}
+              gate={gate}
+              auth={auth}
+            />
+          </GridItem>
+        ),
+      )}
+    </ProductCardList>
   );
 };
