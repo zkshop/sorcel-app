@@ -1,6 +1,6 @@
 import React from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Button, Text } from '@3shop/ui';
+import { Button } from '@3shop/ui';
 
 export const ConnectWalletButton = () => (
   <ConnectButton.Custom>
@@ -83,7 +83,6 @@ export const ConnectWalletButton = () => (
                   fontSize={{ xs: 'x-small', sm: 'small', md: 'md' }}
                 >
                   {account.displayName}
-                  {account.displayBalance ? ` (${account.displayBalance})` : ''}
                 </Button>
               </div>
             );
