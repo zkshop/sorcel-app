@@ -8,7 +8,7 @@ import { envVars } from '@3shop/config';
 import { Segment_Type_Enum, useGetProductsQuery } from '@3shop/apollo';
 import { flattenDeep } from 'lodash';
 
-export const Galery = () => {
+export const Gallery = () => {
   const { data, loading, error } = useGetProductsQuery({
     variables: {
       appId: envVars.APP_ID,
