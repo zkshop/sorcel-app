@@ -2,6 +2,7 @@ import type { Nft } from '@3shop/alchemy';
 
 import type { ShopGate_v2 } from './ProductListContainer';
 import { every, includes } from 'lodash';
+import type { GateFieldsFragment } from '@3shop/apollo';
 import { Segment_Type_Enum } from '@3shop/apollo';
 
 // const isNftMatchingWithGate = (gate: ShopGate_v2, nft: Nft): boolean => {
@@ -45,7 +46,7 @@ const isMatchingGate = (gate: ShopGate_v2, nfts: Nft[], poaps: number[]): boolea
 };
 
 export const gateVerifier = (
-  gates: ShopGate_v2[],
+  gates: GateFieldsFragment[],
   nfts: Nft[],
   userPoapIds: number[],
 ): ShopGate_v2 | null => {

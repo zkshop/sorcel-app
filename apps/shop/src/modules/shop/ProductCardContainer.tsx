@@ -2,9 +2,7 @@ import { gateVerifier } from './gateVerifier';
 import { formatProductData } from '@/formatProductData';
 import { classnames } from '@3shop/config';
 import { GridItem, ProductCard } from '@3shop/ui';
-import type { ShopGate_v2 } from './ProductListContainer';
-import type { GetProductsQuery } from '@3shop/apollo';
-import { useGetGatesV2ByProductIdQuery } from '@3shop/apollo';
+import type { GateFieldsFragment, GetProductsQuery } from '@3shop/apollo';
 import { useAppSelector } from '@3shop/store';
 
 type Props = {
@@ -13,7 +11,7 @@ type Props = {
   product: GetProductsQuery['products'][0];
 };
 
-function sortGates(a: ShopGate_v2, b: ShopGate_v2) {
+function sortGates(a: GateFieldsFragment, b: GateFieldsFragment) {
   if (a.discount && b.discount) {
     return b.discount - a.discount;
   }
@@ -25,22 +23,19 @@ function sortGates(a: ShopGate_v2, b: ShopGate_v2) {
   return -1;
 }
 
-const getAssociatedGates = (gates: ShopGate_v2[], productId: string) =>
-  gates.filter((gate) => gate.product_id === productId);
-
 export function ProductCardContainer({ isWalletConnected, auth, product }: Props) {
-  const { data } = useGetGatesV2ByProductIdQuery({ variables: { productId: product.id } });
   const userNFTs = useAppSelector((state) => state.user.nfts);
   const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
   const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
-  const gates = data?.gate_v2.slice() || [];
+  const gates = product.gate.slice() || [];
   const sortedGates = gates.sort(sortGates);
-  const productGates = getAssociatedGates(sortedGates, product.id);
-  const userMatchedProductGate = gateVerifier(productGates, userNFTs, userPoapIds);
+
+  const userMatchedProductGate = gateVerifier(sortedGates, userNFTs, userPoapIds);
+
   const formatedProduct = formatProductData({
     product,
-    productGates,
+    productGates: sortedGates,
     userPoapIds,
     userNFTContracts,
     userMatchedProductGate,
@@ -54,24 +49,7 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
       display="flex"
       justifyContent="center"
     >
-      <ProductCard
-        id={formatedProduct.id}
-        name={formatedProduct.name}
-        image={formatedProduct.image}
-        price={formatedProduct.price}
-        discount={formatedProduct.discount}
-        priceReduced={formatedProduct.priceReduced}
-        collectionName={formatedProduct.collection}
-        poapImgList={formatedProduct.poapImgList}
-        isLocked={formatedProduct.isLocked}
-        isWithHref={formatedProduct.isWithHref}
-        isWalletConnected={isWalletConnected}
-        type={formatedProduct.type}
-        webhookUrl={formatedProduct.webhookUrl}
-        description={formatedProduct.description}
-        gate={formatedProduct.gate}
-        auth={auth}
-      />
+      <ProductCard {...formatedProduct} isWalletConnected={isWalletConnected} auth={auth} />
     </GridItem>
   );
 }
