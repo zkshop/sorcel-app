@@ -21,7 +21,12 @@ export const ProductListContainer = ({ products }: ProductListContainerProps) =>
   return (
     <ProductCardList>
       {products.map((product) => (
-        <ProductCardContainer isWalletConnected={isWalletConnected} auth={auth} product={product} />
+        <ProductCardContainer
+          key={`products-${product.id}`}
+          isWalletConnected={isWalletConnected}
+          auth={auth}
+          product={product}
+        />
       ))}
     </ProductCardList>
   );
