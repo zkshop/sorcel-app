@@ -44,7 +44,6 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
 
   return (
     <GridItem
-      key={`products-${formatedProduct.id}`}
       className={classnames.PRODUCT_CARD_LIST.GRID_ITEM}
       display="flex"
       justifyContent="center"
