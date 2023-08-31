@@ -72,7 +72,7 @@ export const Gates = () => {
     <Box>
       <Header title="Gates">
         <Link to={`${ROUTES_PATH.PROTECTED.GATE}/add`}>
-          <Button>+ New Gate</Button>
+          <Button fontSize="24px">+ New Gate</Button>
         </Link>
       </Header>
 

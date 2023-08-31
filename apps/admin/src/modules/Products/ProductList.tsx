@@ -24,7 +24,7 @@ export const Products = () => {
     <Box>
       <Header title="Products">
         <Link to={`${ROUTES_PATH.PROTECTED.PRODUCT}/add`}>
-          <Button>+ New Product</Button>
+          <Button fontSize="24px">+ New Product</Button>
         </Link>
       </Header>
 
