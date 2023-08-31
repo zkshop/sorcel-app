@@ -39,6 +39,7 @@ export const ProductDetails = ({
   priceReduced,
   collectionName,
   isLocked = false,
+  price,
   poapImgList,
   userHasAlreadyOrdered,
 }: ProductDetailsProps) => {
@@ -134,7 +135,7 @@ export const ProductDetails = ({
                   textDecoration={discount ? 'line-through' : 'none'}
                   marginRight={discount ? '2px' : 'none'}
                 >
-                  {priceReduced ? `${priceReduced} €` : <span style={{ color: 'red' }}>FREE</span>}
+                  {priceReduced ? `${price} €` : <span style={{ color: 'red' }}>FREE</span>}
                 </Text>
                 {discount ? (
                   <Text
@@ -162,11 +163,7 @@ export const ProductDetails = ({
                 w="full"
                 p={1}
                 isDisabled={isLocked}
-                bg="black"
                 isLoading={isLoading}
-                _hover={{
-                  bg: 'black',
-                }}
                 {...elementProps}
               >
                 <Box display="flex" justifyContent="space-between" alignItems="center">
