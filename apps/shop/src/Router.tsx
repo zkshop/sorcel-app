@@ -4,7 +4,7 @@ import {
   createMemoryRouter,
   useRouteError,
 } from 'react-router-dom';
-import { Galery } from '@/routes/Galery';
+import { Gallery } from '@/routes/Gallery';
 import { Success } from '@/routes/Success';
 import { Shipping } from '@/routes/Shipping';
 import { Product } from '@/routes/Product';
@@ -28,8 +28,8 @@ const router = createMemoryRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route errorElement={<ErrorBoundary />}>
-        <Route index element={<Galery />} />
-        <Route path="/modal/:productId" element={<Galery />} />
+        <Route index element={<Gallery />} />
+        <Route path="/modal/:productId" element={<Gallery />} />
         <Route path="/product/:productId" element={<Product />} />
         <Route path="/shipping/:productId" element={<Shipping />} />
         <Route path="/checkout/:productId" element={<Checkout />} />
