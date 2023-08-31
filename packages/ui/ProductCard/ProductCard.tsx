@@ -1,17 +1,4 @@
-import {
-  Box,
-  Button,
-  HStack,
-  Image,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Box, HStack, Image, useDisclosure } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 import { StyledProductCard } from './ProductCard.style';
@@ -21,11 +8,11 @@ import { classnames } from '@3shop/config';
 import { DiscountTag } from './DiscountTag';
 import { Text } from '../Text/Text';
 import { CollectionBadge } from '../CollectionBadge/CollectionBadge';
-import { PoapLink } from '../PoapLink';
 import { Product_Type_Enum } from '@3shop/apollo';
 import { ProductCardModal } from './ProductCardModal';
 import type { FormatedProductData } from '@3shop/types';
 import { useCollection } from '@center-inc/react';
+import { PoapListModal } from './PoapListModal';
 
 export type ProductCardProps = {
   id?: string;
@@ -93,14 +80,7 @@ export const ProductCard = ({
       onClick={!isLocked && type === Product_Type_Enum.Modal ? onProductModalOpen : undefined}
       {...additionalProps}
     >
-      <Box
-        className={classnames.PRODUCT_CARD.IMG_CONTAINER}
-        sx={{
-          position: 'relative',
-          mb: 2,
-          flex: 1,
-        }}
-      >
+      <Box className={classnames.PRODUCT_CARD.IMG_CONTAINER} position="relative" mb={2} flex={1}>
         <Image
           className={classnames.PRODUCT_CARD.IMG}
           alt="product"
@@ -166,25 +146,7 @@ export const ProductCard = ({
       )}
       {isDiscount && <DiscountTag discount={discount} />}
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Poap to unlock {name}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <HStack justifyContent="center" padding={2}>
-              {poapImgList?.map((poap) => (
-                <PoapLink key={`poap-link-${poap.id}`} poapId={poap.id} imgUrl={poap.url} />
-              ))}
-            </HStack>
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose} mr={3}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <PoapListModal isOpen={isOpen} onClose={onClose} name={name} poapImgList={poapImgList} />
 
       <ProductCardModal
         description={description}
