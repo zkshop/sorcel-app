@@ -65,14 +65,14 @@ export const GeneralForm = ({ app }: GeneralFormProps) => {
   return (
     <Box>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Heading as="h2" minWidth="300px">
-          <HStack justifyContent="space-between">
+        <HStack justifyContent="space-between">
+          <Heading as="h2" minWidth="300px">
             <span> General </span>
-            <Button isLoading={isLoading} isDisabled={isLoading} type="submit">
-              Save
-            </Button>
-          </HStack>
-        </Heading>
+          </Heading>
+          <Button isLoading={isLoading} isDisabled={isLoading} type="submit">
+            Save
+          </Button>
+        </HStack>
 
         <Box
           my={4}

@@ -38,7 +38,7 @@ export const CustomizationForm = ({
   <form onSubmit={handleSubmit(onSubmit)}>
     <Box>
       <Header title="Customization">
-        <Button isLoading={loading} type="submit">
+        <Button fontSize="24px" isLoading={loading} type="submit">
           Save
         </Button>
       </Header>
