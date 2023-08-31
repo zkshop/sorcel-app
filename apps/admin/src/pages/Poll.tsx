@@ -65,7 +65,7 @@ export const Poll = () => {
     <Box>
       <Header title="Polls">
         <Link to={`${ROUTES_PATH.PROTECTED.POLL}/add`}>
-          <Button>+ New Poll</Button>
+          <Button fontSize="24px">+ New Poll</Button>
         </Link>
       </Header>
 
