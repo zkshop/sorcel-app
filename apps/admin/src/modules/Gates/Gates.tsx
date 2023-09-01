@@ -19,13 +19,16 @@ import { useState } from 'react';
 import { GateListItem } from './GateListItem';
 import { ROUTES_PATH } from '../../routes/Routes';
 
-const GATES_ATTRIBUTES = ['name', 'perk', ''];
+const GATES_ATTRIBUTES = ['name', 'perk', 'product', ''];
 
 export type GateItemType = {
   name: string;
   id: string;
   exclusive_access: boolean;
   discount?: Nullable<number>;
+  productId: string;
+  productImage: string;
+  productName: string;
   handleOpenDeleteGateModal(gate: { id: string; name: string }): void;
 };
 
@@ -79,13 +82,22 @@ export const Gates = () => {
       <Table
         data={data.gates}
         heads={GATES_ATTRIBUTES}
-        renderRow={({ id, exclusive_access, name, discount }) => (
+        renderRow={({
+          id,
+          exclusive_access,
+          name,
+          discount,
+          product: { id: productId, image: productImage, name: productName },
+        }) => (
           <GateListItem
             id={id}
             exclusive_access={exclusive_access}
             name={name}
             discount={discount}
             handleOpenDeleteGateModal={handleOpenDeleteGateModal}
+            productId={productId}
+            productImage={productImage}
+            productName={productName}
           />
         )}
       />
@@ -96,21 +108,23 @@ export const Gates = () => {
         body={
           <Box>
             <Text>Are you sure you want to delete {selectedGate?.name} gate?</Text>
-            <HStack mt={4} justifyContent="flex-end">
-              <Button mr={2} onClick={onClose}>
-                Cancel
-              </Button>
-
-              <Button
-                colorScheme="red"
-                onClick={handleDeleteGate}
-                isDisabled={deleteGateLoading}
-                isLoading={deleteGateLoading}
-              >
-                Delete
-              </Button>
-            </HStack>
           </Box>
+        }
+        footer={
+          <HStack mt={4} justifyContent="flex-end">
+            <Button mr={2} onClick={onClose}>
+              Cancel
+            </Button>
+
+            <Button
+              variant="negative"
+              onClick={handleDeleteGate}
+              isDisabled={deleteGateLoading}
+              isLoading={deleteGateLoading}
+            >
+              Delete
+            </Button>
+          </HStack>
         }
       />
     </Box>
