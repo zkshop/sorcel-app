@@ -82,6 +82,7 @@ export type String_Comparison_Exp = {
 export type App = {
   __typename?: 'app';
   background_color?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
   font?: Maybe<Scalars['String']>;
   font_color?: Maybe<Scalars['String']>;
@@ -120,6 +121,7 @@ export type App_Bool_Exp = {
   _not?: InputMaybe<App_Bool_Exp>;
   _or?: InputMaybe<Array<App_Bool_Exp>>;
   background_color?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   deliveryTaxesTableName?: InputMaybe<String_Comparison_Exp>;
   font?: InputMaybe<String_Comparison_Exp>;
   font_color?: InputMaybe<String_Comparison_Exp>;
@@ -140,6 +142,7 @@ export enum App_Constraint {
 /** input type for inserting data into table "app" */
 export type App_Insert_Input = {
   background_color?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
   font?: InputMaybe<Scalars['String']>;
   font_color?: InputMaybe<Scalars['String']>;
@@ -155,6 +158,7 @@ export type App_Insert_Input = {
 export type App_Max_Fields = {
   __typename?: 'app_max_fields';
   background_color?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
   font?: Maybe<Scalars['String']>;
   font_color?: Maybe<Scalars['String']>;
@@ -168,6 +172,7 @@ export type App_Max_Fields = {
 export type App_Min_Fields = {
   __typename?: 'app_min_fields';
   background_color?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
   font?: Maybe<Scalars['String']>;
   font_color?: Maybe<Scalars['String']>;
@@ -203,6 +208,7 @@ export type App_On_Conflict = {
 /** Ordering options when selecting data from "app". */
 export type App_Order_By = {
   background_color?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
   deliveryTaxesTableName?: InputMaybe<Order_By>;
   font?: InputMaybe<Order_By>;
   font_color?: InputMaybe<Order_By>;
@@ -223,6 +229,8 @@ export type App_Pk_Columns_Input = {
 export enum App_Select_Column {
   /** column name */
   BackgroundColor = 'background_color',
+  /** column name */
+  CreatedAt = 'created_at',
   /** column name */
   DeliveryTaxesTableName = 'deliveryTaxesTableName',
   /** column name */
@@ -246,6 +254,7 @@ export enum App_Select_Column {
 /** input type for updating data in table "app" */
 export type App_Set_Input = {
   background_color?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
   font?: InputMaybe<Scalars['String']>;
   font_color?: InputMaybe<Scalars['String']>;
@@ -268,6 +277,7 @@ export type App_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type App_Stream_Cursor_Value_Input = {
   background_color?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
   font?: InputMaybe<Scalars['String']>;
   font_color?: InputMaybe<Scalars['String']>;
@@ -283,6 +293,8 @@ export type App_Stream_Cursor_Value_Input = {
 export enum App_Update_Column {
   /** column name */
   BackgroundColor = 'background_color',
+  /** column name */
+  CreatedAt = 'created_at',
   /** column name */
   DeliveryTaxesTableName = 'deliveryTaxesTableName',
   /** column name */
@@ -1189,6 +1201,8 @@ export type Gate_V2 = {
   exclusive_access: Scalars['Boolean'];
   id: Scalars['uuid'];
   name: Scalars['String'];
+  /** An object relationship */
+  product: Product;
   product_id: Scalars['uuid'];
   /** An array relationship */
   segments: Array<Segment>;
@@ -1325,6 +1339,7 @@ export type Gate_V2_Bool_Exp = {
   exclusive_access?: InputMaybe<Boolean_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  product?: InputMaybe<Product_Bool_Exp>;
   product_id?: InputMaybe<Uuid_Comparison_Exp>;
   segments?: InputMaybe<Segment_Bool_Exp>;
   segments_aggregate?: InputMaybe<Segment_Aggregate_Bool_Exp>;
@@ -1365,6 +1380,7 @@ export type Gate_V2_Insert_Input = {
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
+  product?: InputMaybe<Product_Obj_Rel_Insert_Input>;
   product_id?: InputMaybe<Scalars['uuid']>;
   segments?: InputMaybe<Segment_Arr_Rel_Insert_Input>;
   unique_claim?: InputMaybe<Scalars['Boolean']>;
@@ -1432,6 +1448,7 @@ export type Gate_V2_Order_By = {
   exclusive_access?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  product?: InputMaybe<Product_Order_By>;
   product_id?: InputMaybe<Order_By>;
   segments_aggregate?: InputMaybe<Segment_Aggregate_Order_By>;
   unique_claim?: InputMaybe<Order_By>;
@@ -5575,6 +5592,7 @@ export type GetGates_V2Query = {
     id: any;
     exclusive_access: boolean;
     discount?: number | null;
+    product: { __typename?: 'product'; id: any; image: string; name: string };
   }>;
 };
 
@@ -6783,6 +6801,11 @@ export const GetGates_V2Document = gql`
       id
       exclusive_access
       discount
+      product {
+        id
+        image
+        name
+      }
     }
   }
 `;
