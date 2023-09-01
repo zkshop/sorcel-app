@@ -4,6 +4,11 @@ query GetGates_V2 {
     id
     exclusive_access
     discount
+    product {
+      id
+      image
+      name
+    }
   }
 }
 
