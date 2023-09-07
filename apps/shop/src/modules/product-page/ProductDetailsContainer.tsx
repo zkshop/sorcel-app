@@ -13,7 +13,9 @@ type ProductDetailsContainerProps = {
 
 export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProps) => {
   const { data } = useGetGatesV2ByProductIdQuery({ variables: { productId: product?.id } });
+
   if (!product) return null;
+
   const productGates = data?.gate_v2;
 
   const userNFTs = useAppSelector((state) => state.user.nfts);
