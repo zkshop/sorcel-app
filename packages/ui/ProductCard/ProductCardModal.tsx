@@ -61,7 +61,7 @@ export const ProductCardModal = ({
       if (gate) {
         await pushClaims({
           variables: {
-            gate_id: gate.id,
+            gate_id: gate?.[0]?.id,
             claims: auth,
           },
         });
