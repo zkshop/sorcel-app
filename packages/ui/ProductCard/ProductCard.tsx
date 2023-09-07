@@ -61,8 +61,8 @@ export const ProductCard = ({
   const to = `product/${id}`;
 
   const result = useCollection({
-    address: gate?.contractAddress || '',
-    network: gate?.network === 'ETHEREUM' ? 'ethereum-mainnet' : 'polygon-mainnet',
+    address: gate?.[0]?.contractAddress || '',
+    network: gate?.[0]?.network === 'ETHEREUM' ? 'ethereum-mainnet' : 'polygon-mainnet',
   });
 
   const additionalProps =

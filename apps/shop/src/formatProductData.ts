@@ -61,14 +61,12 @@ export const formatProductData = ({
     isLocked,
     type: product.type,
     webhookUrl: product.webhookUrl || '',
-    gate: productGates[0]
-      ? {
-          id: productGates[0].id,
-          claims: productGates[0].claims,
-          contractAddress: productGates[0].segments[0].nft_contract_address || '',
-          network: productGates[0].segments[0].network,
-        }
-      : null,
+    gate: productGates.map((gate) => ({
+      id: gate.id,
+      claims: gate.claims,
+      contractAddress: gate.segments[0].nft_contract_address || '',
+      network: gate.segments[0].network,
+    })),
   };
 
   return formatedProductData;
