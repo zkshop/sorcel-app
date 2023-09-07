@@ -49,8 +49,8 @@ export const gateVerifier = (
   gates: GateFieldsFragment[],
   nfts: Nft[],
   userPoapIds: number[],
-): ShopGate_v2 | null => {
+): GateFieldsFragment[] => {
   const match = gates.filter((gate) => isMatchingGate(gate, nfts, userPoapIds));
 
-  return match.length ? match[0] : null;
+  return match;
 };
