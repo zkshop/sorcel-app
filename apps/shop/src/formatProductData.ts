@@ -1,5 +1,5 @@
 import { getPoapImageFromPoapList } from '@3shop/poap';
-import type { GateFieldsFragment, GetGates_V2_ByAppIdQuery, GetProductsQuery } from '@3shop/apollo';
+import type { GateFieldsFragment, GetProductsQuery } from '@3shop/apollo';
 import { Segment_Type_Enum } from '@3shop/apollo';
 import type { FormatedProductData } from '@3shop/types';
 import { applyDiscount } from '@3shop/pure/applyDiscount';
@@ -8,15 +8,38 @@ import { useAppSelector } from '@3shop/store';
 import { get } from 'lodash';
 
 type Product = GetProductsQuery['products'][0];
-type ShopGate_v2 = GetGates_V2_ByAppIdQuery['gates'][0];
 
 export type GetProductCardPropsParams = {
   product: Product;
   productGates: GateFieldsFragment[];
   userPoapIds: number[];
   userNFTContracts: string[];
-  userMatchedProductGate: ShopGate_v2 | null;
+  userMatchedProductGate: GateFieldsFragment[];
   poapImageList: string[];
+};
+
+const getBestDiscount = (gates: GateFieldsFragment[]): number => {
+  if (gates.length === 0) return 0;
+
+  const discounts = gates.map((gate) => gate.discount || 0);
+
+  return Math.max(...discounts);
+};
+
+export const hasAlreadyClaimed = (
+  gates: GateFieldsFragment[],
+  address: `0x${string}` | undefined,
+  email: string | null,
+): boolean => {
+  if (gates.length === 0) return false;
+
+  for (const gateItem of gates) {
+    if (gateItem.unique_claim && gateItem.claims?.includes(address || email)) {
+      return true;
+    }
+  }
+
+  return false;
 };
 
 export const formatProductData = ({
@@ -32,7 +55,7 @@ export const formatProductData = ({
 
   const isGated = productGates.length > 0 && productGates[0].exclusive_access;
 
-  const discountToApply = userMatchedProductGate?.discount;
+  const discountToApply = getBestDiscount(userMatchedProductGate);
   const priceReduced = applyDiscount(price, discountToApply || 0);
 
   const filteredProductGates = productGates.filter(
@@ -46,16 +69,13 @@ export const formatProductData = ({
     url: getPoapImageFromPoapList(poapImageList, Number(poapId)),
   }));
 
-  const hasAlreadyClaimed =
-    !userMatchedProductGate ||
-    (userMatchedProductGate.unique_claim &&
-      userMatchedProductGate?.claims?.includes(address || email));
+  const alreadyClaimed = hasAlreadyClaimed(productGates, address, email);
 
-  const isLocked = isGated && hasAlreadyClaimed;
+  const isLocked = isGated && alreadyClaimed;
 
   const formatedProductData = {
     ...product,
-    discount: userMatchedProductGate?.discount || 0,
+    discount: discountToApply,
     priceReduced,
     poapImgList: poapImgListToDisplay,
     isLocked,
