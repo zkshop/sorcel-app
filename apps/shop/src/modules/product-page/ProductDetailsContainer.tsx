@@ -5,7 +5,7 @@ import { useAppSelector } from '@3shop/store';
 import { gateVerifier } from '../shop/gateVerifier';
 import { useAccount } from '@3shop/wallet';
 import type { ProductDetailsType } from '@/routes/Product';
-import { formatProductData } from '@/formatProductData';
+import { formatProductData, hasAlreadyClaimed } from '@/formatProductData';
 
 type ProductDetailsContainerProps = {
   product: ProductDetailsType;
@@ -47,9 +47,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   const { address: walletAddress } = useAccount();
   const email = useAppSelector((state) => state.user.auth.email);
 
-  const userHasAlreadyOrdered =
-    userMatchedProductGate?.unique_claim &&
-    userMatchedProductGate?.claims.includes(walletAddress || email);
+  const userHasAlreadyOrdered = hasAlreadyClaimed(userMatchedProductGate, walletAddress, email);
 
   return (
     <ProductDetails
