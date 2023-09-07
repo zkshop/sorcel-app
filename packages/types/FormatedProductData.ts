@@ -23,5 +23,5 @@ export type FormatedProductData = {
     claims: string[];
     contractAddress: string;
     network?: Network_Enum | null;
-  }>;
+  }>[];
 };
