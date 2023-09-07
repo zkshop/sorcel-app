@@ -60,7 +60,7 @@ export const ProductDetails = ({
 
   return (
     <Box className={classnames.PRODUCT_DETAILS.CONTAINER} w="full" position="relative">
-      {(isLocked || userHasAlreadyOrdered) && (
+      {isLocked && (
         <LockedLayer
           text={userHasAlreadyOrdered ? 'Already Ordered' : undefined}
           collectionName={collectionName}
