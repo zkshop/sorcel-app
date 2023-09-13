@@ -1,9 +1,10 @@
-import { Box, useMediaQuery, Image } from '@chakra-ui/react';
+import { Box, useMediaQuery, Image, Text } from '@chakra-ui/react';
 
 type PoapBadgeProps = {
   imgUrl: string;
   index?: number;
   href?: string;
+  addtionnalPoaps?: number;
 };
 
 const sizeToBoxSize = {
@@ -12,7 +13,7 @@ const sizeToBoxSize = {
   lg: 100,
 };
 
-export const PoapBadge = ({ imgUrl, index = 0 }: PoapBadgeProps) => {
+export const PoapBadge = ({ imgUrl, index = 0, addtionnalPoaps }: PoapBadgeProps) => {
   // TODO: use UseBreakpointValue hook here
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   const boxSize = sizeToBoxSize[isLargerThan768 ? 'md' : 'sm'];
@@ -29,16 +30,37 @@ export const PoapBadge = ({ imgUrl, index = 0 }: PoapBadgeProps) => {
       width={boxSize}
       height={boxSize}
     >
-      <Image
-        src={imgUrl + '?size=small'}
-        alt="poap"
-        w="100%"
-        h="100%"
-        style={{
-          borderRadius: '50%',
-          overflow: 'none',
-        }}
-      />
+      {addtionnalPoaps ? (
+        <Box
+          bgColor="black"
+          w="70px"
+          h="70"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          textAlign="center"
+          margin="auto"
+          style={{
+            borderRadius: '50%',
+            overflow: 'none',
+          }}
+        >
+          <Text fontWeight="bold" fontSize="xl">
+            +3
+          </Text>
+        </Box>
+      ) : (
+        <Image
+          src={imgUrl + '?size=small'}
+          alt="poap"
+          w="70"
+          h="70"
+          style={{
+            borderRadius: '50%',
+            overflow: 'none',
+          }}
+        />
+      )}
     </Box>
   );
 };
