@@ -12,9 +12,11 @@ export const CollectionBadge = ({ poapImgList, nftUrl }: CollectionBadgeProps) =
   if (poapImgList) {
     return (
       <>
-        {poapImgList.map((poap, index) => (
+        {poapImgList.slice(0, 2).map((poap, index) => (
           <PoapBadge key={`badge-${index}-${poap.id}`} index={index} imgUrl={poap.url} />
         ))}
+
+        {poapImgList.length > 2 && <PoapBadge imgUrl="" addtionnalPoaps={poapImgList.length - 2} />}
       </>
     );
   }
