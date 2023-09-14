@@ -5751,7 +5751,7 @@ packages:
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
-      react-hook-form: 7.37.0_react@18.2.0
+      react-hook-form: 7.37.0
     dev: false
 
   /@humanwhocodes/config-array/0.11.10:
