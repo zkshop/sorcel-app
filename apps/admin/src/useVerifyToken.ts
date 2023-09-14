@@ -40,7 +40,6 @@ export const useVerifyToken = (fromAdminRoute = false) => {
 
         if (!fromAdminRoute) navigate(ROUTES_PATH.PROTECTED.GENERAL);
       } catch (error) {
-        console.error(error);
         if (fromAdminRoute) navigate(ROUTES_PATH.PUBLIC.LOGIN);
       }
     }
