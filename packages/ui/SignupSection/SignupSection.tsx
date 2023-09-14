@@ -1,12 +1,4 @@
-import {
-  Divider,
-  VStack,
-  Input,
-  Image,
-  FormControl,
-  FormErrorMessage,
-  Link,
-} from '@chakra-ui/react';
+import { Divider, VStack, Input, Image, FormControl, FormErrorMessage } from '@chakra-ui/react';
 import { Button } from '../Button/Button';
 import { FormLabel } from '../FormLabel/FormLabel';
 
@@ -14,6 +6,7 @@ import { FormLabel } from '../FormLabel/FormLabel';
 import logo from './SORCEL_LOGO.png';
 import { Text } from '../Text/Text';
 import type { UseFormHandleSubmit, UseFormRegister, UseFormStateReturn } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 type SignupFormValues = {
   email: string;
@@ -58,7 +51,7 @@ export const SignupSection = ({
 
       <Text variant="H500" color="greyscales.450">
         Already have an account ?{' '}
-        <Link href="/" color="black" textDecoration="underline">
+        <Link to="/" style={{ textDecoration: 'underline', color: 'black' }}>
           Log in
         </Link>
       </Text>
