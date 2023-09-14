@@ -16,7 +16,13 @@ export const CollectionBadge = ({ poapImgList, nftUrl }: CollectionBadgeProps) =
           <PoapBadge key={`badge-${index}-${poap.id}`} index={index} imgUrl={poap.url} />
         ))}
 
-        {poapImgList.length > 2 && <PoapBadge imgUrl="" addtionnalPoaps={poapImgList.length - 2} />}
+        {poapImgList.length > 2 && (
+          <PoapBadge
+            imgUrl=""
+            index={poapImgList.length - 1}
+            addtionnalPoaps={poapImgList.length - 2}
+          />
+        )}
       </>
     );
   }
