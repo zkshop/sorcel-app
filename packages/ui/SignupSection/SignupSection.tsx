@@ -1,14 +1,15 @@
 import {
   Divider,
-  Link,
   VStack,
   Input,
   Image,
   FormControl,
   FormErrorMessage,
+  Link,
 } from '@chakra-ui/react';
 import { Button } from '../Button/Button';
 import { FormLabel } from '../FormLabel/FormLabel';
+
 // @ts-ignore
 import logo from './SORCEL_LOGO.png';
 import { Text } from '../Text/Text';
@@ -39,11 +40,6 @@ export const SignupSection = ({
       <Text mb="1rem" as="h1" variant="title">
         Sign Up
       </Text>
-      {/* <Button width="full" variant="secondary">
-        Continue With Google
-      </Button> */}
-
-      {/* <Divider my="4" width="full" borderColor="greyscales.350" /> */}
 
       <FormLabel mt={5} alignSelf="flex-start">
         <Text variant="H300" color="greyscales.450">
@@ -62,7 +58,7 @@ export const SignupSection = ({
 
       <Text variant="H500" color="greyscales.450">
         Already have an account ?{' '}
-        <Link color="black" textDecoration="underline">
+        <Link href="/" color="black" textDecoration="underline">
           Log in
         </Link>
       </Text>
