@@ -19,6 +19,7 @@
     "framer-motion": "^7.5.3",
     "react-hook-form": "^7.37.0",
     "react-icons": "^4.4.0",
+    "react-router-dom": "^6.8.1",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
