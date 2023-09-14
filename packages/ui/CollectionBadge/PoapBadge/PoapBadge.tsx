@@ -45,21 +45,23 @@ export const PoapBadge = ({ imgUrl, index = 0, addtionnalPoaps }: PoapBadgeProps
             overflow: 'none',
           }}
         >
-          <Text fontWeight="bold" fontSize="xl">
-            +3
+          <Text color="white" fontWeight="bold" fontSize="xl">
+            +{addtionnalPoaps}
           </Text>
         </Box>
       ) : (
-        <Image
-          src={imgUrl + '?size=small'}
-          alt="poap"
-          w="70"
-          h="70"
-          style={{
-            borderRadius: '50%',
-            overflow: 'none',
-          }}
-        />
+        imgUrl && (
+          <Image
+            src={imgUrl + '?size=small'}
+            alt="poap"
+            w="70"
+            h="70"
+            style={{
+              borderRadius: '50%',
+              overflow: 'none',
+            }}
+          />
+        )
       )}
     </Box>
   );
