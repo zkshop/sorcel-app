@@ -26,18 +26,6 @@ const getBestDiscount = (gates: GateFieldsFragment[]): number => {
   return Math.max(...discounts);
 };
 
-const isExclusiveAccess = (gates: GateFieldsFragment[]): boolean => {
-  if (gates.length === 0) return false;
-
-  for (const gateItem of gates) {
-    if (!gateItem.exclusive_access) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
 export const hasAlreadyClaimed = (
   gates: GateFieldsFragment[],
   address: `0x${string}` | undefined,
@@ -46,7 +34,9 @@ export const hasAlreadyClaimed = (
   if (gates.length === 0) return false;
 
   for (const gateItem of gates) {
-    if (gateItem.unique_claim && gateItem?.claims?.includes(address || email)) return true;
+    if (gateItem.unique_claim && gateItem.claims?.includes(address || email)) {
+      return true;
+    }
   }
 
   return false;
@@ -63,7 +53,7 @@ export const formatProductData = ({
 
   const { price } = product;
 
-  const isGated = isExclusiveAccess(productGates);
+  const isGated = productGates.length > 0 && productGates[0].exclusive_access;
 
   const discountToApply = getBestDiscount(userMatchedProductGate);
   const priceReduced = applyDiscount(price, discountToApply || 0);
@@ -81,7 +71,7 @@ export const formatProductData = ({
 
   const alreadyClaimed = hasAlreadyClaimed(productGates, address, email);
 
-  const isLocked = (isGated || alreadyClaimed) && userMatchedProductGate.length === 0;
+  const isLocked = isGated && alreadyClaimed;
 
   const formatedProductData = {
     ...product,
