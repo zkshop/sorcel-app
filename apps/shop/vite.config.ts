@@ -34,6 +34,7 @@ const envVars = {
   MONTHLY_PRO_PLAN_CHECKOUT_LINK: undefined,
   YEARLY_PRO_PLAN_CHECKOUT_LINK: undefined,
   STRIPE_WEBHOOK_SECRET: false,
+  LINK_API_URL: 'https://www.walletlink.org',
 };
 
 const dirname = __dirname;
