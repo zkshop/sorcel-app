@@ -33,7 +33,6 @@ const envVars = {
   WALLET_CONNECT_PROJECT_ID: undefined,
   MONTHLY_PRO_PLAN_CHECKOUT_LINK: undefined,
   YEARLY_PRO_PLAN_CHECKOUT_LINK: undefined,
-  STRIPE_WEBHOOK_SECRET: false,
   LINK_API_URL: 'https://www.walletlink.org',
 };
 
@@ -77,6 +76,7 @@ export default defineConfig(({ mode }) => {
           assetFileNames: '[name].[ext]',
         },
       },
+      minify: false,
     },
   };
 });
