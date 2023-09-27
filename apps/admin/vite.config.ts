@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { createCommonConfig } from '@3shop/vite-config/vite.config.common';
+import Unfonts from 'unplugin-fonts/vite';
 
 const envVars = [
   'PUBLIC_FUNCTIONS_URL',
@@ -21,4 +22,11 @@ const commonConfig = createCommonConfig({ envVars, dirname });
 
 export default defineConfig({
   ...commonConfig,
+  plugins: [
+    ...commonConfig.plugins,
+    Unfonts({ google: { families: [{ name: 'Inter', styles: 'wght@400;500;600;700;800;900' }] } }),
+  ],
+  build: {
+    ...commonConfig.build,
+  },
 });
