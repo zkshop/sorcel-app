@@ -17,8 +17,7 @@
     "@3shop/ui": "workspace:*",
     "@3shop/wallet": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.1"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@3shop/vite-config": "workspace:*",
