@@ -24,6 +24,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { COLLECTION_FIELDS } from './constants';
 import ADD_GATE_SCHEMA from './schemas';
+import { PoapSelector } from './PoapSelector';
 
 type AddGateModalFormValues =
   | {
@@ -33,7 +34,7 @@ type AddGateModalFormValues =
     }
   | {
       type: 'POAP';
-      poapIds: string;
+      poapIds: { value: string }[];
     };
 
 type AddGateModalProps = {
@@ -123,14 +124,7 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
               </FormControl>
             ) : null}
 
-            {typeValue === 'POAP' ? (
-              <FormControl>
-                <FormLabel mt={1} mb={1}>
-                  {COLLECTION_FIELDS.poapIds.label}
-                </FormLabel>
-                <Input {...register(COLLECTION_FIELDS.poapIds.name)} />
-              </FormControl>
-            ) : null}
+            {typeValue === 'POAP' ? <PoapSelector control={control} /> : null}
           </ModalBody>
 
           <ModalFooter>

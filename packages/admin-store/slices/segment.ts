@@ -18,8 +18,8 @@ type NftAction = { type: string; payload: NftSegment };
 
 const initialState = [] as Segment[];
 
-export const formatPoapSegment = (poapIds: string): string[] =>
-  poapIds.split(',').map((id) => id.trim());
+export const formatPoapSegment = (poapIds: { value: string }[]): string[] =>
+  poapIds.map((id) => id.value);
 
 const segmentSlice = createSlice({
   initialState,
