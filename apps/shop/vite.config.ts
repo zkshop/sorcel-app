@@ -76,7 +76,6 @@ export default defineConfig(({ mode }) => {
           assetFileNames: '[name].[ext]',
         },
       },
-      minify: false,
     },
   };
 });
