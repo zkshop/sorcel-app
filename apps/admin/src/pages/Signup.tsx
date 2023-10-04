@@ -5,6 +5,11 @@ import { FormValidation } from '@3shop/validation';
 import axios from 'axios';
 import { useState } from 'react';
 import { envVars } from '@3shop/config';
+import { AuthAdminService } from '@3shop/domains';
+import { CustomerAuthClient } from '@3shop/admin-infra';
+import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
+import { ROUTES_PATH } from '../routes/Routes';
+import { useNavigate } from 'react-router-dom';
 
 type SignupFormValues = {
   email: string;
@@ -13,6 +18,8 @@ type SignupFormValues = {
 const SIGNUP_SCHEMA = FormValidation.object().shape({
   email: FormValidation.string().email().required(),
 });
+
+const auth = AuthAdminService(CustomerAuthClient());
 
 export const Signup = () => {
   const [loading, setLoading] = useState(false);
@@ -24,6 +31,8 @@ export const Signup = () => {
     resolver: yupResolver(SIGNUP_SCHEMA),
     mode: 'onBlur',
   });
+  const { setCustomerTokenCookie } = useCustomerTokenCookie();
+  const navigate = useNavigate();
   const toast = useToastMessage();
 
   const onSubmit = async (data: SignupFormValues) => {
@@ -33,7 +42,16 @@ export const Signup = () => {
         email: data.email,
         name: `${data.email}'s app`,
       });
-      toast.success('App created successfully');
+
+      toast.success('App created successfully. Waiting to connect you...');
+
+      const res = await auth.login(data.email);
+
+      if (res.token) {
+        setCustomerTokenCookie(res.token);
+
+        navigate(ROUTES_PATH.PROTECTED.GENERAL);
+      }
     } catch (error) {
       console.error(error);
       toast.error('Something went wrong');
