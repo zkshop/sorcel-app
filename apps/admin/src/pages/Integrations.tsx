@@ -30,6 +30,7 @@ export const Integrations = () => {
             <Code>{'</script>'}</Code>
             <br />
             <Code>{'<script defer="defer" src="https://cdn.3shop.co/app/index.js"></script>'}</Code>
+            <Code>{'<link rel="stylesheet" href="https://cdn.3shop.co/app/index.css">'}</Code>
           </li>
           <li>
             Insert at the end of your &lt;body&gt; tag this div, this is the place where the FAQ
