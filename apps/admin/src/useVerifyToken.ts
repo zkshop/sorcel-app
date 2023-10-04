@@ -38,7 +38,7 @@ export const useVerifyToken = (fromAdminRoute = false) => {
         setValidity(true);
         setLoading(false);
 
-        if (!fromAdminRoute) navigate(ROUTES_PATH.PROTECTED.GENERAL);
+        if (!fromAdminRoute) navigate(ROUTES_PATH.PROTECTED.SETTINGS);
       } catch (error) {
         if (fromAdminRoute) navigate(ROUTES_PATH.PUBLIC.LOGIN);
       }

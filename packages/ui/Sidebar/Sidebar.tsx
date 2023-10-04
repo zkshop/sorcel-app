@@ -20,7 +20,6 @@ import {
   MenuList,
 } from '@chakra-ui/react';
 import {
-  FiHome,
   FiStar,
   FiMenu,
   FiChevronDown,
@@ -31,6 +30,7 @@ import {
   FiTool,
   FiDollarSign,
   FiUnlock,
+  FiSettings,
 } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 import type { Nullable, WithChildren } from '@3shop/types';
@@ -41,14 +41,14 @@ interface LinkItemProps {
   href?: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'General', href: '/app', icon: FiHome },
+  { name: 'Integrations', icon: FiTool, href: '/app' },
+  { name: 'Settings', href: '/app/settings', icon: FiSettings },
   { name: 'Customization', href: '/app/customization', icon: FiLayout },
   { name: 'Products', icon: FiStar, href: '/app/product' },
   { name: 'Gates', icon: FiLock, href: '/app/gate' },
   { name: 'Orders', icon: FiCreditCard, href: '/app/orders' },
   { name: 'Poll', icon: FiThumbsUp, href: '/app/poll' },
   { name: 'Payments', icon: FiDollarSign, href: '/app/Payments' },
-  { name: 'Integrations', icon: FiTool, href: '/app/integrations' },
   { name: 'Plan', icon: FiUnlock, href: '/app/plan' },
 ];
 
