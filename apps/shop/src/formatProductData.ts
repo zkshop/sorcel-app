@@ -81,7 +81,7 @@ export const formatProductData = ({
 
   const alreadyClaimed = hasAlreadyClaimed(productGates, address, email);
 
-  const isLocked = (isGated || alreadyClaimed) && userMatchedProductGate.length === 0;
+  const isLocked = (isGated && userMatchedProductGate.length === 0) || alreadyClaimed;
 
   const formatedProductData = {
     ...product,
