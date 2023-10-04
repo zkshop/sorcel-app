@@ -9,14 +9,12 @@ type FormStackProps = {
 export const Section = ({ children, width = 'full', sx }: FormStackProps) => (
   <Stack
     width={width}
-    mt={8}
+    mt={4}
     spacing={3}
-    sx={{
-      borderRadius: 'lg',
-      p: 8,
-      border: '1px solid lightgrey',
-      ...sx,
-    }}
+    borderRadius="lg"
+    p={8}
+    border="1px solid lightgrey"
+    sx={sx}
   >
     {children}
   </Stack>

@@ -75,32 +75,34 @@ export const Gates = () => {
     <Box>
       <Header title="Gates">
         <Link to={`${ROUTES_PATH.PROTECTED.GATE}/add`}>
-          <Button fontSize="24px">+ New Gate</Button>
+          <Button>+ New Gate</Button>
         </Link>
       </Header>
 
-      <Table
-        data={data.gates}
-        heads={GATES_ATTRIBUTES}
-        renderRow={({
-          id,
-          exclusive_access,
-          name,
-          discount,
-          product: { id: productId, image: productImage, name: productName },
-        }) => (
-          <GateListItem
-            id={id}
-            exclusive_access={exclusive_access}
-            name={name}
-            discount={discount}
-            handleOpenDeleteGateModal={handleOpenDeleteGateModal}
-            productId={productId}
-            productImage={productImage}
-            productName={productName}
-          />
-        )}
-      />
+      <Box mt={4}>
+        <Table
+          data={data.gates}
+          heads={GATES_ATTRIBUTES}
+          renderRow={({
+            id,
+            exclusive_access,
+            name,
+            discount,
+            product: { id: productId, image: productImage, name: productName },
+          }) => (
+            <GateListItem
+              id={id}
+              exclusive_access={exclusive_access}
+              name={name}
+              discount={discount}
+              handleOpenDeleteGateModal={handleOpenDeleteGateModal}
+              productId={productId}
+              productImage={productImage}
+              productName={productName}
+            />
+          )}
+        />
+      </Box>
       <CustomModal
         isOpen={isOpen}
         onClose={handleCloseDeleteGateModal}
