@@ -65,25 +65,27 @@ export const Poll = () => {
     <Box>
       <Header title="Polls">
         <Link to={`${ROUTES_PATH.PROTECTED.POLL}/add`}>
-          <Button fontSize="24px">+ New Poll</Button>
+          <Button>+ New Poll</Button>
         </Link>
       </Header>
 
-      <Table
-        data={data.polls}
-        heads={['image', 'title', 'completed', '']}
-        renderRow={({ id, image, title, completed }) => (
-          <PollListItem
-            key={id}
-            id={id}
-            image={image || ''}
-            completed={completed}
-            title={title}
-            goToPoll={() => goToPoll(id)}
-            onToggleCompletedPoll={handleClickOnDeletePoll}
-          />
-        )}
-      />
+      <Box mt={4}>
+        <Table
+          data={data.polls}
+          heads={['image', 'title', 'completed', '']}
+          renderRow={({ id, image, title, completed }) => (
+            <PollListItem
+              key={id}
+              id={id}
+              image={image || ''}
+              completed={completed}
+              title={title}
+              goToPoll={() => goToPoll(id)}
+              onToggleCompletedPoll={handleClickOnDeletePoll}
+            />
+          )}
+        />
+      </Box>
 
       <CustomModal
         isOpen={isOpen}

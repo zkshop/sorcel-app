@@ -1,4 +1,4 @@
-import { Box, HStack, Button, FormField, useToast, FormLabel, Heading } from '@3shop/ui';
+import { Box, HStack, Button, FormField, useToast, FormLabel, Heading, Section } from '@3shop/ui';
 import { useForm, Controller } from 'react-hook-form';
 
 import type { App } from '@3shop/apollo';
@@ -67,22 +67,14 @@ export const GeneralForm = ({ app }: GeneralFormProps) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <HStack justifyContent="space-between">
           <Heading as="h2" minWidth="300px">
-            <span> General </span>
+            General
           </Heading>
           <Button isLoading={isLoading} isDisabled={isLoading} type="submit">
             Save
           </Button>
         </HStack>
 
-        <Box
-          my={4}
-          sx={{
-            bg: 'white',
-            borderRadius: 'lg',
-            p: 8,
-            border: '1px solid lightgrey',
-          }}
-        >
+        <Section>
           <FormField label="App Name" name="name" maxWidth={32} register={register} />
 
           {/* TODO(refacto): Unecessary Box  */}
@@ -96,7 +88,7 @@ export const GeneralForm = ({ app }: GeneralFormProps) => {
               )}
             />
           </Box>
-        </Box>
+        </Section>
       </form>
     </Box>
   );

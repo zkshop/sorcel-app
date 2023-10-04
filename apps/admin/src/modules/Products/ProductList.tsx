@@ -24,25 +24,27 @@ export const Products = () => {
     <Box>
       <Header title="Products">
         <Link to={`${ROUTES_PATH.PROTECTED.PRODUCT}/add`}>
-          <Button fontSize="24px">+ New Product</Button>
+          <Button>+ New Product</Button>
         </Link>
       </Header>
 
-      <Table
-        data={data.products}
-        heads={PRODUCT_ATTRIBUTES}
-        renderRow={({ id, image, name, price, type }) => (
-          <ProductListItem
-            key={id}
-            id={id}
-            image={image}
-            name={name}
-            price={price}
-            type={type}
-            goToProduct={() => navigate(getEditProductIdRoute(id))}
-          />
-        )}
-      />
+      <Box mt={4}>
+        <Table
+          data={data.products}
+          heads={PRODUCT_ATTRIBUTES}
+          renderRow={({ id, image, name, price, type }) => (
+            <ProductListItem
+              key={id}
+              id={id}
+              image={image}
+              name={name}
+              price={price}
+              type={type}
+              goToProduct={() => navigate(getEditProductIdRoute(id))}
+            />
+          )}
+        />
+      </Box>
     </Box>
   );
 };

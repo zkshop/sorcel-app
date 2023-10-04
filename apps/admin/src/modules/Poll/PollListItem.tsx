@@ -1,4 +1,4 @@
-import { CloseIcon, Image, Switch, Td, Tr } from '@3shop/ui';
+import { Image, Switch, Td, Tr } from '@3shop/ui';
 import type { ToggleCompletedPollState } from '../../pages/Poll';
 
 type PollListItemProps = {
