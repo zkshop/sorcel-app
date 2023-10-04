@@ -29,7 +29,11 @@ export const Integrations = () => {
             <br />
             <Code>{'</script>'}</Code>
             <br />
-            <Code>{'<script defer="defer" src="https://cdn.3shop.co/app/index.js"></script>'}</Code>
+            <Code>
+              {
+                '<script type="module" defer="defer" src="https://cdn.3shop.co/app/index.js"></script>'
+              }
+            </Code>
             <Code>{'<link rel="stylesheet" href="https://cdn.3shop.co/app/index.css">'}</Code>
           </li>
           <li>

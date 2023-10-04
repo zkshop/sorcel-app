@@ -50,7 +50,7 @@ export const Signup = () => {
       if (res.token) {
         setCustomerTokenCookie(res.token);
 
-        navigate(ROUTES_PATH.PROTECTED.GENERAL);
+        navigate(ROUTES_PATH.PROTECTED.SETTINGS);
       }
     } catch (error) {
       console.error(error);

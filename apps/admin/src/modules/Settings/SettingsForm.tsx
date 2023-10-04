@@ -9,29 +9,29 @@ import { useState } from 'react';
 import { ERROR_MESSAGE } from '@3shop/messages';
 import { Dropzone } from '../Dropzone';
 
-type GeneralFormValues = {
+type SettingsFormValues = {
   name: string;
   imgUrl?: File | string;
   id: string;
 };
 
-type GeneralFormProps = {
+type SettingsFormProps = {
   app: App;
 };
 
 const storage = StorageService(ImageStorageClient());
 
-export const GeneralForm = ({ app }: GeneralFormProps) => {
+export const SettingsForm = ({ app }: SettingsFormProps) => {
   const { id } = app;
   const [isLoading, setIsLoading] = useState(false);
-  const { handleSubmit, register, control } = useForm<GeneralFormValues>({
+  const { handleSubmit, register, control } = useForm<SettingsFormValues>({
     defaultValues: { ...app, imgUrl: app.imgUrl || undefined },
   });
   const toast = useToast();
 
   const [updateApp] = useUpdateAppMutation();
 
-  const onSubmit = async (data: GeneralFormValues) => {
+  const onSubmit = async (data: SettingsFormValues) => {
     const variables = {
       newName: data.name,
       appId: id,
@@ -67,7 +67,7 @@ export const GeneralForm = ({ app }: GeneralFormProps) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <HStack justifyContent="space-between">
           <Heading as="h2" minWidth="300px">
-            General
+            Settings
           </Heading>
           <Button isLoading={isLoading} isDisabled={isLoading} type="submit">
             Save
