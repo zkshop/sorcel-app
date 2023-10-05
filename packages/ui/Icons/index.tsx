@@ -9,7 +9,7 @@ export {
 export { FaLink as LinkIcon, FaArrowRight as ArrowRightIcon } from 'react-icons/fa';
 export { FcApproval as ApprovalIcon } from 'react-icons/fc';
 
-export { FiGift as GiftIcon } from 'react-icons/fi';
+export { FiGift as GiftIcon, FiCopy as CopyIcon } from 'react-icons/fi';
 
 export { BsPlusCircle as PlusCircle } from 'react-icons/bs';
 export { GoTriangleUp as TriangleUpIcon } from 'react-icons/go';
