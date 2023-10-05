@@ -37,6 +37,8 @@ const NftSegmentItem = ({
 };
 
 export const SegmentTableItem = (item: WithIndex<Segment>) => {
+  const dispatch = useDispatch();
+
   if (item.type === 'NFT') {
     return (
       <NftSegmentItem
@@ -57,6 +59,9 @@ export const SegmentTableItem = (item: WithIndex<Segment>) => {
       >
         <Td>Poap List</Td>
         <Td>{item.poapIds.join(', ')}</Td>
+        <Td>
+          <CloseIcon float="right" onClick={() => dispatch(deleteSegment(item.index))} />
+        </Td>
       </Tr>
     );
 };
