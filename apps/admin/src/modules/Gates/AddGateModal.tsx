@@ -52,6 +52,7 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
   } = useForm<AddGateModalFormValues>({
     resolver: yupResolver(ADD_GATE_SCHEMA),
   });
+
   const dispatch = useDispatch();
   const typeValue = watch('type');
   const networkValue = watch('network');
@@ -62,6 +63,8 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
     } else {
       dispatch(addNftSegment(data));
     }
+
+    onClose();
   };
 
   return (
