@@ -50,3 +50,27 @@ update_permissions:
           - id:
               _eq: X-Hasura-User-Id
       check: null
+event_triggers:
+  - name: onboarding
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: '{{ONBOARDING_WEBHOOK_URL}}'
+    request_transform:
+      body:
+        action: transform
+        template: |-
+          {
+            "name": {{$body.event.data.name}},
+            "table": {
+              "name": {{$body.table.name}},
+              "schema": {{$body.table.schema}}
+            }
+          }
+      template_engine: Kriti
+      version: 2

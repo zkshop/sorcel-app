@@ -23,5 +23,6 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: admin_secret
       HASURA_GRAPHQL_JWT_SECRET: '{"key":"bXYc5pXjGEAjydo8aNO@E1$$KUhJl10HA","type":"HS256"}'
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
+      ONBOARDING_WEBHOOK_URL: https://hook.eu1.make.com/ghbdcethi3nlcwlsmu0poe3n0ch519ga
 volumes:
   db_data:
