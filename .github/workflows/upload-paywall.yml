@@ -27,14 +27,14 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
       - name: Build
-        run: pnpm build:shop:ci
+        run: pnpm build:paywall:ci
         env:
           DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
       - name: Archive staging artifacts
         uses: actions/upload-artifact@v3
         with:
           name: dist-staging
-          path: apps/shop/dist
+          path: apps/paywall/dist
 
   build-prod:
     name: Build Prod
@@ -55,14 +55,14 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
       - name: Build
-        run: pnpm build:shop:ci
+        run: pnpm build:paywall:ci
         env:
           DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
       - name: Archive prod artifacts
         uses: actions/upload-artifact@v3
         with:
           name: dist-prod
-          path: apps/shop/dist
+          path: apps/paywall/dist
 
   deploy-staging:
     name: Deploy to Staging (S3)

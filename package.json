@@ -10,6 +10,8 @@
     "build:ci": "turbo run build:ci",
     "build:docs": "pnpm build --filter=docs...",
     "build:functions": "pnpm build --filter=functions...",
+    "build:paywall": "pnpm build --filter=paywall...",
+    "build:paywall:ci": "pnpm build:ci --filter=paywall...",
     "build:poll": "pnpm build --filter=poll...",
     "build:poll:ci": "pnpm build:ci --filter=poll...",
     "build:shop": "pnpm build --filter=shop...",
