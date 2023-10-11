@@ -1,0 +1,109 @@
+name: Deploy paywall
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+  workflow_dispatch:
+
+jobs:
+  build-staging:
+    name: Build Staging
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "pnpm"
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm build:shop:ci
+        env:
+          DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
+      - name: Archive staging artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-staging
+          path: apps/shop/dist
+
+  build-prod:
+    name: Build Prod
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "pnpm"
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm build:shop:ci
+        env:
+          DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
+      - name: Archive prod artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-prod
+          path: apps/shop/dist
+
+  deploy-staging:
+    name: Deploy to Staging (S3)
+    if: github.ref == 'refs/heads/dev'
+    needs: [build-staging]
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-staging
+      - run: ls -la
+      - uses: BetaHuhn/do-spaces-action@v2
+        with:
+          access_key: ${{ secrets.DIGITAL_OCEAN_ACCESS_KEY}}
+          space_region: ${{ secrets.DIGITAL_OCEAN_SPACE_REGION }}
+          secret_key: ${{ secrets.DIGITAL_OCEAN_SECRET_KEY }}
+          space_name: ${{ secrets.DIGITAL_OCEAN_PAYWALL_SPACE_NAME }}
+          source: index.js
+          out_dir: app
+
+  deploy-prod:
+    name: Deploy to Prod (S3)
+    if: github.ref == 'refs/heads/main'
+    needs: [build-prod]
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-prod
+      - run: ls -la
+      - uses: BetaHuhn/do-spaces-action@v2
+        with:
+          access_key: ${{ secrets.DIGITAL_OCEAN_ACCESS_KEY}}
+          space_region: ${{ secrets.DIGITAL_OCEAN_SPACE_REGION }}
+          secret_key: ${{ secrets.DIGITAL_OCEAN_SECRET_KEY }}
+          space_name: ${{ secrets.DIGITAL_OCEAN_PAYWALL_SPACE_NAME }}
+          source: index.js
+          out_dir: app
