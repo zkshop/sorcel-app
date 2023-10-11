@@ -5,6 +5,8 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { mainnet, polygon } from 'wagmi/chains';
 
+console.log({ envVars });
+
 export const { chains, publicClient } = configureChains(
   [mainnet, polygon],
   [alchemyProvider({ apiKey: envVars.SECRET_ALCHEMY || '' }), publicProvider()],

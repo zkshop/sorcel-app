@@ -17,7 +17,7 @@ const envVars = {
   PUBLIC_MAGIC_PUBLISHABLE_KEY: null,
   PUBLIC_STRIPE_PUBLISHABLE_KEY: null,
   SECRET_AIRTABLE: null,
-  SECRET_ALCHEMY: null,
+  SECRET_ALCHEMY: undefined,
   SECRET_HASURA: null,
   SECRET_MAGIC: null,
   SECRET_POAP: null,
