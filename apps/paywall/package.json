@@ -1,0 +1,33 @@
+{
+  "name": "paywall",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc && vite build",
+    "build:ci": "tsc && vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@3shop/alchemy": "workspace:*",
+    "@3shop/apollo": "workspace:*",
+    "@3shop/config": "workspace:*",
+    "@3shop/domains": "workspace:*",
+    "@3shop/ui": "workspace:*",
+    "@3shop/wallet": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@3shop/vite-config": "workspace:*",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^3.1.0",
+    "dotenv-vault-core": "^0.7.0",
+    "typescript": "5.1.6",
+    "unplugin-fonts": "^1.0.0",
+    "vite": "^3.2.0",
+    "vite-plugin-html": "^3.2.0"
+  }
+}
