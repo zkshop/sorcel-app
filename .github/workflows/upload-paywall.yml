@@ -23,16 +23,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: Install
         run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm build:paywall:ci
         env:
           DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
-      - name: Compress
-        run: |
-            find apps/paywall/dist -type f \( -name '*.js' -o -name '*.css' \) -exec gzip -9 {} \; -exec mv {}.gz {} \;
+
       - name: Archive staging artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -54,16 +52,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: Install
         run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm build:paywall:ci
         env:
           DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
-      - name: Compress
-        run: |
-            find apps/paywall/dist -type f \( -name '*.js' -o -name '*.css' \) -exec gzip -9 {} \; -exec mv {}.gz {} \;
 
       - name: Archive prod artifacts
         uses: actions/upload-artifact@v3
