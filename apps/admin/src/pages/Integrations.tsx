@@ -46,7 +46,7 @@ export const Integrations = () => {
             Insert at the end of your &lt;body&gt; tag this div, this is the place where the FAQ
             will appear.
             <br />
-            <CodeBlock code='<div class="3shop-app"></div>' />
+            <CodeBlock code='<div id="3shop-app"></div>' />
           </li>
         </ol>
       </Box>
