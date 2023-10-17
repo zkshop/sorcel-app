@@ -1,13 +1,24 @@
 import { ConnectWalletButton, useAccount } from '@3shop/wallet';
 import { useEffect } from 'react';
 
+function setLocalStorageItem(key: string, value: any) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+function removeLocalStorageItem(key: string) {
+  localStorage.removeItem(key);
+}
+
 const App = ({}) => {
-  const { isConnected } = useAccount();
+  const { isConnected, isDisconnected } = useAccount();
 
   useEffect(() => {
     if (isConnected) {
-      // @ts-ignore
-      window.isWalletConnected = true;
+      setLocalStorageItem('isWalletConnected', true);
+    }
+
+    if (isDisconnected) {
+      removeLocalStorageItem('isWalletConnected');
     }
   }, [isConnected]);
 
