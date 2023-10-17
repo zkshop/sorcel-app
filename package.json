@@ -20,6 +20,7 @@
     "dev:admin": "pnpm dev --filter=admin...",
     "dev:docs": "pnpm dev --filter=docs...",
     "dev:functions": "pnpm dev --filter=functions...",
+    "dev:paywall": "pnpm dev --filter=paywall...",
     "dev:poll": "pnpm dev --filter=poll...",
     "dev:shop": "pnpm dev --filter=shop...",
     "dotenv-vault:link": "pnpm dotenv-vault:shop && pnpm dotenv-vault:poll",
