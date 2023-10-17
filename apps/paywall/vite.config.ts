@@ -30,6 +30,8 @@ const envVars = {
   WALLET_CONNECT_PROJECT_ID: undefined,
   MONTHLY_PRO_PLAN_CHECKOUT_LINK: undefined,
   YEARLY_PRO_PLAN_CHECKOUT_LINK: undefined,
+  LINK_API_URL: 'https://www.walletlink.org',
+  SDK_VERSION: 'unknown',
 };
 
 const dirname = __dirname;
