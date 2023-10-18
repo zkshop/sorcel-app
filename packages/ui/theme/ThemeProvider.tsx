@@ -42,7 +42,7 @@ export const ThemeProvider = ({ children, customTheme = false }: Props) => {
           merge({
             styles: {
               global: {
-                body: {
+                '.3shop-app': {
                   fontFamily: font ? font : 'inherit',
                   color: font_color,
                   backgroundColor: background_color,
