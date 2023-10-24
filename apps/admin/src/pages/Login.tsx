@@ -60,7 +60,7 @@ export const Login = () => {
     if (res.token) {
       setCustomerTokenCookie(res.token);
 
-      navigate(ROUTES_PATH.PROTECTED.SETTINGS);
+      navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
     }
 
     setIsLoginLoading(false);
