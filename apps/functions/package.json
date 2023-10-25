@@ -8,6 +8,7 @@
     "lint": "eslint \"**/*.ts\" --fix"
   },
   "dependencies": {
+    "@3shop/apollo": "workspace:*",
     "@3shop/config": "workspace:*",
     "@3shop/domains": "workspace:*",
     "@3shop/magic-server-sdk": "workspace:*",
