@@ -31,6 +31,13 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const serverLink = setContext((_, { headers }) => ({
+  headers: {
+    ...headers,
+    'x-hasura-admin-secret': envVars.SECRET_HASURA,
+  },
+}));
+
 const shopHttpLink = new HttpLink({
   uri: envVars.PUBLIC_HASURA_API_URL,
   credentials: 'same-origin',
@@ -49,6 +56,15 @@ export function createApolloClient() {
 export function createApolloShopClient() {
   return new ApolloClient({
     link: from([errorLink, shopHttpLink]),
+    cache: new InMemoryCache({
+      typePolicies: {},
+    }),
+  });
+}
+
+export function createServerClient() {
+  return new ApolloClient({
+    link: from([errorLink, serverLink]),
     cache: new InMemoryCache({
       typePolicies: {},
     }),
