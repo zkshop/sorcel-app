@@ -3,3 +3,4 @@ export type { ApolloCache, FetchResult } from '@apollo/client';
 
 export * from './generated';
 export * from './client';
+export * from './server-client';
