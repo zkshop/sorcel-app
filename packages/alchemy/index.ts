@@ -24,10 +24,3 @@ export const createAlchemy = (): Alchemy =>
     apiKey: envVars.SECRET_ALCHEMY,
     network: getNetwork((envVars.NETWORK || DEFAULT_NETWORK) as keyof typeof networks),
   });
-
-export const createAdminAlchemy = (network: keyof typeof networks = 'default') => {
-  new Alchemy({
-    apiKey: envVars.SECRET_ALCHEMY,
-    network: getNetwork(network),
-  });
-};
