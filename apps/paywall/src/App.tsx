@@ -24,7 +24,6 @@ async function fetchGrants(address: string) {
 
 const App = () => {
   const { isConnected, isDisconnected, address } = useAccount();
-  console.log({ envVars });
 
   useEffect(() => {
     async function getGrants() {
