@@ -27,6 +27,7 @@ const envVars = {
   SECRET_STRIPE: null,
   SECRET_SUPABASE: null,
   SECRET_CENTER: null,
+  SORCEL_PRODUCT_ID: null,
   WALLET_CONNECT_PROJECT_ID: undefined,
   MONTHLY_PRO_PLAN_CHECKOUT_LINK: undefined,
   YEARLY_PRO_PLAN_CHECKOUT_LINK: undefined,
@@ -56,6 +57,7 @@ export default defineConfig(({ mode }) => {
             SET_APP_ID: `
               <script type="text/javascript">
                 window.__3SHOP_NETWORK__ = "${process.env.NETWORK}";
+                window.__SORCEL_PRODUCT_ID__ = "${process.env.SORCEL_PRODUCT_ID}";
               </script>
             `,
           },
