@@ -5,6 +5,8 @@ import { gqlRequestClient } from '@3shop/apollo';
 import { NftReaderClient } from '../infra/NftReaderClient';
 import { gateVerifier } from '../utils/matchProductGate';
 import { BAD_REQUEST, INTERNAL_SERVER_ERROR, OK } from 'http-status';
+import { method } from '../middlewares/method';
+import { allowCors } from '../middlewares/allowCors';
 
 const walletScrapper = NftService(NftReaderClient());
 
@@ -30,4 +32,4 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   return res.status(OK).send({ isGranted, address, productId });
 }
 
-export default handler;
+export default allowCors(method('GET', handler));

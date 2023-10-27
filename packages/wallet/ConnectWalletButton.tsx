@@ -1,6 +1,7 @@
 import React from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Button } from '@3shop/ui';
+import { classnames } from '@3shop/config';
 
 export const ConnectWalletButton = () => (
   <ConnectButton.Custom>
@@ -35,14 +36,22 @@ export const ConnectWalletButton = () => (
           {(() => {
             if (!connected) {
               return (
-                <Button onClick={openConnectModal} type="button">
+                <Button
+                  className={classnames.WALLET_CONNECT_BUTTON}
+                  onClick={openConnectModal}
+                  type="button"
+                >
                   Connect Wallet
                 </Button>
               );
             }
             if (chain.unsupported) {
               return (
-                <Button onClick={openChainModal} type="button">
+                <Button
+                  className={classnames.WALLET_CONNECT_BUTTON}
+                  onClick={openChainModal}
+                  type="button"
+                >
                   Wrong network
                 </Button>
               );
@@ -50,6 +59,7 @@ export const ConnectWalletButton = () => (
             return (
               <div style={{ display: 'flex', gap: 12 }}>
                 <Button
+                  className={classnames.WALLET_CONNECT_BUTTON}
                   onClick={openChainModal}
                   style={{ display: 'flex', alignItems: 'center' }}
                   type="button"
@@ -77,6 +87,7 @@ export const ConnectWalletButton = () => (
                   {chain.name}
                 </Button>
                 <Button
+                  className={classnames.WALLET_CONNECT_BUTTON}
                   overflow="hidden"
                   onClick={openAccountModal}
                   type="button"
