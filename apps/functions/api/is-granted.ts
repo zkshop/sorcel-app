@@ -15,7 +15,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(BAD_REQUEST).send('Missing address or productId');
   }
 
-  const response = await gqlRequestClient.get.GetProductById({ id: productId });
+  const response = await gqlRequestClient.get.GetProductById({
+    id: productId,
+  });
 
   const nfts = await walletScrapper.getWalletNfts(address);
 
@@ -23,7 +25,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
   const matchedGates = gateVerifier(response.product.gate, nfts);
 
-  const isGranted = matchedGates.length > 0;
+  const isGranted = matchedGates.length > 0 || response.product.gate.length === 0;
 
   return res.status(OK).send({ isGranted, address, productId });
 }
