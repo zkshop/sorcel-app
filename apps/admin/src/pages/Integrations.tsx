@@ -43,8 +43,8 @@ export const Integrations = () => {
             <CodeBlock code={sampleCode} />
           </li>
           <li>
-            Insert anywhere you want inside your &lt;body&gt; tag this div, this is where the token gating module
-            will appear.
+            Insert anywhere you want inside your &lt;body&gt; tag this div, this is where the token
+            gating module will appear.
             <br />
             <CodeBlock code='<div id="3shop-app"></div>' />
           </li>
