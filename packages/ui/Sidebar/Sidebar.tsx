@@ -9,7 +9,6 @@ import {
   HStack,
   VStack,
   Icon,
-  useColorModeValue,
   Drawer,
   DrawerContent,
   Text,
@@ -60,7 +59,7 @@ type SidebarWithHeaderProps = WithChildren<{
 export function SidebarWithHeader({ children, user, signOut }: SidebarWithHeaderProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
+    <Box minH="100vh" bg="gray.100">
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
       <Drawer
         autoFocus={false}
@@ -91,9 +90,9 @@ interface SidebarProps extends BoxProps {
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => (
   <Box
     transition="3s ease"
-    bg={useColorModeValue('white', 'gray.900')}
+    bg="white"
     borderRight="1px"
-    borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+    borderRightColor="gray.200"
     w={{ base: 'full', md: 60 }}
     pos="fixed"
     h="full"
@@ -163,9 +162,9 @@ const MobileNav = ({ onOpen, signOut, user, ...rest }: MobileProps) => (
     px={{ base: 4, md: 4 }}
     height="20"
     alignItems="center"
-    bg={useColorModeValue('white', 'gray.900')}
+    bg="white"
     borderBottomWidth="1px"
-    borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
+    borderBottomColor="gray.200"
     justifyContent={{ base: 'space-between', md: 'flex-end' }}
     {...rest}
   >
@@ -204,10 +203,7 @@ const MobileNav = ({ onOpen, signOut, user, ...rest }: MobileProps) => (
               </Box>
             </HStack>
           </MenuButton>
-          <MenuList
-            bg={useColorModeValue('white', 'gray.900')}
-            borderColor={useColorModeValue('gray.200', 'gray.700')}
-          >
+          <MenuList bg="white" borderColor="gray.200">
             <MenuItem onClick={signOut}>Sign out</MenuItem>
           </MenuList>
         </Menu>

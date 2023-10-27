@@ -32,8 +32,6 @@ const App = () => {
 
       const response = await fetchGrants(address);
 
-      console.log({ response });
-
       setLocalStorageItem('isGranted', response.isGranted);
     }
 
