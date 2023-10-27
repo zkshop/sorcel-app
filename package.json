@@ -32,7 +32,6 @@
     "dotenv:paywall": "APP=apps/paywall; rm -f $APP/.env && ln -s ../../.env $APP/.env",
     "dotenv:poll": "APP=apps/poll; rm -f $APP/.env && ln -s ../../.env $APP/.env",
     "dotenv:shop": "APP=apps/shop; rm -f $APP/.env && ln -s ../../.env $APP/.env",
-    "dotenv:tbw": "APP=specific-apps/tbw; rm -f $APP/.env && ln -s ../../.env $APP/.env",
     "generate:graphql": "turbo run generate:graphql",
     "generate:package": "plop --plopfile generators/package.js",
     "init:env": "pnpm dotenv:admin && pnpm dotenv:functions && pnpm dotenv:shop && pnpm dotenv:tbw && pnpm dotenv:admin:e2e",

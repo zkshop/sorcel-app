@@ -21,7 +21,10 @@ const ADD_GATE_SCHEMA = FormValidation.object().shape({
           ),
       }),
     )
-    .min(1, 'At least 1 POAP ID is required'),
+    .when('type', {
+      is: 'POAP',
+      then: FormValidation.array().min(1, 'At least 1 POAP ID is required'),
+    }),
 });
 
 export default ADD_GATE_SCHEMA;
