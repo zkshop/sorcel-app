@@ -1,7 +1,7 @@
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const GITHUB_ACTIONS = process.env.GITHUB_ACTIONS || false;
 
-type WindowEnvVar = 'APP_ID' | 'NETWORK' | 'SORCEL_PRODUCT_ID';
+type WindowEnvVar = 'APP_ID' | 'NETWORK' | 'PRODUCT_ID';
 
 function getWindowEnvVar(name: WindowEnvVar) {
   if (NODE_ENV === 'production' || GITHUB_ACTIONS) {
@@ -36,7 +36,7 @@ const envVars = {
   YEARLY_PRO_PLAN_CHECKOUT_LINK: process.env.YEARLY_PRO_PLAN_CHECKOUT_LINK,
   APP_ID: getWindowEnvVar('APP_ID'),
   WALLET_CONNECT_PROJECT_ID: process.env.WALLET_CONNECT_PROJECT_ID,
-  SORCEL_PRODUCT_ID: getWindowEnvVar('SORCEL_PRODUCT_ID'),
+  SORCEL_PRODUCT_ID: getWindowEnvVar('PRODUCT_ID'),
 };
 
 export { envVars };

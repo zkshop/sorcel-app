@@ -27,7 +27,7 @@ const envVars = {
   SECRET_STRIPE: null,
   SECRET_SUPABASE: null,
   SECRET_CENTER: null,
-  SORCEL_PRODUCT_ID: null,
+  PRODUCT_ID: null,
   WALLET_CONNECT_PROJECT_ID: undefined,
   MONTHLY_PRO_PLAN_CHECKOUT_LINK: undefined,
   YEARLY_PRO_PLAN_CHECKOUT_LINK: undefined,
