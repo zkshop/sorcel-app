@@ -2,12 +2,9 @@ import {
   Heading,
   FormControl,
   FormLabel,
-  InputGroup,
-  InputLeftElement,
   Input,
   FormErrorMessage,
   Section,
-  ChatRightTextIcon,
   NumberInput,
   NumberInputField,
   Switch,
@@ -45,12 +42,8 @@ export const GeneralInformationsFields = () => {
       <FormControl isInvalid={Boolean(errors.name)}>
         <FormLabel mb={1}>{PRODUCTS_FIELDS.name.label}</FormLabel>
 
-        <InputGroup>
-          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
-            -
-          </InputLeftElement>
-          <Input placeholder="Name" {...register('name')} />
-        </InputGroup>
+        <Input placeholder="Name" {...register('name')} />
+
         <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
       </FormControl>
 
@@ -58,13 +51,8 @@ export const GeneralInformationsFields = () => {
       <FormControl isInvalid={Boolean(errors.description)}>
         <FormLabel mb={1}>{PRODUCTS_FIELDS.description.label}</FormLabel>
 
-        <InputGroup>
-          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
-            <ChatRightTextIcon />
-          </InputLeftElement>
+        <Input placeholder="Description" {...register('description')} />
 
-          <Input placeholder="Description" {...register('description')} />
-        </InputGroup>
         <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
       </FormControl>
 
