@@ -27,6 +27,7 @@ export * from './Spinner';
 export * from './Table';
 export * from './Text/Text';
 export * from './TextInput/TextInput';
+export * from './Input/Input';
 export * from './theme';
 export * from './useToastMessage';
 export * from './VerticalMenu/VerticalMenu';
@@ -51,7 +52,6 @@ export {
   GridItem,
   HStack,
   Image,
-  Input,
   InputGroup,
   InputLeftElement,
   Link,

@@ -28,7 +28,7 @@ export const GateFields = ({ nftAttributes }: GateFieldsProps) => {
       <FormControl isInvalid={Boolean(errors.discount)}>
         <FormLabel>Discount</FormLabel>
         <NumberInput>
-          <NumberInputField
+          <NumberInputField  border="1px solid" borderColor="#E5E5E5" 
             min={0}
             max={100}
             placeholder="Discount for holders"
