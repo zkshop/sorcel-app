@@ -5407,6 +5407,7 @@ export type GetAppQuery = {
     imgUrl?: string | null;
     deliveryTaxesTableName?: string | null;
     show_brand?: boolean | null;
+    show_connect_email?: boolean | null;
   } | null;
 };
 
@@ -6158,6 +6159,7 @@ export const GetAppDocument = gql`
       imgUrl
       deliveryTaxesTableName
       show_brand
+      show_connect_email
     }
   }
 `;

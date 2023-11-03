@@ -27,6 +27,7 @@ export const NavBar = ({ admin }: NavBarProps) => {
   const appName = data?.data?.app?.name;
   const imgUrl = data?.data?.app?.imgUrl;
   const showBrand = data?.data?.app?.show_brand;
+  const showConnectEmail = data?.data?.app?.show_connect_email;
 
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -87,6 +88,7 @@ export const NavBar = ({ admin }: NavBarProps) => {
 
         {!admin && (
           <ConnectButtonGroup
+            showConnectEmail={showConnectEmail ? true : false}
             isConnectedByWallet={isConnected}
             userEmail={user.email}
             userLoading={user.loading}
