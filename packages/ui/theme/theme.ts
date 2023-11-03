@@ -7,7 +7,10 @@ import { colors } from './foundations/colors';
 import { styles } from './styles';
 import { components } from './components';
 
-const config: ThemeConfig = {};
+const config: ThemeConfig = {
+  initialColorMode: 'light',
+  useSystemColorMode: false,
+};
 
 export const theme = extendTheme({
   colors,

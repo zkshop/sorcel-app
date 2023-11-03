@@ -1,8 +1,8 @@
-import { inputAnatomy } from '@chakra-ui/anatomy';
+import { numberInputAnatomy } from '@chakra-ui/anatomy';
 import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
 
 const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpers(
-  inputAnatomy.keys,
+  numberInputAnatomy.keys,
 );
 
 const baseStyle = definePartsStyle({
@@ -39,8 +39,4 @@ const defaultProps = {
   variant: 'default',
 } as const;
 
-export const InputStyle = defineMultiStyleConfig({
-  baseStyle,
-  variants,
-  defaultProps,
-});
+export const NumberInputStyle = defineMultiStyleConfig({ baseStyle, variants, defaultProps });

@@ -15,7 +15,7 @@ export const Table = <Item extends object>({ heads = [], data, renderRow }: Tabl
     p={8}
     borderWidth="1px"
     borderStyle="solid"
-    borderColor="lightgrey"
+    borderColor="greyscales.200"
   >
     <ChakraTable>
       <Thead>
