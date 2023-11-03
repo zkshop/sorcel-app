@@ -8,7 +8,7 @@ import { styles } from './styles';
 import { components } from './components';
 
 const config: ThemeConfig = {
-  initialColorMode: 'system',
+  initialColorMode: 'dark',
   useSystemColorMode: true,
 };
 
