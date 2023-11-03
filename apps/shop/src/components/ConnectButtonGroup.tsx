@@ -9,6 +9,7 @@ type ConnectButtonGroupProps = {
   userLoading: boolean;
   userEmail: string | null;
   isConnectedByWallet: boolean;
+  showConnectEmail?: boolean;
 };
 
 const truncate = (input: string) => (input.length > 5 ? `${input.substring(0, 10)}...` : input);
@@ -19,6 +20,7 @@ export function ConnectButtonGroup({
   userEmail,
   userLoading,
   isConnectedByWallet,
+  showConnectEmail,
 }: ConnectButtonGroupProps) {
   if (isConnectedByWallet) return <ConnectWalletButton />;
 
@@ -59,15 +61,17 @@ export function ConnectButtonGroup({
 
   return (
     <Flex gap={1} flexDirection="row" className={classnames.GROUP_CONNECT_BUTTON}>
-      <Button
-        className={classnames.EMAIL_LOGIN_BUTTON}
-        isLoading={userLoading}
-        onClick={handleOpenLoginModal}
-        fontSize="16px"
-        fontWeight="700"
-      >
-        E-mail login
-      </Button>
+      {showConnectEmail && (
+        <Button
+          className={classnames.EMAIL_LOGIN_BUTTON}
+          isLoading={userLoading}
+          onClick={handleOpenLoginModal}
+          fontSize="16px"
+          fontWeight="700"
+        >
+          E-mail login
+        </Button>
+      )}
       <ConnectWalletButton />
     </Flex>
   );

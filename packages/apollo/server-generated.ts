@@ -5635,7 +5635,7 @@ export type GetAppQueryVariables = Exact<{
 }>;
 
 
-export type GetAppQuery = { __typename?: 'query_root', app?: { __typename?: 'app', id: any, name: string, imgUrl?: string | null, deliveryTaxesTableName?: string | null, show_brand?: boolean | null } | null };
+export type GetAppQuery = { __typename?: 'query_root', app?: { __typename?: 'app', id: any, name: string, imgUrl?: string | null, deliveryTaxesTableName?: string | null, show_brand?: boolean | null, show_connect_email?: boolean | null } | null };
 
 export type GetPlanQueryVariables = Exact<{
   appId: Scalars['uuid'];
@@ -5979,6 +5979,7 @@ export const GetAppDocument = gql`
     imgUrl
     deliveryTaxesTableName
     show_brand
+    show_connect_email
   }
 }
     `;

@@ -5,6 +5,7 @@ query getApp($appId: uuid!) {
     imgUrl
     deliveryTaxesTableName
     show_brand
+    show_connect_email
   }
 }
 
