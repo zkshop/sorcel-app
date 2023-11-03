@@ -5,16 +5,17 @@ select_permissions:
   - role: anonymous
     permission:
       columns:
-        - show_brand
         - background_color
         - deliveryTaxesTableName
         - font
         - font_color
+        - id
         - imgUrl
         - moneyAccountId
         - name
         - plan
-        - id
+        - show_brand
+        - show_connect_email
       filter: {}
   - role: customer
     permission:
@@ -29,6 +30,7 @@ select_permissions:
         - name
         - plan
         - show_brand
+        - show_connect_email
       filter:
         _and:
           - id:
@@ -45,6 +47,7 @@ update_permissions:
         - moneyAccountId
         - name
         - show_brand
+        - show_connect_email
       filter:
         _and:
           - id:
