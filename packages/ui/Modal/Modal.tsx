@@ -20,7 +20,7 @@ export const Modal = ({ title, body, isOpen, onClose, footer }: ModalProps) => (
   <ChakraModal isOpen={isOpen} onClose={onClose}>
     <ModalOverlay />
     <ModalContent>
-      <ModalHeader>{title}</ModalHeader>
+      <ModalHeader color="black">{title}</ModalHeader>
       <ModalCloseButton />
       <ModalBody>{body}</ModalBody>
       {footer && <ModalBody>{footer}</ModalBody>}
