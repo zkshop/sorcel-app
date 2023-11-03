@@ -41,7 +41,7 @@ export const PerkFields = ({ control, showDiscountInput, register }: PerkFieldsP
                 {showDiscountInput && (
                   <InputGroup>
                     <NumberInput>
-                      <NumberInputField {...register(GATE_FIELDS.discount.name)} />
+                      <NumberInputField  border="1px solid" borderColor="#E5E5E5"  {...register(GATE_FIELDS.discount.name)} />
                     </NumberInput>
                     <InputRightElement pointerEvents="none" color="gray.300" fontSize="1.2em">
                       %

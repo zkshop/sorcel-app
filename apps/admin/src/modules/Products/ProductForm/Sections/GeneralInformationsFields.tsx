@@ -74,7 +74,12 @@ export const GeneralInformationsFields = () => {
           <FormLabel mb={1}>{PRODUCTS_FIELDS.price.label}</FormLabel>
 
           <NumberInput min={0}>
-            <NumberInputField placeholder="Price" {...register('price')} />
+            <NumberInputField
+              border="1px solid"
+              borderColor="#E5E5E5"
+              placeholder="Price"
+              {...register('price')}
+            />
           </NumberInput>
 
           <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
