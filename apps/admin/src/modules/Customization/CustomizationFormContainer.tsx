@@ -35,6 +35,7 @@ export const CustomizationFormContainer = ({
       fontColor: defaultValues.fontColor,
       font: defaultValues.font,
       showBrand: defaultValues.showBrand,
+      showConnectEmail: defaultValues.showConnectEmail,
     },
     resolver: yupResolver(CUSTOMIZATION_FIELDS),
   });
@@ -50,6 +51,7 @@ export const CustomizationFormContainer = ({
           font_color: data.fontColor,
           font: data.font,
           show_brand: data.showBrand,
+          show_connect_email: data.showConnectEmail,
         },
       });
 
