@@ -101,6 +101,13 @@ export const CustomizationForm = ({
 
           <Switch {...register(CUSTOMIZATION_FIELDS.showBrand.value)} />
         </FormControl>
+
+        {/* Show Connect Email */}
+        <FormControl>
+          <FormLabel mb={1}>{CUSTOMIZATION_FIELDS.showConnectEmail.label}</FormLabel>
+
+          <Switch {...register(CUSTOMIZATION_FIELDS.showConnectEmail.value)} />
+        </FormControl>
       </Section>
     </Box>
   </form>

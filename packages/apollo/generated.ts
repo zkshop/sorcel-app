@@ -92,6 +92,7 @@ export type App = {
   name: Scalars['String'];
   plan?: Maybe<Plan_Enum>;
   show_brand?: Maybe<Scalars['Boolean']>;
+  show_connect_email?: Maybe<Scalars['Boolean']>;
 };
 
 /** aggregated selection of "app" */
@@ -131,6 +132,7 @@ export type App_Bool_Exp = {
   name?: InputMaybe<String_Comparison_Exp>;
   plan?: InputMaybe<Plan_Enum_Comparison_Exp>;
   show_brand?: InputMaybe<Boolean_Comparison_Exp>;
+  show_connect_email?: InputMaybe<Boolean_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "app" */
@@ -152,6 +154,7 @@ export type App_Insert_Input = {
   name?: InputMaybe<Scalars['String']>;
   plan?: InputMaybe<Plan_Enum>;
   show_brand?: InputMaybe<Scalars['Boolean']>;
+  show_connect_email?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate max on columns */
@@ -218,6 +221,7 @@ export type App_Order_By = {
   name?: InputMaybe<Order_By>;
   plan?: InputMaybe<Order_By>;
   show_brand?: InputMaybe<Order_By>;
+  show_connect_email?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: app */
@@ -249,6 +253,8 @@ export enum App_Select_Column {
   Plan = 'plan',
   /** column name */
   ShowBrand = 'show_brand',
+  /** column name */
+  ShowConnectEmail = 'show_connect_email',
 }
 
 /** input type for updating data in table "app" */
@@ -264,6 +270,7 @@ export type App_Set_Input = {
   name?: InputMaybe<Scalars['String']>;
   plan?: InputMaybe<Plan_Enum>;
   show_brand?: InputMaybe<Scalars['Boolean']>;
+  show_connect_email?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Streaming cursor of the table "app" */
@@ -287,6 +294,7 @@ export type App_Stream_Cursor_Value_Input = {
   name?: InputMaybe<Scalars['String']>;
   plan?: InputMaybe<Plan_Enum>;
   show_brand?: InputMaybe<Scalars['Boolean']>;
+  show_connect_email?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** update columns of table "app" */
@@ -313,6 +321,8 @@ export enum App_Update_Column {
   Plan = 'plan',
   /** column name */
   ShowBrand = 'show_brand',
+  /** column name */
+  ShowConnectEmail = 'show_connect_email',
 }
 
 export type App_Updates = {
@@ -5438,6 +5448,7 @@ export type GetAdminAppQuery = {
     font?: string | null;
     font_color?: string | null;
     show_brand?: boolean | null;
+    show_connect_email?: boolean | null;
     plan?: Plan_Enum | null;
   }>;
 };
@@ -5462,6 +5473,7 @@ export type UpdateCustomizationFieldsMutationVariables = Exact<{
   font_color?: InputMaybe<Scalars['String']>;
   font?: InputMaybe<Scalars['String']>;
   show_brand?: InputMaybe<Scalars['Boolean']>;
+  show_connect_email?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 export type UpdateCustomizationFieldsMutation = {
@@ -5472,6 +5484,7 @@ export type UpdateCustomizationFieldsMutation = {
     font?: string | null;
     font_color?: string | null;
     show_brand?: boolean | null;
+    show_connect_email?: boolean | null;
   } | null;
 };
 
@@ -6279,6 +6292,7 @@ export const GetAdminAppDocument = gql`
       font
       font_color
       show_brand
+      show_connect_email
       plan
     }
   }
@@ -6377,6 +6391,7 @@ export const UpdateCustomizationFieldsDocument = gql`
     $font_color: String
     $font: String
     $show_brand: Boolean
+    $show_connect_email: Boolean
   ) {
     update_app_by_pk(
       pk_columns: { id: $id }
@@ -6385,12 +6400,14 @@ export const UpdateCustomizationFieldsDocument = gql`
         font_color: $font_color
         font: $font
         show_brand: $show_brand
+        show_connect_email: $show_connect_email
       }
     ) {
       background_color
       font
       font_color
       show_brand
+      show_connect_email
     }
   }
 `;
@@ -6417,6 +6434,7 @@ export type UpdateCustomizationFieldsMutationFn = Apollo.MutationFunction<
  *      font_color: // value for 'font_color'
  *      font: // value for 'font'
  *      show_brand: // value for 'show_brand'
+ *      show_connect_email: // value for 'show_connect_email'
  *   },
  * });
  */
