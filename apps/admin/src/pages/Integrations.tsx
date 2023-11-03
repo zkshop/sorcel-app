@@ -29,7 +29,7 @@ export const Integrations = () => {
     return <div>Error</div>;
   }
 
-  const sampleCode = `<script>window.__3SHOP_APP_ID__="${data.app[0].id}";window.__3SHOP_NETWORK__="POLYGON";</script><script type="module" defer src="https://cdn.3shop.co/app/index.js"></script><link rel="stylesheet" href="https://cdn.3shop.co/app/index.css">`;
+  const sampleCode = `<script>var global = global || window;window.__3SHOP_APP_ID__="${data.app[0].id}";window.__3SHOP_NETWORK__="POLYGON";</script><script type="module" defer src="https://cdn.3shop.co/app/index.js"></script><link rel="stylesheet" href="https://cdn.3shop.co/app/index.css">`;
 
   return (
     <>
