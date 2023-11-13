@@ -55,8 +55,9 @@ export const ProductCardModal = ({
 
   const onSubmit = async (data: { email: string }) => {
     setLoading(true);
+    const emailEncoded = encodeURIComponent(data.email);
     try {await axios.post(webhookUrl, {
-        email: data.email || '',
+        email: emailEncoded || '',
         wallet: auth || '',
       });
 
