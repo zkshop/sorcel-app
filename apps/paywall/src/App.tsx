@@ -1,7 +1,9 @@
 import { envVars } from '@3shop/config';
-import { ConnectWalletButton, useAccount } from '@3shop/wallet';
+
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useAccount } from 'wagmi';
+import { ConnectWalletButton } from './ConnectWalletButton';
 
 function setLocalStorageItem(key: string, value: any) {
   localStorage.setItem(key, JSON.stringify(value));

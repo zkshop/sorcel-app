@@ -68,7 +68,8 @@ export const ProductCardModal = ({
 
   const onSubmit = async (data: { email: string }) => {
     setLoading(true);
-    try {await axios.post(webhookUrl, {
+    try {
+      await axios.post(webhookUrl, {
         email: data.email || '',
         wallet: auth || '',
       });
@@ -102,8 +103,6 @@ export const ProductCardModal = ({
         isClosable: true,
       });
     } catch (e) {
-      console.log({ e });
-
       toast({
         title: 'Error',
         description: 'An error occured. Please try again later.',
