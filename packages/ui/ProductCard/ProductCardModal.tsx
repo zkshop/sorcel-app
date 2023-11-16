@@ -103,8 +103,6 @@ export const ProductCardModal = ({
         isClosable: true,
       });
     } catch (e) {
-      console.log({ e });
-
       toast({
         title: 'Error',
         description: 'An error occured. Please try again later.',
