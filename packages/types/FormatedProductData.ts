@@ -1,5 +1,6 @@
-import type { Network_Enum, Product_Type_Enum } from '@3shop/apollo';
+import type { GateFieldsFragment, Network_Enum, Product_Type_Enum } from '@3shop/apollo';
 import type { Nullable } from './utils';
+import type { Nft } from '@3shop/alchemy';
 
 export type FormatedProductData = {
   id?: string;
@@ -24,4 +25,9 @@ export type FormatedProductData = {
     contractAddress: string;
     network?: Network_Enum | null;
   }>[];
+  matches: {
+    gate: GateFieldsFragment;
+    matchingNfts: Nft[];
+    matchingPoaps: number[];
+  }[];
 };

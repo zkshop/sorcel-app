@@ -31,14 +31,14 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
   const gates = product.gate.slice() || [];
   const sortedGates = gates.sort(sortGates);
 
-  const userMatchedProductGate = gateVerifier(sortedGates, userNFTs, userPoapIds);
+  const matches = gateVerifier(sortedGates, userNFTs, userPoapIds);
 
   const formatedProduct = formatProductData({
     product,
     productGates: sortedGates,
     userPoapIds,
     userNFTContracts,
-    userMatchedProductGate,
+    matches,
     poapImageList,
   });
 

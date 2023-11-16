@@ -2,7 +2,6 @@ import type { Nft } from '@3shop/alchemy';
 
 import type { ShopGate_v2 } from './ProductListContainer';
 import { every, includes } from 'lodash';
-import type { GateFieldsFragment } from '@3shop/apollo';
 import { Segment_Type_Enum } from '@3shop/apollo';
 
 // const isNftMatchingWithGate = (gate: ShopGate_v2, nft: Nft): boolean => {
@@ -27,30 +26,31 @@ const isPoapsMatchingOneSegment = (poapIds: number[], segment: ShopGate_v2['segm
 const isNFTMatchingOneSegment = (address: string, segments: ShopGate_v2['segments']) =>
   segments.some((segment) => segment.nft_contract_address?.toLowerCase() === address.toLowerCase());
 
-const isMatchingGate = (gate: ShopGate_v2, nfts: Nft[], poaps: number[]): boolean => {
-  const nftsWithSameSmartContract = nfts.filter((nft) =>
-    isNFTMatchingOneSegment(nft.contract.address, gate.segments),
-  );
-
-  const poapGates = gate.segments.filter((segment) => segment.type === Segment_Type_Enum.Poap);
-  const isPoapMatching = poapGates.some((poapGate) => isPoapsMatchingOneSegment(poaps, poapGate));
-
-  if (!nftsWithSameSmartContract.length && !isPoapMatching) return false;
-
-  /* for nft attributes */
-  /* for (const nft of nftsWithSameSmartContract) {
-     if (isNftMatchingWithGate(gate, nft)) return true;
-   } */
-
-  return true;
+export type Match = {
+  gate: ShopGate_v2;
+  matchingNfts: Nft[];
+  matchingPoaps: number[];
 };
 
-export const gateVerifier = (
-  gates: GateFieldsFragment[],
-  nfts: Nft[],
-  userPoapIds: number[],
-): GateFieldsFragment[] => {
-  const match = gates.filter((gate) => isMatchingGate(gate, nfts, userPoapIds));
+export const gateVerifier = (gates: ShopGate_v2[], nfts: Nft[], userPoapIds: number[]): Match[] =>
+  gates
+    .map((gate) => {
+      const matchingNfts = nfts.filter(
+        (nft) =>
+          isNFTMatchingOneSegment(nft.contract.address, gate.segments) &&
+          (!gate.claims.includes(nft.tokenId) || !gate.unique_claim),
+      );
 
-  return match;
-};
+      const matchingPoaps = gate.segments
+        .filter((segment) => segment.type === Segment_Type_Enum.Poap && segment.poap_ids)
+        .some((segment) => isPoapsMatchingOneSegment(userPoapIds, segment))
+        ? userPoapIds
+        : [];
+
+      return {
+        gate,
+        matchingNfts,
+        matchingPoaps,
+      };
+    })
+    .filter((entry) => entry.matchingNfts.length > 0 || entry.matchingPoaps.length > 0);

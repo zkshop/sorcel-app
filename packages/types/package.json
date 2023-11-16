@@ -12,6 +12,7 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
+    "@3shop/alchemy": "workspace:*",
     "@3shop/apollo": "workspace:*"
   }
 }

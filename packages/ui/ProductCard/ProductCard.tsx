@@ -32,6 +32,7 @@ export type ProductCardProps = {
   description?: string;
   gate: FormatedProductData['gate'];
   auth?: string;
+  matches: FormatedProductData['matches'];
 };
 
 export const ProductCard = ({
@@ -51,6 +52,7 @@ export const ProductCard = ({
   description,
   gate,
   auth,
+  matches,
 }: ProductCardProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const {
@@ -149,6 +151,7 @@ export const ProductCard = ({
       <PoapListModal isOpen={isOpen} onClose={onClose} name={name} poapImgList={poapImgList} />
 
       <ProductCardModal
+        matches={matches}
         description={description}
         webhookUrl={webhookUrl || ''}
         isOpen={isProductModalOpen}

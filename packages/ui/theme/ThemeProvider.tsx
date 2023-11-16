@@ -42,7 +42,7 @@ export const ThemeProvider = ({ children, customTheme = false }: Props) => {
           merge({
             styles: {
               global: {
-                '.3shop-app': {
+                body: {
                   fontFamily: font ? font : 'inherit',
                   color: font_color,
                   backgroundColor: background_color,
@@ -66,7 +66,7 @@ export const ThemeProvider = ({ children, customTheme = false }: Props) => {
   }
 
   return (
-    <ChakraProvider resetCSS theme={theme} cssVarsRoot="body">
+    <ChakraProvider resetCSS theme={theme} cssVarsRoot=".cssRoot">
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       {children}
     </ChakraProvider>

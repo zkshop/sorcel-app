@@ -22,7 +22,6 @@ type ProductDetailsProps = {
   isLocked?: boolean;
 
   walletAddress?: string;
-  userHasAlreadyOrdered?: boolean;
 };
 
 const templateColumns = {
@@ -41,7 +40,6 @@ export const ProductDetails = ({
   isLocked = false,
   price,
   poapImgList,
-  userHasAlreadyOrdered,
 }: ProductDetailsProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const shippingLink = `/shipping/${id}`;
@@ -60,13 +58,7 @@ export const ProductDetails = ({
 
   return (
     <Box className={classnames.PRODUCT_DETAILS.CONTAINER} w="full" position="relative">
-      {isLocked && (
-        <LockedLayer
-          text={userHasAlreadyOrdered ? 'Already Ordered' : undefined}
-          collectionName={collectionName}
-          size="lg"
-        />
-      )}
+      {isLocked && <LockedLayer collectionName={collectionName} size="lg" />}
       {poapImgList && <CollectionBadge poapImgList={poapImgList} />}
       <Grid className={classnames.PRODUCT_DETAILS.GRID} templateColumns={templateColumns}>
         <GridItem className={classnames.PRODUCT_DETAILS.GRID_ITEM}>
