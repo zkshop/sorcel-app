@@ -6,6 +6,7 @@ import { applyDiscount } from '@3shop/pure/applyDiscount';
 import { useAccount } from '@3shop/wallet';
 import { useAppSelector } from '@3shop/store';
 import { get } from 'lodash';
+import type { Match } from './modules/shop/gateVerifier';
 
 type Product = GetProductsQuery['products'][0];
 
@@ -14,14 +15,14 @@ export type GetProductCardPropsParams = {
   productGates: GateFieldsFragment[];
   userPoapIds: number[];
   userNFTContracts: string[];
-  userMatchedProductGate: GateFieldsFragment[];
+  matches: Match[];
   poapImageList: string[];
 };
 
-const getBestDiscount = (gates: GateFieldsFragment[]): number => {
-  if (gates.length === 0) return 0;
+const getBestDiscount = (matches: Match[]): number => {
+  if (matches.length === 0) return 0;
 
-  const discounts = gates.map((gate) => gate.discount || 0);
+  const discounts = matches.map((match) => match.gate.discount || 0);
 
   return Math.max(...discounts);
 };
@@ -55,7 +56,7 @@ export const hasAlreadyClaimed = (
 export const formatProductData = ({
   product,
   productGates,
-  userMatchedProductGate,
+  matches,
   poapImageList,
 }: GetProductCardPropsParams): FormatedProductData => {
   const { address } = useAccount();
@@ -65,7 +66,7 @@ export const formatProductData = ({
 
   const isGated = isExclusiveAccess(productGates);
 
-  const discountToApply = getBestDiscount(userMatchedProductGate);
+  const discountToApply = getBestDiscount(matches);
   const priceReduced = applyDiscount(price, discountToApply || 0);
 
   const filteredProductGates = productGates.filter(
@@ -81,7 +82,7 @@ export const formatProductData = ({
 
   const alreadyClaimed = hasAlreadyClaimed(productGates, address, email);
 
-  const isLocked = (isGated && userMatchedProductGate.length === 0) || alreadyClaimed;
+  const isLocked = (isGated && matches.length === 0) || alreadyClaimed;
 
   const formatedProductData = {
     ...product,
@@ -97,6 +98,7 @@ export const formatProductData = ({
       contractAddress: gate.segments[0].nft_contract_address || '',
       network: gate.segments[0].network,
     })),
+    matches,
   };
 
   return formatedProductData;

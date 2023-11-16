@@ -5,7 +5,7 @@ import { useAppSelector } from '@3shop/store';
 import { gateVerifier } from '../shop/gateVerifier';
 import { useAccount } from '@3shop/wallet';
 import type { ProductDetailsType } from '@/routes/Product';
-import { formatProductData, hasAlreadyClaimed } from '@/formatProductData';
+import { formatProductData } from '@/formatProductData';
 
 type ProductDetailsContainerProps = {
   product: ProductDetailsType;
@@ -20,14 +20,14 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
   const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
-  const userMatchedProductGate = gateVerifier(productGates || [], userNFTs, userPoapIds);
+  const matches = gateVerifier(productGates || [], userNFTs, userPoapIds);
 
   const formatedProducts = formatProductData({
     product,
     productGates: productGates || [],
     userPoapIds,
     userNFTContracts,
-    userMatchedProductGate,
+    matches,
     poapImageList,
   });
 
@@ -45,9 +45,6 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   } = formatedProducts;
 
   const { address: walletAddress } = useAccount();
-  const email = useAppSelector((state) => state.user.auth.email);
-
-  const userHasAlreadyOrdered = hasAlreadyClaimed(userMatchedProductGate, walletAddress, email);
 
   return (
     <ProductDetails
@@ -62,7 +59,6 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
       poapImgList={poapImgList}
       isLocked={isLocked}
       walletAddress={walletAddress}
-      userHasAlreadyOrdered={userHasAlreadyOrdered}
     />
   );
 };

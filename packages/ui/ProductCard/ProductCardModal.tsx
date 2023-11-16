@@ -25,11 +25,23 @@ type ProductCardModalProps = {
   description?: string;
   gate: FormatedProductData['gate'];
   auth?: string;
+  matches: FormatedProductData['matches'];
 };
 
 const EMAIL_SCHEMA = FormValidation.object().shape({
   email: FormValidation.string().email(),
 });
+
+function getIdForPushClaim(
+  matches: FormatedProductData['matches'],
+  gate: FormatedProductData['gate'],
+) {
+  const currentMatch = matches.filter((match) => match.gate.id === gate?.[0]?.id);
+
+  if (!currentMatch.length) return;
+
+  return currentMatch[0].matchingNfts?.[0].tokenId;
+}
 
 export const ProductCardModal = ({
   isOpen,
@@ -39,6 +51,7 @@ export const ProductCardModal = ({
   description = 'Enter your email to receive the ticket',
   gate,
   auth,
+  matches,
 }: ProductCardModalProps) => {
   const [loading, setLoading] = useState(false);
   const {
@@ -61,6 +74,17 @@ export const ProductCardModal = ({
       });
 
       if (gate) {
+        if (gate?.[0]?.contractAddress) {
+          const claimToPush = getIdForPushClaim(matches, gate) || auth;
+
+          await pushClaims({
+            variables: {
+              gate_id: gate?.[0]?.id,
+              claims: claimToPush,
+            },
+          });
+        }
+
         await pushClaims({
           variables: {
             gate_id: gate?.[0]?.id,
@@ -78,6 +102,8 @@ export const ProductCardModal = ({
         isClosable: true,
       });
     } catch (e) {
+      console.log({ e });
+
       toast({
         title: 'Error',
         description: 'An error occured. Please try again later.',
