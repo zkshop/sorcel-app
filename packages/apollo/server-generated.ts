@@ -5911,7 +5911,7 @@ export type DeleteProductMutationVariables = Exact<{
 }>;
 
 
-export type DeleteProductMutation = { __typename?: 'mutation_root', delete_product?: { __typename?: 'product_mutation_response', returning: Array<{ __typename?: 'product', app_id: any }> } | null };
+export type DeleteProductMutation = { __typename?: 'mutation_root', delete_product?: { __typename?: 'product_mutation_response', returning: Array<{ __typename?: 'product', id: any, app_id: any }> } | null };
 
 export type EditProductMutationVariables = Exact<{
   id: Scalars['uuid'];
@@ -6416,6 +6416,7 @@ export const DeleteProductDocument = gql`
     mutation DeleteProduct($id: uuid) {
   delete_product(where: {id: {_eq: $id}}) {
     returning {
+      id
       app_id
     }
   }
