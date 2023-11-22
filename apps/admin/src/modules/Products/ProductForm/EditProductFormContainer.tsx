@@ -5,8 +5,12 @@ import { DeleteProductModal } from './DeleteProductModal';
 import { ProductForm } from './ProductForm';
 import type { EditProductFormValues } from './types';
 
-import type { EditProductMutationVariables, GetProductByIdQuery } from '@3shop/apollo';
-import { Product_Type_Enum } from '@3shop/apollo';
+import type {
+  EditProductMutationVariables,
+  GetAdminProductsQuery,
+  GetProductByIdQuery,
+} from '@3shop/apollo';
+import { GetAdminProductsDocument, Product_Type_Enum } from '@3shop/apollo';
 import { useDeleteProductMutation, useEditProductMutation } from '@3shop/apollo';
 import {
   ERROR_MESSAGE,
@@ -52,7 +56,25 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
   const toast = useToast();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
-  const [deleteProduct, { loading: isDeleteLoading }] = useDeleteProductMutation();
+  const [deleteProduct, { loading: isDeleteLoading }] = useDeleteProductMutation({
+    update(cache, { data }) {
+      const productsCache = cache.readQuery<GetAdminProductsQuery>({
+        query: GetAdminProductsDocument,
+      });
+      console.log({ productsCache });
+      console.log({ data });
+
+      cache.modify({
+        fields: {
+          product: () =>
+            productsCache?.products.filter(
+              (product: GetAdminProductsQuery['products'][0]) =>
+                product.id !== data?.delete_product?.returning[0].id,
+            ),
+        },
+      });
+    },
+  });
   const [editProduct, { loading: isEditLoading }] = useEditProductMutation();
 
   if (!product) return null;
