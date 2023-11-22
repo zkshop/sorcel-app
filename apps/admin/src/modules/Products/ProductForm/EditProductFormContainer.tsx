@@ -61,8 +61,6 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
       const productsCache = cache.readQuery<GetAdminProductsQuery>({
         query: GetAdminProductsDocument,
       });
-      console.log({ productsCache });
-      console.log({ data });
 
       cache.modify({
         fields: {

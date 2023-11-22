@@ -5938,6 +5938,7 @@ export type CreateProductMutation = {
     name: string;
     description: string;
     price: number;
+    type: Product_Type_Enum;
   } | null;
 };
 
@@ -5961,6 +5962,7 @@ export type CreateAdminProductMutation = {
     description: string;
     price: number;
     webhookUrl?: string | null;
+    type: Product_Type_Enum;
   } | null;
 };
 
@@ -7939,6 +7941,7 @@ export const CreateProductDocument = gql`
       name
       description
       price
+      type
     }
   }
 `;
@@ -8009,6 +8012,7 @@ export const CreateAdminProductDocument = gql`
       description
       price
       webhookUrl
+      type
     }
   }
 `;

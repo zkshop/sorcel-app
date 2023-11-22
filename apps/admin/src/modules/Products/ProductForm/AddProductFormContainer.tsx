@@ -9,7 +9,12 @@ import { ADD_PRODUCT_FORM_SCHEMA } from '../../../schemas';
 import { StorageService } from '@3shop/domains';
 import { ImageStorageClient } from '@3shop/admin-infra';
 import { useNavigate } from 'react-router-dom';
-import { Product_Type_Enum, useCreateAdminProductMutation } from '@3shop/apollo';
+import type { GetAdminProductsQuery } from '@3shop/apollo';
+import {
+  GetAdminProductsDocument,
+  Product_Type_Enum,
+  useCreateAdminProductMutation,
+} from '@3shop/apollo';
 import { ROUTES_PATH } from '../../../routes/Routes';
 
 const storage = StorageService(ImageStorageClient());
@@ -38,7 +43,24 @@ export const AddProductFormContainer = () => {
 
   const navigate = useNavigate();
 
-  const [createProduct, { loading: isLoading }] = useCreateAdminProductMutation();
+  const [createProduct, { loading: isLoading }] = useCreateAdminProductMutation({
+    update(cache, { data }) {
+      const productsCache = cache.readQuery<GetAdminProductsQuery>({
+        query: GetAdminProductsDocument,
+      });
+
+      console.log({ productsCache, data });
+
+      cache.modify({
+        fields: {
+          product: () => [
+            ...(productsCache ? productsCache.products : []),
+            data?.insert_product_one,
+          ],
+        },
+      });
+    },
+  });
 
   const toast = useToast();
 
