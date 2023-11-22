@@ -14,6 +14,7 @@ mutation CreateProduct(
     name
     description
     price
+    type
   }
 }
 
@@ -42,5 +43,6 @@ mutation CreateAdminProduct(
     description
     price
     webhookUrl
+    type
   }
 }

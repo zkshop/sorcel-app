@@ -5892,7 +5892,7 @@ export type CreateProductMutationVariables = Exact<{
 }>;
 
 
-export type CreateProductMutation = { __typename?: 'mutation_root', insert_product_one?: { __typename?: 'product', app_id: any, id: any, image: string, name: string, description: string, price: number } | null };
+export type CreateProductMutation = { __typename?: 'mutation_root', insert_product_one?: { __typename?: 'product', app_id: any, id: any, image: string, name: string, description: string, price: number, type: Product_Type_Enum } | null };
 
 export type CreateAdminProductMutationVariables = Exact<{
   price: Scalars['Int'];
@@ -5904,7 +5904,7 @@ export type CreateAdminProductMutationVariables = Exact<{
 }>;
 
 
-export type CreateAdminProductMutation = { __typename?: 'mutation_root', insert_product_one?: { __typename?: 'product', app_id: any, id: any, image: string, name: string, description: string, price: number, webhookUrl?: string | null } | null };
+export type CreateAdminProductMutation = { __typename?: 'mutation_root', insert_product_one?: { __typename?: 'product', app_id: any, id: any, image: string, name: string, description: string, price: number, webhookUrl?: string | null, type: Product_Type_Enum } | null };
 
 export type DeleteProductMutationVariables = Exact<{
   id?: InputMaybe<Scalars['uuid']>;
@@ -6394,6 +6394,7 @@ export const CreateProductDocument = gql`
     name
     description
     price
+    type
   }
 }
     `;
@@ -6409,6 +6410,7 @@ export const CreateAdminProductDocument = gql`
     description
     price
     webhookUrl
+    type
   }
 }
     `;
