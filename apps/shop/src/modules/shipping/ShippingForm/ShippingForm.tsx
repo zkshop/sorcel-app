@@ -50,12 +50,6 @@ export const ShippingForm = ({}: ShippingFormProps) => {
           <Input {...register(SHIPPING_FIELDS.email.name)} />
           <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
         </FormControl>
-
-        <FormControl isInvalid={Boolean(errors.phoneNumber)}>
-          <FormLabel mb={1}>{SHIPPING_FIELDS.phoneNumber.label}</FormLabel>
-          <Input {...register(SHIPPING_FIELDS.phoneNumber.name)} />
-          <FormErrorMessage>{errors.phoneNumber?.message}</FormErrorMessage>
-        </FormControl>
       </Section>
     </Box>
   );
