@@ -17,8 +17,8 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAppSelector } from '@3shop/admin-store';
 import { SegmentTableItem } from './SegmentTableItem';
-import type { Segment_Insert_Input } from '@3shop/apollo';
-import { useCreateGateV2Mutation } from '@3shop/apollo';
+import type { GetGatesQuery, Segment_Insert_Input } from '@3shop/apollo';
+import { GetGates_V2Document, useCreateGateV2Mutation } from '@3shop/apollo';
 import { ProductSelectField } from './ProductSelectField';
 import segmentInputCreator from './segmentInputCreator';
 import { useNavigate } from 'react-router-dom';
@@ -46,7 +46,16 @@ export const AddGate = () => {
   const perkValue = watch('perk');
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [showDiscountInput, setShowDiscountInput] = useState(false);
-  const [createGate, { loading }] = useCreateGateV2Mutation();
+  const [createGate, { loading }] = useCreateGateV2Mutation({
+    update(cache, { data }) {
+      const gatesCache = cache.readQuery<GetGatesQuery>({ query: GetGates_V2Document });
+      cache.modify({
+        fields: {
+          gate_v2: () => [...(gatesCache ? gatesCache.gates : []), data?.insert_gate_v2_one],
+        },
+      });
+    },
+  });
   const toast = useToast();
   const navigate = useNavigate();
 

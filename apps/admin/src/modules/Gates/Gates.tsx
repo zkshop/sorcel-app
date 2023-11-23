@@ -1,4 +1,5 @@
-import { useDeleteGateV2Mutation, useGetGates_V2Query } from '@3shop/apollo';
+import type { GetGates_V2Query } from '@3shop/apollo';
+import { GetGates_V2Document, useDeleteGateV2Mutation, useGetGates_V2Query } from '@3shop/apollo';
 import type { Nullable } from '@3shop/types';
 
 import { Link } from 'react-router-dom';
@@ -34,7 +35,17 @@ export type GateItemType = {
 
 export const Gates = () => {
   const { data, loading } = useGetGates_V2Query();
-  const [deleteGate, { loading: deleteGateLoading }] = useDeleteGateV2Mutation();
+  const [deleteGate, { loading: deleteGateLoading }] = useDeleteGateV2Mutation({
+    update(cache, { data }) {
+      const gatesCache = cache.readQuery<GetGates_V2Query>({ query: GetGates_V2Document });
+      cache.modify({
+        fields: {
+          gate_v2: () =>
+            gatesCache?.gates.filter((gate) => gate.id === data?.delete_gate_v2_by_pk?.id) || [],
+        },
+      });
+    },
+  });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedGate, setSelectedGate] = useState<Nullable<{ id: string; name: string }>>(null);
   const toast = useToast();
