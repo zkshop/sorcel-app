@@ -49,8 +49,6 @@ export const AddProductFormContainer = () => {
         query: GetAdminProductsDocument,
       });
 
-      console.log({ productsCache, data });
-
       cache.modify({
         fields: {
           product: () => [

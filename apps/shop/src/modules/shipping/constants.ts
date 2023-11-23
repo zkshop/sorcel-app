@@ -15,10 +15,6 @@ export const SHIPPING_FIELDS = {
     label: 'Email',
     name: 'email',
   },
-  phoneNumber: {
-    label: 'Phone Number',
-    name: 'phoneNumber',
-  },
   country: {
     label: 'Country',
     name: 'country',

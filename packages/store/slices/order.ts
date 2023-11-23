@@ -6,7 +6,6 @@ type ShippingInformations = {
   lastname: string;
   address: string;
   email: string;
-  phoneNumber: string;
   amount: number;
   gateId?: string;
   claims?: string;

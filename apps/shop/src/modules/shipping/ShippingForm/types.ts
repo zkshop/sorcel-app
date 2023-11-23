@@ -4,5 +4,4 @@ export type ShippingFormValues = {
   address: string;
   email: string;
   country: string;
-  phoneNumber: string;
 };
