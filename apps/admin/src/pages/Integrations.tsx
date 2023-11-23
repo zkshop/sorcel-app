@@ -1,7 +1,9 @@
 import { useGetAdminAppQuery } from '@3shop/apollo';
-import { Box, Code, Header, Spinner, Button, CopyIcon } from '@3shop/ui';
-
+import { Box, Code, Header, Spinner, Button, CopyIcon, Select } from '@3shop/ui';
 import { useClipboard } from '@chakra-ui/react';
+import { useState } from 'react';
+
+type Network = 'POLYGON' | 'ETHEREUM';
 
 const CodeBlock = ({ code }: { code: string }) => {
   const { hasCopied, onCopy } = useClipboard(code);
@@ -20,6 +22,7 @@ const CodeBlock = ({ code }: { code: string }) => {
 
 export const Integrations = () => {
   const { data, loading, error } = useGetAdminAppQuery();
+  const [network, setNetwork] = useState<Network>('POLYGON');
 
   if (loading) {
     return <Spinner />;
@@ -29,7 +32,11 @@ export const Integrations = () => {
     return <div>Error</div>;
   }
 
-  const sampleCode = `<script>var global = global || window;window.__3SHOP_APP_ID__="${data.app[0].id}";window.__3SHOP_NETWORK__="POLYGON";</script><script type="module" defer src="https://cdn.3shop.co/app/index.js"></script><link rel="stylesheet" href="https://cdn.3shop.co/app/index.css">`;
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setNetwork(event.target.value as Network);
+  };
+
+  const sampleCode = `<script>var global = global || window;window.__3SHOP_APP_ID__="${data.app[0].id}";window.__3SHOP_NETWORK__="${network}";</script><script type="module" defer src="https://cdn.3shop.co/app/index.js"></script><link rel="stylesheet" href="https://cdn.3shop.co/app/index.css">`;
 
   return (
     <>
@@ -38,7 +45,14 @@ export const Integrations = () => {
         <ol>
           <li>Find the &lt;head&gt; tag inside your html</li>
           <li>
-            Copy the following code inside the &lt;head&gt;
+            <Box display="flex" flexDirection="row">
+              Copy the following code inside the &lt;head&gt;. Choose the network you want to use:
+              &nbsp;&nbsp;
+              <Select maxW="200px" value={network} onChange={handleChange}>
+                <option value="POLYGON">Polygon</option>
+                <option value="ETHEREUM">Ethereum</option>
+              </Select>
+            </Box>
             <br />
             <CodeBlock code={sampleCode} />
           </li>
