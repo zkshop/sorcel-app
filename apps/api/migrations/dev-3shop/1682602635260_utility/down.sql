@@ -1,2 +1,0 @@
-ALTER TABLE product
-ADD COLUMN utility TEXT;
