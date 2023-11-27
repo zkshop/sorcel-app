@@ -1,3 +1,0 @@
-ALTER TABLE product
-
-DROP COLUMN type;

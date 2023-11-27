@@ -51,7 +51,14 @@ export const ConnectWalletButton = () => (
             if (!connected) {
               return (
                 <Button className={classnames.WALLET_CONNECT_BUTTON} onClick={openConnectModal}>
-                  Connect Wallet
+                  <img
+                    width={16}
+                    height={16}
+                    src={`data:image/svg+xml;utf8,${encodeURIComponent(
+                      window.__SORCEL_BUTTON_ICON__,
+                    )}`}
+                  />
+                  &nbsp; Connect Wallet
                 </Button>
               );
             }

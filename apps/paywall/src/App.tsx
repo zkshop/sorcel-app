@@ -46,7 +46,7 @@ const App = () => {
     }
 
     getGrants();
-  }, [isConnected]);
+  }, [isConnected, isDisconnected, address]);
 
   return <ConnectWalletButton />;
 };

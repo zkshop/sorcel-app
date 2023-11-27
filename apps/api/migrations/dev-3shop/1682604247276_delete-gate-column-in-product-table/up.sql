@@ -1,6 +1,0 @@
-ALTER TABLE product
-DROP COLUMN IF EXISTS "poapId",
-DROP COLUMN IF EXISTS "collection",
-DROP COLUMN IF EXISTS "curation",
-DROP COLUMN IF EXISTS "discount",
-DROP COLUMN IF EXISTS "isDiscountGated";
