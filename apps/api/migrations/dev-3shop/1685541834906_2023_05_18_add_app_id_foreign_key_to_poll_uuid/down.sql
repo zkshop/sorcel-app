@@ -1,2 +1,0 @@
-ALTER TABLE poll
-DROP COLUMN app_id;
