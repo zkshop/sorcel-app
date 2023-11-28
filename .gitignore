@@ -54,3 +54,5 @@ storybook-static
 
 # parcel
 .parcel-cache
+
+.terraform
