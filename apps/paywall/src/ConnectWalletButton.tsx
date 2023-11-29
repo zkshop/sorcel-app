@@ -1,5 +1,6 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { classnames } from '@3shop/config';
+import WalletIcon from './assets/WalletIcon';
 
 const Button = ({
   children,
@@ -51,13 +52,7 @@ export const ConnectWalletButton = () => (
             if (!connected) {
               return (
                 <Button className={classnames.WALLET_CONNECT_BUTTON} onClick={openConnectModal}>
-                  <img
-                    width={16}
-                    height={16}
-                    src={`data:image/svg+xml;utf8,${encodeURIComponent(
-                      window.__SORCEL_BUTTON_ICON__,
-                    )}`}
-                  />
+                  <WalletIcon />
                   &nbsp; Connect Wallet
                 </Button>
               );
