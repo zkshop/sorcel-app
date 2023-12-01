@@ -73,3 +73,25 @@ Next, you can link your Turborepo to your Remote Cache by running the following 
 ```
 npx turbo link
 ```
+
+# Hasura
+## 1. Install hasura CLI with homebrew
+``` https://hasura.io/docs/latest/hasura-cli/install-hasura-cli/ ```
+
+> **Important Note:** Before installing the Hasura CLI, ensure that your environment variables have been set up correctly and that the `.env` files are available in your project directory.
+
+> **Step 1:** This should init and apply migrations, do not continue to step 2 if this script failed
+```sh
+export ADMIN_SECRET=<YOUR_ADMIN_SECRET>
+export ENDPOINT_URL=<YOUR_ENDPOINT_URL>
+export SORCEL_APP_PATH=<YOUR_SORCEL_APP_ROOT>
+
+hasura init api
+cd api
+hasura migrate create init --from-server --endpoint $ENDPOINT_URL --admin-secret $ADMIN_SECRET
+hasura migrate apply --endpoint $ENDPOINT_URL --admin-secret $ADMIN_SECRET
+```
+
+
+
+

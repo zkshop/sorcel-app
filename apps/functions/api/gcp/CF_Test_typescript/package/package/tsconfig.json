@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "rootDir": "/Users/eclipse/sorcel/sorcel-app-two", // Relative path from the tsconfig.json to the desired rootDir
+    "outDir": "./lib",
+    "module": "esnext", // Changed from "commonjs" to "esnext" for ES Modules
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+}
