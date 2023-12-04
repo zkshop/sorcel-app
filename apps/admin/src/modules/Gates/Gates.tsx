@@ -41,7 +41,7 @@ export const Gates = () => {
       cache.modify({
         fields: {
           gate_v2: () =>
-            gatesCache?.gates.filter((gate) => gate.id === data?.delete_gate_v2_by_pk?.id) || [],
+            gatesCache?.gates.filter((gate) => gate.id !== data?.delete_gate_v2_by_pk?.id) || [],
         },
       });
     },
