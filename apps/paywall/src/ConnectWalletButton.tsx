@@ -2,6 +2,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { classnames } from '@3shop/config';
 import WalletIcon from './assets/WalletIcon';
 import { useEffect } from 'react';
+import { dispatchCustomEvent } from './App';
 
 const Button = ({
   children,
@@ -31,10 +32,7 @@ export const ConnectWalletButton = () => (
       mounted,
     }) => {
       useEffect(() => {
-        if (mounted)
-          window.dispatchEvent(
-            new CustomEvent('WALLET_BUTTON_CREATED', { bubbles: true, composed: true }),
-          );
+        if (mounted) dispatchCustomEvent('WALLET_BUTTON_CREATED');
       }, [mounted]);
 
       const ready = mounted && authenticationStatus !== 'loading';
