@@ -42,6 +42,7 @@ export const PoapSelector = ({ control }: PoapSelectorProps) => {
               /* @ts-ignore */
               value={field.value}
               deletePoapFromList={remove}
+              isOverlayVisible={field.index !== 0}
             />
           )}
         />
