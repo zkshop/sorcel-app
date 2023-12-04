@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es2016",
+    "module": "commonjs",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
@@ -14,7 +14,11 @@
       ],
       "@infra/*": [
         "/Users/eclipse/sorcel/sorcel-app-two/apps/functions/infra/*"
+      ],
+      "@banana/*": [
+        "../banana/*"
       ]
     }
-  }
+  },
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }

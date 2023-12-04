@@ -8,7 +8,8 @@
     "@google-cloud/functions-framework": "^3.3.0",
     "esbuild-node-externals": "^1.11.0",
     "esbuild-plugin-tsc": "^0.4.0",
-    "http-status": "^1.5.3"
+    "http-status": "^1.5.3",
+    "parcel": "^2.10.3"
   },
   "devDependencies": {
     "esbuild": "^0.19.8",
@@ -18,11 +19,12 @@
   },
   "scripts": {
     "tsconfig": "tsc --init",
-    "bundle": "node esbuild.cjs",
-    "start": "functions-framework --target getPaperToken --source=./index.cjs --port 8081"
+    "bundle": "node build.mjs",
+    "start": "functions-framework --target getPaperToken --source=./dist/index.js --port 8081",
+    "startTwo": "functions-framework --target getPaperToken --source=./index.js --port 8081"
   },
   "engines": {
     "pnpm": "^8.11.0"
   },
-  "type": "commonjs"
+  "type": "module"
 }
