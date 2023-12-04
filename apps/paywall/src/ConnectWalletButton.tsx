@@ -1,6 +1,7 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { classnames } from '@3shop/config';
 import WalletIcon from './assets/WalletIcon';
+import { useEffect } from 'react';
 
 const Button = ({
   children,
@@ -29,8 +30,10 @@ export const ConnectWalletButton = () => (
       authenticationStatus,
       mounted,
     }) => {
-      // Note: If your app doesn't use authentication, you
-      // can remove all 'authenticationStatus' checks
+      useEffect(() => {
+        if (mounted) window.dispatchEvent(new Event('WALLET_BUTTON_CREATED'));
+      }, [mounted]);
+
       const ready = mounted && authenticationStatus !== 'loading';
       const connected =
         ready &&

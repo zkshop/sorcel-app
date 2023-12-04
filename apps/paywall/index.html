@@ -84,6 +84,11 @@
 
 <body>
   <script type="module" src="/src/main.tsx"></script>
+  <script>
+    window.addEventListener('WALLET_BUTTON_CREATED', function(e) {
+        console.log('Le bouton de portefeuille a été créé', e);
+    });
+  </script>
     <header>
         <h1>Da</h1>
     </header>
