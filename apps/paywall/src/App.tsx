@@ -34,7 +34,9 @@ const App = () => {
       const response = await fetchGrants(address);
 
       setLocalStorageItem('isGranted', response.isGranted);
-      window.dispatchEvent(new Event('IS_GRANTED_UPDATED'));
+      window.dispatchEvent(
+        new CustomEvent('IS_GRANTED_UPDATED', { bubbles: true, composed: true }),
+      );
     }
 
     if (isConnected) {
