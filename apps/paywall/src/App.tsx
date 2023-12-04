@@ -24,6 +24,10 @@ async function fetchGrants(address: string) {
   return res.data;
 }
 
+export function dispatchCustomEvent(event: string) {
+  window.dispatchEvent(new CustomEvent(event, { bubbles: true, composed: true }));
+}
+
 const App = () => {
   const { isConnected, isDisconnected, address } = useAccount();
 
@@ -34,9 +38,7 @@ const App = () => {
       const response = await fetchGrants(address);
 
       setLocalStorageItem('isGranted', response.isGranted);
-      window.dispatchEvent(
-        new CustomEvent('IS_GRANTED_UPDATED', { bubbles: true, composed: true }),
-      );
+      dispatchCustomEvent('IS_GRANTED_UPDATED');
     }
 
     if (isConnected) {
@@ -46,6 +48,7 @@ const App = () => {
     if (isDisconnected) {
       removeLocalStorageItem('isWalletConnected');
       removeLocalStorageItem('isGranted');
+      dispatchCustomEvent('IS_GRANTED_UPDATED');
     }
 
     getGrants();
