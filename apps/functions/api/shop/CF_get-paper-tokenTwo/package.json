@@ -1,7 +1,7 @@
 {
   "name": "CF_Test_typescript",
   "version": "1.0.0",
-  "main": "./index.js",
+  "main": "./index.cjs",
   "license": "MIT",
   "dependencies": {
     "@esbuild-plugins/tsconfig-paths": "^0.1.2",
@@ -19,9 +19,9 @@
   },
   "scripts": {
     "tsconfig": "tsc --init",
-    "bundle": "node build.mjs",
-    "start": "functions-framework --target getPaperToken --source=./dist/index.js --port 8081",
-    "startTwo": "functions-framework --target getPaperToken --source=./index.js --port 8081"
+    "bundle": "npx esbuild src/index.ts --bundle --platform=node --outfile=./index.cjs",
+    "start": "functions-framework --target getPaperToken --source=./index.cjs --port 8081",
+    "startTwo": "functions-framework --target getPaperToken --source=./index.cjs --port 8081"
   },
   "engines": {
     "pnpm": "^8.11.0"
