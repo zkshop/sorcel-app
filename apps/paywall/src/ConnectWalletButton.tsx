@@ -31,7 +31,10 @@ export const ConnectWalletButton = () => (
       mounted,
     }) => {
       useEffect(() => {
-        if (mounted) window.dispatchEvent(new Event('WALLET_BUTTON_CREATED'));
+        if (mounted)
+          window.dispatchEvent(
+            new CustomEvent('WALLET_BUTTON_CREATED', { bubbles: true, composed: true }),
+          );
       }, [mounted]);
 
       const ready = mounted && authenticationStatus !== 'loading';
