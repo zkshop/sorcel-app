@@ -8,6 +8,6 @@
   "dependencies": {
     "@3shop/config": "*",
     "@alch/alchemy-web3": "^1.4.6",
-    "alchemy-sdk": "^2.1.1"
+    "alchemy-sdk": "^3.1.0"
   }
 }
