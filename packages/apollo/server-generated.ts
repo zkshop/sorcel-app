@@ -5717,6 +5717,13 @@ export type CreateGateV2MutationVariables = Exact<{
 
 export type CreateGateV2Mutation = { __typename?: 'mutation_root', insert_gate_v2_one?: { __typename?: 'gate_v2', id: any, discount?: number | null, name: string } | null };
 
+export type GetEveryContractAddressByAppIdQueryVariables = Exact<{
+  app_id: Scalars['uuid'];
+}>;
+
+
+export type GetEveryContractAddressByAppIdQuery = { __typename?: 'query_root', gate_v2: Array<{ __typename?: 'gate_v2', segments: Array<{ __typename?: 'segment', nft_contract_address?: string | null }> }> };
+
 export type GetGatesV2ByProductIdQueryVariables = Exact<{
   productId?: InputMaybe<Scalars['uuid']>;
 }>;
@@ -6095,6 +6102,15 @@ export const CreateGateV2Document = gql`
     id
     discount
     name
+  }
+}
+    `;
+export const GetEveryContractAddressByAppIdDocument = gql`
+    query GetEveryContractAddressByAppId($app_id: uuid!) {
+  gate_v2(where: {app_id: {_eq: $app_id}}) {
+    segments(where: {type: {_eq: NFT}}) {
+      nft_contract_address
+    }
   }
 }
     `;
@@ -6544,6 +6560,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     CreateGateV2(variables?: CreateGateV2MutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateGateV2Mutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateGateV2Mutation>(CreateGateV2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateGateV2', 'mutation');
+    },
+    GetEveryContractAddressByAppId(variables: GetEveryContractAddressByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetEveryContractAddressByAppIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetEveryContractAddressByAppIdQuery>(GetEveryContractAddressByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetEveryContractAddressByAppId', 'query');
     },
     GetGatesV2ByProductId(variables?: GetGatesV2ByProductIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetGatesV2ByProductIdQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetGatesV2ByProductIdQuery>(GetGatesV2ByProductIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGatesV2ByProductId', 'query');
