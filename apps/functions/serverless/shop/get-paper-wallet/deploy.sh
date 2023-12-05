@@ -16,7 +16,7 @@ gcloud functions deploy nodejs-http-function \
   --runtime=nodejs20 \
   --region=$GCP_REGION \
   --source=. \
-  --entry-point=createApp\
+  --entry-point=getPaperWallet \
   --trigger-http \
   --memory=256MB \
   --max-instances=83 \
