@@ -1,6 +1,6 @@
 import { Network, Alchemy } from 'alchemy-sdk';
 import { envVars } from '@3shop/config';
-export { Network } from 'alchemy-sdk';
+export { Network, NftFilters } from 'alchemy-sdk';
 export type { Nft, Alchemy, OwnedNft } from 'alchemy-sdk';
 
 const DEFAULT_NETWORK = 'POLYGON';

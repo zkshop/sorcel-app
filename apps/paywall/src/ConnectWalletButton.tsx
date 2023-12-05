@@ -4,17 +4,16 @@ import WalletIcon from './assets/WalletIcon';
 import { useEffect } from 'react';
 import { dispatchCustomEvent } from './App';
 
-const Button = ({
-  children,
-  className,
-  onClick,
-  ...rest
-}: {
+import React from 'react'; // Assurez-vous d'importer React
+
+type ButtonProps = {
   children: React.ReactNode;
   className?: string;
   onClick: () => void;
   rest?: any;
-}) => (
+};
+
+const Button = ({ children, className, onClick, ...rest }: ButtonProps) => (
   <button type="button" className={className} onClick={onClick} {...rest}>
     {children}
   </button>

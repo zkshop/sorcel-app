@@ -5,7 +5,7 @@ export const createAttributeListFromNftMetadata = (nfts: Nft[]): NftAttribute<an
   const nftAttributes: NftAttribute<any>[] = [];
 
   nfts.forEach((nft) => {
-    nft.rawMetadata?.attributes?.forEach((attribute) => {
+    nft.raw.metadata.forEach((attribute: any) => {
       const key = attribute.trait_type;
       const attributeIndex = nftAttributes.findIndex((elem) => elem.name === key);
 

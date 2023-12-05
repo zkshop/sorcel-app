@@ -1,5 +1,5 @@
 import type { Alchemy, Nft } from '@3shop/alchemy';
-import { createAlchemy } from '@3shop/alchemy';
+import { NftFilters, createAlchemy } from '@3shop/alchemy';
 import type { NftClient } from '@3shop/domains/nft';
 import { createAttributeListFromNftMetadata } from '@3shop/pure';
 
@@ -23,10 +23,15 @@ const getEveryNftForContract = async (
 export function NftReaderClient(): NftClient {
   const api = createAlchemy();
   return {
-    getWalletNfts: async (walletAddress) => {
-      const result = await api.nft.getNftsForOwner(walletAddress);
+    getWalletNfts: async (walletAddress, contractAddresses) => {
+      const result = await api.nft.getNftsForOwner(walletAddress, {
+        contractAddresses,
+        excludeFilters: [NftFilters.SPAM, NftFilters.AIRDROPS],
+      });
+
       return result.ownedNfts;
     },
+
     getNftAttribute: async (smartContractAddress) => {
       const nfts = await getEveryNftForContract(api, smartContractAddress);
 
