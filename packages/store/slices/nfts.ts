@@ -5,9 +5,15 @@ import { NftReaderClient } from '@3shop/infra';
 
 const WalletScrapper = NftService(NftReaderClient());
 
+type Params = {
+  walletAddress: string;
+  contractAdressesToFilter: string[];
+};
+
 export const fetchNFTS = createAsyncThunk(
   'nfts/fetch',
-  async (walletAddress: string) => await WalletScrapper.getWalletNfts(walletAddress),
+  async (params: Params) =>
+    await WalletScrapper.getWalletNfts(params.walletAddress, params.contractAdressesToFilter),
 );
 
 const initialState: Nft[] = [];

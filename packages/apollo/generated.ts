@@ -5568,6 +5568,18 @@ export type CreateGateV2Mutation = {
   } | null;
 };
 
+export type GetEveryContractAddressByAppIdQueryVariables = Exact<{
+  app_id: Scalars['uuid'];
+}>;
+
+export type GetEveryContractAddressByAppIdQuery = {
+  __typename?: 'query_root';
+  gate_v2: Array<{
+    __typename?: 'gate_v2';
+    segments: Array<{ __typename?: 'segment'; nft_contract_address?: string | null }>;
+  }>;
+};
+
 export type GetGatesV2ByProductIdQueryVariables = Exact<{
   productId?: InputMaybe<Scalars['uuid']>;
 }>;
@@ -6744,6 +6756,66 @@ export type CreateGateV2MutationResult = Apollo.MutationResult<CreateGateV2Mutat
 export type CreateGateV2MutationOptions = Apollo.BaseMutationOptions<
   CreateGateV2Mutation,
   CreateGateV2MutationVariables
+>;
+export const GetEveryContractAddressByAppIdDocument = gql`
+  query GetEveryContractAddressByAppId($app_id: uuid!) {
+    gate_v2(where: { app_id: { _eq: $app_id } }) {
+      segments(where: { type: { _eq: NFT } }) {
+        nft_contract_address
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetEveryContractAddressByAppIdQuery__
+ *
+ * To run a query within a React component, call `useGetEveryContractAddressByAppIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEveryContractAddressByAppIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEveryContractAddressByAppIdQuery({
+ *   variables: {
+ *      app_id: // value for 'app_id'
+ *   },
+ * });
+ */
+export function useGetEveryContractAddressByAppIdQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetEveryContractAddressByAppIdQuery,
+    GetEveryContractAddressByAppIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetEveryContractAddressByAppIdQuery,
+    GetEveryContractAddressByAppIdQueryVariables
+  >(GetEveryContractAddressByAppIdDocument, options);
+}
+export function useGetEveryContractAddressByAppIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetEveryContractAddressByAppIdQuery,
+    GetEveryContractAddressByAppIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetEveryContractAddressByAppIdQuery,
+    GetEveryContractAddressByAppIdQueryVariables
+  >(GetEveryContractAddressByAppIdDocument, options);
+}
+export type GetEveryContractAddressByAppIdQueryHookResult = ReturnType<
+  typeof useGetEveryContractAddressByAppIdQuery
+>;
+export type GetEveryContractAddressByAppIdLazyQueryHookResult = ReturnType<
+  typeof useGetEveryContractAddressByAppIdLazyQuery
+>;
+export type GetEveryContractAddressByAppIdQueryResult = Apollo.QueryResult<
+  GetEveryContractAddressByAppIdQuery,
+  GetEveryContractAddressByAppIdQueryVariables
 >;
 export const GetGatesV2ByProductIdDocument = gql`
   query GetGatesV2ByProductId($productId: uuid) {
