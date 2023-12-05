@@ -32,7 +32,7 @@ export const PoapSelectorTableItem = ({
           px="2"
           fontWeight="bold"
         >
-          OR
+          AND
         </Box>
       )}
     </Td>
