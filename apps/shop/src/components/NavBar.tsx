@@ -9,7 +9,7 @@ import { useAccount } from '@3shop/wallet';
 import { useGetAppQuery } from '@3shop/apollo';
 import { useAppDispatch, useAppSelector } from '@3shop/store';
 import { getCurrentUser, login, logoutUser } from '@3shop/store/slices/auth';
-import useUpdateThemeOnConnection from '@/hooks/useUpdateThemeOnConnection';
+import useFetchWallet from '@/hooks/useFetchWallet';
 import { classnames, envVars } from '@3shop/config';
 import { Link } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ type NavBarProps = {
 };
 
 export const NavBar = ({ admin }: NavBarProps) => {
-  const {} = useUpdateThemeOnConnection();
+  const {} = useFetchWallet();
   const data = useGetAppQuery({
     variables: {
       appId: envVars.APP_ID,
