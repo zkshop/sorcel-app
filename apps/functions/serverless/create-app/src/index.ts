@@ -1,12 +1,17 @@
+console.log("-------------- file 1");
+import { withEnv } from 'env-loader';
+
+import { Request, Response } from 'express';
 import { AppCreatorService } from '../../../../../packages/domains';
 import { SorcelAppCreator } from '../../../infra/SorcelAppCreator';
+// envEmitter.emit('updateEnv', process.env);
+
 
 type CreateAppParams = {
   name: string;
   email: string;
 };
-
-const appCreator = AppCreatorService(SorcelAppCreator());
+const appCreator = withEnv(() => AppCreatorService(SorcelAppCreator()));
 
 export async function createApp(req: any, res: any) {
   const { name, email } = req.body as CreateAppParams;

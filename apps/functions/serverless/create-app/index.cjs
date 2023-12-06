@@ -30,6 +30,299 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
+// node_modules/dotenv/package.json
+var require_package = __commonJS({
+  "node_modules/dotenv/package.json"(exports, module2) {
+    module2.exports = {
+      name: "dotenv",
+      version: "16.3.1",
+      description: "Loads environment variables from .env file",
+      main: "lib/main.js",
+      types: "lib/main.d.ts",
+      exports: {
+        ".": {
+          types: "./lib/main.d.ts",
+          require: "./lib/main.js",
+          default: "./lib/main.js"
+        },
+        "./config": "./config.js",
+        "./config.js": "./config.js",
+        "./lib/env-options": "./lib/env-options.js",
+        "./lib/env-options.js": "./lib/env-options.js",
+        "./lib/cli-options": "./lib/cli-options.js",
+        "./lib/cli-options.js": "./lib/cli-options.js",
+        "./package.json": "./package.json"
+      },
+      scripts: {
+        "dts-check": "tsc --project tests/types/tsconfig.json",
+        lint: "standard",
+        "lint-readme": "standard-markdown",
+        pretest: "npm run lint && npm run dts-check",
+        test: "tap tests/*.js --100 -Rspec",
+        prerelease: "npm test",
+        release: "standard-version"
+      },
+      repository: {
+        type: "git",
+        url: "git://github.com/motdotla/dotenv.git"
+      },
+      funding: "https://github.com/motdotla/dotenv?sponsor=1",
+      keywords: [
+        "dotenv",
+        "env",
+        ".env",
+        "environment",
+        "variables",
+        "config",
+        "settings"
+      ],
+      readmeFilename: "README.md",
+      license: "BSD-2-Clause",
+      devDependencies: {
+        "@definitelytyped/dtslint": "^0.0.133",
+        "@types/node": "^18.11.3",
+        decache: "^4.6.1",
+        sinon: "^14.0.1",
+        standard: "^17.0.0",
+        "standard-markdown": "^7.1.0",
+        "standard-version": "^9.5.0",
+        tap: "^16.3.0",
+        tar: "^6.1.11",
+        typescript: "^4.8.4"
+      },
+      engines: {
+        node: ">=12"
+      },
+      browser: {
+        fs: false
+      }
+    };
+  }
+});
+
+// node_modules/dotenv/lib/main.js
+var require_main = __commonJS({
+  "node_modules/dotenv/lib/main.js"(exports, module2) {
+    var fs = require("fs");
+    var path2 = require("path");
+    var os = require("os");
+    var crypto = require("crypto");
+    var packageJson = require_package();
+    var version = packageJson.version;
+    var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
+    function parse(src) {
+      const obj = {};
+      let lines = src.toString();
+      lines = lines.replace(/\r\n?/mg, "\n");
+      let match;
+      while ((match = LINE.exec(lines)) != null) {
+        const key = match[1];
+        let value = match[2] || "";
+        value = value.trim();
+        const maybeQuote = value[0];
+        value = value.replace(/^(['"`])([\s\S]*)\1$/mg, "$2");
+        if (maybeQuote === '"') {
+          value = value.replace(/\\n/g, "\n");
+          value = value.replace(/\\r/g, "\r");
+        }
+        obj[key] = value;
+      }
+      return obj;
+    }
+    function _parseVault(options) {
+      const vaultPath = _vaultPath(options);
+      const result = DotenvModule.configDotenv({ path: vaultPath });
+      if (!result.parsed) {
+        throw new Error(`MISSING_DATA: Cannot parse ${vaultPath} for an unknown reason`);
+      }
+      const keys = _dotenvKey(options).split(",");
+      const length = keys.length;
+      let decrypted;
+      for (let i = 0; i < length; i++) {
+        try {
+          const key = keys[i].trim();
+          const attrs = _instructions(result, key);
+          decrypted = DotenvModule.decrypt(attrs.ciphertext, attrs.key);
+          break;
+        } catch (error) {
+          if (i + 1 >= length) {
+            throw error;
+          }
+        }
+      }
+      return DotenvModule.parse(decrypted);
+    }
+    function _log(message) {
+      console.log(`[dotenv@${version}][INFO] ${message}`);
+    }
+    function _warn(message) {
+      console.log(`[dotenv@${version}][WARN] ${message}`);
+    }
+    function _debug(message) {
+      console.log(`[dotenv@${version}][DEBUG] ${message}`);
+    }
+    function _dotenvKey(options) {
+      if (options && options.DOTENV_KEY && options.DOTENV_KEY.length > 0) {
+        return options.DOTENV_KEY;
+      }
+      if (process.env.DOTENV_KEY && process.env.DOTENV_KEY.length > 0) {
+        return process.env.DOTENV_KEY;
+      }
+      return "";
+    }
+    function _instructions(result, dotenvKey) {
+      let uri;
+      try {
+        uri = new URL(dotenvKey);
+      } catch (error) {
+        if (error.code === "ERR_INVALID_URL") {
+          throw new Error("INVALID_DOTENV_KEY: Wrong format. Must be in valid uri format like dotenv://:key_1234@dotenv.org/vault/.env.vault?environment=development");
+        }
+        throw error;
+      }
+      const key = uri.password;
+      if (!key) {
+        throw new Error("INVALID_DOTENV_KEY: Missing key part");
+      }
+      const environment = uri.searchParams.get("environment");
+      if (!environment) {
+        throw new Error("INVALID_DOTENV_KEY: Missing environment part");
+      }
+      const environmentKey = `DOTENV_VAULT_${environment.toUpperCase()}`;
+      const ciphertext = result.parsed[environmentKey];
+      if (!ciphertext) {
+        throw new Error(`NOT_FOUND_DOTENV_ENVIRONMENT: Cannot locate environment ${environmentKey} in your .env.vault file.`);
+      }
+      return { ciphertext, key };
+    }
+    function _vaultPath(options) {
+      let dotenvPath = path2.resolve(process.cwd(), ".env");
+      if (options && options.path && options.path.length > 0) {
+        dotenvPath = options.path;
+      }
+      return dotenvPath.endsWith(".vault") ? dotenvPath : `${dotenvPath}.vault`;
+    }
+    function _resolveHome(envPath2) {
+      return envPath2[0] === "~" ? path2.join(os.homedir(), envPath2.slice(1)) : envPath2;
+    }
+    function _configVault(options) {
+      _log("Loading env from encrypted .env.vault");
+      const parsed = DotenvModule._parseVault(options);
+      let processEnv = process.env;
+      if (options && options.processEnv != null) {
+        processEnv = options.processEnv;
+      }
+      DotenvModule.populate(processEnv, parsed, options);
+      return { parsed };
+    }
+    function configDotenv(options) {
+      let dotenvPath = path2.resolve(process.cwd(), ".env");
+      let encoding = "utf8";
+      const debug = Boolean(options && options.debug);
+      if (options) {
+        if (options.path != null) {
+          dotenvPath = _resolveHome(options.path);
+        }
+        if (options.encoding != null) {
+          encoding = options.encoding;
+        }
+      }
+      try {
+        const parsed = DotenvModule.parse(fs.readFileSync(dotenvPath, { encoding }));
+        let processEnv = process.env;
+        if (options && options.processEnv != null) {
+          processEnv = options.processEnv;
+        }
+        DotenvModule.populate(processEnv, parsed, options);
+        return { parsed };
+      } catch (e) {
+        if (debug) {
+          _debug(`Failed to load ${dotenvPath} ${e.message}`);
+        }
+        return { error: e };
+      }
+    }
+    function config(options) {
+      const vaultPath = _vaultPath(options);
+      if (_dotenvKey(options).length === 0) {
+        return DotenvModule.configDotenv(options);
+      }
+      if (!fs.existsSync(vaultPath)) {
+        _warn(`You set DOTENV_KEY but you are missing a .env.vault file at ${vaultPath}. Did you forget to build it?`);
+        return DotenvModule.configDotenv(options);
+      }
+      return DotenvModule._configVault(options);
+    }
+    function decrypt(encrypted, keyStr) {
+      const key = Buffer.from(keyStr.slice(-64), "hex");
+      let ciphertext = Buffer.from(encrypted, "base64");
+      const nonce = ciphertext.slice(0, 12);
+      const authTag = ciphertext.slice(-16);
+      ciphertext = ciphertext.slice(12, -16);
+      try {
+        const aesgcm = crypto.createDecipheriv("aes-256-gcm", key, nonce);
+        aesgcm.setAuthTag(authTag);
+        return `${aesgcm.update(ciphertext)}${aesgcm.final()}`;
+      } catch (error) {
+        const isRange = error instanceof RangeError;
+        const invalidKeyLength = error.message === "Invalid key length";
+        const decryptionFailed = error.message === "Unsupported state or unable to authenticate data";
+        if (isRange || invalidKeyLength) {
+          const msg = "INVALID_DOTENV_KEY: It must be 64 characters long (or more)";
+          throw new Error(msg);
+        } else if (decryptionFailed) {
+          const msg = "DECRYPTION_FAILED: Please check your DOTENV_KEY";
+          throw new Error(msg);
+        } else {
+          console.error("Error: ", error.code);
+          console.error("Error: ", error.message);
+          throw error;
+        }
+      }
+    }
+    function populate(processEnv, parsed, options = {}) {
+      const debug = Boolean(options && options.debug);
+      const override = Boolean(options && options.override);
+      if (typeof parsed !== "object") {
+        throw new Error("OBJECT_REQUIRED: Please check the processEnv argument being passed to populate");
+      }
+      for (const key of Object.keys(parsed)) {
+        if (Object.prototype.hasOwnProperty.call(processEnv, key)) {
+          if (override === true) {
+            processEnv[key] = parsed[key];
+          }
+          if (debug) {
+            if (override === true) {
+              _debug(`"${key}" is already defined and WAS overwritten`);
+            } else {
+              _debug(`"${key}" is already defined and was NOT overwritten`);
+            }
+          }
+        } else {
+          processEnv[key] = parsed[key];
+        }
+      }
+    }
+    var DotenvModule = {
+      configDotenv,
+      _configVault,
+      _parseVault,
+      config,
+      decrypt,
+      parse,
+      populate
+    };
+    module2.exports.configDotenv = DotenvModule.configDotenv;
+    module2.exports._configVault = DotenvModule._configVault;
+    module2.exports._parseVault = DotenvModule._parseVault;
+    module2.exports.config = DotenvModule.config;
+    module2.exports.decrypt = DotenvModule.decrypt;
+    module2.exports.parse = DotenvModule.parse;
+    module2.exports.populate = DotenvModule.populate;
+    module2.exports = DotenvModule;
+  }
+});
+
 // ../../../../node_modules/delayed-stream/lib/delayed_stream.js
 var require_delayed_stream = __commonJS({
   "../../../../node_modules/delayed-stream/lib/delayed_stream.js"(exports, module2) {
@@ -8880,11 +9173,11 @@ var require_mime_types = __commonJS({
       }
       return exts[0];
     }
-    function lookup(path) {
-      if (!path || typeof path !== "string") {
+    function lookup(path2) {
+      if (!path2 || typeof path2 !== "string") {
         return false;
       }
-      var extension2 = extname("x." + path).toLowerCase().substr(1);
+      var extension2 = extname("x." + path2).toLowerCase().substr(1);
       if (!extension2) {
         return false;
       }
@@ -9141,7 +9434,7 @@ var require_form_data = __commonJS({
   "../../../../node_modules/form-data/lib/form_data.js"(exports, module2) {
     var CombinedStream = require_combined_stream();
     var util = require("util");
-    var path = require("path");
+    var path2 = require("path");
     var http2 = require("http");
     var https2 = require("https");
     var parseUrl = require("url").parse;
@@ -9268,11 +9561,11 @@ var require_form_data = __commonJS({
     FormData4.prototype._getContentDisposition = function(value, options) {
       var filename, contentDisposition;
       if (typeof options.filepath === "string") {
-        filename = path.normalize(options.filepath).replace(/\\/g, "/");
+        filename = path2.normalize(options.filepath).replace(/\\/g, "/");
       } else if (options.filename || value.name || value.path) {
-        filename = path.basename(options.filename || value.name || value.path);
+        filename = path2.basename(options.filename || value.name || value.path);
       } else if (value.readable && value.hasOwnProperty("httpVersion")) {
-        filename = path.basename(value.client._httpMessage.path || "");
+        filename = path2.basename(value.client._httpMessage.path || "");
       }
       if (filename) {
         contentDisposition = 'filename="' + filename + '"';
@@ -9982,29 +10275,27 @@ var require_has_flag = __commonJS({
   }
 });
 
-// ../../../../node_modules/debug/node_modules/supports-color/index.js
+// ../../../../node_modules/supports-color/index.js
 var require_supports_color = __commonJS({
-  "../../../../node_modules/debug/node_modules/supports-color/index.js"(exports, module2) {
+  "../../../../node_modules/supports-color/index.js"(exports, module2) {
     "use strict";
     var os = require("os");
     var tty = require("tty");
     var hasFlag = require_has_flag();
     var { env } = process;
-    var flagForceColor;
+    var forceColor;
     if (hasFlag("no-color") || hasFlag("no-colors") || hasFlag("color=false") || hasFlag("color=never")) {
-      flagForceColor = 0;
+      forceColor = 0;
     } else if (hasFlag("color") || hasFlag("colors") || hasFlag("color=true") || hasFlag("color=always")) {
-      flagForceColor = 1;
+      forceColor = 1;
     }
-    function envForceColor() {
-      if ("FORCE_COLOR" in env) {
-        if (env.FORCE_COLOR === "true") {
-          return 1;
-        }
-        if (env.FORCE_COLOR === "false") {
-          return 0;
-        }
-        return env.FORCE_COLOR.length === 0 ? 1 : Math.min(Number.parseInt(env.FORCE_COLOR, 10), 3);
+    if ("FORCE_COLOR" in env) {
+      if (env.FORCE_COLOR === "true") {
+        forceColor = 1;
+      } else if (env.FORCE_COLOR === "false") {
+        forceColor = 0;
+      } else {
+        forceColor = env.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(env.FORCE_COLOR, 10), 3);
       }
     }
     function translateLevel(level) {
@@ -10018,22 +10309,15 @@ var require_supports_color = __commonJS({
         has16m: level >= 3
       };
     }
-    function supportsColor(haveStream, { streamIsTTY, sniffFlags = true } = {}) {
-      const noFlagForceColor = envForceColor();
-      if (noFlagForceColor !== void 0) {
-        flagForceColor = noFlagForceColor;
-      }
-      const forceColor = sniffFlags ? flagForceColor : noFlagForceColor;
+    function supportsColor(haveStream, streamIsTTY) {
       if (forceColor === 0) {
         return 0;
       }
-      if (sniffFlags) {
-        if (hasFlag("color=16m") || hasFlag("color=full") || hasFlag("color=truecolor")) {
-          return 3;
-        }
-        if (hasFlag("color=256")) {
-          return 2;
-        }
+      if (hasFlag("color=16m") || hasFlag("color=full") || hasFlag("color=truecolor")) {
+        return 3;
+      }
+      if (hasFlag("color=256")) {
+        return 2;
       }
       if (haveStream && !streamIsTTY && forceColor === void 0) {
         return 0;
@@ -10050,7 +10334,7 @@ var require_supports_color = __commonJS({
         return 1;
       }
       if ("CI" in env) {
-        if (["TRAVIS", "CIRCLECI", "APPVEYOR", "GITLAB_CI", "GITHUB_ACTIONS", "BUILDKITE", "DRONE"].some((sign) => sign in env) || env.CI_NAME === "codeship") {
+        if (["TRAVIS", "CIRCLECI", "APPVEYOR", "GITLAB_CI", "GITHUB_ACTIONS", "BUILDKITE"].some((sign) => sign in env) || env.CI_NAME === "codeship") {
           return 1;
         }
         return min;
@@ -10062,7 +10346,7 @@ var require_supports_color = __commonJS({
         return 3;
       }
       if ("TERM_PROGRAM" in env) {
-        const version = Number.parseInt((env.TERM_PROGRAM_VERSION || "").split(".")[0], 10);
+        const version = parseInt((env.TERM_PROGRAM_VERSION || "").split(".")[0], 10);
         switch (env.TERM_PROGRAM) {
           case "iTerm.app":
             return version >= 3 ? 3 : 2;
@@ -10081,17 +10365,14 @@ var require_supports_color = __commonJS({
       }
       return min;
     }
-    function getSupportLevel(stream3, options = {}) {
-      const level = supportsColor(stream3, {
-        streamIsTTY: stream3 && stream3.isTTY,
-        ...options
-      });
+    function getSupportLevel(stream3) {
+      const level = supportsColor(stream3, stream3 && stream3.isTTY);
       return translateLevel(level);
     }
     module2.exports = {
       supportsColor: getSupportLevel,
-      stdout: getSupportLevel({ isTTY: tty.isatty(1) }),
-      stderr: getSupportLevel({ isTTY: tty.isatty(2) })
+      stdout: translateLevel(supportsColor(true, tty.isatty(1))),
+      stderr: translateLevel(supportsColor(true, tty.isatty(2)))
     };
   }
 });
@@ -10757,6 +11038,15 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 
+// src/env-loader.ts
+var import_dotenv = __toESM(require_main(), 1);
+var import_path = __toESM(require("path"), 1);
+var envPath = import_path.default.resolve(import_path.default.join(__dirname, "..", ".env.vault"));
+import_dotenv.default.config({ path: envPath, DOTENV_KEY: "dotenv://:key_846174a2e4d30c989d33cbaec3ffd7f0f9a5b6606f03d537dd024219025a618b@dotenv.org/vault/.env.vault?environment=development" });
+var withEnv = (callback) => {
+  return callback();
+};
+
 // ../../../../packages/domains/app/AppCreatorService.ts
 function AppCreatorService(client) {
   return {
@@ -10816,6 +11106,7 @@ var classnames = {
 // ../../../../packages/config/envVars.ts
 var NODE_ENV = process.env.NODE_ENV || "development";
 var GITHUB_ACTIONS = process.env.GITHUB_ACTIONS || false;
+console.log("---------- file 2");
 function getWindowEnvVar(name) {
   if (NODE_ENV === "production" || GITHUB_ACTIONS) {
     if (typeof window === "undefined")
@@ -11222,10 +11513,10 @@ function isVisitable(thing) {
 function removeBrackets(key) {
   return utils_default.endsWith(key, "[]") ? key.slice(0, -2) : key;
 }
-function renderKey(path, key, dots) {
-  if (!path)
+function renderKey(path2, key, dots) {
+  if (!path2)
     return key;
-  return path.concat(key).map(function each(token, i) {
+  return path2.concat(key).map(function each(token, i) {
     token = removeBrackets(token);
     return !dots && i ? "[" + token + "]" : token;
   }).join(dots ? "." : "");
@@ -11274,9 +11565,9 @@ function toFormData(obj, formData, options) {
     }
     return value;
   }
-  function defaultVisitor(value, key, path) {
+  function defaultVisitor(value, key, path2) {
     let arr = value;
-    if (value && !path && typeof value === "object") {
+    if (value && !path2 && typeof value === "object") {
       if (utils_default.endsWith(key, "{}")) {
         key = metaTokens ? key : key.slice(0, -2);
         value = JSON.stringify(value);
@@ -11295,7 +11586,7 @@ function toFormData(obj, formData, options) {
     if (isVisitable(value)) {
       return true;
     }
-    formData.append(renderKey(path, key, dots), convertValue(value));
+    formData.append(renderKey(path2, key, dots), convertValue(value));
     return false;
   }
   const stack = [];
@@ -11304,11 +11595,11 @@ function toFormData(obj, formData, options) {
     convertValue,
     isVisitable
   });
-  function build(value, path) {
+  function build(value, path2) {
     if (utils_default.isUndefined(value))
       return;
     if (stack.indexOf(value) !== -1) {
-      throw Error("Circular reference detected in " + path.join("."));
+      throw Error("Circular reference detected in " + path2.join("."));
     }
     stack.push(value);
     utils_default.forEach(value, function each(el, key) {
@@ -11316,11 +11607,11 @@ function toFormData(obj, formData, options) {
         formData,
         el,
         utils_default.isString(key) ? key.trim() : key,
-        path,
+        path2,
         exposedHelpers
       );
       if (result === true) {
-        build(el, path ? path.concat(key) : [key]);
+        build(el, path2 ? path2.concat(key) : [key]);
       }
     });
     stack.pop();
@@ -11485,7 +11776,7 @@ var node_default = {
 // ../../../../node_modules/axios/lib/helpers/toURLEncodedForm.js
 function toURLEncodedForm(data, options) {
   return toFormData_default(data, new node_default.classes.URLSearchParams(), Object.assign({
-    visitor: function(value, key, path, helpers) {
+    visitor: function(value, key, path2, helpers) {
       if (node_default.isNode && utils_default.isBuffer(value)) {
         this.append(key, value.toString("base64"));
         return false;
@@ -11514,10 +11805,10 @@ function arrayToObject(arr) {
   return obj;
 }
 function formDataToJSON(formData) {
-  function buildPath(path, value, target, index) {
-    let name = path[index++];
+  function buildPath(path2, value, target, index) {
+    let name = path2[index++];
     const isNumericKey = Number.isFinite(+name);
-    const isLast = index >= path.length;
+    const isLast = index >= path2.length;
     name = !name && utils_default.isArray(target) ? target.length : name;
     if (isLast) {
       if (utils_default.hasOwnProp(target, name)) {
@@ -11530,7 +11821,7 @@ function formDataToJSON(formData) {
     if (!target[name] || !utils_default.isObject(target[name])) {
       target[name] = [];
     }
-    const result = buildPath(path, value, target[name], index);
+    const result = buildPath(path2, value, target[name], index);
     if (result && utils_default.isArray(target[name])) {
       target[name] = arrayToObject(target[name]);
     }
@@ -12308,9 +12599,9 @@ function httpAdapter(config) {
       auth = urlUsername + ":" + urlPassword;
     }
     auth && headers.delete("authorization");
-    let path;
+    let path2;
     try {
-      path = buildURL(
+      path2 = buildURL(
         parsed.pathname + parsed.search,
         config.params,
         config.paramsSerializer
@@ -12324,7 +12615,7 @@ function httpAdapter(config) {
     }
     headers.set("Accept-Encoding", "gzip, deflate, br", false);
     const options = {
-      path,
+      path: path2,
       method,
       headers: headers.toJSON(),
       agents: { http: config.httpAgent, https: config.httpsAgent },
@@ -12539,14 +12830,14 @@ var cookies_default = node_default.isStandardBrowserEnv ? (
   // Standard browser envs support document.cookie
   /* @__PURE__ */ function standardBrowserEnv() {
     return {
-      write: function write(name, value, expires, path, domain, secure) {
+      write: function write(name, value, expires, path2, domain, secure) {
         const cookie = [];
         cookie.push(name + "=" + encodeURIComponent(value));
         if (utils_default.isNumber(expires)) {
           cookie.push("expires=" + new Date(expires).toGMTString());
         }
-        if (utils_default.isString(path)) {
-          cookie.push("path=" + path);
+        if (utils_default.isString(path2)) {
+          cookie.push("path=" + path2);
         }
         if (utils_default.isString(domain)) {
           cookie.push("domain=" + domain);
@@ -13408,6 +13699,7 @@ var {
 var axios_default2 = axios_default;
 
 // ../../utils/hasura.ts
+console.log(`envVars ${JSON.stringify(envVars)}`);
 async function query(payload) {
   const res = await axios_default2(envVars.PUBLIC_HASURA_API_URL || "", {
     method: "POST",
@@ -13506,7 +13798,8 @@ function SorcelAppCreator() {
 }
 
 // src/index.ts
-var appCreator = AppCreatorService(SorcelAppCreator());
+console.log("-------------- file 1");
+var appCreator = withEnv(() => AppCreatorService(SorcelAppCreator()));
 async function createApp2(req, res) {
   const { name, email } = req.body;
   if (!name || !email) {
