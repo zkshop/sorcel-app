@@ -1,6 +1,18 @@
 const { execSync } = require('child_process');
 const scriptName = "deploy";
 const bundleFileName = "index.cjs";
+const endPointDefaultPrefix = ['api'];
+
+const createEndPointPrefix = (path) => {
+    const parts = splitPathIntoArray(path);
+    for (let i = 0; i < 2; i++) parts.pop();
+    parts.shift();
+    return [endPointDefaultPrefix, ...parts].join('/');
+}
+const createImport = (_function) => `import { ${_function.entryPointName} } from \'../.${_function.srcPath}\';`;
+const createEndpoint = (_function) => _function['endpoint'] = `\'/${_function.prefix}/${_function.name}\', ${_function.entryPointName}`;
+const createExpressUse = (_function) => `app.use(${_function.endpoint});`;
+
 const splitPathIntoArray = (path) => path.split('/');
 const getFunctionName = (path) => {
     const parts = splitPathIntoArray(path);
@@ -64,22 +76,18 @@ const toCamelCase = (input) => {
         const entryPointName = toCamelCase(name);
         const jsFile = getJsFile(path);
         const srcPath = getSrc(path);
+        const prefix = createEndPointPrefix(path);
         functions.push({
             path,
             srcPath,
             jsFile,
             name,
             entryPointName,
+            prefix
         });
     }
     const fs = require('fs');
     let content = 'import express from \'express\';\n';
-    const createImport = (_function) => {
-        return `import { ${_function.entryPointName} } from \'../.${_function.srcPath}\';`;
-    };
-    const createExpressUse = (_function) => {
-        return `app.use(\'/${_function.name}\', ${_function.entryPointName});`;
-    }
     const writeContent = (line) => content = `${content}\n${line}`;
     const writeEndl = () => content = `${content}\n`;
     // imports
@@ -90,6 +98,7 @@ const toCamelCase = (input) => {
     // app.use
     writeContent('const app = express();');
     functions.forEach(_function => {
+        createEndpoint(_function);
         writeContent(createExpressUse(_function));
     });
     writeEndl();
@@ -97,8 +106,8 @@ const toCamelCase = (input) => {
     const allEntryPoints = functions.map(_f => _f.entryPointName);
     writeContent(`export { app as index, ${allEntryPoints.join(', ')} };`);
     // write file
-    fs.writeFileSync('./runAll/src/index.ts', content);
+    fs.writeFileSync('./.gcf_local/src/index.ts', content);
 
     // const deployScripts = splitPathIntoArray(deployScriptsOutput);
-    console.log(`Created routes`, functions.map(_f => _f.name));
+    console.log(`Created routes`, functions.map(_f => _f.endpoint));
 })();

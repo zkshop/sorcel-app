@@ -1,11 +1,8 @@
-console.log("-------------- file 1");
-import { withEnv } from 'env-loader';
-
-import { Request, Response } from 'express';
+import { envMiddleWare, withEnv } from '../../middlewares/withEnv';
+import { HttpFunction } from '@google-cloud/functions-framework';
 import { AppCreatorService } from '../../../../../packages/domains';
 import { SorcelAppCreator } from '../../../infra/SorcelAppCreator';
-// envEmitter.emit('updateEnv', process.env);
-
+import { allowCors } from '../../middlewares/allowCors';
 
 type CreateAppParams = {
   name: string;
@@ -13,15 +10,18 @@ type CreateAppParams = {
 };
 const appCreator = withEnv(() => AppCreatorService(SorcelAppCreator()));
 
-export async function createApp(req: any, res: any) {
+const handler: HttpFunction = async (req, res) => {
+  console.log("br1");
   const { name, email } = req.body as CreateAppParams;
 
   if (!name || !email) {
     return res.status(400).send('Missing name or email');
   }
 
+      console.log("br 2")
   const appData = await appCreator.createApp(name);
 
+      console.log("br 3")
   if (!appData) {
     console.log(appData);
 
@@ -36,3 +36,5 @@ export async function createApp(req: any, res: any) {
 
   return res.status(200).send({ appId: appData.id, name: appData.name, email: userData.email });
 }
+
+export const createApp = envMiddleWare(allowCors(handler));

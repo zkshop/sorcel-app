@@ -1,14 +1,15 @@
-import { Request, Response } from 'express';
 import { magicSDK } from '../../../../../../../packages/magic-server-sdk';
 import { INTERNAL_SERVER_ERROR, OK, UNAUTHORIZED } from 'http-status';
 import { AuthorizationTokenService } from '@3shop/domains';
 import { JsonWebTokenClient } from '../../../../../infra/JsonWebTokenClient';
 import { extractTokenFromAuthorization, getUser } from '../../../../../utils';
 import { envVars } from '@3shop/config';
+import { HttpFunction } from '@google-cloud/functions-framework';
+import { envMiddleWare, allowCors, withEnv } from '../../../../middlewares';
 
-const Token = AuthorizationTokenService(JsonWebTokenClient());
+const Token = withEnv(() => AuthorizationTokenService(JsonWebTokenClient()));
 
-export async function login(req: Request, res: Response) {
+const handler: HttpFunction = async (req, res) => {
   if (!envVars.SECRET_JWT) return res.status(INTERNAL_SERVER_ERROR);
 
   const didToken = extractTokenFromAuthorization(req.headers.authorization);
@@ -32,3 +33,4 @@ export async function login(req: Request, res: Response) {
     return res.status(INTERNAL_SERVER_ERROR).json({ error });
   }
 }
+export const login = envMiddleWare(allowCors(handler));
