@@ -1,10 +1,11 @@
-import { Request, Response } from 'express';
 import { stripe } from '../../../../../../packages/stripe';
 import { applyFees } from '../../../../../../packages/pure';
 import { formatAmountForStripe } from '../../../../utils/formatAmountForStripe';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status';
+import { envMiddleWare, allowCors, withEnv } from '../../../middlewares';
+import { HttpFunction } from '@google-cloud/functions-framework';
 
-export async function paymentIntents(req: Request, res: Response) {
+const handler: HttpFunction = async (req, res) => {
    try {
     const { price, moneyAccountId } = req.body as { price: number; moneyAccountId: string };
 
@@ -30,3 +31,4 @@ export async function paymentIntents(req: Request, res: Response) {
   }
 }
 
+export const paymentIntents = envMiddleWare(allowCors(handler));

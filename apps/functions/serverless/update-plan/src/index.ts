@@ -1,6 +1,8 @@
 import { updatePlan as utilUpdatePlan } from '../../../utils/updatePlan';
+import { envMiddleWare, allowCors, withEnv } from '../../middlewares';
+import { HttpFunction } from '@google-cloud/functions-framework';
 
-export async function updatePlan(req: any, res: any) {
+const handler: HttpFunction = async (req, res) => {
     const event = req.body;
 
   if (event.type === 'checkout.session.completed') {
@@ -14,3 +16,5 @@ export async function updatePlan(req: any, res: any) {
 
   return res.status(400).send(`Webhook Error: Unhandled event type ${event.type}`);
 }
+
+export const updatePlan = envMiddleWare(allowCors(handler));

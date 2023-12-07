@@ -3,10 +3,12 @@ import { AuthService } from '@3shop/domains';
 import { UserAuthenticationClient } from '../../../../infra/UserAuthenticationClient';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status';
+import { envMiddleWare, allowCors, withEnv } from '../../../middlewares';
+import { HttpFunction } from '@google-cloud/functions-framework';
 
 const Auth = AuthService(UserAuthenticationClient());
 
-export async function getPaperWallet(req: Request, res: Response) {
+export const handler: HttpFunction = async (req, res) => {
   const { code } = req.body as { code: string };
 
   try {
@@ -20,3 +22,4 @@ export async function getPaperWallet(req: Request, res: Response) {
   }
 }
 
+export const getPaperWallet = envMiddleWare(allowCors(handler));

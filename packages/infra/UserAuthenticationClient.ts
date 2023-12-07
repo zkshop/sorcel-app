@@ -27,7 +27,7 @@ export function UserAuthenticationClient(): AuthClient {
         email,
       });
 
-      const res = await fetch(`${envVars.PUBLIC_FUNCTIONS_URL}/api/shop/login`, {
+      const res = await fetch(`${envVars.PUBLIC_FUNCTIONS_URL}/api/shop/connect-with-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

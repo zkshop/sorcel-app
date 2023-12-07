@@ -5,11 +5,12 @@ import { StripeAccountCreator } from '../../../../infra';
 import { addAccountIdToApp } from '../../../../utils/addAccountIdToApp';
 import { JsonWebTokenClient } from '../../../../infra/JsonWebTokenClient';
 import { extractTokenFromAuthorization } from '../../../../utils';
+import { envMiddleWare, allowCors, withEnv } from '../../../middlewares';
+import { HttpFunction } from '@google-cloud/functions-framework';
 
-const account = MoneyAccountService(StripeAccountCreator());
-const token = AuthorizationTokenService(JsonWebTokenClient());
+const [account, token] = withEnv(() => [MoneyAccountService(StripeAccountCreator()), AuthorizationTokenService(JsonWebTokenClient())]);
 
-export async function createStripeAccount(req: Request, res: Response) {
+const handler: HttpFunction = async (req, res) => {
   const authorizationToken = extractTokenFromAuthorization(req.headers.authorization);
   const { accountId } = req.body as { accountId?: string };
 
@@ -37,4 +38,6 @@ export async function createStripeAccount(req: Request, res: Response) {
     return res.status(INTERNAL_SERVER_ERROR).json({ error });
   }
 }
+
+export const createStripeAccount = envMiddleWare(allowCors(handler));
 

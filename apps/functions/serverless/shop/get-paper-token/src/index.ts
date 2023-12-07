@@ -2,10 +2,12 @@ import { Request, Response } from 'express';
 import { TokenService } from '../../../../../../packages/domains';
 import { PaperWalletClient } from '../../../../infra/PaperWalletClient';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status';
+import { envMiddleWare, allowCors, withEnv } from '../../../middlewares';
+import { HttpFunction } from '@google-cloud/functions-framework';
 
 const Token = TokenService(PaperWalletClient());
 
-export async function getPaperToken(req: Request, res: Response) {
+export const handler: HttpFunction = async (req, res) => {
     const { code } = req.body as { code: string };
 
   try {
@@ -19,3 +21,4 @@ export async function getPaperToken(req: Request, res: Response) {
   }
 }
 
+export const getPaperToken = envMiddleWare(allowCors(handler));

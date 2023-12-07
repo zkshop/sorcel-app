@@ -3,10 +3,12 @@ import { gqlRequestClient } from '../../../../../packages/apollo';
 import { NftReaderClient } from '../../../infra/NftReaderClient';
 import { gateVerifier } from '../../../utils/matchProductGate';
 import { BAD_REQUEST, INTERNAL_SERVER_ERROR, OK } from 'http-status';
+import { envMiddleWare, allowCors, withEnv } from '../../middlewares';
+import { HttpFunction } from '@google-cloud/functions-framework';
 
-const walletScrapper = NftService(NftReaderClient());
+const walletScrapper = withEnv(() => NftService(NftReaderClient()));
 
-export async function isGranted(req: any, res: any) {
+const handler: HttpFunction = async (req, res) => {
   const { address, productId } = req.query as { address: string; productId: string };
 
   if (!address || !productId) {
@@ -27,3 +29,5 @@ export async function isGranted(req: any, res: any) {
 
   return res.status(OK).send({ isGranted, address, productId });
 }
+
+export const isGranted = envMiddleWare(allowCors(handler));
