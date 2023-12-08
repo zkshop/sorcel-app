@@ -1,6 +1,5 @@
 import { HttpFunction, Request, Response } from '@google-cloud/functions-framework';
 import { OK } from 'http-status';
-// import type { Handler } from './method';
 
 export const allowCors = (next: HttpFunction) => async (req: Request, res: Response) => {
   res.set('Access-Control-Allow-Credentials', 'true');
