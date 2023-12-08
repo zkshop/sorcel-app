@@ -1,2 +1,3 @@
 **/index.cjs
 **/tsconfig.json
+.env*
