@@ -16,7 +16,10 @@ type AppProviderProps = {
 
 const apolloClient = createApolloClient();
 
-posthog.init(envVars.POSTHOG_KEY || '');
+posthog.init(envVars.POSTHOG_KEY || '', {
+  api_host: 'https://eu.posthog.com',
+  enable_recording_console_log: true,
+});
 
 export const AppProvider = ({ children }: AppProviderProps) => (
   <React.StrictMode>
