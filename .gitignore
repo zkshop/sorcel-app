@@ -54,3 +54,8 @@ storybook-static
 
 # parcel
 .parcel-cache
+
+# serverless
+**/serverless/.gcf_local/index.cjs
+**/serverless/.gcf_local/tsconfig
+
