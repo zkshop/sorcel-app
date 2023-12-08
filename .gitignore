@@ -57,7 +57,7 @@ storybook-static
 
 # serverless
 **/serverless/index.cjs
-**/serverless/tsconfig
+**/serverless/tsconfig.json
 # **/serverless/.gcf_local/index.cjs
 # **/serverless/.gcf_local/tsconfig
 
