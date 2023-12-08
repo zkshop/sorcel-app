@@ -6,12 +6,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { Provider as StoreProvider } from 'react-redux';
 import { store } from './store/store';
-import posthog from 'posthog-js';
-import { PostHogProvider } from 'posthog-js/react';
-import { envVars } from '@3shop/config';
 
 const apolloClient = createApolloShopClient();
-posthog.init(envVars.POSTHOG_KEY || '');
 
 const Main = () => (
   <React.StrictMode>
@@ -19,9 +15,7 @@ const Main = () => (
       <StoreProvider store={store}>
         <WalletProvider>
           <ThemeProvider>
-            <PostHogProvider client={posthog}>
-              <App />
-            </PostHogProvider>
+            <App />
           </ThemeProvider>
         </WalletProvider>
       </StoreProvider>

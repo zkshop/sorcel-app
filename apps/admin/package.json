@@ -20,6 +20,7 @@
     "@3shop/config": "workspace:*",
     "@3shop/domains": "workspace:*",
     "@3shop/messages": "workspace:*",
+    "@3shop/posthog": "workspace:*",
     "@3shop/ui": "workspace:*",
     "@3shop/validation": "workspace:*",
     "@3shop/vite-config": "workspace:*",

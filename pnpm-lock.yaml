@@ -64,6 +64,7 @@ importers:
       '@3shop/config': workspace:*
       '@3shop/domains': workspace:*
       '@3shop/messages': workspace:*
+      '@3shop/posthog': workspace:*
       '@3shop/ui': workspace:*
       '@3shop/validation': workspace:*
       '@3shop/vite-config': workspace:*
@@ -91,6 +92,7 @@ importers:
       '@3shop/config': link:../../packages/config
       '@3shop/domains': link:../../packages/domains
       '@3shop/messages': link:../../packages/messages
+      '@3shop/posthog': link:../../packages/posthog
       '@3shop/ui': link:../../packages/ui
       '@3shop/validation': link:../../packages/validation
       '@3shop/vite-config': link:../../packages/vite-config
@@ -236,7 +238,6 @@ importers:
       '@3shop/apollo': workspace:*
       '@3shop/config': workspace:*
       '@3shop/domains': workspace:*
-      '@3shop/posthog': workspace:*
       '@3shop/ui': workspace:*
       '@3shop/vite-config': workspace:*
       '@3shop/wallet': workspace:*
@@ -255,7 +256,6 @@ importers:
       '@3shop/apollo': link:../../packages/apollo
       '@3shop/config': link:../../packages/config
       '@3shop/domains': link:../../packages/domains
-      '@3shop/posthog': link:../../packages/posthog
       '@3shop/ui': link:../../packages/ui
       '@3shop/wallet': link:../../packages/wallet
       react: 18.2.0
