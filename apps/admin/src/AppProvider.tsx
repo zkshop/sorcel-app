@@ -8,6 +8,7 @@ import { CookiesProvider } from 'react-cookie';
 import { CenterProvider } from '@center-inc/react';
 import { envVars } from '@3shop/config';
 import { TokenValidityProvider } from './context';
+import { PostHogProvider, posthog } from '@3shop/posthog';
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -15,23 +16,27 @@ type AppProviderProps = {
 
 const apolloClient = createApolloClient();
 
+posthog.init(envVars.POSTHOG_KEY || '');
+
 export const AppProvider = ({ children }: AppProviderProps) => (
   <React.StrictMode>
-    <TokenValidityProvider>
-      <CookiesProvider>
-        <ApolloProvider client={apolloClient}>
-          <ReduxProvider store={store}>
-            <CenterProvider
-              apiKey={envVars.SECRET_CENTER}
-              mode={envVars.NODE_ENV as 'development' | 'production'}
-            >
-              <BrowserRouter>
-                <ThemeProvider>{children}</ThemeProvider>
-              </BrowserRouter>
-            </CenterProvider>
-          </ReduxProvider>
-        </ApolloProvider>
-      </CookiesProvider>
-    </TokenValidityProvider>
+    <PostHogProvider client={posthog}>
+      <TokenValidityProvider>
+        <CookiesProvider>
+          <ApolloProvider client={apolloClient}>
+            <ReduxProvider store={store}>
+              <CenterProvider
+                apiKey={envVars.SECRET_CENTER}
+                mode={envVars.NODE_ENV as 'development' | 'production'}
+              >
+                <BrowserRouter>
+                  <ThemeProvider>{children}</ThemeProvider>
+                </BrowserRouter>
+              </CenterProvider>
+            </ReduxProvider>
+          </ApolloProvider>
+        </CookiesProvider>
+      </TokenValidityProvider>
+    </PostHogProvider>
   </React.StrictMode>
 );
