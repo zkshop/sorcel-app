@@ -1,6 +1,7 @@
 {
   "root": true,
   "extends": ["@3shop/eslint-config-custom"],
+  "ignorePatterns": ["deployLocally.js"],
   "settings": {
     "next": {
       "rootDir": ["apps/*/"]
