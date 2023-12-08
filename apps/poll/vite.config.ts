@@ -27,6 +27,7 @@ const envVars = {
   SECRET_STRIPE: null,
   SECRET_SUPABASE: null,
   SECRET_CENTER: null,
+  POSTHOG_KEY: null,
 };
 
 const dirname = __dirname;

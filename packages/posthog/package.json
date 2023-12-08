@@ -1,0 +1,11 @@
+{
+  "name": "@3shop/posthog",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix"
+  },
+  "dependencies": {
+    "posthog-js": "^1.93.6"
+  }
+}
