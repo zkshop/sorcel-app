@@ -1,0 +1,31 @@
+{
+  "name": "functions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vc dev",
+    "lint": "eslint \"**/*.ts\" --fix"
+  },
+  "dependencies": {
+    "@3shop/alchemy": "workspace:*",
+    "@3shop/apollo": "workspace:*",
+    "@3shop/config": "workspace:*",
+    "@3shop/domains": "workspace:*",
+    "@3shop/magic-server-sdk": "workspace:*",
+    "@3shop/poap": "workspace:*",
+    "@3shop/pure": "workspace:*",
+    "@3shop/stripe": "workspace:*",
+    "@3shop/supabase": "workspace:*",
+    "@vercel/node": "^2.7.1",
+    "axios": "^1.1.3",
+    "cross-fetch": "^3.1.5",
+    "http-status": "^1.5.3",
+    "jsonwebtoken": "^9.0.0",
+    "stripe": "^11.6.0"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.9",
+    "typescript": "5.1.6"
+  }
+}

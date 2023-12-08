@@ -1,0 +1,4 @@
+table:
+  name: segment_type
+  schema: public
+is_enum: true
