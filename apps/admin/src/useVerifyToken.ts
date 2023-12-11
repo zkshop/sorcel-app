@@ -49,5 +49,5 @@ export const useVerifyToken = (fromAdminRoute = false) => {
     }
   }, [fromAdminRoute, navigate, tokenCookie]);
 
-  return { loading, user };
+  return { loading, user, email: user?.email };
 };
