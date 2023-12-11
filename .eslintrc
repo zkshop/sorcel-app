@@ -1,7 +1,7 @@
 {
   "root": true,
   "extends": ["@3shop/eslint-config-custom"],
-  "ignorePatterns": ["deployLocally.js"],
+  "ignorePatterns": ["deployLocally.js", "apps/functions/serverless/turbo.js"],
   "settings": {
     "next": {
       "rootDir": ["apps/*/"]
