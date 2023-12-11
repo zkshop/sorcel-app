@@ -11,17 +11,14 @@ type CreateAppParams = {
 const appCreator = withEnv(() => AppCreatorService(SorcelAppCreator()));
 
 const handler: HttpFunction = async (req, res) => {
-  console.log('br1');
   const { name, email } = req.body as CreateAppParams;
 
   if (!name || !email) {
     return res.status(400).send('Missing name or email');
   }
 
-  console.log('br 2');
   const appData = await appCreator.createApp(name);
 
-  console.log('br 3');
   if (!appData) {
     console.log(appData);
 

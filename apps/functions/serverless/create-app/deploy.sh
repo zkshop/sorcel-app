@@ -11,7 +11,7 @@ do
   esac
 done
 
-gcloud functions deploy createApp \
+gcloud functions deploy create-app \
   --gen2 \
   --runtime=nodejs20 \
   --region=$GCP_REGION \
