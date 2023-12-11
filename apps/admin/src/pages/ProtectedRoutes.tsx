@@ -4,7 +4,7 @@ import { useVerifyToken } from '../useVerifyToken';
 import { removeCustomerTokenCookie } from '../useCustomerTokenCookie';
 
 export const ProtectedRoutes = () => {
-  const { loading, user } = useVerifyToken(true);
+  const { loading, user, email } = useVerifyToken(true);
   const navigate = useNavigate();
 
   function signOut() {
@@ -13,7 +13,7 @@ export const ProtectedRoutes = () => {
   }
 
   return (
-    <SidebarWithHeader user={user} signOut={signOut}>
+    <SidebarWithHeader email={email} user={user} signOut={signOut}>
       {loading ? <Spinner /> : <Outlet />}
     </SidebarWithHeader>
   );

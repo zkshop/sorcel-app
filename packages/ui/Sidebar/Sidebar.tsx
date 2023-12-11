@@ -53,10 +53,11 @@ const LinkItems: Array<LinkItemProps> = [
 
 type SidebarWithHeaderProps = WithChildren<{
   user: Nullable<{ email: string; appId: string }>;
+  email?: string;
   signOut: () => void;
 }>;
 
-export function SidebarWithHeader({ children, user, signOut }: SidebarWithHeaderProps) {
+export function SidebarWithHeader({ children, user, signOut, email }: SidebarWithHeaderProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg="gray.100">
@@ -75,7 +76,7 @@ export function SidebarWithHeader({ children, user, signOut }: SidebarWithHeader
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav signOut={signOut} user={user} onOpen={onOpen} />
+      <MobileNav email={email} signOut={signOut} user={user} onOpen={onOpen} />
       <Box minH="calc(100vh - 5rem)" ml={{ base: 0, md: 60 }} p="4" backgroundColor="white">
         {children}
       </Box>
@@ -154,9 +155,10 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
   user: Nullable<{ email: string; appId: string }>;
   signOut: () => void;
+  email?: string;
 }
 
-const MobileNav = ({ onOpen, signOut, user, ...rest }: MobileProps) => (
+const MobileNav = ({ onOpen, signOut, email, ...rest }: MobileProps) => (
   <Flex
     ml={{ base: 0, md: 60 }}
     px={{ base: 4, md: 4 }}
@@ -196,7 +198,7 @@ const MobileNav = ({ onOpen, signOut, user, ...rest }: MobileProps) => (
                 spacing="1px"
                 ml="2"
               >
-                <Text fontSize="sm">{user?.email}</Text>
+                <Text fontSize="sm">{email}</Text>
               </VStack>
               <Box display={{ base: 'none', md: 'flex' }}>
                 <FiChevronDown />
