@@ -1,5 +1,5 @@
 import { useGetAdminAppQuery } from '@3shop/apollo';
-import { Box, Code, Header, Spinner, Button, CopyIcon, Select } from '@3shop/ui';
+import { Box, Code, Header, Spinner, Button, CopyIcon, Select, Text } from '@3shop/ui';
 import { useClipboard } from '@chakra-ui/react';
 import { useState } from 'react';
 
@@ -63,6 +63,17 @@ export const Integrations = () => {
             <CodeBlock code='<div id="3shop-app"></div>' />
           </li>
         </ol>
+      </Box>
+      <Box>
+        <Text variant="H700" paddingY={2}>
+          Tutorial
+        </Text>
+        <Box pos="relative" paddingBottom="55%" height={0}>
+          <iframe
+            src="https://www.loom.com/embed/8c7dfd2e1ae949c29d5dc37d77688323?sid=f379653e-0bb7-422b-b6e0-86f41f78dbef"
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+          ></iframe>
+        </Box>
       </Box>
     </>
   );
