@@ -1,0 +1,58 @@
+{
+  "params": {
+    "useDefaultConfig": true
+  },
+  "gcf": {},
+  "openapi": {
+    "/is-granted": {
+      "get": {
+        "operationId": "isGranted",
+        "summary": "Check if access is granted",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "address",
+            "required": true,
+            "type": "string",
+            "description": "Address of the wallet"
+          },
+          {
+            "in": "query",
+            "name": "productId",
+            "required": true,
+            "type": "string",
+            "description": "ID of the product"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isGranted": {
+                  "type": "boolean",
+                  "description": "Whether access is granted or not"
+                },
+                "address": {
+                  "type": "string",
+                  "description": "Address of the wallet"
+                },
+                "productId": {
+                  "type": "string",
+                  "description": "ID of the product"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing address or productId"
+          },
+          "500": {
+            "description": "Error checking access"
+          }
+        }
+      }
+    }
+  }
+}
