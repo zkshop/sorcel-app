@@ -27,6 +27,7 @@ const envVars = {
   SECRET_SUPABASE: null,
   SECRET_CENTER: null,
   PRODUCT_ID: null,
+  POSTHOG_KEY: undefined,
   WALLET_CONNECT_PROJECT_ID: undefined,
   MONTHLY_PRO_PLAN_CHECKOUT_LINK: undefined,
   YEARLY_PRO_PLAN_CHECKOUT_LINK: undefined,
