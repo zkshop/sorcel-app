@@ -54,3 +54,6 @@ storybook-static
 
 # parcel
 .parcel-cache
+
+# scripts
+apps/functions/serverless/scripts/
