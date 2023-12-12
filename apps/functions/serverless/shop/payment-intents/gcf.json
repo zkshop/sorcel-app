@@ -1,0 +1,44 @@
+{
+  "params": {
+    "useDefaultConfig": true
+  },
+  "gcf": {},
+  "openapi": {
+    "post": {
+      "summary": "Create payment intent",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "price",
+          "required": true,
+          "type": "number",
+          "description": "Price of the product"
+        },
+        {
+          "in": "body",
+          "name": "moneyAccountId",
+          "required": true,
+          "type": "string",
+          "description": "ID of the money account"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful operation",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "clientSecret": {
+                "type": "string",
+                "description": "Client secret for the payment intent"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Error creating payment intent"
+        }
+      }
+    }
+  }
+}

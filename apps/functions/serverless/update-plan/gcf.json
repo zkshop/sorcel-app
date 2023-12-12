@@ -1,0 +1,40 @@
+{
+  "params": {
+    "useDefaultConfig": true
+  },
+  "gcf": {},
+  "openapi": {
+    "post": {
+      "summary": "Update plan",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "event",
+          "required": true,
+          "type": "object",
+          "description": "Event object from Stripe"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful operation",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "Message indicating the plan update status"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Webhook Error: Unhandled event type"
+        },
+        "500": {
+          "description": "Error updating plan"
+        }
+      }
+    }
+  }
+}
