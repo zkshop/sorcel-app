@@ -607,11 +607,7 @@ importers:
 
   packages/config: {}
 
-  packages/domains:
-    dependencies:
-      '@3shop/alchemy':
-        specifier: workspace:*
-        version: link:../alchemy
+  packages/domains: {}
 
   packages/eslint-config-custom:
     devDependencies:
@@ -784,12 +780,12 @@ importers:
 
   packages/types:
     dependencies:
-      '@3shop/alchemy':
-        specifier: workspace:*
-        version: link:../alchemy
       '@3shop/apollo':
         specifier: workspace:*
         version: link:../apollo
+      '@3shop/domains':
+        specifier: workspace:*
+        version: link:../domains
 
   packages/ui:
     dependencies:
