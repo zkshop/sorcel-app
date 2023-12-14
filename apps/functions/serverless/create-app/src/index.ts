@@ -3,6 +3,7 @@ import type { HttpFunction } from '@google-cloud/functions-framework';
 import { AppCreatorService } from '../../../../../packages/domains';
 import { SorcelAppCreator } from '../../../infra/SorcelAppCreator';
 import { allowCors } from '../../middlewares/allowCors';
+import { envVars } from '@3shop/config';
 
 type CreateAppParams = {
   name: string;
@@ -11,6 +12,8 @@ type CreateAppParams = {
 const appCreator = withEnv(() => AppCreatorService(SorcelAppCreator()));
 
 const handler: HttpFunction = async (req, res) => {
+  console.log(envVars.PUBLIC_HASURA_API_URL);
+  console.log(envVars.SECRET_HASURA);
   const { name, email } = req.body as CreateAppParams;
 
   if (!name || !email) {

@@ -1,3 +1,7 @@
 **/index.cjs
 **/tsconfig.json
 .env*
+
+.flaskenv*
+!.env.project
+!.env.vault
