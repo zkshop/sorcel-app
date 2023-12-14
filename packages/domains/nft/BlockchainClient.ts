@@ -12,7 +12,7 @@ export type NFT = {
   };
 };
 
-export type NftClient = {
+export type BlockchainClient = {
   getWalletNfts(address: string, contractAddresses?: string[]): Promise<NFT[]>;
   getNftAttribute(smartContractAdress: string): Promise<NftAttribute<any>[]>;
 };
