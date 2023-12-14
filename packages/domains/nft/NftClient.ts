@@ -1,6 +1,18 @@
-import type { Nft, NftAttribute } from './Nft';
+import type { NftAttribute } from './Nft';
+
+export type NFT = {
+  tokenId: string;
+  description: string;
+  contract: {
+    address: string;
+    name: string;
+  };
+  raw: {
+    metadata: Record<string, any>;
+  };
+};
 
 export type NftClient = {
-  getWalletNfts(address: string, contractAddresses?: string[]): Promise<Nft[]>;
+  getWalletNfts(address: string, contractAddresses?: string[]): Promise<NFT[]>;
   getNftAttribute(smartContractAdress: string): Promise<NftAttribute<any>[]>;
 };
