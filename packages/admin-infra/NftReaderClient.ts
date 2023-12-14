@@ -1,6 +1,6 @@
 import type { Alchemy, Nft } from '@3shop/alchemy';
 import { createAlchemy } from '@3shop/alchemy';
-import type { NftClient } from '@3shop/domains/nft';
+import type { NFT, NftClient } from '@3shop/domains/nft';
 import { createAttributeListFromNftMetadata } from '@3shop/pure';
 
 const getEveryNftForContract = async (
@@ -25,12 +25,12 @@ export function NftReaderClient(): NftClient {
   return {
     getWalletNfts: async (walletAddress) => {
       const result = await api.nft.getNftsForOwner(walletAddress);
-      return result.ownedNfts;
+      return result.ownedNfts as NFT[];
     },
     getNftAttribute: async (smartContractAddress) => {
       const nfts = await getEveryNftForContract(api, smartContractAddress);
 
-      return createAttributeListFromNftMetadata(nfts);
+      return createAttributeListFromNftMetadata(nfts as NFT[]);
     },
   };
 }

@@ -6,7 +6,5 @@
   "scripts": {
     "lint": "eslint \"**/*.ts*\" --fix"
   },
-  "dependencies": {
-    "@3shop/alchemy": "workspace:*"
-  }
+  "dependencies": {}
 }

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { Nft } from '@3shop/domains';
+import type { NFT } from '@3shop/domains';
 import { NftService } from '@3shop/domains';
 import { NftReaderClient } from '../../infra/NFTReaderClient';
 
@@ -10,7 +10,7 @@ export const fetchNFTS = createAsyncThunk(
   async (walletAddress: string) => await WalletScrapper.getWalletNfts(walletAddress),
 );
 
-const initialState: Nft[] = [];
+const initialState: NFT[] = [];
 
 export const balancesSlice = createSlice({
   name: 'nfts',
