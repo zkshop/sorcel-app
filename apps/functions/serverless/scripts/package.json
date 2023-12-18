@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "scripts": {
+    "deploy:prod": "bun deployment/deploy.js --for-production",
+    "deploy:staging": "bun deployment/deploy.js --for-staging",
+    "dev": "cd ../; bun deployLocally.js && cd .gcf_local && bun i && bun bundle && bun start && cd -"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^7.7.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "googleapis": "^129.0.0",
+    "js-yaml": "^4.1.0",
+    "multispinner": "^0.2.1",
+    "ora": "^7.0.1"
+  }
+}

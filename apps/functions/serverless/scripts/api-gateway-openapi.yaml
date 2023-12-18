@@ -1,0 +1,83 @@
+swagger: '2.0'
+info:
+  version: 1.0.6
+  title: App Creator API
+  description: API for creating apps
+host: sorcel-api.apigateway.dazzling-botany-406610.cloud.goog
+basePath: /api
+schemes:
+  - https
+produces:
+  - application/json
+security:
+  - api_key: []
+x-google-management:
+  metrics:
+    - name: post-requests
+      displayName: post requests
+      valueType: INT64
+      metricKind: DELTA
+    - name: get-requests
+      displayName: get requests
+      valueType: INT64
+      metricKind: DELTA
+  quota:
+    limits:
+      - name: post-limit
+        metric: post-requests
+        unit: 1/min/{project}
+        values:
+          STANDARD: 5
+      - name: get-limit
+        metric: get-requests
+        unit: 1/min/{project}
+        values:
+          STANDARD: 5
+paths:
+  /create-app:
+    post:
+      x-google-backend:
+        address: >-
+          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/create-app
+      operationId: createApp
+      summary: Create an app
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Name of the app
+              email:
+                type: string
+                description: Email of the admin user
+            required:
+              - name
+              - email
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              appId:
+                type: string
+                description: ID of the created app
+              name:
+                type: string
+                description: Name of the created app
+              email:
+                type: string
+                description: Email of the created admin user
+        '400':
+          description: Missing name or email
+        '500':
+          description: Error creating app or user
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: key
+    in: query

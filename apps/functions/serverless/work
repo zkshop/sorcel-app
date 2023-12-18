@@ -1,0 +1,6 @@
+gcloud api-gateway api-configs create staging-config \
+  --api=$SORCEL_API --openapi-spec=/Users/shadokan87/sorcel/sorcel-app/apps/functions/serverless/results/staging/api-gateway.yaml --project=$SOR
+CEL_PROJECT
+
+gcloud api-gateway gateways create sorcel-staging \
+  --api="$SORCEL_API-staging" --api-config=staging-config --location=$SORCEL_LOCATION --project=$SORCEL_PROJECT
