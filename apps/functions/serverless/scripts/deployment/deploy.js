@@ -231,6 +231,8 @@ async function main(args) {
     ctx.describe('Reading existing configs');
     const existingConfigNames = await listConfigs(process.env.SORCEL_API)
       .then(({ data }) => {
+        if (!data || !data.apiConfigs)
+          return [];
         const names = data.apiConfigs.map((conf) => conf.displayName);
         return names.filter((id) => id.split('-')[0] == ctx.global.deploymentEnvContext);
       })
