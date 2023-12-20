@@ -82,7 +82,7 @@ const executeTasks = async () => {
       };
       const next = () => executeCallback(index + 1);
 
-      ctx._spinner.start();
+      // ctx._spinner.start();
       if (isAsync(callback)) await callback(ctx, next, skip);
       else callback(data, next, skip);
       if (ctx._spinner.isSpinning) ctx._spinner.succeed(description);
@@ -220,7 +220,7 @@ async function main(args) {
         });
       },
     );
-  
+
     const yamlPath = `./results/${ctx.global.deploymentEnvContext}/api-gateway.yaml`;
     await generateYaml({
       ...YamlDefaultOptions,
@@ -231,8 +231,7 @@ async function main(args) {
     ctx.describe('Reading existing configs');
     const existingConfigNames = await listConfigs(process.env.SORCEL_API)
       .then(({ data }) => {
-        if (!data || !data.apiConfigs)
-          return [];
+        if (!data || !data.apiConfigs) return [];
         const names = data.apiConfigs.map((conf) => conf.displayName);
         return names.filter((id) => id.split('-')[0] == ctx.global.deploymentEnvContext);
       })
@@ -273,7 +272,7 @@ async function main(args) {
         project: process.env.SORCEL_PROJECT,
       },
     });
-  
+
     await dry(async () => {
       await Function.do([apiGateWayCmd], process.env.PWD, (_process, index) => {
         _process.stderr.on('data', (data) => {
@@ -301,6 +300,7 @@ async function main(args) {
       return next();
     },
     async (ctx, next, skip) => {
+      return next();
       ctx.describe('Checking for changes');
       const bucketName = `bundled-functions-${ctx.global.deploymentEnvContext}`;
 
@@ -310,9 +310,11 @@ async function main(args) {
         });
       });
 
-      Function.allFunctions.forEach(
-        (f) => (f.hash = createHashStringForFile(`${f.path}/index.cjs`)),
-      );
+      Function.allFunctions.forEach((f) => {
+        if (fs.existsSync(`${f.path}/index.cjs`)) {
+          f.hash = createHashStringForFile(`${f.path}/index.cjs`);
+        }
+      });
 
       // Fetching bucket content with google api then creating a map from file names (<function name>:<hash>)
       const fileNames = (
@@ -337,19 +339,18 @@ async function main(args) {
       ctx._spinner.info('Deploying functions');
       ctx._spinner.stopAndPersist();
       const spinners = {};
-      const liveFunctionsNames = ctx.global.liveFunctionsNames;
-
+      // const liveFunctionsNames = ctx.global.liveFunctionsNames;
       // Functions to deploy
       for (const f of Function.allFunctions) {
         spinners[f.name] = f.name;
       }
 
       // Already up to date functions (if any)
-      for (const liveFunction of liveFunctionsNames) {
-        spinners[liveFunction] = `${liveFunction}: (already up to date)`;
-      }
-      let multi = new Multispinner(spinners);
-      liveFunctionsNames.forEach((name) => multi.success(name));
+      // for (const liveFunction of liveFunctionsNames) {
+      //   spinners[liveFunction] = `${liveFunction}: (already up to date)`;
+      // }
+      // let multi = new Multispinner(spinners);
+      // liveFunctionsNames.forEach((name) => multi.success(name));
 
       ctx.describe('Uploading');
       const release = (releaser) =>
@@ -357,15 +358,15 @@ async function main(args) {
           const result = releaser.array.random(['success', 'error']);
           releaser.delay.random(3, 7, () => multi[result](f.name));
         });
-  
+
       await dry(async () => {
         await deployCloudFunctions((_function, childProcess, index) => {
           childProcess.on('close', async (code) => {
             if (index == 2) {
               if (code != 0) {
-                multi.error(_function.name);
+                // multi.error(_function.name);
               } else {
-                multi.success(_function.name);
+                // multi.success(_function.name);
 
                 await uploadFile(
                   `bundled-functions-${ctx.global.deploymentEnvContext}`,

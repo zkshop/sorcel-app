@@ -34,11 +34,35 @@ x-google-management:
         values:
           STANDARD: 5
 paths:
+  /admin/get-stripe-account:
+    get:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/get-stripe-account-production
+      operationId: getStripeAccount
+      summary: Get Stripe account
+      parameters:
+        - in: query
+          name: accountId
+          required: true
+          type: string
+          description: ID of the Stripe account
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              account:
+                type: object
+                description: Stripe account details
+        '500':
+          description: Error retrieving Stripe account
   /create-app:
     post:
       x-google-backend:
         address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/create-app-production
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/create-app-production
       operationId: createApp
       summary: Create an app
       parameters:
@@ -76,82 +100,11 @@ paths:
           description: Missing name or email
         '500':
           description: Error creating app or user
-  /is-granted:
-    get:
-      x-google-backend:
-        address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/is-granted-production
-      operationId: isGranted
-      summary: Check if access is granted
-      parameters:
-        - in: query
-          name: address
-          required: true
-          type: string
-          description: Address of the wallet
-        - in: query
-          name: productId
-          required: true
-          type: string
-          description: ID of the product
-      responses:
-        '200':
-          description: Successful operation
-          schema:
-            type: object
-            properties:
-              isGranted:
-                type: boolean
-                description: Whether access is granted or not
-              address:
-                type: string
-                description: Address of the wallet
-              productId:
-                type: string
-                description: ID of the product
-        '400':
-          description: Missing address or productId
-        '500':
-          description: Error checking access
-  /update-plan:
-    post:
-      x-google-backend:
-        address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/update-plan-production
-      operationId: updatePlan
-      summary: Update plan
-      parameters:
-        - in: body
-          name: event
-          required: true
-          description: Event object from Stripe
-          schema:
-            type: object
-            properties:
-              id:
-                type: string
-                description: ID of the event
-              type:
-                type: string
-                description: Type of the event
-      responses:
-        '200':
-          description: Successful operation
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-                description: Message indicating the plan update status
-        '400':
-          description: 'Webhook Error: Unhandled event type'
-        '500':
-          description: Error updating plan
   /shop/connect-with-email:
     post:
       x-google-backend:
         address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/connect-with-email-production
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/connect-with-email-production
       operationId: connectWithEmail
       summary: Connect with email
       parameters:
@@ -171,61 +124,11 @@ paths:
                 description: Whether the user is authenticated or not
         '500':
           description: Error during authentication
-  /admin/get-stripe-account:
-    get:
-      x-google-backend:
-        address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/get-stripe-account-production
-      operationId: getStripeAccount
-      summary: Get Stripe account
-      parameters:
-        - in: query
-          name: accountId
-          required: true
-          type: string
-          description: ID of the Stripe account
-      responses:
-        '200':
-          description: Successful operation
-          schema:
-            type: object
-            properties:
-              account:
-                type: object
-                description: Stripe account details
-        '500':
-          description: Error retrieving Stripe account
-  /shop/poap/events/id:
-    get:
-      x-google-backend:
-        address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/id-production
-      operationId: id
-      summary: Get POAP event by ID
-      parameters:
-        - in: query
-          name: id
-          required: true
-          type: string
-          description: ID of the POAP event
-      responses:
-        '200':
-          description: Successful operation
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                description: POAP event data
-        '400':
-          description: Missing ID
-        '500':
-          description: Error getting POAP event
   /admin/auth/login:
     post:
       x-google-backend:
         address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/login-production
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/login-production
       operationId: login
       summary: Authenticate user
       parameters:
@@ -257,35 +160,88 @@ paths:
           description: Unauthorized
         '500':
           description: Error during authentication
-  /shop/poap/address:
-    get:
+  /update-plan:
+    post:
       x-google-backend:
         address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/address-production
-      operationId: address
-      summary: Get every POAP URL
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/update-plan-production
+      operationId: updatePlan
+      summary: Update plan
       parameters:
-        - in: query
-          name: address
+        - in: body
+          name: event
           required: true
-          type: string
-          description: Address of the wallet
+          description: Event object from Stripe
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: ID of the event
+              type:
+                type: string
+                description: Type of the event
       responses:
         '200':
           description: Successful operation
           schema:
             type: object
             properties:
-              data:
-                type: array
-                description: Array of POAP URLs
+              message:
+                type: string
+                description: Message indicating the plan update status
+        '400':
+          description: 'Webhook Error: Unhandled event type'
         '500':
-          description: Error getting POAP URLs
+          description: Error updating plan
+  /shop/get-paper-wallet:
+    post:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/get-paper-wallet-production
+      operationId: getPaperWallet
+      summary: Get paper wallet
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              wallet:
+                type: object
+                description: The paper wallet
+        '500':
+          description: Error when requesting the wallet
+  /shop/get-paper-token:
+    post:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/get-paper-token-production
+      operationId: getPaperToken
+      summary: Get paper token
+      parameters:
+        - in: body
+          name: code
+          required: true
+          description: Code for the paper token
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              userToken:
+                type: string
+                description: User token
+        '500':
+          description: Error getting paper token
   /admin/auth/verify:
     get:
       x-google-backend:
         address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/verify-production
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/verify-production
       operationId: verify
       summary: Check if access is granted
       parameters:
@@ -318,54 +274,11 @@ paths:
           description: Missing address or productId
         '500':
           description: Error checking access
-  /shop/get-paper-token:
-    post:
-      x-google-backend:
-        address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/get-paper-token-production
-      operationId: getPaperToken
-      summary: Get paper token
-      parameters:
-        - in: body
-          name: code
-          required: true
-          description: Code for the paper token
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful operation
-          schema:
-            type: object
-            properties:
-              userToken:
-                type: string
-                description: User token
-        '500':
-          description: Error getting paper token
-  /shop/get-paper-wallet:
-    post:
-      x-google-backend:
-        address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/get-paper-wallet-production
-      operationId: getPaperWallet
-      summary: Get paper wallet
-      responses:
-        '200':
-          description: Successful operation
-          schema:
-            type: object
-            properties:
-              wallet:
-                type: object
-                description: The paper wallet
-        '500':
-          description: Error when requesting the wallet
   /admin/create-stripe-account:
     get:
       x-google-backend:
         address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/create-stripe-account-production
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/create-stripe-account-production
       operationId: createStripeAccount
       summary: Create Stripe account
       parameters:
@@ -387,11 +300,37 @@ paths:
           description: Missing accountId
         '500':
           description: Error creating Stripe account
+  /shop/poap/events/id:
+    get:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/id-production
+      operationId: id
+      summary: Get POAP event by ID
+      parameters:
+        - in: query
+          name: id
+          required: true
+          type: string
+          description: ID of the POAP event
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                description: POAP event data
+        '400':
+          description: Missing ID
+        '500':
+          description: Error getting POAP event
   /shop/payment-intents:
     post:
       x-google-backend:
         address: >-
-          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/payment-intents-production
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/payment-intents-production
       operationId: paymentIntents
       summary: Create payment intent
       parameters:
@@ -419,6 +358,67 @@ paths:
                 description: Client secret for the payment intent
         '500':
           description: Error creating payment intent
+  /shop/poap/address:
+    get:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/address-production
+      operationId: address
+      summary: Get every POAP URL
+      parameters:
+        - in: query
+          name: address
+          required: true
+          type: string
+          description: Address of the wallet
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                description: Array of POAP URLs
+        '500':
+          description: Error getting POAP URLs
+  /is-granted:
+    get:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/is-granted-production
+      operationId: isGranted
+      summary: Check if access is granted
+      parameters:
+        - in: query
+          name: address
+          required: true
+          type: string
+          description: Address of the wallet
+        - in: query
+          name: productId
+          required: true
+          type: string
+          description: ID of the product
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              isGranted:
+                type: boolean
+                description: Whether access is granted or not
+              address:
+                type: string
+                description: Address of the wallet
+              productId:
+                type: string
+                description: ID of the product
+        '400':
+          description: Missing address or productId
+        '500':
+          description: Error checking access
 securityDefinitions:
   api_key:
     type: apiKey
