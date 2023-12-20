@@ -6,15 +6,6 @@
   "openapi": {
     "post": {
       "summary": "Get paper wallet",
-      "parameters": [
-        {
-          "in": "body",
-          "name": "code",
-          "required": true,
-          "type": "string",
-          "description": "Code for the paper wallet"
-        }
-      ],
       "responses": {
         "200": {
           "description": "Successful operation",

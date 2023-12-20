@@ -14,14 +14,20 @@
             "name": "address",
             "required": true,
             "type": "string",
-            "description": "Address of the wallet"
+            "description": "Address of the wallet",
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "in": "query",
             "name": "productId",
             "required": true,
             "type": "string",
-            "description": "ID of the product"
+            "description": "ID of the product",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {

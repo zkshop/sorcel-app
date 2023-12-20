@@ -9,17 +9,22 @@
       "parameters": [
         {
           "in": "body",
-          "name": "price",
+          "name": "body",
+          "description": "Payment intent details",
           "required": true,
-          "type": "number",
-          "description": "Price of the product"
-        },
-        {
-          "in": "body",
-          "name": "moneyAccountId",
-          "required": true,
-          "type": "string",
-          "description": "ID of the money account"
+          "schema": {
+            "type": "object",
+            "properties": {
+              "price": {
+                "type": "number",
+                "description": "Price of the product"
+              },
+              "moneyAccountId": {
+                "type": "string",
+                "description": "ID of the money account"
+              }
+            }
+          }
         }
       ],
       "responses": {

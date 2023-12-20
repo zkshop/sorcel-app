@@ -4,6 +4,7 @@
   "globalEnv": [
     "APP_ID",
     "CI",
+    "DOTENV_KEY",
     "GITHUB_ACTIONS",
     "MONTHLY_PRO_PLAN_CHECKOUT_LINK",
     "NETWORK",

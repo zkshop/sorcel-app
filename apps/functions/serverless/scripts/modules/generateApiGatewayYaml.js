@@ -16,12 +16,31 @@ export const defaultOptions = {
   'template-path': `./scripts/template.yaml`,
 };
 
-function createOpenApiObject(_function) {
+// function keyResolver(keys, obj, onLastKey) {
+//   const [ref, copy] = [obj, { ...obj }];
+
+//   let current = ref;
+//   let result;
+//   let i = 0;
+//   while (i < keys.length) {
+//     if (current[keys[i]] === undefined) {
+//       return undefined;
+//     }
+//     if (i === keys.length - 1) {
+//       result = onLastKey(current, keys[i]);
+//       break;
+//     }
+//     current = current[keys[i]];
+//     i++;
+//   }
+//   return result;
+// }
+
+function createOpenApiObject(_function, keysToExtract) {
   const config = Function.getConfig(_function.id);
   let openApi = { ...config['openapi'] };
   if (!openApi || !Object.entries(openApi).length)
     throw new Error('Failed to get openApi object from config');
-
   const requiredForApiGateWay = {
     'x-google-backend': {
       address: `https://${process.env.GCP_REGION}-${process.env.GCP_PROJECT}.cloudfunctions.net/${_function.name}-${process.env['ENV_CONTEXT']}`,
@@ -55,7 +74,6 @@ const loadYaml = (path) => {
     json,
   };
 };
-// TODO: handle standalone run (createFunctions)
 async function generateYaml(args) {
   const options = getArgs(
     {
@@ -68,6 +86,7 @@ async function generateYaml(args) {
   const { file, json } = loadYaml(options['template-path']);
   let paths = {};
   let buildingYaml = { ...json };
+  let allDefinitions = {};
   const securityDefinitions = { ...buildingYaml['securityDefinitions'] };
   delete buildingYaml['securityDefinitions'];
 
@@ -86,6 +105,10 @@ async function generateYaml(args) {
   Object.freeze(paths);
   buildingYaml['paths'] = paths;
   buildingYaml['securityDefinitions'] = securityDefinitions;
+  buildingYaml['definitions'] = allDefinitions;
+  // console.log(buildingYaml);
+  // console.log('all', a);
+  // process.exit(1);
   const yamlStr = yaml.dump(buildingYaml);
   await fs.promises.writeFile(options['yaml-outfile'], yamlStr, 'utf8');
   return options['yaml-outfile'];

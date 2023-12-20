@@ -48,7 +48,6 @@ async function deployCloudFunctions(callback, silent) {
     }, silent);
   });
   await Promise.all(promises);
-  console.log('dsfgdfg');
 }
 
 export default deployCloudFunctions;

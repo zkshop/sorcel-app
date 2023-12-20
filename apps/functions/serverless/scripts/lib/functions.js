@@ -97,7 +97,7 @@ export class Function {
   setDeployCommand(command) {
     this.deployCommand = command;
   }
-  async do(commands, cwd, callback, silent){
+  async do(commands, cwd, callback, silent) {
     await _do(commands, this.path, callback, silent);
   }
 }
@@ -107,12 +107,13 @@ async function _do(commands, cwd, callback, silent) {
     return new Promise((resolve, reject) => {
       const splitCommand = command.split(' ');
       const args = splitCommand.slice(1);
-      const process = spawn(splitCommand[0], args, { cwd: cwd || this.path, shell: true});
+      const childProcess = spawn(splitCommand[0], args, { cwd: cwd || this.path, shell: true });
 
-      runningProcess.push(process);
-      callback && callback(process, index);
-      process.on('close', (code) => {
-        runningProcess = runningProcess.filter(p => p !== process);
+      runningProcess.push(childProcess);
+      callback && callback(childProcess, index);
+
+      childProcess.on('close', (code) => {
+        runningProcess = runningProcess.filter((p) => p !== childProcess);
         if (code !== 0 && !silent) {
           reject(new Error(`Command failed with exit code ${code}`));
         } else {

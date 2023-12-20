@@ -24,15 +24,16 @@ const supportedOptions = [
   'for-staging',
   'no-deploy',
   'no-config',
+  'dry',
 ];
 const defaultOptions = {};
 const parseArgs = new Map([
-  ['ignore-functions', (key) => key.split(' ')],
-  ['include-only', (key) => key.split(' ')],
-  ['for-production', (key) => 'production'],
-  ['for-staging', (key) => 'staging'],
-  ['no-deploy', (key) => true],
-  ['no-config', (key) => true],
+  ['ignore-functions', (value) => value.split(' ')],
+  ['include-only', (value) => value.split(' ')],
+  ['for-production', () => 'production'],
+  ['for-staging', () => 'staging'],
+  ['no-deploy', () => true],
+  ['no-config', () => true],
 ]);
 
 let tasks = [];
@@ -129,6 +130,35 @@ async function main(args) {
     args || process.argv.slice(2),
   );
 
+  /**
+   * This function is used to simulate a delay when the 'dry' option is enabled.
+   * If the 'dry' option is not enabled, it will execute the provided callback immediately.
+   * This function should be used to wrap any function that mutates data on Google servers.
+   * Reading data without mutation is allowed without using this function.
+   *
+   * @param {Function} callback - The callback function to be executed.
+   */
+  const dry = async (callback, release) => {
+    const releaser = {
+      delay: {
+        default: options.dry,
+        random: (min, max, callback) => {
+          const delay = Math.random() * (max - min) + min;
+          setTimeout(callback, delay * 1000);
+        },
+      },
+      array: {
+        random: (arr) => {
+          return arr[Math.floor(Math.random() * arr.length)];
+        },
+      },
+    };
+    if (options.dry != undefined) {
+      await Function.do([`sleep ${options.dry}`], process.env.PWD);
+      release && release(releaser);
+    } else await callback();
+  };
+
   let envYamlPath = undefined;
 
   addTask('checking env variables', async (ctx) => {
@@ -190,6 +220,7 @@ async function main(args) {
         });
       },
     );
+  
     const yamlPath = `./results/${ctx.global.deploymentEnvContext}/api-gateway.yaml`;
     await generateYaml({
       ...YamlDefaultOptions,
@@ -218,10 +249,14 @@ async function main(args) {
     });
     if (existingConfigNames.find((name) => name == ctx.global.apiConfigName))
       return skip('already exist');
+
     ctx.describe('Running CLI command');
-    await Function.do([createConfigCmd], process.env.PWD, (_process, index) => {
-      _process.stderr.on('data', (data) => {});
-      _process.stdout.on('data', (data) => {});
+
+    await dry(async () => {
+      await Function.do([createConfigCmd], process.env.PWD, (_process, index) => {
+        _process.stderr.on('data', (data) => {});
+        _process.stdout.on('data', (data) => {});
+      });
     });
   });
 
@@ -236,20 +271,22 @@ async function main(args) {
         project: process.env.SORCEL_PROJECT,
       },
     });
-
-    await Function.do([apiGateWayCmd], process.env.PWD, (_process, index) => {
-      _process.stderr.on('data', (data) => {
-        // console.log(`create config: ${data}`);
-      });
-      _process.stdout.on('data', (data) => {
-        // console.log(`create config: ${data}`);
+  
+    await dry(async () => {
+      await Function.do([apiGateWayCmd], process.env.PWD, (_process, index) => {
+        _process.stderr.on('data', (data) => {
+          // console.log(`create config: ${data}`);
+        });
+        _process.stdout.on('data', (data) => {
+          // console.log(`create config: ${data}`);
+        });
       });
     });
   });
 
   addTask(
     'Deploying functions',
-    async (ctx, next) => {
+    async (ctx, next, skip) => {
       if (options['no-deploy']) return skip('Command line argument provided');
       ctx.describe('Generating CLI commands');
       Function.allFunctions.forEach((f) => {
@@ -313,29 +350,40 @@ async function main(args) {
       liveFunctionsNames.forEach((name) => multi.success(name));
 
       ctx.describe('Uploading');
-      await deployCloudFunctions((_function, childProcess, index) => {
-        childProcess.on('close', async (code) => {
-          if (index == 2) {
-            if (code != 0) {
-              multi.error(_function.name);
-            } else {
-              multi.success(_function.name);
-
-              await uploadFile(
-                `bundled-functions-${ctx.global.deploymentEnvContext}`,
-                `${process.env.PWD}/scripts/blank_file`,
-                { ...uploadFileDefaultOptions, destination: `${_function.name}:${_function.hash}` },
-              ).catch((e) => {
-                //TODO: handle error
-                console.error(e);
-              });
-            }
-          }
+      const release = (releaser) =>
+        Function.allFunctions.forEach((f) => {
+          const result = releaser.array.random(['success', 'error']);
+          releaser.delay.random(3, 7, () => multi[result](f.name));
         });
-      }, true).catch((e) => {
-        console.error(e);
-        process.exit(1);
-      });
+  
+      await dry(async () => {
+        await deployCloudFunctions((_function, childProcess, index) => {
+          childProcess.on('close', async (code) => {
+            if (index == 2) {
+              if (code != 0) {
+                multi.error(_function.name);
+              } else {
+                multi.success(_function.name);
+
+                await uploadFile(
+                  `bundled-functions-${ctx.global.deploymentEnvContext}`,
+                  `${process.env.PWD}/scripts/blank_file`,
+                  {
+                    ...uploadFileDefaultOptions,
+                    destination: `${_function.name}:${_function.hash}`,
+                  },
+                ).catch((e) => {
+                  //TODO: handle error
+                  console.error(e);
+                });
+              }
+            }
+          });
+        }, true).catch((e) => {
+          console.error(e);
+          process.exit(1);
+        });
+      }, release);
     },
   );
 

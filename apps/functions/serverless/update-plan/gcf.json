@@ -11,8 +11,20 @@
           "in": "body",
           "name": "event",
           "required": true,
-          "type": "object",
-          "description": "Event object from Stripe"
+          "description": "Event object from Stripe",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "ID of the event"
+              },
+              "type": {
+                "type": "string",
+                "description": "Type of the event"
+              }
+            }
+          }
         }
       ],
       "responses": {

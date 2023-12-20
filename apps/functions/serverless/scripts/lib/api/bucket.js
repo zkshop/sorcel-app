@@ -20,7 +20,6 @@ export async function uploadFile(bucketName, fileName, opts) {
   // Uploads a local file to the bucket
   await storage.bucket(bucketName).upload(fileName, opts || uploadFileDefaultOptions);
 
-  console.log(`${fileName} uploaded to ${bucketName}.`);
 }
 
 export async function listFiles(bucketName) {

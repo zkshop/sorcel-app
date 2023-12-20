@@ -75,7 +75,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     optimizeDeps: {
-      exclude: ['crypto'], // Added this line
+      exclude: ['crypto'], // Add this line
     },
   };
 });

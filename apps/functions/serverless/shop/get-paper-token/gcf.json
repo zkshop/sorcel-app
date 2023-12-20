@@ -11,8 +11,10 @@
           "in": "body",
           "name": "code",
           "required": true,
-          "type": "string",
-          "description": "Code for the paper token"
+          "description": "Code for the paper token",
+          "schema": {
+            "type": "string"
+          }
         }
       ],
       "responses": {
