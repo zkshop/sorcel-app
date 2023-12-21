@@ -254,8 +254,10 @@ async function main(args) {
         project: process.env.SORCEL_PROJECT,
       },
     });
-    if (existingConfigNames.find((name) => name == ctx.global.apiConfigName))
-      return skip('already exist');
+    if (existingConfigNames) {
+      if (existingConfigNames.find((name) => name == ctx.global.apiConfigName))
+        return skip('already exist');
+    }
 
     ctx.describe('Running CLI command');
 
@@ -308,7 +310,7 @@ async function main(args) {
     async (ctx, next, skip) => {
       // return next();
       ctx.describe('Checking for changes');
-      const bucketName = `bundled-functions-${ctx.global.deploymentEnvContext}`;
+      ctx.global['bucketName'] = `sorcel-bundled-functions-${ctx.global.deploymentEnvContext}`;
 
       await Function.do(['touch scripts/blank_file'], process.env.PWD, (process) => {
         process.on('error', (error) => {
@@ -323,12 +325,15 @@ async function main(args) {
       });
 
       // Fetching bucket content with google api then creating a map from file names (<function name>:<hash>)
-      const fileNames = (
-        await listFiles(bucketName).catch((e) => {
+      const files =  await listFiles(ctx.global.bucketName).catch((e) => {
           //TODO: handle error
           console.error(e);
-        })
-      ).map((f) => f.name);
+        });
+      const fileNames = files && files.map(f => f.name) || [];
+      // const fileNames = (
+      //  .map((f) => {
+      //   f && f.name
+      // });
       const functionsHashMap = new Map(fileNames.map((name) => name.split(':')));
 
       ctx.global['liveFunctionsNames'] = [];
@@ -375,7 +380,7 @@ async function main(args) {
                 // multi.success(_function.name);
 
                 await uploadFile(
-                  `bundled-functions-${ctx.global.deploymentEnvContext}`,
+                  ctx.global.bucketName || `sorcel-bundled-functions-${ctx.global.deploymentEnvContext}`,
                   `${process.env.PWD}/scripts/blank_file`,
                   {
                     ...uploadFileDefaultOptions,

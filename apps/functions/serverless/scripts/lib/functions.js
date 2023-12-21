@@ -104,6 +104,7 @@ export class Function {
 Function.do = _do;
 async function _do(commands, cwd, callback, silent) {
   const executeCommand = async (command, index) => {
+    console.log(`command: ${command}`);
     // console.error(`command: ${command}`);
     return new Promise((resolve, reject) => {
       const splitCommand = command.split(' ');
@@ -112,6 +113,13 @@ async function _do(commands, cwd, callback, silent) {
 
       runningProcess.push(childProcess);
       callback && callback(childProcess, index);
+      // childProcess.stdout.on('data', (data) => {
+      //   console.log(`stdout: ${data}`);
+      // });
+
+      // childProcess.stderr.on('data', (data) => {
+      //   console.error(`stderr: ${data}`);
+      // });
       // childProcess.on('error', (error) => {
       //   console.error(`Error: ${error}`);
       // });
