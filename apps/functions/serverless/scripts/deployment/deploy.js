@@ -194,26 +194,14 @@ async function main(args) {
 
   addTask('parsing functions', async () => {
     createFunctions(options['include-only'], options['ignore-functions']);
-    // Function.allFunctions.forEach(f => {
-    //   f.do(['rm -rf index.cjs', undefined, (process) => {
-
-    //   }]);
-    // })
-    // process.exit(42);
   });
 
-  {
-    addTask('creating yaml env file', async (ctx) => {
-      ctx.global['envYamlPath'] = envToYaml(
-        options['for-production'] ? '.env.production' : '.env.staging',
-      );
-    });
+  addTask('creating yaml env file', async (ctx) => {
+    ctx.global['envYamlPath'] = envToYaml(
+      options['for-production'] ? '.env.production' : '.env.staging',
+    );
+  });
 
-    //TODO: duplicate task, move down
-    addTask('deploying functions', async (ctx) => {
-      // log(`deploying functions ${Function.allFunctions.map((f) => f.name)}`);
-    });
-  }
   addTask('Creating api-gateway config', async (ctx, next, skip) => {
     if (options['no-config']) return skip('Command line argument provided');
 
@@ -308,10 +296,7 @@ async function main(args) {
       return next();
     },
     async (ctx, next, skip) => {
-      // return next();
       ctx.describe('Checking for changes');
-      ctx.global['bucketName'] = `sorcel-bundled-functions-${ctx.global.deploymentEnvContext}`;
-
       await Function.do(['touch scripts/blank_file'], process.env.PWD, (process) => {
         process.on('error', (error) => {
           // TODO: handle error
@@ -325,15 +310,13 @@ async function main(args) {
       });
 
       // Fetching bucket content with google api then creating a map from file names (<function name>:<hash>)
-      const files =  await listFiles(ctx.global.bucketName).catch((e) => {
-          //TODO: handle error
-          console.error(e);
-        });
-      const fileNames = files && files.map(f => f.name) || [];
-      // const fileNames = (
-      //  .map((f) => {
-      //   f && f.name
-      // });
+      const files = await listFiles(
+        `${process.env.SORCEL_HASH_BUCKET_PREFIX}-${ctx.global.deploymentEnvContext}`,
+      ).catch((e) => {
+        //TODO: handle error
+        console.error(e);
+      });
+      const fileNames = (files && files.map((f) => f.name)) || [];
       const functionsHashMap = new Map(fileNames.map((name) => name.split(':')));
 
       ctx.global['liveFunctionsNames'] = [];
@@ -375,12 +358,12 @@ async function main(args) {
           childProcess.on('close', async (code) => {
             if (index == 2) {
               if (code != 0) {
-                // multi.error(_function.name);
+                multi.error(_function.name);
               } else {
-                // multi.success(_function.name);
+                multi.success(_function.name);
 
                 await uploadFile(
-                  ctx.global.bucketName || `sorcel-bundled-functions-${ctx.global.deploymentEnvContext}`,
+                  `${process.env.SORCEL_HASH_BUCKET_PREFIX}-${ctx.global.deploymentEnvContext}`,
                   `${process.env.PWD}/scripts/blank_file`,
                   {
                     ...uploadFileDefaultOptions,
@@ -408,4 +391,3 @@ async function main(args) {
 }
 
 main();
-// test();
