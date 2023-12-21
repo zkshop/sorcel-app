@@ -104,7 +104,7 @@ export class Function {
 Function.do = _do;
 async function _do(commands, cwd, callback, silent) {
   const executeCommand = async (command, index) => {
-    console.error(`command: ${command}`);
+    // console.error(`command: ${command}`);
     return new Promise((resolve, reject) => {
       const splitCommand = command.split(' ');
       const args = splitCommand.slice(1);
@@ -112,9 +112,9 @@ async function _do(commands, cwd, callback, silent) {
 
       runningProcess.push(childProcess);
       callback && callback(childProcess, index);
-      childProcess.on('error', (error) => {
-        console.error(`Error: ${error}`);
-      });
+      // childProcess.on('error', (error) => {
+      //   console.error(`Error: ${error}`);
+      // });
 
 
       childProcess.on('close', (code) => {

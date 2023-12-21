@@ -82,7 +82,7 @@ const executeTasks = async () => {
       };
       const next = () => executeCallback(index + 1);
 
-      // ctx._spinner.start();
+      ctx._spinner.start();
       if (isAsync(callback)) await callback(ctx, next, skip);
       else callback(data, next, skip);
       if (ctx._spinner.isSpinning) ctx._spinner.succeed(description);
@@ -194,6 +194,12 @@ async function main(args) {
 
   addTask('parsing functions', async () => {
     createFunctions(options['include-only'], options['ignore-functions']);
+    // Function.allFunctions.forEach(f => {
+    //   f.do(['rm -rf index.cjs', undefined, (process) => {
+
+    //   }]);
+    // })
+    // process.exit(42);
   });
 
   {
@@ -300,7 +306,7 @@ async function main(args) {
       return next();
     },
     async (ctx, next, skip) => {
-      return next();
+      // return next();
       ctx.describe('Checking for changes');
       const bucketName = `bundled-functions-${ctx.global.deploymentEnvContext}`;
 
@@ -339,18 +345,18 @@ async function main(args) {
       ctx._spinner.info('Deploying functions');
       ctx._spinner.stopAndPersist();
       const spinners = {};
-      // const liveFunctionsNames = ctx.global.liveFunctionsNames;
+      const liveFunctionsNames = ctx.global.liveFunctionsNames || [];
       // Functions to deploy
       for (const f of Function.allFunctions) {
         spinners[f.name] = f.name;
       }
 
       // Already up to date functions (if any)
-      // for (const liveFunction of liveFunctionsNames) {
-      //   spinners[liveFunction] = `${liveFunction}: (already up to date)`;
-      // }
-      // let multi = new Multispinner(spinners);
-      // liveFunctionsNames.forEach((name) => multi.success(name));
+      for (const liveFunction of liveFunctionsNames) {
+        spinners[liveFunction] = `${liveFunction}: (already up to date)`;
+      }
+      let multi = new Multispinner(spinners);
+      liveFunctionsNames.forEach((name) => multi.success(name));
 
       ctx.describe('Uploading');
       const release = (releaser) =>

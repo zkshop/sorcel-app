@@ -34,37 +34,11 @@ x-google-management:
         values:
           STANDARD: 5
 paths:
-  /shop/poap/events/id:
-    get:
-      x-google-backend:
-        address: >-
-          https://europe-west3-composite-fire-406610.cloudfunctions.net/id-staging
-      operationId: id
-      summary: Get POAP event by ID
-      parameters:
-        - in: query
-          name: id
-          required: true
-          type: string
-          description: ID of the POAP event
-      responses:
-        '200':
-          description: Successful operation
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                description: POAP event data
-        '400':
-          description: Missing ID
-        '500':
-          description: Error getting POAP event
   /admin/create-stripe-account:
     get:
       x-google-backend:
         address: >-
-          https://europe-west3-composite-fire-406610.cloudfunctions.net/create-stripe-account-staging
+          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/create-stripe-account-staging
       operationId: createStripeAccount
       summary: Create Stripe account
       parameters:
@@ -86,6 +60,32 @@ paths:
           description: Missing accountId
         '500':
           description: Error creating Stripe account
+  /shop/poap/events/id:
+    get:
+      x-google-backend:
+        address: >-
+          https://europe-west3-dazzling-botany-406610.cloudfunctions.net/id-staging
+      operationId: id
+      summary: Get POAP event by ID
+      parameters:
+        - in: query
+          name: id
+          required: true
+          type: string
+          description: ID of the POAP event
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                description: POAP event data
+        '400':
+          description: Missing ID
+        '500':
+          description: Error getting POAP event
 securityDefinitions:
   api_key:
     type: apiKey
