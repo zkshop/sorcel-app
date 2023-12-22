@@ -1,0 +1,55 @@
+{
+  "params": {
+    "useDefaultConfig": true
+  },
+  "gcf": {},
+  "openapi": {
+    "post": {
+      "summary": "Authenticate user",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "login",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "Email of the user"
+              },
+              "password": {
+                "type": "string",
+                "description": "Password of the user"
+              }
+            }
+          },
+          "description": "User login details"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful operation",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "token": {
+                "type": "string",
+                "description": "Authentication token"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Missing email or password"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "500": {
+          "description": "Error during authentication"
+        }
+      }
+    }
+  }
+}

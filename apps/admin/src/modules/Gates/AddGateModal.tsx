@@ -105,12 +105,14 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
                   render={({ field: { onChange, value } }) => (
                     <RadioGroup onChange={onChange} value={value}>
                       <HStack>
-                        <Radio value={COLLECTION_FIELDS.network.polygon.value}>
-                          {COLLECTION_FIELDS.network.polygon.label}
-                        </Radio>
-                        <Radio value={COLLECTION_FIELDS.network.ethereum.value}>
-                          {COLLECTION_FIELDS.network.ethereum.label}
-                        </Radio>
+                        {[COLLECTION_FIELDS.network.polygon,
+                        COLLECTION_FIELDS.network.ethereum,
+                        COLLECTION_FIELDS.network.xrpledger
+                        ].map(field => (
+                          <Radio value={field.value}>
+                            {field.label}
+                          </Radio>
+                        ))}
                       </HStack>
                     </RadioGroup>
                   )}

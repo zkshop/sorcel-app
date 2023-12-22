@@ -48,6 +48,10 @@ export const COLLECTION_FIELDS = {
       label: 'Ethereum',
       value: 'ETHEREUM',
     },
+    xrpledger: {
+      label: 'XRP Ledger',
+      value: 'XRPLEDGER',
+    },
   },
   contractAddress: {
     label: 'NFT Contract Address',

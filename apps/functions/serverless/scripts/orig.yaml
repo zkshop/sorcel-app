@@ -1,0 +1,166 @@
+swagger: '2.0'
+info:
+  description: User API sample
+  version: 1.0.6
+  title: User API
+host: user-api.apigateway.api-gateway-360218.cloud.goog
+basePath: /v1
+schemes:
+  - https
+security:
+  - api_key: []
+x-google-backend:
+  address: >-
+    https://europe-west1-api-gateway-360218.cloudfunctions.net/user-function-manual
+x-google-management:
+  metrics:
+    - name: "get-requests"
+      displayName: "get requests"
+      valueType: INT64
+      metricKind: DELTA
+    - name: "post-requests"
+      displayName: "post requests"
+      valueType: INT64
+      metricKind: DELTA
+    - name: "put-requests"
+      displayName: "put requests"
+      valueType: INT64
+      metricKind: DELTA
+    - name: "delete-requests"
+      displayName: "delete requests"
+      valueType: INT64
+      metricKind: DELTA
+  quota:
+    limits:
+      - name: "get-limit"
+        metric: "get-requests"
+        unit: "1/min/{project}"
+        values:
+          STANDARD: 10
+      - name: "post-limit"
+        metric: "post-requests"
+        unit: "1/min/{project}"
+        values:
+          STANDARD: 5
+      - name: "put-limit"
+        metric: "put-requests"
+        unit: "1/min/{project}"
+        values:
+          STANDARD: 3
+      - name: "delete-limit"
+        metric: "delete-requests"
+        unit: "1/min/{project}"
+        values:
+          STANDARD: 1
+paths:
+  /user:
+    get:
+      tags:
+        - user
+      summary: Get users
+      description: Get all users
+      operationId: getAll
+      produces:
+        - application/json
+      security: []
+      x-google-quota:
+        metricCosts:
+          "get-requests": 1
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      x-google-quota:
+        metricCosts:
+          "post-requests": 1
+      parameters:
+        - in: body
+          name: body
+          description: Created user object
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        default:
+          description: successful operation
+    put:
+      tags:
+        - user
+      summary: Updated user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      x-google-quota:
+        metricCosts:
+          "put-requests": 1
+      parameters:
+        - name: username
+          in: query
+          description: name that need to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Updated user object
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '400':
+          description: Invalid user supplied
+        '404':
+          description: User not found
+    delete:
+      tags:
+        - user
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      x-google-quota:
+        metricCosts:
+          "delete-requests": 1
+      parameters:
+        - name: username
+          in: query
+          description: The name that needs to be deleted
+          required: true
+          type: string
+      responses:
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: key
+    in: query
+definitions:
+  User:
+    type: object
+    properties:
+      username:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      email:
+        type: string
