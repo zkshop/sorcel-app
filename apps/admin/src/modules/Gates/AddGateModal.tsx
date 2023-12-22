@@ -135,7 +135,7 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
               <Button onClick={onClose} backgroundColor="red" color="white">
                 Close
               </Button>
-              <Button type="submit">Add Segment</Button>
+              <Button type="submit">Add condition</Button>
             </ButtonGroup>
           </ModalFooter>
         </form>
