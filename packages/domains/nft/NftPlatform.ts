@@ -1,12 +1,5 @@
 import { Nft } from '@3shop/alchemy';
 import { Nft as BithmompNft } from './Xrp/Bithomp.types';
-
-export interface collectionIdentifiers {
-  contract: true;
-  nftokenTaxon: true;
-  issuer: true;
-}
-
 /**
  * This type represents a platform which is a combination of NFT type and identifiers type.
  * @param ApiResponse - The type of response returned by the API.
@@ -17,14 +10,19 @@ export type platform<ApiResponse, identifiersType> = {
   nft: ApiResponse;
 };
 
-export interface EvmBased {
-  identifiers: Pick<collectionIdentifiers, 'contract'>;
+interface XRPidentifers {
+  issuer: string
+  nftokenTaxon: string
 }
 
+interface EVMidentifiers {
+  contract: string
+}
+
+export type allIdentifiers = XRPidentifers | EVMidentifiers;
+export type platformFunctionType<T> = T extends platform<unknown, allIdentifiers> ? T : never;
+
 export namespace platforms {
-  export type Etherum = platform<Nft, EvmBased>;
-
-  export type Polygon = platform<Nft, EvmBased>;
-
-  export type Xrp = platform<BithmompNft, Pick<collectionIdentifiers, 'issuer' | 'nftokenTaxon'>>;
+  export type EvmBased = platform<Nft, EVMidentifiers>;
+  export type XRP = platform<BithmompNft, XRPidentifers>;
 }
