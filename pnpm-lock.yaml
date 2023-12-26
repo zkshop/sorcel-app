@@ -305,6 +305,12 @@ importers:
       '@types/jsonwebtoken':
         specifier: ^8.5.9
         version: 8.5.9
+<<<<<<< HEAD
+=======
+      bun:
+        specifier: ^1.0.15
+        version: 1.0.18
+>>>>>>> 042bd83 (added type support for nftService and nftClient, to support different apis, need to test)
       dotenv:
         specifier: ^16.3.1
         version: 16.3.1
@@ -15351,11 +15357,14 @@ packages:
       public-encrypt: 4.0.3
       randombytes: 2.1.0
       randomfill: 1.0.4
+<<<<<<< HEAD
     dev: true
 
   /crypto-js@3.3.0:
     resolution: {integrity: sha512-DIT51nX0dCfKltpRiXV+/TVZq+Qq2NgF4644+K7Ttnla7zEzqc+kjJyiB96BHNyUTBxyjzRcZYpUdZa+QAqi6Q==}
     dev: false
+=======
+>>>>>>> 042bd83 (added type support for nftService and nftClient, to support different apis, need to test)
 
   /css-box-model@1.2.1:
     resolution: {integrity: sha512-a7Vr4Q/kd/aw96bnJG332W9V9LkJO69JRcaCYDUqjp6/z0w6VcZjgAcTbgFxEPfBgdnAwlh3iwu+hLopa+flJw==}
