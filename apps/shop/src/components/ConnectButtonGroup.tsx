@@ -1,7 +1,9 @@
 import React from 'react';
 import { classnames } from '@3shop/config';
-import { Box, Flex, Button } from '@3shop/ui';
+import { Box, Flex, Button, Input } from '@3shop/ui';
 import { ConnectWalletButton } from '@3shop/wallet';
+// import { fetchNFTS } from '@3shop/store/slices/nfts';
+const { useState } = React;
 
 type ConnectButtonGroupProps = {
   handleOpenLoginModal(): void;
@@ -59,6 +61,10 @@ export function ConnectButtonGroup({
       </Box>
     );
 
+  const TestPlatform = () => {
+    const [testWallet, setTestWallet] = useState('');
+    return <Input value={testWallet} onChange={(e) => setTestWallet(e.target.value)} />;
+  };
   return (
     <Flex gap={1} flexDirection="row" className={classnames.GROUP_CONNECT_BUTTON}>
       {showConnectEmail && (
@@ -72,7 +78,11 @@ export function ConnectButtonGroup({
           E-mail login
         </Button>
       )}
-      <ConnectWalletButton />
+      <Flex flexDirection="column">
+        <ConnectWalletButton />
+        <h1>test platforms</h1>
+        <TestPlatform />
+      </Flex>
     </Flex>
   );
 }
