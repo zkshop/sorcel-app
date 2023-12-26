@@ -1,8 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { Nft } from '@3shop/domains';
 import { NftService } from '@3shop/domains';
+import { testPlatformService } from '@3shop/domains';
+import { testPlatformClient } from '@3shop/domains';
 import { NftReaderClient } from '@3shop/infra';
 
+namespace testPlatformScrapper {
+  // const WalletScrapper = testPlatformService
+}
 const WalletScrapper = NftService(NftReaderClient());
 
 type Params = {
