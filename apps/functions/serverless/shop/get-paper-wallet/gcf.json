@@ -1,0 +1,28 @@
+{
+  "params": {
+    "useDefaultConfig": true
+  },
+  "gcf": {},
+  "openapi": {
+    "post": {
+      "summary": "Get paper wallet",
+      "responses": {
+        "200": {
+          "description": "Successful operation",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "wallet": {
+                "type": "object",
+                "description": "The paper wallet"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Error when requesting the wallet"
+        }
+      }
+    }
+  }
+}
