@@ -34,7 +34,7 @@ export interface NftApiParams {
   deletedAt?: string;
 }
 
-export interface Nft {
+export interface BithmompNft {
   type: string;
   flags: {
     burnable: boolean;
