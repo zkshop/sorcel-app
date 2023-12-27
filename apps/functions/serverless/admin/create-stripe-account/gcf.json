@@ -1,0 +1,40 @@
+{
+  "params": {
+    "useDefaultConfig": true
+  },
+  "gcf": {},
+  "openapi": {
+    "get": {
+      "summary": "Create Stripe account",
+      "parameters": [
+        {
+          "in": "query",
+          "name": "accountId",
+          "required": true,
+          "type": "string",
+          "description": "ID of the Stripe account"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful operation",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "onboarding_link": {
+                "type": "string",
+                "description": "Onboarding link for the Stripe account"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Missing accountId"
+        },
+        "500": {
+          "description": "Error creating Stripe account"
+        }
+      }
+    }
+  }
+}

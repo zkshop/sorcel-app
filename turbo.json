@@ -2,6 +2,7 @@
   "$schema": "https://turborepo.org/schema.json",
   "globalDependencies": [".env", "tsconfig.json"],
   "globalEnv": [
+    "SORCEL_PROJECT_ROOT",
     "APP_ID",
     "CI",
     "GITHUB_ACTIONS",
