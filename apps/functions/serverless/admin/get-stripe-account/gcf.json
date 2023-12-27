@@ -1,0 +1,37 @@
+{
+  "params": {
+    "useDefaultConfig": true
+  },
+  "gcf": {},
+  "openapi": {
+    "get": {
+      "summary": "Get Stripe account",
+      "parameters": [
+        {
+          "in": "query",
+          "name": "accountId",
+          "required": true,
+          "type": "string",
+          "description": "ID of the Stripe account"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful operation",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "account": {
+                "type": "object",
+                "description": "Stripe account details"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Error retrieving Stripe account"
+        }
+      }
+    }
+  }
+}

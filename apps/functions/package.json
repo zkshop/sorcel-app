@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "deploy": "cd serverless; npx bun scripts/deployment/deploy.js",
     "dev": "vc dev",
+    "devTwo": "cd serverless; npx bun deployLocally.js && echo $PWD && cd .gcf_local && npx bun i && npx bun bundle && npx bun start",
     "lint": "eslint \"**/*.ts\" --fix"
   },
   "dependencies": {
@@ -19,13 +21,20 @@
     "@3shop/supabase": "workspace:*",
     "@vercel/node": "^2.7.1",
     "axios": "^1.1.3",
+    "bun": "^1.0.15",
     "cross-fetch": "^3.1.5",
     "http-status": "^1.5.3",
     "jsonwebtoken": "^9.0.0",
     "stripe": "^11.6.0"
   },
   "devDependencies": {
+    "@google-cloud/storage": "^7.7.0",
     "@types/jsonwebtoken": "^8.5.9",
+    "dotenv": "^16.3.1",
+    "googleapis": "^129.0.0",
+    "js-yaml": "^4.1.0",
+    "multispinner": "^0.2.1",
+    "ora": "^7.0.1",
     "typescript": "5.1.6"
   }
 }
