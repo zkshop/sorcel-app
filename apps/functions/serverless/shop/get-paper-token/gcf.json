@@ -1,0 +1,39 @@
+{
+  "params": {
+    "useDefaultConfig": true
+  },
+  "gcf": {},
+  "openapi": {
+    "post": {
+      "summary": "Get paper token",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "code",
+          "required": true,
+          "description": "Code for the paper token",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful operation",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "userToken": {
+                "type": "string",
+                "description": "User token"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Error getting paper token"
+        }
+      }
+    }
+  }
+}
