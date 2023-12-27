@@ -10,12 +10,12 @@ export type platform<ApiResponse, identifiersType> = {
   nft: ApiResponse;
 };
 
-interface XRPidentifers {
+export interface XRPidentifers {
   issuer: string
   nftokenTaxon: string
 }
 
-interface EVMidentifiers {
+export interface EVMidentifiers {
   contract: string
 }
 
