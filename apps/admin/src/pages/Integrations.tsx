@@ -70,7 +70,7 @@ export const Integrations = () => {
         </Text>
         <Box pos="relative" paddingBottom="55%" height={0}>
           <iframe
-            src="https://www.loom.com/embed/8c7dfd2e1ae949c29d5dc37d77688323?sid=f379653e-0bb7-422b-b6e0-86f41f78dbef"
+            src="https://youtu.be/G_0a_uOh9eg"
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
           ></iframe>
         </Box>
