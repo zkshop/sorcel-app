@@ -1,5 +1,5 @@
 import { Nft } from '@3shop/alchemy';
-import { Nft as BithmompNft } from './Xrp/Bithomp.types';
+import { BithmompNft } from './Xrp/Bithomp.types';
 /**
  * This type represents a platform which is a combination of NFT type and identifiers type.
  * @param ApiResponse - The type of response returned by the API.
