@@ -68,10 +68,15 @@ export const Integrations = () => {
         <Text variant="H700" paddingY={2}>
           Tutorial
         </Text>
-        <Box pos="relative" paddingBottom="55%" height={0}>
+        <Box pos="relative" width="100%" height="0" paddingBottom="56.25%">
           <iframe
-            src="https://youtu.be/G_0a_uOh9eg"
-            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+            width="100%"
+            height="100%"
+            style={{ position: 'absolute', top: 0, left: 0 }}
+            src="https://www.youtube.com/embed/G_0a_uOh9eg?si=32OjwaX0LVEtjY5G"
+            title="Webflow tutorial"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
           ></iframe>
         </Box>
       </Box>
