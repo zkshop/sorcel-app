@@ -4,16 +4,16 @@ export type PlatformData = XRPidentifers | EVMidentifiers;
 
 export interface mockPlatform {
   name: string;
-  data: PlatformData; // Use the defined type here
+  data: PlatformData;
 }
 
 export const mockXRPidentifiers: XRPidentifers = {
-  issuer: 'rKRTexivD9UFsjH1dgmHLZHgnqhLEa9G5v',
-  nftokenTaxon: '451729658',
+  issuer: 'rpbjkoncKiv1LkPWShzZksqYPzKXmUhTW7',
+  nftokenTaxon: '52',
 };
 
 export const mockEVMidentifiers: EVMidentifiers = {
-  contract: 'mockContract',
+  contract: '0xCc4177805aad9483ea2b2b814B82a83abe564023',
 };
 
 export const mocks: mockPlatform[] = [
@@ -23,6 +23,6 @@ export const mocks: mockPlatform[] = [
   },
   {
     name: 'EVM',
-    data: mockEVMidentifiers, // Use EVM identifiers here
+    data: mockEVMidentifiers,
   },
 ];
