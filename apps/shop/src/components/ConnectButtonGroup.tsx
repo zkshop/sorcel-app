@@ -72,34 +72,47 @@ export function ConnectButtonGroup({
     const [testWallet, setTestWallet] = useState('');
     const [testing, setTesting] = useState(false);
     const dispatch = useAppDispatch();
+    const [mockData, setMockData] = useState(mocks);
 
-    const CreateMock = () => {
-      return (
-        <>
-          {mocks.map((mock, index) => (
-            <div key={index}>
-              <Flex flexDirection="row" justifyContent="space-between">
-                <h3>{mock.name}</h3>
-                <Button
-                  onClick={() => {
-                    console.log("!!@@data",  mock.data);
-                    dispatch(fetchPlatformNFTS({ platform: mock.name, walletAddress: testWallet, identifiers: mock.data}));
-                  }}
-                >
-                  Test
-                </Button>
-              </Flex>
-              {Object.entries(mock.data).map(([key, value], i) => (
-                <div key={i}>
-                  <label>{key}</label>
-                  <Input type="text" defaultValue={value as string} />
-                </div>
-              ))}
-            </div>
-          ))}
-        </>
-      );
+    const handleInputChange = (index: number, key: string, value: string) => {
+      const newMockData = [...mockData];
+      (newMockData[index] as any).data[key] = value;
+      setMockData(newMockData);
     };
+
+    // const CreateMock = () => {
+    //   return (
+    //     <>
+    //       {mockData.map((mock, index) => (
+    //         <div key={index}>
+    //           <Flex flexDirection="row" justifyContent="space-between">
+    //             <h3>{mock.name}</h3>
+    //           </Flex>
+    //           {Object.entries(mock.data).map(([key, value], i) => (
+    //             <div key={index + i}>
+    //               <label>{key}</label>
+    //               <Input key={key} value={value}  onChange={(e) => handleInputChange(index, key, e.target.value)}/>
+    //             </div>
+    //           ))}
+    //           <Button
+    //             onClick={() => {
+    //               console.log('!!@@data', mock.data);
+    //               dispatch(
+    //                 fetchPlatformNFTS({
+    //                   platform: mock.name,
+    //                   walletAddress: testWallet,
+    //                   identifiers: mock.data,
+    //                 }),
+    //               );
+    //             }}
+    //           >
+    //             Test
+    //           </Button>
+    //         </div>
+    //       ))}
+    //     </>
+    //   );
+    // };
     return (
       <Box gap={0.5} flexDirection="column">
         <Input
@@ -107,14 +120,57 @@ export function ConnectButtonGroup({
           onChange={(e) => setTestWallet(e.target.value)}
           placeholder="please enter wallet address"
         />
-        <Button
-          onClick={() => {
-            setTesting(true);
-          }}
-        >
-          {'Save and test'}
-        </Button>
-        {testing && <CreateMock />}
+        <Box gap={0.5} flexDirection="row">
+          <Button
+            onClick={() => {
+              setTesting(true);
+            }}
+          >
+            {'Save and test'}
+          </Button>
+          <Button
+            onClick={() => {
+              console.log(mockData);
+            }}
+          >
+            {'Log data'}
+          </Button>
+        </Box>
+        {testing && (
+          <>
+            {mockData.map((mock, index) => (
+              <div key={index}>
+                <Flex flexDirection="row" justifyContent="space-between">
+                  <h3>{mock.name}</h3>
+                </Flex>
+                {Object.entries(mock.data).map(([key, value], i) => (
+                  <div key={index + i}>
+                    <label>{key}</label>
+                    <Input
+                      key={key}
+                      value={value}
+                      onChange={(e) => handleInputChange(index, key, e.target.value)}
+                    />
+                  </div>
+                ))}
+                <Button
+                  onClick={() => {
+                    console.log('!!@@data', mock.data);
+                    dispatch(
+                      fetchPlatformNFTS({
+                        platform: mock.name,
+                        walletAddress: testWallet,
+                        identifiers: mock.data,
+                      }),
+                    );
+                  }}
+                >
+                  Test
+                </Button>
+              </div>
+            ))}
+          </>
+        )}
       </Box>
     );
   };
