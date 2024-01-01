@@ -19,6 +19,8 @@ export interface EVMidentifiers {
   contract: string
 }
 
+
+export type allNames = "XRP" | "EVM";
 export type allIdentifiers = XRPidentifers | EVMidentifiers;
 export type platformFunctionType<T> = T extends platform<unknown, allIdentifiers> ? T : never;
 
