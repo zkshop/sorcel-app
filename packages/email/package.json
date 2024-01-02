@@ -1,0 +1,11 @@
+{
+  "name": "@3shop/email",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix"
+  },
+  "dependencies": {
+    "sib-api-v3-sdk": "^8.5.0"
+  }
+}
