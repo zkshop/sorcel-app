@@ -21,6 +21,7 @@ const envVars = {
   PUBLIC_STRIPE_PUBLISHABLE_KEY: undefined,
   SECRET_AIRTABLE: undefined,
   SECRET_ALCHEMY: undefined,
+  SECRET_BREVO: undefined,
   SECRET_CENTER: false,
   SECRET_HASURA: undefined,
   SECRET_JWT: undefined,
