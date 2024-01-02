@@ -400,6 +400,9 @@ importers:
       '@3shop/domains':
         specifier: workspace:*
         version: link:../../packages/domains
+      '@3shop/email':
+        specifier: workspace:*
+        version: link:../../packages/email
       '@3shop/events':
         specifier: workspace:*
         version: link:../../packages/events
@@ -611,6 +614,9 @@ importers:
 
   packages/email:
     dependencies:
+      '@3shop/config':
+        specifier: workspace:*
+        version: link:../config
       sib-api-v3-sdk:
         specifier: ^8.5.0
         version: 8.5.0
