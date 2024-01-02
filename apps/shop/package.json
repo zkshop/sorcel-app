@@ -15,6 +15,7 @@
     "@3shop/apollo": "workspace:*",
     "@3shop/config": "workspace:*",
     "@3shop/domains": "workspace:*",
+    "@3shop/email": "workspace:*",
     "@3shop/events": "workspace:*",
     "@3shop/messages": "workspace:*",
     "@3shop/poap": "workspace:*",
