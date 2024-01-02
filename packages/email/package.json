@@ -6,6 +6,7 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
+    "@3shop/config": "workspace:*",
     "sib-api-v3-sdk": "^8.5.0"
   }
 }

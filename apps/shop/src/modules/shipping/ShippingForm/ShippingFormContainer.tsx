@@ -15,7 +15,7 @@ import { storeOrder } from '@3shop/store/slices/order';
 import { useDispatch } from 'react-redux';
 import { envVars } from '@3shop/config';
 import { get, omit } from 'lodash';
-import { sendOrderConfirmation } from '@3shop/events';
+import { sendOrderConfirmation } from '@3shop/email';
 import { useAccount } from '@3shop/wallet';
 import { useAppSelector } from '@3shop/store';
 
