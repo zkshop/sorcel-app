@@ -327,7 +327,6 @@ async function main(args) {
         f.do(['bun i', 'bun bundle'], undefined, (childProcess, index) => {
           childProcess.on('close', (code) => {
             if (code != 0) {
-              cleanup();
               console.log(`${f.entryPointName}: KO`);
               throw new Error(`Running Bun: step ${index} for ${f.name} failed`);
             } else if (index == 1) f.hash = createHashStringForFile(`${f.path}/index.cjs`);
