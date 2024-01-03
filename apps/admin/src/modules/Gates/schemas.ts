@@ -4,11 +4,15 @@ const ADD_GATE_SCHEMA = FormValidation.object().shape({
   type: FormValidation.mixed().oneOf(['NFT', 'POAP']).required(),
   network: FormValidation.mixed().when('type', {
     is: 'NFT',
-    then: FormValidation.mixed().oneOf(['POLYGON', 'ETHEREUM']).required(),
+    then: FormValidation.mixed().oneOf(['POLYGON', 'ETHEREUM', 'XRPLEDGER']).required(),
   }),
   contractAddress: FormValidation.string().when('type', {
     is: 'NFT',
-    then: FormValidation.string().required(),
+    then: FormValidation.string().when('network', {
+      is: 'XRPLEDGER',
+      then: FormValidation.string().notRequired(),
+      otherwise: FormValidation.string().required(),
+    }),
   }),
   poapIds: FormValidation.array()
     .of(
