@@ -29,32 +29,34 @@ type paramsType = Omit<Params, 'contractAdressesToFilter'> & {
   identifiers: PlatformData;
 };
 
-const handleClient = async <T>(platform: any, params: paramsType): Promise<void> => {
-  const client = platform() as testPlatformClient.NftClient<T>;
-  const walletScrapper = testPlatformService.NftService<T>(client);
-  await walletScrapper.getWalletNfts(params.walletAddress, params.identifiers).then((res) => {
-    console.log('res', res);
-  });
-  // await walletScrapper.getWalletNfts(params.walletAddress, params.identifiers);
-};
+// const handleClientTwo = async <T>(
+//   platform: any,
+//   name: allNames,
+//   callback: <T>(client: testPlatformClient.NftClient<T>) => Promise<any>,
+// ): Promise<ReturnType<typeof callback>> => {
+//   switch (name) {
+//     case 'XRP':
+//       return callback(platform() as testPlatformClient.NftClient<platforms.XRP>);
+//     case 'EVM':
+//       return callback(platform() as testPlatformClient.NftClient<platforms.EVM>);
+//     default:
+//       throw new Error(`Client ${name} doesn't exist`);
+//   }
+// };
 
-export const fetchPlatformNFTS = createAsyncThunk(
-  'platform/nfts/fetch',
-  async (params: paramsType) => {
-    const platform = nftPlatforms.get(params.platformName);
-    if (platform) {
-      switch (params.platformName) {
-        case 'XRP':
-          return await handleClient<platforms.XRP>(platform, params);
-        case 'EVM':
-          return await handleClient<platforms.EvmBased>(platform, params);
-        default:
-          console.log(`Unknown platform ${params.platformName}`);
-          return;
-      }
-    } else throw new Error(`Client ${params.platformName} doesn't exist`);
-  },
-);
+// export const fetchPlatformNFTS = createAsyncThunk(
+//   'platform/nfts/fetch',
+//   async (params: paramsType) => {
+//     const platform = nftPlatforms.get(params.platformName);
+//     if (platform) {
+//       const result = await handleClientTwo(platform, params.platformName, async (client) => {
+//         const WalletScrapper = testPlatformService.NftService(client);
+//         return await WalletScrapper.getWalletNfts(params.walletAddress, params.identifiers);
+//       });
+//       // console.log("!result", result);
+//     } else throw new Error(`Client ${params.platformName} doesn't exist`);
+//   },
+// );
 
 export const fetchNFTS = createAsyncThunk(
   'nfts/fetch',

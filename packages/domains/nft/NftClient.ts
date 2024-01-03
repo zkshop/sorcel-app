@@ -1,5 +1,6 @@
 import type { Nft, NftAttribute } from './Nft';
 import { platforms, allIdentifiers, platformFunctionType as platform } from './NftPlatform';
+import { SorcelNft } from './SorcelNft';
 
 export type NftClient = {
   getWalletNfts(address: string, contractAddresses?: string[]): Promise<Nft[]>;
@@ -8,9 +9,6 @@ export type NftClient = {
 
 export namespace testPlatformClient {
   export type NftClient<T> = {
-    getWalletNfts(
-      address: string,
-      identifiers: platform<T>['identifiers'],
-    ): Promise<platform<T>['nft']>;
+    getWalletNfts(address: string, identifiers: platform<T>['identifiers']): Promise<SorcelNft[]>;
   };
 }
