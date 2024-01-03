@@ -114,7 +114,7 @@ function log(message, isError = false) {
 }
 
 const envToYaml = (envFileName) => {
-  const envFile = fs.readFileSync(`../${envFileName}`);
+  const envFile = fs.readFileSync(`${process.env.PWD}/${envFileName}`);
   const envObject = dotenv.parse(envFile);
   const envYaml = yaml.dump(envObject);
 
@@ -180,7 +180,7 @@ async function main(args) {
 
       await Function.do(
         [`ls .env.${envToPull}`],
-        '../',
+        process.env.PWD,
         (childProcess) => {
           childProcess.on('error', (code) => {
             ctx.critical(code, `env for ${envToPull} must be present in ..${process.env.PWD}`);
