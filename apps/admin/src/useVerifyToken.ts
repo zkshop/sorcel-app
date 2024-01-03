@@ -14,8 +14,12 @@ export const useVerifyToken = (fromAdminRoute = false) => {
   const [user, setUser] = useState<UserData>(null);
   const [loading, setLoading] = useState(false);
   const { isValid, setValidity } = useTokenValidity();
-
+  const [refreshCount, setRefreshCount] = useState(0);
   const navigate = useNavigate();
+
+  const refresh = () => {
+    setRefreshCount((count) => count + 1);
+  };
 
   useEffect(() => {
     async function verifyToken(token: string) {
@@ -47,7 +51,7 @@ export const useVerifyToken = (fromAdminRoute = false) => {
     if (!isValid) {
       verifyToken(tokenCookie);
     }
-  }, [fromAdminRoute, navigate, tokenCookie]);
+  }, [fromAdminRoute, navigate, tokenCookie, refreshCount]);
 
-  return { loading, user, email: user?.email };
+  return { loading, user, email: user?.email, refresh };
 };

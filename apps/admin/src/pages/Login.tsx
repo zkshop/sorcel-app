@@ -23,7 +23,7 @@ import { CustomerAuthClient } from '@3shop/admin-infra';
 import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
 import { Link, useNavigate } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ROUTES_PATH } from '../routes/Routes';
 
 type LoginFormValues = {
@@ -52,7 +52,16 @@ export const Login = () => {
     resolver: yupResolver(LOGIN_SCHEMA),
   });
 
-  const {} = useVerifyToken();
+  const { refresh } = useVerifyToken();
+
+  useEffect(() => {
+    async function refreshSession() {
+      await auth.refreshCredentials();
+      refresh();
+    }
+
+    refreshSession();
+  }, []);
 
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoginLoading(true);

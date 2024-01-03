@@ -13,6 +13,7 @@ export const CustomerAuthClient = (): AuthAdminClient => ({
 
     const didToken = await magicClient.auth.loginWithMagicLink({
       email,
+      redirectURI: `${window.location.origin}`,
     });
 
     const res = await axios<AuthAdminData>({
@@ -32,5 +33,10 @@ export const CustomerAuthClient = (): AuthAdminClient => ({
 
     if (isUserLoggedIn) return initialAuthData;
     return initialAuthData;
+  },
+
+  refreshCredentials: async () => {
+    if (!magicClient) return;
+    await magicClient.auth.loginWithCredential();
   },
 });
