@@ -5,26 +5,24 @@ import { BithmompNft } from './Xrp/Bithomp.types';
  * @param ApiResponse - The type of response returned by the API.
  * @param identifiersType - Keys of ApiResponse object which is how the collection is identified.
  */
-export type platform<ApiResponse, identifiersType> = {
+export type platform<identifiersType> = {
   identifiers: identifiersType;
-  nft: ApiResponse;
 };
 
 export interface XRPidentifers {
-  issuer: string
-  nftokenTaxon: string
+  issuer: string;
+  nftokenTaxon: string;
 }
 
 export interface EVMidentifiers {
-  contract: string
+  contract: string;
 }
 
-
-export type allNames = "XRP" | "EVM";
+export type allNames = 'XRP' | 'EVM';
 export type allIdentifiers = XRPidentifers | EVMidentifiers;
-export type platformFunctionType<T> = T extends platform<unknown, allIdentifiers> ? T : never;
+export type platformFunctionType<T> = T extends platform<allIdentifiers> ? T : never;
 
 export namespace platforms {
-  export type EvmBased = platform<Nft, EVMidentifiers>;
-  export type XRP = platform<BithmompNft, XRPidentifers>;
+  export type EVM = platform<EVMidentifiers>;
+  export type XRP = platform<XRPidentifers>;
 }
