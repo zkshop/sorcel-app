@@ -158,7 +158,7 @@ export function ConnectButtonGroup({
                     console.log('!!@@data', mock.data);
                     dispatch(
                       fetchPlatformNFTS({
-                        platform: mock.name,
+                        platformName: mock.name,
                         walletAddress: testWallet,
                         identifiers: mock.data,
                       }),
