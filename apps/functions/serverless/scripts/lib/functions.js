@@ -104,10 +104,18 @@ export class Function {
 Function.do = _do;
 async function _do(commands, cwd, callback, silent) {
   const executeCommand = async (command, index) => {
+    console.log(`Executing command: ${command}`);
     return new Promise((resolve, reject) => {
       const splitCommand = command.split(' ');
       const args = splitCommand.slice(1);
       const childProcess = spawn(splitCommand[0], args, { cwd: cwd || this.path, shell: true });
+      
+      childProcess.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`);
+      });
+      childProcess.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+      });
 
       runningProcess.push(childProcess);
       callback && callback(childProcess, index);
@@ -183,7 +191,7 @@ const toCamelCase = (input) => {
 export function createFunctions(includeOnly, ignore) {
   const ripGrepFindDeployScripts = `rg --files-with-matches '__CF' ${process.env.PWD}`;
   const findDeployScripts = () =>
-    execSync(`zsh -c "${ripGrepFindDeployScripts}"`, { encoding: 'utf-8' });
+    execSync(`/bin/sh -c "${ripGrepFindDeployScripts}"`, { encoding: 'utf-8' });
 
   let deployScriptsOutput = findDeployScripts().split('\n');
   const functions = [];

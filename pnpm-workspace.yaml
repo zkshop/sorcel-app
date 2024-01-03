@@ -5,3 +5,5 @@ packages:
   - "specific-apps/*"
   # if required, exclude some directories
   - "!**/test/**"
+  - "!apps/functions/serverless/.gcf_local/**"
+  - "!apps/functions/serverless/.serverless-template/**"
