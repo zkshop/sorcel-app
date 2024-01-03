@@ -7,7 +7,7 @@ export type PoapSegment = {
 
 export type NftSegment = {
   type: 'NFT';
-  network: 'ETHEREUM' | 'POLYGON';
+  network: 'ETHEREUM' | 'POLYGON' | 'XRPLEDGER';
   contractAddress: string;
 };
 
