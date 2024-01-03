@@ -1,9 +1,9 @@
-import { XRPidentifers, EVMidentifiers } from './NftPlatform';
+import { XRPidentifers, EVMidentifiers, allNames } from './NftPlatform';
 
 export type PlatformData = XRPidentifers | EVMidentifiers;
 
 export interface mockPlatform {
-  name: string;
+  name: allNames;
   data: PlatformData;
 }
 

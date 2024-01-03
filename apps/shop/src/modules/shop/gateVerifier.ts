@@ -3,6 +3,7 @@ import type { Nft } from '@3shop/alchemy';
 import type { ShopGate_v2 } from './ProductListContainer';
 import { every, includes } from 'lodash';
 import { Segment_Type_Enum } from '@3shop/apollo';
+import { SorcelNft } from '@3shop/domains';
 
 // const isNftMatchingWithGate = (gate: ShopGate_v2, nft: Nft): boolean => {
 //   if (!nft.rawMetadata || !nft.rawMetadata.attributes) return false;

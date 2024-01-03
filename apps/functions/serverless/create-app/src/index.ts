@@ -12,9 +12,6 @@ type CreateAppParams = {
 const appCreator = withEnv(() => AppCreatorService(SorcelAppCreator()));
 
 const handler: HttpFunction = async (req, res) => {
-  // console.log(envVars.PUBLIC_HASURA_API_URL);
-  // console.log(envVars.SECRET_HASURA);
-  console.log('hander: Process Environment Variables:', JSON.stringify(process.env, null, 2));
   const { name, email } = req.body as CreateAppParams;
 
   if (!name || !email) {
