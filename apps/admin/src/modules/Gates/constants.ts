@@ -53,9 +53,27 @@ export const COLLECTION_FIELDS = {
       value: 'XRPLEDGER',
     },
   },
-  contractAddress: {
-    label: 'NFT Contract Address',
-    name: 'contractAddress',
+  ethereum: {
+    contractAddress: {
+      label: 'NFT Contract Address',
+      name: 'contractAddress',
+    },
+  },
+  polygon: {
+    contractAddress: {
+      label: 'NFT Contract Address',
+      name: 'contractAddress',
+    },
+  },
+  xrpledger: {
+    issuer: {
+      label: 'Issuer',
+      name: 'issuer',
+    },
+    taxon: {
+      label: 'Taxon',
+      name: 'taxon',
+    },
   },
   poapIds: {
     label: 'Poap Ids',
