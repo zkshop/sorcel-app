@@ -26,6 +26,8 @@ const supportedOptions = [
   'no-config',
   'dry',
   'clean',
+  'no-multi',
+  'no-ora'
 ];
 const defaultOptions = {};
 const parseArgs = new Map([
@@ -35,7 +37,10 @@ const parseArgs = new Map([
   ['for-staging', () => 'staging'],
   ['no-deploy', () => true],
   ['no-config', () => true],
+  ['no-multi', () => true],
+  ['no-ora', () => true],
   ['clean', () => true],
+  ['dry', (value) => value || 1],
 ]);
 
 let tasks = [];
@@ -368,12 +373,16 @@ async function main(args) {
       for (const liveFunction of liveFunctionsNames) {
         spinners[liveFunction] = `${liveFunction}: (already up to date)`;
       }
-      let multi = new Multispinner(spinners);
-      liveFunctionsNames.forEach((name) => multi.success(name));
+      if (!options['no-multi']) {
+        let multi = new Multispinner(spinners);
+        liveFunctionsNames.forEach((name) => multi.success(name));
+      }
 
       ctx.describe('Uploading');
       const release = (releaser) =>
         Function.allFunctions.forEach((f) => {
+          if (options['no-multi'])
+            return ;
           const result = releaser.array.random(['success', 'error']);
           releaser.delay.random(3, 7, () => multi[result](f.name));
         });
@@ -383,9 +392,9 @@ async function main(args) {
           childProcess.on('close', async (code) => {
             if (index == 0) {
               if (code != 0) {
-                multi.error(_function.name);
+                !options['no-multi'] && multi.error(_function.name);
               } else {
-                multi.success(_function.name);
+                !options['no-multi'] && multi.success(_function.name);
 
                 await uploadFile(
                   `${process.env.SORCEL_HASH_BUCKET_PREFIX}-${ctx.global.deploymentEnvContext}`,
