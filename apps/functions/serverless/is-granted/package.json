@@ -19,7 +19,7 @@
     "parcel": "^2.10.3"
   },
   "devDependencies": {
-    "esbuild": "^0.19.8",
+    "esbuild": "0.19.8",
     "esbuild-plugin-alias-path": "^2.0.2",
     "parcel-resolver-tspaths": "^0.0.9",
     "typescript": "^5.3.2"

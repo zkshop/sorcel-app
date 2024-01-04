@@ -329,7 +329,7 @@ async function main(args) {
       });
 
       Function.allFunctions.forEach((f) => {
-        f.do(['bun i', 'bun bundle'], undefined, (childProcess, index) => {
+        f.do(['npx bun i', 'npx bun bundle'], undefined, (childProcess, index) => {
           childProcess.on('close', (code) => {
             if (code != 0) {
               console.log(`${f.entryPointName}: KO`);
