@@ -222,17 +222,22 @@ async function main(args) {
     });
   // createFunctions(options['include-only'], options['ignore-functions']);
   // Function.allFunctions.forEach((f) => {
-  //   f.do(['rm -rf node_modules', 'rm -rf bun.lockb'], undefined, (childProcess) => {
+  //   f.do(['pwd'], undefined, (childProcess) => {
   //     childProcess.stdout.on('data', (data) => {
-  //       console.log(`stdout: ${data}`);
-  //     });
-  //     childProcess.stderr.on('data', (data) => {
-  //       console.error(`stderr: ${data}`);
-  //     });
-  //     childProcess.on('error', (error) => {
-  //       console.error(`error: ${error.message}`);
+  //       console.log(`${data}`);
   //     });
   //   });
+    // f.do(['rm -rf node_modules', 'rm -rf bun.lockb'], undefined, (childProcess) => {
+    //   childProcess.stdout.on('data', (data) => {
+    //     console.log(`stdout: ${data}`);
+    //   });
+    //   childProcess.stderr.on('data', (data) => {
+    //     console.error(`stderr: ${data}`);
+    //   });
+    //   childProcess.on('error', (error) => {
+    //     console.error(`error: ${error.message}`);
+    //   });
+    // });
   // });
   // return;
 
