@@ -46,7 +46,7 @@ jobs:
           GCP_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
           GCP_REGION: ${{ secrets.GCP_REGION }}
           SORCEL_PROJECT_ROOT: ${{ github.workspace }}
-          SERVICE_ACCOUNT: "deploy-functions@composite-fire-406610.iam.gserviceaccount.com"
+          SERVICE_ACCOUNT: deploy-functions@composite-fire-406610.iam.gserviceaccount.com
           SORCEL_API: sorcel-api
           SORCEL_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
           SORCEL_HASH_BUCKET_PREFIX: sorcel-bundled-functions
