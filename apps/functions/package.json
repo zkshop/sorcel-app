@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "deploy": "cd serverless; npx bun scripts/deployment/deploy.js",
-    "deploy:staging": "cd serverless; npx bun scripts/deployment/deploy.js -- --for-staging",
     "deploy:production": "cd serverless; npx bun scripts/deployment/deploy.js -- --for-production",
+    "deploy:staging": "cd serverless; npx bun scripts/deployment/deploy.js -- --for-staging --dry",
     "dev": "vc dev",
     "devTwo": "cd serverless; npx bun deployLocally.js && echo $PWD && cd .gcf_local && npx bun i && npx bun bundle && npx bun start",
     "lint": "eslint \"**/*.ts\" --fix"
