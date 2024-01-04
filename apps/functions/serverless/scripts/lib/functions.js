@@ -102,13 +102,13 @@ export class Function {
   }
 }
 Function.do = _do;
-async function _do(commands, cwd, callback, silent) {
+async function _do(commands, cwd, callback, silent, shell = true) {
   const executeCommand = async (command, index) => {
     console.log(`Executing command: ${command}`);
     return new Promise((resolve, reject) => {
       const splitCommand = command.split(' ');
       const args = splitCommand.slice(1);
-      const childProcess = spawn(splitCommand[0], args, { cwd: cwd || this.path, shell: true });
+      const childProcess = spawn(splitCommand[0], args, { cwd: cwd || this.path, shell});
       
       childProcess.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
