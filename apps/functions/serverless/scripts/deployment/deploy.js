@@ -404,8 +404,9 @@ async function main(args) {
                     destination: `${_function.name}:${_function.hash}`,
                   },
                 ).catch((e) => {
-                  //TODO: handle error
                   console.error(e);
+                }).then(() => {
+                  console.log(`Cached function ${_function.name}`);
                 });
               }
             }
