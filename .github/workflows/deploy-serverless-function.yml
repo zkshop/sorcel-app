@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy-staging:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     environment:
       name: staging
     steps:
@@ -22,11 +22,6 @@ jobs:
           credentials_json: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
       - name: Installing binary dependencies
         run: |
-          if ! which curl
-          then
-            echo "curl could not be found"
-            exit 1
-          fi
           echo "installing ripgrep"
           sudo apt-get install ripgrep
       - name: Setup PNPM
