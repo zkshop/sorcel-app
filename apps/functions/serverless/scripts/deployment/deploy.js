@@ -220,13 +220,38 @@ async function main(args) {
     addTask('parsing functions', async (ctx) => {
       createFunctions(options['include-only'], options['ignore-functions']);
     });
-  // createFunctions(options['include-only'], options['ignore-functions']);
+  createFunctions(options['include-only'], options['ignore-functions']);
+  
+  await Function.do(
+    ['rm -rf functions_paths || true; touch functions_paths'],
+    process.env.PWD,
+    (childProcess) => {
+      childProcess.on('error', (error) => {
+        console.error(`error: ${error.message}`);
+      });
+    },
+  );
+
+  Function.allFunctions.forEach(async (f) => {
+    fs.appendFileSync('functions_paths', `${f.path}\n`);
+  });
+  const functionsPaths = fs.readFileSync('functions_paths', 'utf-8').split('\n');
+  for (const path of functionsPaths) {
+    if (path) {
+      await Function.do(
+        ['bun install'],
+        path,
+        (childProcess) => {
+          childProcess.on('error', (error) => {
+            console.error(`error: ${error.message}`);
+          });
+        },
+      );
+    }
+  }
+  return ;
   // Function.allFunctions.forEach((f) => {
-  //   f.do(['pwd'], undefined, (childProcess) => {
-  //     childProcess.stdout.on('data', (data) => {
-  //       console.log(`${data}`);
-  //     });
-  //   });
+
     // f.do(['rm -rf node_modules', 'rm -rf bun.lockb'], undefined, (childProcess) => {
     //   childProcess.stdout.on('data', (data) => {
     //     console.log(`stdout: ${data}`);
