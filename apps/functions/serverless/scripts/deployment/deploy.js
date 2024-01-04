@@ -28,6 +28,7 @@ const supportedOptions = [
   'clean',
   'no-multi',
   'no-ora',
+  'verbose',
 ];
 const defaultOptions = {};
 const parseArgs = new Map([
@@ -40,6 +41,7 @@ const parseArgs = new Map([
   ['no-multi', () => true],
   ['no-ora', () => true],
   ['clean', () => true],
+  ['verbose', () => true],
   ['dry', (value) => value || 1],
 ]);
 
@@ -62,6 +64,8 @@ const executeTasks = async () => {
     let subtasks = new Map();
     ctx['global'] = global;
     ctx['describe'] = (message) => {
+      if (process.env['NO_ORA'])
+        return ;
       if (!message.length) spinners[taskIndex].text = description;
       spinners[taskIndex].text = `${description}\n└──${message}`;
     };
@@ -85,12 +89,12 @@ const executeTasks = async () => {
 
       const callback = callbacks[index];
       const skip = (reason) => {
-        ctx._spinner.info(`skipped: ${description} (${reason})`);
+        !process.env['NO_ORA'] && ctx._spinner.info(`skipped: ${description} (${reason})`);
         executeCallback(callbacks.length);
       };
       const next = () => executeCallback(index + 1);
 
-      ctx._spinner.start();
+      !process.env['NO_ORA'] && ctx._spinner.start();
       if (isAsync(callback)) await callback(ctx, next, skip);
       else callback(data, next, skip);
       if (ctx._spinner.isSpinning) ctx._spinner.succeed(description);
@@ -127,6 +131,11 @@ const envToYaml = (envFileName) => {
   fs.writeFileSync(outfile, envYaml);
   return outfile;
 };
+
+export function verbose(callback) {
+  if (!process.env['DEPLOY_VERBOSE']) return;
+  callback();
+}
 
 async function main(args) {
   const options = getArgs(
@@ -180,6 +189,8 @@ async function main(args) {
       process.exit(0);
     } else {
       const envToPull = String(options['for-production'] || options['for-staging']);
+      if (options['verbose']) process.env['DEPLOY_VERBOSE'] = 'true';
+      if (options['no-ora']) process.env['NO_ORA'] = 'true';
       // ENV_CONTEXT necessary for deployCloudFunctions
       process.env['ENV_CONTEXT'] = ctx.global['deploymentEnvContext'] = envToPull;
 
@@ -233,13 +244,22 @@ async function main(args) {
         childProcess.on('error', (error) => {
           console.error(`error: ${error.message}`);
         });
+
+        verbose(() => {
+          childProcess.stdout.on('data', (data) => {
+            console.log(`stdout: ${data}`);
+          });
+          childProcess.stderr.on('data', (data) => {
+            console.error(`stderr: ${data}`);
+          });
+        });
       },
     );
 
     Function.allFunctions.forEach(async (f) => {
       fs.appendFileSync('functions_paths', `${f.path}\n`);
-      // f.hash = 'sdfsdf';
     });
+
     const functionsPaths = fs.readFileSync('functions_paths', 'utf-8').split('\n');
     for (const path of functionsPaths) {
       if (path) {
@@ -254,21 +274,6 @@ async function main(args) {
       }
     }
   };
-  // Function.allFunctions.forEach((f) => {
-
-  // f.do(['rm -rf node_modules', 'rm -rf bun.lockb'], undefined, (childProcess) => {
-  //   childProcess.stdout.on('data', (data) => {
-  //     console.log(`stdout: ${data}`);
-  //   });
-  //   childProcess.stderr.on('data', (data) => {
-  //     console.error(`stderr: ${data}`);
-  //   });
-  //   childProcess.on('error', (error) => {
-  //     console.error(`error: ${error.message}`);
-  //   });
-  // });
-  // });
-  // return;
 
   addTask('creating yaml env file', async (ctx) => {
     ctx.global['envYamlPath'] = envToYaml(
@@ -378,16 +383,6 @@ async function main(args) {
       });
 
       await installAndBundle();
-      // Function.allFunctions.forEach((f) => {
-      //   f.do(['bun i', 'bun bundle'], undefined, (childProcess, index) => {
-      //     childProcess.on('close', (code) => {
-      //       if (code != 0) {
-      //         console.log(`${f.entryPointName}: KO`);
-      //         throw new Error(`Running Bun: step ${index} for ${f.name} failed`);
-      //       } else if (index == 1) f.hash = createHashStringForFile(`${f.path}/index.cjs`);
-      //     });
-      //   });
-      // });
 
       // Fetching bucket content with google api then creating a map from file names (<function name>:<hash>)
       const files = await listFiles(
