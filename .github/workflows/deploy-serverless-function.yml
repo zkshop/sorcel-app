@@ -9,8 +9,8 @@ on:
 jobs:
   deploy-staging:
     runs-on: ubuntu-latest
-    environment: 
-        name: staging
+    environment:
+      name: staging
     steps:
       - uses: actions/checkout@v3
       - uses: 'google-github-actions/auth@v2'
@@ -18,7 +18,16 @@ jobs:
           project_id: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
           credentials_json: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
       - name: Installing binary dependencies
-        run: 'echo "installing ripgrep"; sudo apt-get install ripgrep && echo "installing bun" curl -fsSL https://bun.sh/install | bash'
+        run: |
+          if ! which curl
+          then
+            echo "curl could not be found"
+            exit 1
+          fi
+          echo "installing ripgrep"
+          sudo apt-get install ripgrep
+          echo "installing bun"
+          curl -fsSL https://bun.sh/install | bash
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
@@ -30,18 +39,18 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      - name: Login to dotenv vault 
+      - name: Login to dotenv vault
         run: npx dotenv-vault login ${{ secrets.DOTENV_ME }}
       - name: Deploy to Staging
         env:
-            GCP_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
-            GCP_REGION: ${{ secrets.GCP_REGION }}
-            SORCEL_PROJECT_ROOT: ${{ github.workspace }}
-            SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT}}
-            SORCEL_API: sorcel-api
-            SORCEL_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
-            SORCEL_HASH_BUCKET_PREFIX: sorcel-bundled-functions
-            SORCEL_LOCATION: europe-west1
+          GCP_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
+          GCP_REGION: ${{ secrets.GCP_REGION }}
+          SORCEL_PROJECT_ROOT: ${{ github.workspace }}
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT}}
+          SORCEL_API: sorcel-api
+          SORCEL_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
+          SORCEL_HASH_BUCKET_PREFIX: sorcel-bundled-functions
+          SORCEL_LOCATION: europe-west1
         run: |
           npx dotenv-vault pull staging
           cp .env.staging apps/functions/serverless/.env.staging
@@ -52,8 +61,8 @@ jobs:
   deploy-production:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    environment: 
-        name: production
+    environment:
+      name: production
     steps:
       - uses: actions/checkout@v3
       - uses: 'google-github-actions/auth@v2'
@@ -71,7 +80,7 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      - name: Login to dotenv vault 
+      - name: Login to dotenv vault
         run: npx dotenv-vault login ${{ secrets.DOTENV_ME }}
       - name: Deploy to Production
         run: |
