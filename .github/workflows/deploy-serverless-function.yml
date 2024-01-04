@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: oven-sh/setup-bun@v1 # Setup bun
         with:
-            bun-version: latest # You can also use a specific version
+          bun-version: latest # You can also use a specific version
       - uses: actions/checkout@v3
       - uses: 'google-github-actions/auth@v2'
         with:
@@ -42,7 +42,7 @@ jobs:
           GCP_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
           GCP_REGION: ${{ secrets.GCP_REGION }}
           SORCEL_PROJECT_ROOT: ${{ github.workspace }}
-          SERVICE_ACCOUNT: deploy-functions@composite-fire-406610.iam.gserviceaccount.com
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
           SORCEL_API: sorcel-api
           SORCEL_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
           SORCEL_HASH_BUCKET_PREFIX: sorcel-bundled-functions
