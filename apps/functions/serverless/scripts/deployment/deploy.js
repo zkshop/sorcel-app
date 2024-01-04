@@ -27,7 +27,7 @@ const supportedOptions = [
   'dry',
   'clean',
   'no-multi',
-  'no-ora'
+  'no-ora',
 ];
 const defaultOptions = {};
 const parseArgs = new Map([
@@ -220,6 +220,21 @@ async function main(args) {
     addTask('parsing functions', async (ctx) => {
       createFunctions(options['include-only'], options['ignore-functions']);
     });
+  createFunctions(options['include-only'], options['ignore-functions']);
+  Function.allFunctions.forEach((f) => {
+    f.do(['rm -rf node_modules', 'rm -rf bun.lockb'], undefined, (childProcess) => {
+      childProcess.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`);
+      });
+      childProcess.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+      });
+      childProcess.on('error', (error) => {
+        console.error(`error: ${error.message}`);
+      });
+    });
+  });
+  return;
 
   addTask('creating yaml env file', async (ctx) => {
     ctx.global['envYamlPath'] = envToYaml(
@@ -381,8 +396,7 @@ async function main(args) {
       ctx.describe('Uploading');
       const release = (releaser) =>
         Function.allFunctions.forEach((f) => {
-          if (options['no-multi'])
-            return ;
+          if (options['no-multi']) return;
           const result = releaser.array.random(['success', 'error']);
           releaser.delay.random(3, 7, () => multi[result](f.name));
         });
@@ -403,11 +417,13 @@ async function main(args) {
                     ...uploadFileDefaultOptions,
                     destination: `${_function.name}:${_function.hash}`,
                   },
-                ).catch((e) => {
-                  console.error(e);
-                }).then(() => {
-                  console.log(`Cached function ${_function.name}`);
-                });
+                )
+                  .catch((e) => {
+                    console.error(e);
+                  })
+                  .then(() => {
+                    console.log(`Cached function ${_function.name}`);
+                  });
               }
             }
           });
