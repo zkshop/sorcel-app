@@ -344,7 +344,7 @@ async function main(args) {
       });
 
       Function.allFunctions.forEach((f) => {
-        f.do(['npx bun i', 'npx bun bundle'], undefined, (childProcess, index) => {
+        f.do(['bun i', 'bun bundle'], undefined, (childProcess, index) => {
           childProcess.on('close', (code) => {
             if (code != 0) {
               console.log(`${f.entryPointName}: KO`);
@@ -439,6 +439,7 @@ async function main(args) {
     await Function.do(['rm scripts/blank_file'], process.env.PWD);
   });
   await executeTasks();
+  process.exit(0);
 }
 
 main();
