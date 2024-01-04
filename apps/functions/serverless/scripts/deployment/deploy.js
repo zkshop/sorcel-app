@@ -223,6 +223,9 @@ async function main(args) {
   createFunctions(options['include-only'], options['ignore-functions']);
 
   const installAndBundle = async () => {
+    const getFunctionByPath = (path) => {
+      return Function.allFunctions.find((f) => f.path == path);
+    };
     await Function.do(
       ['rm -rf functions_paths || true; touch functions_paths'],
       process.env.PWD,
@@ -235,23 +238,22 @@ async function main(args) {
 
     Function.allFunctions.forEach(async (f) => {
       fs.appendFileSync('functions_paths', `${f.path}\n`);
+      // f.hash = 'sdfsdf';
     });
     const functionsPaths = fs.readFileSync('functions_paths', 'utf-8').split('\n');
     for (const path of functionsPaths) {
       if (path) {
-        await Function.do(['bun install', 'bun bundle'], path, (childProcess) => {
-          childProcess.on('error', (error) => {
-            console.error(`error: ${error.message}`);
-          });
-          childProcess.stderr.on('data', (data) => {
-            console.error(`stderr: ${data}`);
+        await Function.do(['bun install', 'bun bundle'], path, (childProcess, index) => {
+          childProcess.on('close', (code) => {
+            if (code != 0) {
+              throw new Error(`Running Bun: step ${index} for ${path} failed`);
+            } else if (index == 1)
+              getFunctionByPath(path).hash = createHashStringForFile(`${path}/index.cjs`);
           });
         });
       }
     }
   };
-  await installAndBundle();
-  return;
   // Function.allFunctions.forEach((f) => {
 
   // f.do(['rm -rf node_modules', 'rm -rf bun.lockb'], undefined, (childProcess) => {
@@ -375,16 +377,17 @@ async function main(args) {
         });
       });
 
-      Function.allFunctions.forEach((f) => {
-        f.do(['bun i', 'bun bundle'], undefined, (childProcess, index) => {
-          childProcess.on('close', (code) => {
-            if (code != 0) {
-              console.log(`${f.entryPointName}: KO`);
-              throw new Error(`Running Bun: step ${index} for ${f.name} failed`);
-            } else if (index == 1) f.hash = createHashStringForFile(`${f.path}/index.cjs`);
-          });
-        });
-      });
+      await installAndBundle();
+      // Function.allFunctions.forEach((f) => {
+      //   f.do(['bun i', 'bun bundle'], undefined, (childProcess, index) => {
+      //     childProcess.on('close', (code) => {
+      //       if (code != 0) {
+      //         console.log(`${f.entryPointName}: KO`);
+      //         throw new Error(`Running Bun: step ${index} for ${f.name} failed`);
+      //       } else if (index == 1) f.hash = createHashStringForFile(`${f.path}/index.cjs`);
+      //     });
+      //   });
+      // });
 
       // Fetching bucket content with google api then creating a map from file names (<function name>:<hash>)
       const files = await listFiles(
