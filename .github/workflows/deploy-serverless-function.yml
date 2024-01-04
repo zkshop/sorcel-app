@@ -17,8 +17,8 @@ jobs:
         with:
           project_id: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
           credentials_json: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
-      - name: Setup Ripgrep
-        run: sudo apt-get install ripgrep
+      - name: Installing binary dependencies
+        run: 'echo "installing ripgrep"; sudo apt-get install ripgrep && echo "installing bun" curl -fsSL https://bun.sh/install | bash'
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
