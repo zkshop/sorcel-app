@@ -1,5 +1,6 @@
 import { execSync, exec, spawn } from 'child_process';
 import { camelCaseToKebabCase } from '../utils.js';
+import { verbose } from '../deployment/deploy.js';
 
 const scriptName = 'deploy';
 const bundleFileName = 'index.cjs';
@@ -104,24 +105,26 @@ export class Function {
 Function.do = _do;
 async function _do(commands, cwd, callback, silent, shell = true) {
   const executeCommand = async (command, index) => {
-    console.log(`Executing command: ${command}`);
+    verbose(() => console.log(`Executing command: ${command}`));
     return new Promise((resolve, reject) => {
       const splitCommand = command.split(' ');
       const args = splitCommand.slice(1);
-      const childProcess = spawn(splitCommand[0], args, { cwd: cwd || this.path, shell});
-      
-      childProcess.stdout.on('data', (data) => {
-        console.log(`stdout: ${data}`);
-      });
-      childProcess.stderr.on('data', (data) => {
-        console.error(`stderr: ${data}`);
+      const childProcess = spawn(splitCommand[0], args, { cwd: cwd || this.path, shell });
+
+      verbose(() => {
+        childProcess.stdout.on('data', (data) => {
+          console.log(`stdout: ${data}`);
+        });
+        childProcess.stderr.on('data', (data) => {
+          console.error(`stderr: ${data}`);
+        });
       });
 
       runningProcess.push(childProcess);
       callback && callback(childProcess, index);
 
       childProcess.on('error', (error) => {
-        console.error(`Error: ${error}`);
+        console.error(`Deploy script Error: ${error}`);
       });
 
       childProcess.on('close', (code) => {
