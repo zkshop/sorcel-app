@@ -243,6 +243,9 @@ async function main(args) {
           childProcess.on('error', (error) => {
             console.error(`error: ${error.message}`);
           });
+          childProcess.stderr.on('data', (data) => {
+            console.error(`stderr: ${data}`);
+          });
         });
       }
     }
