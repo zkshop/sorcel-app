@@ -34,6 +34,199 @@ x-google-management:
         values:
           STANDARD: 5
 paths:
+  /create-app:
+    post:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/create-app-staging
+      operationId: createApp
+      summary: Create an app
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Name of the app
+              email:
+                type: string
+                description: Email of the admin user
+            required:
+              - name
+              - email
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              appId:
+                type: string
+                description: ID of the created app
+              name:
+                type: string
+                description: Name of the created app
+              email:
+                type: string
+                description: Email of the created admin user
+        '400':
+          description: Missing name or email
+        '500':
+          description: Error creating app or user
+  /admin/get-stripe-account:
+    get:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/get-stripe-account-staging
+      operationId: getStripeAccount
+      summary: Get Stripe account
+      parameters:
+        - in: query
+          name: accountId
+          required: true
+          type: string
+          description: ID of the Stripe account
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              account:
+                type: object
+                description: Stripe account details
+        '500':
+          description: Error retrieving Stripe account
+  /shop/connect-with-email:
+    post:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/connect-with-email-staging
+      operationId: connectWithEmail
+      summary: Connect with email
+      parameters:
+        - in: header
+          name: authorization
+          required: true
+          type: string
+          description: Bearer token
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              authenticated:
+                type: boolean
+                description: Whether the user is authenticated or not
+        '500':
+          description: Error during authentication
+  /update-plan:
+    post:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/update-plan-staging
+      operationId: updatePlan
+      summary: Update plan
+      parameters:
+        - in: body
+          name: event
+          required: true
+          description: Event object from Stripe
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: ID of the event
+              type:
+                type: string
+                description: Type of the event
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Message indicating the plan update status
+        '400':
+          description: 'Webhook Error: Unhandled event type'
+        '500':
+          description: Error updating plan
+  /shop/get-paper-wallet:
+    post:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/get-paper-wallet-staging
+      operationId: getPaperWallet
+      summary: Get paper wallet
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              wallet:
+                type: object
+                description: The paper wallet
+        '500':
+          description: Error when requesting the wallet
+  /shop/get-paper-token:
+    post:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/get-paper-token-staging
+      operationId: getPaperToken
+      summary: Get paper token
+      parameters:
+        - in: body
+          name: code
+          required: true
+          description: Code for the paper token
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              userToken:
+                type: string
+                description: User token
+        '500':
+          description: Error getting paper token
+  /admin/create-stripe-account:
+    get:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/create-stripe-account-staging
+      operationId: createStripeAccount
+      summary: Create Stripe account
+      parameters:
+        - in: query
+          name: accountId
+          required: true
+          type: string
+          description: ID of the Stripe account
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              onboarding_link:
+                type: string
+                description: Onboarding link for the Stripe account
+        '400':
+          description: Missing accountId
+        '500':
+          description: Error creating Stripe account
   /shop/poap/events/id:
     get:
       x-google-backend:
@@ -60,6 +253,172 @@ paths:
           description: Missing ID
         '500':
           description: Error getting POAP event
+  /is-granted:
+    get:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/is-granted-staging
+      operationId: isGranted
+      summary: Check if access is granted
+      parameters:
+        - in: query
+          name: address
+          required: true
+          type: string
+          description: Address of the wallet
+        - in: query
+          name: productId
+          required: true
+          type: string
+          description: ID of the product
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              isGranted:
+                type: boolean
+                description: Whether access is granted or not
+              address:
+                type: string
+                description: Address of the wallet
+              productId:
+                type: string
+                description: ID of the product
+        '400':
+          description: Missing address or productId
+        '500':
+          description: Error checking access
+  /shop/poap/address:
+    get:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/address-staging
+      operationId: address
+      summary: Get every POAP URL
+      parameters:
+        - in: query
+          name: address
+          required: true
+          type: string
+          description: Address of the wallet
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                description: Array of POAP URLs
+        '500':
+          description: Error getting POAP URLs
+  /admin/auth/login:
+    post:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/login-staging
+      operationId: login
+      summary: Authenticate user
+      parameters:
+        - in: body
+          name: login
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                description: Email of the user
+              password:
+                type: string
+                description: Password of the user
+          description: User login details
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                description: Authentication token
+        '400':
+          description: Missing email or password
+        '401':
+          description: Unauthorized
+        '500':
+          description: Error during authentication
+  /shop/payment-intents:
+    post:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/payment-intents-staging
+      operationId: paymentIntents
+      summary: Create payment intent
+      parameters:
+        - in: body
+          name: body
+          description: Payment intent details
+          required: true
+          schema:
+            type: object
+            properties:
+              price:
+                type: number
+                description: Price of the product
+              moneyAccountId:
+                type: string
+                description: ID of the money account
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              clientSecret:
+                type: string
+                description: Client secret for the payment intent
+        '500':
+          description: Error creating payment intent
+  /admin/auth/verify:
+    get:
+      x-google-backend:
+        address: >-
+          https://europe-west3-composite-fire-406610.cloudfunctions.net/verify-staging
+      operationId: verify
+      summary: Check if access is granted
+      parameters:
+        - in: query
+          name: address
+          required: true
+          type: string
+          description: Address of the wallet
+        - in: query
+          name: productId
+          required: true
+          type: string
+          description: ID of the product
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              isGranted:
+                type: boolean
+                description: Whether access is granted or not
+              address:
+                type: string
+                description: Address of the wallet
+              productId:
+                type: string
+                description: ID of the product
+        '400':
+          description: Missing address or productId
+        '500':
+          description: Error checking access
 securityDefinitions:
   api_key:
     type: apiKey
