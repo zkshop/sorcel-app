@@ -6,7 +6,7 @@
   "scripts": {
     "deploy": "cd serverless; bun scripts/deployment/deploy.js",
     "deploy:production": "cd serverless; bun scripts/deployment/deploy.js -- --for-production",
-    "deploy:staging": "cd serverless; npx bun scripts/deployment/deploy.js -- --for-staging --no-config --no-multi --dry",
+    "deploy:staging": "cd serverless; bun scripts/deployment/deploy.js -- --for-staging --no-config --no-multi --dry",
     "dev": "vc dev",
     "devTwo": "cd serverless; bun deployLocally.js && echo $PWD && cd .gcf_local && bun i && bun bundle && bun start",
     "lint": "eslint \"**/*.ts\" --fix"
@@ -23,7 +23,6 @@
     "@3shop/supabase": "workspace:*",
     "@vercel/node": "^2.7.1",
     "axios": "^1.1.3",
-    "bun": "^1.0.15",
     "cross-fetch": "^3.1.5",
     "http-status": "^1.5.3",
     "jsonwebtoken": "^9.0.0",
