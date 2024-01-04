@@ -220,21 +220,21 @@ async function main(args) {
     addTask('parsing functions', async (ctx) => {
       createFunctions(options['include-only'], options['ignore-functions']);
     });
-  createFunctions(options['include-only'], options['ignore-functions']);
-  Function.allFunctions.forEach((f) => {
-    f.do(['rm -rf node_modules', 'rm -rf bun.lockb'], undefined, (childProcess) => {
-      childProcess.stdout.on('data', (data) => {
-        console.log(`stdout: ${data}`);
-      });
-      childProcess.stderr.on('data', (data) => {
-        console.error(`stderr: ${data}`);
-      });
-      childProcess.on('error', (error) => {
-        console.error(`error: ${error.message}`);
-      });
-    });
-  });
-  return;
+  // createFunctions(options['include-only'], options['ignore-functions']);
+  // Function.allFunctions.forEach((f) => {
+  //   f.do(['rm -rf node_modules', 'rm -rf bun.lockb'], undefined, (childProcess) => {
+  //     childProcess.stdout.on('data', (data) => {
+  //       console.log(`stdout: ${data}`);
+  //     });
+  //     childProcess.stderr.on('data', (data) => {
+  //       console.error(`stderr: ${data}`);
+  //     });
+  //     childProcess.on('error', (error) => {
+  //       console.error(`error: ${error.message}`);
+  //     });
+  //   });
+  // });
+  // return;
 
   addTask('creating yaml env file', async (ctx) => {
     ctx.global['envYamlPath'] = envToYaml(
@@ -344,7 +344,7 @@ async function main(args) {
       });
 
       Function.allFunctions.forEach((f) => {
-        f.do(['bun i', 'bun bundle'], undefined, (childProcess, index) => {
+        f.do(['npx bun i', 'npx bun bundle'], undefined, (childProcess, index) => {
           childProcess.on('close', (code) => {
             if (code != 0) {
               console.log(`${f.entryPointName}: KO`);
