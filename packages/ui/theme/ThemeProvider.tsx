@@ -44,7 +44,7 @@ export const ThemeProvider = ({ children, customTheme = false }: Props) => {
               global: {
                 body: {
                   fontFamily: font ? font : 'inherit',
-                  color: font_color,
+                  color: font_color || 'black',
                   backgroundColor: background_color,
                 },
               },
