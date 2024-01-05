@@ -1,11 +1,10 @@
-import { envVars } from '@3shop/config';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCustomerTokenCookie } from './useCustomerTokenCookie';
 import { ROUTES_PATH } from './routes/Routes';
 import type { Nullable } from '@3shop/types';
 import { useTokenValidity } from './context';
+import { httpServerless } from '@3shop/http-serverless';
 
 type UserData = Nullable<{ email: string; appId: string }>;
 
@@ -24,14 +23,11 @@ export const useVerifyToken = (fromAdminRoute = false) => {
       try {
         if (!tokenCookie) throw new Error();
 
-        const user = await axios.get<UserData>(
-          `${envVars.PUBLIC_FUNCTIONS_URL}/api/admin/auth/verify`,
-          {
-            headers: {
-              Authorization: 'Bearer ' + token,
-            },
+        const user = await httpServerless.get<UserData>(`api/admin/auth/verify`, {
+          headers: {
+            Authorization: 'Bearer ' + token,
           },
-        );
+        });
 
         setUser(user.data);
 

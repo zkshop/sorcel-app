@@ -1,9 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 import type { AuthData, PaperWallet } from '@3shop/domains';
 import { AuthService } from '@3shop/domains';
 import { UserAuthenticationClient } from '@3shop/infra';
-import { envVars } from '@3shop/config';
+import { httpServerless } from '@3shop/http-serverless';
 
 type AuthType = 'paper' | 'magic' | 'WALLET';
 
@@ -19,8 +18,8 @@ const initialState: AuthSliceType = {
 };
 
 export const getPaperWallet = async (code: string) => {
-  const url = `${envVars.PUBLIC_FUNCTIONS_URL}/api/shop/get-paper-wallet`;
-  const res = await axios.post<PaperWallet>(url, {
+  const url = `api/shop/get-paper-wallet`;
+  const res = await httpServerless.post<PaperWallet>(url, {
     code,
   });
 

@@ -2,15 +2,14 @@ import { Grid, GridItem, SignupSection, useToastMessage } from '@3shop/ui';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormValidation } from '@3shop/validation';
-import axios from 'axios';
+
+import { httpServerless } from '@3shop/http-serverless';
 import { useState } from 'react';
-import { envVars } from '@3shop/config';
 import { AuthAdminService } from '@3shop/domains';
 import { CustomerAuthClient } from '@3shop/admin-infra';
 import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
 import { ROUTES_PATH } from '../routes/Routes';
 import { useNavigate } from 'react-router-dom';
-
 type SignupFormValues = {
   email: string;
 };
@@ -38,7 +37,7 @@ export const Signup = () => {
   const onSubmit = async (data: SignupFormValues) => {
     try {
       setLoading(true);
-      await axios.post(`${envVars.PUBLIC_FUNCTIONS_URL}/api/create-app`, {
+      await httpServerless.post('api/create-app', {
         email: data.email,
         name: `${data.email}'s app`,
       });
