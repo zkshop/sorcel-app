@@ -1,0 +1,1 @@
+INSERT INTO network (value) VALUES (E'XRPLEDGER');
