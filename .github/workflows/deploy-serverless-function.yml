@@ -2,13 +2,14 @@ name: Deploy Serverless Functions
 
 on:
   push:
-    branches: [cloud-functions, main, dev]
+    branches: [main, dev]
   pull_request:
     branches: [main, dev]
 
 jobs:
   deploy-staging:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'
     environment:
       name: staging
     steps:
@@ -104,8 +105,7 @@ jobs:
         run: npx dotenv-vault pull production
 
       - name: Copy dotenv file and go to functions folder
-        run: |
-          cp .env.production apps/functions/serverless/.env.production
+        run: cp .env.production apps/functions/serverless/.env.production
 
       - name: Deploy to Production
         env:
