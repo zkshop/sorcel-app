@@ -1,6 +1,6 @@
 import { envVars } from '@3shop/config';
 // @ts-ignore
-import SibApiV3Sdk from 'sib-api-v3-sdk';
+import * as SibApiV3Sdk from 'sib-api-v3-sdk';
 
 type Params = {
   shop_logo_url: string;

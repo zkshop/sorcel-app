@@ -24,6 +24,7 @@ insert_permissions:
       set:
         app_id: x-hasura-User-Id
       columns:
+        - chain
         - discount
         - exclusive_access
         - name
@@ -33,19 +34,21 @@ select_permissions:
   - role: anonymous
     permission:
       columns:
-        - exclusive_access
-        - unique_claim
-        - discount
-        - claims
-        - name
         - app_id
+        - chain
+        - claims
+        - discount
+        - exclusive_access
         - id
+        - name
         - product_id
+        - unique_claim
       filter: {}
   - role: customer
     permission:
       columns:
         - app_id
+        - chain
         - claims
         - discount
         - exclusive_access
@@ -66,6 +69,7 @@ update_permissions:
   - role: customer
     permission:
       columns:
+        - chain
         - discount
         - exclusive_access
         - name
