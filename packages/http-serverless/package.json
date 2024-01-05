@@ -1,5 +1,5 @@
 {
-  "name": "@3shop/poap",
+  "name": "@3shop/http-serverless",
   "version": "0.0.0",
   "main": "index.ts",
   "scripts": {
@@ -7,6 +7,6 @@
   },
   "dependencies": {
     "@3shop/config": "workspace:*",
-    "@3shop/http-serverless": "workspace:*"
+    "axios": "1.1.3"
   }
 }

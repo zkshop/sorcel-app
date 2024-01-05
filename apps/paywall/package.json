@@ -13,6 +13,7 @@
     "@3shop/alchemy": "workspace:*",
     "@3shop/config": "workspace:*",
     "@3shop/domains": "workspace:*",
+    "@3shop/http-serverless": "workspace:*",
     "@rainbow-me/rainbowkit": "1.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

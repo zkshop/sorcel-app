@@ -15,6 +15,7 @@ const envVars = [
   'MONTHLY_PRO_PLAN_CHECKOUT_LINK',
   'YEARLY_PRO_PLAN_CHECKOUT_LINK',
   'POSTHOG_KEY',
+  'SERVERLESS_API_KEY',
 ];
 
 const dirname = __dirname;

@@ -9,6 +9,7 @@
   "dependencies": {
     "@3shop/config": "workspace:*",
     "@3shop/domains": "workspace:*",
+    "@3shop/http-serverless": "workspace:*",
     "@3shop/infra": "workspace:*",
     "@3shop/poap": "workspace:*",
     "@3shop/pure": "workspace:*"
