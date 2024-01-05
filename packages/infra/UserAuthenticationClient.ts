@@ -1,8 +1,8 @@
-import { envVars } from '@3shop/config';
 import { TokenService } from '@3shop/domains';
 import type { AuthClient } from '@3shop/domains/auth/AuthClient';
 import { magicClient } from '@3shop/magic';
 import { PaperWalletClient } from './PaperWalletClient';
+import { httpServerless } from '@3shop/http-serverless';
 
 const initialAuthData = { email: null, issuer: null, phoneNumber: null, publicAddress: null };
 
@@ -27,7 +27,7 @@ export function UserAuthenticationClient(): AuthClient {
         email,
       });
 
-      const res = await fetch(`${envVars.PUBLIC_FUNCTIONS_URL}/api/shop/login`, {
+      const res = await httpServerless('api/shop/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

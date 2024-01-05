@@ -19,6 +19,7 @@
     "@3shop/apollo": "workspace:*",
     "@3shop/config": "workspace:*",
     "@3shop/domains": "workspace:*",
+    "@3shop/http-serverless": "workspace:*",
     "@3shop/messages": "workspace:*",
     "@3shop/posthog": "workspace:*",
     "@3shop/ui": "workspace:*",

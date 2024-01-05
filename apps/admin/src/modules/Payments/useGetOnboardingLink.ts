@@ -1,7 +1,6 @@
-import { envVars } from '@3shop/config';
-import axios from 'axios';
 import { useState } from 'react';
 import { useCustomerTokenCookie } from '../../useCustomerTokenCookie';
+import { httpServerless } from '@3shop/http-serverless';
 
 type CreateOnboardingLinkResponse = {
   onboarding_link: string;
@@ -14,8 +13,8 @@ export const useGetOnboardingLink = () => {
 
   async function getOnboardingLink(accountId?: string) {
     setLoading(true);
-    const response = await axios.post<CreateOnboardingLinkResponse>(
-      `${envVars.PUBLIC_FUNCTIONS_URL}/api/admin/create-stripe-account`,
+    const response = await httpServerless.post<CreateOnboardingLinkResponse>(
+      `api/admin/create-stripe-account`,
       {
         accountId,
       },

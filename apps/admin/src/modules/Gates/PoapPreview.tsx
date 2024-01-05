@@ -1,8 +1,7 @@
-import { envVars } from '@3shop/config';
+import { httpServerless } from '@3shop/http-serverless';
 import type { Nullable } from '@3shop/types';
 import { Image, Spinner } from '@3shop/ui';
 import type { AxiosResponse } from 'axios';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 type Props = {
@@ -15,8 +14,8 @@ export const PoapPreview = ({ id }: Props) => {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(`${envVars.PUBLIC_FUNCTIONS_URL}/api/shop/poap/events/id/${id}`)
+    httpServerless
+      .get(`api/shop/poap/events/id/${id}`)
       .then((res) => setPoap(res.data))
       .finally(() => setLoading(false));
   }, [id]);
