@@ -36,10 +36,18 @@ export const COLLECTION_FIELDS = {
       label: 'NFT',
       value: 'NFT',
     },
+    Erc20: {
+      label: 'ERC-20',
+      value: 'ERC20',
+    },
   },
   network: {
     name: 'network',
     label: 'Network',
+    chiliz: {
+      label: 'Chiliz',
+      value: 'CHILIZ',
+    },
     polygon: {
       label: 'Polygon',
       value: 'POLYGON',
@@ -51,6 +59,12 @@ export const COLLECTION_FIELDS = {
     xrpledger: {
       label: 'XRP Ledger',
       value: 'XRPLEDGER',
+    },
+  },
+  chiliz: {
+    contractAddress: {
+      label: 'NFT Contract Address',
+      name: 'contractAddress',
     },
   },
   ethereum: {

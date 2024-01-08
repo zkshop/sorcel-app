@@ -34,7 +34,7 @@ type PoapType = {
 };
 
 type NftType = {
-  type: 'NFT';
+  type: 'NFT' | "ERC20";
   network: 'POLYGON' | 'ETHEREUM' | 'XRPLEDGER';
   contractAddress: string;
 };
@@ -149,6 +149,9 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
                       <Radio value={COLLECTION_FIELDS.type.nft.value}>
                         {COLLECTION_FIELDS.type.nft.label}
                       </Radio>
+                      <Radio value={COLLECTION_FIELDS.type.Erc20.value}>
+                        {COLLECTION_FIELDS.type.Erc20.label}
+                      </Radio>
                       <Radio value={COLLECTION_FIELDS.type.poap.value}>
                         {COLLECTION_FIELDS.type.poap.label}
                       </Radio>
@@ -159,7 +162,7 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
               <FormErrorMessage>{errors[COLLECTION_FIELDS.type.name]?.message}</FormErrorMessage>
             </FormControl>
 
-            {typeValue === 'NFT' ? (
+            {typeValue === 'NFT' || typeValue === "ERC20" ? (
               <FormControl>
                 <FormLabel mb={1}>{COLLECTION_FIELDS.network.label}</FormLabel>
                 <Controller
@@ -171,7 +174,7 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
                         {[
                           COLLECTION_FIELDS.network.polygon,
                           COLLECTION_FIELDS.network.ethereum,
-                          COLLECTION_FIELDS.network.xrpledger,
+                          COLLECTION_FIELDS.network.chiliz,
                         ].map((field) => (
                           <Radio value={field.value}>{field.label}</Radio>
                         ))}
