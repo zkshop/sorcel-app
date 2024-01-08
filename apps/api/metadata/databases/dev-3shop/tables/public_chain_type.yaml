@@ -1,7 +1,6 @@
 table:
   name: chain_type
   schema: public
-<<<<<<< HEAD
 is_enum: true
 select_permissions:
   - role: anonymous
@@ -14,5 +13,3 @@ select_permissions:
       columns:
         - value
       filter: {}
-=======
->>>>>>> c4e4b81 (draft: creating migration for xrp in 1 file)
