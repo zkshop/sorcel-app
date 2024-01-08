@@ -21,7 +21,7 @@ export namespace testPlatformService {
     getWalletNfts(
       walletAddress: string,
       identifiers: platform<T>['identifiers'],
-    ): Promise<platform<T>['nft']>;
+    ): Promise<Nft[]>;
     // getNftAttribute(address: string): Promise<NftAttribute<any>[]>;
   };
 

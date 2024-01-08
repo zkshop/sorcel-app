@@ -61,10 +61,10 @@ export const AddGate = () => {
 
   const onSubmit = async (data: AddGateFormValues) => {
     const input: Segment_Insert_Input[] = segments.map(segmentInputCreator);
-    console.log("!here dfgkndfg", data);
-    console.log("!input", input);
-    console.log("!segments", segments);
-    return ;
+    // console.log("!here dfgkndfg", data);
+    // console.log("!input", input);
+    // console.log("!segments", segments);
+    // return ;
 
     try {
       await createGate({

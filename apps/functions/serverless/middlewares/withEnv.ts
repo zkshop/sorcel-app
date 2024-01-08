@@ -1,14 +1,15 @@
 import type { HttpFunction, Request, Response } from '@google-cloud/functions-framework';
+import findConfig from 'find-config';
 import dotenv from 'dotenv';
-import path from 'path';
 
-let envPath = path.join(__dirname, '..', '..');
-console.log("!envPath", envPath);
-
-dotenv.config({
-  path: path.join(envPath, '.env.vault'),
-  DOTENV_KEY: process.env.DOTENV_KEY,
-});
+const envPath = findConfig('.env.vault');
+if (envPath) {
+  console.log('env found', envPath);
+  dotenv.config({
+    path: envPath,
+    DOTENV_KEY: process.env.DOTENV_KEY,
+  });
+} else console.error('failed to load environment');
 
 export const envMiddleWare = (next: HttpFunction) => async (req: Request, res: Response) => {
   await next(req, res);

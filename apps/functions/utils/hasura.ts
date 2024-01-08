@@ -1,6 +1,5 @@
 import { envVars } from '@3shop/config';
 import axios from 'axios';
-import { withEnv } from '../serverless/middlewares';
 
 type QueryPayload = {
   query: string;
@@ -23,7 +22,6 @@ export async function query(payload: QueryPayload) {
 }
 
 export async function mutate<T extends object>(payload: QueryPayload): Promise<T> {
-  console.log("called ++++++++++", envVars);
   const res = await axios(envVars.PUBLIC_HASURA_API_URL || '', {
     method: 'POST',
     headers: {

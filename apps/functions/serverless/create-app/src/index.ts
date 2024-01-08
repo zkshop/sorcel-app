@@ -1,9 +1,8 @@
-import { envMiddleWare, withEnv } from '../../middlewares/withEnv';
+import { withEnv } from '../../middlewares/withEnv';
 import type { HttpFunction } from '@google-cloud/functions-framework';
 import { AppCreatorService } from '../../../../../packages/domains';
 import { SorcelAppCreator } from '../../../infra/SorcelAppCreator';
 import { allowCors } from '../../middlewares/allowCors';
-import { envVars } from '@3shop/config';
 
 type CreateAppParams = {
   name: string;
@@ -35,4 +34,4 @@ const handler: HttpFunction = async (req, res) => {
   return res.status(200).send({ appId: appData.id, name: appData.name, email: userData.email });
 };
 
-export const createApp = envMiddleWare(allowCors(handler));
+export const createApp = allowCors(handler);
