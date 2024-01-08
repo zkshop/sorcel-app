@@ -2,11 +2,11 @@ import type { HttpFunction, Request, Response } from '@google-cloud/functions-fr
 import dotenv from 'dotenv';
 import path from 'path';
 
-let envPath = path.join(__dirname, '..', '..', '.env.vault');
+let envPath = path.join(__dirname, '..', '..');
 console.log("!envPath", envPath);
 
 dotenv.config({
-  path: envPath,
+  path: path.join(envPath, '.env.vault'),
   DOTENV_KEY: process.env.DOTENV_KEY,
 });
 
