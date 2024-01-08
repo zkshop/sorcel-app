@@ -1,0 +1,47 @@
+table:
+  name: choice
+  schema: public
+insert_permissions:
+  - role: customer
+    permission:
+      check: {}
+      columns:
+        - count
+        - poll_id
+        - value
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - count
+        - value
+        - created_at
+        - id
+        - poll_id
+      filter: {}
+  - role: customer
+    permission:
+      columns:
+        - count
+        - created_at
+        - id
+        - poll_id
+        - value
+      filter: {}
+update_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - count
+      filter: {}
+      check: null
+  - role: customer
+    permission:
+      columns:
+        - value
+      filter: {}
+      check: null
+delete_permissions:
+  - role: customer
+    permission:
+      filter: {}
