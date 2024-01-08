@@ -2,31 +2,18 @@ import type { HttpFunction, Request, Response } from '@google-cloud/functions-fr
 import dotenv from 'dotenv';
 import path from 'path';
 
-// import { exec } from 'child_process';
-// console.log(__dirname);
+let envPath = path.join(__dirname, '..', '..', '.env.vault');
+console.log("!envPath", envPath);
 
-// exec(`ls -la` + __dirname, (error, stdout, stderr) => {
-//   if (error) {
-//     console.error(`Error: ${error.message}`);
-//     return;
-//   }
-//   if (stderr) {
-//     console.error(`Stderr: ${stderr}`);
-//     return;
-//   }
-//   console.log(`Stdout: ${stdout}`);
-// });
-
-let envVaultPath = path.join(__dirname, '..', '..', '.env.vault');
-console.log('envVault: ', envVaultPath);
 dotenv.config({
-  path: envVaultPath,
+  path: envPath,
   DOTENV_KEY: process.env.DOTENV_KEY,
 });
-
-// console.log('Process Environment Variables:', JSON.stringify(process.env, null, 2));
 
 export const envMiddleWare = (next: HttpFunction) => async (req: Request, res: Response) => {
   await next(req, res);
 };
-export const withEnv = <T>(callback: () => T): T => callback();
+export const withEnv = <T>(callback: () => T, label?: string): T => {
+  label && console.log(`withEnv: ${label}`);
+  return callback();
+};

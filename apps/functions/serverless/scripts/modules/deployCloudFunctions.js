@@ -16,18 +16,12 @@ export const randomCommand = () => {
     
 async function deployCloudFunctions(callback, silent) {
   const promises = Function.allFunctions.map((f, index) => {
-    const commands = ['bun i', 'bun bundle', inline(f.deployCommand)];
+    const commands = [inline(f.deployCommand)];
     return f.do(commands, undefined, (process, index) => {
       callback && callback(f, process, index);
       if (!silent) {
         switch (index) {
           case 0:
-            console.log(`${f.name}: installing packages`);
-            break;
-          case 1:
-            console.log(`${f.name}: running esbuild`);
-            break;
-          case 2:
             process.stderr.on('data', (data) => {
               console.error(`stderr: ${data}`);
             });

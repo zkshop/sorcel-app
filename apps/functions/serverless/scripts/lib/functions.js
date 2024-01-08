@@ -1,5 +1,6 @@
 import { execSync, exec, spawn } from 'child_process';
 import { camelCaseToKebabCase } from '../utils.js';
+import { verbose } from '../deployment/deploy.js';
 
 const scriptName = 'deploy';
 const bundleFileName = 'index.cjs';
@@ -102,28 +103,29 @@ export class Function {
   }
 }
 Function.do = _do;
-async function _do(commands, cwd, callback, silent) {
+async function _do(commands, cwd, callback, silent, shell = true) {
   const executeCommand = async (command, index) => {
-    console.log(`command: ${command}`);
-    // console.error(`command: ${command}`);
+    verbose(() => console.log(`Executing command: ${command}`));
     return new Promise((resolve, reject) => {
       const splitCommand = command.split(' ');
       const args = splitCommand.slice(1);
-      const childProcess = spawn(splitCommand[0], args, { cwd: cwd || this.path, shell: true });
+      const childProcess = spawn(splitCommand[0], args, { cwd: cwd || this.path, shell });
+
+      verbose(() => {
+        childProcess.stdout.on('data', (data) => {
+          console.log(`stdout: ${data}`);
+        });
+        childProcess.stderr.on('data', (data) => {
+          console.error(`stderr: ${data}`);
+        });
+      });
 
       runningProcess.push(childProcess);
       callback && callback(childProcess, index);
-      // childProcess.stdout.on('data', (data) => {
-      //   console.log(`stdout: ${data}`);
-      // });
 
-      // childProcess.stderr.on('data', (data) => {
-      //   console.error(`stderr: ${data}`);
-      // });
-      // childProcess.on('error', (error) => {
-      //   console.error(`Error: ${error}`);
-      // });
-
+      childProcess.on('error', (error) => {
+        console.error(`Deploy script Error: ${error}`);
+      });
 
       childProcess.on('close', (code) => {
         runningProcess = runningProcess.filter((p) => p !== childProcess);
@@ -192,7 +194,7 @@ const toCamelCase = (input) => {
 export function createFunctions(includeOnly, ignore) {
   const ripGrepFindDeployScripts = `rg --files-with-matches '__CF' ${process.env.PWD}`;
   const findDeployScripts = () =>
-    execSync(`zsh -c "${ripGrepFindDeployScripts}"`, { encoding: 'utf-8' });
+    execSync(`/bin/sh -c "${ripGrepFindDeployScripts}"`, { encoding: 'utf-8' });
 
   let deployScriptsOutput = findDeployScripts().split('\n');
   const functions = [];

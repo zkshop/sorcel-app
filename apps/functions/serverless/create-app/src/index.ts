@@ -9,7 +9,7 @@ type CreateAppParams = {
   name: string;
   email: string;
 };
-const appCreator = withEnv(() => AppCreatorService(SorcelAppCreator()));
+const appCreator = withEnv(() => AppCreatorService(SorcelAppCreator()), 'AppCreator');
 
 const handler: HttpFunction = async (req, res) => {
   const { name, email } = req.body as CreateAppParams;

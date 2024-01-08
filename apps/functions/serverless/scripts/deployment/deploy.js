@@ -25,6 +25,10 @@ const supportedOptions = [
   'no-deploy',
   'no-config',
   'dry',
+  'clean',
+  'no-multi',
+  'no-ora',
+  'verbose',
 ];
 const defaultOptions = {};
 const parseArgs = new Map([
@@ -34,6 +38,11 @@ const parseArgs = new Map([
   ['for-staging', () => 'staging'],
   ['no-deploy', () => true],
   ['no-config', () => true],
+  ['no-multi', () => true],
+  ['no-ora', () => true],
+  ['clean', () => true],
+  ['verbose', () => true],
+  ['dry', (value) => value || 1],
 ]);
 
 let tasks = [];
@@ -55,6 +64,9 @@ const executeTasks = async () => {
     let subtasks = new Map();
     ctx['global'] = global;
     ctx['describe'] = (message) => {
+      if (process.env['NO_ORA'])
+        return ;
+      if (!message.length) spinners[taskIndex].text = description;
       spinners[taskIndex].text = `${description}\n└──${message}`;
     };
     ctx['critical'] = (code, message) => {
@@ -77,12 +89,12 @@ const executeTasks = async () => {
 
       const callback = callbacks[index];
       const skip = (reason) => {
-        ctx._spinner.info(`skipped: ${description} (${reason})`);
+        !process.env['NO_ORA'] && ctx._spinner.info(`skipped: ${description} (${reason})`);
         executeCallback(callbacks.length);
       };
       const next = () => executeCallback(index + 1);
 
-      ctx._spinner.start();
+      !process.env['NO_ORA'] && ctx._spinner.start();
       if (isAsync(callback)) await callback(ctx, next, skip);
       else callback(data, next, skip);
       if (ctx._spinner.isSpinning) ctx._spinner.succeed(description);
@@ -111,7 +123,7 @@ function log(message, isError = false) {
 }
 
 const envToYaml = (envFileName) => {
-  const envFile = fs.readFileSync(`../${envFileName}`);
+  const envFile = fs.readFileSync(`${process.env.PWD}/${envFileName}`);
   const envObject = dotenv.parse(envFile);
   const envYaml = yaml.dump(envObject);
 
@@ -119,6 +131,11 @@ const envToYaml = (envFileName) => {
   fs.writeFileSync(outfile, envYaml);
   return outfile;
 };
+
+export function verbose(callback) {
+  if (!process.env['DEPLOY_VERBOSE']) return;
+  callback();
+}
 
 async function main(args) {
   const options = getArgs(
@@ -164,7 +181,7 @@ async function main(args) {
   addTask('checking env variables', async (ctx) => {
     checkEnvs(mandatoryEnvs);
 
-    if (!options['for-production'] && !options['for-staging']) {
+    if (!options['clean'] && !options['for-production'] && !options['for-staging']) {
       log(
         'Please provide a deployment mode.\nUse --for-production for production mode or --for-staging for staging mode.',
         true,
@@ -172,12 +189,14 @@ async function main(args) {
       process.exit(0);
     } else {
       const envToPull = String(options['for-production'] || options['for-staging']);
+      if (options['verbose']) process.env['DEPLOY_VERBOSE'] = 'true';
+      if (options['no-ora']) process.env['NO_ORA'] = 'true';
       // ENV_CONTEXT necessary for deployCloudFunctions
       process.env['ENV_CONTEXT'] = ctx.global['deploymentEnvContext'] = envToPull;
 
       await Function.do(
         [`ls .env.${envToPull}`],
-        '../',
+        process.env.PWD,
         (childProcess) => {
           childProcess.on('error', (code) => {
             ctx.critical(code, `env for ${envToPull} must be present in ..${process.env.PWD}`);
@@ -192,9 +211,69 @@ async function main(args) {
     }
   });
 
-  addTask('parsing functions', async () => {
-    createFunctions(options['include-only'], options['ignore-functions']);
-  });
+  if (options['clean']) {
+    addTask('cleaning up', async (ctx) => {
+      createFunctions(options['include-only'], options['ignore-functions']);
+      Function.allFunctions.forEach((f) => {
+        const files = [`${f.path}/index.cjs`];
+        files.forEach((file) => {
+          if (fs.existsSync(file)) {
+            fs.unlink(file, (err) => {
+              if (err) console.error(err);
+            });
+          }
+        });
+      });
+
+      process.exit(0);
+    });
+  } else
+    addTask('parsing functions', async (ctx) => {
+      createFunctions(options['include-only'], options['ignore-functions']);
+    });
+  createFunctions(options['include-only'], options['ignore-functions']);
+
+  const installAndBundle = async () => {
+    const getFunctionByPath = (path) => {
+      return Function.allFunctions.find((f) => f.path == path);
+    };
+    await Function.do(
+      ['rm -rf functions_paths || true; touch functions_paths'],
+      process.env.PWD,
+      (childProcess) => {
+        childProcess.on('error', (error) => {
+          console.error(`error: ${error.message}`);
+        });
+
+        verbose(() => {
+          childProcess.stdout.on('data', (data) => {
+            console.log(`stdout: ${data}`);
+          });
+          childProcess.stderr.on('data', (data) => {
+            console.error(`stderr: ${data}`);
+          });
+        });
+      },
+    );
+
+    Function.allFunctions.forEach(async (f) => {
+      fs.appendFileSync('functions_paths', `${f.path}\n`);
+    });
+
+    const functionsPaths = fs.readFileSync('functions_paths', 'utf-8').split('\n');
+    for (const path of functionsPaths) {
+      if (path) {
+        await Function.do(['bun install', 'bun bundle'], path, (childProcess, index) => {
+          childProcess.on('close', (code) => {
+            if (code != 0) {
+              throw new Error(`Running Bun: step ${index} for ${path} failed`);
+            } else if (index == 1)
+              getFunctionByPath(path).hash = createHashStringForFile(`${path}/index.cjs`);
+          });
+        });
+      }
+    }
+  };
 
   addTask('creating yaml env file', async (ctx) => {
     ctx.global['envYamlPath'] = envToYaml(
@@ -303,18 +382,14 @@ async function main(args) {
         });
       });
 
-      Function.allFunctions.forEach((f) => {
-        if (fs.existsSync(`${f.path}/index.cjs`)) {
-          f.hash = createHashStringForFile(`${f.path}/index.cjs`);
-        }
-      });
+      await installAndBundle();
 
       // Fetching bucket content with google api then creating a map from file names (<function name>:<hash>)
       const files = await listFiles(
         `${process.env.SORCEL_HASH_BUCKET_PREFIX}-${ctx.global.deploymentEnvContext}`,
       ).catch((e) => {
         //TODO: handle error
-        console.error(e);
+        // console.error(e);
       });
       const fileNames = (files && files.map((f) => f.name)) || [];
       const functionsHashMap = new Map(fileNames.map((name) => name.split(':')));
@@ -343,12 +418,15 @@ async function main(args) {
       for (const liveFunction of liveFunctionsNames) {
         spinners[liveFunction] = `${liveFunction}: (already up to date)`;
       }
-      let multi = new Multispinner(spinners);
-      liveFunctionsNames.forEach((name) => multi.success(name));
+      if (!options['no-multi']) {
+        let multi = new Multispinner(spinners);
+        liveFunctionsNames.forEach((name) => multi.success(name));
+      }
 
       ctx.describe('Uploading');
       const release = (releaser) =>
         Function.allFunctions.forEach((f) => {
+          if (options['no-multi']) return;
           const result = releaser.array.random(['success', 'error']);
           releaser.delay.random(3, 7, () => multi[result](f.name));
         });
@@ -356,11 +434,11 @@ async function main(args) {
       await dry(async () => {
         await deployCloudFunctions((_function, childProcess, index) => {
           childProcess.on('close', async (code) => {
-            if (index == 2) {
+            if (index == 0) {
               if (code != 0) {
-                multi.error(_function.name);
+                !options['no-multi'] && multi.error(_function.name);
               } else {
-                multi.success(_function.name);
+                !options['no-multi'] && multi.success(_function.name);
 
                 await uploadFile(
                   `${process.env.SORCEL_HASH_BUCKET_PREFIX}-${ctx.global.deploymentEnvContext}`,
@@ -369,10 +447,13 @@ async function main(args) {
                     ...uploadFileDefaultOptions,
                     destination: `${_function.name}:${_function.hash}`,
                   },
-                ).catch((e) => {
-                  //TODO: handle error
-                  console.error(e);
-                });
+                )
+                  .catch((e) => {
+                    console.error(e);
+                  })
+                  .then(() => {
+                    console.log(`Cached function ${_function.name}`);
+                  });
               }
             }
           });
@@ -388,6 +469,7 @@ async function main(args) {
     await Function.do(['rm scripts/blank_file'], process.env.PWD);
   });
   await executeTasks();
+  process.exit(0);
 }
 
 main();

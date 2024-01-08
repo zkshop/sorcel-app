@@ -9,6 +9,7 @@ export async function listConfigs(api) {
 
   const projectId = await auth.getProjectId();
   const parent = `projects/${projectId}/locations/global/apis/${api}`;
+  console.log(`! parent [${parent}]`);
 
   const res = await apiGateway.projects.locations.apis.configs.list({
     auth: authClient,
