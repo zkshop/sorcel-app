@@ -1,0 +1,34 @@
+table:
+  name: segment
+  schema: public
+insert_permissions:
+  - role: customer
+    permission:
+      check: {}
+      columns:
+        - gate_id
+        - network
+        - nft_contract_address
+        - poap_ids
+        - type
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - poap_ids
+        - network
+        - nft_contract_address
+        - type
+        - gate_id
+        - id
+      filter: {}
+  - role: customer
+    permission:
+      columns:
+        - poap_ids
+        - network
+        - nft_contract_address
+        - type
+        - gate_id
+        - id
+      filter: {}
