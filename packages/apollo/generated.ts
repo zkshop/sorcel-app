@@ -332,6 +332,127 @@ export type App_Updates = {
   where: App_Bool_Exp;
 };
 
+/** columns and relationships of "chain_type" */
+export type Chain_Type = {
+  __typename?: 'chain_type';
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "chain_type" */
+export type Chain_Type_Aggregate = {
+  __typename?: 'chain_type_aggregate';
+  aggregate?: Maybe<Chain_Type_Aggregate_Fields>;
+  nodes: Array<Chain_Type>;
+};
+
+/** aggregate fields of "chain_type" */
+export type Chain_Type_Aggregate_Fields = {
+  __typename?: 'chain_type_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Chain_Type_Max_Fields>;
+  min?: Maybe<Chain_Type_Min_Fields>;
+};
+
+/** aggregate fields of "chain_type" */
+export type Chain_Type_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Chain_Type_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "chain_type". All fields are combined with a logical 'AND'. */
+export type Chain_Type_Bool_Exp = {
+  _and?: InputMaybe<Array<Chain_Type_Bool_Exp>>;
+  _not?: InputMaybe<Chain_Type_Bool_Exp>;
+  _or?: InputMaybe<Array<Chain_Type_Bool_Exp>>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "chain_type" */
+export enum Chain_Type_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  ChainTypePkey = 'chain_type_pkey',
+}
+
+/** input type for inserting data into table "chain_type" */
+export type Chain_Type_Insert_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Chain_Type_Max_Fields = {
+  __typename?: 'chain_type_max_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Chain_Type_Min_Fields = {
+  __typename?: 'chain_type_min_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "chain_type" */
+export type Chain_Type_Mutation_Response = {
+  __typename?: 'chain_type_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Chain_Type>;
+};
+
+/** on_conflict condition type for table "chain_type" */
+export type Chain_Type_On_Conflict = {
+  constraint: Chain_Type_Constraint;
+  update_columns?: Array<Chain_Type_Update_Column>;
+  where?: InputMaybe<Chain_Type_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "chain_type". */
+export type Chain_Type_Order_By = {
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: chain_type */
+export type Chain_Type_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "chain_type" */
+export enum Chain_Type_Select_Column {
+  /** column name */
+  Value = 'value',
+}
+
+/** input type for updating data in table "chain_type" */
+export type Chain_Type_Set_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "chain_type" */
+export type Chain_Type_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Chain_Type_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Chain_Type_Stream_Cursor_Value_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "chain_type" */
+export enum Chain_Type_Update_Column {
+  /** column name */
+  Value = 'value',
+}
+
+export type Chain_Type_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Chain_Type_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Chain_Type_Bool_Exp;
+};
+
 /** columns and relationships of "choice" */
 export type Choice = {
   __typename?: 'choice';
@@ -1206,6 +1327,7 @@ export type Gate_Updates = {
 export type Gate_V2 = {
   __typename?: 'gate_v2';
   app_id?: Maybe<Scalars['uuid']>;
+  chain?: Maybe<Scalars['String']>;
   claims: Scalars['jsonb'];
   discount?: Maybe<Scalars['Int']>;
   exclusive_access: Scalars['Boolean'];
@@ -1344,6 +1466,7 @@ export type Gate_V2_Bool_Exp = {
   _not?: InputMaybe<Gate_V2_Bool_Exp>;
   _or?: InputMaybe<Array<Gate_V2_Bool_Exp>>;
   app_id?: InputMaybe<Uuid_Comparison_Exp>;
+  chain?: InputMaybe<String_Comparison_Exp>;
   claims?: InputMaybe<Jsonb_Comparison_Exp>;
   discount?: InputMaybe<Int_Comparison_Exp>;
   exclusive_access?: InputMaybe<Boolean_Comparison_Exp>;
@@ -1385,6 +1508,7 @@ export type Gate_V2_Inc_Input = {
 /** input type for inserting data into table "gate_v2" */
 export type Gate_V2_Insert_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
+  chain?: InputMaybe<Scalars['String']>;
   claims?: InputMaybe<Scalars['jsonb']>;
   discount?: InputMaybe<Scalars['Int']>;
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
@@ -1400,6 +1524,7 @@ export type Gate_V2_Insert_Input = {
 export type Gate_V2_Max_Fields = {
   __typename?: 'gate_v2_max_fields';
   app_id?: Maybe<Scalars['uuid']>;
+  chain?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
@@ -1409,6 +1534,7 @@ export type Gate_V2_Max_Fields = {
 /** order by max() on columns of table "gate_v2" */
 export type Gate_V2_Max_Order_By = {
   app_id?: InputMaybe<Order_By>;
+  chain?: InputMaybe<Order_By>;
   discount?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -1419,6 +1545,7 @@ export type Gate_V2_Max_Order_By = {
 export type Gate_V2_Min_Fields = {
   __typename?: 'gate_v2_min_fields';
   app_id?: Maybe<Scalars['uuid']>;
+  chain?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
@@ -1428,6 +1555,7 @@ export type Gate_V2_Min_Fields = {
 /** order by min() on columns of table "gate_v2" */
 export type Gate_V2_Min_Order_By = {
   app_id?: InputMaybe<Order_By>;
+  chain?: InputMaybe<Order_By>;
   discount?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -1453,6 +1581,7 @@ export type Gate_V2_On_Conflict = {
 /** Ordering options when selecting data from "gate_v2". */
 export type Gate_V2_Order_By = {
   app_id?: InputMaybe<Order_By>;
+  chain?: InputMaybe<Order_By>;
   claims?: InputMaybe<Order_By>;
   discount?: InputMaybe<Order_By>;
   exclusive_access?: InputMaybe<Order_By>;
@@ -1478,6 +1607,8 @@ export type Gate_V2_Prepend_Input = {
 export enum Gate_V2_Select_Column {
   /** column name */
   AppId = 'app_id',
+  /** column name */
+  Chain = 'chain',
   /** column name */
   Claims = 'claims',
   /** column name */
@@ -1513,6 +1644,7 @@ export enum Gate_V2_Select_Column_Gate_V2_Aggregate_Bool_Exp_Bool_Or_Arguments_C
 /** input type for updating data in table "gate_v2" */
 export type Gate_V2_Set_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
+  chain?: InputMaybe<Scalars['String']>;
   claims?: InputMaybe<Scalars['jsonb']>;
   discount?: InputMaybe<Scalars['Int']>;
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
@@ -1566,6 +1698,7 @@ export type Gate_V2_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Gate_V2_Stream_Cursor_Value_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
+  chain?: InputMaybe<Scalars['String']>;
   claims?: InputMaybe<Scalars['jsonb']>;
   discount?: InputMaybe<Scalars['Int']>;
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
@@ -1590,6 +1723,8 @@ export type Gate_V2_Sum_Order_By = {
 export enum Gate_V2_Update_Column {
   /** column name */
   AppId = 'app_id',
+  /** column name */
+  Chain = 'chain',
   /** column name */
   Claims = 'claims',
   /** column name */
@@ -1711,6 +1846,10 @@ export type Mutation_Root = {
   delete_app?: Maybe<App_Mutation_Response>;
   /** delete single row from the table: "app" */
   delete_app_by_pk?: Maybe<App>;
+  /** delete data from the table: "chain_type" */
+  delete_chain_type?: Maybe<Chain_Type_Mutation_Response>;
+  /** delete single row from the table: "chain_type" */
+  delete_chain_type_by_pk?: Maybe<Chain_Type>;
   /** delete data from the table: "choice" */
   delete_choice?: Maybe<Choice_Mutation_Response>;
   /** delete single row from the table: "choice" */
@@ -1771,6 +1910,10 @@ export type Mutation_Root = {
   insert_app?: Maybe<App_Mutation_Response>;
   /** insert a single row into the table: "app" */
   insert_app_one?: Maybe<App>;
+  /** insert data into the table: "chain_type" */
+  insert_chain_type?: Maybe<Chain_Type_Mutation_Response>;
+  /** insert a single row into the table: "chain_type" */
+  insert_chain_type_one?: Maybe<Chain_Type>;
   /** insert data into the table: "choice" */
   insert_choice?: Maybe<Choice_Mutation_Response>;
   /** insert a single row into the table: "choice" */
@@ -1833,6 +1976,12 @@ export type Mutation_Root = {
   update_app_by_pk?: Maybe<App>;
   /** update multiples rows of table: "app" */
   update_app_many?: Maybe<Array<Maybe<App_Mutation_Response>>>;
+  /** update data of the table: "chain_type" */
+  update_chain_type?: Maybe<Chain_Type_Mutation_Response>;
+  /** update single row of the table: "chain_type" */
+  update_chain_type_by_pk?: Maybe<Chain_Type>;
+  /** update multiples rows of table: "chain_type" */
+  update_chain_type_many?: Maybe<Array<Maybe<Chain_Type_Mutation_Response>>>;
   /** update data of the table: "choice" */
   update_choice?: Maybe<Choice_Mutation_Response>;
   /** update single row of the table: "choice" */
@@ -1927,6 +2076,16 @@ export type Mutation_RootDelete_AppArgs = {
 /** mutation root */
 export type Mutation_RootDelete_App_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Chain_TypeArgs = {
+  where: Chain_Type_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Chain_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 /** mutation root */
@@ -2079,6 +2238,18 @@ export type Mutation_RootInsert_AppArgs = {
 export type Mutation_RootInsert_App_OneArgs = {
   object: App_Insert_Input;
   on_conflict?: InputMaybe<App_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Chain_TypeArgs = {
+  objects: Array<Chain_Type_Insert_Input>;
+  on_conflict?: InputMaybe<Chain_Type_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Chain_Type_OneArgs = {
+  object: Chain_Type_Insert_Input;
+  on_conflict?: InputMaybe<Chain_Type_On_Conflict>;
 };
 
 /** mutation root */
@@ -2264,6 +2435,23 @@ export type Mutation_RootUpdate_App_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_App_ManyArgs = {
   updates: Array<App_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Chain_TypeArgs = {
+  _set?: InputMaybe<Chain_Type_Set_Input>;
+  where: Chain_Type_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Chain_Type_By_PkArgs = {
+  _set?: InputMaybe<Chain_Type_Set_Input>;
+  pk_columns: Chain_Type_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Chain_Type_ManyArgs = {
+  updates: Array<Chain_Type_Updates>;
 };
 
 /** mutation root */
@@ -2608,6 +2796,7 @@ export enum Network_Constraint {
 export enum Network_Enum {
   Ethereum = 'ETHEREUM',
   Polygon = 'POLYGON',
+  Xrpledger = 'XRPLEDGER',
 }
 
 /** Boolean expression to compare columns of type "network_enum". All fields are combined with logical 'AND'. */
@@ -3799,6 +3988,12 @@ export type Query_Root = {
   app_aggregate: App_Aggregate;
   /** fetch data from the table: "app" using primary key columns */
   app_by_pk?: Maybe<App>;
+  /** fetch data from the table: "chain_type" */
+  chain_type: Array<Chain_Type>;
+  /** fetch aggregated fields from the table: "chain_type" */
+  chain_type_aggregate: Chain_Type_Aggregate;
+  /** fetch data from the table: "chain_type" using primary key columns */
+  chain_type_by_pk?: Maybe<Chain_Type>;
   /** fetch data from the table: "choice" */
   choice: Array<Choice>;
   /** fetch aggregated fields from the table: "choice" */
@@ -3903,6 +4098,26 @@ export type Query_RootApp_AggregateArgs = {
 
 export type Query_RootApp_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+export type Query_RootChain_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Chain_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chain_Type_Order_By>>;
+  where?: InputMaybe<Chain_Type_Bool_Exp>;
+};
+
+export type Query_RootChain_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Chain_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chain_Type_Order_By>>;
+  where?: InputMaybe<Chain_Type_Bool_Exp>;
+};
+
+export type Query_RootChain_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 export type Query_RootChoiceArgs = {
@@ -4584,6 +4799,14 @@ export type Subscription_Root = {
   app_by_pk?: Maybe<App>;
   /** fetch data from the table in a streaming manner: "app" */
   app_stream: Array<App>;
+  /** fetch data from the table: "chain_type" */
+  chain_type: Array<Chain_Type>;
+  /** fetch aggregated fields from the table: "chain_type" */
+  chain_type_aggregate: Chain_Type_Aggregate;
+  /** fetch data from the table: "chain_type" using primary key columns */
+  chain_type_by_pk?: Maybe<Chain_Type>;
+  /** fetch data from the table in a streaming manner: "chain_type" */
+  chain_type_stream: Array<Chain_Type>;
   /** fetch data from the table: "choice" */
   choice: Array<Choice>;
   /** fetch aggregated fields from the table: "choice" */
@@ -4722,6 +4945,32 @@ export type Subscription_RootApp_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<App_Stream_Cursor_Input>>;
   where?: InputMaybe<App_Bool_Exp>;
+};
+
+export type Subscription_RootChain_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Chain_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chain_Type_Order_By>>;
+  where?: InputMaybe<Chain_Type_Bool_Exp>;
+};
+
+export type Subscription_RootChain_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Chain_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chain_Type_Order_By>>;
+  where?: InputMaybe<Chain_Type_Bool_Exp>;
+};
+
+export type Subscription_RootChain_Type_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+export type Subscription_RootChain_Type_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Chain_Type_Stream_Cursor_Input>>;
+  where?: InputMaybe<Chain_Type_Bool_Exp>;
 };
 
 export type Subscription_RootChoiceArgs = {
@@ -5556,6 +5805,7 @@ export type CreateGateV2MutationVariables = Exact<{
   product_id?: InputMaybe<Scalars['uuid']>;
   segments?: InputMaybe<Segment_Arr_Rel_Insert_Input>;
   unique_claim?: InputMaybe<Scalars['Boolean']>;
+  chain?: InputMaybe<Scalars['String']>;
 }>;
 
 export type CreateGateV2Mutation = {
@@ -6697,7 +6947,8 @@ export const CreateGateV2Document = gql`
     $name: String
     $product_id: uuid
     $segments: segment_arr_rel_insert_input
-    $unique_claim: Boolean = false
+    $unique_claim: Boolean
+    $chain: String
   ) {
     insert_gate_v2_one(
       object: {
@@ -6705,8 +6956,8 @@ export const CreateGateV2Document = gql`
         exclusive_access: $exclusive_access
         name: $name
         product_id: $product_id
-        segments: $segments
         unique_claim: $unique_claim
+        chain: $chain
       }
     ) {
       id
@@ -6739,6 +6990,7 @@ export type CreateGateV2MutationFn = Apollo.MutationFunction<
  *      product_id: // value for 'product_id'
  *      segments: // value for 'segments'
  *      unique_claim: // value for 'unique_claim'
+ *      chain: // value for 'chain'
  *   },
  * });
  */

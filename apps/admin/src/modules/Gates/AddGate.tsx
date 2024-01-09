@@ -32,6 +32,8 @@ export type AddGateFormValues = {
   product_id: string;
 };
 
+const networkToChain = new Map([['XRPLEDGER', 'XRP']]);
+
 export const AddGate = () => {
   const {
     register,
@@ -61,6 +63,7 @@ export const AddGate = () => {
 
   const onSubmit = async (data: AddGateFormValues) => {
     const input: Segment_Insert_Input[] = segments.map(segmentInputCreator);
+    console.log("!!!input", input);
     // console.log("!here dfgkndfg", data);
     // console.log("!input", input);
     // console.log("!segments", segments);
