@@ -262,6 +262,9 @@ importers:
       cross-fetch:
         specifier: ^3.1.5
         version: 3.1.5
+      find-config:
+        specifier: ^1.0.0
+        version: 1.0.0
       http-status:
         specifier: ^1.5.3
         version: 1.5.3
@@ -275,6 +278,9 @@ importers:
       '@google-cloud/storage':
         specifier: ^7.7.0
         version: 7.7.0
+      '@types/find-config':
+        specifier: ^1.0.4
+        version: 1.0.4
       '@types/jsonwebtoken':
         specifier: ^8.5.9
         version: 8.5.9
@@ -10724,6 +10730,10 @@ packages:
       '@types/serve-static': 1.15.5
     dev: false
 
+  /@types/find-config@1.0.4:
+    resolution: {integrity: sha512-BCXaKgzHK7KnfCQBRQBWGTA+QajOE9uFolXPt+9EktiiMS56D8oXF2ZCh9eCxuEyfqDmX/mYIcmWg9j9f659eg==}
+    dev: true
+
   /@types/fined@1.1.3:
     resolution: {integrity: sha512-CWYnSRnun3CGbt6taXeVo2lCbuaj4mchVJ4UF/BdU5TSuIn3AmS13pGMwCsBUoehGbhZrBrpNJZSZI5EVilXww==}
     dev: true
@@ -17464,6 +17474,13 @@ packages:
       pkg-dir: 4.2.0
     dev: true
 
+  /find-config@1.0.0:
+    resolution: {integrity: sha512-Z+suHH+7LSE40WfUeZPIxSxypCWvrzdVc60xAjUShZeT5eMWM0/FQUduq3HjluyfAHWvC/aOBkT1pTZktyF/jg==}
+    engines: {node: '>= 0.12'}
+    dependencies:
+      user-home: 2.0.0
+    dev: false
+
   /find-root@1.1.0:
     resolution: {integrity: sha512-NKfW6bec6GfKc0SGx1e07QZY9PE99u0Bft/0rzSD5k3sO/vwkVUpDUKVm5Gpp5Ue3YfShPFTX2070tDs5kB9Ng==}
 
@@ -22231,8 +22248,6 @@ packages:
     resolution: {integrity: sha512-B5JU3cabzk8c67mRRd3ECmROafjYMXbuzlwtqdM8IbS8ktlTix8aFGb2bAGKrSRIlnfKwovGUUr72JUPyOb6kQ==}
     engines: {node: '>=0.10.0'}
     requiresBuild: true
-    dev: true
-    optional: true
 
   /os-tmpdir@1.0.2:
     resolution: {integrity: sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==}
@@ -26567,6 +26582,13 @@ packages:
     resolution: {integrity: sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /user-home@2.0.0:
+    resolution: {integrity: sha512-KMWqdlOcjCYdtIJpicDSFBQ8nFwS2i9sslAd6f4+CBGcU4gist2REnr2fxj2YocvJFxSF3ZOHLYLVZnUxv4BZQ==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      os-homedir: 1.0.2
+    dev: false
 
   /utf-8-validate@5.0.9:
     resolution: {integrity: sha512-Yek7dAy0v3Kl0orwMlvi7TPtiCNrdfHNd7Gcc/pLq4BLXqfAmd0J7OWMizUQnTTJsyjKn02mU7anqwfmUP4J8Q==}

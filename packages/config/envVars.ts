@@ -1,3 +1,6 @@
+import { withEnv } from "../../apps/functions/serverless/middlewares";
+withEnv(() => {}, 'envVars');
+
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const GITHUB_ACTIONS = process.env.GITHUB_ACTIONS || false;
 
