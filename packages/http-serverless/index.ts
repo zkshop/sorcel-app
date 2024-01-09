@@ -6,6 +6,8 @@ export const httpServerless = axios.create({
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${envVars.SERVERLESS_API_KEY}`,
+  },
+  params: {
+    key: envVars.SERVERLESS_API_KEY,
   },
 });
