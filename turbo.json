@@ -3,6 +3,7 @@
   "globalDependencies": [".env", "tsconfig.json"],
   "globalEnv": [
     "SORCEL_PROJECT_ROOT",
+    "DOTENV_KEY",
     "APP_ID",
     "CI",
     "GITHUB_ACTIONS",
