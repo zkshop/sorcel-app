@@ -4,6 +4,9 @@ info:
   title: App Creator API
   description: API for creating apps
 host: sorcel-api.apigateway.dazzling-botany-406610.cloud.goog
+x-google-endpoints:
+- name: "sorcel-api.apigateway.dazzling-botany-406610.cloud.goog"
+  allowCors: True
 basePath: /api
 schemes:
   - https
