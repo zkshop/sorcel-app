@@ -41,18 +41,6 @@ type NftType = {
 
 type AddGateModalFormValues = NftType | PoapType;
 
-// type AddGateModalFormValues<T = {}> =
-//   | {
-//       type: 'NFT';
-//       network: 'POLYGON' | 'ETHEREUM' | 'XRPLEDGER';
-//       contractAddress: string;
-//       others?: T;
-//     }
-//   | {
-//       type: 'POAP';
-//       poapIds: { value: string }[];
-//     };
-
 type AddGateModalProps = {
   isOpen: boolean;
   onClose(): void;
@@ -81,7 +69,6 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
   console.error(errors);
   const onSubmit = (data: AddGateModalFormValues) => {
     console.log('!data', data);
-    // return;
     if (data.type === 'POAP') {
       dispatch(addPoapSegment({ ...data, poapIds: formatPoapSegment(data.poapIds) }));
     } else {

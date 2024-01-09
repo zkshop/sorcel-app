@@ -1,16 +1,7 @@
 import React from 'react';
 import { classnames } from '@3shop/config';
-import { Box, Flex, Button, Input, Divider } from '@3shop/ui';
+import { Box, Flex, Button } from '@3shop/ui';
 import { ConnectWalletButton } from '@3shop/wallet';
-import { platforms } from '@3shop/domains/nft/NftPlatform';
-import { mocks } from '@3shop/domains/nft/mocks';
-import { testPlatformClient } from '@3shop/domains';
-import { testPlatformService } from '@3shop/domains';
-import { useAppSelector, useAppDispatch } from '@3shop/store';
-import { fetchPlatformNFTS } from '@3shop/store/slices/nfts';
-
-// import { fetchNFTS } from '@3shop/store/slices/nfts';
-const { useState } = React;
 
 type ConnectButtonGroupProps = {
   handleOpenLoginModal(): void;
@@ -68,112 +59,6 @@ export function ConnectButtonGroup({
       </Box>
     );
 
-  const TestPlatform = () => {
-    const [testWallet, setTestWallet] = useState('');
-    const [testing, setTesting] = useState(false);
-    const dispatch = useAppDispatch();
-    const [mockData, setMockData] = useState(mocks);
-
-    const handleInputChange = (index: number, key: string, value: string) => {
-      const newMockData = [...mockData];
-      (newMockData[index] as any).data[key] = value;
-      setMockData(newMockData);
-    };
-
-    // const CreateMock = () => {
-    //   return (
-    //     <>
-    //       {mockData.map((mock, index) => (
-    //         <div key={index}>
-    //           <Flex flexDirection="row" justifyContent="space-between">
-    //             <h3>{mock.name}</h3>
-    //           </Flex>
-    //           {Object.entries(mock.data).map(([key, value], i) => (
-    //             <div key={index + i}>
-    //               <label>{key}</label>
-    //               <Input key={key} value={value}  onChange={(e) => handleInputChange(index, key, e.target.value)}/>
-    //             </div>
-    //           ))}
-    //           <Button
-    //             onClick={() => {
-    //               console.log('!!@@data', mock.data);
-    //               dispatch(
-    //                 fetchPlatformNFTS({
-    //                   platform: mock.name,
-    //                   walletAddress: testWallet,
-    //                   identifiers: mock.data,
-    //                 }),
-    //               );
-    //             }}
-    //           >
-    //             Test
-    //           </Button>
-    //         </div>
-    //       ))}
-    //     </>
-    //   );
-    // };
-    return (
-      <Box gap={0.5} flexDirection="column">
-        <Input
-          value={testWallet}
-          onChange={(e) => setTestWallet(e.target.value)}
-          placeholder="please enter wallet address"
-        />
-        <Box gap={0.5} flexDirection="row">
-          <Button
-            onClick={() => {
-              setTesting(true);
-            }}
-          >
-            {'Save and test'}
-          </Button>
-          <Button
-            onClick={() => {
-              console.log(mockData);
-            }}
-          >
-            {'Log data'}
-          </Button>
-        </Box>
-        {testing && (
-          <>
-            {mockData.map((mock, index) => (
-              <div key={index}>
-                <Flex flexDirection="row" justifyContent="space-between">
-                  <h3>{mock.name}</h3>
-                </Flex>
-                {Object.entries(mock.data).map(([key, value], i) => (
-                  <div key={index + i}>
-                    <label>{key}</label>
-                    <Input
-                      key={key}
-                      value={value}
-                      onChange={(e) => handleInputChange(index, key, e.target.value)}
-                    />
-                  </div>
-                ))}
-                <Button
-                  onClick={() => {
-                    console.log('!!@@data', mock.data);
-                    dispatch(
-                      fetchPlatformNFTS({
-                        platformName: mock.name,
-                        walletAddress: testWallet,
-                        identifiers: mock.data,
-                      }),
-                    );
-                  }}
-                >
-                  Test
-                </Button>
-              </div>
-            ))}
-          </>
-        )}
-      </Box>
-    );
-  };
   return (
     <Flex gap={1} flexDirection="row" className={classnames.GROUP_CONNECT_BUTTON}>
       {showConnectEmail && (
@@ -187,12 +72,7 @@ export function ConnectButtonGroup({
           E-mail login
         </Button>
       )}
-      <Flex flexDirection="column">
-        <ConnectWalletButton />
-        <Divider my="8" width="full" borderColor="greyscales.350" />
-        {'Test platforms'}
-        <TestPlatform />
-      </Flex>
+      <ConnectWalletButton />
     </Flex>
   );
 }
