@@ -1,11 +1,19 @@
-import type { Segment } from '@3shop/admin-store';
+import type { NftSegment, Segment } from '@3shop/admin-store';
+import segment from '@3shop/admin-store/slices/segment';
 import { Network_Enum, Segment_Type_Enum } from '@3shop/apollo';
+
+const determineNetwork = (segment: NftSegment): Network_Enum => {
+  if ((Object.values(Network_Enum) as string[]).includes(segment.network))
+    return segment.network as Network_Enum;
+  else
+    throw new Error(`Network ${segment.network} not recognized.`);
+}
 
 export default (segment: Segment) =>
   segment.type === 'NFT'
     ? {
         type: Segment_Type_Enum.Nft,
-        network: segment.network === 'ETHEREUM' ? Network_Enum.Ethereum : Network_Enum.Polygon,
+        network: determineNetwork(segment),
         nft_contract_address: segment.contractAddress,
         poapIds: undefined,
       }

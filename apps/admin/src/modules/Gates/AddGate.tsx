@@ -1,18 +1,16 @@
 import { AddGateModal } from './AddGateModal';
 import { PerkFields } from './PerkFields';
 import { GeneralFields } from './GeneralFields';
+import { AddGateFormHeader } from './AddGateFormHeader';
 import {
   BackButton,
   Button,
-  Header,
   Heading,
   MainLayout,
   Section,
   Table,
   useDisclosure,
   useToast,
-  Tooltip,
-  QuestionIcon,
 } from '@3shop/ui';
 
 import { useEffect, useState } from 'react';
@@ -33,6 +31,8 @@ export type AddGateFormValues = {
   uniqueClaim: boolean;
   product_id: string;
 };
+
+const networkToChain = new Map([['XRPLEDGER', 'XRP']]);
 
 export const AddGate = () => {
   const {
@@ -63,10 +63,11 @@ export const AddGate = () => {
 
   const onSubmit = async (data: AddGateFormValues) => {
     const input: Segment_Insert_Input[] = segments.map(segmentInputCreator);
-    console.log("!here dfgkndfg", data);
-    console.log("!input", input);
-    console.log("!segments", segments);
-    return ;
+    console.log("!!!input", input);
+    // console.log("!here dfgkndfg", data);
+    // console.log("!input", input);
+    // console.log("!segments", segments);
+    // return ;
 
     try {
       await createGate({
@@ -117,16 +118,15 @@ export const AddGate = () => {
   return (
     <MainLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Header title="Add Gate" />
+        <AddGateFormHeader loading={loading} />
         <BackButton href="/app" />
         <GeneralFields register={register} errors={errors} />
+
         <PerkFields control={control} showDiscountInput={showDiscountInput} register={register} />
+
         <Section mb={2}>
           <Heading fontSize="xl">
-            Gating{' '}
-            <Tooltip label="Add a NFT collection or a POAP to gate the product. You can add multiple collections to gate the product, if one is matched, the product is unlocked.">
-              <QuestionIcon boxSize={4} />
-            </Tooltip>
+            Gating
             <Button
               float="right"
               isDisabled={false}
@@ -145,9 +145,6 @@ export const AddGate = () => {
 
           <ProductSelectField register={register} />
         </Section>
-        <Button isLoading={loading} float="right" my={2} type="submit">
-          Add Gate
-        </Button>
       </form>
 
       <AddGateModal isOpen={isOpen} onClose={onClose} />
