@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import { createCommonConfig } from '@3shop/vite-config/vite.config.common';
 import Unfonts from 'unplugin-fonts/vite';
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 
 const envVars = [
   'PUBLIC_FUNCTIONS_URL',
@@ -16,6 +17,7 @@ const envVars = [
   'YEARLY_PRO_PLAN_CHECKOUT_LINK',
   'POSTHOG_KEY',
   'SERVERLESS_API_KEY',
+  'SENTRY_AUTH_TOKEN',
 ];
 
 const dirname = __dirname;
@@ -27,5 +29,10 @@ export default defineConfig({
   plugins: [
     ...commonConfig.plugins,
     Unfonts({ google: { families: [{ name: 'Inter', styles: 'wght@400;500;600;700;800;900' }] } }),
+    sentryVitePlugin({
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      org: '3shop',
+      project: 'javascript-react',
+    }),
   ],
 });

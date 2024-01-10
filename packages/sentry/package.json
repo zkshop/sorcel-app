@@ -1,0 +1,11 @@
+{
+  "name": "@3shop/sentry",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix"
+  },
+  "dependencies": {
+    "@sentry/react": "^7.93.0"
+  }
+}

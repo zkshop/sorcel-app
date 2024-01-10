@@ -38,6 +38,7 @@ export const createCommonConfig = (options) => {
       rollupOptions: {
         plugins: [nodePolyfills()],
       },
+      sourcemap: true,
       commonjsOptions: {
         transformMixedEsModules: true,
       },

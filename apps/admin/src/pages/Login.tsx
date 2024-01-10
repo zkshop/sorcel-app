@@ -13,6 +13,7 @@ import {
   Grid,
   GridItem,
   Box,
+  useToastMessage,
 } from '@3shop/ui';
 import logo from '@3shop/ui/SignupSection/SORCEL_LOGO.png';
 
@@ -40,6 +41,7 @@ export const Login = () => {
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const navigate = useNavigate();
   const { setCustomerTokenCookie } = useCustomerTokenCookie();
+  const toast = useToastMessage();
   const {
     handleSubmit,
     register,
@@ -56,14 +58,20 @@ export const Login = () => {
 
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoginLoading(true);
-    const res = await auth.login(data.email);
-    if (res.token) {
-      setCustomerTokenCookie(res.token);
+    try {
+      const res = await auth.login(data.email);
 
-      navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
+      if (res.token) {
+        setCustomerTokenCookie(res.token);
+
+        navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('An error occured, please contact us at sinane@sorcel.co');
+    } finally {
+      setIsLoginLoading(false);
     }
-
-    setIsLoginLoading(false);
   };
 
   return (
