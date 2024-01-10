@@ -6958,6 +6958,7 @@ export const CreateGateV2Document = gql`
         product_id: $product_id
         unique_claim: $unique_claim
         chain: $chain
+        segments: $segments
       }
     ) {
       id

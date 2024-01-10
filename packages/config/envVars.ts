@@ -16,7 +16,6 @@ function getWindowEnvVar(name: WindowEnvVar) {
   return process.env[name];
 }
 
-
 const envVars = {
   SECRET_SUPABASE: process.env.SECRET_SUPABASE,
   SECRET_STRIPE: process.env.SECRET_STRIPE,

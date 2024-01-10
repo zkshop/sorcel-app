@@ -1,13 +1,12 @@
 import type { NftSegment, Segment } from '@3shop/admin-store';
-import segment from '@3shop/admin-store/slices/segment';
 import { Network_Enum, Segment_Type_Enum } from '@3shop/apollo';
 
 const determineNetwork = (segment: NftSegment): Network_Enum => {
+  console.log('!network', Network_Enum);
   if ((Object.values(Network_Enum) as string[]).includes(segment.network))
     return segment.network as Network_Enum;
-  else
-    throw new Error(`Network ${segment.network} not recognized.`);
-}
+  else throw new Error(`Network ${segment.network} not recognized.`);
+};
 
 export default (segment: Segment) =>
   segment.type === 'NFT'
