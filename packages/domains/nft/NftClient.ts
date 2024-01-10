@@ -9,6 +9,6 @@ export type NftClient = {
 
 export namespace testPlatformClient {
   export type NftClient<T> = {
-    getWalletNfts(address: string, identifiers: platform<T>['identifiers']): Promise<SorcelNft[]>;
+    getWalletNfts(address: string, identifiers: platform<T>['identifiers']): Promise<Nft[]>;
   };
 }
