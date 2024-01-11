@@ -33,6 +33,7 @@ export default defineConfig({
       authToken: process.env.SENTRY_AUTH_TOKEN,
       org: '3shop',
       project: 'javascript-react',
+      telemetry: false,
     }),
   ],
 });
