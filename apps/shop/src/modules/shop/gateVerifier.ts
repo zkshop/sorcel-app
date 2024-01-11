@@ -3,23 +3,6 @@ import type { Nft } from '@3shop/alchemy';
 import type { ShopGate_v2 } from './ProductListContainer';
 import { every, includes } from 'lodash';
 import { Segment_Type_Enum } from '@3shop/apollo';
-import { SorcelNft } from '@3shop/domains';
-
-// const isNftMatchingWithGate = (gate: ShopGate_v2, nft: Nft): boolean => {
-//   if (!nft.rawMetadata || !nft.rawMetadata.attributes) return false;
-
-//   for (const gateAttribute of gate.attributes) {
-//     const nftAttribute = nft.rawMetadata.attributes.find(
-//       (attribute: any) => attribute.trait_type === gateAttribute.name,
-//     );
-
-//     if (!nftAttribute || nftAttribute.value !== gateAttribute.value) {
-//       return false;
-//     }
-//   }
-
-//   return true;
-// };
 
 const isPoapsMatchingOneSegment = (poapIds: number[], segment: ShopGate_v2['segments'][0]) =>
   every(segment.poap_ids, (id) => includes(poapIds, Number(id)));

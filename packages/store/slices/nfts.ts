@@ -8,7 +8,8 @@ import { XRPNftReaderClient } from '@3shop/infra';
 import { platformFunctionType, platforms } from 'node_modules/@3shop/domains/nft/NftPlatform';
 import { PlatformData } from 'node_modules/@3shop/domains/nft/mocks';
 import { allNames } from '@3shop/domains/nft/NftPlatform';
-
+import type { GetGates_V2_ByAppIdQuery } from 'node_modules/@3shop/apollo';
+import type { Gate_V2 } from 'node_modules/@3shop/apollo';
 namespace testPlatformScrapper {
   // const WalletScrapper = testPlatformService
 }
@@ -17,6 +18,7 @@ const WalletScrapper = NftService(NftReaderClient());
 type Params = {
   walletAddress: string;
   contractAdressesToFilter: string[];
+  gate: GetGates_V2_ByAppIdQuery['gates'][0] | undefined;
 };
 
 const nftPlatforms = new Map<allNames, any>([
@@ -58,11 +60,13 @@ type paramsType = Omit<Params, 'contractAdressesToFilter'> & {
 //   },
 // );
 
-export const fetchNFTS = createAsyncThunk(
-  'nfts/fetch',
-  async (params: Params) =>
-    await WalletScrapper.getWalletNfts(params.walletAddress, params.contractAdressesToFilter),
-);
+export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) => {
+  console.log("!!!params", params);
+  switch(params.gate) {
+    case 'EVM':
+      return await WalletScrapper.getWalletNfts(params.walletAddress, params.contractAdressesToFilter);
+  }
+});
 
 const initialState: Nft[] = [];
 
