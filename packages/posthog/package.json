@@ -6,6 +6,6 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "posthog-js": "^1.93.6"
+    "posthog-js": "^1.100.0"
   }
 }
