@@ -5886,6 +5886,7 @@ export type GetGates_V2_ByAppIdQuery = {
     exclusive_access: boolean;
     discount?: number | null;
     claims: any;
+    chain?: string | null;
     unique_claim: boolean;
     segments: Array<{
       __typename?: 'segment';
@@ -7202,6 +7203,7 @@ export const GetGates_V2_ByAppIdDocument = gql`
       exclusive_access
       discount
       claims
+      chain
       unique_claim
       segments {
         type

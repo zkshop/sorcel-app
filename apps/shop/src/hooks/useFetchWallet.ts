@@ -4,12 +4,18 @@ import { fetchNFTS, reset } from '@3shop/store/slices/nfts';
 import { fetchPOAPS, reset as resetPoaps } from '@3shop/store/slices/poap';
 import { useAccount } from '@3shop/wallet';
 import {
+  Gate_V2,
+  Network_Enum,
+  Product_Type_Enum,
+  Segment_Type,
+  Segment_Type_Enum,
   useGetEveryContractAddressByAppIdQuery,
   useGetGates_V2Query,
   useGetGates_V2_ByAppIdQuery,
 } from '@3shop/apollo';
 import { envVars } from '@3shop/config';
 import { flatten } from 'lodash';
+import { GetGates_V2_ByAppIdQuery } from '@3shop/apollo';
 
 const useFetchWallet = () => {
   const { isConnected, isDisconnected, address } = useAccount();
@@ -27,6 +33,10 @@ const useFetchWallet = () => {
     },
   });
 
+  useEffect(() => {
+    console.log('!!!gate', gateQuery);
+  }, [gateQuery]);
+
   const dispatch = useAppDispatch();
 
   const getNfts = useCallback(async () => {
@@ -41,7 +51,7 @@ const useFetchWallet = () => {
         fetchNFTS({
           walletAddress: address,
           contractAdressesToFilter,
-          gate: gateQuery?.data?.gates[0]
+          gates: gateQuery?.data?.gates,
         }),
       );
       dispatch(fetchPOAPS(address));
@@ -49,6 +59,7 @@ const useFetchWallet = () => {
       dispatch(fetchPOAPS(email));
     }
   }, [publicAddress, address, email, dispatch, gateQuery]);
+  // REMINDER: Put-back gateQuery as dependency when done with Mock
 
   useEffect(() => {
     if (isDisconnected) {
@@ -58,12 +69,11 @@ const useFetchWallet = () => {
   }, [dispatch, isConnected, isDisconnected]);
 
   useEffect(() => {
-    // const loadingStates = [gateQuery.loading, adressQuery.loading];
-    if (!gateQuery.loading && !adressQuery.loading && (address || email)) {
-      console.log('gates @@', gateQuery);
+    if (!adressQuery.loading && (address || email)) {
+      // console.log('gates @@', gateQuery);
       getNfts();
     }
-  }, [address, email, getNfts, gateQuery, adressQuery]);
+  }, [address, email, getNfts, adressQuery]);
 
   return { nfts, poap };
 };

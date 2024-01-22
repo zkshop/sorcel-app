@@ -4,9 +4,12 @@
 export interface SorcelNft {
   tokenId: string;
   name?: string;
+  combinedIdentifiers: string,
 }
 
-export interface SorcelNftExtended<T> extends SorcelNft {
+// T = identifiers type, K = apiResponseType
+export interface SorcelNftExtended<T, K> extends SorcelNft {
   /** An NFT collection is identified by identifiers, they are variable in number and kind. */
   identifiers: T[],
+  apiResponse: K,
 }

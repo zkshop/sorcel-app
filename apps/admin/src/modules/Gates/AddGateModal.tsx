@@ -74,17 +74,25 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
     } else {
       let payload: NftType;
       switch (data.network) {
-        case 'XRPLEDGER':
+        case 'XRPLEDGER': {
           type XRPValues = NftType & { issuer: string; taxon: string };
           let XRPFormValues: XRPValues = data as XRPValues;
-          XRPFormValues.contractAddress = `${XRPFormValues.issuer}:${XRPFormValues.taxon}`;
+          XRPFormValues.contractAddress = JSON.stringify(XRPFormValues, ['issuer', 'taxon']);
           const { issuer, taxon, ...rest } = XRPFormValues;
           payload = rest;
           break;
+        }
+        // Intentional pass-trough
+        case 'POLYGON':
+        case 'ETHEREUM': {
+          payload = data;
+          break ;
+        }
         default:
           return;
       }
       if (payload) {
+        Object.freeze(payload);
         dispatch(addNftSegment(payload));
         onClose();
       }

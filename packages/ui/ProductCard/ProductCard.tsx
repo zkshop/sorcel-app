@@ -35,6 +35,17 @@ export type ProductCardProps = {
   matches: FormatedProductData['matches'];
 };
 
+interface ProductCardTwoProps {
+  name: string,
+  isLocked: boolean
+}
+
+export const ProductCardTwo = ({name, isLocked}: ProductCardTwoProps) => {
+  return <>
+    <h1>{`${name}, locked: ${isLocked}`}</h1>
+  </>
+}
+
 export const ProductCard = ({
   id,
   name,

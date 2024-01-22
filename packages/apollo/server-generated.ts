@@ -6006,7 +6006,7 @@ export type GetGates_V2_ByAppIdQueryVariables = Exact<{
 }>;
 
 
-export type GetGates_V2_ByAppIdQuery = { __typename?: 'query_root', gates: Array<{ __typename?: 'gate_v2', product_id: any, name: string, id: any, exclusive_access: boolean, discount?: number | null, claims: any, unique_claim: boolean, segments: Array<{ __typename?: 'segment', type: Segment_Type_Enum, nft_contract_address?: string | null, poap_ids: any, network?: Network_Enum | null, id: any }> }> };
+export type GetGates_V2_ByAppIdQuery = { __typename?: 'query_root', gates: Array<{ __typename?: 'gate_v2', product_id: any, name: string, id: any, exclusive_access: boolean, discount?: number | null, claims: any, chain?: string | null, unique_claim: boolean, segments: Array<{ __typename?: 'segment', type: Segment_Type_Enum, nft_contract_address?: string | null, poap_ids: any, network?: Network_Enum | null, id: any }> }> };
 
 export type PushClaimsMutationVariables = Exact<{
   gate_id: Scalars['uuid'];
@@ -6425,6 +6425,7 @@ export const GetGates_V2_ByAppIdDocument = gql`
     exclusive_access
     discount
     claims
+    chain
     unique_claim
     segments {
       type
