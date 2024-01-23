@@ -19,7 +19,8 @@ export const useFilteredGates = (gates: Gate_V2[]): Gate_V2[] => {
           switch (segment.type) {
             case Segment_Type_Enum.Nft:
               return (
-                segment.network === Network_Enum.Ethereum &&
+                segment.network &&
+                [Network_Enum.Ethereum, Network_Enum.Polygon].includes(segment.network) &&
                 nfts.includes(segment.nft_contract_address || '')
               );
             case Segment_Type_Enum.Poap:
@@ -29,7 +30,6 @@ export const useFilteredGates = (gates: Gate_V2[]): Gate_V2[] => {
           }
         }),
       );
-
       setFilteredGates(result);
     };
 

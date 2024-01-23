@@ -7,7 +7,7 @@ import type { Gate_V2, GetProductByIdQuery } from '@3shop/apollo';
 import { usePushClaimsMutation } from '@3shop/apollo';
 import { useGetDeliveryZoneByAppIdQuery, useCreateOrderMutation } from '@3shop/apollo';
 import { applyDiscount } from '@3shop/pure';
-// import { useFilteredGates } from '@/hooks/useFilteredGates';
+import { useFilteredGates } from '@/hooks/useFilteredGates';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SHIPPING_FORM_SCHEMA } from '@/schemas';
 import { useNavigate } from 'react-router-dom';
@@ -65,8 +65,8 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
     return false;
   }
 
-  // const activatedGates = useFilteredGates(product.gate as Gate_V2[]);
-  const activatedGates: Gate_V2[] = [];
+  const activatedGates = useFilteredGates(product.gate as Gate_V2[]);
+  // const activatedGates: Gate_V2[] = [];
 
   const amount = applyDiscount(price + (fees || 0), showDiscount() ? Number(discount) : undefined);
 
@@ -110,7 +110,6 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
           const pushClaimPayload = {
             variables: {
               gate_id: gate.id,
-              // claims: 3,
               claims: address || (email as string),
             },
           };

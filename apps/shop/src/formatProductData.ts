@@ -15,8 +15,6 @@ export type GetProductCardPropsParams = {
   productGates: GateFieldsFragment[];
   userPoapIds: number[];
   isLocked: boolean;
-  // userNFTContracts: string[];
-  // matches: Match[];
   poapImageList: string[];
 };
 
@@ -58,7 +56,6 @@ export const formatProductData = ({
   product,
   productGates,
   isLocked,
-  // matches,
   poapImageList,
 }: GetProductCardPropsParams): FormatedProductData => {
   const { address } = useAccount();
@@ -83,9 +80,6 @@ export const formatProductData = ({
   }));
 
   const alreadyClaimed = hasAlreadyClaimed(productGates, address, email);
-  // const alreadyClaimed = true;
-
-  // const isLocked = (isGated && matches.length === 0) || alreadyClaimed;
 
   const formatedProductData = {
     ...product,
