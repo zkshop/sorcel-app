@@ -33,10 +33,6 @@ const useFetchWallet = () => {
     },
   });
 
-  useEffect(() => {
-    console.log('!!!gate', gateQuery);
-  }, [gateQuery]);
-
   const dispatch = useAppDispatch();
 
   const getNfts = useCallback(async () => {
@@ -59,7 +55,6 @@ const useFetchWallet = () => {
       dispatch(fetchPOAPS(email));
     }
   }, [publicAddress, address, email, dispatch, gateQuery]);
-  // REMINDER: Put-back gateQuery as dependency when done with Mock
 
   useEffect(() => {
     if (isDisconnected) {

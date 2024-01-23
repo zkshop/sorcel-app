@@ -15,6 +15,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { usePushClaimsMutation } from '@3shop/apollo';
 import type { FormatedProductData } from '@3shop/types';
+import { useContext } from 'react';
+import { ValidationResultContext, validationResult } from '../../../apps/shop/src/modules/';
 
 type ProductCardModalProps = {
   isOpen: boolean;
@@ -25,22 +27,31 @@ type ProductCardModalProps = {
   description?: string;
   gate: FormatedProductData['gate'];
   auth?: string;
-  matches: FormatedProductData['matches'];
+  // matches: FormatedProductData['matches'];
 };
 
 const EMAIL_SCHEMA = FormValidation.object().shape({
   email: FormValidation.string().email(),
 });
 
-function getIdForPushClaim(
-  matches: FormatedProductData['matches'],
+// function getIdForPushClaim(
+//   // matches: FormatedProductData['matches'],
+//   gate: FormatedProductData['gate'],
+// ) {
+//   const currentMatch = matches.filter((match) => match.gate.id === gate?.[0]?.id);
+
+//   if (!currentMatch.length) return;
+
+//   return currentMatch[0].matchingNfts?.[0].tokenId;
+// }
+
+function getLastValidatedTokenId(
   gate: FormatedProductData['gate'],
-) {
-  const currentMatch = matches.filter((match) => match.gate.id === gate?.[0]?.id);
-
-  if (!currentMatch.length) return;
-
-  return currentMatch[0].matchingNfts?.[0].tokenId;
+  results: validationResult[],
+): string | undefined {
+  let filteredResults = [...results].filter((elem) => elem.gate?.id == gate?.[0]?.id);
+  if (!filteredResults.length) return;
+  return filteredResults[filteredResults.length - 1].nft.tokenId;
 }
 
 export const ProductCardModal = ({
@@ -50,10 +61,12 @@ export const ProductCardModal = ({
   webhookUrl,
   description = 'Enter your email to receive the ticket',
   gate,
-  auth,
-  matches,
+  auth, // matches,
 }: ProductCardModalProps) => {
   const [loading, setLoading] = useState(false);
+  const validationResult = useContext(ValidationResultContext);
+  // console.log('!!!@!!!last', getLastValidatedTokenId(gate, validationResult));
+
   const {
     handleSubmit,
     formState: { errors },
@@ -76,7 +89,7 @@ export const ProductCardModal = ({
 
       if (gate) {
         if (gate?.[0]?.contractAddress) {
-          const claimToPush = getIdForPushClaim(matches, gate) || auth;
+          const claimToPush = getLastValidatedTokenId(gate, validationResult) || auth;
 
           await pushClaims({
             variables: {

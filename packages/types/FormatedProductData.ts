@@ -1,6 +1,7 @@
 import type { GateFieldsFragment, Network_Enum, Product_Type_Enum } from '@3shop/apollo';
 import type { Nullable } from './utils';
 import type { Nft } from '@3shop/alchemy';
+import { SorcelNft } from 'node_modules/@3shop/domains';
 
 export type FormatedProductData = {
   id?: string;
@@ -25,9 +26,9 @@ export type FormatedProductData = {
     contractAddress: string;
     network?: Network_Enum | null;
   }>[];
-  matches: {
-    gate: GateFieldsFragment;
-    matchingNfts: Nft[];
-    matchingPoaps: number[];
-  }[];
+  // matches: {
+  //   gate: GateFieldsFragment;
+  //   matchingNfts: SorcelNft[];
+  //   matchingPoaps: number[];
+  // }[];
 };

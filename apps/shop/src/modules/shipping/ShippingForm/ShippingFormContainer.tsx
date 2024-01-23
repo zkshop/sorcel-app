@@ -70,6 +70,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
   const amount = applyDiscount(price + (fees || 0), showDiscount() ? Number(discount) : undefined);
 
   const onSubmit = async (data: ShippingFormValues) => {
+    console.log('++ br1');
     const gate = activatedGates.length ? activatedGates[0] : undefined;
 
     dispatch(
@@ -82,6 +83,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
     );
 
     if (amount === 0) {
+      console.log('++ br2');
       try {
         await createOrder({
           variables: {
@@ -100,13 +102,20 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
           img_url: product.image,
         });
 
+        console.log('++ br3');
+        console.log("!gate", gate);
         if (gate) {
-          await pushClaims({
+          console.log('++ br4');
+          const pushClaimPayload = {
             variables: {
               gate_id: gate.id,
+              // claims: 3,
               claims: address || (email as string),
             },
-          });
+          };
+          console.log("!pushClaim", pushClaimPayload);
+
+          await pushClaims(pushClaimPayload);
         }
 
         return navigate('/success');

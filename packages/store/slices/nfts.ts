@@ -39,13 +39,6 @@ type paramsType = Omit<Params, 'contractAdressesToFilter'> & {
   identifiers: PlatformData;
 };
 
-// const converted = convertObject<Nft, SorcelNft>(
-//   result[0],
-//   resolvers.get(chain)!
-// );
-
-// console.log('!result', result);
-// console.log('converted !++!!+!+', converted);
 export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) => {
   // console.log('!!!params', params);
   if (!params.gates) return undefined;
@@ -57,7 +50,7 @@ export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) =
         params.contractAdressesToFilter,
       );
       const converted = convertManyObjects<Nft, SorcelNft>(response, resolvers.get(chain)!);
-      console.log('###### CONVERTED', converted);
+      // console.log('###### CONVERTED', converted);
       return converted;
     }
     default:
@@ -76,7 +69,6 @@ export const balancesSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchNFTS.fulfilled, (state, action) => {
-      console.log("!!!action.payload", action.payload);
       return action.payload;
     });
   },

@@ -5,4 +5,6 @@ export const resolver: objectResolver<SorcelNft> = {
   tokenId: 'tokenId',
   name: ['contract', 'name'],
   combinedIdentifiers: ['contract', 'address'],
+  thumbnailUrl: ['image', 'thumbnailUrl'],
+  originalUrl: ['image', 'originalUrl']
 };

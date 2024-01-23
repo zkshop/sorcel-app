@@ -17,17 +17,16 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   const productGates = data?.gate_v2;
 
   const userNFTs = useAppSelector((state) => state.user.nfts);
-  const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
+  // const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
   const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
-  const matches = gateVerifier(productGates || [], userNFTs, userPoapIds);
+  // const matches = gateVerifier(productGates || [], userNFTs, userPoapIds);
 
   const formatedProducts = formatProductData({
     product,
+    isLocked: false,
     productGates: productGates || [],
     userPoapIds,
-    userNFTContracts,
-    matches,
     poapImageList,
   });
 

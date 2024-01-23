@@ -10,7 +10,7 @@ export const useFilteredGates = (gates: Gate_V2[]): Gate_V2[] => {
   const poapList = useMemo(() => poapState.map(({ event: { id } }) => id), [poapState]);
 
   const nftState = useAppSelector((state) => state.user.nfts);
-  const nfts = useMemo(() => nftState.map((nft) => nft.contract.address), [nftState]);
+  const nfts = useMemo(() => nftState.map((nft) => nft.combinedIdentifiers), [nftState]);
 
   useEffect(() => {
     const filterGates = () => {
