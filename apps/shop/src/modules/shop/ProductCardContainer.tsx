@@ -1,5 +1,5 @@
 import { gateVerifier } from './gateVerifier';
-import { formatProductData } from '@/formatProductData';
+import { formatProductData } from '../../formatProductData';
 import { classnames } from '@3shop/config';
 import { GridItem, ProductCard } from '@3shop/ui';
 import type { GateFieldsFragment, GetProductsQuery, Product } from '@3shop/apollo';
