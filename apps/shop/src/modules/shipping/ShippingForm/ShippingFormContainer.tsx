@@ -7,7 +7,7 @@ import type { Gate_V2, GetProductByIdQuery } from '@3shop/apollo';
 import { usePushClaimsMutation } from '@3shop/apollo';
 import { useGetDeliveryZoneByAppIdQuery, useCreateOrderMutation } from '@3shop/apollo';
 import { applyDiscount } from '@3shop/pure';
-import { useFilteredGates } from '@/hooks/useFilteredGates';
+// import { useFilteredGates } from '@/hooks/useFilteredGates';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SHIPPING_FORM_SCHEMA } from '@/schemas';
 import { useNavigate } from 'react-router-dom';
@@ -65,11 +65,13 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
     return false;
   }
 
-  const activatedGates = useFilteredGates(product.gate as Gate_V2[]);
+  // const activatedGates = useFilteredGates(product.gate as Gate_V2[]);
+  const activatedGates: Gate_V2[] = [];
 
   const amount = applyDiscount(price + (fees || 0), showDiscount() ? Number(discount) : undefined);
 
   const onSubmit = async (data: ShippingFormValues) => {
+    console.log('++ br1');
     const gate = activatedGates.length ? activatedGates[0] : undefined;
 
     dispatch(
@@ -82,6 +84,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
     );
 
     if (amount === 0) {
+      console.log('++ br2');
       try {
         await createOrder({
           variables: {
@@ -100,13 +103,20 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
           img_url: product.image,
         });
 
+        console.log('++ br3');
+        console.log("!gate", gate);
         if (gate) {
-          await pushClaims({
+          console.log('++ br4');
+          const pushClaimPayload = {
             variables: {
               gate_id: gate.id,
+              // claims: 3,
               claims: address || (email as string),
             },
-          });
+          };
+          console.log("!pushClaim", pushClaimPayload);
+
+          await pushClaims(pushClaimPayload);
         }
 
         return navigate('/success');

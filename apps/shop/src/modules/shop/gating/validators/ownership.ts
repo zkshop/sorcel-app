@@ -8,12 +8,14 @@ export class Ownership extends BaseValidator implements IValidator {
   }
 
   validate() {
-    const {ownedNfts, gate} = this.params;
-  
+    const { ownedNfts, gate } = this.params;
+
     if (!ownedNfts || !ownedNfts.length) return false;
     for (const ownedNft of ownedNfts) {
       if (!gate?.segments.some((seg) => seg.nft_contract_address == ownedNft.combinedIdentifiers))
         return false;
+
+      if (this.params.onValidation) this.params.onValidation(gate, ownedNft);
     }
     return true;
   }

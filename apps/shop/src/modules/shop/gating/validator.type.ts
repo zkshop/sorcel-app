@@ -6,8 +6,11 @@ export interface IValidator {
   validate: () => boolean;
 }
 
+export type gateType = Maybe<GetProductsQuery['products'][0]['gate'][0]>;
+
 export interface validatorParams {
   // walletAddress: string;
   ownedNfts?: Maybe<SorcelNft[]>;
-  gate?: Maybe<GetProductsQuery['products'][0]['gate'][0]>;
+  gate?: gateType;
+  onValidation?: Maybe<(gate: gateType, nft: SorcelNft) => void>
 }
