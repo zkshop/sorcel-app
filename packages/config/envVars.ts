@@ -1,13 +1,9 @@
-import { withEnv } from "../../apps/functions/serverless/middlewares";
-withEnv(() => {}, 'envVars');
-
 const NODE_ENV = process.env.NODE_ENV || 'development';
-const GITHUB_ACTIONS = process.env.GITHUB_ACTIONS || false;
 
 type WindowEnvVar = 'APP_ID' | 'NETWORK' | 'PRODUCT_ID';
 
 function getWindowEnvVar(name: WindowEnvVar) {
-  if (NODE_ENV === 'production' || GITHUB_ACTIONS) {
+  if (NODE_ENV === 'production') {
     if (typeof window === 'undefined') return process.env[name];
     // @ts-ignore
     return window[`__3SHOP_${name}__`];

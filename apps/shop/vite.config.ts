@@ -1,14 +1,7 @@
 import { defineConfig, loadEnv } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { createCommonConfig } from '@3shop/vite-config/vite.config.common.js';
-import dotenv from 'dotenv-vault-core';
 
-dotenv.config();
-
-/* 
-  null: will not fail if the environment variable is missing.
-  undefined: will fail if the environment variable is missing.
-*/
 const envVars = {
   APP_ID: null,
   GITHUB_ACTIONS: false,
@@ -42,7 +35,7 @@ const envVars = {
 
 const dirname = __dirname;
 
-const commonConfig = createCommonConfig({ envVars, dirname });
+const commonConfig = createCommonConfig({ dirname, envVars });
 
 export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };

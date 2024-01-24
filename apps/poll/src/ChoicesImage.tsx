@@ -8,6 +8,7 @@ type ImageProps = {
 
 const DEFAULT_IMAGE = 'choices_background.png';
 
+//@ts-ignore
 const StyledImage = styled(ChakraImage)<{ isLocked: boolean }>`
   height: 100%;
   margin: auto;

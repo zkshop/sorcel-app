@@ -37,6 +37,12 @@ export const ThemeProvider = ({ children, customTheme = false }: Props) => {
               families: [font],
             },
           });
+        else
+          WebFont.load({
+            google: {
+              families: ['Inter'],
+            },
+          });
 
         const newTheme = extendTheme(
           merge({
