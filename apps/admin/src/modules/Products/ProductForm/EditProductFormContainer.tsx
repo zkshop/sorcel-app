@@ -64,6 +64,7 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
 
       cache.modify({
         fields: {
+          // @ts-ignore
           product: () =>
             productsCache?.products.filter(
               (product: GetAdminProductsQuery['products'][0]) =>
