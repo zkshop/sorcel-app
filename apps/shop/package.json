@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "tsc && node -r dotenv/config ../../node_modules/.bin/vite build",
     "build:ci": "tsc && vite build",
-    "dev": "vite",
+    "dev": "node -r dotenv/config ../../node_modules/.bin/vite",
     "lint": "eslint \"**/*.ts*\" --fix",
     "preview": "vite preview"
   },

@@ -9,6 +9,7 @@ type ImageProps = {
 
 const DEFAULT_IMAGE = 'choices_background.png';
 
+//@ts-ignore
 const StyledImage = styled(ChakraImage)<{ completed: boolean }>`
   @media (max-width: 1440px) {
     max-height: 80%;

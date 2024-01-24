@@ -2,9 +2,7 @@ import { defineConfig, loadEnv } from 'vite';
 import { createCommonConfig } from '@3shop/vite-config/vite.config.common.js';
 import { createHtmlPlugin } from 'vite-plugin-html';
 
-import dotenv from 'dotenv-vault-core';
-
-dotenv.config();
+const dirname = __dirname;
 
 const envVars = {
   APP_ID: null,
@@ -35,9 +33,7 @@ const envVars = {
   SDK_VERSION: 'unknown',
 };
 
-const dirname = __dirname;
-
-const commonConfig = createCommonConfig({ envVars, dirname });
+const commonConfig = createCommonConfig({ dirname, envVars });
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {

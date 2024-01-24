@@ -1,31 +1,49 @@
 import { defineConfig } from 'vite';
-import { createCommonConfig } from '@3shop/vite-config/vite.config.common';
-import Unfonts from 'unplugin-fonts/vite';
 
-const envVars = [
-  'PUBLIC_FUNCTIONS_URL',
-  'PUBLIC_HASURA_API_URL',
-  'PUBLIC_MAGIC_PUBLISHABLE_KEY',
-  'SECRET_ALCHEMY',
-  'SECRET_HASURA',
-  'SECRET_MAGIC',
-  'SECRET_SUPABASE',
-  'SECRET_POAP',
-  'SECRET_CENTER',
-  'MONTHLY_PRO_PLAN_CHECKOUT_LINK',
-  'YEARLY_PRO_PLAN_CHECKOUT_LINK',
-  'POSTHOG_KEY',
-  'SERVERLESS_API_KEY',
-];
+import path from 'path';
+import react from '@vitejs/plugin-react';
+import EnvironmentPlugin from 'vite-plugin-environment';
+
+const ENV_VARIABLES = {
+  EMAIL_ORDER_TARGET: undefined,
+  NETWORK: undefined,
+  PAPER_CLIENT_ID: undefined,
+  PAPER_KEY_MANAGER_TOKEN: undefined,
+  PLAYWRIGHT_TEST_BASE_URL: undefined,
+  PUBLIC_FUNCTIONS_URL: undefined,
+  PUBLIC_HASURA_API_URL: undefined,
+  PUBLIC_MAGIC_PUBLISHABLE_KEY: undefined,
+  PUBLIC_STRIPE_PUBLISHABLE_KEY: undefined,
+  SECRET_AIRTABLE: undefined,
+  SECRET_ALCHEMY: undefined,
+  SECRET_CENTER: undefined,
+  SECRET_HASURA: undefined,
+  SECRET_JWT: undefined,
+  SECRET_MAGIC: undefined,
+  SECRET_PAPER: undefined,
+  SECRET_POAP: undefined,
+  SECRET_RUDDERSTACK: undefined,
+  SECRET_STRIPE: undefined,
+  SECRET_SUPABASE: undefined,
+  MONTHLY_PRO_PLAN_CHECKOUT_LINK: undefined,
+  YEARLY_PRO_PLAN_CHECKOUT_LINK: undefined,
+  STRIPE_WEBHOOK_SECRET: undefined,
+  WALLET_CONNECT_PROJECT_ID: undefined,
+  POSTHOG_KEY: undefined,
+  SECRET_BREVO: undefined,
+  SERVERLESS_API_KEY: undefined,
+};
 
 const dirname = __dirname;
 
-const commonConfig = createCommonConfig({ envVars, dirname });
-
 export default defineConfig({
-  ...commonConfig,
-  plugins: [
-    ...commonConfig.plugins,
-    Unfonts({ google: { families: [{ name: 'Inter', styles: 'wght@400;500;600;700;800;900' }] } }),
-  ],
+  plugins: [react(), EnvironmentPlugin(ENV_VARIABLES)],
+  resolve: {
+    alias: {
+      '@': path.resolve(dirname, './src'),
+    },
+  },
+  build: {
+    sourcemap: false,
+  },
 });
