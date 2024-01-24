@@ -65,7 +65,6 @@ const useFetchWallet = () => {
 
   useEffect(() => {
     if (!adressQuery.loading && (address || email)) {
-      // console.log('gates @@', gateQuery);
       getNfts();
     }
   }, [address, email, getNfts, adressQuery]);

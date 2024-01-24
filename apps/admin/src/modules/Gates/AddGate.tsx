@@ -59,7 +59,6 @@ export const AddGate = () => {
 
   const onSubmit = async (data: AddGateFormValues) => {
     const input: Segment_Insert_Input[] = segments.map(segmentInputCreator);
-    console.log('!!input', input);
     const createGatePayload: Parameters<typeof createGate>[0] = {
       variables: {
         segments: {
@@ -75,7 +74,6 @@ export const AddGate = () => {
     };
 
     try {
-      console.log('!sending', createGatePayload);
       await createGate(createGatePayload);
       sucess({ description: `Gate ${data.name} created` });
       navigate(ROUTES_PATH.PROTECTED.GATE);

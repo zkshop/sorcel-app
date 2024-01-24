@@ -38,24 +38,21 @@ function sortGates(a: GateFieldsFragment, b: GateFieldsFragment) {
 export function ProductCardContainer({ isWalletConnected, auth, product }: Props) {
   const userNFTs = useAppSelector((state) => state.user.nfts);
   const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
+  const poapImageList = useAppSelector((state) => state.poapImageList);
   const gates = product.gate.slice() || [];
   const sortedGates = gates.sort(sortGates);
 
+  useEffect(() => {
+    console.log('!Poap', userPoapIds);
+  }, [userPoapIds]);
+
   let validatedNfts: validationResult[] = [];
 
-  /**
-   * This function iterates over an array of gate validators and calls the validate method for each.
-   * If all validate methods return true, the gate is considered unlocked.
-   * @param {validatorArray[]} validators - An array of validator arrays.
-   * @returns {boolean} - Returns true if the gate is locked, false otherwise.
-   */
   const validate = (validators: validatorArray[]) => {
     for (let i = 0; i < validators.length; i++) {
       const validatorsResult = validators[i].map((v) => v.validate());
-      // If every validator returns true, the gate is unlocked, hence return false for isLocked.
       if (validatorsResult.every((result) => result == true)) return false;
     }
-    // If any validator does not return true, the gate remains locked.
     return true;
   };
 
@@ -78,32 +75,6 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
     }
     return validate(validators);
   })();
-
-  // useEffect(() => {
-  //   console.log('!!!nfts', userNFTs);
-  // }, [userNFTs]);
-
-  // useEffect(() => {
-  //   console.log('!gates here', gates);
-  // }, [gates]);
-  // return (
-  //   <GridItem
-  //     className={classnames.PRODUCT_CARD_LIST.GRID_ITEM}
-  //     display="flex"
-  //     justifyContent="center"
-  //   >
-  //     <ProductCardTwo name={product.name} isLocked={isLocked} />
-  //   </GridItem>
-  // );
-  // const userNFTs = useAppSelector((state) => state.user.nfts);
-  // console.log(userNFTs);
-  // const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
-  // const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
-  const poapImageList = useAppSelector((state) => state.poapImageList);
-  // const gates = product.gate.slice() || [];
-  // const sortedGates = gates.sort(sortGates);
-
-  // const matches = gateVerifier(sortedGates, userNFTs, userPoapIds);
 
   const formatedProduct = formatProductData({
     product,

@@ -65,7 +65,6 @@ export const balancesSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchNFTS.fulfilled, (state, action) => {
-      console.log("!!!action.payload", action.payload);
       return action.payload;
     });
   },

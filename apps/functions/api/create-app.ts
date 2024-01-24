@@ -21,8 +21,6 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   const appData = await appCreator.createApp(name);
 
   if (!appData) {
-    console.log(appData);
-
     return res.status(500).send('Error creating app');
   }
 

@@ -25,9 +25,8 @@ type ProductCardModalProps = {
   description?: string;
   gate: FormatedProductData['gate'];
   auth?: string;
-  matches: FormatedProductData['matches'];
 };
-
+// TODO: push claim
 const EMAIL_SCHEMA = FormValidation.object().shape({
   email: FormValidation.string().email(),
 });
@@ -51,7 +50,6 @@ export const ProductCardModal = ({
   description = 'Enter your email to receive the ticket',
   gate,
   auth,
-  matches,
 }: ProductCardModalProps) => {
   const [loading, setLoading] = useState(false);
   const {

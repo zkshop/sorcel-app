@@ -68,7 +68,6 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
 
   console.error(errors);
   const onSubmit = (data: AddGateModalFormValues) => {
-    console.log('!data', data);
     if (data.type === 'POAP') {
       dispatch(addPoapSegment({ ...data, poapIds: formatPoapSegment(data.poapIds) }));
     } else {
@@ -106,7 +105,6 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
 
   const renderFields = (object: { label: string; name: string }) => {
     type RegisterParam = Parameters<typeof register>[0];
-    // console.log('!object', object);
     return (
       <>
         <FormLabel mt={1} mb={1}>
