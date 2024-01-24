@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import react from '@vitejs/plugin-react';
 import EnvironmentPlugin from 'vite-plugin-environment';
+import Unfonts from 'unplugin-fonts/vite';
 
 const ENV_VARIABLES = {
   EMAIL_ORDER_TARGET: undefined,
@@ -37,7 +38,11 @@ const ENV_VARIABLES = {
 const dirname = __dirname;
 
 export default defineConfig({
-  plugins: [react(), EnvironmentPlugin(ENV_VARIABLES)],
+  plugins: [
+    react(),
+    EnvironmentPlugin(ENV_VARIABLES),
+    Unfonts({ google: { families: [{ name: 'Inter', styles: 'wght@400;500;600;700;800;900' }] } }),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(dirname, './src'),
