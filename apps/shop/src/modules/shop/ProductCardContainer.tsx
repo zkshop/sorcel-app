@@ -87,7 +87,6 @@ const doValidation = (gates: Gate_V2[], userNFTs: SorcelNft[], userPoapIds: numb
       default:
         break;
     }
-    console.log('## GATE', gates[i]);
     validators = [...validators, current];
     current = [];
   }
