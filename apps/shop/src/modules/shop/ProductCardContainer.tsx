@@ -33,7 +33,35 @@ function sortGates(a: GateFieldsFragment, b: GateFieldsFragment) {
   return -1;
 }
 
+const validate = (validators: validatorArray[]) => {
+  for (let i = 0; i < validators.length; i++) {
+    const validatorsResult = validators[i].map((v) => v.validate());
+    if (validatorsResult.every((result) => result == true)) return false;
+  }
+  return true;
+};
 
+const doValidation = () => {
+  let validators: validatorArray[] = [];
+  let current: validatorArray = [];
+  let validatedNfts: validationResult[] = [];
+
+  for (let i = 0; i < gates.length; i++) {
+    console.log('## GATE', gates[i]);
+    current.push(
+      new Ownership({
+        gate: gates[i],
+        ownedNfts: userNFTs,
+        onValidation(gate, nft) {
+          validatedNfts = [...validatedNfts, { gate, nft }];
+        },
+      }),
+    );
+    validators = [...validators, current];
+    current = [];
+  }
+  return validate(validators);
+};
 
 export function ProductCardContainer({ isWalletConnected, auth, product }: Props) {
   const userNFTs = useAppSelector((state) => state.user.nfts);
@@ -46,36 +74,7 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
     console.log('!Poap', userPoapIds);
   }, [userPoapIds]);
 
-  let validatedNfts: validationResult[] = [];
-
-  const validate = (validators: validatorArray[]) => {
-    for (let i = 0; i < validators.length; i++) {
-      const validatorsResult = validators[i].map((v) => v.validate());
-      if (validatorsResult.every((result) => result == true)) return false;
-    }
-    return true;
-  };
-
-  const isLocked = (() => {
-    let validators: validatorArray[] = [];
-    let current: validatorArray = [];
-
-    for (let i = 0; i < gates.length; i++) {
-      console.log("## GATE", gates[i]);
-      current.push(
-        new Ownership({
-          gate: gates[i],
-          ownedNfts: userNFTs,
-          onValidation(gate, nft) {
-            validatedNfts = [...validatedNfts, { gate, nft }];
-          },
-        }),
-      );
-      validators = [...validators, current];
-      current = [];
-    }
-    return validate(validators);
-  })();
+  const isLocked = doValidation(gates);
 
   const formatedProduct = formatProductData({
     product,
