@@ -41,7 +41,7 @@ const validate = (validators: validatorArray[]) => {
   return true;
 };
 
-const doValidation = () => {
+const doValidation = (gates: gateType[], userNFTs: SorcelNft[], userPoapIds: number[]) => {
   let validators: validatorArray[] = [];
   let current: validatorArray = [];
   let validatedNfts: validationResult[] = [];
@@ -60,7 +60,10 @@ const doValidation = () => {
     validators = [...validators, current];
     current = [];
   }
-  return validate(validators);
+  return {
+    isLocked: validate(validators),
+    validatedNfts
+  }
 };
 
 export function ProductCardContainer({ isWalletConnected, auth, product }: Props) {
@@ -74,7 +77,7 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
     console.log('!Poap', userPoapIds);
   }, [userPoapIds]);
 
-  const isLocked = doValidation(gates);
+  const { isLocked, validatedNfts} = doValidation(gates, userNFTs);
 
   const formatedProduct = formatProductData({
     product,
