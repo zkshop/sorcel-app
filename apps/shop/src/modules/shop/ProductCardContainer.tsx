@@ -2,16 +2,24 @@ import { gateVerifier } from './gateVerifier';
 import { formatProductData } from '../../formatProductData';
 import { classnames } from '@3shop/config';
 import { GridItem, ProductCard } from '@3shop/ui';
-import type { GateFieldsFragment, GetProductsQuery, Product } from '@3shop/apollo';
+import {
+  GateFieldsFragment,
+  Gate_V2,
+  GetProductsQuery,
+  Product,
+  Segment_Type,
+  Segment_Type_Enum,
+} from '@3shop/apollo';
 import { useAppSelector } from '@3shop/store';
 import { useEffect } from 'react';
 import { BaseValidator } from './gating/validators/base';
 import { IValidator } from './gating/validator.type';
-import { Ownership } from './gating/validators/ownership';
+import { NFTOwnership } from './gating/validators/nft/ownership';
 import { gateType } from './gating/validator.type';
 import { SorcelNft } from '@3shop/domains';
 import { createContext } from 'react';
 import { validationResult, ValidationResultContext } from './gating/validationResultContext';
+import { POAPOwnership } from './gating/validators/poap/ownership';
 
 type Props = {
   isWalletConnected: boolean;
@@ -41,29 +49,52 @@ const validate = (validators: validatorArray[]) => {
   return true;
 };
 
-const doValidation = (gates: gateType[], userNFTs: SorcelNft[], userPoapIds: number[]) => {
+const doValidation = (gates: Gate_V2[], userNFTs: SorcelNft[], userPoapIds: number[]) => {
   let validators: validatorArray[] = [];
   let current: validatorArray = [];
   let validatedNfts: validationResult[] = [];
 
   for (let i = 0; i < gates.length; i++) {
+    const segmentType: Segment_Type_Enum | undefined = gates[i]?.segments[0].type;
+    if (!segmentType) {
+      console.warn(`Failed to retrieve segment type for gate ${gates[i].id}`);
+      continue;
+    }
+
+    switch (segmentType) {
+      case Segment_Type_Enum.Nft:
+        current.push(
+          new NFTOwnership({
+            gate: gates[i],
+            ownedNfts: userNFTs,
+            onValidation(gate, { nft }) {
+              validatedNfts = [...validatedNfts, { gate, nft: nft! }];
+            },
+          }),
+        );
+        break;
+      case Segment_Type_Enum.Poap:
+        current.push(
+          new POAPOwnership({
+            gate: gates[i],
+            ownedPoaps: userPoapIds,
+            onValidation(gate, { poapId }) {
+              console.log("#VALID ", poapId);
+            },
+          }),
+        );
+        break;
+      default:
+        break;
+    }
     console.log('## GATE', gates[i]);
-    current.push(
-      new Ownership({
-        gate: gates[i],
-        ownedNfts: userNFTs,
-        onValidation(gate, nft) {
-          validatedNfts = [...validatedNfts, { gate, nft }];
-        },
-      }),
-    );
     validators = [...validators, current];
     current = [];
   }
   return {
     isLocked: validate(validators),
-    validatedNfts
-  }
+    validatedNfts,
+  };
 };
 
 export function ProductCardContainer({ isWalletConnected, auth, product }: Props) {
@@ -77,7 +108,11 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
     console.log('!Poap', userPoapIds);
   }, [userPoapIds]);
 
-  const { isLocked, validatedNfts} = doValidation(gates, userNFTs);
+  const { isLocked, validatedNfts } = doValidation(
+    gates.filter((gate) => gate != undefined) as Gate_V2[],
+    userNFTs,
+    userPoapIds,
+  );
 
   const formatedProduct = formatProductData({
     product,

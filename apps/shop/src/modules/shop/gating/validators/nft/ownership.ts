@@ -1,8 +1,8 @@
 import { SorcelNft } from '@3shop/domains';
-import type { IValidator, validatorParams } from '../validator.type';
-import { BaseValidator } from './base';
+import type { IValidator, validatorParams } from '../../validator.type';
+import { BaseValidator } from '../base';
 
-export class Ownership extends BaseValidator implements IValidator {
+export class NFTOwnership extends BaseValidator implements IValidator {
   constructor(params: validatorParams) {
     super(params);
   }
@@ -15,7 +15,7 @@ export class Ownership extends BaseValidator implements IValidator {
       if (!gate?.segments.some((seg) => seg.nft_contract_address == ownedNft.combinedIdentifiers))
         return false;
 
-      if (this.params.onValidation) this.params.onValidation(gate, ownedNft);
+      if (this.params.onValidation) this.params.onValidation(gate, { nft: ownedNft });
     }
     return true;
   }
