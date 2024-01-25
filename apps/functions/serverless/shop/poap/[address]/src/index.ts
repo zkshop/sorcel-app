@@ -1,11 +1,10 @@
 import type { HttpFunction } from '@google-cloud/functions-framework';
-import { getEveryPoapURL, poap } from '../../../../../../../packages/poap';
+import { getEveryPoapURL, poap } from '@3shop/poap';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status';
-import { envMiddleWare, allowCors } from '../../../../middlewares';
+import { envMiddleWare, allowCors, slug } from '../../../../middlewares';
 
 const handler: HttpFunction = async (req, res) => {
   const { address } = req.query;
-
   try {
     if (typeof address !== 'string') throw new Error('No address specified');
 
@@ -21,7 +20,7 @@ const handler: HttpFunction = async (req, res) => {
   }
 };
 
-export const address = envMiddleWare(allowCors(handler));
+export const address = envMiddleWare(allowCors(slug('[address]', handler)));
 
 // To apply middlewares to the handler, wrap the handler with the middleware functions.
 // Example: export const myFunction = middleware1(middleware2(handler));
