@@ -61,6 +61,7 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
     let current: validatorArray = [];
 
     for (let i = 0; i < gates.length; i++) {
+      console.log("## GATE", gates[i]);
       current.push(
         new Ownership({
           gate: gates[i],
