@@ -1,5 +1,5 @@
-import { createFunctions, createDeployCommand, Function } from '../lib/functions.js';
-import { UnknownArgumentException, getArgs } from '../utils.js';
+import { Function } from '../lib/functions.js';
+import { getArgs } from '../utils.js';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import { log } from '../display.mjs';
@@ -15,26 +15,6 @@ export const defaultOptions = {
   'yaml-outfile': './scripts/api-gateway-openapi.yaml',
   'template-path': `./scripts/template.yaml`,
 };
-
-// function keyResolver(keys, obj, onLastKey) {
-//   const [ref, copy] = [obj, { ...obj }];
-
-//   let current = ref;
-//   let result;
-//   let i = 0;
-//   while (i < keys.length) {
-//     if (current[keys[i]] === undefined) {
-//       return undefined;
-//     }
-//     if (i === keys.length - 1) {
-//       result = onLastKey(current, keys[i]);
-//       break;
-//     }
-//     current = current[keys[i]];
-//     i++;
-//   }
-//   return result;
-// }
 
 function createOpenApiObject(_function, keysToExtract) {
   const config = Function.getConfig(_function.id);
@@ -103,12 +83,11 @@ async function generateYaml(args) {
     }
   });
   Object.freeze(paths);
+
   buildingYaml['paths'] = paths;
   buildingYaml['securityDefinitions'] = securityDefinitions;
   buildingYaml['definitions'] = allDefinitions;
-  // console.log(buildingYaml);
-  // console.log('all', a);
-  // process.exit(1);
+
   const yamlStr = yaml.dump(buildingYaml);
   await fs.promises.writeFile(options['yaml-outfile'], yamlStr, 'utf8');
   return options['yaml-outfile'];
