@@ -7,10 +7,20 @@ const bundleFileName = 'index.cjs';
 const endPointDefaultPrefix = ['api'];
 export const enabled = '(enabled)';
 
+const isSlug = (str) => str.startsWith('[') && str.endsWith(']');
+
+const withoutSlug = (str) => {
+  if (isSlug(str)) {
+    return str.slice(1, -1);
+  }
+  return str;
+};
+
 const createEndPointPrefix = (path) => {
   const parts = splitPathIntoArray(path).filter((s) => s != '');
   const cwdSplit = splitPathIntoArray(process.cwd()).filter((s) => s != '');
-  const fromCwd = parts.slice(cwdSplit.length);
+  const fromCwd = parts.slice(cwdSplit.length).filter(part => !isSlug(part));
+  console.log("!CWD ", fromCwd);
 
   return [...endPointDefaultPrefix, ...fromCwd].join('/');
 };
@@ -204,7 +214,7 @@ export function createFunctions(includeOnly, ignore) {
     let pathSplit = splitPathIntoArray(path);
     pathSplit.pop();
     path = pathSplit.join('/');
-    const name = getFunctionName(path);
+    const name = withoutSlug(getFunctionName(path));
     const skipFunction =
       (includeOnly && !includeOnly.includes(name)) || (ignore && ignore.includes(name));
     if (skipFunction) continue;
