@@ -7,7 +7,7 @@ const envVars = {
   GITHUB_ACTIONS: false,
   NETWORK: null,
   NODE_DEBUG: false,
-  PAPER_CLIENT_ID: null,
+  PAPER_CLIENT_ID: undefined,
   PUBLIC_FUNCTIONS_URL: undefined,
   PUBLIC_HASURA_API_URL: undefined,
   PUBLIC_MAGIC_PUBLISHABLE_KEY: undefined,

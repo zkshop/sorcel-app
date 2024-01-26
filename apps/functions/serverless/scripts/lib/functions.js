@@ -20,7 +20,6 @@ const createEndPointPrefix = (path) => {
   const parts = splitPathIntoArray(path).filter((s) => s != '');
   const cwdSplit = splitPathIntoArray(process.cwd()).filter((s) => s != '');
   const fromCwd = parts.slice(cwdSplit.length).filter(part => !isSlug(part));
-  console.log("!CWD ", fromCwd);
 
   return [...endPointDefaultPrefix, ...fromCwd].join('/');
 };
