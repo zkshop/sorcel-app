@@ -50,22 +50,21 @@ const validate = (validators: validatorArray[]) => {
 };
 
 const doValidation = (gates: Gate_V2[], userNFTs: SorcelNft[], userPoapIds: number[]) => {
-  let validators: validatorArray[] = [];
-  let current: validatorArray = [];
   let validatedNfts: validationResult[] = [];
 
-  for (let i = 0; i < gates.length; i++) {
-    const segmentType: Segment_Type_Enum | undefined = gates[i]?.segments[0].type;
+  const validators = gates.reduce<validatorArray[]>((acc, gate) => {
+    const segmentType: Segment_Type_Enum | undefined = gate?.segments[0].type;
     if (!segmentType) {
-      console.warn(`Failed to retrieve segment type for gate ${gates[i].id}`);
-      continue;
+      console.warn(`Failed to retrieve segment type for gate ${gate.id}`);
+      return acc;
     }
 
+    let current: validatorArray = [];
     switch (segmentType) {
       case Segment_Type_Enum.Nft:
         current.push(
           new NFTOwnership({
-            gate: gates[i],
+            gate,
             ownedNfts: userNFTs,
             onValidation(gate, { nft }) {
               validatedNfts = [...validatedNfts, { gate, nft: nft! }];
@@ -76,10 +75,12 @@ const doValidation = (gates: Gate_V2[], userNFTs: SorcelNft[], userPoapIds: numb
       case Segment_Type_Enum.Poap:
         current.push(
           new POAPOwnership({
-            gate: gates[i],
+            gate,
             ownedPoaps: userPoapIds,
             onValidation(gate, { poapId }) {
-              console.log("#VALID ", poapId);
+              // Callback not used yet
+              gate;
+              poapId;
             },
           }),
         );
@@ -87,12 +88,12 @@ const doValidation = (gates: Gate_V2[], userNFTs: SorcelNft[], userPoapIds: numb
       default:
         break;
     }
-    validators = [...validators, current];
-    current = [];
-  }
+    return [...acc, current];
+  }, []);
+
   return {
     isLocked: validate(validators),
-    validatedNfts,
+    validatedNfts: Object.freeze(validatedNfts),
   };
 };
 
@@ -102,10 +103,6 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
   const poapImageList = useAppSelector((state) => state.poapImageList);
   const gates = product.gate.slice() || [];
   const sortedGates = gates.sort(sortGates);
-
-  useEffect(() => {
-    console.log('!Poap', userPoapIds);
-  }, [userPoapIds]);
 
   const { isLocked, validatedNfts } = doValidation(
     gates.filter((gate) => gate != undefined) as Gate_V2[],
