@@ -28,6 +28,20 @@ function createOpenApiObject(_function, keysToExtract) {
     operationId: _function.entryPointName,
   };
 
+ const requiredForCors = {
+    'x-google-backend': {
+      address: `https://${process.env.GCP_REGION}-${process.env.GCP_PROJECT}.cloudfunctions.net/${_function.name}-${process.env['ENV_CONTEXT']}`,
+    },
+    operationId: `${_function.entryPointName}Cors`,
+    summary: `CORS support for ${_function.name}`,
+    description: 'Enable CORS by returning the correct headers',
+    responses: {
+      '204': {
+        description: 'no content'
+      }
+    }
+  };
+
   function locateRestMethodToAppendRequired(obj) {
     if (typeof obj !== 'object' || obj === null) return;
     const restMethods = ['get', 'post', 'put', 'delete', 'patch', 'options', 'head'];
@@ -41,6 +55,7 @@ function createOpenApiObject(_function, keysToExtract) {
   }
 
   locateRestMethodToAppendRequired(openApi);
+  openApi['options'] = {...requiredForCors};
   Object.freeze(openApi);
   return openApi;
 }
