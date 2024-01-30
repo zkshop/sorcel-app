@@ -17,8 +17,8 @@ export const CustomerAuthClient = (): AuthAdminClient => ({
     const res = await httpServerless<AuthAdminData>({
       url: 'api/admin/auth/login',
       method: 'POST',
-      data: {
-        didToken: `Bearer ${didToken}`,
+      headers: {
+        Authorization: 'Bearer ' + didToken,
       },
     });
 
