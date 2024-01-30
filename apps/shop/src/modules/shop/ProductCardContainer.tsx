@@ -48,6 +48,7 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
       display="flex"
       justifyContent="center"
     >
+      <h1>{"test"}</h1>
       <ProductCard {...formatedProduct} isWalletConnected={isWalletConnected} auth={auth} />
     </GridItem>
   );

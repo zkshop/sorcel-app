@@ -28,32 +28,35 @@ export const ThemeProvider = ({ children, customTheme = false }: Props) => {
         const response = await getTheme();
 
         if (!response.data) throw new Error('Theme not found');
+        console.log('!response', response);
+        if (response.data.app) {
+          const { font, font_color } = response.data.app as CustomTheme;
+          if (font)
+            WebFont.load({
+              google: {
+                families: [font],
+              },
+            });
 
-        const { background_color, font, font_color } = response.data.app as CustomTheme;
-
-        if (font)
-          WebFont.load({
-            google: {
-              families: [font],
-            },
-          });
-
-        const newTheme = extendTheme(
-          merge({
-            styles: {
-              global: {
-                body: {
-                  fontFamily: font ? font : 'inherit',
-                  color: font_color || 'black',
-                  backgroundColor: background_color,
+          const newTheme = extendTheme(
+            merge({
+              styles: {
+                global: {
+                  body: {
+                    fontFamily: font ? font : 'inherit',
+                    color: font_color || 'black',
+                    // backgroundColor: background_color,
+                  },
                 },
               },
-            },
-          }),
-          baseTheme,
-        );
+            }),
+            baseTheme,
+          );
 
-        setTheme(newTheme);
+          setTheme(newTheme);
+        }
+        else
+          console.warn("Failed to retrieve custom theme")
       } catch (error) {
         console.error('Erreur lors de la récupération du thème:', error);
       }
