@@ -12,8 +12,9 @@ const Token = AuthorizationTokenService(JsonWebTokenClient());
 
 async function handler(req: VercelRequest, res: VercelResponse) {
   if (!envVars.SECRET_JWT) return res.status(INTERNAL_SERVER_ERROR);
+  console.log('+++', req.headers.authorization);
 
-  const didToken = extractTokenFromAuthorization(req.headers.authorization);
+  const didToken = extractTokenFromAuthorization(req.body.didToken);
 
   if (!didToken) return res.status(UNAUTHORIZED);
 
