@@ -12,7 +12,7 @@ const Token = withEnv(() => AuthorizationTokenService(JsonWebTokenClient()));
 const handler: HttpFunction = async (req, res) => {
   if (!envVars.SECRET_JWT) return res.status(INTERNAL_SERVER_ERROR);
 
-  const didToken = extractTokenFromAuthorization(req.headers.authorization);
+  const didToken = extractTokenFromAuthorization(req.body.didToken);
 
   if (!didToken) return res.status(UNAUTHORIZED);
 
