@@ -9,7 +9,7 @@ import { extractTokenFromAuthorization } from '../../../utils';
 const Token = AuthorizationTokenService(JsonWebTokenClient());
 
 async function handler(req: VercelRequest, res: VercelResponse) {
-  const token = extractTokenFromAuthorization(req.headers.authorization);
+  const token = extractTokenFromAuthorization(req.body.didToken);
   if (!token || !Token.verify(token)) return res.status(UNAUTHORIZED).end();
 
   const userPayload = Token.getUserPayload(token);
