@@ -6572,9 +6572,7 @@ export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetUserQuery = { __typename?: 'query_root', user: Array<{ __typename?: 'user', app_id: any, id: any, role: string }> };
 
-export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{
-  app_id: Scalars['uuid'];
-}>;
+export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetWalletConnectionLogByAppIdQuery = { __typename?: 'query_root', wallet_connection_log: Array<{ __typename?: 'wallet_connection_log', address: string, date: any, id: number }> };
@@ -7142,8 +7140,8 @@ export const GetUserDocument = gql`
 }
     `;
 export const GetWalletConnectionLogByAppIdDocument = gql`
-    query getWalletConnectionLogByAppId($app_id: uuid!) {
-  wallet_connection_log(where: {app_id: {_eq: $app_id}}) {
+    query getWalletConnectionLogByAppId {
+  wallet_connection_log {
     address
     date
     id
@@ -7281,7 +7279,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetUser(variables?: GetUserQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUserQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetUserQuery>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetUser', 'query', variables);
     },
-    getWalletConnectionLogByAppId(variables: GetWalletConnectionLogByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetWalletConnectionLogByAppIdQuery> {
+    getWalletConnectionLogByAppId(variables?: GetWalletConnectionLogByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetWalletConnectionLogByAppIdQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetWalletConnectionLogByAppIdQuery>(GetWalletConnectionLogByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getWalletConnectionLogByAppId', 'query', variables);
     }
   };

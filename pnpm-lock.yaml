@@ -123,11 +123,9 @@ importers:
       '@types/react-dropzone':
         specifier: ^5.1.0
         version: 5.1.0(react@18.2.0)
-<<<<<<< HEAD
       '@types/url-parse':
         specifier: ^1.4.11
         version: 1.4.11
-=======
       i:
         specifier: ^0.3.7
         version: 0.3.7
@@ -140,7 +138,6 @@ importers:
       npm:
         specifier: ^10.4.0
         version: 10.4.0
->>>>>>> feeb661b (draft: is working, not ready to merge, moving to Magic redirection ticket)
       react:
         specifier: ^18.2.0
         version: 18.2.0

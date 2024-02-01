@@ -1,5 +1,5 @@
-query getWalletConnectionLogByAppId($app_id: uuid!) {
-  wallet_connection_log(where: {app_id: {_eq: $app_id}}) {
+query getWalletConnectionLogByAppId {
+  wallet_connection_log {
     address
     date
     id
