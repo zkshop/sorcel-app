@@ -23,9 +23,11 @@ export const useVerifyToken = (fromAdminRoute = false) => {
       try {
         if (!tokenCookie) throw new Error();
 
-        const user = await httpServerless.get<UserData>(`api/admin/auth/verify`, {
+        const user = await httpServerless<UserData>({
+          url: 'api/admin/auth/verify',
+          method: 'POST',
           data: {
-            didToken: 'Bearer ' + token,
+            didToken: `Bearer ${token}`,
           },
         });
 

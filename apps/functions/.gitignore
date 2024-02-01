@@ -2,3 +2,7 @@ node_modules
 .env
 .vercel
 .turbo
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
