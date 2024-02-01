@@ -18,4 +18,6 @@ select_permissions:
         - app_id
         - date
         - id
-      filter: {}
+      filter:
+        app_id:
+          _eq: X-Hasura-User-Id

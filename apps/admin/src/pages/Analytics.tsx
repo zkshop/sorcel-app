@@ -1,8 +1,10 @@
-import { Wallet_Connection_Log, useGetWalletConnectionLogByAppIdQuery } from '@3shop/apollo';
-import { ReactNode, useEffect, useMemo, useState, useRef } from 'react';
+import type { Wallet_Connection_Log } from '@3shop/apollo';
+import { useGetWalletConnectionLogByAppIdQuery } from '@3shop/apollo';
+import type { ReactNode } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import { Box, Button, HStack, Header, Table, Td, Tr } from '@3shop/ui';
 import { DateTime } from 'luxon';
-import {json2csv} from 'json-2-csv';
+import { json2csv } from 'json-2-csv';
 
 interface formatedLog {
   address: Wallet_Connection_Log['address'];
@@ -13,11 +15,7 @@ interface formatedLog {
 }
 
 export const Analytics = () => {
-  const { data, loading, error } = useGetWalletConnectionLogByAppIdQuery({
-    variables: {
-      app_id: '5e174260-08bf-442b-89b3-b16cb90c5241',
-    },
-  });
+  const { data, loading } = useGetWalletConnectionLogByAppIdQuery();
   const [formatedLogs, setFormatedLogs] = useState<formatedLog[]>([]);
   const linkRef = useRef<HTMLAnchorElement>(null);
 
@@ -45,6 +43,7 @@ export const Analytics = () => {
         </Button>
       );
     });
+
     const firstPageButton = (
       <Button size="sm" onClick={() => setCurrentPage(0)} disabled={currentPage === 0}>
         First
@@ -106,7 +105,7 @@ export const Analytics = () => {
     <>
       <Box>
         <Header title="Analytics">
-          <Button onClick={async () => await exportData()}>{'Export data'}</Button>
+          <Button onClick={async () => await exportData()}>Export data</Button>
         </Header>
         <Box mt={4}>
           <Table
@@ -122,7 +121,7 @@ export const Analytics = () => {
             )}
           />
         </Box>
-        <HStack mt={4} justifyContent={'center'}>
+        <HStack mt={4} justifyContent="center">
           {pagination()}
         </HStack>
       </Box>
