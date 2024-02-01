@@ -38,7 +38,8 @@ const dirname = __dirname;
 const commonConfig = createCommonConfig({ dirname, envVars });
 
 export default defineConfig(({ mode }) => {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') }
+  process.env['APP_ID'] = "5e174260-08bf-442b-89b3-b16cb90c5241";
 
   return {
     ...commonConfig,

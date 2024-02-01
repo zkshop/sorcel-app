@@ -1,0 +1,2 @@
+CREATE TABLE "public"."wallet_logs" ("address" text NOT NULL, "date" timestamptz NOT NULL DEFAULT now(), "app_id" uuid NOT NULL, "id" uuid NOT NULL DEFAULT gen_random_uuid(), PRIMARY KEY ("id") , FOREIGN KEY ("app_id") REFERENCES "public"."app"("id") ON UPDATE restrict ON DELETE restrict);COMMENT ON TABLE "public"."wallet_logs" IS E'this table log date, time and wallet address upon connection';
+CREATE EXTENSION IF NOT EXISTS pgcrypto;

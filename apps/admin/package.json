@@ -28,6 +28,10 @@
     "@hookform/resolvers": "^2.9.10",
     "@types/react-dropzone": "^5.1.0",
     "@types/url-parse": "^1.4.11",
+    "i": "^0.3.7",
+    "json-2-csv": "^5.0.1",
+    "luxon": "^3.4.4",
+    "npm": "^10.4.0",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
@@ -38,6 +42,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.29.0",
+    "@types/luxon": "^3.4.2",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.8",
     "@types/uuid": "^9.0.0",
