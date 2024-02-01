@@ -6729,9 +6729,7 @@ export type GetUserQuery = {
   user: Array<{ __typename?: 'user'; app_id: any; id: any; role: string }>;
 };
 
-export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{
-  app_id: Scalars['uuid'];
-}>;
+export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetWalletConnectionLogByAppIdQuery = {
   __typename?: 'query_root';
@@ -9066,8 +9064,8 @@ export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
 export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
 export const GetWalletConnectionLogByAppIdDocument = gql`
-  query getWalletConnectionLogByAppId($app_id: uuid!) {
-    wallet_connection_log(where: { app_id: { _eq: $app_id } }) {
+  query getWalletConnectionLogByAppId {
+    wallet_connection_log {
       address
       date
       id
@@ -9087,12 +9085,11 @@ export const GetWalletConnectionLogByAppIdDocument = gql`
  * @example
  * const { data, loading, error } = useGetWalletConnectionLogByAppIdQuery({
  *   variables: {
- *      app_id: // value for 'app_id'
  *   },
  * });
  */
 export function useGetWalletConnectionLogByAppIdQuery(
-  baseOptions: Apollo.QueryHookOptions<
+  baseOptions?: Apollo.QueryHookOptions<
     GetWalletConnectionLogByAppIdQuery,
     GetWalletConnectionLogByAppIdQueryVariables
   >,
