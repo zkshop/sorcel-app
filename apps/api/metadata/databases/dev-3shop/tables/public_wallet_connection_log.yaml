@@ -1,0 +1,21 @@
+table:
+  name: wallet_connection_log
+  schema: public
+insert_permissions:
+  - role: anonymous
+    permission:
+      check: {}
+      columns:
+        - id
+        - app_id
+        - address
+        - date
+select_permissions:
+  - role: customer
+    permission:
+      columns:
+        - address
+        - app_id
+        - date
+        - id
+      filter: {}

@@ -59,6 +59,27 @@ export const ButtonStyle: ComponentStyleConfig = {
         backgroundColor: 'error.pressed',
       },
     },
+
+    outlined: {
+      color: 'primary.main',
+      border: '2px solid',
+      borderColor: 'primary.main',
+      backgroundColor: 'transparent',
+      _hover: {
+        backgroundColor: 'primary.hover',
+        borderColor: 'primary.hover',
+      },
+      _active: {
+        backgroundColor: 'primary.pressed',
+        borderColor: 'primary.pressed',
+      },
+      _disabled: {
+        backgroundColor: 'bluescales.750!important',
+        pointerEvents: 'none',
+        color: 'bluescales.400',
+        borderColor: 'bluescales.400',
+      },
+    },
   },
 
   defaultProps: {
