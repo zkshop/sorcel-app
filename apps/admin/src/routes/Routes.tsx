@@ -11,6 +11,7 @@ import { Integrations } from '../pages/Integrations';
 import { Plan } from '../pages/Plan';
 import { Signup } from '../pages/Signup';
 import { Redirect } from '../pages/Redirect';
+import { Analytics } from '../pages/Analytics';
 
 export const ROUTES_PATH = {
   PUBLIC: {
@@ -25,6 +26,7 @@ export const ROUTES_PATH = {
     POLL: '/app/poll',
     PAYMENTS: '/app/payments',
     INTEGRATIONS: '/app',
+    ANALYTICS: '/app/analytics',
   },
 } as const;
 
@@ -43,6 +45,7 @@ const Routes = () => (
       <Route path="poll/*" element={<PollRoutes />} />
       <Route path="payments" element={<Payments />} />
       <Route path="plan" element={<Plan />} />
+      <Route path="analytics" element={<Analytics />} />
     </Route>
   </OriginalRoutes>
 );

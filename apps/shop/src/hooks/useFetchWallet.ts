@@ -6,6 +6,7 @@ import { useAccount } from '@3shop/wallet';
 import { useGetEveryContractAddressByAppIdQuery } from '@3shop/apollo';
 import { envVars } from '../envVars';
 import { flatten } from 'lodash';
+import { createWalletConnectionLog } from '../../utils';
 
 const useFetchWallet = () => {
   const { isConnected, isDisconnected, address } = useAccount();
@@ -30,6 +31,12 @@ const useFetchWallet = () => {
       dispatch(fetchPOAPS(email));
     }
   }, [publicAddress, address, email, dispatch]);
+
+  useEffect(() => {
+    if (isConnected && address) {
+      (async () => await createWalletConnectionLog(envVars.APP_ID, address))();
+    }
+  }, [isConnected, address, isDisconnected]);
 
   useEffect(() => {
     if (isDisconnected) {

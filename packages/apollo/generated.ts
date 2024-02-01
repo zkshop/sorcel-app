@@ -332,6 +332,127 @@ export type App_Updates = {
   where: App_Bool_Exp;
 };
 
+/** columns and relationships of "chain_type" */
+export type Chain_Type = {
+  __typename?: 'chain_type';
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "chain_type" */
+export type Chain_Type_Aggregate = {
+  __typename?: 'chain_type_aggregate';
+  aggregate?: Maybe<Chain_Type_Aggregate_Fields>;
+  nodes: Array<Chain_Type>;
+};
+
+/** aggregate fields of "chain_type" */
+export type Chain_Type_Aggregate_Fields = {
+  __typename?: 'chain_type_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Chain_Type_Max_Fields>;
+  min?: Maybe<Chain_Type_Min_Fields>;
+};
+
+/** aggregate fields of "chain_type" */
+export type Chain_Type_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Chain_Type_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "chain_type". All fields are combined with a logical 'AND'. */
+export type Chain_Type_Bool_Exp = {
+  _and?: InputMaybe<Array<Chain_Type_Bool_Exp>>;
+  _not?: InputMaybe<Chain_Type_Bool_Exp>;
+  _or?: InputMaybe<Array<Chain_Type_Bool_Exp>>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "chain_type" */
+export enum Chain_Type_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  ChainTypePkey = 'chain_type_pkey',
+}
+
+/** input type for inserting data into table "chain_type" */
+export type Chain_Type_Insert_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Chain_Type_Max_Fields = {
+  __typename?: 'chain_type_max_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Chain_Type_Min_Fields = {
+  __typename?: 'chain_type_min_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "chain_type" */
+export type Chain_Type_Mutation_Response = {
+  __typename?: 'chain_type_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Chain_Type>;
+};
+
+/** on_conflict condition type for table "chain_type" */
+export type Chain_Type_On_Conflict = {
+  constraint: Chain_Type_Constraint;
+  update_columns?: Array<Chain_Type_Update_Column>;
+  where?: InputMaybe<Chain_Type_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "chain_type". */
+export type Chain_Type_Order_By = {
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: chain_type */
+export type Chain_Type_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "chain_type" */
+export enum Chain_Type_Select_Column {
+  /** column name */
+  Value = 'value',
+}
+
+/** input type for updating data in table "chain_type" */
+export type Chain_Type_Set_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "chain_type" */
+export type Chain_Type_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Chain_Type_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Chain_Type_Stream_Cursor_Value_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "chain_type" */
+export enum Chain_Type_Update_Column {
+  /** column name */
+  Value = 'value',
+}
+
+export type Chain_Type_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Chain_Type_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Chain_Type_Bool_Exp;
+};
+
 /** columns and relationships of "choice" */
 export type Choice = {
   __typename?: 'choice';
@@ -1206,6 +1327,7 @@ export type Gate_Updates = {
 export type Gate_V2 = {
   __typename?: 'gate_v2';
   app_id?: Maybe<Scalars['uuid']>;
+  chain?: Maybe<Scalars['String']>;
   claims: Scalars['jsonb'];
   discount?: Maybe<Scalars['Int']>;
   exclusive_access: Scalars['Boolean'];
@@ -1344,6 +1466,7 @@ export type Gate_V2_Bool_Exp = {
   _not?: InputMaybe<Gate_V2_Bool_Exp>;
   _or?: InputMaybe<Array<Gate_V2_Bool_Exp>>;
   app_id?: InputMaybe<Uuid_Comparison_Exp>;
+  chain?: InputMaybe<String_Comparison_Exp>;
   claims?: InputMaybe<Jsonb_Comparison_Exp>;
   discount?: InputMaybe<Int_Comparison_Exp>;
   exclusive_access?: InputMaybe<Boolean_Comparison_Exp>;
@@ -1385,6 +1508,7 @@ export type Gate_V2_Inc_Input = {
 /** input type for inserting data into table "gate_v2" */
 export type Gate_V2_Insert_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
+  chain?: InputMaybe<Scalars['String']>;
   claims?: InputMaybe<Scalars['jsonb']>;
   discount?: InputMaybe<Scalars['Int']>;
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
@@ -1400,6 +1524,7 @@ export type Gate_V2_Insert_Input = {
 export type Gate_V2_Max_Fields = {
   __typename?: 'gate_v2_max_fields';
   app_id?: Maybe<Scalars['uuid']>;
+  chain?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
@@ -1409,6 +1534,7 @@ export type Gate_V2_Max_Fields = {
 /** order by max() on columns of table "gate_v2" */
 export type Gate_V2_Max_Order_By = {
   app_id?: InputMaybe<Order_By>;
+  chain?: InputMaybe<Order_By>;
   discount?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -1419,6 +1545,7 @@ export type Gate_V2_Max_Order_By = {
 export type Gate_V2_Min_Fields = {
   __typename?: 'gate_v2_min_fields';
   app_id?: Maybe<Scalars['uuid']>;
+  chain?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
@@ -1428,6 +1555,7 @@ export type Gate_V2_Min_Fields = {
 /** order by min() on columns of table "gate_v2" */
 export type Gate_V2_Min_Order_By = {
   app_id?: InputMaybe<Order_By>;
+  chain?: InputMaybe<Order_By>;
   discount?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -1453,6 +1581,7 @@ export type Gate_V2_On_Conflict = {
 /** Ordering options when selecting data from "gate_v2". */
 export type Gate_V2_Order_By = {
   app_id?: InputMaybe<Order_By>;
+  chain?: InputMaybe<Order_By>;
   claims?: InputMaybe<Order_By>;
   discount?: InputMaybe<Order_By>;
   exclusive_access?: InputMaybe<Order_By>;
@@ -1478,6 +1607,8 @@ export type Gate_V2_Prepend_Input = {
 export enum Gate_V2_Select_Column {
   /** column name */
   AppId = 'app_id',
+  /** column name */
+  Chain = 'chain',
   /** column name */
   Claims = 'claims',
   /** column name */
@@ -1513,6 +1644,7 @@ export enum Gate_V2_Select_Column_Gate_V2_Aggregate_Bool_Exp_Bool_Or_Arguments_C
 /** input type for updating data in table "gate_v2" */
 export type Gate_V2_Set_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
+  chain?: InputMaybe<Scalars['String']>;
   claims?: InputMaybe<Scalars['jsonb']>;
   discount?: InputMaybe<Scalars['Int']>;
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
@@ -1566,6 +1698,7 @@ export type Gate_V2_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Gate_V2_Stream_Cursor_Value_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
+  chain?: InputMaybe<Scalars['String']>;
   claims?: InputMaybe<Scalars['jsonb']>;
   discount?: InputMaybe<Scalars['Int']>;
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
@@ -1590,6 +1723,8 @@ export type Gate_V2_Sum_Order_By = {
 export enum Gate_V2_Update_Column {
   /** column name */
   AppId = 'app_id',
+  /** column name */
+  Chain = 'chain',
   /** column name */
   Claims = 'claims',
   /** column name */
@@ -1711,6 +1846,10 @@ export type Mutation_Root = {
   delete_app?: Maybe<App_Mutation_Response>;
   /** delete single row from the table: "app" */
   delete_app_by_pk?: Maybe<App>;
+  /** delete data from the table: "chain_type" */
+  delete_chain_type?: Maybe<Chain_Type_Mutation_Response>;
+  /** delete single row from the table: "chain_type" */
+  delete_chain_type_by_pk?: Maybe<Chain_Type>;
   /** delete data from the table: "choice" */
   delete_choice?: Maybe<Choice_Mutation_Response>;
   /** delete single row from the table: "choice" */
@@ -1767,10 +1906,18 @@ export type Mutation_Root = {
   delete_utility?: Maybe<Utility_Mutation_Response>;
   /** delete single row from the table: "utility" */
   delete_utility_by_pk?: Maybe<Utility>;
+  /** delete data from the table: "wallet_connection_log" */
+  delete_wallet_connection_log?: Maybe<Wallet_Connection_Log_Mutation_Response>;
+  /** delete single row from the table: "wallet_connection_log" */
+  delete_wallet_connection_log_by_pk?: Maybe<Wallet_Connection_Log>;
   /** insert data into the table: "app" */
   insert_app?: Maybe<App_Mutation_Response>;
   /** insert a single row into the table: "app" */
   insert_app_one?: Maybe<App>;
+  /** insert data into the table: "chain_type" */
+  insert_chain_type?: Maybe<Chain_Type_Mutation_Response>;
+  /** insert a single row into the table: "chain_type" */
+  insert_chain_type_one?: Maybe<Chain_Type>;
   /** insert data into the table: "choice" */
   insert_choice?: Maybe<Choice_Mutation_Response>;
   /** insert a single row into the table: "choice" */
@@ -1827,12 +1974,22 @@ export type Mutation_Root = {
   insert_utility?: Maybe<Utility_Mutation_Response>;
   /** insert a single row into the table: "utility" */
   insert_utility_one?: Maybe<Utility>;
+  /** insert data into the table: "wallet_connection_log" */
+  insert_wallet_connection_log?: Maybe<Wallet_Connection_Log_Mutation_Response>;
+  /** insert a single row into the table: "wallet_connection_log" */
+  insert_wallet_connection_log_one?: Maybe<Wallet_Connection_Log>;
   /** update data of the table: "app" */
   update_app?: Maybe<App_Mutation_Response>;
   /** update single row of the table: "app" */
   update_app_by_pk?: Maybe<App>;
   /** update multiples rows of table: "app" */
   update_app_many?: Maybe<Array<Maybe<App_Mutation_Response>>>;
+  /** update data of the table: "chain_type" */
+  update_chain_type?: Maybe<Chain_Type_Mutation_Response>;
+  /** update single row of the table: "chain_type" */
+  update_chain_type_by_pk?: Maybe<Chain_Type>;
+  /** update multiples rows of table: "chain_type" */
+  update_chain_type_many?: Maybe<Array<Maybe<Chain_Type_Mutation_Response>>>;
   /** update data of the table: "choice" */
   update_choice?: Maybe<Choice_Mutation_Response>;
   /** update single row of the table: "choice" */
@@ -1917,6 +2074,12 @@ export type Mutation_Root = {
   update_utility_by_pk?: Maybe<Utility>;
   /** update multiples rows of table: "utility" */
   update_utility_many?: Maybe<Array<Maybe<Utility_Mutation_Response>>>;
+  /** update data of the table: "wallet_connection_log" */
+  update_wallet_connection_log?: Maybe<Wallet_Connection_Log_Mutation_Response>;
+  /** update single row of the table: "wallet_connection_log" */
+  update_wallet_connection_log_by_pk?: Maybe<Wallet_Connection_Log>;
+  /** update multiples rows of table: "wallet_connection_log" */
+  update_wallet_connection_log_many?: Maybe<Array<Maybe<Wallet_Connection_Log_Mutation_Response>>>;
 };
 
 /** mutation root */
@@ -1927,6 +2090,16 @@ export type Mutation_RootDelete_AppArgs = {
 /** mutation root */
 export type Mutation_RootDelete_App_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Chain_TypeArgs = {
+  where: Chain_Type_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Chain_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 /** mutation root */
@@ -2070,6 +2243,16 @@ export type Mutation_RootDelete_Utility_By_PkArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootDelete_Wallet_Connection_LogArgs = {
+  where: Wallet_Connection_Log_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Wallet_Connection_Log_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+/** mutation root */
 export type Mutation_RootInsert_AppArgs = {
   objects: Array<App_Insert_Input>;
   on_conflict?: InputMaybe<App_On_Conflict>;
@@ -2079,6 +2262,18 @@ export type Mutation_RootInsert_AppArgs = {
 export type Mutation_RootInsert_App_OneArgs = {
   object: App_Insert_Input;
   on_conflict?: InputMaybe<App_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Chain_TypeArgs = {
+  objects: Array<Chain_Type_Insert_Input>;
+  on_conflict?: InputMaybe<Chain_Type_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Chain_Type_OneArgs = {
+  object: Chain_Type_Insert_Input;
+  on_conflict?: InputMaybe<Chain_Type_On_Conflict>;
 };
 
 /** mutation root */
@@ -2250,6 +2445,18 @@ export type Mutation_RootInsert_Utility_OneArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootInsert_Wallet_Connection_LogArgs = {
+  objects: Array<Wallet_Connection_Log_Insert_Input>;
+  on_conflict?: InputMaybe<Wallet_Connection_Log_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Wallet_Connection_Log_OneArgs = {
+  object: Wallet_Connection_Log_Insert_Input;
+  on_conflict?: InputMaybe<Wallet_Connection_Log_On_Conflict>;
+};
+
+/** mutation root */
 export type Mutation_RootUpdate_AppArgs = {
   _set?: InputMaybe<App_Set_Input>;
   where: App_Bool_Exp;
@@ -2264,6 +2471,23 @@ export type Mutation_RootUpdate_App_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_App_ManyArgs = {
   updates: Array<App_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Chain_TypeArgs = {
+  _set?: InputMaybe<Chain_Type_Set_Input>;
+  where: Chain_Type_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Chain_Type_By_PkArgs = {
+  _set?: InputMaybe<Chain_Type_Set_Input>;
+  pk_columns: Chain_Type_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Chain_Type_ManyArgs = {
+  updates: Array<Chain_Type_Updates>;
 };
 
 /** mutation root */
@@ -2564,6 +2788,25 @@ export type Mutation_RootUpdate_Utility_ManyArgs = {
   updates: Array<Utility_Updates>;
 };
 
+/** mutation root */
+export type Mutation_RootUpdate_Wallet_Connection_LogArgs = {
+  _inc?: InputMaybe<Wallet_Connection_Log_Inc_Input>;
+  _set?: InputMaybe<Wallet_Connection_Log_Set_Input>;
+  where: Wallet_Connection_Log_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Wallet_Connection_Log_By_PkArgs = {
+  _inc?: InputMaybe<Wallet_Connection_Log_Inc_Input>;
+  _set?: InputMaybe<Wallet_Connection_Log_Set_Input>;
+  pk_columns: Wallet_Connection_Log_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Wallet_Connection_Log_ManyArgs = {
+  updates: Array<Wallet_Connection_Log_Updates>;
+};
+
 /** columns and relationships of "network" */
 export type Network = {
   __typename?: 'network';
@@ -2608,6 +2851,7 @@ export enum Network_Constraint {
 export enum Network_Enum {
   Ethereum = 'ETHEREUM',
   Polygon = 'POLYGON',
+  Xrpledger = 'XRPLEDGER',
 }
 
 /** Boolean expression to compare columns of type "network_enum". All fields are combined with logical 'AND'. */
@@ -3799,6 +4043,12 @@ export type Query_Root = {
   app_aggregate: App_Aggregate;
   /** fetch data from the table: "app" using primary key columns */
   app_by_pk?: Maybe<App>;
+  /** fetch data from the table: "chain_type" */
+  chain_type: Array<Chain_Type>;
+  /** fetch aggregated fields from the table: "chain_type" */
+  chain_type_aggregate: Chain_Type_Aggregate;
+  /** fetch data from the table: "chain_type" using primary key columns */
+  chain_type_by_pk?: Maybe<Chain_Type>;
   /** fetch data from the table: "choice" */
   choice: Array<Choice>;
   /** fetch aggregated fields from the table: "choice" */
@@ -3883,6 +4133,12 @@ export type Query_Root = {
   utility_aggregate: Utility_Aggregate;
   /** fetch data from the table: "utility" using primary key columns */
   utility_by_pk?: Maybe<Utility>;
+  /** fetch data from the table: "wallet_connection_log" */
+  wallet_connection_log: Array<Wallet_Connection_Log>;
+  /** fetch aggregated fields from the table: "wallet_connection_log" */
+  wallet_connection_log_aggregate: Wallet_Connection_Log_Aggregate;
+  /** fetch data from the table: "wallet_connection_log" using primary key columns */
+  wallet_connection_log_by_pk?: Maybe<Wallet_Connection_Log>;
 };
 
 export type Query_RootAppArgs = {
@@ -3903,6 +4159,26 @@ export type Query_RootApp_AggregateArgs = {
 
 export type Query_RootApp_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+export type Query_RootChain_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Chain_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chain_Type_Order_By>>;
+  where?: InputMaybe<Chain_Type_Bool_Exp>;
+};
+
+export type Query_RootChain_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Chain_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chain_Type_Order_By>>;
+  where?: InputMaybe<Chain_Type_Bool_Exp>;
+};
+
+export type Query_RootChain_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 export type Query_RootChoiceArgs = {
@@ -4183,6 +4459,26 @@ export type Query_RootUtility_AggregateArgs = {
 
 export type Query_RootUtility_By_PkArgs = {
   value: Scalars['String'];
+};
+
+export type Query_RootWallet_Connection_LogArgs = {
+  distinct_on?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Wallet_Connection_Log_Order_By>>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
+export type Query_RootWallet_Connection_Log_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Wallet_Connection_Log_Order_By>>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
+export type Query_RootWallet_Connection_Log_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 /** columns and relationships of "segment" */
@@ -4584,6 +4880,14 @@ export type Subscription_Root = {
   app_by_pk?: Maybe<App>;
   /** fetch data from the table in a streaming manner: "app" */
   app_stream: Array<App>;
+  /** fetch data from the table: "chain_type" */
+  chain_type: Array<Chain_Type>;
+  /** fetch aggregated fields from the table: "chain_type" */
+  chain_type_aggregate: Chain_Type_Aggregate;
+  /** fetch data from the table: "chain_type" using primary key columns */
+  chain_type_by_pk?: Maybe<Chain_Type>;
+  /** fetch data from the table in a streaming manner: "chain_type" */
+  chain_type_stream: Array<Chain_Type>;
   /** fetch data from the table: "choice" */
   choice: Array<Choice>;
   /** fetch aggregated fields from the table: "choice" */
@@ -4696,6 +5000,14 @@ export type Subscription_Root = {
   utility_by_pk?: Maybe<Utility>;
   /** fetch data from the table in a streaming manner: "utility" */
   utility_stream: Array<Utility>;
+  /** fetch data from the table: "wallet_connection_log" */
+  wallet_connection_log: Array<Wallet_Connection_Log>;
+  /** fetch aggregated fields from the table: "wallet_connection_log" */
+  wallet_connection_log_aggregate: Wallet_Connection_Log_Aggregate;
+  /** fetch data from the table: "wallet_connection_log" using primary key columns */
+  wallet_connection_log_by_pk?: Maybe<Wallet_Connection_Log>;
+  /** fetch data from the table in a streaming manner: "wallet_connection_log" */
+  wallet_connection_log_stream: Array<Wallet_Connection_Log>;
 };
 
 export type Subscription_RootAppArgs = {
@@ -4722,6 +5034,32 @@ export type Subscription_RootApp_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<App_Stream_Cursor_Input>>;
   where?: InputMaybe<App_Bool_Exp>;
+};
+
+export type Subscription_RootChain_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Chain_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chain_Type_Order_By>>;
+  where?: InputMaybe<Chain_Type_Bool_Exp>;
+};
+
+export type Subscription_RootChain_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Chain_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chain_Type_Order_By>>;
+  where?: InputMaybe<Chain_Type_Bool_Exp>;
+};
+
+export type Subscription_RootChain_Type_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+export type Subscription_RootChain_Type_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Chain_Type_Stream_Cursor_Input>>;
+  where?: InputMaybe<Chain_Type_Bool_Exp>;
 };
 
 export type Subscription_RootChoiceArgs = {
@@ -5088,6 +5426,32 @@ export type Subscription_RootUtility_StreamArgs = {
   where?: InputMaybe<Utility_Bool_Exp>;
 };
 
+export type Subscription_RootWallet_Connection_LogArgs = {
+  distinct_on?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Wallet_Connection_Log_Order_By>>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
+export type Subscription_RootWallet_Connection_Log_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Wallet_Connection_Log_Order_By>>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
+export type Subscription_RootWallet_Connection_Log_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+export type Subscription_RootWallet_Connection_Log_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Wallet_Connection_Log_Stream_Cursor_Input>>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['timestamptz']>;
@@ -5392,6 +5756,226 @@ export type Uuid_Comparison_Exp = {
   _lte?: InputMaybe<Scalars['uuid']>;
   _neq?: InputMaybe<Scalars['uuid']>;
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
+};
+
+/** log date and time uppon wallet connection. stores the address */
+export type Wallet_Connection_Log = {
+  __typename?: 'wallet_connection_log';
+  address: Scalars['String'];
+  app_id: Scalars['uuid'];
+  date: Scalars['timestamptz'];
+  id: Scalars['Int'];
+};
+
+/** aggregated selection of "wallet_connection_log" */
+export type Wallet_Connection_Log_Aggregate = {
+  __typename?: 'wallet_connection_log_aggregate';
+  aggregate?: Maybe<Wallet_Connection_Log_Aggregate_Fields>;
+  nodes: Array<Wallet_Connection_Log>;
+};
+
+/** aggregate fields of "wallet_connection_log" */
+export type Wallet_Connection_Log_Aggregate_Fields = {
+  __typename?: 'wallet_connection_log_aggregate_fields';
+  avg?: Maybe<Wallet_Connection_Log_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Wallet_Connection_Log_Max_Fields>;
+  min?: Maybe<Wallet_Connection_Log_Min_Fields>;
+  stddev?: Maybe<Wallet_Connection_Log_Stddev_Fields>;
+  stddev_pop?: Maybe<Wallet_Connection_Log_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Wallet_Connection_Log_Stddev_Samp_Fields>;
+  sum?: Maybe<Wallet_Connection_Log_Sum_Fields>;
+  var_pop?: Maybe<Wallet_Connection_Log_Var_Pop_Fields>;
+  var_samp?: Maybe<Wallet_Connection_Log_Var_Samp_Fields>;
+  variance?: Maybe<Wallet_Connection_Log_Variance_Fields>;
+};
+
+/** aggregate fields of "wallet_connection_log" */
+export type Wallet_Connection_Log_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Wallet_Connection_Log_Avg_Fields = {
+  __typename?: 'wallet_connection_log_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "wallet_connection_log". All fields are combined with a logical 'AND'. */
+export type Wallet_Connection_Log_Bool_Exp = {
+  _and?: InputMaybe<Array<Wallet_Connection_Log_Bool_Exp>>;
+  _not?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+  _or?: InputMaybe<Array<Wallet_Connection_Log_Bool_Exp>>;
+  address?: InputMaybe<String_Comparison_Exp>;
+  app_id?: InputMaybe<Uuid_Comparison_Exp>;
+  date?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "wallet_connection_log" */
+export enum Wallet_Connection_Log_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  WalletConnectionLogsPkey = 'wallet_connection_logs_pkey',
+}
+
+/** input type for incrementing numeric columns in table "wallet_connection_log" */
+export type Wallet_Connection_Log_Inc_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "wallet_connection_log" */
+export type Wallet_Connection_Log_Insert_Input = {
+  address?: InputMaybe<Scalars['String']>;
+  app_id?: InputMaybe<Scalars['uuid']>;
+  date?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Wallet_Connection_Log_Max_Fields = {
+  __typename?: 'wallet_connection_log_max_fields';
+  address?: Maybe<Scalars['String']>;
+  app_id?: Maybe<Scalars['uuid']>;
+  date?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Wallet_Connection_Log_Min_Fields = {
+  __typename?: 'wallet_connection_log_min_fields';
+  address?: Maybe<Scalars['String']>;
+  app_id?: Maybe<Scalars['uuid']>;
+  date?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "wallet_connection_log" */
+export type Wallet_Connection_Log_Mutation_Response = {
+  __typename?: 'wallet_connection_log_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Wallet_Connection_Log>;
+};
+
+/** on_conflict condition type for table "wallet_connection_log" */
+export type Wallet_Connection_Log_On_Conflict = {
+  constraint: Wallet_Connection_Log_Constraint;
+  update_columns?: Array<Wallet_Connection_Log_Update_Column>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "wallet_connection_log". */
+export type Wallet_Connection_Log_Order_By = {
+  address?: InputMaybe<Order_By>;
+  app_id?: InputMaybe<Order_By>;
+  date?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: wallet_connection_log */
+export type Wallet_Connection_Log_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "wallet_connection_log" */
+export enum Wallet_Connection_Log_Select_Column {
+  /** column name */
+  Address = 'address',
+  /** column name */
+  AppId = 'app_id',
+  /** column name */
+  Date = 'date',
+  /** column name */
+  Id = 'id',
+}
+
+/** input type for updating data in table "wallet_connection_log" */
+export type Wallet_Connection_Log_Set_Input = {
+  address?: InputMaybe<Scalars['String']>;
+  app_id?: InputMaybe<Scalars['uuid']>;
+  date?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Wallet_Connection_Log_Stddev_Fields = {
+  __typename?: 'wallet_connection_log_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Wallet_Connection_Log_Stddev_Pop_Fields = {
+  __typename?: 'wallet_connection_log_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Wallet_Connection_Log_Stddev_Samp_Fields = {
+  __typename?: 'wallet_connection_log_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "wallet_connection_log" */
+export type Wallet_Connection_Log_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Wallet_Connection_Log_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Wallet_Connection_Log_Stream_Cursor_Value_Input = {
+  address?: InputMaybe<Scalars['String']>;
+  app_id?: InputMaybe<Scalars['uuid']>;
+  date?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Wallet_Connection_Log_Sum_Fields = {
+  __typename?: 'wallet_connection_log_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "wallet_connection_log" */
+export enum Wallet_Connection_Log_Update_Column {
+  /** column name */
+  Address = 'address',
+  /** column name */
+  AppId = 'app_id',
+  /** column name */
+  Date = 'date',
+  /** column name */
+  Id = 'id',
+}
+
+export type Wallet_Connection_Log_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Wallet_Connection_Log_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Wallet_Connection_Log_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Wallet_Connection_Log_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Wallet_Connection_Log_Var_Pop_Fields = {
+  __typename?: 'wallet_connection_log_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Wallet_Connection_Log_Var_Samp_Fields = {
+  __typename?: 'wallet_connection_log_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Wallet_Connection_Log_Variance_Fields = {
+  __typename?: 'wallet_connection_log_variance_fields';
+  id?: Maybe<Scalars['Float']>;
 };
 
 export type GetAppQueryVariables = Exact<{
@@ -6143,6 +6727,20 @@ export type GetUserQueryVariables = Exact<{ [key: string]: never }>;
 export type GetUserQuery = {
   __typename?: 'query_root';
   user: Array<{ __typename?: 'user'; app_id: any; id: any; role: string }>;
+};
+
+export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{
+  app_id: Scalars['uuid'];
+}>;
+
+export type GetWalletConnectionLogByAppIdQuery = {
+  __typename?: 'query_root';
+  wallet_connection_log: Array<{
+    __typename?: 'wallet_connection_log';
+    address: string;
+    date: any;
+    id: number;
+  }>;
 };
 
 export const GateFieldsFragmentDoc = gql`
@@ -8467,3 +9065,63 @@ export function useGetUserLazyQuery(
 export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
 export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
+export const GetWalletConnectionLogByAppIdDocument = gql`
+  query getWalletConnectionLogByAppId($app_id: uuid!) {
+    wallet_connection_log(where: { app_id: { _eq: $app_id } }) {
+      address
+      date
+      id
+    }
+  }
+`;
+
+/**
+ * __useGetWalletConnectionLogByAppIdQuery__
+ *
+ * To run a query within a React component, call `useGetWalletConnectionLogByAppIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetWalletConnectionLogByAppIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetWalletConnectionLogByAppIdQuery({
+ *   variables: {
+ *      app_id: // value for 'app_id'
+ *   },
+ * });
+ */
+export function useGetWalletConnectionLogByAppIdQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetWalletConnectionLogByAppIdQuery,
+    GetWalletConnectionLogByAppIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetWalletConnectionLogByAppIdQuery,
+    GetWalletConnectionLogByAppIdQueryVariables
+  >(GetWalletConnectionLogByAppIdDocument, options);
+}
+export function useGetWalletConnectionLogByAppIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetWalletConnectionLogByAppIdQuery,
+    GetWalletConnectionLogByAppIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetWalletConnectionLogByAppIdQuery,
+    GetWalletConnectionLogByAppIdQueryVariables
+  >(GetWalletConnectionLogByAppIdDocument, options);
+}
+export type GetWalletConnectionLogByAppIdQueryHookResult = ReturnType<
+  typeof useGetWalletConnectionLogByAppIdQuery
+>;
+export type GetWalletConnectionLogByAppIdLazyQueryHookResult = ReturnType<
+  typeof useGetWalletConnectionLogByAppIdLazyQuery
+>;
+export type GetWalletConnectionLogByAppIdQueryResult = Apollo.QueryResult<
+  GetWalletConnectionLogByAppIdQuery,
+  GetWalletConnectionLogByAppIdQueryVariables
+>;
