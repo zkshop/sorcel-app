@@ -5,7 +5,6 @@ import { poap, getPoapURLFromId } from '../../../../../../../../packages/poap';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status';
 
 const handler: HttpFunction = async (req, res) => {
-  console.log('!query_id', req.query);
   const { id } = req.query;
 
   try {

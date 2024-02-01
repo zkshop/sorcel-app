@@ -4,7 +4,7 @@
   },
   "gcf": {},
   "openapi": {
-    "get": {
+    "post": {
       "summary": "Check if access is granted",
       "parameters": [
         {
