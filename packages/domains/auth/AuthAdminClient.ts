@@ -4,5 +4,6 @@ export type AuthAdminData = {
 
 export type AuthAdminClient = {
   login(email: string): Promise<AuthAdminData>;
+  loginRedirect(email: string): Promise<boolean>;
   verifyUser(): Promise<AuthAdminData>;
 };
