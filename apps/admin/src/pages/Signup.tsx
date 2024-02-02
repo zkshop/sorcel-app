@@ -10,6 +10,7 @@ import { CustomerAuthClient } from '@3shop/admin-infra';
 import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
 import { ROUTES_PATH } from '../routes/Routes';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 type SignupFormValues = {
   email: string;
 };
@@ -42,7 +43,7 @@ export const Signup = () => {
         name: `${data.email}'s app`,
       });
 
-      toast.success('App created successfully. Waiting to connect you...');
+      toast.success("Your app is ready! We're setting things up for you.");
 
       const res = await auth.login(data.email);
 
@@ -52,10 +53,15 @@ export const Signup = () => {
         navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
       }
     } catch (error) {
-      console.error(error);
-      toast.error('Something went wrong');
-    } finally {
       setLoading(false);
+      if (axios.isAxiosError(error) && error.response) {
+        const { status } = error.response;
+
+        if (status == 409) {
+          toast.error(`An account with this email already exists. Please login.`);
+          return;
+        }
+      } else toast.error('Something went wrong');
     }
   };
 
