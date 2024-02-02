@@ -20,11 +20,9 @@ import { FormValidation } from '@3shop/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AuthAdminService } from '@3shop/domains';
 import { CustomerAuthClient } from '@3shop/admin-infra';
-import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
 import { useState } from 'react';
-import { ROUTES_PATH } from '../routes/Routes';
 
 type LoginFormValues = {
   email: string;
@@ -38,8 +36,6 @@ const auth = AuthAdminService(CustomerAuthClient());
 
 export const Login = () => {
   const [isLoginLoading, setIsLoginLoading] = useState(false);
-  const navigate = useNavigate();
-  const { setCustomerTokenCookie } = useCustomerTokenCookie();
   const {
     handleSubmit,
     register,
@@ -56,13 +52,11 @@ export const Login = () => {
 
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoginLoading(true);
-    const res = await auth.login(data.email);
-    if (res.token) {
-      setCustomerTokenCookie(res.token);
-
-      navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
+    try {
+      await auth.loginRedirect(data.email);
+    } catch (e) {
+      console.error(e);
     }
-
     setIsLoginLoading(false);
   };
 
