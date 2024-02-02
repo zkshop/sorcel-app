@@ -6,6 +6,16 @@ type QueryPayload = {
   variables?: object;
 };
 
+export interface HasuraError {
+  message: string;
+  extensions: Record<string, any>;
+}
+
+export interface HasuraResponse<T> {
+  data?: T;
+  errors?: HasuraError[];
+}
+
 export async function query(payload: QueryPayload) {
   const res = await axios(envVars.PUBLIC_HASURA_API_URL || '', {
     method: 'POST',
