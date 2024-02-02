@@ -10,6 +10,7 @@ import { Customization } from '../pages/Customization';
 import { Integrations } from '../pages/Integrations';
 import { Plan } from '../pages/Plan';
 import { Signup } from '../pages/Signup';
+import { Redirect } from '../pages/Redirect';
 
 export const ROUTES_PATH = {
   PUBLIC: {
@@ -30,6 +31,7 @@ export const ROUTES_PATH = {
 const Routes = () => (
   <OriginalRoutes>
     <Route path="/" index element={<Login />} />
+    <Route path="/redirect" index element={<Redirect />} />
     <Route path="/signup" element={<Signup />} />
     <Route path="/app" element={<ProtectedRoutes />}>
       <Route index element={<Integrations />} />
