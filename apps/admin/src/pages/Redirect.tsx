@@ -21,24 +21,25 @@ export const Redirect = () => {
   const magic_credential = queryParams.get('magic_credential');
 
   (async () => {
-    const didToken = await magic.auth.loginWithCredential(magic_credential!).catch((e) => {
+    try {
+      const didToken = await magic.auth.loginWithCredential(magic_credential!);
+      const res = await httpServerless<AuthAdminData>({
+        url: 'api/admin/auth/login',
+        method: 'POST',
+        data: {
+          didToken: `Bearer ${didToken}`,
+        },
+      });
+
+      if (res.data.token) {
+        setCustomerTokenCookie(res.data.token);
+
+        navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
+      } else setDescription(redirFailed);
+    } catch (e) {
       console.error(e);
       setDescription(redirFailed);
-    });
-
-    const res = await httpServerless<AuthAdminData>({
-      url: 'api/admin/auth/login',
-      method: 'POST',
-      data: {
-        didToken: `Bearer ${didToken}`,
-      },
-    });
-
-    if (res.data.token) {
-      setCustomerTokenCookie(res.data.token);
-
-      navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
-    } else setDescription(redirFailed);
+    }
   })();
 
   const descriptionNode = (): ReactNode => {
