@@ -11,6 +11,8 @@ import { id } from '../../shop/poap/events/[id]/src';
 import { login } from '../../admin/auth/login/src';
 import { address } from '../../shop/poap/[address]/src';
 import { createStripeAccount } from '../../admin/create-stripe-account/src';
+import { login } from '../../admin/auth/login/src';
+import { address } from '../../shop/poap/[address]/src';
 import { verify } from '../../admin/auth/verify/src';
 import { getPaperWallet } from '../../shop/get-paper-wallet/src';
 
@@ -27,6 +29,8 @@ app.use('/api/shop/poap/events', id);
 app.use('/api/admin/auth/login', login);
 app.use('/api/shop/poap', address);
 app.use('/api/admin/create-stripe-account', createStripeAccount);
+app.use('/api/admin/auth/login', login);
+app.use('/api/shop/poap', address);
 app.use('/api/admin/auth/verify', verify);
 app.use('/api/shop/get-paper-wallet', getPaperWallet);
 

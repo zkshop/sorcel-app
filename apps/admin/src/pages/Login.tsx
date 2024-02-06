@@ -25,6 +25,13 @@ import { Link } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
 import { useState } from 'react';
 import { useIsUserLazyQuery } from '@3shop/apollo';
+import { ROUTES_PATH } from '../routes/Routes';
+import {
+  useGetUserLazyQuery,
+  useGetUserQuery,
+  useIsUserLazyQuery,
+  useIsUserQuery,
+} from '@3shop/apollo';
 
 type LoginFormValues = {
   email: string;
@@ -58,18 +65,14 @@ export const Login = () => {
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoginLoading(true);
     try {
-      const { data : isUserData } = await isUser({
-        variables:
-        {
-          email: data.email
+      const { data: isUserData } = await isUser({
+        variables: {
+          email: data.email,
         },
-      })
-      if (isUserData?.user_by_pk?.id)
-      {
+      });
+      if (isUserData?.user_by_pk?.id) {
         await auth.loginRedirect(data.email);
-      }
-      else
-      {
+      } else {
         error('Invalid Email', 'Please Sign up first');
       }
     } catch (e) {
