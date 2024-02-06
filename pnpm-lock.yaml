@@ -126,6 +126,7 @@ importers:
       '@types/url-parse':
         specifier: ^1.4.11
         version: 1.4.11
+<<<<<<< HEAD
       i:
         specifier: ^0.3.7
         version: 0.3.7
@@ -138,6 +139,8 @@ importers:
       npm:
         specifier: ^10.4.0
         version: 10.4.0
+=======
+>>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
       react:
         specifier: ^18.2.0
         version: 18.2.0

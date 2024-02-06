@@ -6729,6 +6729,7 @@ export type GetUserQuery = {
   user: Array<{ __typename?: 'user'; app_id: any; id: any; role: string }>;
 };
 
+<<<<<<< HEAD
 export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetWalletConnectionLogByAppIdQuery = {
@@ -6739,6 +6740,15 @@ export type GetWalletConnectionLogByAppIdQuery = {
     date: any;
     id: number;
   }>;
+=======
+export type IsUserQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+export type IsUserQuery = {
+  __typename?: 'query_root';
+  user_by_pk?: { __typename?: 'user'; id: any } | null;
+>>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 };
 
 export const GateFieldsFragmentDoc = gql`
@@ -9063,26 +9073,40 @@ export function useGetUserLazyQuery(
 export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
 export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
+<<<<<<< HEAD
 export const GetWalletConnectionLogByAppIdDocument = gql`
   query getWalletConnectionLogByAppId {
     wallet_connection_log {
       address
       date
+=======
+export const IsUserDocument = gql`
+  query IsUser($email: String!) {
+    user_by_pk(email: $email) {
+>>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
       id
     }
   }
 `;
 
 /**
+<<<<<<< HEAD
  * __useGetWalletConnectionLogByAppIdQuery__
  *
  * To run a query within a React component, call `useGetWalletConnectionLogByAppIdQuery` and pass it any options that fit your needs.
  * When your component renders, `useGetWalletConnectionLogByAppIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+=======
+ * __useIsUserQuery__
+ *
+ * To run a query within a React component, call `useIsUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIsUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+>>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
+<<<<<<< HEAD
  * const { data, loading, error } = useGetWalletConnectionLogByAppIdQuery({
  *   variables: {
  *   },
@@ -9122,3 +9146,26 @@ export type GetWalletConnectionLogByAppIdQueryResult = Apollo.QueryResult<
   GetWalletConnectionLogByAppIdQuery,
   GetWalletConnectionLogByAppIdQueryVariables
 >;
+=======
+ * const { data, loading, error } = useIsUserQuery({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useIsUserQuery(
+  baseOptions: Apollo.QueryHookOptions<IsUserQuery, IsUserQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<IsUserQuery, IsUserQueryVariables>(IsUserDocument, options);
+}
+export function useIsUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<IsUserQuery, IsUserQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<IsUserQuery, IsUserQueryVariables>(IsUserDocument, options);
+}
+export type IsUserQueryHookResult = ReturnType<typeof useIsUserQuery>;
+export type IsUserLazyQueryHookResult = ReturnType<typeof useIsUserLazyQuery>;
+export type IsUserQueryResult = Apollo.QueryResult<IsUserQuery, IsUserQueryVariables>;
+>>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
