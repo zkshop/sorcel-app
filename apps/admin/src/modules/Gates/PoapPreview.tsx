@@ -15,7 +15,7 @@ export const PoapPreview = ({ id }: Props) => {
   useEffect(() => {
     setLoading(true);
     httpServerless
-      .get(`api/shop/poap/events/${id}`)
+      .get(`api/shop/poap/events`, { params: { id } })
       .then((res) => setPoap(res.data))
       .finally(() => setLoading(false));
   }, [id]);
