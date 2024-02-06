@@ -6600,6 +6600,7 @@ export type IsUserQueryVariables = Exact<{
 
 export type IsUserQuery = { __typename?: 'query_root', user_by_pk?: { __typename?: 'user', id: any } | null };
 
+<<<<<<< HEAD
 export type CreateWalletConnectionLogMutationVariables = Exact<{
   app_id: Scalars['uuid'];
   address: Scalars['String'];
@@ -6613,6 +6614,8 @@ export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{ [key: string]:
 
 export type GetWalletConnectionLogByAppIdQuery = { __typename?: 'query_root', wallet_connection_log: Array<{ __typename?: 'wallet_connection_log', address: string, date: any, id: number }> };
 
+=======
+>>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 export const GateFieldsFragmentDoc = gql`
     fragment GateFields on gate_v2 {
   app_id
@@ -7193,6 +7196,7 @@ export const IsUserDocument = gql`
   }
 }
     `;
+<<<<<<< HEAD
 export const CreateWalletConnectionLogDocument = gql`
     mutation CreateWalletConnectionLog($app_id: uuid!, $address: String!) {
   insert_wallet_connection_log_one(object: {address: $address, app_id: $app_id}) {
@@ -7212,6 +7216,8 @@ export const GetWalletConnectionLogByAppIdDocument = gql`
   }
 }
     `;
+=======
+>>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -7348,12 +7354,15 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     IsUser(variables: IsUserQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<IsUserQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<IsUserQuery>(IsUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'IsUser', 'query', variables);
+<<<<<<< HEAD
     },
     CreateWalletConnectionLog(variables: CreateWalletConnectionLogMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateWalletConnectionLogMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateWalletConnectionLogMutation>(CreateWalletConnectionLogDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateWalletConnectionLog', 'mutation', variables);
     },
     getWalletConnectionLogByAppId(variables?: GetWalletConnectionLogByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetWalletConnectionLogByAppIdQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetWalletConnectionLogByAppIdQuery>(GetWalletConnectionLogByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getWalletConnectionLogByAppId', 'query', variables);
+=======
+>>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
     }
   };
 }
