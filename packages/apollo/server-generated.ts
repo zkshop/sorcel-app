@@ -5958,6 +5958,13 @@ export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetUserQuery = { __typename?: 'query_root', user: Array<{ __typename?: 'user', app_id: any, id: any, role: string }> };
 
+export type IsUserQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type IsUserQuery = { __typename?: 'query_root', user_by_pk?: { __typename?: 'user', id: any } | null };
+
 export const GateFieldsFragmentDoc = gql`
     fragment GateFields on gate_v2 {
   app_id
@@ -6520,136 +6527,146 @@ export const GetUserDocument = gql`
   }
 }
     `;
+export const IsUserDocument = gql`
+    query IsUser($email: String!) {
+  user_by_pk(email: $email) {
+    id
+  }
+}
+    `;
 
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
 
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, variables) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     getApp(variables: GetAppQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAppQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAppQuery>(GetAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getApp', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAppQuery>(GetAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getApp', 'query', variables);
     },
     getPlan(variables: GetPlanQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetPlanQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPlanQuery>(GetPlanDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPlan', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPlanQuery>(GetPlanDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPlan', 'query', variables);
     },
     getAppTheme(variables: GetAppThemeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAppThemeQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAppThemeQuery>(GetAppThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAppTheme', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAppThemeQuery>(GetAppThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAppTheme', 'query', variables);
     },
     getAdminApp(variables?: GetAdminAppQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAdminAppQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminAppQuery>(GetAdminAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAdminApp', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminAppQuery>(GetAdminAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAdminApp', 'query', variables);
     },
     UpdateApp(variables: UpdateAppMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateAppMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateAppMutation>(UpdateAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateApp', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateAppMutation>(UpdateAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateApp', 'mutation', variables);
     },
     updateCustomizationFields(variables: UpdateCustomizationFieldsMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateCustomizationFieldsMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateCustomizationFieldsMutation>(UpdateCustomizationFieldsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateCustomizationFields', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateCustomizationFieldsMutation>(UpdateCustomizationFieldsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateCustomizationFields', 'mutation', variables);
     },
     CreateDeliveryZone(variables?: CreateDeliveryZoneMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateDeliveryZoneMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateDeliveryZoneMutation>(CreateDeliveryZoneDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateDeliveryZone', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateDeliveryZoneMutation>(CreateDeliveryZoneDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateDeliveryZone', 'mutation', variables);
     },
     DeleteDeliveryZone(variables: DeleteDeliveryZoneMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteDeliveryZoneMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteDeliveryZoneMutation>(DeleteDeliveryZoneDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteDeliveryZone', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteDeliveryZoneMutation>(DeleteDeliveryZoneDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteDeliveryZone', 'mutation', variables);
     },
     GetDeliveryZoneByAppId(variables?: GetDeliveryZoneByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetDeliveryZoneByAppIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetDeliveryZoneByAppIdQuery>(GetDeliveryZoneByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetDeliveryZoneByAppId', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetDeliveryZoneByAppIdQuery>(GetDeliveryZoneByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetDeliveryZoneByAppId', 'query', variables);
     },
     GetDeliveryZones(variables?: GetDeliveryZonesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetDeliveryZonesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetDeliveryZonesQuery>(GetDeliveryZonesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetDeliveryZones', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetDeliveryZonesQuery>(GetDeliveryZonesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetDeliveryZones', 'query', variables);
     },
     CreateGateV2(variables?: CreateGateV2MutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateGateV2Mutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateGateV2Mutation>(CreateGateV2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateGateV2', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateGateV2Mutation>(CreateGateV2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateGateV2', 'mutation', variables);
     },
     GetEveryContractAddressByAppId(variables: GetEveryContractAddressByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetEveryContractAddressByAppIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetEveryContractAddressByAppIdQuery>(GetEveryContractAddressByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetEveryContractAddressByAppId', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetEveryContractAddressByAppIdQuery>(GetEveryContractAddressByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetEveryContractAddressByAppId', 'query', variables);
     },
     GetGatesV2ByProductId(variables?: GetGatesV2ByProductIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetGatesV2ByProductIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetGatesV2ByProductIdQuery>(GetGatesV2ByProductIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGatesV2ByProductId', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetGatesV2ByProductIdQuery>(GetGatesV2ByProductIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGatesV2ByProductId', 'query', variables);
     },
     GetGates_V2(variables?: GetGates_V2QueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetGates_V2Query> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetGates_V2Query>(GetGates_V2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGates_V2', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetGates_V2Query>(GetGates_V2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGates_V2', 'query', variables);
     },
     GetGates_V2_ByAppId(variables?: GetGates_V2_ByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetGates_V2_ByAppIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetGates_V2_ByAppIdQuery>(GetGates_V2_ByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGates_V2_ByAppId', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetGates_V2_ByAppIdQuery>(GetGates_V2_ByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGates_V2_ByAppId', 'query', variables);
     },
     PushClaims(variables: PushClaimsMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PushClaimsMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<PushClaimsMutation>(PushClaimsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PushClaims', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<PushClaimsMutation>(PushClaimsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PushClaims', 'mutation', variables);
     },
     DeleteGateV2(variables: DeleteGateV2MutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteGateV2Mutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteGateV2Mutation>(DeleteGateV2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteGateV2', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteGateV2Mutation>(DeleteGateV2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteGateV2', 'mutation', variables);
     },
     CreateGate(variables: CreateGateMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateGateMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateGateMutation>(CreateGateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateGate', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateGateMutation>(CreateGateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateGate', 'mutation', variables);
     },
     DeleteGateFromId(variables: DeleteGateFromIdMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteGateFromIdMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteGateFromIdMutation>(DeleteGateFromIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteGateFromId', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteGateFromIdMutation>(DeleteGateFromIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteGateFromId', 'mutation', variables);
     },
     GetGates(variables?: GetGatesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetGatesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetGatesQuery>(GetGatesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGates', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetGatesQuery>(GetGatesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGates', 'query', variables);
     },
     GetProductGate(variables?: GetProductGateQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductGateQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductGateQuery>(GetProductGateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProductGate', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductGateQuery>(GetProductGateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProductGate', 'query', variables);
     },
     CreateOrder(variables: CreateOrderMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateOrderMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateOrderMutation>(CreateOrderDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateOrder', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateOrderMutation>(CreateOrderDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateOrder', 'mutation', variables);
     },
     CreateSurveyOrder(variables: CreateSurveyOrderMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateSurveyOrderMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateSurveyOrderMutation>(CreateSurveyOrderDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateSurveyOrder', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateSurveyOrderMutation>(CreateSurveyOrderDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateSurveyOrder', 'mutation', variables);
     },
     GetOrdersByAddress(variables: GetOrdersByAddressQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetOrdersByAddressQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetOrdersByAddressQuery>(GetOrdersByAddressDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetOrdersByAddress', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetOrdersByAddressQuery>(GetOrdersByAddressDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetOrdersByAddress', 'query', variables);
     },
     GetOrders(variables?: GetOrdersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetOrdersQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetOrdersQuery>(GetOrdersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetOrders', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetOrdersQuery>(GetOrdersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetOrders', 'query', variables);
     },
     CreatePoll(variables: CreatePollMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreatePollMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreatePollMutation>(CreatePollDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreatePoll', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreatePollMutation>(CreatePollDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreatePoll', 'mutation', variables);
     },
     DeletePoll(variables: DeletePollMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeletePollMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeletePollMutation>(DeletePollDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeletePoll', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeletePollMutation>(DeletePollDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeletePoll', 'mutation', variables);
     },
     updatePoll(variables: UpdatePollMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdatePollMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdatePollMutation>(UpdatePollDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updatePoll', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdatePollMutation>(UpdatePollDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updatePoll', 'mutation', variables);
     },
     getPollById(variables: GetPollByIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetPollByIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPollByIdQuery>(GetPollByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPollById', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPollByIdQuery>(GetPollByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPollById', 'query', variables);
     },
     GetPolls(variables: GetPollsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetPollsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPollsQuery>(GetPollsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetPolls', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPollsQuery>(GetPollsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetPolls', 'query', variables);
     },
     GetAdminPolls(variables?: GetAdminPollsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAdminPollsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminPollsQuery>(GetAdminPollsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAdminPolls', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminPollsQuery>(GetAdminPollsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAdminPolls', 'query', variables);
     },
     TogglePollCompleted(variables: TogglePollCompletedMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TogglePollCompletedMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<TogglePollCompletedMutation>(TogglePollCompletedDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TogglePollCompleted', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<TogglePollCompletedMutation>(TogglePollCompletedDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TogglePollCompleted', 'mutation', variables);
     },
     Vote(variables: VoteMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<VoteMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<VoteMutation>(VoteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Vote', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<VoteMutation>(VoteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Vote', 'mutation', variables);
     },
     CreateProduct(variables: CreateProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateProductMutation>(CreateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateProduct', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateProductMutation>(CreateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateProduct', 'mutation', variables);
     },
     CreateAdminProduct(variables: CreateAdminProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateAdminProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateAdminProductMutation>(CreateAdminProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateAdminProduct', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateAdminProductMutation>(CreateAdminProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateAdminProduct', 'mutation', variables);
     },
     DeleteProduct(variables?: DeleteProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteProductMutation>(DeleteProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteProduct', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteProductMutation>(DeleteProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteProduct', 'mutation', variables);
     },
     EditProduct(variables: EditProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<EditProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<EditProductMutation>(EditProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EditProduct', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<EditProductMutation>(EditProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EditProduct', 'mutation', variables);
     },
     GetProductById(variables: GetProductByIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductByIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductByIdQuery>(GetProductByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProductById', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductByIdQuery>(GetProductByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProductById', 'query', variables);
     },
     GetProducts(variables: GetProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductsQuery>(GetProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProducts', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductsQuery>(GetProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProducts', 'query', variables);
     },
     GetAdminProducts(variables?: GetAdminProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAdminProductsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminProductsQuery>(GetAdminProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAdminProducts', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminProductsQuery>(GetAdminProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAdminProducts', 'query', variables);
     },
     GetUser(variables?: GetUserQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUserQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetUserQuery>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetUser', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetUserQuery>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetUser', 'query', variables);
+    },
+    IsUser(variables: IsUserQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<IsUserQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<IsUserQuery>(IsUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'IsUser', 'query', variables);
     }
   };
 }

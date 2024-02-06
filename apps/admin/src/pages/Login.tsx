@@ -13,6 +13,7 @@ import {
   Grid,
   GridItem,
   Box,
+  useToastMessage,
 } from '@3shop/ui';
 import logo from '@3shop/ui/SignupSection/SORCEL_LOGO.png';
 
@@ -25,6 +26,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
 import { useState } from 'react';
 import { ROUTES_PATH } from '../routes/Routes';
+import { useGetUserLazyQuery, useGetUserQuery, useIsUserLazyQuery, useIsUserQuery } from '@3shop/apollo';
 
 type LoginFormValues = {
   email: string;
@@ -54,13 +56,34 @@ export const Login = () => {
 
   const {} = useVerifyToken();
 
+  const [ isUser ] = useIsUserLazyQuery();
+  const { error } = useToastMessage();
+
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoginLoading(true);
-    const res = await auth.login(data.email);
-    if (res.token) {
-      setCustomerTokenCookie(res.token);
 
-      navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
+    const { data : isUserData } = await isUser({
+      variables:
+      {
+        email: data.email
+      },
+    })
+
+    console.log("email", data.email);
+    console.log("id", isUserData?.user_by_pk?.id);
+      
+    if (isUserData?.user_by_pk?.id)
+    {
+      const res = await auth.login(data.email);
+      if (res.token) {
+        setCustomerTokenCookie(res.token);
+  
+        navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
+      }
+    }
+    else
+    {
+      error('Invalid Email', 'Please Sign up first');
     }
 
     setIsLoginLoading(false);
