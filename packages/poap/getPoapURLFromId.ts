@@ -1,1 +1,1 @@
-export const getPoapURLFromId = (id?: string | number) => `/events/${id}`;
+export const getPoapURLFromId = (id?: string | number) => `/events/id/${id}`;
