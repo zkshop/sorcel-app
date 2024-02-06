@@ -6730,6 +6730,7 @@ export type GetUserQuery = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetWalletConnectionLogByAppIdQuery = {
@@ -6741,6 +6742,8 @@ export type GetWalletConnectionLogByAppIdQuery = {
     id: number;
   }>;
 =======
+=======
+>>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 export type IsUserQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -6748,7 +6751,10 @@ export type IsUserQueryVariables = Exact<{
 export type IsUserQuery = {
   __typename?: 'query_root';
   user_by_pk?: { __typename?: 'user'; id: any } | null;
+<<<<<<< HEAD
 >>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
+=======
+>>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 };
 
 export const GateFieldsFragmentDoc = gql`
@@ -9074,6 +9080,7 @@ export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
 export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 export const GetWalletConnectionLogByAppIdDocument = gql`
   query getWalletConnectionLogByAppId {
     wallet_connection_log {
@@ -9084,6 +9091,11 @@ export const IsUserDocument = gql`
   query IsUser($email: String!) {
     user_by_pk(email: $email) {
 >>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
+=======
+export const IsUserDocument = gql`
+  query IsUser($email: String!) {
+    user_by_pk(email: $email) {
+>>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
       id
     }
   }
@@ -9091,21 +9103,28 @@ export const IsUserDocument = gql`
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * __useGetWalletConnectionLogByAppIdQuery__
  *
  * To run a query within a React component, call `useGetWalletConnectionLogByAppIdQuery` and pass it any options that fit your needs.
  * When your component renders, `useGetWalletConnectionLogByAppIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
 =======
+=======
+>>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
  * __useIsUserQuery__
  *
  * To run a query within a React component, call `useIsUserQuery` and pass it any options that fit your needs.
  * When your component renders, `useIsUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+<<<<<<< HEAD
 >>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
+=======
+>>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
+<<<<<<< HEAD
 <<<<<<< HEAD
  * const { data, loading, error } = useGetWalletConnectionLogByAppIdQuery({
  *   variables: {
@@ -9147,6 +9166,8 @@ export type GetWalletConnectionLogByAppIdQueryResult = Apollo.QueryResult<
   GetWalletConnectionLogByAppIdQueryVariables
 >;
 =======
+=======
+>>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
  * const { data, loading, error } = useIsUserQuery({
  *   variables: {
  *      email: // value for 'email'
@@ -9168,4 +9189,7 @@ export function useIsUserLazyQuery(
 export type IsUserQueryHookResult = ReturnType<typeof useIsUserQuery>;
 export type IsUserLazyQueryHookResult = ReturnType<typeof useIsUserLazyQuery>;
 export type IsUserQueryResult = Apollo.QueryResult<IsUserQuery, IsUserQueryVariables>;
+<<<<<<< HEAD
 >>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
+=======
+>>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
