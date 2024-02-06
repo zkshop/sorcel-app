@@ -13,6 +13,7 @@ import {
   Grid,
   GridItem,
   Box,
+  useToastMessage,
 } from '@3shop/ui';
 import logo from '@3shop/ui/SignupSection/SORCEL_LOGO.png';
 
@@ -23,6 +24,7 @@ import { CustomerAuthClient } from '@3shop/admin-infra';
 import { Link } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
 import { useState } from 'react';
+import { useIsUserLazyQuery } from '@3shop/apollo';
 
 type LoginFormValues = {
   email: string;
@@ -50,13 +52,30 @@ export const Login = () => {
 
   const {} = useVerifyToken();
 
+  const [ isUser ] = useIsUserLazyQuery();
+  const { error } = useToastMessage();
+
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoginLoading(true);
     try {
-      await auth.loginRedirect(data.email);
+      const { data : isUserData } = await isUser({
+        variables:
+        {
+          email: data.email
+        },
+      })
+      if (isUserData?.user_by_pk?.id)
+      {
+        await auth.loginRedirect(data.email);
+      }
+      else
+      {
+        error('Invalid Email', 'Please Sign up first');
+      }
     } catch (e) {
       console.error(e);
     }
+
     setIsLoginLoading(false);
   };
 
