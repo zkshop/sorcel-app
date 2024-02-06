@@ -30,4 +30,4 @@ app.use('/api/admin/create-stripe-account', createStripeAccount);
 app.use('/api/admin/auth/verify', verify);
 app.use('/api/shop/get-paper-wallet', getPaperWallet);
 
-export { app as index, createApp, updatePlan, getStripeAccount, isGranted, connectWithEmail, getPaperToken, paymentIntents, id, login, address, createStripeAccount, verify, getPaperWallet };
+export { app as index, getStripeAccount, updatePlan, createApp, connectWithEmail, createStripeAccount, getPaperWallet, login, getPaperToken, verify, paymentIntents, id, isGranted, address };
