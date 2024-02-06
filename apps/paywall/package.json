@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc && node -r dotenv/config ../../node_modules/.bin/vite build",
-    "build:ci": "tsc && vite build",
+    "build:ci": "tsc && node -r dotenv/config ../../node_modules/.bin/vite build",
     "dev": "node -r dotenv/config ../../node_modules/.bin/vite",
     "preview": "vite preview"
   },
