@@ -26,7 +26,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
 import { useState } from 'react';
 import { ROUTES_PATH } from '../routes/Routes';
-import { useGetUserLazyQuery, useGetUserQuery, useIsUserLazyQuery, useIsUserQuery } from '@3shop/apollo';
+import { useIsUserLazyQuery } from '@3shop/apollo';
 
 type LoginFormValues = {
   email: string;
@@ -56,33 +56,26 @@ export const Login = () => {
 
   const {} = useVerifyToken();
 
-  const [ isUser ] = useIsUserLazyQuery();
+  const [isUser] = useIsUserLazyQuery();
   const { error } = useToastMessage();
 
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoginLoading(true);
 
-    const { data : isUserData } = await isUser({
-      variables:
-      {
-        email: data.email
+    const { data: isUserData } = await isUser({
+      variables: {
+        email: data.email,
       },
-    })
+    });
 
-    console.log("email", data.email);
-    console.log("id", isUserData?.user_by_pk?.id);
-      
-    if (isUserData?.user_by_pk?.id)
-    {
+    if (isUserData?.user_by_pk?.id) {
       const res = await auth.login(data.email);
       if (res.token) {
         setCustomerTokenCookie(res.token);
-  
+
         navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
       }
-    }
-    else
-    {
+    } else {
       error('Invalid Email', 'Please Sign up first');
     }
 

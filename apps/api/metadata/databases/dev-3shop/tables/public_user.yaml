@@ -6,6 +6,7 @@ select_permissions:
     permission:
       columns:
         - email
+        - id
       filter: {}
   - role: customer
     permission:
