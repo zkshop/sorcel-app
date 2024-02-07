@@ -5,6 +5,7 @@ import { createApp } from '../../create-app/src';
 =======
 import { isGranted } from '../../is-granted/src';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { connectWithEmail } from '../../shop/connect-with-email/src';
 >>>>>>> db4b49f2 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 import { getStripeAccount } from '../../admin/get-stripe-account/src';
@@ -34,9 +35,23 @@ import { login } from '../../admin/auth/login/src';
 import { address } from '../../shop/poap/[address]/src';
 >>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 import { verify } from '../../admin/auth/verify/src';
+=======
+import { updatePlan } from '../../update-plan/src';
+import { connectWithEmail } from '../../shop/connect-with-email/src';
+import { id } from '../../shop/poap/events/[id]/src';
+import { getStripeAccount } from '../../admin/get-stripe-account/src';
+>>>>>>> eed41a70 (Fix email sent when not signed up)
 import { paymentIntents } from '../../shop/payment-intents/src';
 import { getPaperWallet } from '../../shop/get-paper-wallet/src';
+<<<<<<< HEAD
 >>>>>>> db4b49f2 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
+=======
+import { createStripeAccount } from '../../admin/create-stripe-account/src';
+import { address } from '../../shop/poap/[address]/src';
+import { getPaperToken } from '../../shop/get-paper-token/src';
+import { login } from '../../admin/auth/login/src';
+import { verify } from '../../admin/auth/verify/src';
+>>>>>>> cf995664 (Fix email sent when not signed up)
 
 
 const app = express();
@@ -66,19 +81,28 @@ app.use('/api/shop/get-paper-token', getPaperToken);
 app.use('/api/admin/auth/login', login);
 =======
 app.use('/api/is-granted', isGranted);
-app.use('/api/admin/get-stripe-account', getStripeAccount);
 app.use('/api/update-plan', updatePlan);
 app.use('/api/shop/connect-with-email', connectWithEmail);
 app.use('/api/shop/poap/events', id);
+<<<<<<< HEAD
 app.use('/api/shop/get-paper-token', getPaperToken);
 app.use('/api/admin/create-stripe-account', createStripeAccount);
 app.use('/api/admin/auth/login', login);
 app.use('/api/shop/poap', address);
 >>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 app.use('/api/admin/auth/verify', verify);
+=======
+app.use('/api/admin/get-stripe-account', getStripeAccount);
+>>>>>>> eed41a70 (Fix email sent when not signed up)
 app.use('/api/shop/payment-intents', paymentIntents);
 app.use('/api/shop/get-paper-wallet', getPaperWallet);
+app.use('/api/admin/create-stripe-account', createStripeAccount);
+app.use('/api/shop/poap', address);
+app.use('/api/shop/get-paper-token', getPaperToken);
+app.use('/api/admin/auth/login', login);
+app.use('/api/admin/auth/verify', verify);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 export { app as index, getStripeAccount, updatePlan, createApp, connectWithEmail, createStripeAccount, getPaperWallet, login, getPaperToken, verify, paymentIntents, id, isGranted, address };
@@ -104,4 +128,10 @@ export { app as index, createApp, isGranted, connectWithEmail, getStripeAccount,
 =======
 export { app as index, createApp, isGranted, getStripeAccount, updatePlan, connectWithEmail, id, getPaperToken, createStripeAccount, login, address, verify, paymentIntents, getPaperWallet };
 >>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
+<<<<<<< HEAD
 >>>>>>> db4b49f2 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
+=======
+=======
+export { app as index, createApp, isGranted, updatePlan, connectWithEmail, id, getStripeAccount, paymentIntents, getPaperWallet, createStripeAccount, address, getPaperToken, login, verify };
+>>>>>>> eed41a70 (Fix email sent when not signed up)
+>>>>>>> cf995664 (Fix email sent when not signed up)
