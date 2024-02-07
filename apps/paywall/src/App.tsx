@@ -1,4 +1,4 @@
-import { envVars } from '@3shop/config';
+import { envVars } from './envVars';
 import { useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectWalletButton } from './ConnectWalletButton';

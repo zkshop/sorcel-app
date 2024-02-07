@@ -1,4 +1,4 @@
-import { envVars } from '@3shop/config';
+import { envVars } from './envVars';
 import { getDefaultWallets } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
