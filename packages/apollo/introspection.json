@@ -1992,6 +1992,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "app_name_key",
+            "description": "unique or primary key constraint on columns \"name\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "app_pkey",
             "description": "unique or primary key constraint on columns \"id\"",
             "isDeprecated": false,
@@ -3530,6 +3536,116 @@
             "deprecationReason": null
           }
         ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "chain_type_enum",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "EVM",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "XRP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "chain_type_enum_comparison_exp",
+        "description": "Boolean expression to compare columns of type \"chain_type_enum\". All fields are combined with logical 'AND'.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "_eq",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "chain_type_enum",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "chain_type_enum",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_is_null",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_neq",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "chain_type_enum",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_nin",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "chain_type_enum",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -9221,8 +9337,8 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "ENUM",
+              "name": "chain_type_enum",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10378,7 +10494,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "String_comparison_exp",
+              "name": "chain_type_enum_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -10649,8 +10765,8 @@
             "name": "chain",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "ENUM",
+              "name": "chain_type_enum",
               "ofType": null
             },
             "defaultValue": null,
@@ -10788,18 +10904,6 @@
             "deprecationReason": null
           },
           {
-            "name": "chain",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "discount",
             "description": null,
             "args": [],
@@ -10861,18 +10965,6 @@
         "inputFields": [
           {
             "name": "app_id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "chain",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -10954,18 +11046,6 @@
             "deprecationReason": null
           },
           {
-            "name": "chain",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "discount",
             "description": null,
             "args": [],
@@ -11027,18 +11107,6 @@
         "inputFields": [
           {
             "name": "app_id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "chain",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -11542,8 +11610,8 @@
             "name": "chain",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "ENUM",
+              "name": "chain_type_enum",
               "ofType": null
             },
             "defaultValue": null,
@@ -11838,8 +11906,8 @@
             "name": "chain",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "ENUM",
+              "name": "chain_type_enum",
               "ofType": null
             },
             "defaultValue": null,
