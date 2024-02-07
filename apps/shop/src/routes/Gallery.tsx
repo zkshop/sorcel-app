@@ -3,7 +3,7 @@ import ReactCanvasConfetti from 'react-canvas-confetti';
 import { useAccount } from '@3shop/wallet';
 import { ProductListContainer } from '@/modules';
 import { useAppDispatch } from '@3shop/store';
-import { envVars } from '@3shop/config';
+import { envVars } from '../envVars';
 import { useGetProductsQuery } from '@3shop/apollo';
 import { useFetchPoapImageList } from '@/hooks/useFetchPoapImageList';
 import { Spinner } from '@3shop/ui';

@@ -1,7 +1,7 @@
 import { mapWindowAttributeToEnvVar } from '@3shop/config';
 
 const envVars = {
-  APP_ID: mapWindowAttributeToEnvVar('APP_ID'),
+  APP_ID: 'f61e45c2-8b92-48f7-904a-36ebe7704af6',
   SECRET_CENTER: 'key0496d7622616d32fbb5f9595',
   PUBLIC_HASURA_API_URL: process.env.PUBLIC_HASURA_API_URL,
   SECRET_HASURA: process.env.SECRET_HASURA,

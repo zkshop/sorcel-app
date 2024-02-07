@@ -13,7 +13,7 @@ import { SHIPPING_FORM_SCHEMA } from '@/schemas';
 import { useNavigate } from 'react-router-dom';
 import { storeOrder } from '@3shop/store/slices/order';
 import { useDispatch } from 'react-redux';
-import { envVars } from '@3shop/config';
+import { envVars } from '../../../envVars';
 import { get, omit } from 'lodash';
 import { sendOrderConfirmation } from '@3shop/email';
 import { useAccount } from '@3shop/wallet';

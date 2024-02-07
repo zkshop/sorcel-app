@@ -1,4 +1,4 @@
-import { envVars } from '@3shop/config';
+import { envVars } from '../envVars';
 import { loadStripe } from '@stripe/stripe-js';
 import { httpServerless } from '@3shop/http-serverless';
 

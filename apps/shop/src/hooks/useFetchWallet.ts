@@ -4,7 +4,7 @@ import { fetchNFTS, reset } from '@3shop/store/slices/nfts';
 import { fetchPOAPS, reset as resetPoaps } from '@3shop/store/slices/poap';
 import { useAccount } from '@3shop/wallet';
 import { useGetEveryContractAddressByAppIdQuery } from '@3shop/apollo';
-import { envVars } from '@3shop/config';
+import { envVars } from '../envVars';
 import { flatten } from 'lodash';
 
 const useFetchWallet = () => {
