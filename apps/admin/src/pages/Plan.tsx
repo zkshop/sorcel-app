@@ -12,7 +12,7 @@ import {
 } from '@3shop/ui';
 import { useState } from 'react';
 import { CheckCircleIcon } from '@3shop/ui';
-import { envVars } from '@3shop/config';
+import { envVars } from '../envVars';
 import { Plan_Enum } from '@3shop/apollo';
 import { useAppData } from '../useAppData';
 

@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import { NavBar } from './NavBar';
 import { Plan_Enum, useGetPlanQuery } from '@3shop/apollo';
-import { envVars } from '@3shop/config';
+import { envVars } from '../envVars';
 
 export const Layout = () => {
   const { data, loading } = useGetPlanQuery({ variables: { appId: envVars.APP_ID } });

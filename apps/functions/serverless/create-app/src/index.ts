@@ -10,12 +10,9 @@ type CreateAppParams = {
 };
 const appCreator = withEnv(() => AppCreatorService(SorcelAppCreator()));
 
-import { envVars } from '@3shop/config';
 import { AppConflict, AppNoData } from '../../../utils/createAppExceptions';
 
 const handler: HttpFunction = async (req, res) => {
-  console.log(envVars.PUBLIC_HASURA_API_URL);
-  console.log(envVars.SECRET_HASURA);
   const { name, email } = req.body as CreateAppParams;
   try {
     if (!name || !email) {
