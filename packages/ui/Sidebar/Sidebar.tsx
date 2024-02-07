@@ -32,6 +32,7 @@ import {
 } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 import type { Nullable, WithChildren } from '@3shop/types';
+import { useGetAdminAppQuery } from '@3shop/apollo';
 
 interface LinkItemProps {
   name: string;
@@ -57,6 +58,15 @@ type SidebarWithHeaderProps = WithChildren<{
 
 export function SidebarWithHeader({ children, user, signOut, email }: SidebarWithHeaderProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { data, error } = useGetAdminAppQuery();
+
+  if (error || !data) {
+    return <div>Error</div>;
+  }
+  if (data && data.app && data.app.length > 6) {
+    email = data.app[0].name.slice(0, -6);
+  }
   return (
     <Box minH="100vh" bg="gray.100">
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
