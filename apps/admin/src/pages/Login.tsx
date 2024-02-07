@@ -52,7 +52,7 @@ export const Login = () => {
 
   const {} = useVerifyToken();
 
-  const [ isUser ] = useIsUserLazyQuery();
+  const [isUser] = useIsUserLazyQuery();
   const { error } = useToastMessage();
 
   const onSubmit = async (data: LoginFormValues) => {
