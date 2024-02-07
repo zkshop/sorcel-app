@@ -1,15 +1,17 @@
 import type { AuthAdminData } from '@3shop/domains';
 import { httpServerless } from '@3shop/http-serverless';
-import { Magic } from 'magic-sdk';
 import type { ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES_PATH } from '../routes/Routes';
 import { setCustomerTokenCookie } from '../useCustomerTokenCookie';
 import { HStack, Image, VStack, Text, Button } from '@3shop/ui';
 import { useState } from 'react';
+import { AuthAdminService } from '@3shop/domains';
+import { CustomerAuthClient } from '@3shop/admin-infra';
+
+const auth = AuthAdminService(CustomerAuthClient());
 
 export const Redirect = () => {
-  const magic = new Magic(process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY!);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,7 +24,7 @@ export const Redirect = () => {
 
   (async () => {
     try {
-      const didToken = await magic.auth.loginWithCredential(magic_credential!);
+      const didToken = await auth.loginWithCredential(magic_credential!);
       const res = await httpServerless<AuthAdminData>({
         url: 'api/admin/auth/login',
         method: 'POST',
