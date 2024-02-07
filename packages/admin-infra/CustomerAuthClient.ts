@@ -4,7 +4,6 @@ import { httpServerless } from '@3shop/http-serverless';
 import URL from 'url-parse';
 
 const initialAuthData: AuthAdminData = { token: '' };
-
 export const CustomerAuthClient = (): AuthAdminClient => ({
   login: async (email) => {
     if (!magicClient) {
@@ -33,15 +32,21 @@ export const CustomerAuthClient = (): AuthAdminClient => ({
     const redirectURI = `${url.origin}/redirect`;
 
     try {
-      await magicClient.auth
-        .loginWithMagicLink({
-          email,
-          redirectURI,
-        })
+      await magicClient.auth.loginWithMagicLink({
+        email,
+        redirectURI,
+      });
       return true;
     } catch (e) {
       return false;
     }
+  },
+  loginWithCredential: async (credential) => {
+    if (!magicClient) {
+      console.warn('Magic client is undefined');
+      return null;
+    }
+    return magicClient.auth.loginWithCredential(credential);
   },
   verifyUser: async () => {
     if (!magicClient) return initialAuthData;
