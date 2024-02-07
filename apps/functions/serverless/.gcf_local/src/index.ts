@@ -2,7 +2,10 @@ import express from 'express';
 
 import { createApp } from '../../create-app/src';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 65bc7ffc (Connect Stripe a la place de New Product si pas deja fait)
 import { isGranted } from '../../is-granted/src';
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -37,21 +40,36 @@ import { address } from '../../shop/poap/[address]/src';
 import { verify } from '../../admin/auth/verify/src';
 =======
 import { updatePlan } from '../../update-plan/src';
+=======
+>>>>>>> 597b56a2 (Connect Stripe a la place de New Product si pas deja fait)
 import { connectWithEmail } from '../../shop/connect-with-email/src';
-import { id } from '../../shop/poap/events/[id]/src';
 import { getStripeAccount } from '../../admin/get-stripe-account/src';
+<<<<<<< HEAD
 >>>>>>> eed41a70 (Fix email sent when not signed up)
 import { paymentIntents } from '../../shop/payment-intents/src';
 import { getPaperWallet } from '../../shop/get-paper-wallet/src';
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> db4b49f2 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 =======
+=======
+=======
+import { updatePlan } from '../../update-plan/src';
+import { id } from '../../shop/poap/events/[id]/src';
+>>>>>>> 597b56a2 (Connect Stripe a la place de New Product si pas deja fait)
+>>>>>>> 65bc7ffc (Connect Stripe a la place de New Product si pas deja fait)
 import { createStripeAccount } from '../../admin/create-stripe-account/src';
-import { address } from '../../shop/poap/[address]/src';
-import { getPaperToken } from '../../shop/get-paper-token/src';
-import { login } from '../../admin/auth/login/src';
 import { verify } from '../../admin/auth/verify/src';
+<<<<<<< HEAD
 >>>>>>> cf995664 (Fix email sent when not signed up)
+=======
+import { login } from '../../admin/auth/login/src';
+import { paymentIntents } from '../../shop/payment-intents/src';
+import { getPaperToken } from '../../shop/get-paper-token/src';
+import { address } from '../../shop/poap/[address]/src';
+import { isGranted } from '../../is-granted/src';
+import { getPaperWallet } from '../../shop/get-paper-wallet/src';
+>>>>>>> 65bc7ffc (Connect Stripe a la place de New Product si pas deja fait)
 
 
 const app = express();
@@ -59,6 +77,7 @@ app.use('/api/create-app', createApp);
 <<<<<<< HEAD
 app.use('/api/admin/get-stripe-account', getStripeAccount);
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -96,12 +115,22 @@ app.use('/api/admin/get-stripe-account', getStripeAccount);
 >>>>>>> eed41a70 (Fix email sent when not signed up)
 app.use('/api/shop/payment-intents', paymentIntents);
 app.use('/api/shop/get-paper-wallet', getPaperWallet);
+=======
+app.use('/api/shop/connect-with-email', connectWithEmail);
+app.use('/api/admin/get-stripe-account', getStripeAccount);
+app.use('/api/update-plan', updatePlan);
+app.use('/api/shop/poap/events', id);
+>>>>>>> 597b56a2 (Connect Stripe a la place de New Product si pas deja fait)
 app.use('/api/admin/create-stripe-account', createStripeAccount);
-app.use('/api/shop/poap', address);
-app.use('/api/shop/get-paper-token', getPaperToken);
-app.use('/api/admin/auth/login', login);
 app.use('/api/admin/auth/verify', verify);
+app.use('/api/admin/auth/login', login);
+app.use('/api/shop/payment-intents', paymentIntents);
+app.use('/api/shop/get-paper-token', getPaperToken);
+app.use('/api/shop/poap', address);
+app.use('/api/is-granted', isGranted);
+app.use('/api/shop/get-paper-wallet', getPaperWallet);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -134,4 +163,10 @@ export { app as index, createApp, isGranted, getStripeAccount, updatePlan, conne
 =======
 export { app as index, createApp, isGranted, updatePlan, connectWithEmail, id, getStripeAccount, paymentIntents, getPaperWallet, createStripeAccount, address, getPaperToken, login, verify };
 >>>>>>> eed41a70 (Fix email sent when not signed up)
+<<<<<<< HEAD
 >>>>>>> cf995664 (Fix email sent when not signed up)
+=======
+=======
+export { app as index, createApp, connectWithEmail, getStripeAccount, updatePlan, id, createStripeAccount, verify, login, paymentIntents, getPaperToken, address, isGranted, getPaperWallet };
+>>>>>>> 597b56a2 (Connect Stripe a la place de New Product si pas deja fait)
+>>>>>>> 65bc7ffc (Connect Stripe a la place de New Product si pas deja fait)

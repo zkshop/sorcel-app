@@ -6600,7 +6600,6 @@ export type IsUserQueryVariables = Exact<{
 
 export type IsUserQuery = { __typename?: 'query_root', user_by_pk?: { __typename?: 'user', id: any } | null };
 
-<<<<<<< HEAD
 export type CreateWalletConnectionLogMutationVariables = Exact<{
   app_id: Scalars['uuid'];
   address: Scalars['String'];
@@ -6614,8 +6613,6 @@ export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{ [key: string]:
 
 export type GetWalletConnectionLogByAppIdQuery = { __typename?: 'query_root', wallet_connection_log: Array<{ __typename?: 'wallet_connection_log', address: string, date: any, id: number }> };
 
-=======
->>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 export const GateFieldsFragmentDoc = gql`
     fragment GateFields on gate_v2 {
   app_id
@@ -7060,7 +7057,7 @@ export const VoteDocument = gql`
 export const CreateExampleProductsDocument = gql`
     mutation createExampleProducts($app_id: uuid!, $image_url: String!, $image_url_2: String!) {
   insert_product(
-    objects: [{app_id: $app_id, type: COMMERCE, price: 0, name: "Bored ape shirt", image: $image_url, description: "Bored ape shirt for bored ape holders !", gate: {data: {chain: EVM, app_id: $app_id, exclusive_access: true, segments: {data: {network: ETHEREUM, nft_contract_address: "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D", type: NFT}}, name: "Bored ape Gate"}}}, {app_id: $app_id, type: MODAL, price: 0, webhookUrl: "webhook_url_value", name: "Somaverse ticket", image: $image_url_2, description: "Ticket for somaverse expo", gate: {data: {chain: EVM, app_id: $app_id, exclusive_access: true, segments: {data: {network: ETHEREUM, nft_contract_address: "0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e", type: NFT}}, name: "CRYPTO PUNK Gate"}}}]
+    objects: [{app_id: $app_id, type: COMMERCE, price: 0, name: "Bored ape shirt", image: $image_url, description: "Bored ape shirt for bored ape holders !", gate: {data: {chain: EVM, app_id: $app_id, exclusive_access: true, segments: {data: {network: ETHEREUM, nft_contract_address: "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D", type: NFT}}, name: "Bored ape Gate"}}}, {app_id: $app_id, type: MODAL, price: 0, webhookUrl: "webhook_url_value", name: "Somaverse ticket", image: $image_url_2, description: "Ticket for somaverse expo", gate: {data: {chain: EVM, app_id: $app_id, exclusive_access: true, segments: {data: {network: ETHEREUM, nft_contract_address: "0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e", type: NFT}}, name: "Doodle Gate"}}}]
   ) {
     returning {
       app_id
@@ -7196,7 +7193,6 @@ export const IsUserDocument = gql`
   }
 }
     `;
-<<<<<<< HEAD
 export const CreateWalletConnectionLogDocument = gql`
     mutation CreateWalletConnectionLog($app_id: uuid!, $address: String!) {
   insert_wallet_connection_log_one(object: {address: $address, app_id: $app_id}) {
@@ -7216,8 +7212,6 @@ export const GetWalletConnectionLogByAppIdDocument = gql`
   }
 }
     `;
-=======
->>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -7354,15 +7348,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     IsUser(variables: IsUserQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<IsUserQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<IsUserQuery>(IsUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'IsUser', 'query', variables);
-<<<<<<< HEAD
     },
     CreateWalletConnectionLog(variables: CreateWalletConnectionLogMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateWalletConnectionLogMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateWalletConnectionLogMutation>(CreateWalletConnectionLogDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateWalletConnectionLog', 'mutation', variables);
     },
     getWalletConnectionLogByAppId(variables?: GetWalletConnectionLogByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetWalletConnectionLogByAppIdQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetWalletConnectionLogByAppIdQuery>(GetWalletConnectionLogByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getWalletConnectionLogByAppId', 'query', variables);
-=======
->>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
     }
   };
 }
