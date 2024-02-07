@@ -25,13 +25,6 @@ import { Link } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
 import { useState } from 'react';
 import { useIsUserLazyQuery } from '@3shop/apollo';
-import { ROUTES_PATH } from '../routes/Routes';
-import {
-  useGetUserLazyQuery,
-  useGetUserQuery,
-  useIsUserLazyQuery,
-  useIsUserQuery,
-} from '@3shop/apollo';
 
 type LoginFormValues = {
   email: string;
