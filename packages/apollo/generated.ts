@@ -6764,7 +6764,6 @@ export type IsUserQuery = {
   user_by_pk?: { __typename?: 'user'; id: any } | null;
 };
 
-<<<<<<< HEAD
 export type CreateWalletConnectionLogMutationVariables = Exact<{
   app_id: Scalars['uuid'];
   address: Scalars['String'];
@@ -6793,8 +6792,6 @@ export type GetWalletConnectionLogByAppIdQuery = {
   }>;
 };
 
-=======
->>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 export const GateFieldsFragmentDoc = gql`
   fragment GateFields on gate_v2 {
     app_id
@@ -8687,7 +8684,7 @@ export const CreateExampleProductsDocument = gql`
                   type: NFT
                 }
               }
-              name: "CRYPTO PUNK Gate"
+              name: "Doodle Gate"
             }
           }
         }
@@ -9260,7 +9257,6 @@ export function useIsUserLazyQuery(
 export type IsUserQueryHookResult = ReturnType<typeof useIsUserQuery>;
 export type IsUserLazyQueryHookResult = ReturnType<typeof useIsUserLazyQuery>;
 export type IsUserQueryResult = Apollo.QueryResult<IsUserQuery, IsUserQueryVariables>;
-<<<<<<< HEAD
 export const CreateWalletConnectionLogDocument = gql`
   mutation CreateWalletConnectionLog($app_id: uuid!, $address: String!) {
     insert_wallet_connection_log_one(object: { address: $address, app_id: $app_id }) {
@@ -9374,5 +9370,3 @@ export type GetWalletConnectionLogByAppIdQueryResult = Apollo.QueryResult<
   GetWalletConnectionLogByAppIdQuery,
   GetWalletConnectionLogByAppIdQueryVariables
 >;
-=======
->>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)

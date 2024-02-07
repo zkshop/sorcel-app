@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { PRODUCT_ATTRIBUTES } from './constants';
 import { ProductListItem } from './ProductListItem';
 
-import { useGetAdminProductsQuery } from '@3shop/apollo';
+import { useGetAdminAppQuery, useGetAdminProductsQuery } from '@3shop/apollo';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES_PATH } from '../../routes/Routes';
 
@@ -12,6 +12,7 @@ const getEditProductIdRoute = (id: string) => `edit/${id}`;
 
 export const Products = () => {
   const { data, error, loading } = useGetAdminProductsQuery();
+  const { data: appData, error: appError, loading: appLoading } = useGetAdminAppQuery();
   const navigate = useNavigate();
 
   if (loading) return <Spinner />;
@@ -20,15 +21,24 @@ export const Products = () => {
     return <div>Error</div>;
   }
 
+  if (appLoading) return <Spinner />;
+
+  if (appError || !appData) {
+    return <div>Error</div>;
+  }
+
   return (
     <Box>
-      <Header
-        title="Products"
-        tooltip="Products are the entities that you want to show on your website. You can add, edit and delete them and also token-gate them with NFTs or POAPs."
-      >
-        <Link to={`${ROUTES_PATH.PROTECTED.PRODUCT}/add`}>
-          <Button>+ New Product</Button>
-        </Link>
+      <Header title="Products">
+        {appData.app[0].moneyAccountId ? (
+          <Link to={`${ROUTES_PATH.PROTECTED.PRODUCT}/add`}>
+            <Button>+ New Product</Button>
+          </Link>
+        ) : (
+          <Link to={`${ROUTES_PATH.PROTECTED.PAYMENTS}`}>
+            <Button>Connect to Stripe</Button>
+          </Link>
+        )}
       </Header>
 
       <Box mt={4}>
