@@ -137,6 +137,8 @@ export type App_Bool_Exp = {
 
 /** unique or primary key constraints on table "app" */
 export enum App_Constraint {
+  /** unique or primary key constraint on columns "name" */
+  AppNameKey = 'app_name_key',
   /** unique or primary key constraint on columns "id" */
   AppPkey = 'app_pkey',
 }
@@ -372,6 +374,20 @@ export enum Chain_Type_Constraint {
   /** unique or primary key constraint on columns "value" */
   ChainTypePkey = 'chain_type_pkey',
 }
+
+export enum Chain_Type_Enum {
+  Evm = 'EVM',
+  Xrp = 'XRP',
+}
+
+/** Boolean expression to compare columns of type "chain_type_enum". All fields are combined with logical 'AND'. */
+export type Chain_Type_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Chain_Type_Enum>;
+  _in?: InputMaybe<Array<Chain_Type_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Chain_Type_Enum>;
+  _nin?: InputMaybe<Array<Chain_Type_Enum>>;
+};
 
 /** input type for inserting data into table "chain_type" */
 export type Chain_Type_Insert_Input = {
@@ -1327,7 +1343,7 @@ export type Gate_Updates = {
 export type Gate_V2 = {
   __typename?: 'gate_v2';
   app_id?: Maybe<Scalars['uuid']>;
-  chain?: Maybe<Scalars['String']>;
+  chain?: Maybe<Chain_Type_Enum>;
   claims: Scalars['jsonb'];
   discount?: Maybe<Scalars['Int']>;
   exclusive_access: Scalars['Boolean'];
@@ -1466,7 +1482,7 @@ export type Gate_V2_Bool_Exp = {
   _not?: InputMaybe<Gate_V2_Bool_Exp>;
   _or?: InputMaybe<Array<Gate_V2_Bool_Exp>>;
   app_id?: InputMaybe<Uuid_Comparison_Exp>;
-  chain?: InputMaybe<String_Comparison_Exp>;
+  chain?: InputMaybe<Chain_Type_Enum_Comparison_Exp>;
   claims?: InputMaybe<Jsonb_Comparison_Exp>;
   discount?: InputMaybe<Int_Comparison_Exp>;
   exclusive_access?: InputMaybe<Boolean_Comparison_Exp>;
@@ -1508,7 +1524,7 @@ export type Gate_V2_Inc_Input = {
 /** input type for inserting data into table "gate_v2" */
 export type Gate_V2_Insert_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
-  chain?: InputMaybe<Scalars['String']>;
+  chain?: InputMaybe<Chain_Type_Enum>;
   claims?: InputMaybe<Scalars['jsonb']>;
   discount?: InputMaybe<Scalars['Int']>;
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
@@ -1524,7 +1540,6 @@ export type Gate_V2_Insert_Input = {
 export type Gate_V2_Max_Fields = {
   __typename?: 'gate_v2_max_fields';
   app_id?: Maybe<Scalars['uuid']>;
-  chain?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
@@ -1534,7 +1549,6 @@ export type Gate_V2_Max_Fields = {
 /** order by max() on columns of table "gate_v2" */
 export type Gate_V2_Max_Order_By = {
   app_id?: InputMaybe<Order_By>;
-  chain?: InputMaybe<Order_By>;
   discount?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -1545,7 +1559,6 @@ export type Gate_V2_Max_Order_By = {
 export type Gate_V2_Min_Fields = {
   __typename?: 'gate_v2_min_fields';
   app_id?: Maybe<Scalars['uuid']>;
-  chain?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
@@ -1555,7 +1568,6 @@ export type Gate_V2_Min_Fields = {
 /** order by min() on columns of table "gate_v2" */
 export type Gate_V2_Min_Order_By = {
   app_id?: InputMaybe<Order_By>;
-  chain?: InputMaybe<Order_By>;
   discount?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -1644,7 +1656,7 @@ export enum Gate_V2_Select_Column_Gate_V2_Aggregate_Bool_Exp_Bool_Or_Arguments_C
 /** input type for updating data in table "gate_v2" */
 export type Gate_V2_Set_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
-  chain?: InputMaybe<Scalars['String']>;
+  chain?: InputMaybe<Chain_Type_Enum>;
   claims?: InputMaybe<Scalars['jsonb']>;
   discount?: InputMaybe<Scalars['Int']>;
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
@@ -1698,7 +1710,7 @@ export type Gate_V2_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Gate_V2_Stream_Cursor_Value_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
-  chain?: InputMaybe<Scalars['String']>;
+  chain?: InputMaybe<Chain_Type_Enum>;
   claims?: InputMaybe<Scalars['jsonb']>;
   discount?: InputMaybe<Scalars['Int']>;
   exclusive_access?: InputMaybe<Scalars['Boolean']>;
@@ -6729,8 +6741,15 @@ export type GetUserQuery = {
   user: Array<{ __typename?: 'user'; app_id: any; id: any; role: string }>;
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+export type IsUserQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+export type IsUserQuery = {
+  __typename?: 'query_root';
+  user_by_pk?: { __typename?: 'user'; id: any } | null;
+};
+
 export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetWalletConnectionLogByAppIdQuery = {
@@ -6741,20 +6760,6 @@ export type GetWalletConnectionLogByAppIdQuery = {
     date: any;
     id: number;
   }>;
-=======
-=======
->>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
-export type IsUserQueryVariables = Exact<{
-  email: Scalars['String'];
-}>;
-
-export type IsUserQuery = {
-  __typename?: 'query_root';
-  user_by_pk?: { __typename?: 'user'; id: any } | null;
-<<<<<<< HEAD
->>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
-=======
->>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
 };
 
 export const GateFieldsFragmentDoc = gql`
@@ -9079,53 +9084,65 @@ export function useGetUserLazyQuery(
 export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
 export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
-<<<<<<< HEAD
-<<<<<<< HEAD
-export const GetWalletConnectionLogByAppIdDocument = gql`
-  query getWalletConnectionLogByAppId {
-    wallet_connection_log {
-      address
-      date
-=======
 export const IsUserDocument = gql`
   query IsUser($email: String!) {
     user_by_pk(email: $email) {
->>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
-=======
-export const IsUserDocument = gql`
-  query IsUser($email: String!) {
-    user_by_pk(email: $email) {
->>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
       id
     }
   }
 `;
 
 /**
-<<<<<<< HEAD
-<<<<<<< HEAD
- * __useGetWalletConnectionLogByAppIdQuery__
- *
- * To run a query within a React component, call `useGetWalletConnectionLogByAppIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetWalletConnectionLogByAppIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
-=======
-=======
->>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
  * __useIsUserQuery__
  *
  * To run a query within a React component, call `useIsUserQuery` and pass it any options that fit your needs.
  * When your component renders, `useIsUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
-<<<<<<< HEAD
->>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
-=======
->>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
-<<<<<<< HEAD
-<<<<<<< HEAD
+ * const { data, loading, error } = useIsUserQuery({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useIsUserQuery(
+  baseOptions: Apollo.QueryHookOptions<IsUserQuery, IsUserQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<IsUserQuery, IsUserQueryVariables>(IsUserDocument, options);
+}
+export function useIsUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<IsUserQuery, IsUserQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<IsUserQuery, IsUserQueryVariables>(IsUserDocument, options);
+}
+export type IsUserQueryHookResult = ReturnType<typeof useIsUserQuery>;
+export type IsUserLazyQueryHookResult = ReturnType<typeof useIsUserLazyQuery>;
+export type IsUserQueryResult = Apollo.QueryResult<IsUserQuery, IsUserQueryVariables>;
+export const GetWalletConnectionLogByAppIdDocument = gql`
+  query getWalletConnectionLogByAppId {
+    wallet_connection_log {
+      address
+      date
+      id
+    }
+  }
+`;
+
+/**
+ * __useGetWalletConnectionLogByAppIdQuery__
+ *
+ * To run a query within a React component, call `useGetWalletConnectionLogByAppIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetWalletConnectionLogByAppIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
  * const { data, loading, error } = useGetWalletConnectionLogByAppIdQuery({
  *   variables: {
  *   },
@@ -9165,31 +9182,3 @@ export type GetWalletConnectionLogByAppIdQueryResult = Apollo.QueryResult<
   GetWalletConnectionLogByAppIdQuery,
   GetWalletConnectionLogByAppIdQueryVariables
 >;
-=======
-=======
->>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
- * const { data, loading, error } = useIsUserQuery({
- *   variables: {
- *      email: // value for 'email'
- *   },
- * });
- */
-export function useIsUserQuery(
-  baseOptions: Apollo.QueryHookOptions<IsUserQuery, IsUserQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<IsUserQuery, IsUserQueryVariables>(IsUserDocument, options);
-}
-export function useIsUserLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<IsUserQuery, IsUserQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<IsUserQuery, IsUserQueryVariables>(IsUserDocument, options);
-}
-export type IsUserQueryHookResult = ReturnType<typeof useIsUserQuery>;
-export type IsUserLazyQueryHookResult = ReturnType<typeof useIsUserLazyQuery>;
-export type IsUserQueryResult = Apollo.QueryResult<IsUserQuery, IsUserQueryVariables>;
-<<<<<<< HEAD
->>>>>>> 229f687f (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
-=======
->>>>>>> 40b1b512 (Draft: [GraphQL error]: Malformed Authorization header, draft to check on dev)
