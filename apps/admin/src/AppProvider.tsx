@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 import { CookiesProvider } from 'react-cookie';
 import { CenterProvider } from '@center-inc/react';
-import { envVars } from '@3shop/config';
+import { envVars } from './envVars';
 import { TokenValidityProvider } from './context';
 import { PostHogProvider, posthog } from '@3shop/posthog';
 
@@ -30,7 +30,7 @@ export const AppProvider = ({ children }: AppProviderProps) => (
             <ReduxProvider store={store}>
               <CenterProvider
                 apiKey={envVars.SECRET_CENTER}
-                mode={envVars.NODE_ENV as 'development' | 'production'}
+                mode={process.env.NODE_ENV as 'development' | 'production'}
               >
                 <BrowserRouter>
                   <ThemeProvider>{children}</ThemeProvider>

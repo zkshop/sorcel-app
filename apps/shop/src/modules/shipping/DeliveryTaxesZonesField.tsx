@@ -1,5 +1,5 @@
 import { useGetDeliveryZoneByAppIdQuery } from '@3shop/apollo';
-import { envVars } from '@3shop/config';
+import { envVars } from '../../envVars';
 import { Spinner, Input, Select } from '@3shop/ui';
 import join from 'lodash/join';
 import { useFormContext } from 'react-hook-form';

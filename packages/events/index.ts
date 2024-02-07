@@ -1,10 +1,9 @@
 import * as analytics from 'rudder-sdk-js';
 
-import { envVars } from '@3shop/config';
 
 const RUDDERSTACK_URL = 'https://shopadrien.dataplane.rudderstack.com';
 
-analytics.load(envVars.SECRET_RUDDERSTACK || '', RUDDERSTACK_URL);
+analytics.load(process.env.SECRET_RUDDERSTACK || '', RUDDERSTACK_URL);
 
 export const eventClient = analytics;
 

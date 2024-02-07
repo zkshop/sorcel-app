@@ -2,7 +2,6 @@ import { ApolloClient, HttpLink, InMemoryCache, from } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import Cookies from 'js-cookie';
-import { envVars } from '@3shop/config';
 
 const CUSTOMER_TOKEN_NAME = 'customer-token';
 
@@ -15,7 +14,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const httpLink = new HttpLink({
-  uri: envVars.PUBLIC_HASURA_API_URL, // Server URL (must be absolute)
+  uri: process.env.PUBLIC_HASURA_API_URL, // Server URL (must be absolute)
   credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 });
 
@@ -34,12 +33,12 @@ const authLink = setContext((_, { headers }) => {
 const serverLink = setContext((_, { headers }) => ({
   headers: {
     ...headers,
-    'x-hasura-admin-secret': envVars.SECRET_HASURA,
+    'x-hasura-admin-secret': process.env.SECRET_HASURA,
   },
 }));
 
 const shopHttpLink = new HttpLink({
-  uri: envVars.PUBLIC_HASURA_API_URL,
+  uri: process.env.PUBLIC_HASURA_API_URL,
   credentials: 'same-origin',
   headers: {},
 });

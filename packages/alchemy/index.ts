@@ -1,11 +1,10 @@
 import { Network, Alchemy } from 'alchemy-sdk';
-import { envVars } from '@3shop/config';
 export { Network, NftFilters } from 'alchemy-sdk';
 export type { Nft, Alchemy, OwnedNft } from 'alchemy-sdk';
 
 const DEFAULT_NETWORK = 'POLYGON';
 
-if (!envVars.NETWORK)
+if (!process.env.NETWORK)
   console.warn(
     'Network seems to be undefined. Setup on Polygon by default. Please setup the network in environment.',
   );
@@ -21,6 +20,8 @@ const getNetwork = (network?: keyof typeof networks) =>
 
 export const createAlchemy = (network?: keyof typeof networks): Alchemy =>
   new Alchemy({
-    apiKey: envVars.SECRET_ALCHEMY,
-    network: getNetwork((network || envVars.NETWORK || DEFAULT_NETWORK) as keyof typeof networks),
+    apiKey: process.env.SECRET_ALCHEMY,
+    network: getNetwork(
+      (network || process.env.NETWORK || DEFAULT_NETWORK) as keyof typeof networks,
+    ),
   });

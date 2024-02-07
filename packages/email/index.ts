@@ -1,4 +1,3 @@
-import { envVars } from '@3shop/config';
 // @ts-ignore
 import SibApiV3Sdk from 'sib-api-v3-sdk';
 
@@ -18,7 +17,7 @@ const defaultClient = SibApiV3Sdk.ApiClient.instance;
 
 const apiKey = defaultClient.authentications['api-key'];
 
-apiKey.apiKey = envVars.SECRET_BREVO;
+apiKey.apiKey = process.env.SECRET_BREVO;
 
 const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();

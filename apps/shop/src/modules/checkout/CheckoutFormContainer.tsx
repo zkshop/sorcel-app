@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { CheckoutForm } from './CheckoutForm/CheckoutForm';
 import { useAppSelector } from '@3shop/store';
 import { Navigate } from 'react-router-dom';
-import { envVars } from '@3shop/config';
+import { envVars } from '../../envVars';
 import { sendOrderConfirmation } from '@3shop/email';
 
 const stripe = getStripeObject();

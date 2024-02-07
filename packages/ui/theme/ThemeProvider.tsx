@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ChakraProvider, ColorModeScript, extendTheme } from '@chakra-ui/react';
 import type { Nullable } from '@3shop/types';
 import { useGetAppThemeLazyQuery } from '@3shop/apollo';
-import { envVars } from '@3shop/config';
 import { merge } from 'lodash';
 import { theme as baseTheme } from './theme';
 import WebFont from 'webfontloader';
@@ -19,7 +18,7 @@ type CustomTheme = {
 };
 
 export const ThemeProvider = ({ children, customTheme = false }: Props) => {
-  const [getTheme] = useGetAppThemeLazyQuery({ variables: { appId: envVars.APP_ID || '' } });
+  const [getTheme] = useGetAppThemeLazyQuery({ variables: { appId: process.env.APP_ID || '' } });
   const [theme, setTheme] = useState<Nullable<Record<string, any>>>(baseTheme);
 
   useEffect(() => {
