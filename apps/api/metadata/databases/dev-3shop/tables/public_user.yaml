@@ -1,0 +1,20 @@
+table:
+  name: user
+  schema: public
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - email
+        - id
+      filter: {}
+  - role: customer
+    permission:
+      columns:
+        - email
+        - role
+        - app_id
+        - id
+      filter:
+        app_id:
+          _eq: X-Hasura-User-Id

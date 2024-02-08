@@ -6145,6 +6145,15 @@ export type GetUserQuery = {
   user: Array<{ __typename?: 'user'; app_id: any; id: any; role: string }>;
 };
 
+export type IsUserQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+export type IsUserQuery = {
+  __typename?: 'query_root';
+  user_by_pk?: { __typename?: 'user'; id: any } | null;
+};
+
 export const GateFieldsFragmentDoc = gql`
   fragment GateFields on gate_v2 {
     app_id
@@ -8467,3 +8476,42 @@ export function useGetUserLazyQuery(
 export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
 export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
+export const IsUserDocument = gql`
+  query IsUser($email: String!) {
+    user_by_pk(email: $email) {
+      id
+    }
+  }
+`;
+
+/**
+ * __useIsUserQuery__
+ *
+ * To run a query within a React component, call `useIsUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIsUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIsUserQuery({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useIsUserQuery(
+  baseOptions: Apollo.QueryHookOptions<IsUserQuery, IsUserQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<IsUserQuery, IsUserQueryVariables>(IsUserDocument, options);
+}
+export function useIsUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<IsUserQuery, IsUserQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<IsUserQuery, IsUserQueryVariables>(IsUserDocument, options);
+}
+export type IsUserQueryHookResult = ReturnType<typeof useIsUserQuery>;
+export type IsUserLazyQueryHookResult = ReturnType<typeof useIsUserLazyQuery>;
+export type IsUserQueryResult = Apollo.QueryResult<IsUserQuery, IsUserQueryVariables>;
