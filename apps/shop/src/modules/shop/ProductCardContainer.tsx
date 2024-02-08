@@ -2,13 +2,15 @@ import { gateVerifier } from './gateVerifier';
 import { formatProductData } from '@/formatProductData';
 import { classnames } from '@3shop/config';
 import { GridItem, ProductCard } from '@3shop/ui';
-import type { GateFieldsFragment, GetProductsQuery } from '@3shop/apollo';
+import { type GateFieldsFragment, type GetProductsQuery } from '@3shop/apollo';
 import { useAppSelector } from '@3shop/store';
+import type { userConnectionStatus } from '@3shop/types';
 
 type Props = {
   isWalletConnected: boolean;
   auth?: string;
   product: GetProductsQuery['products'][0];
+  connectionStatus: userConnectionStatus;
 };
 
 function sortGates(a: GateFieldsFragment, b: GateFieldsFragment) {
@@ -23,7 +25,7 @@ function sortGates(a: GateFieldsFragment, b: GateFieldsFragment) {
   return -1;
 }
 
-export function ProductCardContainer({ isWalletConnected, auth, product }: Props) {
+export function ProductCardContainer({ connectionStatus, auth, product }: Props) {
   const userNFTs = useAppSelector((state) => state.user.nfts);
   const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
   const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
@@ -48,7 +50,8 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
       display="flex"
       justifyContent="center"
     >
-      <ProductCard {...formatedProduct} isWalletConnected={isWalletConnected} auth={auth} />
+      <h1>test</h1>
+      <ProductCard {...formatedProduct} connectionStatus={connectionStatus} auth={auth} />
     </GridItem>
   );
 }
