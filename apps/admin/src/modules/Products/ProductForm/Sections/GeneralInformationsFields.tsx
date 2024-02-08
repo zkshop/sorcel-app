@@ -15,14 +15,23 @@ import { useFormContext } from 'react-hook-form';
 
 import { PRODUCTS_FIELDS } from '../../constants';
 import type { AddProductFormValues } from '../types';
+import { useGetAdminAppQuery } from '@3shop/apollo';
+import { Link } from 'react-router-dom';
+import { ROUTES_PATH } from '../../../../routes/Routes';
 
 export const GeneralInformationsFields = () => {
+  const { data, error } = useGetAdminAppQuery();
   const {
     register,
     formState: { errors },
     watch,
   } = useFormContext<AddProductFormValues>();
 
+  if (error || !data) {
+    return <div>Error</div>;
+  }
+
+  const priceValue = watch('price');
   const isModalValue = watch('isModal');
 
   return (
@@ -61,7 +70,7 @@ export const GeneralInformationsFields = () => {
         <FormControl isInvalid={Boolean(errors.price)}>
           <FormLabel mb={1}>{PRODUCTS_FIELDS.price.label}</FormLabel>
 
-          <NumberInput min={0}>
+          <NumberInput min={0} max={!data.app[0].moneyAccountId ? 0 : undefined}>
             <NumberInputField
               border="1px solid"
               borderColor="#E5E5E5"
@@ -69,7 +78,18 @@ export const GeneralInformationsFields = () => {
               {...register('price')}
             />
           </NumberInput>
-
+          {priceValue && priceValue !== '0' && !data.app[0].moneyAccountId && (
+            <Text color="red.500">
+              {'You must be connected to '}
+              <Link
+                to={`${ROUTES_PATH.PROTECTED.PAYMENTS}`}
+                style={{ textDecoration: 'underline' }}
+              >
+                Stripe
+              </Link>
+              {' to have a non free product.'}
+            </Text>
+          )}
           <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
         </FormControl>
       )}

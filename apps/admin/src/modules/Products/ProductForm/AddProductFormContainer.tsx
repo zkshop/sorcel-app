@@ -14,12 +14,15 @@ import {
   GetAdminProductsDocument,
   Product_Type_Enum,
   useCreateAdminProductMutation,
+  useGetAdminAppLazyQuery,
 } from '@3shop/apollo';
 import { ROUTES_PATH } from '../../../routes/Routes';
 
 const storage = StorageService(ImageStorageClient());
 
 export const AddProductFormContainer = () => {
+  const [GetAdmin] = useGetAdminAppLazyQuery();
+
   const [storageActionLoading, setStorageActionLoading] = useState(false);
   const methods = useForm<AddProductFormValues>({
     defaultValues: {},
@@ -66,6 +69,8 @@ export const AddProductFormContainer = () => {
     try {
       setStorageActionLoading(true);
 
+      const { data: adminData } = await GetAdmin();
+
       const uploadUrl = await storage.uploadPicture(data.image, 'products');
 
       setStorageActionLoading(false);
@@ -74,7 +79,10 @@ export const AddProductFormContainer = () => {
         variables: {
           ...data,
           image: uploadUrl,
-          price: data.isModal ? 0 : Number(data.price),
+          price:
+            data.isModal || Number(data.price) < 0 || !adminData?.app[0].moneyAccountId
+              ? 0
+              : Number(data.price),
           type: data.isModal ? Product_Type_Enum.Modal : Product_Type_Enum.Commerce,
         },
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),
