@@ -1,19 +1,16 @@
 import { Magic } from 'magic-sdk';
-import { OAuthExtension, OAuthRedirectResult } from '@magic-ext/oauth';
+import { OAuthExtension } from '@magic-ext/oauth';
 import { envVars } from '@3shop/config';
-import { ReactNode, useEffect, useRef, useState } from 'react';
-import { Text, AuthentificationFeedback, authentificationFeedbackProps } from '@3shop/ui';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { setCustomerTokenCookie } from '../useCustomerTokenCookie';
-import { ROUTES_PATH } from '../routes/Routes';
+import { useState } from 'react';
+import type { authentificationFeedbackProps } from '@3shop/ui';
+import { AuthentificationFeedback } from '@3shop/ui';
+import { useNavigate } from 'react-router-dom';
 import { CustomerAuthClient, useOnce } from '@3shop/admin-infra';
 import { httpServerless } from '@3shop/http-serverless';
 import { AuthAdminService } from '@3shop/domains';
 import axios from 'axios';
 
 const auth = AuthAdminService(CustomerAuthClient());
-const redirPending = 'You will be redirected to your dashboard in a few seconds.';
-const redirFailed = 'Something went wrong while attempting to authenticate you.';
 
 const useOAuthRedirectResult = async () => {
   const magic = new Magic(envVars.PUBLIC_MAGIC_PUBLISHABLE_KEY!, {
@@ -62,9 +59,5 @@ export const Oauthredirect = () => {
     }
   });
 
-  return (
-    <>
-      <AuthentificationFeedback information={waitState} onHomePageClick={() => navigate('/')} />
-    </>
-  );
+  return <AuthentificationFeedback information={waitState} onHomePageClick={() => navigate('/')} />;
 };

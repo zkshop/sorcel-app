@@ -7,7 +7,6 @@ import logo from './SORCEL_LOGO.png';
 import { Text } from '../Text/Text';
 import type { UseFormHandleSubmit, UseFormRegister, UseFormStateReturn } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { Oauth } from '../../../apps/admin/src/pages/Signup';
 
 type SignupFormValues = {
   email: string;
@@ -30,7 +29,6 @@ export const SignupSection = ({
 }: SignupSectionProps) => (
   <VStack height="full" justifyContent="space-between">
     <Image w={32} h={12} src={logo} />
-    <Button onClick={() => Oauth['google']('signup')}>google</Button>
     <VStack as="form" width="full" onSubmit={handleSubmit(onSubmit)}>
       <Text mb="1rem" as="h1" variant="title">
         Sign Up

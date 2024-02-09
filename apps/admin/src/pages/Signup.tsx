@@ -7,9 +7,6 @@ import { httpServerless } from '@3shop/http-serverless';
 import { useState } from 'react';
 import { AuthAdminService } from '@3shop/domains';
 import { CustomerAuthClient } from '@3shop/admin-infra';
-import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
-import { ROUTES_PATH } from '../routes/Routes';
-import { useNavigate } from 'react-router-dom';
 
 import { Magic } from 'magic-sdk';
 import { OAuthExtension } from '@magic-ext/oauth';
@@ -29,17 +26,16 @@ const SIGNUP_SCHEMA = FormValidation.object().shape({
 });
 
 const auth = AuthAdminService(CustomerAuthClient());
-type OauthProviderCallback = (method: 'signup' | 'signin') => void;
+type OauthProviderCallback = (method: 'signup' | 'signin') => Promise<void>;
 export interface OauthProviders {
   google: OauthProviderCallback;
   github: OauthProviderCallback;
 }
 
 export const Oauth: OauthProviders = {
-  async google() {
+  async google(method: 'signup' | 'signin') {
     const url = new URL(window.location.href);
-    const redirectURI = `${url.origin}/oauth/callback?auth_method=${arguments[0]}`;
-  
+    const redirectURI = `${url.origin}/oauth/callback?auth_method=${method}`;
     await magic.oauth.loginWithRedirect({
       provider: 'google',
       redirectURI,
@@ -49,7 +45,10 @@ export const Oauth: OauthProviders = {
       ],
     });
   },
-  async github() {},
+  async github(method: 'signup' | 'signin') {
+    method;
+    // Implementation for GitHub OAuth
+  },
 };
 
 export const Signup = () => {
@@ -62,8 +61,7 @@ export const Signup = () => {
     resolver: yupResolver(SIGNUP_SCHEMA),
     mode: 'onBlur',
   });
-  const { setCustomerTokenCookie } = useCustomerTokenCookie();
-  const navigate = useNavigate();
+
   const toast = useToastMessage();
 
   const onSubmit = async (data: SignupFormValues) => {
@@ -75,14 +73,7 @@ export const Signup = () => {
       });
 
       toast.success("Your app is ready! We're setting things up for you.");
-
-      const res = await auth.login(data.email);
-
-      if (res.token) {
-        setCustomerTokenCookie(res.token);
-
-        navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
-      }
+      await auth.loginRedirect(data.email);
     } catch (error) {
       setLoading(false);
       if (axios.isAxiosError(error) && error.response) {
@@ -92,7 +83,10 @@ export const Signup = () => {
           toast.error(`An account with this email already exists. Please login.`);
           return;
         }
-      } else toast.error('Something went wrong');
+      } else {
+        toast.error('Something went wrong');
+        console.error(error);
+      }
     }
   };
 
