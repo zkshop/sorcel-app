@@ -31,6 +31,7 @@ export * from './Input/Input';
 export * from './theme';
 export * from './useToastMessage';
 export * from './VerticalMenu/VerticalMenu';
+export * from './redirection/AuthentificationFeedback';
 
 export {
   Accordion,

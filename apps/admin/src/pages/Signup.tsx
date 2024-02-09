@@ -10,7 +10,16 @@ import { CustomerAuthClient } from '@3shop/admin-infra';
 import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
 import { ROUTES_PATH } from '../routes/Routes';
 import { useNavigate } from 'react-router-dom';
+
+import { Magic } from 'magic-sdk';
+import { OAuthExtension } from '@magic-ext/oauth';
+import { envVars } from '@3shop/config';
 import axios from 'axios';
+
+const magic = new Magic(envVars.PUBLIC_MAGIC_PUBLISHABLE_KEY!, {
+  extensions: [new OAuthExtension()],
+});
+
 type SignupFormValues = {
   email: string;
 };
@@ -20,6 +29,28 @@ const SIGNUP_SCHEMA = FormValidation.object().shape({
 });
 
 const auth = AuthAdminService(CustomerAuthClient());
+type OauthProviderCallback = (method: 'signup' | 'signin') => void;
+export interface OauthProviders {
+  google: OauthProviderCallback;
+  github: OauthProviderCallback;
+}
+
+export const Oauth: OauthProviders = {
+  async google() {
+    const url = new URL(window.location.href);
+    const redirectURI = `${url.origin}/oauth/callback?auth_method=${arguments[0]}`;
+  
+    await magic.oauth.loginWithRedirect({
+      provider: 'google',
+      redirectURI,
+      scope: [
+        'https://www.googleapis.com/auth/userinfo.email',
+        'https://www.googleapis.com/auth/userinfo.profile',
+      ],
+    });
+  },
+  async github() {},
+};
 
 export const Signup = () => {
   const [loading, setLoading] = useState(false);

@@ -23,6 +23,7 @@ import { CustomerAuthClient } from '@3shop/admin-infra';
 import { Link } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
 import { useState } from 'react';
+import { Oauth } from './Signup';
 
 type LoginFormValues = {
   email: string;
@@ -70,6 +71,7 @@ export const Login = () => {
         <VStack height="full" justifyContent="space-between">
           <Image w={32} h={12} src={logo} />
           <VStack as="form" width="full" onSubmit={handleSubmit(onSubmit)}>
+            <Button onClick={() => Oauth['google']("signin")}>google</Button>
             <Text mb="1rem" as="h1" variant="title">
               Log in
             </Text>
