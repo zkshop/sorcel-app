@@ -19,8 +19,8 @@ const networks = {
 const getNetwork = (network?: keyof typeof networks) =>
   network ? networks[network] : networks.default;
 
-export const createAlchemy = (): Alchemy =>
+export const createAlchemy = (network?: keyof typeof networks): Alchemy =>
   new Alchemy({
     apiKey: envVars.SECRET_ALCHEMY,
-    network: getNetwork((envVars.NETWORK || DEFAULT_NETWORK) as keyof typeof networks),
+    network: getNetwork((network || envVars.NETWORK || DEFAULT_NETWORK) as keyof typeof networks),
   });
