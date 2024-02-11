@@ -126,9 +126,6 @@ importers:
       '@types/url-parse':
         specifier: ^1.4.11
         version: 1.4.11
-      magic-sdk:
-        specifier: ^21.3.1
-        version: 21.5.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
