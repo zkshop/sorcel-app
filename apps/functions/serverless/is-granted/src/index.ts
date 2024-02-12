@@ -13,7 +13,7 @@ const handler: HttpFunction = async (req, res) => {
   const { address, productId } = req.query as { address: string; productId: string };
 
   if (!address || !productId) {
-    return res.status(BAD_REQUEST).send('Missing address or productId');
+    return res.status(BAD_REQUEST).send('Missing address or product id');
   }
 
   const response = await gqlRequestClient.get.GetProductById({
