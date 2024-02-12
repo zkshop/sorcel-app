@@ -1,0 +1,81 @@
+table:
+  name: poll
+  schema: public
+array_relationships:
+  - name: choices
+    using:
+      manual_configuration:
+        column_mapping:
+          id: poll_id
+        insertion_order: null
+        remote_table:
+          name: choice
+          schema: public
+insert_permissions:
+  - role: customer
+    permission:
+      check:
+        app_id:
+          _eq: X-Hasura-User-Id
+      set:
+        app_id: x-hasura-User-Id
+      columns:
+        - description
+        - gate
+        - image
+        - title
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - completed
+        - voters
+        - description
+        - gate
+        - image
+        - title
+        - created_at
+        - app_id
+        - id
+      filter: {}
+  - role: customer
+    permission:
+      columns:
+        - app_id
+        - completed
+        - created_at
+        - description
+        - gate
+        - id
+        - image
+        - title
+        - voters
+      filter:
+        app_id:
+          _eq: X-Hasura-User-Id
+update_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - voters
+      filter: {}
+      check: null
+  - role: customer
+    permission:
+      columns:
+        - completed
+        - description
+        - gate
+        - image
+        - title
+        - voters
+      filter:
+        app_id:
+          _eq: X-Hasura-User-Id
+      check: null
+delete_permissions:
+  - role: customer
+    permission:
+      filter:
+        app_id:
+          _eq: X-Hasura-User-Id
