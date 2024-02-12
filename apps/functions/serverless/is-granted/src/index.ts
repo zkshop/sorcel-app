@@ -5,6 +5,7 @@ import { gateVerifier } from '../../../utils/matchProductGate';
 import { BAD_REQUEST, INTERNAL_SERVER_ERROR, OK } from 'http-status';
 import { envMiddleWare, allowCors, withEnv } from '../../middlewares';
 import type { HttpFunction } from '@google-cloud/functions-framework';
+import { flatten } from 'lodash';
 
 const walletScrapper = withEnv(() => NftService(NftReaderClient()));
 
@@ -19,7 +20,13 @@ const handler: HttpFunction = async (req, res) => {
     id: productId,
   });
 
-  const nfts = await walletScrapper.getWalletNfts(address);
+  const contractAdressesToFilter = flatten(
+    response.product?.gate.map((gate) =>
+      gate.segments.map((segment) => segment.nft_contract_address),
+    ),
+  ) as string[];
+
+  const nfts = await walletScrapper.getWalletNfts(address, contractAdressesToFilter);
 
   if (!response.product) return res.status(INTERNAL_SERVER_ERROR).send('Product not found');
 
