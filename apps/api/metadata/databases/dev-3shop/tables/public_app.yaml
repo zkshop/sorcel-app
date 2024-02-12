@@ -1,0 +1,79 @@
+table:
+  name: app
+  schema: public
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - background_color
+        - deliveryTaxesTableName
+        - font
+        - font_color
+        - id
+        - imgUrl
+        - moneyAccountId
+        - name
+        - plan
+        - show_brand
+        - show_connect_email
+      filter: {}
+  - role: customer
+    permission:
+      columns:
+        - background_color
+        - deliveryTaxesTableName
+        - font
+        - font_color
+        - id
+        - imgUrl
+        - moneyAccountId
+        - name
+        - plan
+        - show_brand
+        - show_connect_email
+      filter:
+        _and:
+          - id:
+              _eq: X-Hasura-User-Id
+update_permissions:
+  - role: customer
+    permission:
+      columns:
+        - background_color
+        - deliveryTaxesTableName
+        - font
+        - font_color
+        - imgUrl
+        - moneyAccountId
+        - name
+        - show_brand
+        - show_connect_email
+      filter:
+        _and:
+          - id:
+              _eq: X-Hasura-User-Id
+      check: null
+event_triggers:
+  - name: onboarding
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: '{{ONBOARDING_WEBHOOK_URL}}'
+    request_transform:
+      body:
+        action: transform
+        template: |-
+          {
+            "name": {{$body.event.data.new.name}},
+            "table": {
+              "name": {{$body.table.name}},
+              "schema": {{$body.table.schema}}
+            }
+          }
+      template_engine: Kriti
+      version: 2
