@@ -5,8 +5,6 @@ insert_permissions:
   - role: anonymous
     permission:
       check: {}
-      set:
-        app_id: ""
       columns:
         - address
         - app_id
