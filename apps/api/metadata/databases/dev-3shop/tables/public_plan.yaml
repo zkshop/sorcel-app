@@ -2,14 +2,3 @@ table:
   name: plan
   schema: public
 is_enum: true
-select_permissions:
-  - role: anonymous
-    permission:
-      columns:
-        - value
-      filter: {}
-  - role: customer
-    permission:
-      columns:
-        - value
-      filter: {}
