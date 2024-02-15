@@ -6750,6 +6750,22 @@ export type IsUserQuery = {
   user_by_pk?: { __typename?: 'user'; id: any } | null;
 };
 
+export type CreateWalletConnectionLogMutationVariables = Exact<{
+  app_id: Scalars['uuid'];
+  address: Scalars['String'];
+}>;
+
+export type CreateWalletConnectionLogMutation = {
+  __typename?: 'mutation_root';
+  insert_wallet_connection_log_one?: {
+    __typename?: 'wallet_connection_log';
+    id: number;
+    date: any;
+    app_id: any;
+    address: string;
+  } | null;
+};
+
 export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetWalletConnectionLogByAppIdQuery = {
@@ -9123,6 +9139,60 @@ export function useIsUserLazyQuery(
 export type IsUserQueryHookResult = ReturnType<typeof useIsUserQuery>;
 export type IsUserLazyQueryHookResult = ReturnType<typeof useIsUserLazyQuery>;
 export type IsUserQueryResult = Apollo.QueryResult<IsUserQuery, IsUserQueryVariables>;
+export const CreateWalletConnectionLogDocument = gql`
+  mutation CreateWalletConnectionLog($app_id: uuid!, $address: String!) {
+    insert_wallet_connection_log_one(object: { address: $address, app_id: $app_id }) {
+      id
+      date
+      app_id
+      address
+    }
+  }
+`;
+export type CreateWalletConnectionLogMutationFn = Apollo.MutationFunction<
+  CreateWalletConnectionLogMutation,
+  CreateWalletConnectionLogMutationVariables
+>;
+
+/**
+ * __useCreateWalletConnectionLogMutation__
+ *
+ * To run a mutation, you first call `useCreateWalletConnectionLogMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateWalletConnectionLogMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createWalletConnectionLogMutation, { data, loading, error }] = useCreateWalletConnectionLogMutation({
+ *   variables: {
+ *      app_id: // value for 'app_id'
+ *      address: // value for 'address'
+ *   },
+ * });
+ */
+export function useCreateWalletConnectionLogMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateWalletConnectionLogMutation,
+    CreateWalletConnectionLogMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateWalletConnectionLogMutation,
+    CreateWalletConnectionLogMutationVariables
+  >(CreateWalletConnectionLogDocument, options);
+}
+export type CreateWalletConnectionLogMutationHookResult = ReturnType<
+  typeof useCreateWalletConnectionLogMutation
+>;
+export type CreateWalletConnectionLogMutationResult =
+  Apollo.MutationResult<CreateWalletConnectionLogMutation>;
+export type CreateWalletConnectionLogMutationOptions = Apollo.BaseMutationOptions<
+  CreateWalletConnectionLogMutation,
+  CreateWalletConnectionLogMutationVariables
+>;
 export const GetWalletConnectionLogByAppIdDocument = gql`
   query getWalletConnectionLogByAppId {
     wallet_connection_log {

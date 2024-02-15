@@ -1,5 +1,5 @@
 import hasura from './hasura';
-import type {Wallet_Connection_Log} from '@3shop/apollo/generated';
+import type { Wallet_Connection_Log } from '@3shop/apollo/generated';
 
 interface WalletConnectionLogResponse {
   data: {
@@ -7,7 +7,10 @@ interface WalletConnectionLogResponse {
   };
 }
 
-export async function createWalletConnectionLog(app_id: string, address: string): Promise<Wallet_Connection_Log | undefined> {
+export async function createWalletConnectionLog(
+  app_id: string,
+  address: string,
+): Promise<Wallet_Connection_Log | undefined> {
   const mutation = `
     mutation CreateWalletConnectionLog($app_id: uuid!, $address: String!) {
       insert_wallet_connection_log_one(object: {address: $address, app_id: $app_id}) {

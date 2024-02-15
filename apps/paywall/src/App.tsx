@@ -23,13 +23,21 @@ async function fetchGrants(address: string) {
   return res.data;
 }
 
+async function createLogs(address: string, appId: string) {
+  await httpServerless.get(`api/create-log`, {
+    params: {
+      appId,
+      address,
+    },
+  });
+}
+
 export function dispatchCustomEvent(event: string) {
   window.dispatchEvent(new CustomEvent(event, { bubbles: true, composed: true }));
 }
 
 const App = () => {
   const { isConnected, isDisconnected, address } = useAccount();
-
   useEffect(() => {
     async function getGrants() {
       if (!address) return;
@@ -42,6 +50,7 @@ const App = () => {
 
     if (isConnected) {
       setLocalStorageItem('isWalletConnected', true);
+      createLogs(address as string, '5d9fb7d8-31a5-43c7-a2ca-7bd72b21ef5d');
     }
 
     if (isDisconnected) {
