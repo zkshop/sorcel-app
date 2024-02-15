@@ -6591,6 +6591,14 @@ export type IsUserQueryVariables = Exact<{
 
 export type IsUserQuery = { __typename?: 'query_root', user_by_pk?: { __typename?: 'user', id: any } | null };
 
+export type CreateWalletConnectionLogMutationVariables = Exact<{
+  app_id: Scalars['uuid'];
+  address: Scalars['String'];
+}>;
+
+
+export type CreateWalletConnectionLogMutation = { __typename?: 'mutation_root', insert_wallet_connection_log_one?: { __typename?: 'wallet_connection_log', id: number, date: any, app_id: any, address: string } | null };
+
 export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7165,6 +7173,16 @@ export const IsUserDocument = gql`
   }
 }
     `;
+export const CreateWalletConnectionLogDocument = gql`
+    mutation CreateWalletConnectionLog($app_id: uuid!, $address: String!) {
+  insert_wallet_connection_log_one(object: {address: $address, app_id: $app_id}) {
+    id
+    date
+    app_id
+    address
+  }
+}
+    `;
 export const GetWalletConnectionLogByAppIdDocument = gql`
     query getWalletConnectionLogByAppId {
   wallet_connection_log {
@@ -7307,6 +7325,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     IsUser(variables: IsUserQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<IsUserQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<IsUserQuery>(IsUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'IsUser', 'query', variables);
+    },
+    CreateWalletConnectionLog(variables: CreateWalletConnectionLogMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateWalletConnectionLogMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateWalletConnectionLogMutation>(CreateWalletConnectionLogDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateWalletConnectionLog', 'mutation', variables);
     },
     getWalletConnectionLogByAppId(variables?: GetWalletConnectionLogByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetWalletConnectionLogByAppIdQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetWalletConnectionLogByAppIdQuery>(GetWalletConnectionLogByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getWalletConnectionLogByAppId', 'query', variables);

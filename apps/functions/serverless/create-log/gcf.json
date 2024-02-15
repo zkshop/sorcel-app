@@ -1,0 +1,38 @@
+{
+  "params": {
+    "useDefaultConfig": true
+  },
+  "gcf": {},
+  "openapi": {
+    "get": {
+      "summary": "Create a log entry for a wallet connection",
+      "parameters": [
+        {
+          "in": "query",
+          "name": "address",
+          "required": true,
+          "type": "string",
+          "description": "Address of the wallet"
+        },
+        {
+          "in": "query",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "description": "ID of the application"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "Successful operation, no content to return"
+        },
+        "400": {
+          "description": "Missing address or appId"
+        },
+        "500": {
+          "description": "Error creating log"
+        }
+      }
+    }
+  }
+}
