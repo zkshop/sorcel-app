@@ -17,6 +17,7 @@ const handler: HttpFunction = async (req, res) => {
 
     return res.status(NO_CONTENT);
   } catch (error) {
+    console.log(error);
     return res.status(INTERNAL_SERVER_ERROR).send('Error creating log');
   }
 };
