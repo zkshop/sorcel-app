@@ -1,6 +1,6 @@
 import type { HttpFunction } from '@google-cloud/functions-framework';
 import { gqlRequestClient } from '../../../../../packages/apollo';
-import { BAD_REQUEST, INTERNAL_SERVER_ERROR, NO_CONTENT } from 'http-status';
+import { BAD_REQUEST, INTERNAL_SERVER_ERROR, OK } from 'http-status';
 
 const handler: HttpFunction = async (req, res) => {
   const { address, appId } = req.query as { address: string; appId: string };
@@ -10,12 +10,16 @@ const handler: HttpFunction = async (req, res) => {
   }
 
   try {
-    await gqlRequestClient.get.CreateWalletConnectionLog({
+    console.log({ address, appId });
+
+    const response = await gqlRequestClient.get.CreateWalletConnectionLog({
       address,
       app_id: appId,
     });
 
-    return res.status(NO_CONTENT);
+    console.log({ data: response.insert_wallet_connection_log_one });
+
+    return res.status(OK).send('Log created');
   } catch (error) {
     console.log(error);
     return res.status(INTERNAL_SERVER_ERROR).send('Error creating log');
