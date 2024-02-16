@@ -23,8 +23,8 @@
         }
       ],
       "responses": {
-        "204": {
-          "description": "Successful operation, no content to return"
+        "200": {
+          "description": "Successful operation"
         },
         "400": {
           "description": "Missing address or appId"
