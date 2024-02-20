@@ -15,5 +15,6 @@ export interface UserData {
 
 export type AppCreator = {
   createApp: (name: string) => Promise<Nullable<AppData>>;
+  createExampleProducts: (appId: string) => Promise<boolean>;
   createAdmin: (email: string, appId: string) => Promise<Nullable<UserData>>;
 };
