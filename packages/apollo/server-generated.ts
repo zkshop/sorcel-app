@@ -6516,6 +6516,15 @@ export type VoteMutationVariables = Exact<{
 
 export type VoteMutation = { __typename?: 'mutation_root', choice?: { __typename?: 'choice', id: any, count: number } | null, poll?: { __typename?: 'poll', id: any, voters: any } | null };
 
+export type CreateExampleProductsMutationVariables = Exact<{
+  app_id: Scalars['uuid'];
+  image_url: Scalars['String'];
+  image_url_2: Scalars['String'];
+}>;
+
+
+export type CreateExampleProductsMutation = { __typename?: 'mutation_root', insert_product?: { __typename?: 'product_mutation_response', returning: Array<{ __typename?: 'product', app_id: any }> } | null };
+
 export type CreateProductMutationVariables = Exact<{
   appId: Scalars['uuid'];
   price: Scalars['Int'];
@@ -7045,6 +7054,17 @@ export const VoteDocument = gql`
   }
 }
     `;
+export const CreateExampleProductsDocument = gql`
+    mutation createExampleProducts($app_id: uuid!, $image_url: String!, $image_url_2: String!) {
+  insert_product(
+    objects: [{app_id: $app_id, type: COMMERCE, price: 0, name: "Bored ape shirt", image: $image_url, description: "Bored ape shirt for bored ape holders !", gate: {data: {chain: EVM, app_id: $app_id, exclusive_access: true, segments: {data: {network: ETHEREUM, nft_contract_address: "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D", type: NFT}}, name: "Bored ape Gate"}}}, {app_id: $app_id, type: MODAL, price: 0, webhookUrl: "webhook_url_value", name: "Somaverse ticket", image: $image_url_2, description: "Ticket for somaverse expo", gate: {data: {chain: EVM, app_id: $app_id, exclusive_access: true, segments: {data: {network: ETHEREUM, nft_contract_address: "0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e", type: NFT}}, name: "CRYPTO PUNK Gate"}}}]
+  ) {
+    returning {
+      app_id
+    }
+  }
+}
+    `;
 export const CreateProductDocument = gql`
     mutation CreateProduct($appId: uuid!, $price: Int!, $name: String!, $description: String!, $image: String!) {
   insert_product_one(
@@ -7298,6 +7318,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     Vote(variables: VoteMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<VoteMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<VoteMutation>(VoteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Vote', 'mutation', variables);
+    },
+    createExampleProducts(variables: CreateExampleProductsMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateExampleProductsMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateExampleProductsMutation>(CreateExampleProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createExampleProducts', 'mutation', variables);
     },
     CreateProduct(variables: CreateProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateProductMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateProductMutation>(CreateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateProduct', 'mutation', variables);
