@@ -6528,6 +6528,20 @@ export type VoteMutation = {
   poll?: { __typename?: 'poll'; id: any; voters: any } | null;
 };
 
+export type CreateExampleProductsMutationVariables = Exact<{
+  app_id: Scalars['uuid'];
+  image_url: Scalars['String'];
+  image_url_2: Scalars['String'];
+}>;
+
+export type CreateExampleProductsMutation = {
+  __typename?: 'mutation_root';
+  insert_product?: {
+    __typename?: 'product_mutation_response';
+    returning: Array<{ __typename?: 'product'; app_id: any }>;
+  } | null;
+};
+
 export type CreateProductMutationVariables = Exact<{
   appId: Scalars['uuid'];
   price: Scalars['Int'];
@@ -8623,6 +8637,110 @@ export function useVoteMutation(
 export type VoteMutationHookResult = ReturnType<typeof useVoteMutation>;
 export type VoteMutationResult = Apollo.MutationResult<VoteMutation>;
 export type VoteMutationOptions = Apollo.BaseMutationOptions<VoteMutation, VoteMutationVariables>;
+export const CreateExampleProductsDocument = gql`
+  mutation createExampleProducts($app_id: uuid!, $image_url: String!, $image_url_2: String!) {
+    insert_product(
+      objects: [
+        {
+          app_id: $app_id
+          type: COMMERCE
+          price: 0
+          name: "Bored ape shirt"
+          image: $image_url
+          description: "Bored ape shirt for bored ape holders !"
+          gate: {
+            data: {
+              chain: EVM
+              app_id: $app_id
+              exclusive_access: true
+              segments: {
+                data: {
+                  network: ETHEREUM
+                  nft_contract_address: "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D"
+                  type: NFT
+                }
+              }
+              name: "Bored ape Gate"
+            }
+          }
+        }
+        {
+          app_id: $app_id
+          type: MODAL
+          price: 0
+          webhookUrl: "webhook_url_value"
+          name: "Somaverse ticket"
+          image: $image_url_2
+          description: "Ticket for somaverse expo"
+          gate: {
+            data: {
+              chain: EVM
+              app_id: $app_id
+              exclusive_access: true
+              segments: {
+                data: {
+                  network: ETHEREUM
+                  nft_contract_address: "0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e"
+                  type: NFT
+                }
+              }
+              name: "CRYPTO PUNK Gate"
+            }
+          }
+        }
+      ]
+    ) {
+      returning {
+        app_id
+      }
+    }
+  }
+`;
+export type CreateExampleProductsMutationFn = Apollo.MutationFunction<
+  CreateExampleProductsMutation,
+  CreateExampleProductsMutationVariables
+>;
+
+/**
+ * __useCreateExampleProductsMutation__
+ *
+ * To run a mutation, you first call `useCreateExampleProductsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateExampleProductsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createExampleProductsMutation, { data, loading, error }] = useCreateExampleProductsMutation({
+ *   variables: {
+ *      app_id: // value for 'app_id'
+ *      image_url: // value for 'image_url'
+ *      image_url_2: // value for 'image_url_2'
+ *   },
+ * });
+ */
+export function useCreateExampleProductsMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateExampleProductsMutation,
+    CreateExampleProductsMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateExampleProductsMutation, CreateExampleProductsMutationVariables>(
+    CreateExampleProductsDocument,
+    options,
+  );
+}
+export type CreateExampleProductsMutationHookResult = ReturnType<
+  typeof useCreateExampleProductsMutation
+>;
+export type CreateExampleProductsMutationResult =
+  Apollo.MutationResult<CreateExampleProductsMutation>;
+export type CreateExampleProductsMutationOptions = Apollo.BaseMutationOptions<
+  CreateExampleProductsMutation,
+  CreateExampleProductsMutationVariables
+>;
 export const CreateProductDocument = gql`
   mutation CreateProduct(
     $appId: uuid!
