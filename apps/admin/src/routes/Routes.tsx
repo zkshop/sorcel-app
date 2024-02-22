@@ -12,6 +12,7 @@ import { Plan } from '../pages/Plan';
 import { Signup } from '../pages/Signup';
 import { Redirect } from '../pages/Redirect';
 import { Analytics } from '../pages/Analytics';
+import { ResourcesRoutes } from './ResourcesRoutes';
 
 export const ROUTES_PATH = {
   PUBLIC: {
@@ -27,6 +28,7 @@ export const ROUTES_PATH = {
     PAYMENTS: '/app/payments',
     INTEGRATIONS: '/app',
     ANALYTICS: '/app/analytics',
+    RESOURCES: '/app/resources',
   },
 } as const;
 
@@ -46,6 +48,7 @@ const Routes = () => (
       <Route path="payments" element={<Payments />} />
       <Route path="plan" element={<Plan />} />
       <Route path="analytics" element={<Analytics />} />
+      <Route path="resources/*" element={<ResourcesRoutes />} />
     </Route>
   </OriginalRoutes>
 );
