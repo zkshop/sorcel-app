@@ -84,7 +84,10 @@ export const Gates = () => {
 
   return (
     <Box>
-      <Header title="Gates">
+      <Header
+        title="Gates"
+        tooltip="Gates are the conditions that you can set to allow exclusive access or discount for a product"
+      >
         <Link to={`${ROUTES_PATH.PROTECTED.GATE}/add`}>
           <Button>+ New Gate</Button>
         </Link>

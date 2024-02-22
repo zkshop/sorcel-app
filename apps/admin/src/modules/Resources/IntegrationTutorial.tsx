@@ -5,7 +5,7 @@ export const IntegrationTutorial = () => (
   <>
     <Header title="Integration Tutorial" />
     <Text mb={2} variant="H500">
-      See how to integrate the module into your website
+      See how to integrate web3 into your website
     </Text>
     <HStack>
       <Box flex={1}>
