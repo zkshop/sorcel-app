@@ -49,7 +49,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Poll', icon: FiThumbsUp, href: '/app/poll' },
   { name: 'Payments', icon: FiDollarSign, href: '/app/Payments' },
   { name: 'Plan', icon: FiUnlock, href: '/app/plan' },
-  { name: 'Analytics', icon: FiBarChart, href: '/app/analytics'}
+  { name: 'Analytics', icon: FiBarChart, href: '/app/analytics' },
 ];
 
 type SidebarWithHeaderProps = WithChildren<{
