@@ -76,6 +76,7 @@ export {
   TableContainer,
   Tag,
   Tbody,
+  Tooltip,
   Td,
   Th,
   Thead,

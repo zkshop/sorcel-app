@@ -11,6 +11,8 @@ import {
   Table,
   useDisclosure,
   useToast,
+  Tooltip,
+  QuestionIcon,
 } from '@3shop/ui';
 
 import { useEffect, useState } from 'react';
@@ -117,7 +119,10 @@ export const AddGate = () => {
         <PerkFields control={control} showDiscountInput={showDiscountInput} register={register} />
         <Section mb={2}>
           <Heading fontSize="xl">
-            Gating
+            Gating{' '}
+            <Tooltip label="Add a NFT collection or a POAP to gate the product. You can add multiple collections to gate the product, if one is matched, the product is unlocked.">
+              <QuestionIcon boxSize={4} />
+            </Tooltip>
             <Button
               float="right"
               isDisabled={false}
