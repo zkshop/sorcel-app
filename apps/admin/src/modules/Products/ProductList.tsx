@@ -22,7 +22,10 @@ export const Products = () => {
 
   return (
     <Box>
-      <Header title="Products">
+      <Header
+        title="Products"
+        tooltip="Products are the entities that you want to show on your website. You can add, edit and delete them and also token-gate them with NFTs or POAPs."
+      >
         <Link to={`${ROUTES_PATH.PROTECTED.PRODUCT}/add`}>
           <Button>+ New Product</Button>
         </Link>
