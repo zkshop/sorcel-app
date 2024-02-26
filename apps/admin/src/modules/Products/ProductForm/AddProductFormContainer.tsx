@@ -14,15 +14,13 @@ import {
   GetAdminProductsDocument,
   Product_Type_Enum,
   useCreateAdminProductMutation,
-  useGetAdminAppLazyQuery,
+  useGetAdminAppQuery,
 } from '@3shop/apollo';
 import { ROUTES_PATH } from '../../../routes/Routes';
 
 const storage = StorageService(ImageStorageClient());
 
 export const AddProductFormContainer = () => {
-  const [GetAdmin] = useGetAdminAppLazyQuery();
-
   const [storageActionLoading, setStorageActionLoading] = useState(false);
   const methods = useForm<AddProductFormValues>({
     defaultValues: {},
@@ -63,13 +61,13 @@ export const AddProductFormContainer = () => {
     },
   });
 
+  const { data: adminData } = useGetAdminAppQuery();
+
   const toast = useToast();
 
   const onSubmit = async (data: AddProductFormValues) => {
     try {
       setStorageActionLoading(true);
-
-      const { data: adminData } = await GetAdmin();
 
       const uploadUrl = await storage.uploadPicture(data.image, 'products');
 
@@ -79,10 +77,7 @@ export const AddProductFormContainer = () => {
         variables: {
           ...data,
           image: uploadUrl,
-          price:
-            data.isModal || Number(data.price) < 0 || !adminData?.app[0].moneyAccountId
-              ? 0
-              : Number(data.price),
+          price: data.isModal ? 0 : Number(data.price),
           type: data.isModal ? Product_Type_Enum.Modal : Product_Type_Enum.Commerce,
         },
         onCompleted: () => toast(getAddProductSuccessMessage(data.name)),
@@ -99,7 +94,10 @@ export const AddProductFormContainer = () => {
   return (
     <FormProvider {...methods}>
       <ProductForm
-        isDisabled={!isValid}
+        isDisabled={
+          !isValid ||
+          (!adminData?.app[0].moneyAccountId && Number(methods.getValues('price')) !== 0)
+        }
         isLoading={storageActionLoading || isLoading}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}

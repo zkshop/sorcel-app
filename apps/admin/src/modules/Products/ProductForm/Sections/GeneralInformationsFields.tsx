@@ -70,7 +70,7 @@ export const GeneralInformationsFields = () => {
         <FormControl isInvalid={Boolean(errors.price)}>
           <FormLabel mb={1}>{PRODUCTS_FIELDS.price.label}</FormLabel>
 
-          <NumberInput min={0} max={!data.app[0].moneyAccountId ? 0 : undefined}>
+          <NumberInput>
             <NumberInputField
               border="1px solid"
               borderColor="#E5E5E5"
