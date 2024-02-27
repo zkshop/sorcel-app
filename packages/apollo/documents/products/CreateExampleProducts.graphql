@@ -9,7 +9,7 @@ mutation createExampleProducts($app_id: uuid!, $image_url: String!, $image_url_2
       description: "Bored ape shirt for bored ape holders !",
       gate: {
         data: {
-          chain: EVM,
+          chain: "EVM",
           app_id: $app_id,
           exclusive_access: true,
           segments: {
@@ -33,7 +33,7 @@ mutation createExampleProducts($app_id: uuid!, $image_url: String!, $image_url_2
       description: "Ticket for somaverse expo",
       gate: {
         data: {
-          chain: EVM,
+          chain: "EVM",
           app_id: $app_id,
           exclusive_access: true,
           segments: {
