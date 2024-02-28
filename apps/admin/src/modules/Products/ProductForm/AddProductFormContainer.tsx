@@ -14,6 +14,7 @@ import {
   GetAdminProductsDocument,
   Product_Type_Enum,
   useCreateAdminProductMutation,
+  useGetAdminAppQuery,
 } from '@3shop/apollo';
 import { ROUTES_PATH } from '../../../routes/Routes';
 
@@ -60,6 +61,8 @@ export const AddProductFormContainer = () => {
     },
   });
 
+  const { data: adminData } = useGetAdminAppQuery();
+
   const toast = useToast();
 
   const onSubmit = async (data: AddProductFormValues) => {
@@ -91,7 +94,10 @@ export const AddProductFormContainer = () => {
   return (
     <FormProvider {...methods}>
       <ProductForm
-        isDisabled={!isValid}
+        isDisabled={
+          !isValid ||
+          (!adminData?.app[0].moneyAccountId && Number(methods.getValues('price')) !== 0)
+        }
         isLoading={storageActionLoading || isLoading}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
