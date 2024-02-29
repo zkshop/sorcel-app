@@ -1,11 +1,10 @@
 import type { HttpFunction } from '@google-cloud/functions-framework';
 
-import { envMiddleWare, allowCors, slug } from '../../../../../middlewares';
+import { envMiddleWare, allowCors } from '../../../../../middlewares';
 import { poap, getPoapURLFromId } from '../../../../../../../../packages/poap';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status';
 
 const handler: HttpFunction = async (req, res) => {
-  console.log("!query_id", req.query);
   const { id } = req.query;
 
   try {
@@ -23,4 +22,4 @@ const handler: HttpFunction = async (req, res) => {
   }
 };
 
-export const id = envMiddleWare(allowCors(slug('[id]', handler)));
+export const id = envMiddleWare(allowCors(handler));

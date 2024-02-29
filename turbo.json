@@ -2,6 +2,7 @@
   "$schema": "https://turborepo.org/schema.json",
   "globalDependencies": [".env", "tsconfig.json"],
   "globalEnv": [
+    "SORCEL_PROJECT_ROOT",
     "DOTENV_KEY",
     "APP_ID",
     "CI",
@@ -18,6 +19,7 @@
     "PUBLIC_STRIPE_PUBLISHABLE_KEY",
     "SECRET_AIRTABLE",
     "SECRET_ALCHEMY",
+    "SECRET_BREVO",
     "SECRET_CENTER",
     "SECRET_HASURA",
     "SECRET_JWT",
@@ -27,6 +29,7 @@
     "SECRET_RUDDERSTACK",
     "SECRET_STRIPE",
     "SECRET_SUPABASE",
+    "SERVERLESS_API_KEY",
     "SORCEL_PRODUCT_ID",
     "STRIPE_SECRET_KEY",
     "WALLET_CONNECT_PROJECT_ID",

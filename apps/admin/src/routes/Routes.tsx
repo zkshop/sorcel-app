@@ -10,6 +10,9 @@ import { Customization } from '../pages/Customization';
 import { Integrations } from '../pages/Integrations';
 import { Plan } from '../pages/Plan';
 import { Signup } from '../pages/Signup';
+import { Redirect } from '../pages/Redirect';
+import { Analytics } from '../pages/Analytics';
+import { ResourcesRoutes } from './ResourcesRoutes';
 
 export const ROUTES_PATH = {
   PUBLIC: {
@@ -24,12 +27,15 @@ export const ROUTES_PATH = {
     POLL: '/app/poll',
     PAYMENTS: '/app/payments',
     INTEGRATIONS: '/app',
+    ANALYTICS: '/app/analytics',
+    RESOURCES: '/app/resources',
   },
 } as const;
 
 const Routes = () => (
   <OriginalRoutes>
     <Route path="/" index element={<Login />} />
+    <Route path="/redirect" index element={<Redirect />} />
     <Route path="/signup" element={<Signup />} />
     <Route path="/app" element={<ProtectedRoutes />}>
       <Route index element={<Integrations />} />
@@ -41,6 +47,8 @@ const Routes = () => (
       <Route path="poll/*" element={<PollRoutes />} />
       <Route path="payments" element={<Payments />} />
       <Route path="plan" element={<Plan />} />
+      <Route path="analytics" element={<Analytics />} />
+      <Route path="resources/*" element={<ResourcesRoutes />} />
     </Route>
   </OriginalRoutes>
 );

@@ -1,6 +1,6 @@
 import type { GateFieldsFragment, Network_Enum, Product_Type_Enum } from '@3shop/apollo';
 import type { Nullable } from './utils';
-import type { Nft } from '@3shop/alchemy';
+import type { NFT } from '@3shop/domains';
 
 export type FormatedProductData = {
   id?: string;

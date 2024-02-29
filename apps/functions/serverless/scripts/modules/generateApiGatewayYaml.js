@@ -1,5 +1,5 @@
-import { createFunctions, createDeployCommand, Function } from '../lib/functions.js';
-import { UnknownArgumentException, getArgs } from '../utils.js';
+import { Function } from '../lib/functions.js';
+import { getArgs } from '../utils.js';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import { log } from '../display.mjs';
@@ -16,26 +16,6 @@ export const defaultOptions = {
   'template-path': `./scripts/template.yaml`,
 };
 
-// function keyResolver(keys, obj, onLastKey) {
-//   const [ref, copy] = [obj, { ...obj }];
-
-//   let current = ref;
-//   let result;
-//   let i = 0;
-//   while (i < keys.length) {
-//     if (current[keys[i]] === undefined) {
-//       return undefined;
-//     }
-//     if (i === keys.length - 1) {
-//       result = onLastKey(current, keys[i]);
-//       break;
-//     }
-//     current = current[keys[i]];
-//     i++;
-//   }
-//   return result;
-// }
-
 function createOpenApiObject(_function, keysToExtract) {
   const config = Function.getConfig(_function.id);
   let openApi = { ...config['openapi'] };
@@ -46,6 +26,20 @@ function createOpenApiObject(_function, keysToExtract) {
       address: `https://${process.env.GCP_REGION}-${process.env.GCP_PROJECT}.cloudfunctions.net/${_function.name}-${process.env['ENV_CONTEXT']}`,
     },
     operationId: _function.entryPointName,
+  };
+
+ const requiredForCors = {
+    'x-google-backend': {
+      address: `https://${process.env.GCP_REGION}-${process.env.GCP_PROJECT}.cloudfunctions.net/${_function.name}-${process.env['ENV_CONTEXT']}`,
+    },
+    operationId: `${_function.entryPointName}Cors`,
+    summary: `CORS support for ${_function.name}`,
+    description: 'Enable CORS by returning the correct headers',
+    responses: {
+      '204': {
+        description: 'no content'
+      }
+    }
   };
 
   function locateRestMethodToAppendRequired(obj) {
@@ -61,6 +55,7 @@ function createOpenApiObject(_function, keysToExtract) {
   }
 
   locateRestMethodToAppendRequired(openApi);
+  openApi['options'] = {...requiredForCors};
   Object.freeze(openApi);
   return openApi;
 }
@@ -103,12 +98,11 @@ async function generateYaml(args) {
     }
   });
   Object.freeze(paths);
+
   buildingYaml['paths'] = paths;
   buildingYaml['securityDefinitions'] = securityDefinitions;
   buildingYaml['definitions'] = allDefinitions;
-  // console.log(buildingYaml);
-  // console.log('all', a);
-  // process.exit(1);
+
   const yamlStr = yaml.dump(buildingYaml);
   await fs.promises.writeFile(options['yaml-outfile'], yamlStr, 'utf8');
   return options['yaml-outfile'];

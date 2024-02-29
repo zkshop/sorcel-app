@@ -1,4 +1,3 @@
-import { envVars } from '@3shop/config';
 import type { AuthorizationTokenClient } from '@3shop/domains';
 import jwt from 'jsonwebtoken';
 
@@ -13,7 +12,7 @@ const createJsonWebTokenPayload = (appId: string, metadata: object) => ({
 });
 
 export function JsonWebTokenClient(): AuthorizationTokenClient {
-  const secret = envVars.SECRET_JWT || '';
+  const secret = process.env.SECRET_JWT || '';
   return {
     sign: (appId, metadata) => jwt.sign(createJsonWebTokenPayload(appId, metadata), secret),
     verify: (token) => {

@@ -9,6 +9,7 @@
     "@3shop/alchemy": "workspace:*",
     "@3shop/config": "workspace:*",
     "@3shop/domains": "workspace:*",
+    "@3shop/http-serverless": "workspace:*",
     "@3shop/magic": "workspace:*",
     "@3shop/pure": "workspace:*",
     "@3shop/supabase": "workspace:*",

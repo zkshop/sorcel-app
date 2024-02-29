@@ -1,5 +1,5 @@
 import { useGetAppQuery } from '@3shop/apollo';
-import { envVars } from '@3shop/config';
+import { envVars } from '../envVars';
 import type { DeliveryTaxesData } from '@3shop/domains';
 import { useAppDispatch, useAppSelector } from '@3shop/store';
 import { fetchDeliveryTaxes } from '@3shop/store/slices/deliveryTaxes';

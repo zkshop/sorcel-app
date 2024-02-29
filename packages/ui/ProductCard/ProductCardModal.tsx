@@ -129,7 +129,7 @@ export const ProductCardModal = ({
           </FormControl>
 
           <HStack mt={4} justifyContent="flex-end">
-            <Button variant="ghost" mr={3} onClick={onClose}>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
             </Button>
 

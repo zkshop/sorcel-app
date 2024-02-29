@@ -1,11 +1,14 @@
-import { envVars } from '@3shop/config';
-import axios from 'axios';
+import { httpServerless } from '@3shop/http-serverless';
 import type { Poap } from './Poap';
 
 export const getEveryPOAPOfAWallet = async (address: string): Promise<Poap[]> => {
-  const url = `${envVars.PUBLIC_FUNCTIONS_URL}/api/shop/poap/${address}`;
+  const url = `api/shop/poap`;
   try {
-    const { data } = await axios.get(url);
+    const { data } = await httpServerless.get(url, {
+      params: {
+        address,
+      },
+    });
 
     return data.data;
   } catch (e) {

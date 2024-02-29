@@ -1,21 +1,12 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@3shop/store';
 import { fetchNFTS, reset } from '@3shop/store/slices/nfts';
 import { fetchPOAPS, reset as resetPoaps } from '@3shop/store/slices/poap';
 import { useAccount } from '@3shop/wallet';
-import {
-  Gate_V2,
-  Network_Enum,
-  Product_Type_Enum,
-  Segment_Type,
-  Segment_Type_Enum,
-  useGetEveryContractAddressByAppIdQuery,
-  useGetGates_V2Query,
-  useGetGates_V2_ByAppIdQuery,
-} from '@3shop/apollo';
-import { envVars } from '@3shop/config';
+import { useGetEveryContractAddressByAppIdQuery, useGetGates_V2_ByAppIdQuery } from '@3shop/apollo';
+import { envVars } from '../envVars';
 import { flatten } from 'lodash';
-import { GetGates_V2_ByAppIdQuery } from '@3shop/apollo';
+import { createWalletConnectionLog } from '../../utils';
 
 const useFetchWallet = () => {
   const { isConnected, isDisconnected, address } = useAccount();
@@ -55,6 +46,12 @@ const useFetchWallet = () => {
       dispatch(fetchPOAPS(email));
     }
   }, [publicAddress, address, email, dispatch, gateQuery]);
+
+  useEffect(() => {
+    if (isConnected && address) {
+      (async () => await createWalletConnectionLog(envVars.APP_ID, address))();
+    }
+  }, [isConnected, address, isDisconnected]);
 
   useEffect(() => {
     if (isDisconnected) {

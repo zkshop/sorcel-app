@@ -3,16 +3,15 @@ import { INTERNAL_SERVER_ERROR, OK, UNAUTHORIZED } from 'http-status';
 import { AuthorizationTokenService } from '@3shop/domains';
 import { JsonWebTokenClient } from '../../../../../infra/JsonWebTokenClient';
 import { extractTokenFromAuthorization, getUser } from '../../../../../utils';
-import { envVars } from '@3shop/config';
 import type { HttpFunction } from '@google-cloud/functions-framework';
 import { envMiddleWare, allowCors, withEnv } from '../../../../middlewares';
 
 const Token = withEnv(() => AuthorizationTokenService(JsonWebTokenClient()));
 
 const handler: HttpFunction = async (req, res) => {
-  if (!envVars.SECRET_JWT) return res.status(INTERNAL_SERVER_ERROR);
+  if (!process.env.SECRET_JWT) return res.status(INTERNAL_SERVER_ERROR);
 
-  const didToken = extractTokenFromAuthorization(req.headers.authorization);
+  const didToken = extractTokenFromAuthorization(req.body.didToken);
 
   if (!didToken) return res.status(UNAUTHORIZED);
 

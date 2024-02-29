@@ -6,14 +6,13 @@ import { method } from '../../../middlewares/method';
 import { AuthorizationTokenService } from '@3shop/domains';
 import { JsonWebTokenClient } from '../../../infra/JsonWebTokenClient';
 import { extractTokenFromAuthorization, getUser } from '../../../utils';
-import { envVars } from '@3shop/config';
 
 const Token = AuthorizationTokenService(JsonWebTokenClient());
 
 async function handler(req: VercelRequest, res: VercelResponse) {
-  if (!envVars.SECRET_JWT) return res.status(INTERNAL_SERVER_ERROR);
+  if (!process.env.SECRET_JWT) return res.status(INTERNAL_SERVER_ERROR);
 
-  const didToken = extractTokenFromAuthorization(req.headers.authorization);
+  const didToken = extractTokenFromAuthorization(req.body.didToken);
 
   if (!didToken) return res.status(UNAUTHORIZED);
 

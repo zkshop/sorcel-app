@@ -1,0 +1,7 @@
+query getWalletConnectionLogByAppId {
+  wallet_connection_log {
+    address
+    date
+    id
+  }
+}

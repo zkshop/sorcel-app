@@ -1,0 +1,8 @@
+mutation CreateWalletConnectionLog($app_id: uuid!, $address: String!) {
+  insert_wallet_connection_log_one(object: { address: $address, app_id: $app_id }) {
+    id
+    date
+    app_id
+    address
+  }
+}

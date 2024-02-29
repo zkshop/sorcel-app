@@ -1,0 +1,22 @@
+table:
+  name: wallet_connection_log
+  schema: public
+insert_permissions:
+  - role: anonymous
+    permission:
+      check: {}
+      columns:
+        - address
+        - app_id
+        - date
+select_permissions:
+  - role: customer
+    permission:
+      columns:
+        - id
+        - address
+        - date
+        - app_id
+      filter:
+        app_id:
+          _eq: X-Hasura-User-Id

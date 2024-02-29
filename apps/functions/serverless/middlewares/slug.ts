@@ -1,5 +1,4 @@
 import type { HttpFunction, Request, Response } from '@google-cloud/functions-framework';
-import { OK } from 'http-status';
 
 const advancePattern = '*';
 
@@ -12,6 +11,13 @@ const removeBrackets = (str: string) => {
   return str;
 };
 
+/**
+ * This function can be used like "[slug]" or "/*\/[slugOne]/*[slugTwo]"
+ * The wildcards are used to match any part of the URL that is not a slug
+ * @param {string} pattern - The pattern to match in the URL
+ * @param {HttpFunction} next - The next middleware function to execute
+ * @returns {Promise} - The result of the next middleware function
+ */
 export const slug =
   (pattern: string, next: HttpFunction) => async (req: Request, res: Response) => {
     const patternSplitted = pattern.split('/').filter((str) => str != '' && str.length > 0);

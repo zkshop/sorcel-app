@@ -8,7 +8,8 @@ import { envMiddleWare, allowCors } from '../../../../middlewares';
 const Token = AuthorizationTokenService(JsonWebTokenClient());
 
 const handler: HttpFunction = async (req, res) => {
-  const token = extractTokenFromAuthorization(req.headers.authorization);
+  const token = extractTokenFromAuthorization(req.body.didToken);
+
   if (!token || !Token.verify(token)) return res.status(UNAUTHORIZED).end();
 
   const userPayload = Token.getUserPayload(token);

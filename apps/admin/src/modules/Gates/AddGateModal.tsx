@@ -25,7 +25,6 @@ import { useDispatch } from 'react-redux';
 import { COLLECTION_FIELDS } from './constants';
 import ADD_GATE_SCHEMA from './schemas';
 import { PoapSelector } from './PoapSelector';
-import { useEditProductMutation } from '@3shop/apollo';
 import { useEffect } from 'react';
 
 type PoapType = {
@@ -75,17 +74,19 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
       switch (data.network) {
         case 'XRPLEDGER': {
           type XRPValues = NftType & { issuer: string; taxon: string };
-          let XRPFormValues: XRPValues = data as XRPValues;
+          const XRPFormValues: XRPValues = data as XRPValues;
           XRPFormValues.contractAddress = JSON.stringify(XRPFormValues, ['issuer', 'taxon']);
           const { issuer, taxon, ...rest } = XRPFormValues;
           payload = rest;
+          issuer;
+          taxon;
           break;
         }
         // Intentional pass-trough
         case 'POLYGON':
         case 'ETHEREUM': {
           payload = data;
-          break ;
+          break;
         }
         default:
           return;
@@ -115,13 +116,11 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
     );
   };
 
-  const renderInput = (field: fieldType) => {
-    return (
-      <FormControl>
-        {Object.entries(COLLECTION_FIELDS[field]).map(([key, value]) => renderFields(value))}
-      </FormControl>
-    );
-  };
+  const renderInput = (field: fieldType) => (
+    <FormControl>
+      {Object.entries(COLLECTION_FIELDS[field]).map(([, value]) => renderFields(value))}
+    </FormControl>
+  );
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -184,7 +183,7 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
               <Button onClick={onClose} backgroundColor="red" color="white">
                 Close
               </Button>
-              <Button type="submit">Save</Button>
+              <Button type="submit">Add condition</Button>
             </ButtonGroup>
           </ModalFooter>
         </form>

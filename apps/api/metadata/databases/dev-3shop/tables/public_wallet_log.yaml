@@ -1,0 +1,3 @@
+table:
+  name: wallet_log
+  schema: public

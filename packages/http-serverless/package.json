@@ -1,0 +1,12 @@
+{
+  "name": "@3shop/http-serverless",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\" --fix"
+  },
+  "dependencies": {
+    "@3shop/config": "workspace:*",
+    "axios": "1.1.3"
+  }
+}

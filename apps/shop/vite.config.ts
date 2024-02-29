@@ -1,14 +1,7 @@
 import { defineConfig, loadEnv } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { createCommonConfig } from '@3shop/vite-config/vite.config.common.js';
-import dotenv from 'dotenv-vault-core';
 
-dotenv.config();
-
-/* 
-  null: will not fail if the environment variable is missing.
-  undefined: will fail if the environment variable is missing.
-*/
 const envVars = {
   APP_ID: null,
   GITHUB_ACTIONS: false,
@@ -21,6 +14,7 @@ const envVars = {
   PUBLIC_STRIPE_PUBLISHABLE_KEY: undefined,
   SECRET_AIRTABLE: undefined,
   SECRET_ALCHEMY: undefined,
+  SECRET_BREVO: undefined,
   SECRET_CENTER: false,
   SECRET_HASURA: undefined,
   SECRET_JWT: undefined,
@@ -30,7 +24,8 @@ const envVars = {
   SECRET_RUDDERSTACK: undefined,
   SECRET_STRIPE: undefined,
   SECRET_SUPABASE: undefined,
-  POSTHOG_KEY: undefined,
+  SERVERLESS_API_KEY: 'test',
+  POSTHOG_KEY: null,
   WALLET_CONNECT_PROJECT_ID: undefined,
   MONTHLY_PRO_PLAN_CHECKOUT_LINK: undefined,
   YEARLY_PRO_PLAN_CHECKOUT_LINK: undefined,
@@ -40,7 +35,7 @@ const envVars = {
 
 const dirname = __dirname;
 
-const commonConfig = createCommonConfig({ envVars, dirname });
+const commonConfig = createCommonConfig({ dirname, envVars });
 
 export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };

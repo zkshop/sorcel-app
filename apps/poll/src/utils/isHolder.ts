@@ -1,6 +1,6 @@
-import type { Nft } from '@3shop/alchemy';
+import type { NFT } from '@3shop/domains';
 
-export const isHolder = (nfts: Nft[], contractAddress: string) => {
+export const isHolder = (nfts: NFT[], contractAddress: string) => {
   for (const nft of nfts) {
     if (nft.contract.address.toLocaleUpperCase() === contractAddress.toLocaleUpperCase())
       return true;

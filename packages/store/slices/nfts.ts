@@ -1,8 +1,7 @@
 import { AsyncThunk, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { Nft } from '@3shop/domains';
+import type { NFT } from '@3shop/domains';
 import { NftService, SorcelNft } from '@3shop/domains';
 import { testPlatformService } from '@3shop/domains';
-import { testPlatformClient } from '@3shop/domains';
 import { NftReaderClient, convertObject, objectResolver } from '@3shop/infra';
 import { XRPNftReaderClient } from '@3shop/infra';
 import { platformFunctionType, platforms } from 'node_modules/@3shop/domains/nft/NftPlatform';

@@ -13,6 +13,7 @@ import {
   Grid,
   GridItem,
   Box,
+  useToastMessage,
 } from '@3shop/ui';
 import logo from '@3shop/ui/SignupSection/SORCEL_LOGO.png';
 
@@ -20,11 +21,10 @@ import { FormValidation } from '@3shop/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AuthAdminService } from '@3shop/domains';
 import { CustomerAuthClient } from '@3shop/admin-infra';
-import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
 import { useState } from 'react';
-import { ROUTES_PATH } from '../routes/Routes';
+import { useIsUserLazyQuery } from '@3shop/apollo';
 
 type LoginFormValues = {
   email: string;
@@ -38,8 +38,6 @@ const auth = AuthAdminService(CustomerAuthClient());
 
 export const Login = () => {
   const [isLoginLoading, setIsLoginLoading] = useState(false);
-  const navigate = useNavigate();
-  const { setCustomerTokenCookie } = useCustomerTokenCookie();
   const {
     handleSubmit,
     register,
@@ -54,13 +52,24 @@ export const Login = () => {
 
   const {} = useVerifyToken();
 
+  const [isUser] = useIsUserLazyQuery();
+  const { error } = useToastMessage();
+
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoginLoading(true);
-    const res = await auth.login(data.email);
-    if (res.token) {
-      setCustomerTokenCookie(res.token);
-
-      navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
+    try {
+      const { data: isUserData } = await isUser({
+        variables: {
+          email: data.email,
+        },
+      });
+      if (isUserData?.user_by_pk?.id) {
+        await auth.loginRedirect(data.email);
+      } else {
+        error('Invalid Email', 'Please Sign up first');
+      }
+    } catch (e) {
+      console.error(e);
     }
 
     setIsLoginLoading(false);

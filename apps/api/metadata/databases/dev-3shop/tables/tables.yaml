@@ -14,3 +14,4 @@
 - "!include public_segment_type.yaml"
 - "!include public_user.yaml"
 - "!include public_utility.yaml"
+- "!include public_wallet_connection_log.yaml"

@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build",
-    "build:ci": "tsc && vite build",
-    "dev": "vite",
+    "build": "tsc && node -r dotenv/config ../../node_modules/.bin/vite build",
+    "build:ci": "tsc && node -r dotenv/config ../../node_modules/.bin/vite build",
+    "dev": "node -r dotenv/config ../../node_modules/.bin/vite",
     "lint": "eslint \"**/*.ts*\" --fix",
     "preview": "vite preview"
   },
@@ -15,7 +15,9 @@
     "@3shop/apollo": "workspace:*",
     "@3shop/config": "workspace:*",
     "@3shop/domains": "workspace:*",
+    "@3shop/email": "workspace:*",
     "@3shop/events": "workspace:*",
+    "@3shop/http-serverless": "workspace:*",
     "@3shop/messages": "workspace:*",
     "@3shop/poap": "workspace:*",
     "@3shop/pure": "workspace:*",
@@ -37,7 +39,8 @@
     "@types/lodash": "^4.14.191",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
-    "vite": "3.2.3",
+    "unplugin-fonts": "^1.1.1",
+    "vite": "5.0.12",
     "vite-plugin-html": "^3.2.0"
   },
   "peerDependencies": {

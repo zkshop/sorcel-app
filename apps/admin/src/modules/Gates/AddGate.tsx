@@ -1,8 +1,18 @@
 import { AddGateModal } from './AddGateModal';
 import { PerkFields } from './PerkFields';
 import { GeneralFields } from './GeneralFields';
-import { AddGateFormHeader } from './AddGateFormHeader';
-import { BackButton, Button, Heading, MainLayout, Section, Table, useDisclosure } from '@3shop/ui';
+import {
+  BackButton,
+  Button,
+  Header,
+  Heading,
+  MainLayout,
+  Section,
+  Table,
+  useDisclosure,
+  Tooltip,
+  QuestionIcon,
+} from '@3shop/ui';
 
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -97,15 +107,16 @@ export const AddGate = () => {
   return (
     <MainLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <AddGateFormHeader loading={loading} />
+        <Header title="Add Gate" />
         <BackButton href="/app" />
         <GeneralFields register={register} errors={errors} />
-
         <PerkFields control={control} showDiscountInput={showDiscountInput} register={register} />
-
         <Section mb={2}>
           <Heading fontSize="xl">
-            Gating
+            Gating{' '}
+            <Tooltip label="Add a NFT collection or a POAP to gate the product. You can add multiple collections to gate the product, if one is matched, the product is unlocked.">
+              <QuestionIcon boxSize={4} />
+            </Tooltip>
             <Button
               float="right"
               isDisabled={false}
@@ -124,6 +135,9 @@ export const AddGate = () => {
 
           <ProductSelectField register={register} />
         </Section>
+        <Button isLoading={loading} float="right" my={2} type="submit">
+          Add Gate
+        </Button>
       </form>
 
       <AddGateModal isOpen={isOpen} onClose={onClose} />

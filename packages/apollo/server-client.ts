@@ -1,8 +1,11 @@
 import { GraphQLClient } from 'graphql-request';
 import { getSdk } from './server-generated';
-import { envVars } from '@3shop/config';
 
-export const gqlClient = new GraphQLClient(envVars.PUBLIC_HASURA_API_URL || '');
+export const gqlClient = new GraphQLClient(process.env.PUBLIC_HASURA_API_URL || '', {
+  headers: {
+    'x-hasura-admin-secret': process.env.SECRET_HASURA || '',
+  },
+});
 
 export const get = getSdk(gqlClient);
 

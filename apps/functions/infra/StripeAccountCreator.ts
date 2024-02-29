@@ -1,4 +1,3 @@
-import { envVars } from '@3shop/config';
 import type { MoneyAccount, MoneyAccountClient } from '@3shop/domains';
 import { stripe } from '@3shop/stripe';
 
@@ -8,9 +7,13 @@ export function StripeAccountCreator(): MoneyAccountClient {
       const link = await stripe.accountLinks.create({
         account: accountId,
         refresh_url:
-          envVars.NODE_ENV === 'development' ? 'http://localhost:5173' : 'https://admin.3shop.co',
+          process.env.NODE_ENV === 'development'
+            ? 'http://localhost:5173'
+            : 'https://admin.3shop.co',
         return_url:
-          envVars.NODE_ENV === 'development' ? 'http://localhost:5173' : 'https://admin.3shop.co',
+          process.env.NODE_ENV === 'development'
+            ? 'http://localhost:5173'
+            : 'https://admin.3shop.co',
         type: 'account_onboarding',
       });
 

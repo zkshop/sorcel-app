@@ -6,6 +6,7 @@
     "lint": "eslint \"**/*.ts*\" --fix"
   },
   "dependencies": {
-    "@3shop/config": "workspace:*"
+    "@3shop/config": "workspace:*",
+    "@3shop/http-serverless": "workspace:*"
   }
 }

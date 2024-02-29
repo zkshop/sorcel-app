@@ -1,13 +1,13 @@
-import { envVars } from '@3shop/config';
+import { envVars } from '../envVars';
 import { loadStripe } from '@stripe/stripe-js';
-import axios from 'axios';
+import { httpServerless } from '@3shop/http-serverless';
 
 export const getStripeObject = () => loadStripe(envVars.PUBLIC_STRIPE_PUBLISHABLE_KEY || '');
 
 export const getPaymentIntent = async (price: number, moneyAccountId: string) => {
-  const url = `${envVars.PUBLIC_FUNCTIONS_URL}/api/shop/payment-intents`;
+  const url = `api/shop/payment-intents`;
 
-  const { data } = await axios.post<{ clientSecret: string }>(url, {
+  const { data } = await httpServerless.post<{ clientSecret: string }>(url, {
     price,
     moneyAccountId,
   });
