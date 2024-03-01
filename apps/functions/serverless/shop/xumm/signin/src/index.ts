@@ -3,8 +3,8 @@ import { envMiddleWare, allowCors, withEnv } from '../../../../middlewares';
 import type { HttpFunction } from '@google-cloud/functions-framework';
 import axios from 'axios';
 
-const key = "";
-const secret = "";
+const key = "de7681ce-0e13-492e-807d-3b79f48c2dd9";
+const secret = "0d135bbd-1c83-49e9-8dbc-429ea558e4ca";
 
 const handler: HttpFunction = async (req, res) => {
   const payloadResponse = await axios.post(
