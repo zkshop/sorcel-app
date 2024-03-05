@@ -1,4 +1,4 @@
-import { SorcelNft } from "node_modules/@3shop/domains";
+import { SorcelNft } from "@3shop/domains";
 import type { objectResolver } from "../apiTools/convertObject";
 
 export const resolver: objectResolver<SorcelNft> = {

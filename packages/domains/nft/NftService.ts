@@ -1,6 +1,5 @@
 import type { NftAttribute } from './Nft';
 import { Nft } from '@3shop/alchemy';
-import type { NftClient } from './NftClient';
 import { testPlatformClient } from './NftClient';
 import { platformFunctionType as platform } from './NftPlatform';
 import type { NFT, BlockchainClient } from './BlockchainClient';

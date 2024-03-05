@@ -1,17 +1,16 @@
-import { Nft, testPlatformClient } from '@3shop/domains';
+import { testPlatformClient } from '@3shop/domains/nft/NftClient';
 import { platforms } from '@3shop/domains/nft/NftPlatform';
-import { NftApiParams } from '@3shop/domains/nft/Xrp/Bithomp.types';
+import { BithmompNft, NftApiParams } from '@3shop/domains/nft/Xrp/Bithomp.types';
 import axios from 'axios';
 
-export function XRPNftReaderClient(): testPlatformClient.NftClient<platforms.XRP> {
+export function XRPNftReaderClient(): testPlatformClient.NftClient<platforms.XRP, BithmompNft[]> {
   return {
     getWalletNfts: async (walletAddress, identifiers) => {
-      console.log("identifier !~!!!", identifiers);
       const params: NftApiParams = {
         owner: walletAddress,
         list: 'nfts',
-        issuer: identifiers.issuer,
-        taxon: identifiers.nftokenTaxon,
+        // issuer: identifiers.issuer,
+        // taxon: identifiers.nftokenTaxon,
       };
       const nfts = await axios
         .get(`https://bithomp.com/api/v2/nfts`, {

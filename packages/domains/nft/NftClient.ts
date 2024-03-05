@@ -1,4 +1,5 @@
-import type { Nft, NftAttribute } from './Nft';
+import type { NftAttribute } from './Nft';
+import type { Nft } from '@3shop/alchemy';
 import { platforms, allIdentifiers, platformFunctionType as platform } from './NftPlatform';
 import { SorcelNft } from './SorcelNft';
 
@@ -8,7 +9,7 @@ export type NftClient = {
 };
 
 export namespace testPlatformClient {
-  export type NftClient<T> = {
-    getWalletNfts(address: string, identifiers: platform<T>['identifiers']): Promise<Nft[]>;
+  export type NftClient<T, K> = {
+    getWalletNfts(address: string, identifiers: platform<T>['identifiers']): Promise<K>;
   };
 }

@@ -1,23 +1,15 @@
-import { AsyncThunk, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { NFT } from '@3shop/domains';
-import { NftService, SorcelNft } from '@3shop/domains';
-import { testPlatformService } from '@3shop/domains';
-import { NftReaderClient, convertObject, objectResolver } from '@3shop/infra';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { NFT, NftService, SorcelNft } from '@3shop/domains';
+import { NftReaderClient, objectResolver } from '@3shop/infra';
 import { XRPNftReaderClient } from '@3shop/infra';
-import { platformFunctionType, platforms } from 'node_modules/@3shop/domains/nft/NftPlatform';
-import { PlatformData } from 'node_modules/@3shop/domains/nft/mocks';
-import { allNames } from '@3shop/domains/nft/NftPlatform';
-import type { GetGates_V2_ByAppIdQuery } from 'node_modules/@3shop/apollo';
-import type { Gate_V2 } from 'node_modules/@3shop/apollo';
-import type { Maybe } from 'node_modules/@3shop/apollo';
+import { PlatformData } from '@3shop/domains/nft/mocks';
+import { XRPidentifers, allNames } from '@3shop/domains/nft/NftPlatform';
+import type { GetGates_V2_ByAppIdQuery } from '../../../packages/apollo';
 import { resolver as EVMResolver } from '@3shop/infra/EVM/resolver';
+import { resolver as XRPResolver } from '@3shop/infra/XRP/resolver';
 import { convertManyObjects } from '@3shop/infra';
+import { BithmompNft } from '@3shop/domains/nft/Xrp/Bithomp.types';
 
-type MaybeUndefined<T> = T | undefined;
-
-namespace testPlatformScrapper {
-  // const WalletScrapper = testPlatformService
-}
 const WalletScrapper = NftService(NftReaderClient());
 
 type Params = {
@@ -31,12 +23,12 @@ const nftPlatforms = new Map<allNames, any>([
   ['XRP', XRPNftReaderClient],
 ]);
 
-const resolvers = new Map<allNames, objectResolver<SorcelNft>>([['EVM', EVMResolver]]);
+const resolvers = new Map<allNames, objectResolver<SorcelNft>>([['EVM', EVMResolver], ['XRP', XRPResolver]]);
 
-type paramsType = Omit<Params, 'contractAdressesToFilter'> & {
-  platformName: allNames;
-  identifiers: PlatformData;
-};
+// type paramsType = Omit<Params, 'contractAdressesToFilter'> & {
+//   platformName: allNames;
+//   identifiers: PlatformData;
+// };
 
 export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) => {
   if (!params.gates) return undefined;
@@ -47,7 +39,12 @@ export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) =
         params.walletAddress,
         params.contractAdressesToFilter,
       );
-      return convertManyObjects<Nft, SorcelNft>(response, resolvers.get(chain)!);
+      return convertManyObjects<NFT, SorcelNft>(response, resolvers.get(chain)!);
+    } case 'XRP': {
+      const queryParams: XRPidentifers = JSON.parse(params.contractAdressesToFilter[0]);
+      const response = await XRPNftReaderClient().getWalletNfts(params.walletAddress, queryParams);
+      const converted = convertManyObjects<BithmompNft, SorcelNft>(response, resolvers.get(chain)!);
+      return converted;
     }
     default:
       return undefined;

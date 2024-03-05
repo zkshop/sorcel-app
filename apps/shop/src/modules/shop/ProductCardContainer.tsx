@@ -110,6 +110,10 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
     userPoapIds,
   );
 
+  useEffect(() => {
+    console.log("!nfts", userNFTs);
+  }, [userNFTs]);
+
   const formatedProduct = formatProductData({
     product,
     productGates: sortedGates,

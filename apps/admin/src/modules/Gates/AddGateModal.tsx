@@ -26,6 +26,7 @@ import { COLLECTION_FIELDS } from './constants';
 import ADD_GATE_SCHEMA from './schemas';
 import { PoapSelector } from './PoapSelector';
 import { useEffect } from 'react';
+import { BithmompNft } from '@3shop/domains/nft/Xrp/Bithomp.types';
 
 type PoapType = {
   type: 'POAP';
@@ -73,13 +74,13 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
       let payload: NftType;
       switch (data.network) {
         case 'XRPLEDGER': {
-          type XRPValues = NftType & { issuer: string; taxon: string };
+          type XRPValues = NftType & Pick<BithmompNft, "issuer" | "nftokenTaxon">;
           const XRPFormValues: XRPValues = data as XRPValues;
-          XRPFormValues.contractAddress = JSON.stringify(XRPFormValues, ['issuer', 'taxon']);
-          const { issuer, taxon, ...rest } = XRPFormValues;
+          XRPFormValues.contractAddress = JSON.stringify(XRPFormValues, ['issuer', 'nftokenTaxon']);
+          const { issuer, nftokenTaxon, ...rest } = XRPFormValues;
           payload = rest;
           issuer;
-          taxon;
+          nftokenTaxon;
           break;
         }
         // Intentional pass-trough
