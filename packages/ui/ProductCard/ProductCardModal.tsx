@@ -15,6 +15,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { usePushClaimsMutation } from '@3shop/apollo';
 import type { FormatedProductData } from '@3shop/types';
+import type { validationResult } from '../../../apps/shop/src/modules';
+import { useValidationResult } from '../../../apps/shop/src/modules';
 
 type ProductCardModalProps = {
   isOpen: boolean;
@@ -26,21 +28,19 @@ type ProductCardModalProps = {
   gate: FormatedProductData['gate'];
   auth?: string;
 };
-// TODO: push claim
+
 const EMAIL_SCHEMA = FormValidation.object().shape({
   email: FormValidation.string().email(),
 });
 
-// function getIdForPushClaim(
-//   matches: FormatedProductData['matches'],
-//   gate: FormatedProductData['gate'],
-// ) {
-//   const currentMatch = matches.filter((match) => match.gate.id === gate?.[0]?.id);
-
-//   if (!currentMatch.length) return;
-
-//   return currentMatch[0].matchingNfts?.[0].tokenId;
-// }
+function getIdForPushClaim(result: readonly validationResult[], gate: FormatedProductData['gate']) {
+  const currentMatch = result.filter((res) => {
+    if (!res.gate) return false;
+    return res.gate.id === gate?.[0]?.id;
+  });
+  if (!currentMatch.length) return;
+  return currentMatch[0].nft.tokenId;
+}
 
 export const ProductCardModal = ({
   isOpen,
@@ -63,6 +63,7 @@ export const ProductCardModal = ({
   });
   const toast = useToast();
   const [pushClaims] = usePushClaimsMutation();
+  const validationResult = useValidationResult();
 
   const onSubmit = async (data: { email: string }) => {
     setLoading(true);
@@ -74,13 +75,13 @@ export const ProductCardModal = ({
 
       if (gate) {
         if (gate?.[0]?.contractAddress) {
-          // TODO: fix matches param missing
-          // const claimToPush = getIdForPushClaim(matches, gate) || auth;
+          // TODO: test pushClaims
+          const claimToPush = getIdForPushClaim(validationResult, gate) || auth;
 
           await pushClaims({
             variables: {
               gate_id: gate?.[0]?.id,
-              claims: [],
+              claims: claimToPush,
             },
           });
         }
