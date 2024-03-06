@@ -6,7 +6,6 @@ import { applyDiscount } from '@3shop/pure/applyDiscount';
 import { useAccount } from '@3shop/wallet';
 import { useAppSelector } from '@3shop/store';
 import { get } from 'lodash';
-import type { Match } from './modules/shop/gateVerifier';
 
 type Product = GetProductsQuery['products'][0];
 
@@ -18,29 +17,29 @@ export type GetProductCardPropsParams = {
   poapImageList: string[];
 };
 
-const getBestDiscount = (matches: Match[]): number => {
-  if (matches.length === 0) return 0;
+// const getBestDiscount = (matches: Match[]): number => {
+//   if (matches.length === 0) return 0;
 
-  const discounts = matches.map((match) => match.gate.discount || 0);
+//   const discounts = matches.map((match) => match.gate.discount || 0);
 
-  return Math.max(...discounts);
-};
+//   return Math.max(...discounts);
+// };
 
-const isExclusiveAccess = (gates: GateFieldsFragment[]): boolean => {
-  if (gates.length === 0) return false;
+// const isExclusiveAccess = (gates: GateFieldsFragment[]): boolean => {
+//   if (gates.length === 0) return false;
 
-  for (const gateItem of gates) {
-    if (!gateItem.exclusive_access) {
-      return false;
-    }
-  }
+//   for (const gateItem of gates) {
+//     if (!gateItem.exclusive_access) {
+//       return false;
+//     }
+//   }
 
-  return true;
-};
+//   return true;
+// };
 
 export const hasAlreadyClaimed = (
   gates: GateFieldsFragment[],
-  address: `0x${string}` | undefined,
+  address: `0x${string}` | undefined | (string | undefined),
   email: string | null,
 ): boolean => {
   if (gates.length === 0) return false;
@@ -63,7 +62,7 @@ export const formatProductData = ({
 
   const { price } = product;
 
-  const isGated = isExclusiveAccess(productGates);
+  // const isGated = isExclusiveAccess(productGates);
 
   const discountToApply = 0;
   const priceReduced = applyDiscount(price, discountToApply || 0);

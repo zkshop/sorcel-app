@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { NFT, NftService, SorcelNft } from '@3shop/domains';
 import { NftReaderClient, objectResolver } from '@3shop/infra';
 import { XRPNftReaderClient } from '@3shop/infra';
-import { PlatformData } from '@3shop/domains/nft/mocks';
 import { XRPidentifers, allNames } from '@3shop/domains/nft/NftPlatform';
 import type { GetGates_V2_ByAppIdQuery } from '../../../packages/apollo';
 import { resolver as EVMResolver } from '@3shop/infra/EVM/resolver';
@@ -41,8 +40,9 @@ export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) =
       );
       return convertManyObjects<NFT, SorcelNft>(response, resolvers.get(chain)!);
     } case 'XRP': {
-      const queryParams: XRPidentifers = JSON.parse(params.contractAdressesToFilter[0]);
-      const response = await XRPNftReaderClient().getWalletNfts(params.walletAddress, queryParams);
+      const queryParams: XRPidentifers[] = [...new Set(params.contractAdressesToFilter)].map(address => JSON.parse(address));
+      const responses = await Promise.all(queryParams.map(queryParam => XRPNftReaderClient().getWalletNfts(params.walletAddress, queryParam)));
+      const response = responses.flat();
       const converted = convertManyObjects<BithmompNft, SorcelNft>(response, resolvers.get(chain)!);
       return converted;
     }

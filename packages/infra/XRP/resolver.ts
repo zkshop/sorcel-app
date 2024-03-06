@@ -5,6 +5,6 @@ import { BithmompNft } from "@3shop/domains/nft/Xrp/Bithomp.types";
 export const resolver: objectResolver<SorcelNft> = {
   tokenId: 'nftokenID',
   name: ['metadata', 'name'],
-  combinedIdentifiers: new ResolveMany<string, BithmompNft>('issuer', 'nftokenTaxon').onResolved((values) => JSON.stringify(values, (_, value) =>
+  combinedIdentifiers: new ResolveMany<SorcelNft['combinedIdentifiers'], BithmompNft>('issuer', 'nftokenTaxon').onResolved((values) => JSON.stringify(values, (_, value) =>
     typeof value === 'number' ? value.toString() : value))
 };

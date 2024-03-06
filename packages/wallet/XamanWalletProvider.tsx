@@ -1,11 +1,15 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { Xumm } from 'xumm';
+import { useEffect, useContext } from 'react';
 import type { XummPostPayloadResponse } from '../../node_modules/xumm-sdk/dist/src/types';
-import { Button, Text, HStack, Modal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spinner } from '@3shop/ui';
+import { HStack, Modal, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Spinner } from '@3shop/ui';
 import { createContext } from 'react';
 import axios from 'axios';
-import { reset } from 'node_modules/@3shop/store/slices/poapImageList';
+
+type auth = {
+  address: string | undefined,
+  isConnected: boolean,
+  isDisconnected: boolean
+};
 
 interface XamanContextType {
   modal: {
@@ -13,11 +17,10 @@ interface XamanContextType {
     close: () => void;
     isOpen: () => boolean;
   },
-  account: string | undefined
+  auth: auth;
 }
 
 export const XamanWalletContext = createContext<XamanContextType | undefined>(undefined);
-const xumm = new Xumm("de7681ce-0e13-492e-807d-3b79f48c2dd9", "0d135bbd-1c83-49e9-8dbc-429ea558e4ca");
 
 type XamanWalletProviderProps = { children: React.ReactNode };
 
@@ -27,7 +30,7 @@ interface state {
   socket: WebSocket | undefined,
   currentStep: "none" | "scanned" | "opened" | "signed" | "completed" | "expired",
   xummPayload: any | undefined,
-  account: string | undefined
+  auth: auth
 }
 
 const stateInitialState: state = {
@@ -36,10 +39,14 @@ const stateInitialState: state = {
   apiResponse: undefined,
   currentStep: "none",
   xummPayload: undefined,
-  account: undefined
+  auth: {
+    // address: "rLLAmbFhd44wWfUbYmLSfd4qeTH4WAtTUo",
+    // address: "rQwKgL7aB37mVugoaKaXMfwfp6wmKrzKC8",
+    address: "ra4JFPKcZUc6TYjt4bQ5e2WMTgjoQXaPHP",
+    isConnected: true,
+    isDisconnected: false
+  }
 }
-
-// console.log("data", data);
 
 export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
   const [state, setState] = React.useState<state>(stateInitialState);
@@ -52,7 +59,7 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
   };
 
   useEffect(() => {
-    if (!state.modalOpen)
+    if (!state.modalOpen || state.auth.isConnected)
       return;
     (async () => {
       try {
@@ -115,10 +122,10 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
       console.log("!payload uuid",);
       await axios.post<any>("http://localhost:3000/api/shop/xumm/payload", { payload_uuid: state.xummPayload['payload_uuidv4'] }).then(res => {
         console.log("final payload", res);
+        setStateByKey('auth', { ...state.auth, address: res.data.response.signer });
       }).catch(e => {
         console.log("!err", e);
       });
-      // console.log("!res payload", res);
     })();
     console.log("!ok payload", state.xummPayload);
   }, [state.xummPayload]);
@@ -155,9 +162,21 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
         close: () => setStateByKey('modalOpen', false),
         isOpen: () => state.modalOpen == true
       },
-      account: undefined
+      auth: {
+        address: state.auth.address,
+        isConnected: ((): boolean => state.auth.address !== undefined)(),
+        isDisconnected: ((): boolean => state.auth.address === undefined)(),
+      },
     }}>
       {children}
     </XamanWalletContext.Provider>
   </>
+}
+
+export const useAccount = () => {
+  const context = useContext(XamanWalletContext);
+  if (context === undefined) {
+    throw new Error('useAccount must be used within a XamanWalletProvider');
+  }
+  return context.auth;
 }

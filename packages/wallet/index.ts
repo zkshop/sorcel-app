@@ -4,4 +4,5 @@ export * from './ConnectWalletButton';
 export * from './WalletProvider';
 export * from './walletClient';
 export * from './XamanWalletProvider';
-export { useAccount } from 'wagmi';
+export { useAccount as useRainbowAccount } from 'wagmi';
+export { useAccount } from './pickWallet';

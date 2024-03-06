@@ -17,20 +17,20 @@ export function NftService(client: BlockchainClient): NftServiceType {
   };
 }
 
-export namespace testPlatformService {
-  export type NftServiceType<T> = {
-    getWalletNfts(
-      walletAddress: string,
-      identifiers: platform<T>['identifiers'],
-    ): Promise<Nft[]>;
-    // getNftAttribute(address: string): Promise<NftAttribute<any>[]>;
-  };
+// export namespace testPlatformService {
+//   export type NftServiceType<T> = {
+//     getWalletNfts(
+//       walletAddress: string,
+//       identifiers: platform<T>['identifiers'],
+//     ): Promise<Nft[]>;
+//     // getNftAttribute(address: string): Promise<NftAttribute<any>[]>;
+//   };
 
-  export function NftService<T>(client: testPlatformClient.NftClient<T>): NftServiceType<T> {
-    return {
-      getWalletNfts: (walletAddress, identifiers) =>
-        client.getWalletNfts(walletAddress, identifiers),
-      // getNftAttribute: (smartContractAdress) => client.getNftAttribute(smartContractAdress),
-    };
-  }
-}
+//   export function NftService<T>(client: testPlatformClient.NftClient<T>): NftServiceType<T> {
+//     return {
+//       getWalletNfts: (walletAddress, identifiers) =>
+//         client.getWalletNfts(walletAddress, identifiers),
+//       // getNftAttribute: (smartContractAdress) => client.getNftAttribute(smartContractAdress),
+//     };
+//   }
+// }

@@ -6,11 +6,12 @@ import axios from 'axios';
 export function XRPNftReaderClient(): testPlatformClient.NftClient<platforms.XRP, BithmompNft[]> {
   return {
     getWalletNfts: async (walletAddress, identifiers) => {
+      console.log("!wallet", walletAddress);
       const params: NftApiParams = {
         owner: walletAddress,
         list: 'nfts',
-        // issuer: identifiers.issuer,
-        // taxon: identifiers.nftokenTaxon,
+        issuer: identifiers.issuer,
+        taxon: identifiers.nftokenTaxon,
       };
       const nfts = await axios
         .get(`https://bithomp.com/api/v2/nfts`, {
@@ -22,6 +23,7 @@ export function XRPNftReaderClient(): testPlatformClient.NftClient<platforms.XRP
         .then(({ data }) => {
           return data.nfts;
         });
+        console.log(`!bithomp response for ${walletAddress}`, nfts);
         return nfts;
       // return nfts.filter(nft => {
       //   return Object.keys(identifiers).every(key => nft.hasOwnProperty(key));

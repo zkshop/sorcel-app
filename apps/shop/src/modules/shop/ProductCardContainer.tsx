@@ -1,24 +1,16 @@
-import { gateVerifier } from './gateVerifier';
 import { formatProductData } from '../../formatProductData';
 import { classnames } from '@3shop/config';
 import { GridItem, ProductCard } from '@3shop/ui';
-import {
-  GateFieldsFragment,
-  Gate_V2,
-  GetProductsQuery,
-  Product,
-  Segment_Type,
-  Segment_Type_Enum,
-} from '@3shop/apollo';
+import type { GateFieldsFragment, Gate_V2, GetProductsQuery } from '@3shop/apollo';
+import { Segment_Type_Enum } from '@3shop/apollo';
 import { useAppSelector } from '@3shop/store';
 import { useEffect } from 'react';
-import { BaseValidator } from './gating/validators/base';
-import { IValidator } from './gating/validator.type';
+import type { BaseValidator } from './gating/validators/base';
+import type { IValidator } from './gating/validator.type';
 import { NFTOwnership } from './gating/validators/nft/ownership';
-import { gateType } from './gating/validator.type';
-import { SorcelNft } from '@3shop/domains';
-import { createContext } from 'react';
-import { validationResult, ValidationResultContext } from './gating/validationResultContext';
+import type { SorcelNft } from '@3shop/domains';
+import type { validationResult } from './gating/validationResultContext';
+import { ValidationResultContext } from './gating/validationResultContext';
 import { POAPOwnership } from './gating/validators/poap/ownership';
 
 type Props = {
@@ -59,7 +51,7 @@ const doValidation = (gates: Gate_V2[], userNFTs: SorcelNft[], userPoapIds: numb
       return acc;
     }
 
-    let current: validatorArray = [];
+    const current: validatorArray = [];
     switch (segmentType) {
       case Segment_Type_Enum.Nft:
         current.push(
@@ -111,8 +103,12 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
   );
 
   useEffect(() => {
-    console.log("!nfts", userNFTs);
+    console.log('!nfts', userNFTs);
   }, [userNFTs]);
+
+  useEffect(() => {
+    console.log(`locked: ${isLocked}`);
+  }, [isLocked]);
 
   const formatedProduct = formatProductData({
     product,
