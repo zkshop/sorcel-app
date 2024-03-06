@@ -16,7 +16,7 @@ type SettingsFormValues = {
 };
 
 type SettingsFormProps = {
-  app: App;
+  app: Omit<App, 'app_wallet_connection_logs' | 'app_wallet_connection_logs_aggregate'>;
 };
 
 const storage = StorageService(ImageStorageClient());
