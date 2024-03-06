@@ -31,16 +31,16 @@ const EMAIL_SCHEMA = FormValidation.object().shape({
   email: FormValidation.string().email(),
 });
 
-function getIdForPushClaim(
-  matches: FormatedProductData['matches'],
-  gate: FormatedProductData['gate'],
-) {
-  const currentMatch = matches.filter((match) => match.gate.id === gate?.[0]?.id);
+// function getIdForPushClaim(
+//   matches: FormatedProductData['matches'],
+//   gate: FormatedProductData['gate'],
+// ) {
+//   const currentMatch = matches.filter((match) => match.gate.id === gate?.[0]?.id);
 
-  if (!currentMatch.length) return;
+//   if (!currentMatch.length) return;
 
-  return currentMatch[0].matchingNfts?.[0].tokenId;
-}
+//   return currentMatch[0].matchingNfts?.[0].tokenId;
+// }
 
 export const ProductCardModal = ({
   isOpen,
@@ -74,12 +74,13 @@ export const ProductCardModal = ({
 
       if (gate) {
         if (gate?.[0]?.contractAddress) {
-          const claimToPush = getIdForPushClaim(matches, gate) || auth;
+          // TODO: fix matches param missing
+          // const claimToPush = getIdForPushClaim(matches, gate) || auth;
 
           await pushClaims({
             variables: {
               gate_id: gate?.[0]?.id,
-              claims: claimToPush,
+              claims: [],
             },
           });
         }
