@@ -132,6 +132,7 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
 
   const handlers = {
     close: () => {
+      //TODO: reset state only if not authenticated
       setState(stateInitialState);
     },
     copyAdress: () => {
