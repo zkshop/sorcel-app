@@ -80,6 +80,27 @@ export const ButtonStyle: ComponentStyleConfig = {
         borderColor: 'bluescales.400',
       },
     },
+    negativeOutlined: {
+      color: 'error.main',
+      border: '2px solid',
+      borderColor: 'error.main',
+      backgroundColor: 'transparent',
+      _hover: {
+        backgroundColor: 'error.hover',
+        borderColor: 'error.hover',
+        color: 'white', // Text color on hover is set to white
+      },
+      _active: {
+        backgroundColor: 'error.pressed',
+        borderColor: 'error.pressed',
+      },
+      _disabled: {
+        backgroundColor: 'bluescales.750!important',
+        pointerEvents: 'none',
+        color: 'bluescales.400',
+        borderColor: 'bluescales.400',
+      },
+    },
   },
 
   defaultProps: {

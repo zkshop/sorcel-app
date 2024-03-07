@@ -1,8 +1,9 @@
 import React from 'react';
 import { useEffect, useContext } from 'react';
 import type { XummPostPayloadResponse } from '../../node_modules/xumm-sdk/dist/src/types';
-import { HStack, Modal, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Spinner } from '@3shop/ui';
+import { HStack, Modal, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Spinner, VStack, Text, Button, CopyIcon, LogoutIcon, useToast } from '@3shop/ui';
 import { createContext } from 'react';
+
 import axios from 'axios';
 
 type auth = {
@@ -15,7 +16,7 @@ interface XamanContextType {
   modal: {
     open: () => void;
     close: () => void;
-    isOpen: () => boolean;
+    isOpen: boolean;
   },
   auth: auth;
 }
@@ -30,7 +31,7 @@ interface state {
   socket: WebSocket | undefined,
   currentStep: "none" | "scanned" | "opened" | "signed" | "completed" | "expired",
   xummPayload: any | undefined,
-  auth: auth
+  auth: Omit<auth, "isConnected" | "isDisconnected">
 }
 
 const stateInitialState: state = {
@@ -42,14 +43,13 @@ const stateInitialState: state = {
   auth: {
     // address: "rLLAmbFhd44wWfUbYmLSfd4qeTH4WAtTUo",
     // address: "rQwKgL7aB37mVugoaKaXMfwfp6wmKrzKC8",
-    address: "ra4JFPKcZUc6TYjt4bQ5e2WMTgjoQXaPHP",
-    isConnected: true,
-    isDisconnected: false
+    address: undefined,
   }
 }
 
 export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
   const [state, setState] = React.useState<state>(stateInitialState);
+  const toast = useToast();
 
   const setStateByKey = <K extends keyof state>(key: K, value: state[K]) => {
     setState((prevState) => ({
@@ -59,7 +59,7 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
   };
 
   useEffect(() => {
-    if (!state.modalOpen || state.auth.isConnected)
+    if (!state.modalOpen || state.auth.address !== undefined)
       return;
     (async () => {
       try {
@@ -134,6 +134,23 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
     close: () => {
       setState(stateInitialState);
     },
+    copyAdress: () => {
+      if (state.auth.address) {
+        navigator.clipboard.writeText(state.auth.address);
+        toast({
+          status: 'success',
+          title: 'Address copied to clipboard',
+        });
+      } else {
+        toast({
+          status: 'error',
+          title: 'Failed to copy address to clipboard',
+        });
+      }
+    },
+    disconnect: () => {
+      setState(stateInitialState);     
+    }
   }
 
   const RenderQrCode = () => {
@@ -142,10 +159,9 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
     return <img src={state.apiResponse.refs.qr_png} alt="xaman-signin-qrcode" />
   }
 
-  return <>
-    <Modal isOpen={state.modalOpen} onClose={handlers.close}>
-      <ModalOverlay />
-      <ModalContent>
+  const RenderModal = () => {
+    const UnAuthenticated = () => {
+      return <>
         <ModalHeader>
           {"Connect your xaman wallet"}
           <ModalCloseButton />
@@ -153,14 +169,49 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
         <HStack>
           <RenderQrCode />
         </HStack>
+      </>
+    }
+
+    const Authenticated = () => {
+      return <>
+        <ModalHeader>
+          <ModalCloseButton />
+        </ModalHeader>
+        <VStack>
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="#F5F5F5">
+            <circle cx="50" cy="50" r="50" fill="#F5F5F5" />
+            <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="black" fontSize="25">{state.auth.address?.substring(0, 3)}</text>
+          </svg>
+          <Text fontWeight="bold">{state.auth.address?.substring(0, 4) + "..." + state.auth.address?.slice(-4)}</Text>
+          <HStack spacing="20px">
+            <Button leftIcon={<CopyIcon />} onClick={handlers.copyAdress}>Copy address</Button>
+            <Button variant={"negativeOutlined"} onClick={handlers.disconnect} leftIcon={<LogoutIcon />}>Disconnect</Button>
+          </HStack>
+        </VStack>
+      </>
+    }
+
+    return <Modal isOpen={state.modalOpen} onClose={handlers.close}>
+      <ModalOverlay />
+      <ModalContent padding="6">
+        {
+          {
+            true: <Authenticated />,
+            false: <UnAuthenticated />
+          }[String(state.auth.address !== undefined)]
+        }
       </ModalContent>
     </Modal>
+  }
+
+  return <>
+    <RenderModal />
     <XamanWalletContext.Provider value={{
       modal: {
         open: () =>
           setStateByKey('modalOpen', true),
         close: () => setStateByKey('modalOpen', false),
-        isOpen: () => state.modalOpen == true
+        isOpen: ((): boolean => state.modalOpen)()
       },
       auth: {
         address: state.auth.address,
