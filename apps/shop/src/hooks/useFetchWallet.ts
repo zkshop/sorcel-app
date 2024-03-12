@@ -9,13 +9,8 @@ import { flatten } from 'lodash';
 import { createWalletConnectionLog } from '../../utils';
 
 const useFetchWallet = () => {
-  // const { isConnected, isDisconnected, address } = useAccount();
   const account = useAccount();
   const { isConnected, isDisconnected, address } = account;
-  useEffect(() => {
-    console.log('!account', account);
-  }, [account]);
-  // const address = "rpbjkoncKiv1LkPWShzZksqYPzKXmUhTW7";
   const { nfts, poap } = useAppSelector((state) => state.user);
   const email = useAppSelector((state) => state.user.auth.email);
   const publicAddress = useAppSelector((state) => state.user.auth.publicAddress);
@@ -51,7 +46,7 @@ const useFetchWallet = () => {
     } else if (email) {
       dispatch(fetchPOAPS(email));
     }
-  }, [publicAddress, address, email, dispatch, gateQuery]);
+  }, [publicAddress, address, email, dispatch, gateQuery, adressQuery]);
 
   useEffect(() => {
     if (isConnected && address) {

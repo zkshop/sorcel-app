@@ -33,9 +33,6 @@ export async function mutate<T extends object>(payload: QueryPayload): Promise<T
     data: JSON.stringify(payload),
   });
 
-  console.log('url', envVars.PUBLIC_HASURA_API_URL);
-  console.log('response', { errors: res.data.errors });
-
   return res.data;
 }
 

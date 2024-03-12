@@ -1,13 +1,20 @@
 import React from 'react';
-import { XamanWalletContext } from './XamanWalletProvider';
+import { XamanWalletContext } from './internal/xaman/XamanWalletProvider';
 import { useContext } from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Button } from '@3shop/ui';
 import { classnames } from '@3shop/config';
-type WalletType = "xaman" | "rainbow";
-const walletUsed: WalletType = "xaman";
+import { XamanContextType } from './internal/xaman/XamanWalletProvider';
+import { envVars } from '@3shop/config';
+import { Network_Enum } from '../apollo';
 
-export const XamanConnectButton = ({ children }: { children: (args: { modal: any }) => React.ReactNode }) => {
+const walletUsed: "xaman" | "rainbow"= (() => {
+  if ([Network_Enum.Ethereum, Network_Enum.Polygon].includes(envVars.NETWORK))
+    return "rainbow";
+  return "xaman";
+})();
+
+export const XamanConnectButton = ({ children }: { children: (args: { modal: XamanContextType['modal'], auth: XamanContextType['auth'] }) => React.ReactNode }) => {
   const context = useContext(XamanWalletContext);
 
   if (!context) {
@@ -15,9 +22,9 @@ export const XamanConnectButton = ({ children }: { children: (args: { modal: any
     return null;
   }
 
-  const { modal } = context;
+  const { modal, auth } = context;
 
-  const renderChildren = children({ modal });
+  const renderChildren = children({ modal, auth });
 
   return <>{renderChildren}</>;
 };
@@ -25,14 +32,23 @@ export const XamanConnectButton = ({ children }: { children: (args: { modal: any
 const Xaman = () => {
   return (
     <XamanConnectButton>
-      {({ modal }) => {
-        return <Button
-          className={classnames.WALLET_CONNECT_BUTTON}
-          onClick={modal.open}
-          type="button"
-        >
-          Connect Wallet
-        </Button>
+      {({ modal, auth }) => {
+        if (auth.isConnected)
+          return <Button
+            className={classnames.WALLET_CONNECT_BUTTON}
+            onClick={modal.open}
+            type="button"
+          >
+            {auth.address?.substring(0, 4) + "..." + auth.address?.slice(-4)}
+          </Button>
+        else
+          return <Button
+            className={classnames.WALLET_CONNECT_BUTTON}
+            onClick={modal.open}
+            type="button"
+          >
+            Connect Wallet
+          </Button>
       }}
     </XamanConnectButton>
   );
@@ -147,6 +163,6 @@ export const ConnectWalletButton = () => {
     {
       "xaman": <Xaman />,
       "rainbow": <RainbowConnectButton />
-    }["xaman"]
+    }[walletUsed]
   }</>)
 }

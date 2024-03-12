@@ -2,7 +2,7 @@ import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import React from 'react';
 import { WagmiConfig } from 'wagmi';
 import { chains, walletConfig } from './walletClient';
-import { XamanWalletProvider } from './XamanWalletProvider';
+import { XamanWalletProvider } from './internal/xaman/XamanWalletProvider';
 
 type WalletProviderProps = { children: React.ReactElement };
 

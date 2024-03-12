@@ -29,6 +29,7 @@ const envVars = {
   SORCEL_PRODUCT_ID: mapWindowAttributeToEnvVar('PRODUCT_ID'),
   WALLET_CONNECT_PROJECT_ID: process.env.WALLET_CONNECT_PROJECT_ID,
   YEARLY_PRO_PLAN_CHECKOUT_LINK: process.env.YEARLY_PRO_PLAN_CHECKOUT_LINK,
+  SECRET_BITHOMP: process.env.SECRET_BITHOMP
 };
 
 export { envVars };

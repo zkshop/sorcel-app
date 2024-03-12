@@ -8,6 +8,7 @@ import { resolver as EVMResolver } from '@3shop/infra/EVM/resolver';
 import { resolver as XRPResolver } from '@3shop/infra/XRP/resolver';
 import { convertManyObjects } from '@3shop/infra';
 import { BithmompNft } from '@3shop/domains/nft/Xrp/Bithomp.types';
+import _ from 'lodash';
 
 const WalletScrapper = NftService(NftReaderClient());
 
@@ -17,17 +18,12 @@ type Params = {
   gates: GetGates_V2_ByAppIdQuery['gates'] | undefined;
 };
 
-const nftPlatforms = new Map<allNames, any>([
-  ['EVM', NftReaderClient],
-  ['XRP', XRPNftReaderClient],
-]);
+// const nftPlatforms = new Map<allNames, any>([
+//   ['EVM', NftReaderClient],
+//   ['XRP', XRPNftReaderClient],
+// ]);
 
 const resolvers = new Map<allNames, objectResolver<SorcelNft>>([['EVM', EVMResolver], ['XRP', XRPResolver]]);
-
-// type paramsType = Omit<Params, 'contractAdressesToFilter'> & {
-//   platformName: allNames;
-//   identifiers: PlatformData;
-// };
 
 export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) => {
   if (!params.gates) return undefined;
@@ -42,8 +38,7 @@ export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) =
     } case 'XRP': {
       const queryParams: XRPidentifers[] = [...new Set(params.contractAdressesToFilter)].map(address => JSON.parse(address));
       const responses = await Promise.all(queryParams.map(queryParam => XRPNftReaderClient().getWalletNfts(params.walletAddress, queryParam)));
-      const response = responses.flat();
-      const converted = convertManyObjects<BithmompNft, SorcelNft>(response, resolvers.get(chain)!);
+      const converted = convertManyObjects<BithmompNft, SorcelNft>(responses.flat(), resolvers.get(chain)!);
       return converted;
     }
     default:
@@ -61,7 +56,7 @@ export const balancesSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchNFTS.fulfilled, (state, action) => {
-      return action.payload;
+      return _.uniqBy(action.payload, 'combinedIdentifiers');
     });
   },
 });

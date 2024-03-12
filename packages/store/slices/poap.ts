@@ -5,10 +5,7 @@ import { getEveryPOAPOfAWallet } from '@3shop/poap';
 
 export const fetchPOAPS = createAsyncThunk(
   'poap/fetch',
-  async (walletAddress: string) => {
-    console.log("#br9");
-    return await getEveryPOAPOfAWallet(walletAddress)
-  },
+  async (walletAddress: string) => await getEveryPOAPOfAWallet(walletAddress)
 );
 
 const initialState: Poap[] = [];
