@@ -48,7 +48,7 @@ const useFetchWallet = () => {
     } else if (email) {
       dispatch(fetchPOAPS(email));
     }
-  }, [publicAddress, address, email, dispatch, gateQuery]);
+  }, [publicAddress, address, email, dispatch, gateQuery, adressQuery]);
 
   useEffect(() => {
     if (isDisconnected) {

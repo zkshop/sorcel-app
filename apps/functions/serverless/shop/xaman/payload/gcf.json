@@ -1,0 +1,37 @@
+{
+  "params": {
+    "useDefaultConfig": true
+  },
+  "gcf": {},
+  "openapi": {
+    "get": {
+      "summary": "Get every POAP URL",
+      "parameters": [
+        {
+          "in": "query",
+          "name": "address",
+          "required": true,
+          "type": "string",
+          "description": "Address of the wallet"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful operation",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "description": "Array of POAP URLs"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Error getting POAP URLs"
+        }
+      }
+    }
+  }
+}
