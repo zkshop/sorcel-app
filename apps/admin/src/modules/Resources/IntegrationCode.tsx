@@ -2,6 +2,8 @@ import { useGetAdminAppQuery } from '@3shop/apollo';
 import { Spinner, Box, Select, Button, Code, CopyIcon, Text, VStack } from '@3shop/ui';
 import { useState } from 'react';
 import { useClipboard } from '@chakra-ui/react';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { irBlack } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 type Network = 'POLYGON' | 'ETHEREUM';
 
@@ -14,7 +16,9 @@ const CodeBlock = ({ code }: { code: string }) => {
         {hasCopied ? 'Copied !' : <CopyIcon />}
       </Button>
       <Code display="block" whiteSpace="pre-wrap" backgroundColor="black" color="white">
-        {code}
+        <SyntaxHighlighter language="html" style={irBlack} wrapLongLines>
+          {code}
+        </SyntaxHighlighter>
       </Code>
     </Box>
   );
@@ -53,6 +57,7 @@ export const IntegrationCode = () => {
               <Select maxW="200px" value={network} onChange={handleChange}>
                 <option value="POLYGON">Polygon</option>
                 <option value="ETHEREUM">Ethereum</option>
+                <option value="XRPLEDGER">XRP Ledger</option>
               </Select>
             </Box>
             <br />
