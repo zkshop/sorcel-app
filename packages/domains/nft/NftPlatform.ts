@@ -1,4 +1,3 @@
-import { Nft } from '@3shop/alchemy';
 import { BithmompNft } from './Xrp/Bithomp.types';
 /**
  * This type represents a platform which is a combination of NFT type and identifiers type.
