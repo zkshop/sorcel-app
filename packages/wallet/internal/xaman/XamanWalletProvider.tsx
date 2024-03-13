@@ -42,7 +42,7 @@ const stateInitialState: state = {
   currentStep: "none",
   xummPayload: undefined,
   auth: {
-    address: "rLLAmbFhd44wWfUbYmLSfd4qeTH4WAtTUo",
+    address: undefined,
   }
 }
 
