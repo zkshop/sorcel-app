@@ -5,6 +5,7 @@ export * from './cookies';
 export * from './delivery-taxes';
 export * from './money-account';
 export * from './nft';
+export * from './nft/sorcelNft';
 export * from './storage';
 export * from './token';
 export * from './api';
