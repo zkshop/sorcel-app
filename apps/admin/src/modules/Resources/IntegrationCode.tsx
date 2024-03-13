@@ -5,7 +5,7 @@ import { useClipboard } from '@chakra-ui/react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { irBlack } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
-type Network = 'POLYGON' | 'ETHEREUM';
+type Network = 'POLYGON' | 'ETHEREUM' | 'XRPLEDGER';
 
 const CodeBlock = ({ code }: { code: string }) => {
   const { hasCopied, onCopy } = useClipboard(code);
