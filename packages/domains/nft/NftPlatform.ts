@@ -1,4 +1,3 @@
-import { Nft } from '@3shop/alchemy';
 import { BithmompNft } from './Xrp/Bithomp.types';
 
 export type platform<identifiersType, apiResponseType = {}> = {
