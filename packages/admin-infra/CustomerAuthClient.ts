@@ -24,6 +24,14 @@ export const CustomerAuthClient = (): AuthAdminClient => ({
 
     return res.data;
   },
+
+  logout: async () => {
+    if (!magicClient) {
+      console.warn('Magic client is undefined');
+      return false;
+    }
+    return await magicClient.user.logout();
+  },
   loginRedirect: async (email) => {
     if (!magicClient) {
       return false;

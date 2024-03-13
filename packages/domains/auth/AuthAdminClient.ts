@@ -3,6 +3,7 @@ export type AuthAdminData = {
 };
 
 export type AuthAdminClient = {
+  logout(): Promise<boolean>;
   login(email: string): Promise<AuthAdminData>;
   loginRedirect(email: string): Promise<boolean>;
   loginWithCredential: (credential: string) => Promise<string | null>;
