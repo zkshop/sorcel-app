@@ -1,4 +1,4 @@
-export { Modal as CustomModal } from './Modal/Modal';
+export { Modal as CustomModal} from './Modal/Modal';
 export { Select as SearchSelect } from 'chakra-react-select';
 export * from './BackButton/BackButton';
 export * from './Banner/Banner';

@@ -1,9 +1,10 @@
 import { useGetAdminAppQuery } from '@3shop/apollo';
 import { Spinner, Box, Select, Button, Code, CopyIcon, Text, VStack } from '@3shop/ui';
-import { useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useClipboard } from '@chakra-ui/react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { irBlack } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import useUserSettings, { Network_standard } from '../../hooks/useUserSettings';
 
 type Network = 'POLYGON' | 'ETHEREUM' | 'XRPLEDGER';
 
@@ -25,8 +26,26 @@ const CodeBlock = ({ code }: { code: string }) => {
 };
 
 export const IntegrationCode = () => {
+  const defaultNetwork = 'POLYGON';
   const { data, loading, error } = useGetAdminAppQuery();
-  const [network, setNetwork] = useState<Network>('POLYGON');
+  const [network, setNetwork] = useState<Network>(defaultNetwork);
+  const [get,, settingsLoading] = useUserSettings();
+
+  useEffect(() => {
+    if (settingsLoading)
+      return;
+    const userSettings = get();
+    if (!userSettings || !userSettings.network)
+      return;
+    if (userSettings.network == Network_standard.EVM)
+      setNetwork(defaultNetwork);
+    else
+      setNetwork('XRPLEDGER');
+  }, [settingsLoading]);
+
+  useEffect(() => {
+    console.log("!change", change);
+  }, [change]);
 
   if (loading) {
     return <Spinner />;

@@ -101,6 +101,38 @@ export const ButtonStyle: ComponentStyleConfig = {
         borderColor: 'bluescales.400',
       },
     },
+    networkSelection: {
+      backgroundColor: 'white',
+      color: 'black',
+      border: '2px solid',
+      _hover: {
+        borderColor: 'purple.200', // Border color on hover is now a lighter purple
+      },
+      _active: {
+        borderColor: 'purple', // Border color when active
+      },
+      _disabled: {
+        backgroundColor: 'bluescales.750!important',
+        pointerEvents: 'none',
+        color: 'bluescales.400',
+        borderColor: 'bluescales.400',
+      },
+    },
+    minimalist: {
+      color: 'current',
+      backgroundColor: 'transparent',
+      width: 'auto', // Width adjusted to fit the text
+      padding: "1em",
+      _hover: {
+        backgroundColor: 'greyscales.100',
+      },
+      _active: {
+        backgroundColor: 'transparent',
+      },
+      _disabled: {
+        color: 'bluescales.400',
+      },
+    },
   },
 
   defaultProps: {
