@@ -81,6 +81,11 @@ export type String_Comparison_Exp = {
 /** app table */
 export type App = {
   __typename?: 'app';
+  /** An array relationship */
+  app_wallet_connection_logs: Array<Wallet_Connection_Log>;
+  /** An aggregate relationship */
+  app_wallet_connection_logs_aggregate: Wallet_Connection_Log_Aggregate;
+  auth?: Maybe<Scalars['String']>;
   background_color?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
@@ -93,6 +98,26 @@ export type App = {
   plan?: Maybe<Plan_Enum>;
   show_brand?: Maybe<Scalars['Boolean']>;
   show_connect_email?: Maybe<Scalars['Boolean']>;
+};
+
+
+/** app table */
+export type AppApp_Wallet_Connection_LogsArgs = {
+  distinct_on?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Wallet_Connection_Log_Order_By>>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
+
+/** app table */
+export type AppApp_Wallet_Connection_Logs_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Wallet_Connection_Log_Order_By>>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
 };
 
 /** aggregated selection of "app" */
@@ -122,6 +147,9 @@ export type App_Bool_Exp = {
   _and?: InputMaybe<Array<App_Bool_Exp>>;
   _not?: InputMaybe<App_Bool_Exp>;
   _or?: InputMaybe<Array<App_Bool_Exp>>;
+  app_wallet_connection_logs?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+  app_wallet_connection_logs_aggregate?: InputMaybe<Wallet_Connection_Log_Aggregate_Bool_Exp>;
+  auth?: InputMaybe<String_Comparison_Exp>;
   background_color?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   deliveryTaxesTableName?: InputMaybe<String_Comparison_Exp>;
@@ -138,12 +166,16 @@ export type App_Bool_Exp = {
 
 /** unique or primary key constraints on table "app" */
 export enum App_Constraint {
+  /** unique or primary key constraint on columns "name" */
+  AppNameKey = 'app_name_key',
   /** unique or primary key constraint on columns "id" */
   AppPkey = 'app_pkey'
 }
 
 /** input type for inserting data into table "app" */
 export type App_Insert_Input = {
+  app_wallet_connection_logs?: InputMaybe<Wallet_Connection_Log_Arr_Rel_Insert_Input>;
+  auth?: InputMaybe<Scalars['String']>;
   background_color?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
@@ -161,6 +193,7 @@ export type App_Insert_Input = {
 /** aggregate max on columns */
 export type App_Max_Fields = {
   __typename?: 'app_max_fields';
+  auth?: Maybe<Scalars['String']>;
   background_color?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
@@ -175,6 +208,7 @@ export type App_Max_Fields = {
 /** aggregate min on columns */
 export type App_Min_Fields = {
   __typename?: 'app_min_fields';
+  auth?: Maybe<Scalars['String']>;
   background_color?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
@@ -211,6 +245,8 @@ export type App_On_Conflict = {
 
 /** Ordering options when selecting data from "app". */
 export type App_Order_By = {
+  app_wallet_connection_logs_aggregate?: InputMaybe<Wallet_Connection_Log_Aggregate_Order_By>;
+  auth?: InputMaybe<Order_By>;
   background_color?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   deliveryTaxesTableName?: InputMaybe<Order_By>;
@@ -232,6 +268,8 @@ export type App_Pk_Columns_Input = {
 
 /** select columns of table "app" */
 export enum App_Select_Column {
+  /** column name */
+  Auth = 'auth',
   /** column name */
   BackgroundColor = 'background_color',
   /** column name */
@@ -260,6 +298,7 @@ export enum App_Select_Column {
 
 /** input type for updating data in table "app" */
 export type App_Set_Input = {
+  auth?: InputMaybe<Scalars['String']>;
   background_color?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
@@ -284,6 +323,7 @@ export type App_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type App_Stream_Cursor_Value_Input = {
+  auth?: InputMaybe<Scalars['String']>;
   background_color?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
@@ -300,6 +340,8 @@ export type App_Stream_Cursor_Value_Input = {
 
 /** update columns of table "app" */
 export enum App_Update_Column {
+  /** column name */
+  Auth = 'auth',
   /** column name */
   BackgroundColor = 'background_color',
   /** column name */
@@ -331,6 +373,140 @@ export type App_Updates = {
   _set?: InputMaybe<App_Set_Input>;
   /** filter the rows which have to be updated */
   where: App_Bool_Exp;
+};
+
+/** columns and relationships of "auth_type" */
+export type Auth_Type = {
+  __typename?: 'auth_type';
+  exact_name?: Maybe<Scalars['String']>;
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "auth_type" */
+export type Auth_Type_Aggregate = {
+  __typename?: 'auth_type_aggregate';
+  aggregate?: Maybe<Auth_Type_Aggregate_Fields>;
+  nodes: Array<Auth_Type>;
+};
+
+/** aggregate fields of "auth_type" */
+export type Auth_Type_Aggregate_Fields = {
+  __typename?: 'auth_type_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Auth_Type_Max_Fields>;
+  min?: Maybe<Auth_Type_Min_Fields>;
+};
+
+
+/** aggregate fields of "auth_type" */
+export type Auth_Type_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Auth_Type_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "auth_type". All fields are combined with a logical 'AND'. */
+export type Auth_Type_Bool_Exp = {
+  _and?: InputMaybe<Array<Auth_Type_Bool_Exp>>;
+  _not?: InputMaybe<Auth_Type_Bool_Exp>;
+  _or?: InputMaybe<Array<Auth_Type_Bool_Exp>>;
+  exact_name?: InputMaybe<String_Comparison_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "auth_type" */
+export enum Auth_Type_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  AuthTypePkey = 'auth_type_pkey'
+}
+
+/** input type for inserting data into table "auth_type" */
+export type Auth_Type_Insert_Input = {
+  exact_name?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Auth_Type_Max_Fields = {
+  __typename?: 'auth_type_max_fields';
+  exact_name?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Auth_Type_Min_Fields = {
+  __typename?: 'auth_type_min_fields';
+  exact_name?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "auth_type" */
+export type Auth_Type_Mutation_Response = {
+  __typename?: 'auth_type_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Auth_Type>;
+};
+
+/** on_conflict condition type for table "auth_type" */
+export type Auth_Type_On_Conflict = {
+  constraint: Auth_Type_Constraint;
+  update_columns?: Array<Auth_Type_Update_Column>;
+  where?: InputMaybe<Auth_Type_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "auth_type". */
+export type Auth_Type_Order_By = {
+  exact_name?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: auth_type */
+export type Auth_Type_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "auth_type" */
+export enum Auth_Type_Select_Column {
+  /** column name */
+  ExactName = 'exact_name',
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "auth_type" */
+export type Auth_Type_Set_Input = {
+  exact_name?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "auth_type" */
+export type Auth_Type_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Auth_Type_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Auth_Type_Stream_Cursor_Value_Input = {
+  exact_name?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "auth_type" */
+export enum Auth_Type_Update_Column {
+  /** column name */
+  ExactName = 'exact_name',
+  /** column name */
+  Value = 'value'
+}
+
+export type Auth_Type_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Auth_Type_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Auth_Type_Bool_Exp;
 };
 
 /** columns and relationships of "chain_type" */
@@ -1857,6 +2033,10 @@ export type Mutation_Root = {
   delete_app?: Maybe<App_Mutation_Response>;
   /** delete single row from the table: "app" */
   delete_app_by_pk?: Maybe<App>;
+  /** delete data from the table: "auth_type" */
+  delete_auth_type?: Maybe<Auth_Type_Mutation_Response>;
+  /** delete single row from the table: "auth_type" */
+  delete_auth_type_by_pk?: Maybe<Auth_Type>;
   /** delete data from the table: "chain_type" */
   delete_chain_type?: Maybe<Chain_Type_Mutation_Response>;
   /** delete single row from the table: "chain_type" */
@@ -1917,10 +2097,18 @@ export type Mutation_Root = {
   delete_utility?: Maybe<Utility_Mutation_Response>;
   /** delete single row from the table: "utility" */
   delete_utility_by_pk?: Maybe<Utility>;
+  /** delete data from the table: "wallet_connection_log" */
+  delete_wallet_connection_log?: Maybe<Wallet_Connection_Log_Mutation_Response>;
+  /** delete single row from the table: "wallet_connection_log" */
+  delete_wallet_connection_log_by_pk?: Maybe<Wallet_Connection_Log>;
   /** insert data into the table: "app" */
   insert_app?: Maybe<App_Mutation_Response>;
   /** insert a single row into the table: "app" */
   insert_app_one?: Maybe<App>;
+  /** insert data into the table: "auth_type" */
+  insert_auth_type?: Maybe<Auth_Type_Mutation_Response>;
+  /** insert a single row into the table: "auth_type" */
+  insert_auth_type_one?: Maybe<Auth_Type>;
   /** insert data into the table: "chain_type" */
   insert_chain_type?: Maybe<Chain_Type_Mutation_Response>;
   /** insert a single row into the table: "chain_type" */
@@ -1981,12 +2169,22 @@ export type Mutation_Root = {
   insert_utility?: Maybe<Utility_Mutation_Response>;
   /** insert a single row into the table: "utility" */
   insert_utility_one?: Maybe<Utility>;
+  /** insert data into the table: "wallet_connection_log" */
+  insert_wallet_connection_log?: Maybe<Wallet_Connection_Log_Mutation_Response>;
+  /** insert a single row into the table: "wallet_connection_log" */
+  insert_wallet_connection_log_one?: Maybe<Wallet_Connection_Log>;
   /** update data of the table: "app" */
   update_app?: Maybe<App_Mutation_Response>;
   /** update single row of the table: "app" */
   update_app_by_pk?: Maybe<App>;
   /** update multiples rows of table: "app" */
   update_app_many?: Maybe<Array<Maybe<App_Mutation_Response>>>;
+  /** update data of the table: "auth_type" */
+  update_auth_type?: Maybe<Auth_Type_Mutation_Response>;
+  /** update single row of the table: "auth_type" */
+  update_auth_type_by_pk?: Maybe<Auth_Type>;
+  /** update multiples rows of table: "auth_type" */
+  update_auth_type_many?: Maybe<Array<Maybe<Auth_Type_Mutation_Response>>>;
   /** update data of the table: "chain_type" */
   update_chain_type?: Maybe<Chain_Type_Mutation_Response>;
   /** update single row of the table: "chain_type" */
@@ -2077,6 +2275,12 @@ export type Mutation_Root = {
   update_utility_by_pk?: Maybe<Utility>;
   /** update multiples rows of table: "utility" */
   update_utility_many?: Maybe<Array<Maybe<Utility_Mutation_Response>>>;
+  /** update data of the table: "wallet_connection_log" */
+  update_wallet_connection_log?: Maybe<Wallet_Connection_Log_Mutation_Response>;
+  /** update single row of the table: "wallet_connection_log" */
+  update_wallet_connection_log_by_pk?: Maybe<Wallet_Connection_Log>;
+  /** update multiples rows of table: "wallet_connection_log" */
+  update_wallet_connection_log_many?: Maybe<Array<Maybe<Wallet_Connection_Log_Mutation_Response>>>;
 };
 
 
@@ -2089,6 +2293,18 @@ export type Mutation_RootDelete_AppArgs = {
 /** mutation root */
 export type Mutation_RootDelete_App_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Auth_TypeArgs = {
+  where: Auth_Type_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Auth_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 
@@ -2273,6 +2489,18 @@ export type Mutation_RootDelete_Utility_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_Wallet_Connection_LogArgs = {
+  where: Wallet_Connection_Log_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Wallet_Connection_Log_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_AppArgs = {
   objects: Array<App_Insert_Input>;
   on_conflict?: InputMaybe<App_On_Conflict>;
@@ -2283,6 +2511,20 @@ export type Mutation_RootInsert_AppArgs = {
 export type Mutation_RootInsert_App_OneArgs = {
   object: App_Insert_Input;
   on_conflict?: InputMaybe<App_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Auth_TypeArgs = {
+  objects: Array<Auth_Type_Insert_Input>;
+  on_conflict?: InputMaybe<Auth_Type_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Auth_Type_OneArgs = {
+  object: Auth_Type_Insert_Input;
+  on_conflict?: InputMaybe<Auth_Type_On_Conflict>;
 };
 
 
@@ -2497,6 +2739,20 @@ export type Mutation_RootInsert_Utility_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Wallet_Connection_LogArgs = {
+  objects: Array<Wallet_Connection_Log_Insert_Input>;
+  on_conflict?: InputMaybe<Wallet_Connection_Log_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Wallet_Connection_Log_OneArgs = {
+  object: Wallet_Connection_Log_Insert_Input;
+  on_conflict?: InputMaybe<Wallet_Connection_Log_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_AppArgs = {
   _set?: InputMaybe<App_Set_Input>;
   where: App_Bool_Exp;
@@ -2513,6 +2769,26 @@ export type Mutation_RootUpdate_App_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_App_ManyArgs = {
   updates: Array<App_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Auth_TypeArgs = {
+  _set?: InputMaybe<Auth_Type_Set_Input>;
+  where: Auth_Type_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Auth_Type_By_PkArgs = {
+  _set?: InputMaybe<Auth_Type_Set_Input>;
+  pk_columns: Auth_Type_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Auth_Type_ManyArgs = {
+  updates: Array<Auth_Type_Updates>;
 };
 
 
@@ -2873,6 +3149,28 @@ export type Mutation_RootUpdate_Utility_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Utility_ManyArgs = {
   updates: Array<Utility_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Wallet_Connection_LogArgs = {
+  _inc?: InputMaybe<Wallet_Connection_Log_Inc_Input>;
+  _set?: InputMaybe<Wallet_Connection_Log_Set_Input>;
+  where: Wallet_Connection_Log_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Wallet_Connection_Log_By_PkArgs = {
+  _inc?: InputMaybe<Wallet_Connection_Log_Inc_Input>;
+  _set?: InputMaybe<Wallet_Connection_Log_Set_Input>;
+  pk_columns: Wallet_Connection_Log_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Wallet_Connection_Log_ManyArgs = {
+  updates: Array<Wallet_Connection_Log_Updates>;
 };
 
 /** columns and relationships of "network" */
@@ -4122,6 +4420,12 @@ export type Query_Root = {
   app_aggregate: App_Aggregate;
   /** fetch data from the table: "app" using primary key columns */
   app_by_pk?: Maybe<App>;
+  /** fetch data from the table: "auth_type" */
+  auth_type: Array<Auth_Type>;
+  /** fetch aggregated fields from the table: "auth_type" */
+  auth_type_aggregate: Auth_Type_Aggregate;
+  /** fetch data from the table: "auth_type" using primary key columns */
+  auth_type_by_pk?: Maybe<Auth_Type>;
   /** fetch data from the table: "chain_type" */
   chain_type: Array<Chain_Type>;
   /** fetch aggregated fields from the table: "chain_type" */
@@ -4212,6 +4516,12 @@ export type Query_Root = {
   utility_aggregate: Utility_Aggregate;
   /** fetch data from the table: "utility" using primary key columns */
   utility_by_pk?: Maybe<Utility>;
+  /** fetch data from the table: "wallet_connection_log" */
+  wallet_connection_log: Array<Wallet_Connection_Log>;
+  /** fetch aggregated fields from the table: "wallet_connection_log" */
+  wallet_connection_log_aggregate: Wallet_Connection_Log_Aggregate;
+  /** fetch data from the table: "wallet_connection_log" using primary key columns */
+  wallet_connection_log_by_pk?: Maybe<Wallet_Connection_Log>;
 };
 
 
@@ -4235,6 +4545,29 @@ export type Query_RootApp_AggregateArgs = {
 
 export type Query_RootApp_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Query_RootAuth_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Type_Order_By>>;
+  where?: InputMaybe<Auth_Type_Bool_Exp>;
+};
+
+
+export type Query_RootAuth_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Type_Order_By>>;
+  where?: InputMaybe<Auth_Type_Bool_Exp>;
+};
+
+
+export type Query_RootAuth_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 
@@ -4580,6 +4913,29 @@ export type Query_RootUtility_AggregateArgs = {
 
 export type Query_RootUtility_By_PkArgs = {
   value: Scalars['String'];
+};
+
+
+export type Query_RootWallet_Connection_LogArgs = {
+  distinct_on?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Wallet_Connection_Log_Order_By>>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
+
+export type Query_RootWallet_Connection_Log_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Wallet_Connection_Log_Order_By>>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
+
+export type Query_RootWallet_Connection_Log_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 /** columns and relationships of "segment" */
@@ -4984,6 +5340,14 @@ export type Subscription_Root = {
   app_by_pk?: Maybe<App>;
   /** fetch data from the table in a streaming manner: "app" */
   app_stream: Array<App>;
+  /** fetch data from the table: "auth_type" */
+  auth_type: Array<Auth_Type>;
+  /** fetch aggregated fields from the table: "auth_type" */
+  auth_type_aggregate: Auth_Type_Aggregate;
+  /** fetch data from the table: "auth_type" using primary key columns */
+  auth_type_by_pk?: Maybe<Auth_Type>;
+  /** fetch data from the table in a streaming manner: "auth_type" */
+  auth_type_stream: Array<Auth_Type>;
   /** fetch data from the table: "chain_type" */
   chain_type: Array<Chain_Type>;
   /** fetch aggregated fields from the table: "chain_type" */
@@ -5104,6 +5468,14 @@ export type Subscription_Root = {
   utility_by_pk?: Maybe<Utility>;
   /** fetch data from the table in a streaming manner: "utility" */
   utility_stream: Array<Utility>;
+  /** fetch data from the table: "wallet_connection_log" */
+  wallet_connection_log: Array<Wallet_Connection_Log>;
+  /** fetch aggregated fields from the table: "wallet_connection_log" */
+  wallet_connection_log_aggregate: Wallet_Connection_Log_Aggregate;
+  /** fetch data from the table: "wallet_connection_log" using primary key columns */
+  wallet_connection_log_by_pk?: Maybe<Wallet_Connection_Log>;
+  /** fetch data from the table in a streaming manner: "wallet_connection_log" */
+  wallet_connection_log_stream: Array<Wallet_Connection_Log>;
 };
 
 
@@ -5134,6 +5506,36 @@ export type Subscription_RootApp_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<App_Stream_Cursor_Input>>;
   where?: InputMaybe<App_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuth_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Type_Order_By>>;
+  where?: InputMaybe<Auth_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuth_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Type_Order_By>>;
+  where?: InputMaybe<Auth_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootAuth_Type_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+export type Subscription_RootAuth_Type_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Auth_Type_Stream_Cursor_Input>>;
+  where?: InputMaybe<Auth_Type_Bool_Exp>;
 };
 
 
@@ -5586,6 +5988,36 @@ export type Subscription_RootUtility_StreamArgs = {
   where?: InputMaybe<Utility_Bool_Exp>;
 };
 
+
+export type Subscription_RootWallet_Connection_LogArgs = {
+  distinct_on?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Wallet_Connection_Log_Order_By>>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
+
+export type Subscription_RootWallet_Connection_Log_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Wallet_Connection_Log_Order_By>>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
+
+export type Subscription_RootWallet_Connection_Log_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootWallet_Connection_Log_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Wallet_Connection_Log_Stream_Cursor_Input>>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['timestamptz']>;
@@ -5894,6 +6326,316 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+/** log date and time uppon wallet connection. stores the address */
+export type Wallet_Connection_Log = {
+  __typename?: 'wallet_connection_log';
+  address: Scalars['String'];
+  app_id: Scalars['uuid'];
+  date: Scalars['timestamptz'];
+  id: Scalars['Int'];
+};
+
+/** aggregated selection of "wallet_connection_log" */
+export type Wallet_Connection_Log_Aggregate = {
+  __typename?: 'wallet_connection_log_aggregate';
+  aggregate?: Maybe<Wallet_Connection_Log_Aggregate_Fields>;
+  nodes: Array<Wallet_Connection_Log>;
+};
+
+export type Wallet_Connection_Log_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Wallet_Connection_Log_Aggregate_Bool_Exp_Count>;
+};
+
+export type Wallet_Connection_Log_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "wallet_connection_log" */
+export type Wallet_Connection_Log_Aggregate_Fields = {
+  __typename?: 'wallet_connection_log_aggregate_fields';
+  avg?: Maybe<Wallet_Connection_Log_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Wallet_Connection_Log_Max_Fields>;
+  min?: Maybe<Wallet_Connection_Log_Min_Fields>;
+  stddev?: Maybe<Wallet_Connection_Log_Stddev_Fields>;
+  stddev_pop?: Maybe<Wallet_Connection_Log_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Wallet_Connection_Log_Stddev_Samp_Fields>;
+  sum?: Maybe<Wallet_Connection_Log_Sum_Fields>;
+  var_pop?: Maybe<Wallet_Connection_Log_Var_Pop_Fields>;
+  var_samp?: Maybe<Wallet_Connection_Log_Var_Samp_Fields>;
+  variance?: Maybe<Wallet_Connection_Log_Variance_Fields>;
+};
+
+
+/** aggregate fields of "wallet_connection_log" */
+export type Wallet_Connection_Log_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "wallet_connection_log" */
+export type Wallet_Connection_Log_Aggregate_Order_By = {
+  avg?: InputMaybe<Wallet_Connection_Log_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Wallet_Connection_Log_Max_Order_By>;
+  min?: InputMaybe<Wallet_Connection_Log_Min_Order_By>;
+  stddev?: InputMaybe<Wallet_Connection_Log_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Wallet_Connection_Log_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Wallet_Connection_Log_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Wallet_Connection_Log_Sum_Order_By>;
+  var_pop?: InputMaybe<Wallet_Connection_Log_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Wallet_Connection_Log_Var_Samp_Order_By>;
+  variance?: InputMaybe<Wallet_Connection_Log_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "wallet_connection_log" */
+export type Wallet_Connection_Log_Arr_Rel_Insert_Input = {
+  data: Array<Wallet_Connection_Log_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Wallet_Connection_Log_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Wallet_Connection_Log_Avg_Fields = {
+  __typename?: 'wallet_connection_log_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "wallet_connection_log" */
+export type Wallet_Connection_Log_Avg_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "wallet_connection_log". All fields are combined with a logical 'AND'. */
+export type Wallet_Connection_Log_Bool_Exp = {
+  _and?: InputMaybe<Array<Wallet_Connection_Log_Bool_Exp>>;
+  _not?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+  _or?: InputMaybe<Array<Wallet_Connection_Log_Bool_Exp>>;
+  address?: InputMaybe<String_Comparison_Exp>;
+  app_id?: InputMaybe<Uuid_Comparison_Exp>;
+  date?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "wallet_connection_log" */
+export enum Wallet_Connection_Log_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  WalletConnectionLogsPkey = 'wallet_connection_logs_pkey'
+}
+
+/** input type for incrementing numeric columns in table "wallet_connection_log" */
+export type Wallet_Connection_Log_Inc_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "wallet_connection_log" */
+export type Wallet_Connection_Log_Insert_Input = {
+  address?: InputMaybe<Scalars['String']>;
+  app_id?: InputMaybe<Scalars['uuid']>;
+  date?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Wallet_Connection_Log_Max_Fields = {
+  __typename?: 'wallet_connection_log_max_fields';
+  address?: Maybe<Scalars['String']>;
+  app_id?: Maybe<Scalars['uuid']>;
+  date?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "wallet_connection_log" */
+export type Wallet_Connection_Log_Max_Order_By = {
+  address?: InputMaybe<Order_By>;
+  app_id?: InputMaybe<Order_By>;
+  date?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Wallet_Connection_Log_Min_Fields = {
+  __typename?: 'wallet_connection_log_min_fields';
+  address?: Maybe<Scalars['String']>;
+  app_id?: Maybe<Scalars['uuid']>;
+  date?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "wallet_connection_log" */
+export type Wallet_Connection_Log_Min_Order_By = {
+  address?: InputMaybe<Order_By>;
+  app_id?: InputMaybe<Order_By>;
+  date?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "wallet_connection_log" */
+export type Wallet_Connection_Log_Mutation_Response = {
+  __typename?: 'wallet_connection_log_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Wallet_Connection_Log>;
+};
+
+/** on_conflict condition type for table "wallet_connection_log" */
+export type Wallet_Connection_Log_On_Conflict = {
+  constraint: Wallet_Connection_Log_Constraint;
+  update_columns?: Array<Wallet_Connection_Log_Update_Column>;
+  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "wallet_connection_log". */
+export type Wallet_Connection_Log_Order_By = {
+  address?: InputMaybe<Order_By>;
+  app_id?: InputMaybe<Order_By>;
+  date?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: wallet_connection_log */
+export type Wallet_Connection_Log_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "wallet_connection_log" */
+export enum Wallet_Connection_Log_Select_Column {
+  /** column name */
+  Address = 'address',
+  /** column name */
+  AppId = 'app_id',
+  /** column name */
+  Date = 'date',
+  /** column name */
+  Id = 'id'
+}
+
+/** input type for updating data in table "wallet_connection_log" */
+export type Wallet_Connection_Log_Set_Input = {
+  address?: InputMaybe<Scalars['String']>;
+  app_id?: InputMaybe<Scalars['uuid']>;
+  date?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Wallet_Connection_Log_Stddev_Fields = {
+  __typename?: 'wallet_connection_log_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "wallet_connection_log" */
+export type Wallet_Connection_Log_Stddev_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Wallet_Connection_Log_Stddev_Pop_Fields = {
+  __typename?: 'wallet_connection_log_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "wallet_connection_log" */
+export type Wallet_Connection_Log_Stddev_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Wallet_Connection_Log_Stddev_Samp_Fields = {
+  __typename?: 'wallet_connection_log_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "wallet_connection_log" */
+export type Wallet_Connection_Log_Stddev_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** Streaming cursor of the table "wallet_connection_log" */
+export type Wallet_Connection_Log_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Wallet_Connection_Log_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Wallet_Connection_Log_Stream_Cursor_Value_Input = {
+  address?: InputMaybe<Scalars['String']>;
+  app_id?: InputMaybe<Scalars['uuid']>;
+  date?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Wallet_Connection_Log_Sum_Fields = {
+  __typename?: 'wallet_connection_log_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "wallet_connection_log" */
+export type Wallet_Connection_Log_Sum_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "wallet_connection_log" */
+export enum Wallet_Connection_Log_Update_Column {
+  /** column name */
+  Address = 'address',
+  /** column name */
+  AppId = 'app_id',
+  /** column name */
+  Date = 'date',
+  /** column name */
+  Id = 'id'
+}
+
+export type Wallet_Connection_Log_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Wallet_Connection_Log_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Wallet_Connection_Log_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Wallet_Connection_Log_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Wallet_Connection_Log_Var_Pop_Fields = {
+  __typename?: 'wallet_connection_log_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "wallet_connection_log" */
+export type Wallet_Connection_Log_Var_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Wallet_Connection_Log_Var_Samp_Fields = {
+  __typename?: 'wallet_connection_log_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "wallet_connection_log" */
+export type Wallet_Connection_Log_Var_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Wallet_Connection_Log_Variance_Fields = {
+  __typename?: 'wallet_connection_log_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "wallet_connection_log" */
+export type Wallet_Connection_Log_Variance_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
 export type GetAppQueryVariables = Exact<{
   appId: Scalars['uuid'];
 }>;
@@ -6006,7 +6748,7 @@ export type GetGates_V2_ByAppIdQueryVariables = Exact<{
 }>;
 
 
-export type GetGates_V2_ByAppIdQuery = { __typename?: 'query_root', gates: Array<{ __typename?: 'gate_v2', product_id: any, name: string, id: any, exclusive_access: boolean, discount?: number | null, claims: any, unique_claim: boolean, segments: Array<{ __typename?: 'segment', type: Segment_Type_Enum, nft_contract_address?: string | null, poap_ids: any, network?: Network_Enum | null, id: any }> }> };
+export type GetGates_V2_ByAppIdQuery = { __typename?: 'query_root', gates: Array<{ __typename?: 'gate_v2', product_id: any, name: string, id: any, exclusive_access: boolean, discount?: number | null, claims: any, chain?: string | null, unique_claim: boolean, segments: Array<{ __typename?: 'segment', type: Segment_Type_Enum, nft_contract_address?: string | null, poap_ids: any, network?: Network_Enum | null, id: any }> }> };
 
 export type PushClaimsMutationVariables = Exact<{
   gate_id: Scalars['uuid'];
@@ -6155,6 +6897,15 @@ export type VoteMutationVariables = Exact<{
 
 export type VoteMutation = { __typename?: 'mutation_root', choice?: { __typename?: 'choice', id: any, count: number } | null, poll?: { __typename?: 'poll', id: any, voters: any } | null };
 
+export type CreateExampleProductsMutationVariables = Exact<{
+  app_id: Scalars['uuid'];
+  image_url: Scalars['String'];
+  image_url_2: Scalars['String'];
+}>;
+
+
+export type CreateExampleProductsMutation = { __typename?: 'mutation_root', insert_product?: { __typename?: 'product_mutation_response', returning: Array<{ __typename?: 'product', app_id: any }> } | null };
+
 export type CreateProductMutationVariables = Exact<{
   appId: Scalars['uuid'];
   price: Scalars['Int'];
@@ -6222,6 +6973,26 @@ export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetUserQuery = { __typename?: 'query_root', user: Array<{ __typename?: 'user', app_id: any, id: any, role: string }> };
+
+export type IsUserQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type IsUserQuery = { __typename?: 'query_root', user_by_pk?: { __typename?: 'user', id: any } | null };
+
+export type CreateWalletConnectionLogMutationVariables = Exact<{
+  app_id: Scalars['uuid'];
+  address: Scalars['String'];
+}>;
+
+
+export type CreateWalletConnectionLogMutation = { __typename?: 'mutation_root', insert_wallet_connection_log_one?: { __typename?: 'wallet_connection_log', id: number, date: any, app_id: any, address: string } | null };
+
+export type GetWalletConnectionLogByAppIdQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetWalletConnectionLogByAppIdQuery = { __typename?: 'query_root', wallet_connection_log: Array<{ __typename?: 'wallet_connection_log', address: string, date: any, id: number }> };
 
 export const GateFieldsFragmentDoc = gql`
     fragment GateFields on gate_v2 {
@@ -6425,6 +7196,7 @@ export const GetGates_V2_ByAppIdDocument = gql`
     exclusive_access
     discount
     claims
+    chain
     unique_claim
     segments {
       type
@@ -6664,6 +7436,17 @@ export const VoteDocument = gql`
   }
 }
     `;
+export const CreateExampleProductsDocument = gql`
+    mutation createExampleProducts($app_id: uuid!, $image_url: String!, $image_url_2: String!) {
+  insert_product(
+    objects: [{app_id: $app_id, type: COMMERCE, price: 0, name: "Bored ape shirt", image: $image_url, description: "Bored ape shirt for bored ape holders !", gate: {data: {chain: "EVM", app_id: $app_id, exclusive_access: true, segments: {data: {network: ETHEREUM, nft_contract_address: "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D", type: NFT}}, name: "Bored ape Gate"}}}, {app_id: $app_id, type: MODAL, price: 0, webhookUrl: "webhook_url_value", name: "Somaverse ticket", image: $image_url_2, description: "Ticket for somaverse expo", gate: {data: {chain: "EVM", app_id: $app_id, exclusive_access: true, segments: {data: {network: ETHEREUM, nft_contract_address: "0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e", type: NFT}}, name: "Doodle Gate"}}}]
+  ) {
+    returning {
+      app_id
+    }
+  }
+}
+    `;
 export const CreateProductDocument = gql`
     mutation CreateProduct($appId: uuid!, $price: Int!, $name: String!, $description: String!, $image: String!) {
   insert_product_one(
@@ -6785,136 +7568,174 @@ export const GetUserDocument = gql`
   }
 }
     `;
+export const IsUserDocument = gql`
+    query IsUser($email: String!) {
+  user_by_pk(email: $email) {
+    id
+  }
+}
+    `;
+export const CreateWalletConnectionLogDocument = gql`
+    mutation CreateWalletConnectionLog($app_id: uuid!, $address: String!) {
+  insert_wallet_connection_log_one(object: {address: $address, app_id: $app_id}) {
+    id
+    date
+    app_id
+    address
+  }
+}
+    `;
+export const GetWalletConnectionLogByAppIdDocument = gql`
+    query getWalletConnectionLogByAppId {
+  wallet_connection_log {
+    address
+    date
+    id
+  }
+}
+    `;
 
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
 
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, variables) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     getApp(variables: GetAppQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAppQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAppQuery>(GetAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getApp', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAppQuery>(GetAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getApp', 'query', variables);
     },
     getPlan(variables: GetPlanQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetPlanQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPlanQuery>(GetPlanDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPlan', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPlanQuery>(GetPlanDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPlan', 'query', variables);
     },
     getAppTheme(variables: GetAppThemeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAppThemeQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAppThemeQuery>(GetAppThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAppTheme', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAppThemeQuery>(GetAppThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAppTheme', 'query', variables);
     },
     getAdminApp(variables?: GetAdminAppQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAdminAppQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminAppQuery>(GetAdminAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAdminApp', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminAppQuery>(GetAdminAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAdminApp', 'query', variables);
     },
     UpdateApp(variables: UpdateAppMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateAppMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateAppMutation>(UpdateAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateApp', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateAppMutation>(UpdateAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateApp', 'mutation', variables);
     },
     updateCustomizationFields(variables: UpdateCustomizationFieldsMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateCustomizationFieldsMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateCustomizationFieldsMutation>(UpdateCustomizationFieldsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateCustomizationFields', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateCustomizationFieldsMutation>(UpdateCustomizationFieldsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateCustomizationFields', 'mutation', variables);
     },
     CreateDeliveryZone(variables?: CreateDeliveryZoneMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateDeliveryZoneMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateDeliveryZoneMutation>(CreateDeliveryZoneDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateDeliveryZone', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateDeliveryZoneMutation>(CreateDeliveryZoneDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateDeliveryZone', 'mutation', variables);
     },
     DeleteDeliveryZone(variables: DeleteDeliveryZoneMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteDeliveryZoneMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteDeliveryZoneMutation>(DeleteDeliveryZoneDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteDeliveryZone', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteDeliveryZoneMutation>(DeleteDeliveryZoneDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteDeliveryZone', 'mutation', variables);
     },
     GetDeliveryZoneByAppId(variables?: GetDeliveryZoneByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetDeliveryZoneByAppIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetDeliveryZoneByAppIdQuery>(GetDeliveryZoneByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetDeliveryZoneByAppId', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetDeliveryZoneByAppIdQuery>(GetDeliveryZoneByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetDeliveryZoneByAppId', 'query', variables);
     },
     GetDeliveryZones(variables?: GetDeliveryZonesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetDeliveryZonesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetDeliveryZonesQuery>(GetDeliveryZonesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetDeliveryZones', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetDeliveryZonesQuery>(GetDeliveryZonesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetDeliveryZones', 'query', variables);
     },
     CreateGateV2(variables?: CreateGateV2MutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateGateV2Mutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateGateV2Mutation>(CreateGateV2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateGateV2', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateGateV2Mutation>(CreateGateV2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateGateV2', 'mutation', variables);
     },
     GetEveryContractAddressByAppId(variables: GetEveryContractAddressByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetEveryContractAddressByAppIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetEveryContractAddressByAppIdQuery>(GetEveryContractAddressByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetEveryContractAddressByAppId', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetEveryContractAddressByAppIdQuery>(GetEveryContractAddressByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetEveryContractAddressByAppId', 'query', variables);
     },
     GetGatesV2ByProductId(variables?: GetGatesV2ByProductIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetGatesV2ByProductIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetGatesV2ByProductIdQuery>(GetGatesV2ByProductIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGatesV2ByProductId', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetGatesV2ByProductIdQuery>(GetGatesV2ByProductIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGatesV2ByProductId', 'query', variables);
     },
     GetGates_V2(variables?: GetGates_V2QueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetGates_V2Query> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetGates_V2Query>(GetGates_V2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGates_V2', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetGates_V2Query>(GetGates_V2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGates_V2', 'query', variables);
     },
     GetGates_V2_ByAppId(variables?: GetGates_V2_ByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetGates_V2_ByAppIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetGates_V2_ByAppIdQuery>(GetGates_V2_ByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGates_V2_ByAppId', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetGates_V2_ByAppIdQuery>(GetGates_V2_ByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGates_V2_ByAppId', 'query', variables);
     },
     PushClaims(variables: PushClaimsMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PushClaimsMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<PushClaimsMutation>(PushClaimsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PushClaims', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<PushClaimsMutation>(PushClaimsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PushClaims', 'mutation', variables);
     },
     DeleteGateV2(variables: DeleteGateV2MutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteGateV2Mutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteGateV2Mutation>(DeleteGateV2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteGateV2', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteGateV2Mutation>(DeleteGateV2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteGateV2', 'mutation', variables);
     },
     CreateGate(variables: CreateGateMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateGateMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateGateMutation>(CreateGateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateGate', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateGateMutation>(CreateGateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateGate', 'mutation', variables);
     },
     DeleteGateFromId(variables: DeleteGateFromIdMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteGateFromIdMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteGateFromIdMutation>(DeleteGateFromIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteGateFromId', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteGateFromIdMutation>(DeleteGateFromIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteGateFromId', 'mutation', variables);
     },
     GetGates(variables?: GetGatesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetGatesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetGatesQuery>(GetGatesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGates', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetGatesQuery>(GetGatesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetGates', 'query', variables);
     },
     GetProductGate(variables?: GetProductGateQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductGateQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductGateQuery>(GetProductGateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProductGate', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductGateQuery>(GetProductGateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProductGate', 'query', variables);
     },
     CreateOrder(variables: CreateOrderMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateOrderMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateOrderMutation>(CreateOrderDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateOrder', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateOrderMutation>(CreateOrderDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateOrder', 'mutation', variables);
     },
     CreateSurveyOrder(variables: CreateSurveyOrderMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateSurveyOrderMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateSurveyOrderMutation>(CreateSurveyOrderDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateSurveyOrder', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateSurveyOrderMutation>(CreateSurveyOrderDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateSurveyOrder', 'mutation', variables);
     },
     GetOrdersByAddress(variables: GetOrdersByAddressQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetOrdersByAddressQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetOrdersByAddressQuery>(GetOrdersByAddressDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetOrdersByAddress', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetOrdersByAddressQuery>(GetOrdersByAddressDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetOrdersByAddress', 'query', variables);
     },
     GetOrders(variables?: GetOrdersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetOrdersQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetOrdersQuery>(GetOrdersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetOrders', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetOrdersQuery>(GetOrdersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetOrders', 'query', variables);
     },
     CreatePoll(variables: CreatePollMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreatePollMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreatePollMutation>(CreatePollDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreatePoll', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreatePollMutation>(CreatePollDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreatePoll', 'mutation', variables);
     },
     DeletePoll(variables: DeletePollMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeletePollMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeletePollMutation>(DeletePollDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeletePoll', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeletePollMutation>(DeletePollDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeletePoll', 'mutation', variables);
     },
     updatePoll(variables: UpdatePollMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdatePollMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdatePollMutation>(UpdatePollDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updatePoll', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdatePollMutation>(UpdatePollDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updatePoll', 'mutation', variables);
     },
     getPollById(variables: GetPollByIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetPollByIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPollByIdQuery>(GetPollByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPollById', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPollByIdQuery>(GetPollByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPollById', 'query', variables);
     },
     GetPolls(variables: GetPollsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetPollsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPollsQuery>(GetPollsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetPolls', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPollsQuery>(GetPollsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetPolls', 'query', variables);
     },
     GetAdminPolls(variables?: GetAdminPollsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAdminPollsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminPollsQuery>(GetAdminPollsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAdminPolls', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminPollsQuery>(GetAdminPollsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAdminPolls', 'query', variables);
     },
     TogglePollCompleted(variables: TogglePollCompletedMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TogglePollCompletedMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<TogglePollCompletedMutation>(TogglePollCompletedDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TogglePollCompleted', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<TogglePollCompletedMutation>(TogglePollCompletedDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TogglePollCompleted', 'mutation', variables);
     },
     Vote(variables: VoteMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<VoteMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<VoteMutation>(VoteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Vote', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<VoteMutation>(VoteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Vote', 'mutation', variables);
+    },
+    createExampleProducts(variables: CreateExampleProductsMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateExampleProductsMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateExampleProductsMutation>(CreateExampleProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createExampleProducts', 'mutation', variables);
     },
     CreateProduct(variables: CreateProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateProductMutation>(CreateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateProduct', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateProductMutation>(CreateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateProduct', 'mutation', variables);
     },
     CreateAdminProduct(variables: CreateAdminProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateAdminProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateAdminProductMutation>(CreateAdminProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateAdminProduct', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateAdminProductMutation>(CreateAdminProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateAdminProduct', 'mutation', variables);
     },
     DeleteProduct(variables?: DeleteProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteProductMutation>(DeleteProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteProduct', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteProductMutation>(DeleteProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteProduct', 'mutation', variables);
     },
     EditProduct(variables: EditProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<EditProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<EditProductMutation>(EditProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EditProduct', 'mutation');
+      return withWrapper((wrappedRequestHeaders) => client.request<EditProductMutation>(EditProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EditProduct', 'mutation', variables);
     },
     GetProductById(variables: GetProductByIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductByIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductByIdQuery>(GetProductByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProductById', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductByIdQuery>(GetProductByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProductById', 'query', variables);
     },
     GetProducts(variables: GetProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductsQuery>(GetProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProducts', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductsQuery>(GetProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProducts', 'query', variables);
     },
     GetAdminProducts(variables?: GetAdminProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAdminProductsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminProductsQuery>(GetAdminProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAdminProducts', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminProductsQuery>(GetAdminProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAdminProducts', 'query', variables);
     },
     GetUser(variables?: GetUserQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUserQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetUserQuery>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetUser', 'query');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetUserQuery>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetUser', 'query', variables);
+    },
+    IsUser(variables: IsUserQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<IsUserQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<IsUserQuery>(IsUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'IsUser', 'query', variables);
+    },
+    CreateWalletConnectionLog(variables: CreateWalletConnectionLogMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateWalletConnectionLogMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateWalletConnectionLogMutation>(CreateWalletConnectionLogDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateWalletConnectionLog', 'mutation', variables);
+    },
+    getWalletConnectionLogByAppId(variables?: GetWalletConnectionLogByAppIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetWalletConnectionLogByAppIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetWalletConnectionLogByAppIdQuery>(GetWalletConnectionLogByAppIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getWalletConnectionLogByAppId', 'query', variables);
     }
   };
 }

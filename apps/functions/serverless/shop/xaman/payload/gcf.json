@@ -4,15 +4,15 @@
   },
   "gcf": {},
   "openapi": {
-    "get": {
-      "summary": "Get every POAP URL",
+    "post": {
+      "summary": "Connect with email",
       "parameters": [
         {
-          "in": "query",
-          "name": "address",
+          "in": "header",
+          "name": "authorization",
           "required": true,
           "type": "string",
-          "description": "Address of the wallet"
+          "description": "Bearer token"
         }
       ],
       "responses": {
@@ -21,15 +21,15 @@
           "schema": {
             "type": "object",
             "properties": {
-              "data": {
-                "type": "array",
-                "description": "Array of POAP URLs"
+              "authenticated": {
+                "type": "boolean",
+                "description": "Whether the user is authenticated or not"
               }
             }
           }
         },
         "500": {
-          "description": "Error getting POAP URLs"
+          "description": "Error during authentication"
         }
       }
     }
