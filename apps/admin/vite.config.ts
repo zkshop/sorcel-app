@@ -6,7 +6,7 @@ import EnvironmentPlugin from 'vite-plugin-environment';
 import Unfonts from 'unplugin-fonts/vite';
 
 const ENV_VARIABLES = {
-  EMAIL_ORDER_TARGET: undefined,
+  EMAIL_ORDER_TARGET: null,
   NETWORK: undefined,
   PAPER_CLIENT_ID: undefined,
   PAPER_KEY_MANAGER_TOKEN: undefined,
