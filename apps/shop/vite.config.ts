@@ -24,6 +24,7 @@ const envVars = {
   SECRET_RUDDERSTACK: undefined,
   SECRET_STRIPE: undefined,
   SECRET_SUPABASE: undefined,
+  SECRET_BITHOMP: undefined,
   SERVERLESS_API_KEY: undefined,
   POSTHOG_KEY: null,
   WALLET_CONNECT_PROJECT_ID: undefined,
