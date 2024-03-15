@@ -72,7 +72,7 @@ export const COLLECTION_FIELDS = {
     },
     taxon: {
       label: 'Taxon',
-      name: 'taxon',
+      name: 'nftokenTaxon',
     },
   },
   poapIds: {
