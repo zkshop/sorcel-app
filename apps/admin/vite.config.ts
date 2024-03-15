@@ -6,8 +6,7 @@ import EnvironmentPlugin from 'vite-plugin-environment';
 import Unfonts from 'unplugin-fonts/vite';
 
 const ENV_VARIABLES = {
-  EMAIL_ORDER_TARGET: null,
-  NETWORK: undefined,
+  NETWORK: null,
   PAPER_CLIENT_ID: undefined,
   PAPER_KEY_MANAGER_TOKEN: undefined,
   PLAYWRIGHT_TEST_BASE_URL: undefined,
