@@ -25,8 +25,8 @@ import { useDispatch } from 'react-redux';
 import { COLLECTION_FIELDS } from './constants';
 import ADD_GATE_SCHEMA from './schemas';
 import { PoapSelector } from './PoapSelector';
-import { useEditProductMutation } from '@3shop/apollo';
 import { useEffect } from 'react';
+import type { BithmompNft } from '@3shop/domains/nft/Xrp/Bithomp.types';
 
 type PoapType = {
   type: 'POAP';
@@ -68,23 +68,32 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
 
   console.error(errors);
   const onSubmit = (data: AddGateModalFormValues) => {
-    console.log('!data', data);
     if (data.type === 'POAP') {
       dispatch(addPoapSegment({ ...data, poapIds: formatPoapSegment(data.poapIds) }));
     } else {
       let payload: NftType;
       switch (data.network) {
-        case 'XRPLEDGER':
-          type XRPValues = NftType & { issuer: string; taxon: string };
-          let XRPFormValues: XRPValues = data as XRPValues;
-          XRPFormValues.contractAddress = `${XRPFormValues.issuer}:${XRPFormValues.taxon}`;
-          const { issuer, taxon, ...rest } = XRPFormValues;
+        case 'XRPLEDGER': {
+          type XRPValues = NftType & Pick<BithmompNft, 'issuer' | 'nftokenTaxon'>;
+          const XRPFormValues: XRPValues = data as XRPValues;
+          XRPFormValues.contractAddress = JSON.stringify(XRPFormValues, ['issuer', 'nftokenTaxon']);
+          const { issuer, nftokenTaxon, ...rest } = XRPFormValues;
           payload = rest;
+          issuer;
+          nftokenTaxon;
           break;
+        }
+        // Intentional pass-trough
+        case 'POLYGON':
+        case 'ETHEREUM': {
+          payload = data;
+          break;
+        }
         default:
           return;
       }
       if (payload) {
+        Object.freeze(payload);
         dispatch(addNftSegment(payload));
         onClose();
       }
@@ -98,7 +107,6 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
 
   const renderFields = (object: { label: string; name: string }) => {
     type RegisterParam = Parameters<typeof register>[0];
-    // console.log('!object', object);
     return (
       <>
         <FormLabel mt={1} mb={1}>
@@ -109,13 +117,11 @@ export const AddGateModal = ({ isOpen, onClose }: AddGateModalProps) => {
     );
   };
 
-  const renderInput = (field: fieldType) => {
-    return (
-      <FormControl>
-        {Object.entries(COLLECTION_FIELDS[field]).map(([key, value]) => renderFields(value))}
-      </FormControl>
-    );
-  };
+  const renderInput = (field: fieldType) => (
+    <FormControl>
+      {Object.entries(COLLECTION_FIELDS[field]).map(([, value]) => renderFields(value))}
+    </FormControl>
+  );
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
