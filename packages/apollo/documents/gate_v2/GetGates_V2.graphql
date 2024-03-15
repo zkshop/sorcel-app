@@ -20,6 +20,7 @@ query GetGates_V2_ByAppId($app_id: uuid) {
     exclusive_access
     discount
     claims
+    chain
     unique_claim
     segments {
       type

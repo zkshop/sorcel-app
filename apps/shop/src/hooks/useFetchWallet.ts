@@ -1,18 +1,16 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@3shop/store';
 import { fetchNFTS, reset } from '@3shop/store/slices/nfts';
 import { fetchPOAPS, reset as resetPoaps } from '@3shop/store/slices/poap';
 import { useAccount } from '@3shop/wallet';
-import {
-  useGetEveryContractAddressByAppIdQuery,
-  useGetGates_V2Query,
-  useGetGates_V2_ByAppIdQuery,
-} from '@3shop/apollo';
-import { envVars } from '@3shop/config';
+import { useGetEveryContractAddressByAppIdQuery, useGetGates_V2_ByAppIdQuery } from '@3shop/apollo';
+import { envVars } from '../envVars';
 import { flatten } from 'lodash';
+import { createWalletConnectionLog } from '../../utils';
 
 const useFetchWallet = () => {
-  const { isConnected, isDisconnected, address } = useAccount();
+  const account = useAccount();
+  const { isConnected, isDisconnected, address } = account;
   const { nfts, poap } = useAppSelector((state) => state.user);
   const email = useAppSelector((state) => state.user.auth.email);
   const publicAddress = useAppSelector((state) => state.user.auth.publicAddress);
@@ -41,7 +39,7 @@ const useFetchWallet = () => {
         fetchNFTS({
           walletAddress: address,
           contractAdressesToFilter,
-          gate: gateQuery?.data?.gates[0]
+          gates: gateQuery?.data?.gates,
         }),
       );
       dispatch(fetchPOAPS(address));
@@ -51,6 +49,12 @@ const useFetchWallet = () => {
   }, [publicAddress, address, email, dispatch, gateQuery, adressQuery]);
 
   useEffect(() => {
+    if (isConnected && address) {
+      (async () => await createWalletConnectionLog(envVars.APP_ID, address))();
+    }
+  }, [isConnected, address, isDisconnected]);
+
+  useEffect(() => {
     if (isDisconnected) {
       dispatch(reset());
       dispatch(resetPoaps());
@@ -58,12 +62,10 @@ const useFetchWallet = () => {
   }, [dispatch, isConnected, isDisconnected]);
 
   useEffect(() => {
-    // const loadingStates = [gateQuery.loading, adressQuery.loading];
-    if (!gateQuery.loading && !adressQuery.loading && (address || email)) {
-      console.log('gates @@', gateQuery);
+    if (!adressQuery.loading && (address || email)) {
       getNfts();
     }
-  }, [address, email, getNfts, gateQuery, adressQuery]);
+  }, [address, email, getNfts, adressQuery]);
 
   return { nfts, poap };
 };
