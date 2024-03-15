@@ -25,9 +25,9 @@ export type FormatedProductData = {
     contractAddress: string;
     network?: Network_Enum | null;
   }>[];
-  matches: {
-    gate: GateFieldsFragment;
-    matchingNfts: NFT[];
-    matchingPoaps: number[];
-  }[];
+//  matches: {
+//     gate: GateFieldsFragment;
+//     matchingNfts: NFT[];
+//     matchingPoaps: number[];
+//   }[];
 };

@@ -2,7 +2,6 @@ import { ProductDetails } from '@3shop/ui';
 
 import { useGetGatesV2ByProductIdQuery } from '@3shop/apollo';
 import { useAppSelector } from '@3shop/store';
-import { gateVerifier } from '../shop/gateVerifier';
 import { useAccount } from '@3shop/wallet';
 import type { ProductDetailsType } from '@/routes/Product';
 import { formatProductData } from '@/formatProductData';
@@ -16,18 +15,14 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
   if (!product) return null;
   const productGates = data?.gate_v2;
 
-  const userNFTs = useAppSelector((state) => state.user.nfts);
-  const userNFTContracts = userNFTs.map(({ contract: { address } }) => address);
   const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
-  const matches = gateVerifier(productGates || [], userNFTs, userPoapIds);
 
   const formatedProducts = formatProductData({
     product,
+    isLocked: false,
     productGates: productGates || [],
     userPoapIds,
-    userNFTContracts,
-    matches,
     poapImageList,
   });
 

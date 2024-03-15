@@ -11,12 +11,12 @@ do
   esac
 done
 
-gcloud functions deploy __FN__ \
+gcloud functions deploy nodejs-http-function \
   --gen2 \
   --runtime=nodejs20 \
   --region=$GCP_REGION \
   --source=. \
-  --entry-point=address \
+  --entry-point=login \
   --trigger-http \
   --memory=256MB \
   --max-instances=83 \
