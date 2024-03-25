@@ -27,6 +27,7 @@
     "@center-inc/react": "^1.1.7",
     "@hookform/resolvers": "^2.9.10",
     "@types/react-dropzone": "^5.1.0",
+    "@types/react-syntax-highlighter": "^15.5.11",
     "@types/url-parse": "^1.4.11",
     "i": "^0.3.7",
     "json-2-csv": "^5.0.1",
@@ -37,6 +38,7 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.37.0",
+    "react-syntax-highlighter": "^15.5.0",
     "url-parse": "^1.5.10",
     "yup": "^0.32.11"
   },
