@@ -6,18 +6,26 @@ import { CustomerAuthClient } from '@3shop/admin-infra';
 import { AuthAdminService } from '@3shop/domains';
 import type { dialog } from '@3shop/ui/Modal/Dialogs';
 import { Dialogs } from '@3shop/ui/Modal/Dialogs';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { networkDialog } from '../modules/Dialog/firstConnection';
 import useUserSettings from '../hooks/useUserSettings';
-import React from 'react';
+import { setUserSettings, userSettingsSelector } from '@3shop/admin-store';
+import { useDispatch } from 'react-redux';
 
 const auth = AuthAdminService(CustomerAuthClient());
 
 export const ProtectedRoutes = () => {
   const { loading, user, email } = useVerifyToken(true);
   const toast = useToastMessage();
-  const [get, , settingsLoading] = useUserSettings();
+  const [get, settingsLoading] = useUserSettings();
+  const { settings } = userSettingsSelector();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userSettings = get();
+    if (userSettings) dispatch(setUserSettings(userSettings));
+  }, [settingsLoading]);
 
   function signOut() {
     (async () => {
@@ -34,11 +42,9 @@ export const ProtectedRoutes = () => {
   }
 
   const firstConnectionDialogs = useMemo<dialog[]>(() => {
-    if (settingsLoading) return [];
-    const userSettings = get();
-    if (userSettings && userSettings.network) return [];
-    return [networkDialog];
-  }, [settingsLoading]);
+    if (!settingsLoading && (!settings || (settings && !settings.network))) return [networkDialog];
+    return [];
+  }, [settings, settingsLoading]);
 
   return (
     <>
