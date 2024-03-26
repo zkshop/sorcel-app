@@ -4,8 +4,13 @@ import { useState } from 'react';
 import { useClipboard } from '@chakra-ui/react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { irBlack } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Network_standard } from '../../hooks/useUserSettings';
+import { useEffect } from 'react';
+import { userSettingsSelector } from '@3shop/admin-store';
 
 type Network = 'POLYGON' | 'ETHEREUM' | 'XRPLEDGER';
+
+const defaultNetwork = 'POLYGON';
 
 const CodeBlock = ({ code }: { code: string; language: string }) => {
   const { hasCopied, onCopy } = useClipboard(code);
@@ -27,6 +32,13 @@ const CodeBlock = ({ code }: { code: string; language: string }) => {
 export const IntegrationCode = () => {
   const { data, loading, error } = useGetAdminAppQuery();
   const [network, setNetwork] = useState<Network>('POLYGON');
+  const { settings } = userSettingsSelector();
+
+  useEffect(() => {
+    if (!settings || !settings.network) return;
+    if (settings.network == Network_standard.EVM) setNetwork(defaultNetwork);
+    else setNetwork('XRPLEDGER');
+  }, [settings]);
 
   if (loading) {
     return <Spinner />;
