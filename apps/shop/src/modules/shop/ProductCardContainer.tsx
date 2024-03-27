@@ -54,6 +54,15 @@ const useValidation = (gates: Gate_V2[], userNFTs: SorcelNft[], userPoapIds: num
     let validatedNfts: validationResult[] = [];
     if (!userNFTs) return;
 
+    // Products without gates are unlocked by default
+    if (!gates.length) {
+      setValidationResult({
+        isLocked: false,
+        validatedNfts: [],
+      });
+      return;
+    }
+
     const validators = gates.reduce<validatorArray[]>((acc, gate) => {
       const segmentType: Segment_Type_Enum | undefined = gate?.segments[0].type;
       if (!segmentType) {
