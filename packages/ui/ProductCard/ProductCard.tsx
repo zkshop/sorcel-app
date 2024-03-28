@@ -72,7 +72,7 @@ export const ProductCard = ({
           to,
         };
   const isDiscount = !!discount;
-
+  console.log('!ProductCard');
   return (
     <StyledProductCard
       className={classnames.PRODUCT_CARD.CONTAINER}
