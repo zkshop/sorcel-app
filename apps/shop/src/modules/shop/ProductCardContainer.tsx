@@ -50,6 +50,8 @@ const useValidation = (gates: Gate_V2[], userNFTs: SorcelNft[], userPoapIds: num
     validatedNfts: [],
   });
 
+  console.log(`[useValidation]: userNfts: `, userNFTs);
+
   useEffect(() => {
     let validatedNfts: validationResult[] = [];
     if (!userNFTs) return;
