@@ -5,12 +5,20 @@ import Cookies from 'js-cookie';
 
 const CUSTOMER_TOKEN_NAME = 'customer-token';
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
+const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) =>
       console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`),
     );
   if (networkError) console.log(`[Network error]: ${networkError}`);
+  try {
+    console.log(`Operation Name: ${operation.operationName}`);
+    console.log(`Variables: ${JSON.stringify(operation.variables)}`);
+    console.log(`Extensions: ${JSON.stringify(operation.extensions)}`);
+    console.log(`Query: ${operation.query.loc && operation.query.loc.source.body}`);
+  } catch (e) {
+    console.warn("errorLink log error");
+  }
 });
 
 const httpLink = new HttpLink({
