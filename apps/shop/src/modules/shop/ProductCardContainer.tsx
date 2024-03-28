@@ -124,6 +124,18 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
     userPoapIds,
   );
 
+  useEffect(() => {
+    console.log('[validatedNfts]: ', validatedNfts);
+  }, [validatedNfts]);
+
+  useEffect(() => {
+    console.log('[isLocked]: ', isLocked);
+  }, [isLocked]);
+
+  useEffect(() => {
+    console.log('[userNfts]: ', userNFTs);
+  }, [userNFTs]);
+
   const formatedProduct = formatProductData({
     product,
     productGates: sortedGates,
