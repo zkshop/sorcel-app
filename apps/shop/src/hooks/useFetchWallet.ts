@@ -15,6 +15,10 @@ const useFetchWallet = () => {
   const email = useAppSelector((state) => state.user.auth.email);
   const publicAddress = useAppSelector((state) => state.user.auth.publicAddress);
 
+  useEffect(() => {
+    console.log('!wallet connected: ', isConnected);
+  }, [isConnected]);
+
   const adressQuery = useGetEveryContractAddressByAppIdQuery({
     variables: { app_id: envVars.APP_ID },
   });
@@ -28,6 +32,7 @@ const useFetchWallet = () => {
   const dispatch = useAppDispatch();
 
   const getNfts = useCallback(async () => {
+    console.log('in getNfts');
     const contractAdressesToFilter = flatten(
       adressQuery.data?.gate_v2.map((gate) =>
         gate.segments.map((segment) => segment.nft_contract_address),
@@ -62,7 +67,9 @@ const useFetchWallet = () => {
   }, [dispatch, isConnected, isDisconnected]);
 
   useEffect(() => {
+    console.log('!checking adress');
     if (!adressQuery.loading && (address || email)) {
+      console.log('calling getNfts');
       getNfts();
     }
   }, [address, email, getNfts, adressQuery]);
