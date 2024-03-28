@@ -28,13 +28,16 @@ const resolvers = new Map<allNames, objectResolver<SorcelNft>>([['EVM', EVMResol
 export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) => {
   console.log("!in fetchNfts");
   if (!params.gates) return undefined;
+  console.log("#br0");
   const chain = params.gates[0].chain;
   switch (chain) {
     case 'EVM': {
+      console.log("#br1");
       const response = await WalletScrapper.getWalletNfts(
         params.walletAddress,
         params.contractAdressesToFilter,
       );
+      console.log("#br2", response);
       return convertManyObjects<NFT, SorcelNft>(response, resolvers.get(chain)!);
     } case 'XRP': {
       const queryParams: XRPidentifers[] = [...new Set(params.contractAdressesToFilter)].map(address => JSON.parse(address));
