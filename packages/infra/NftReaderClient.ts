@@ -23,12 +23,17 @@ const getEveryNftForContract = async (
 export function NftReaderClient(): BlockchainClient {
   const api = createAlchemy();
   return {
-  getWalletNfts: async (walletAddress, contractAddresses) => {
-      const result = await api.nft.getNftsForOwner(walletAddress, {
-        contractAddresses,
-        excludeFilters: [NftFilters.SPAM, NftFilters.AIRDROPS],
-      });
-      return result.ownedNfts as NFT[];
+    getWalletNfts: async (walletAddress, contractAddresses) => {
+      try {
+        const result = await api.nft.getNftsForOwner(walletAddress, {
+          contractAddresses,
+          excludeFilters: [NftFilters.SPAM, NftFilters.AIRDROPS],
+        });
+        return result.ownedNfts as NFT[];
+      } catch (e) {
+        console.error("!getWalletNfts failed", e);
+        return [];
+      }
     },
 
     getNftAttribute: async (smartContractAddress) => {
