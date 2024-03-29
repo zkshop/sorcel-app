@@ -22,6 +22,6 @@ export const createAlchemy = (network?: keyof typeof networks): Alchemy =>
   new Alchemy({
     apiKey: process.env.SECRET_ALCHEMY,
     network: getNetwork(
-      (network || process.env.NETWORK || DEFAULT_NETWORK) as keyof typeof networks,
+      (network || "POLYGON" || DEFAULT_NETWORK) as keyof typeof networks,
     ),
   });
