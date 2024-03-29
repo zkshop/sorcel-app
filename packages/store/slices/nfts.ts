@@ -33,6 +33,7 @@ export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) =
   switch (chain) {
     case 'EVM': {
       console.log("#b2");
+      console.log("!network", process.env.NETWORK);
       try {
         const response = await WalletScrapper.getWalletNfts(
           params.walletAddress,
