@@ -26,7 +26,9 @@ type Params = {
 const resolvers = new Map<allNames, objectResolver<SorcelNft>>([['EVM', EVMResolver], ['XRP', XRPResolver]]);
 
 export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) => {
+  console.log("#b0", params);
   if (!params.gates) return undefined;
+  console.log("#b1", params);
   const chain = params.gates[0].chain;
   switch (chain) {
     case 'EVM': {
@@ -42,6 +44,7 @@ export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) =
       return converted;
     }
     default:
+      console.log("#b2", chain);
       return undefined;
   }
 });
