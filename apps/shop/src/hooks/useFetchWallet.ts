@@ -28,6 +28,7 @@ const useFetchWallet = () => {
   const dispatch = useAppDispatch();
 
   const getNfts = useCallback(async () => {
+    console.log('getNfts network', process.env['NETWORK']);
     const contractAdressesToFilter = flatten(
       adressQuery.data?.gate_v2.map((gate) =>
         gate.segments.map((segment) => segment.nft_contract_address),
