@@ -13,7 +13,6 @@ const walletUsed: "xaman" | "rainbow"= (() => {
     return "rainbow";
   return "xaman";
 })();
-console.log("!network", envVars.NETWORK);
 
 export const XamanConnectButton = ({ children }: { children: (args: { modal: XamanContextType['modal'], auth: XamanContextType['auth'] }) => React.ReactNode }) => {
   const context = useContext(XamanWalletContext);
