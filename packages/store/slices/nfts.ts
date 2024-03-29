@@ -33,12 +33,17 @@ export const fetchNFTS = createAsyncThunk('nfts/fetch', async (params: Params) =
   switch (chain) {
     case 'EVM': {
       console.log("#b2");
-      const response = await WalletScrapper.getWalletNfts(
-        params.walletAddress,
-        params.contractAdressesToFilter,
-      );
-      console.log("#b3", response);
-      return convertManyObjects<NFT, SorcelNft>(response, resolvers.get(chain)!);
+      try {
+        console.log("#b3");
+        const response = await WalletScrapper.getWalletNfts(
+          params.walletAddress,
+          params.contractAdressesToFilter,
+        );
+        return convertManyObjects<NFT, SorcelNft>(response, resolvers.get(chain)!);
+      } catch (e) {
+        console.error("failed to fetch wallet", e);
+        return [];
+      }
     } case 'XRP': {
       const queryParams: XRPidentifers[] = [...new Set(params.contractAdressesToFilter)].map(address => JSON.parse(address));
       const responses = await Promise.all(queryParams.map(queryParam => XRPNftReaderClient().getWalletNfts(params.walletAddress, queryParam)));
