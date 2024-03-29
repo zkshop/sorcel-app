@@ -21,7 +21,7 @@ const getEveryNftForContract = async (
 };
 
 export function NftReaderClient(): BlockchainClient {
-  const api = createAlchemy();
+  const api = createAlchemy("POLYGON");
   return {
   getWalletNfts: async (walletAddress, contractAddresses) => {
       const result = await api.nft.getNftsForOwner(walletAddress, {
