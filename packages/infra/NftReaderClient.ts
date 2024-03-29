@@ -27,7 +27,7 @@ export function NftReaderClient(): BlockchainClient {
       try {
         const result = await api.nft.getNftsForOwner(walletAddress, {
           contractAddresses,
-          excludeFilters: [NftFilters.SPAM, NftFilters.AIRDROPS],
+          // excludeFilters: [NftFilters.SPAM, NftFilters.AIRDROPS],
         });
         return result.ownedNfts as NFT[];
       } catch (e) {
