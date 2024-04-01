@@ -32,4 +32,6 @@ const envVars = {
   SECRET_BITHOMP: process.env.SECRET_BITHOMP
 };
 
+console.log("envVars network", envVars.NETWORK);
+
 export { envVars };
