@@ -76,10 +76,10 @@ export const ProductCardModal = ({
       });
 
       if (gate) {
+        console.log('!gate', gate);
         if (gate?.[0]?.contractAddress) {
           // TODO: test pushClaims
           const claimToPush = getIdForPushClaim(validationResult, gate) || auth;
-          console.log('!gate', gate);
           await pushClaims({
             variables: {
               gate_id: gate?.[0]?.id,
