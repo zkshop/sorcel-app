@@ -40,7 +40,6 @@ const commonConfig = createCommonConfig({ dirname, envVars });
 
 export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
-  console.log('!process', process.env['NETWORK']);
 
   return {
     ...commonConfig,
