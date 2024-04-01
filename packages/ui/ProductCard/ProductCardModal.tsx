@@ -105,15 +105,15 @@ export const ProductCardModal = ({
         isClosable: true,
       });
     } catch (e) {
-      console.error(e);
-      // toast({
-      //   title: 'Error',
-      //   description: 'An error occured. Please try again later.',
-      //   position: 'top-right',
-      //   status: 'error',
-      //   duration: 5000,
-      //   isClosable: true,
-      // });
+      // console.error(e);
+      toast({
+        title: 'Error',
+        description: 'An error occured. Please try again later.',
+        position: 'top-right',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
     } finally {
       setLoading(false);
     }
