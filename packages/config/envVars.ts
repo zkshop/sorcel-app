@@ -31,5 +31,5 @@ const envVars = {
   YEARLY_PRO_PLAN_CHECKOUT_LINK: process.env.YEARLY_PRO_PLAN_CHECKOUT_LINK,
   SECRET_BITHOMP: process.env.SECRET_BITHOMP
 };
-
+console.log('envVars network', envVars.NETWORK);
 export { envVars };
