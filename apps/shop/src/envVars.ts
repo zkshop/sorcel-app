@@ -13,5 +13,5 @@ const envVars = {
   SECRET_BREVO: process.env.SECRET_BREVO,
   NETWORK: mapWindowAttributeToEnvVar('NETWORK'),
 };
-
+console.log('envVars network', envVars.NETWORK);
 export { envVars };

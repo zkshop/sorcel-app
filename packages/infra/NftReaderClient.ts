@@ -1,3 +1,4 @@
+import { envVars } from '@/envVars';
 import type { Alchemy } from '@3shop/alchemy';
 import { NftFilters, createAlchemy } from '@3shop/alchemy';
 import type { NFT, BlockchainClient } from '@3shop/domains/nft';
@@ -21,7 +22,9 @@ const getEveryNftForContract = async (
 };
 
 export function NftReaderClient(): BlockchainClient {
+  console.log("#br0", envVars.NETWORK);
   const api = createAlchemy();
+  console.log("#br1", api, envVars.NETWORK);
   return {
   getWalletNfts: async (walletAddress, contractAddresses) => {
       const result = await api.nft.getNftsForOwner(walletAddress, {
