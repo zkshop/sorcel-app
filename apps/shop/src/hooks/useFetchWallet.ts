@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from '@3shop/store';
 import { fetchNFTS, reset } from '@3shop/store/slices/nfts';
 import { fetchPOAPS, reset as resetPoaps } from '@3shop/store/slices/poap';
 import { useAccount } from '@3shop/wallet';
+import type { Segment } from '@3shop/apollo';
 import { useGetEveryContractAddressByAppIdQuery, useGetGates_V2_ByAppIdQuery } from '@3shop/apollo';
 import { envVars } from '../envVars';
 import { flatten } from 'lodash';
@@ -28,15 +29,22 @@ const useFetchWallet = () => {
   const dispatch = useAppDispatch();
 
   const getNfts = useCallback(async () => {
+    const networks: Segment['network'][] = [];
     const contractAdressesToFilter = flatten(
       adressQuery.data?.gate_v2.map((gate) =>
-        gate.segments.map((segment) => segment.nft_contract_address),
+        gate.segments.map((segment) => {
+          networks.push(segment.network);
+          return segment.nft_contract_address;
+        }),
       ),
     ) as string[];
 
+    console.log('!gate_v2', adressQuery.data?.gate_v2);
+    console.log('!networks', networks);
     if (address) {
       dispatch(
         fetchNFTS({
+          networks,
           walletAddress: address,
           contractAdressesToFilter,
           gates: gateQuery?.data?.gates,
