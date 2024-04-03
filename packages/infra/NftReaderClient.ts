@@ -3,6 +3,7 @@ import type { Alchemy } from '@3shop/alchemy';
 import { NftFilters, createAlchemy } from '@3shop/alchemy';
 import type { NFT, BlockchainClient } from '@3shop/domains/nft';
 import { createAttributeListFromNftMetadata } from '@3shop/pure';
+import { Network_Enum } from 'node_modules/@3shop/apollo';
 
 const getEveryNftForContract = async (
   api: Alchemy,
@@ -21,8 +22,8 @@ const getEveryNftForContract = async (
   return nfts;
 };
 
-export function NftReaderClient(): BlockchainClient {
-  const api = createAlchemy(envVars.NETWORK);
+export function NftReaderClient(network?: Network_Enum): BlockchainClient {
+  const api = createAlchemy(network || envVars.NETWORK);
   return {
   getWalletNfts: async (walletAddress, contractAddresses) => {
       const result = await api.nft.getNftsForOwner(walletAddress, {
