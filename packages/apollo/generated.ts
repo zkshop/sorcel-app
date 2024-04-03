@@ -6536,7 +6536,11 @@ export type GetEveryContractAddressByAppIdQuery = {
   __typename?: 'query_root';
   gate_v2: Array<{
     __typename?: 'gate_v2';
-    segments: Array<{ __typename?: 'segment'; nft_contract_address?: string | null }>;
+    segments: Array<{
+      __typename?: 'segment';
+      nft_contract_address?: string | null;
+      network?: Network_Enum | null;
+    }>;
   }>;
 };
 
@@ -7777,6 +7781,7 @@ export const GetEveryContractAddressByAppIdDocument = gql`
     gate_v2(where: { app_id: { _eq: $app_id } }) {
       segments(where: { type: { _eq: NFT } }) {
         nft_contract_address
+        network
       }
     }
   }
