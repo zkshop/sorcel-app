@@ -2,6 +2,7 @@ query GetEveryContractAddressByAppId($app_id: uuid!) {
   gate_v2(where: {app_id: {_eq: $app_id}}) {
     segments(where: {type: {_eq: NFT}}) {
       nft_contract_address
+      network
     }
   }
 }
