@@ -13,6 +13,7 @@ import { ProductCardModal } from './ProductCardModal';
 import type { FormatedProductData } from '@3shop/types';
 import { useCollection } from '@center-inc/react';
 import { PoapListModal } from './PoapListModal';
+import type { userConnectionStatus } from '@3shop/types';
 
 export type ProductCardProps = {
   id?: string;
@@ -26,7 +27,7 @@ export type ProductCardProps = {
   poapImgList?: { id: string; url: string }[];
   isLocked?: boolean;
   isWithHref?: boolean;
-  isWalletConnected?: boolean;
+  connectionStatus: userConnectionStatus;
   type: Product_Type_Enum;
   webhookUrl?: string;
   description?: string;
@@ -43,9 +44,9 @@ export const ProductCard = ({
   priceReduced,
   collectionName,
   poapImgList,
+  connectionStatus,
   isLocked = false,
   isWithHref = true,
-  isWalletConnected = false,
   type,
   webhookUrl,
   description,
@@ -59,6 +60,12 @@ export const ProductCard = ({
     onOpen: onProductModalOpen,
   } = useDisclosure();
   const to = `product/${id}`;
+  const { connected, canConnectEmail } = connectionStatus;
+
+  const connectionString = ((): string => {
+    if (canConnectEmail) return 'Connect your email or wallet';
+    return 'Connect your wallet';
+  })();
 
   const result = useCollection({
     address: gate?.[0]?.contractAddress || '',
@@ -136,11 +143,7 @@ export const ProductCard = ({
       </Box>
       {isLocked && (
         <LockedLayer
-          text={
-            isWalletConnected
-              ? "You don't have the right digital assets"
-              : 'Connect your email or wallet'
-          }
+          text={connected ? "You don't have the right digital assets" : `${connectionString}`}
           collectionName={collectionName}
         />
       )}
