@@ -12,11 +12,13 @@ import type { SorcelNft } from '@3shop/domains';
 import type { validationResult } from './gating/validationResultContext';
 import { ValidationResultContext } from './gating/validationResultContext';
 import { POAPOwnership } from './gating/validators/poap/ownership';
+import type { userConnectionStatus } from '@3shop/types';
 
 type Props = {
   isWalletConnected: boolean;
   auth?: string;
   product: GetProductsQuery['products'][0];
+  connectionStatus: userConnectionStatus;
 };
 
 type validatorArray = (BaseValidator & IValidator)[];
@@ -111,7 +113,7 @@ const useValidation = (gates: Gate_V2[], userNFTs: SorcelNft[], userPoapIds: num
   return validationResult;
 };
 
-export function ProductCardContainer({ isWalletConnected, auth, product }: Props) {
+export function ProductCardContainer({ connectionStatus, auth, product }: Props) {
   const userNFTs = useAppSelector((state) => state.user.nfts);
   const userPoapIds = useAppSelector((state) => state.user.poap.map((poap) => poap.event.id));
   const poapImageList = useAppSelector((state) => state.poapImageList);
@@ -139,7 +141,7 @@ export function ProductCardContainer({ isWalletConnected, auth, product }: Props
       justifyContent="center"
     >
       <ValidationResultContext.Provider value={validatedNfts}>
-        <ProductCard {...formatedProduct} isWalletConnected={isWalletConnected} auth={auth} />
+        <ProductCard {...formatedProduct} connectionStatus={connectionStatus} auth={auth} />
       </ValidationResultContext.Provider>
     </GridItem>
   );
