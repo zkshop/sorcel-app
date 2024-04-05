@@ -1,0 +1,140 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ChainType {
+  EVM
+  XRP
+}
+
+enum ProductType {
+  COMMERCE
+  MODAL
+}
+
+enum SegmentType {
+  NFT
+  POAP
+}
+
+enum Plan {
+  FREE
+  PRO
+}
+
+enum utility {
+  ECOMMERCE
+  EMAIL_MODAL
+  EXTERNAL_LINK
+}
+
+enum Network {
+  POLYGON
+  ETHEREUM
+  XRPLEDGER
+}
+
+enum Role {
+  CUSTOMER
+}
+
+model App {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  imgUrl String?
+  name String
+  moneyAccountId String?
+  plan Plan
+
+  // 1 to 1 Relation to Customization
+  customization Customization @relation(fields: [customizationId], references: [id])
+  customizationId Int @unique
+
+  // 1 to Many Relation to Gates
+  gates Gate[]
+
+  // 1 to Many Relation to Products
+  products Product[]
+
+  // 1 to 1 Relation to User
+  userId String @unique
+  user User @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id String @id @default(uuid())
+
+  email String
+  role Role @default(CUSTOMER)
+
+  // 1 to 1 Optional Relation to App
+  app App?
+}
+
+model Segment {
+  id String @id @default(uuid())
+
+  type SegmentType
+  poapIds String[]
+  nftContractAdress String?
+  network Network
+
+  // Many to 1 Relation to Gate
+  gateId String
+  gate Gate @relation(fields: [gateId], references: [id])
+}
+
+model Gate {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  name String
+  discount Int?
+  exclusiveAccess Boolean @default(false)
+
+  // Many to 1 Relation to App
+  appId String
+  app App @relation(fields: [appId], references: [id])
+
+  // 1 to Many Relation to Segments
+  segments Segment[]
+}
+
+model Product {
+  id Int @id @default(autoincrement())
+
+  description String
+  image String
+  name String
+  price Int
+  type ProductType
+  webhookUrl String?
+
+  // Many to 1 Relation to App
+  appId String
+  app App @relation(fields: [appId], references: [id])
+}
+
+model Customization {
+  id Int @id @default(autoincrement())
+
+  font String?
+  fontColor String?
+  showBrand Boolean? @default(false)
+  showConnectEmail Boolean? @default(false)
+
+  // 1 to 1 Optional Relation to App
+  app App? @relation
+}
