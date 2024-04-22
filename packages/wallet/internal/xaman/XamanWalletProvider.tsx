@@ -25,6 +25,7 @@ export const XamanWalletContext = createContext<XamanContextType | undefined>(un
 
 interface state {
   modalOpen: boolean,
+  deepLink: boolean,
   apiResponse: XummPostPayloadResponse | undefined,
   currentStep: "none" | "scanned" | "signed" | "expired",
   xummPayload: any | undefined,
@@ -38,6 +39,7 @@ const stepToDescription = new Map<state['currentStep'], string>(
 
 const stateInitialState: state = {
   modalOpen: false,
+  deepLink: false,
   apiResponse: undefined,
   currentStep: "none",
   xummPayload: undefined,
@@ -64,6 +66,10 @@ const useSocketService = <T extends new (url: string) => Partial<WebSocket>>(web
   return socket;
 }
 
+const isMobile = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
 export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
   const [state, setState] = React.useState<state>(stateInitialState);
   const toast = useToast();
@@ -76,11 +82,13 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
   }, []);
 
   useEffect(() => {
-    if (!state.modalOpen || state.auth.address !== undefined)
+    if ((!state.modalOpen && !state.deepLink) || state.auth.address !== undefined)
       return;
     (async () => {
       try {
         const { data } = await httpServerless.post<XummPostPayloadResponse>("api/shop/xaman/signin");
+        if (state.deepLink)
+          window.location.href = `${data.next.always}/deeplink`;
         useSocketService(WebSocket, data.refs.websocket_status, (eventData) => {
           switch (true) {
             // unhandled events
@@ -112,7 +120,7 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
         console.error(e);
       }
     })();
-  }, [state.modalOpen]);
+  }, [state.modalOpen, state.deepLink]);
 
   useEffect(() => {
     (async () => {
@@ -223,8 +231,12 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
     {renderModal}
     <XamanWalletContext.Provider value={{
       modal: {
-        open: () =>
-          setStateByKey('modalOpen', true),
+        open: () => {
+          if (isMobile())
+            setStateByKey('deepLink', true)
+          else
+            setStateByKey('modalOpen', true)
+        },
         close: () => setStateByKey('modalOpen', false),
         isOpen: ((): boolean => state.modalOpen)()
       },
