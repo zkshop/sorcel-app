@@ -232,7 +232,7 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
     <XamanWalletContext.Provider value={{
       modal: {
         open: () => {
-          if (isMobile())
+          if (isMobile() && !state.auth.address)
             setStateByKey('deepLink', true)
           else
             setStateByKey('modalOpen', true)
