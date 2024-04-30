@@ -54,3 +54,4 @@ storybook-static
 
 # parcel
 .parcel-cache
+apps/functions/serverless/.gcf_local
