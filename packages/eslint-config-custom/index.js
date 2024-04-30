@@ -7,6 +7,7 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    "@typescript-eslint/no-namespace": "off",
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/no-explicit-any': 'off',
