@@ -13,6 +13,8 @@ const envVars = {
   SECRET_SUPABASE: process.env.SECRET_SUPABASE,
   PUBLIC_MAGIC_PUBLISHABLE_KEY: process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY,
   NETWORK: process.env.NETWORK,
+  BACKEND_BASEURL: process.env.BACKEND_BASEURL,
+  PORT: process.env.PORT,
 };
 
 const envVariables = z.object({
@@ -28,6 +30,8 @@ const envVariables = z.object({
   SECRET_SUPABASE: z.string(),
   PUBLIC_MAGIC_PUBLISHABLE_KEY: z.string(),
   NETWORK: z.string(),
+  BACKEND_BASEURL: z.string(),
+  PORT: z.string(),
 });
 
 envVariables.parse(process.env);

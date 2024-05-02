@@ -1,0 +1,177 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model app {
+  id                     String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  imgUrl                 String?
+  name                   String
+  deliveryTaxesTableName String?
+  moneyAccountId         String?
+  plan                   String?                 @default("FREE")
+  background_color       String?
+  font_color             String?
+  font                   String?
+  show_brand             Boolean?                @default(false)
+  created_at             DateTime?               @default(now()) @db.Timestamptz(6)
+  show_connect_email     Boolean?                @default(false)
+  plan_app_planToplan    plan?                   @relation("app_planToplan", fields: [plan], references: [value], onDelete: NoAction, onUpdate: NoAction)
+  delivery_zone          delivery_zone[]
+  gate_v2                gate_v2[]
+  order                  order[]
+  poll                   poll[]
+  product                product[]
+  user                   user[]
+  wallet_connection_log  wallet_connection_log[]
+}
+
+model chain_type {
+  value String @id
+}
+
+model choice {
+  value      String
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  poll_id    String   @db.Uuid
+  count      Int      @default(0)
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model delivery_zone {
+  name      String
+  fees      Int
+  id        String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  countries Json   @default(dbgenerated("jsonb_build_array()"))
+  app_id    String @db.Uuid
+  app       app    @relation(fields: [app_id], references: [id], onDelete: Cascade)
+}
+
+model gate {
+  attributes      Json?
+  contractAddress String
+  discount        Int
+  id              String  @id(map: "Gate_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  product_id      String  @db.Uuid
+  name            String?
+  product         product @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+model gate_v2 {
+  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name             String
+  product_id       String   @db.Uuid
+  discount         Int?
+  exclusive_access Boolean  @default(false)
+  app_id           String?  @db.Uuid
+  claims           String[] @default([]) @db.Uuid
+  unique_claim     Boolean  @default(false)
+  chain            String?
+  app              app?     @relation(fields: [app_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  product          product  @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model network {
+  value                            String    @id
+  segment_segment_networkTonetwork segment[] @relation("segment_networkTonetwork")
+}
+
+model order {
+  id         String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  app_id     String       @db.Uuid
+  product_id String       @db.Uuid
+  email      String
+  address    String
+  firstname  String
+  lastname   String
+  status     order_status @default(Pending)
+  app        app          @relation(fields: [app_id], references: [id], onDelete: SetNull, onUpdate: Restrict)
+  product    product      @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+model plan {
+  value              String @id
+  app_app_planToplan app[]  @relation("app_planToplan")
+}
+
+model poll {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  description String
+  voters      Json      @default(dbgenerated("jsonb_build_array()"))
+  gate        String?
+  image       String?
+  created_at  DateTime? @default(now()) @db.Timestamptz(6)
+  completed   Boolean   @default(false)
+  app_id      String?   @db.Uuid
+  app         app?      @relation(fields: [app_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model product {
+  app_id       String       @db.Uuid
+  id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  description  String
+  image        String
+  name         String
+  price        Int
+  type         String       @default("COMMERCE")
+  webhookUrl   String?
+  gate         gate[]
+  gate_v2      gate_v2[]
+  order        order[]
+  app          app          @relation(fields: [app_id], references: [id], onUpdate: Restrict)
+  product_type product_type @relation(fields: [type], references: [value], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model product_type {
+  value   String    @id
+  product product[]
+}
+
+model segment {
+  type                             String
+  poap_ids                         Json         @default(dbgenerated("jsonb_build_array()"))
+  nft_contract_address             String?
+  id                               String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  gate_id                          String?      @db.Uuid
+  network                          String?
+  network_segment_networkTonetwork network?     @relation("segment_networkTonetwork", fields: [network], references: [value], onDelete: NoAction, onUpdate: NoAction)
+  segment_type                     segment_type @relation(fields: [type], references: [value], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model segment_type {
+  value   String    @id
+  segment segment[]
+}
+
+model user {
+  app_id String @db.Uuid
+  role   String
+  id     String @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email  String @id @unique
+  app    app    @relation(fields: [app_id], references: [id], onUpdate: Restrict)
+}
+
+model utility {
+  value String @id
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model wallet_connection_log {
+  id      Int      @id(map: "wallet_connection_logs_pkey") @default(autoincrement())
+  app_id  String   @db.Uuid
+  address String
+  date    DateTime @default(now()) @db.Timestamptz(6)
+  app     app      @relation(fields: [app_id], references: [id], onUpdate: Restrict, map: "wallet_connection_logs_app_id_fkey")
+}
+
+enum order_status {
+  Pending
+  In_Transit @map("In Transit")
+  Delivered
+}

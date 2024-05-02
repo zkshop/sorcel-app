@@ -38,6 +38,7 @@ export const useVerifyToken = (fromAdminRoute = false) => {
 
         if (!fromAdminRoute) navigate(ROUTES_PATH.PROTECTED.INTEGRATIONS);
       } catch (error) {
+        console.log('!err', error);
         if (fromAdminRoute) navigate(ROUTES_PATH.PUBLIC.LOGIN);
       }
     }
