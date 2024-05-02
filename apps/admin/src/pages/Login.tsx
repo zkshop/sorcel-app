@@ -24,7 +24,7 @@ import { CustomerAuthClient } from '@3shop/admin-infra';
 import { Link } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
 import { useState } from 'react';
-import { useIsUserLazyQuery } from '@3shop/apollo';
+import { user as userApi } from '../api/user';
 
 type LoginFormValues = {
   email: string;
@@ -35,6 +35,7 @@ const LOGIN_SCHEMA = FormValidation.object().shape({
 });
 
 const auth = AuthAdminService(CustomerAuthClient());
+const user = new userApi();
 
 export const Login = () => {
   const [isLoginLoading, setIsLoginLoading] = useState(false);
@@ -52,26 +53,18 @@ export const Login = () => {
 
   const {} = useVerifyToken();
 
-  const [isUser] = useIsUserLazyQuery();
   const { error } = useToastMessage();
 
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoginLoading(true);
     try {
-      const { data: isUserData } = await isUser({
-        variables: {
-          email: data.email,
-        },
-      });
-      if (isUserData?.user_by_pk?.id) {
-        await auth.loginRedirect(data.email);
-      } else {
-        error('Invalid Email', 'Please Sign up first');
-      }
-    } catch (e) {
-      console.error(e);
+      await user.exist(data.email);
+      await auth.loginRedirect(data.email);
+    } catch (e: any) {
+      console.log(e);
+      if (e?.response?.status == 404) error('Invalid Email', 'Please Sign up first');
+      else error('Server Error', 'An unexpected error occurred. Please try again later.');
     }
-
     setIsLoginLoading(false);
   };
 
