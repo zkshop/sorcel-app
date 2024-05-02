@@ -35,7 +35,7 @@ const envVariables = z.object({
 });
 
 console.log(process.env.BACKEND_BASEURL);
-envVariables.parse(process.env);
+envVariables.parse(envVars);
 
 declare global {
   namespace NodeJS {
