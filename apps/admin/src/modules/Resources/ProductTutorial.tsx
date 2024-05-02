@@ -2,7 +2,7 @@ import { Header, Text } from '@3shop/ui';
 
 export const ProductTutorial = () => (
   <>
-    <Header title="Product Tutorial" />
+    <Header title="How to create a product?" />
     <Text mb={2} variant="H500">
       Learn how to add products and gate them with NFTs or POAPs
     </Text>

@@ -3,7 +3,7 @@ import { IntegrationCode } from './IntegrationCode';
 
 export const IntegrationTutorial = () => (
   <>
-    <Header title="Integration Tutorial" />
+    <Header title="How to integrate the module?" />
     <Text mb={2} variant="H500">
       See how to integrate web3 into your website
     </Text>
