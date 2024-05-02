@@ -2,15 +2,15 @@ import { Grid, GridItem, SignupSection, useToastMessage } from '@3shop/ui';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormValidation } from '@3shop/validation';
-
-import { httpServerless } from '@3shop/http-serverless';
 import { useState } from 'react';
 import { AuthAdminService } from '@3shop/domains';
 import { CustomerAuthClient } from '@3shop/admin-infra';
 import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
 import { ROUTES_PATH } from '../routes/Routes';
 import { useNavigate } from 'react-router-dom';
+import { sorcelApp as sorcelAppApi } from '../api/sorcel-app';
 import axios from 'axios';
+
 type SignupFormValues = {
   email: string;
 };
@@ -20,6 +20,7 @@ const SIGNUP_SCHEMA = FormValidation.object().shape({
 });
 
 const auth = AuthAdminService(CustomerAuthClient());
+const sorcelApp = new sorcelAppApi();
 
 export const Signup = () => {
   const [loading, setLoading] = useState(false);
@@ -38,10 +39,7 @@ export const Signup = () => {
   const onSubmit = async (data: SignupFormValues) => {
     try {
       setLoading(true);
-      await httpServerless.post('api/create-app', {
-        email: data.email,
-        name: `${data.email}'s app`,
-      });
+      await sorcelApp.create(data.email);
 
       toast.success("Your app is ready! We're setting things up for you.");
 
