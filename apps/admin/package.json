@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc && node -r dotenv/config ../../node_modules/.bin/vite build",
+    "build": "npx prisma generate && tsc && node -r dotenv/config ../../node_modules/.bin/vite build",
     "dev": "node -r dotenv/config ../../node_modules/.bin/vite --port 5173",
     "lint": "eslint \"**/*.ts*\" --fix",
     "playwright:codegen": "playwright codegen http://127.0.0.1:5173/",
