@@ -43,8 +43,10 @@ export const SignupSection = ({
         <Input borderColor="#E5E5E5" placeholder="elon@tesla.com" {...register('email')} />
         <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
       </FormControl>
-      <Button width="full" variant="primary" type="submit" isLoading={loading}>
-        Continue with email
+      <Button width={['100%', 'full']} variant="primary" type="submit" isLoading={loading} p={4}>
+        <Text fontSize={['sm', 'md']} color="white" fontWeight="semibold">
+          Continue with email
+        </Text>
       </Button>
 
       <Divider my="8" width="full" borderColor="greyscales.350" />
@@ -56,6 +58,6 @@ export const SignupSection = ({
         </Link>
       </Text>
     </VStack>
-    <Text variant="small">Sorcel © 2023</Text>
+    <Text variant="small">Sorcel © 2024</Text>
   </VStack>
 );
