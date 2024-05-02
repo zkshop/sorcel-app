@@ -34,7 +34,7 @@ const ENV_VARIABLES = {
   SERVERLESS_API_KEY: undefined,
   BACKEND_BASEURL: '',
   PORT: '',
-  SORCEL_DEV_BACKEND_PORT: process.env.SORCEL_DEV_BACKEND_PORT,
+  SORCEL_DEV_BACKEND_PORT: process.env.SORCEL_DEV_BACKEND_PORT || '',
 };
 
 const dirname = __dirname;
