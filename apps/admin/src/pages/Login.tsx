@@ -104,7 +104,7 @@ export const Login = () => {
               </Box>
             </Text>
           </VStack>
-          <Text variant="small">Sorcel © 2023</Text>
+          <Text variant="small">Sorcel © 2024</Text>
         </VStack>
       </GridItem>
       <GridItem
