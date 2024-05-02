@@ -34,39 +34,7 @@ const envVariables = z.object({
   PORT: z.string(),
 });
 
-console.log('POSTHOG_KEY is defined:', typeof process.env.POSTHOG_KEY !== 'undefined');
-console.log('SECRET_CENTER is defined:', typeof process.env.SECRET_CENTER !== 'undefined');
-console.log(
-  'MONTHLY_PRO_PLAN_CHECKOUT_LINK is defined:',
-  typeof process.env.MONTHLY_PRO_PLAN_CHECKOUT_LINK !== 'undefined',
-);
-console.log(
-  'YEARLY_PRO_PLAN_CHECKOUT_LINK is defined:',
-  typeof process.env.YEARLY_PRO_PLAN_CHECKOUT_LINK !== 'undefined',
-);
-console.log(
-  'PUBLIC_HASURA_API_URL is defined:',
-  typeof process.env.PUBLIC_HASURA_API_URL !== 'undefined',
-);
-console.log('SECRET_HASURA is defined:', typeof process.env.SECRET_HASURA !== 'undefined');
-console.log(
-  'SERVERLESS_API_KEY is defined:',
-  typeof process.env.SERVERLESS_API_KEY !== 'undefined',
-);
-console.log(
-  'PUBLIC_FUNCTIONS_URL is defined:',
-  typeof process.env.PUBLIC_FUNCTIONS_URL !== 'undefined',
-);
-console.log('SECRET_ALCHEMY is defined:', typeof process.env.SECRET_ALCHEMY !== 'undefined');
-console.log('SECRET_SUPABASE is defined:', typeof process.env.SECRET_SUPABASE !== 'undefined');
-console.log(
-  'PUBLIC_MAGIC_PUBLISHABLE_KEY is defined:',
-  typeof process.env.PUBLIC_MAGIC_PUBLISHABLE_KEY !== 'undefined',
-);
-console.log('NETWORK is defined:', typeof process.env.NETWORK !== 'undefined');
-console.log('BACKEND_BASEURL is defined:', typeof process.env.BACKEND_BASEURL !== 'undefined');
-console.log('PORT is defined:', typeof process.env.PORT !== 'undefined');
-
+console.log(process.env.BACKEND_BASEURL);
 envVariables.parse(process.env);
 
 declare global {
