@@ -34,7 +34,6 @@ const envVariables = z.object({
   PORT: z.string(),
 });
 
-console.log(process.env.BACKEND_BASEURL);
 envVariables.parse(envVars);
 
 declare global {
