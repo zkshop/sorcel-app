@@ -61,7 +61,6 @@ export const Login = () => {
       await user.exist(data.email);
       await auth.loginRedirect(data.email);
     } catch (e: any) {
-      console.log(e);
       if (e?.response?.status == 404) error('Invalid Email', 'Please Sign up first');
       else error('Server Error', 'An unexpected error occurred. Please try again later.');
     }
