@@ -5,6 +5,7 @@ import { ROUTES_PATH } from './routes/Routes';
 import type { Nullable } from '@3shop/types';
 import { useTokenValidity } from './context';
 import { httpServerless } from '@3shop/http-serverless';
+import { Base } from './api/base';
 
 type UserData = Nullable<{ email: string; appId: string }>;
 
@@ -44,6 +45,7 @@ export const useVerifyToken = (fromAdminRoute = false) => {
     }
 
     if (!isValid) {
+      Base.token = tokenCookie;
       verifyToken(tokenCookie);
     }
   }, [fromAdminRoute, navigate, tokenCookie]);
