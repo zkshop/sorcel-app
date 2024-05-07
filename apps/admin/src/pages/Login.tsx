@@ -24,7 +24,7 @@ import { CustomerAuthClient } from '@3shop/admin-infra';
 import { Link } from 'react-router-dom';
 import { useVerifyToken } from '../useVerifyToken';
 import { useState } from 'react';
-import { user as userApi } from '../api/user';
+import { user as userApi } from '../api/user/user';
 
 type LoginFormValues = {
   email: string;

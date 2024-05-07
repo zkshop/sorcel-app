@@ -8,7 +8,7 @@ import { CustomerAuthClient } from '@3shop/admin-infra';
 import { useCustomerTokenCookie } from '../useCustomerTokenCookie';
 import { ROUTES_PATH } from '../routes/Routes';
 import { useNavigate } from 'react-router-dom';
-import { sorcelApp as sorcelAppApi } from '../api/sorcel-app';
+import { sorcelApp as sorcelAppApi } from '../api/sorcel-app/sorcel-app';
 import axios from 'axios';
 
 type SignupFormValues = {

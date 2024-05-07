@@ -1,4 +1,4 @@
-import { Base } from './base';
+import { Base } from '../base';
 import type { app } from '@prisma/client';
 
 export class sorcelApp extends Base {
