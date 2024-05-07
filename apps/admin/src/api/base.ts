@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export class Base {
   instance: AxiosInstance;
+  static token: string | undefined;
   static backendBaseUrl: string = (() => {
     if (process.env.BACKEND_BASEURL && process.env.BACKEND_BASEURL)
       return process.env.BACKEND_BASEURL;
@@ -10,8 +11,10 @@ export class Base {
   })();
 
   constructor(private baseUrl: string = Base.backendBaseUrl) {
+    const headers = Base.token ? { Authorization: `Bearer ${Base.token}` } : {};
     this.instance = axios.create({
       baseURL: this.baseUrl,
+      headers: headers,
     });
   }
 
