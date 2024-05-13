@@ -29,6 +29,10 @@ import { StorageService } from '@3shop/domains';
 import { ImageStorageClient } from '@3shop/admin-infra';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES_PATH } from '../../../routes/Routes';
+import { useApi } from '../../../hooks/useApi';
+import { product as productApi } from '../../../api/product/product';
+import { z } from 'zod';
+import { UpdateSchema } from '../../../api/product/schemas/update';
 
 type EditProductFormContainerProps = {
   product: GetProductByIdQuery['product'];
@@ -81,6 +85,7 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
     },
   });
   const [editProduct, { loading: isEditLoading }] = useEditProductMutation();
+  const [ready, productInstance] = useApi(() => new productApi());
 
   if (!product) return null;
   const deleteProductOnClick = async () => {
@@ -123,13 +128,18 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
         setStorageActionLoading(false);
         Object.assign(variables, { image: uploadUrl });
       }
-
-      editProduct({
-        variables,
-        onCompleted: () => toast(getEditProductSuccessMessage(data.name)),
-        onError: () => toast(ERROR_MESSAGE),
-      });
+      const id = variables.id;
+      delete variables.id;
+      await productInstance?.update(id, variables as z.infer<typeof UpdateSchema>);
+      navigate(ROUTES_PATH.PROTECTED.PRODUCT);
+      toast(getEditProductSuccessMessage(data.name));
+      // editProduct({
+      //   variables,
+      //   onCompleted: () => toast(getEditProductSuccessMessage(data.name)),
+      //   onError: () => toast(ERROR_MESSAGE),
+      // });
     } catch (e) {
+      toast(ERROR_MESSAGE);
       console.error(e);
     } finally {
       setStorageActionLoading(false);

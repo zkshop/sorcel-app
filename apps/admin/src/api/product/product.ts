@@ -2,6 +2,7 @@ import { Base } from '../base';
 import type { z } from 'zod';
 import type { CreateSchema } from './schemas/create';
 import type { product as productType } from '@prisma/client';
+import { UpdateSchema } from './schemas/update';
 
 export class product extends Base {
   constructor(baseUrl?: string) {
@@ -11,5 +12,9 @@ export class product extends Base {
 
   async create(data: z.infer<typeof CreateSchema>) {
     return await this.instance.post<Partial<productType>>('/create', data);
+  }
+
+  async update(id: string, data: z.infer<typeof UpdateSchema>) {
+    return await this.instance.post<product>(`/update/${id}`, data);
   }
 }
