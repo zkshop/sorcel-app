@@ -3,7 +3,16 @@ import React, { useEffect, createContext } from "react";
 import { io } from "socket.io-client";
 import { QRCodeSVG } from 'qrcode.react';
 import { LoginChallenge, HeirloomSdk } from "./HeirloomSdk";
-import {decode} from 'jsonwebtoken';
+
+function decodeJWT(token) {
+  const base64Url = token.split('.')[1]; // Get the payload part
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Convert base64url to base64
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  return JSON.parse(jsonPayload);
+}
 
 interface state {
   modalOpen: boolean,
@@ -26,10 +35,9 @@ export interface HeirloomDidContextType {
 export const HeirloomDidContext = createContext<HeirloomDidContextType | undefined>(undefined);
 export interface HeirloomDidProviderProps { children: React.ReactNode };
 
-
 export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
   const [state, setState] = React.useState<state>(stateInitialState);
-  const apiKey = '5WjB5iaTvz2nUg8Qwsg3Q81tCWnN7jQmL9LvpSRddTzX';
+  const apiKey = '2uiZgj7iouf9nACd5ReHJ94pViqSVF8JonoYeTiNjTVJ';
   const sdk = new HeirloomSdk(apiKey);
 
   const setStateByKey = React.useCallback(<K extends keyof state>(key: K, value: state[K]) => {
@@ -70,9 +78,9 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
       console.log('Received message:', message);
       if (!message || !message['authToken']) {
 
-      } else if (decode) {
-        const decoded = decode(message.authToken);
-        // console.log("!decoded", decoded);
+      } else  {
+        const decoded = decodeJWT(message.authToken);
+        console.log("!decoded", decoded);
       }
 
       // Emit acknowledgement of receipt back to the server
