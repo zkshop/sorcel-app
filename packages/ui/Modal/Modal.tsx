@@ -5,10 +5,13 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  ModalProps as ChakraModalProps
 } from '@chakra-ui/react';
 import React from 'react';
 
-type ModalProps = {
+export type { ChakraModalProps };
+
+export type ModalProps = {
   title: string;
   body: React.ReactNode;
   footer?: React.ReactNode;
