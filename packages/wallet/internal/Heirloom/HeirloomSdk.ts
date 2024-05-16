@@ -1,5 +1,5 @@
 import axios from "axios";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 
 export interface LoginChallenge {
   loginChallenge: string; // The raw challenge JWT value
@@ -78,10 +78,22 @@ export class HeirloomSdk {
     return challengeResult;
   }
 
+  /**
+   * Initiates a quick login process using a WebSocket connection.
+   * This method handles the entire flow of fetching a login challenge,
+   * displaying a QR code, and managing WebSocket events for login completion or errors.
+   * 
+   * @param {Function} onQrCodeReady - Callback function to handle the QR code URL and raw challenge data.
+   * @param {Function} onLoggedIn - Callback function to handle successful login, providing DID and decoded JWT.
+   * @param {Function} onSocketError - Callback function to handle any WebSocket errors.
+   * @param {Function} socketInstance - Optional callback to handle the instance of the connected WebSocket.
+   * @returns {Promise<Socket>} Returns a promise that resolves to the WebSocket instance used for the connection.
+   */
   async quickLogin(
     onQrCodeReady: (url: string, raw: LoginChallenge) => void,
     onLoggedIn: (did: string, data?: DecodedJWT, raw?: { authToken: string }) => void,
-    onSocketError: (error: any) => void
+    onSocketError: (error: any) => void,
+    socketInstance?: (instance: Socket) => void
   ) {
     try {
       const data = await this.challenges();
@@ -92,38 +104,35 @@ export class HeirloomSdk {
       const apiKey = this.apiKey;
       const jwtChallenge = data.loginChallenge;
       const apiBaseUrl = 'wss://api.heirloom.io';
-      console.log("!jwt", jwtChallenge);
       const socket = io(apiBaseUrl, {
         query: { apiKey, jwtChallenge },
       });
+  
+      if (socketInstance) {
+        socketInstance(socket);
+      }
 
       const topic = `tokens:${apiKey}:${jwtChallenge}`;
 
       socket.on('connect', () => {
-        console.log(socket);
-        console.log('Connected to the server');
+        // Intentional blank
+        console.log("!connected")
       });
 
       socket.on('connect_error', (error) => {
         onSocketError(error);
-        console.error('Connection error:', error);
       });
 
       socket.on('error', (errorMessage) => {
         onSocketError(errorMessage);
-        console.error('Error from server:', errorMessage);
       });
-      //   {
-      //     "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJodHRwczovL2FwaS5oZWlybG9vbS5pby9hdXRoIiwiYXVkaWVuY2UiOiJodHRwczovL2ZvcnR5LXdvcmRzLXRpZS5sb2NhLmx0Iiwic3ViamVjdCI6ImRpZDpoZWlybG9vbS1wb2x5Z29uOjM2NTY1ODU5LUMyQjAtNDgxMC05QkQxLUYzOUVBRDY5MzY0MyIsImlhdCI6MTcxNTY4OTcxNywiZXhwIjoxNzIwODczNzE3fQ.63N_qpL56xHCHnMR7-YcQLBfCTs_Rbt57OSUOy9gfbk"
-      // }
+    
       socket.on(topic, (message: Partial<{ authToken: string }>) => {
-        console.log('Received message:', message);
         if (!message || !message['authToken']) {
           throw new HeirloomSdkException("Invalid message received, expected authToken");
         } else {
           const decoded: DecodedJWT = decodeJWT(message.authToken);
           onLoggedIn(decoded.subject, decoded, { authToken: message.authToken })
-          console.log("!decoded", decoded);
         }
 
         // Emit acknowledgement of receipt back to the server
@@ -131,7 +140,7 @@ export class HeirloomSdk {
       });
 
       socket.on('disconnect', () => {
-        console.log('Disconnected from the server');
+        console.log("!disconnected")
       });
       return socket;
     } catch (error) {
