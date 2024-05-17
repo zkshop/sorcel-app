@@ -2,6 +2,7 @@ import { Spinner, Box, Modal, Text, ModalOverlay, ModalContent, ModalHeader, Mod
 import React, { createContext } from "react";
 import { QRCodeSVG } from 'qrcode.react';
 import { HeirloomSdk } from "./HeirloomSdk";
+import { sorcelApp as sorcelAppApi } from "@/api/sorcel-app/sorcel-app";
 
 interface state {
   modalOpen: boolean,
@@ -28,8 +29,25 @@ export interface HeirloomDidProviderProps { children: React.ReactNode };
 
 export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
   const [state, setState] = React.useState<state>(stateInitialState);
-  const apiKey = '65WoeCSfUVXeKnRca5yX7RwY2iysmNdQwRX1yw5pegAm';
-  const sdk = new HeirloomSdk(apiKey);
+  const [apiKey, setApiKey] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const fetchApiKey = async () => {
+      const sorcelApp = new sorcelAppApi();
+      console.log("!settings", sorcelApp.getInstance().defaults);
+      const heirloomData = await sorcelApp.getHeirloom(window.__3SHOP_APP_ID__);
+      console.log("!heirloom data", heirloomData);
+      if (heirloomData.data.data['heirloomApiKey']) {
+        setApiKey(heirloomData.data.data['heirloomApiKey']);
+      } else {
+        // TODO: handle error
+      }
+    };
+
+    fetchApiKey();
+  }, []);
+
+  const sdk = apiKey ? new HeirloomSdk(apiKey) : null;
 
   const setStateByKey = React.useCallback(<K extends keyof state>(key: K, value: state[K]) => {
     setState((prevState) => ({
@@ -39,7 +57,7 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
   }, []);
 
   const handleQuickLogin = async () => {
-    await sdk.quickLogin((url) => setStateByKey('qrCodeUrl', url), (did) => {
+    await sdk?.quickLogin((url) => setStateByKey('qrCodeUrl', url), (did) => {
       console.log("!did received: ", did);
     }, (err) => {
       console.log("!err", err);
@@ -66,52 +84,52 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
       </Box>
     );
   }
-const TimerBar = ({ seconds, onTimeout }: { seconds: number; onTimeout: () => void }) => {
-  const [remainingTime, setRemainingTime] = React.useState(seconds);
+  const TimerBar = ({ seconds, onTimeout }: { seconds: number; onTimeout: () => void }) => {
+    const [remainingTime, setRemainingTime] = React.useState(seconds);
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setRemainingTime((prevTime) => {
-        const newTime = prevTime - 1;
-        if (newTime < 0) {
-          clearInterval(interval);
-          setTimeout(onTimeout, 0);
-          return prevTime;
-        }
-        return newTime;
-      });
-    }, 1000);
+    React.useEffect(() => {
+      const interval = setInterval(() => {
+        setRemainingTime((prevTime) => {
+          const newTime = prevTime - 1;
+          if (newTime < 0) {
+            clearInterval(interval);
+            setTimeout(onTimeout, 0);
+            return prevTime;
+          }
+          return newTime;
+        });
+      }, 1000);
 
-    return () => clearInterval(interval);
-  }, [seconds, onTimeout]);
+      return () => clearInterval(interval);
+    }, [seconds, onTimeout]);
 
-  const percentage = (remainingTime / seconds) * 100;
+    const percentage = (remainingTime / seconds) * 100;
 
-  const blackBarNode = React.useMemo(() => (
-    <Box
-      width={`${percentage}%`}
-      bg="black"
-      height="100%"
-      transition="width 1s linear"
-      position="relative"
-      zIndex="1"
-    />
-  ), [percentage]);
-
-  return (
-    <Box width="100%" bg="gray.200" position="relative" height="10px">
+    const blackBarNode = React.useMemo(() => (
       <Box
-        width="100%"
-        bg="grey"
-        opacity="50%"
+        width={`${percentage}%`}
+        bg="black"
         height="100%"
-        position="absolute"
-        zIndex="0"
+        transition="width 1s linear"
+        position="relative"
+        zIndex="1"
       />
-      {blackBarNode}
-    </Box>
-  );
-};
+    ), [percentage]);
+
+    return (
+      <Box width="100%" bg="gray.200" position="relative" height="10px">
+        <Box
+          width="100%"
+          bg="grey"
+          opacity="50%"
+          height="100%"
+          position="absolute"
+          zIndex="0"
+        />
+        {blackBarNode}
+      </Box>
+    );
+  };
 
   const renderModal: React.ReactNode = (
     <Modal isOpen={state.modalOpen} onClose={handlers.close}>
