@@ -21,13 +21,21 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from '
  * @property {React.ReactNode} content - The content of the dialog, can be any React node.
  * @property {boolean} [notClosable] - Optional flag to make the dialog not closable.
  * @property {chakra.ModalProps['size']} [size] - Optional size of the dialog, based on Chakra UI's ModalProps size.
+ * @property {boolean} [cancelable] - Optional flag to show a cancel button next to the next button.
  */
 export interface dialog {
   title: string;
   content: React.ReactNode;
   notClosable?: boolean;
   size?: chakra.ModalProps['size'];
+  cancelable?: boolean;
 }
+
+/**
+ * Type for the submit callback.
+ */
+export type SubmitCallback = () => boolean;
+
 /**
  * Interface for the context value used in DialogContext.
  * @typedef {Object} DialogContextValue
@@ -38,11 +46,11 @@ export interface dialog {
  * @property {Function} attachSubmit - Function to attach a submit callback.
  */
 export interface DialogContextValue {
-  next: () => void;
+  next: (force?: boolean) => void;
   disableNext: () => void;
   enableNext: () => void;
   isNextEnabled: boolean;
-  attachSubmit: (callback: () => void) => void;
+  attachSubmit: (callback: SubmitCallback) => void;
 }
 
 /**
@@ -50,11 +58,11 @@ export interface DialogContextValue {
  * @type {React.Context<DialogContextValue>}
  */
 const DialogContext = createContext<DialogContextValue>({
-  next: () => {},
-  disableNext: () => {},
-  enableNext: () => {},
+  next: () => { },
+  disableNext: () => { },
+  enableNext: () => { },
   isNextEnabled: false,
-  attachSubmit: (callback: () => void) => {
+  attachSubmit: (callback: SubmitCallback) => {
     callback;
   },
 });
@@ -85,7 +93,7 @@ export const Dialogs = ({
   const [currentDialogIndex, setCurrentDialogIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(children.length > 0);
   const [isNextDisabled, setIsNextDisabled] = useState(true);
-  const [submitCallbacks, setSubmitCallbacks] = useState<{ [id: number]: () => void }>({});
+  const [submitCallbacks, setSubmitCallbacks] = useState<{ [id: number]: SubmitCallback }>({});
   const modalProps = useMemo<
     Pick<chakra.ModalProps, 'size' | 'closeOnEsc' | 'closeOnOverlayClick'>
   >(() => {
@@ -105,17 +113,31 @@ export const Dialogs = ({
   }, [children]);
   /**
    * Function to navigate to the next dialog or close the modal if it's the last dialog.
+   * @param {boolean} [force=false] - If true, navigate to the next dialog without calling the callback.
    */
-  const next = () => {
-    const callback = submitCallbacks[currentDialogIndex];
-    if (callback) {
-      callback();
+  const next = (force = false) => {
+    if (force) {
+      if (currentDialogIndex < children.length - 1) {
+        setCurrentDialogIndex(currentDialogIndex + 1);
+      } else {
+        setIsOpen(false);
+      }
+      return;
     }
 
-    if (currentDialogIndex < children.length - 1) {
-      setCurrentDialogIndex(currentDialogIndex + 1);
-    } else {
-      setIsOpen(false);
+    const callback = submitCallbacks[currentDialogIndex];
+    const callbackResult = (() => {
+      if (!callback)
+        return true;
+      return callback();
+    })();
+
+    if (callbackResult) {
+      if (currentDialogIndex < children.length - 1) {
+        setCurrentDialogIndex(currentDialogIndex + 1);
+      } else {
+        setIsOpen(false);
+      }
     }
   };
 
@@ -131,9 +153,9 @@ export const Dialogs = ({
 
   /**
    * Function to attach a submit callback to the current dialog.
-   * @param {() => void} callback - The callback function to be executed.
+   * @param {SubmitCallback} callback - The callback function to be executed.
    */
-  const attachSubmit = (callback: () => void) => {
+  const attachSubmit = (callback: SubmitCallback) => {
     setSubmitCallbacks({ ...submitCallbacks, [currentDialogIndex]: callback });
   };
 
@@ -195,11 +217,22 @@ export const Dialogs = ({
                 as="button"
                 cursor="pointer"
                 ml="auto"
-                onClick={next}
+                onClick={() => next()}
                 isDisabled={isNextDisabled}
               >
                 {currentDialogIndex === children.length - 1 ? lastModalNextText : 'Next'}
               </Button>
+              {children[currentDialogIndex].cancelable && (
+                <Button
+                  variant="negativeOutlined"
+                  as="button"
+                  cursor="pointer"
+                  ml="4" // Add margin-left to create a gap
+                  onClick={() => setIsOpen(false)}
+                >
+                  Cancel
+                </Button>
+              )}
             </ModalFooter>
           </ModalContent>
         )}
