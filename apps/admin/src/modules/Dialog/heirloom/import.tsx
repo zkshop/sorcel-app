@@ -4,6 +4,7 @@ import { useDialog, type dialog } from '@3shop/ui/Modal/Dialogs';
 import { Box, Button, FormControl, FormLabel, Input, Text } from '@3shop/ui';
 import { z, ZodError } from 'zod';
 import { useState } from 'react';
+import { sorcelApp } from '../../../api/sorcel-app/sorcel-app';
 
 const schema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -40,8 +41,15 @@ const ImportContent = () => {
     }
   });
 
-  const onSubmit = (data: z.infer<typeof schema>) => {
-    alert(`Submitted data: ${JSON.stringify(data)}`);
+  const onSubmit = async (data: z.infer<typeof schema>) => {
+    try {
+      const sorcelAppInstance = new sorcelApp();
+      await sorcelAppInstance.updateHeirloomLock(data.apiKey, data.name);
+      alert('Heirloom lock updated successfully');
+    } catch (error) {
+      console.error('Error updating heirloom lock:', error);
+      alert('Failed to update heirloom lock');
+    }
   };
 
   useEffect(() => {
@@ -64,7 +72,8 @@ const ImportContent = () => {
     <Box padding="20px">
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={Boolean(errors.name)}>
-          <FormLabel>{"Name (can be different)"}</FormLabel>
+          <FormLabel>{"Name"}</FormLabel>
+          
           <Input type="text" {...register('name')} />
           {errors.name && <Text color="red.500">{errors.name.message}</Text>}
         </FormControl>

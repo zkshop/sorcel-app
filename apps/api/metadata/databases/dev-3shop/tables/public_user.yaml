@@ -2,12 +2,6 @@ table:
   name: user
   schema: public
 select_permissions:
-  - role: anonymous
-    permission:
-      columns:
-        - email
-        - id
-      filter: {}
   - role: customer
     permission:
       columns:
