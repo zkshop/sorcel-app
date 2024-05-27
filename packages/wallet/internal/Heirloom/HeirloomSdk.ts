@@ -23,13 +23,14 @@ export class HeirloomSdkException extends Error {
  * @param {string} apiKey - The API key used for the request.
  * @returns {Promise<LoginChallenge>} The challenge data or null if an error occurs.
  */
-const fetchChallenge = async (apiKey: string): Promise<LoginChallenge | null> => {
+const fetchChallenge = async (apiKey: string, lockId: string): Promise<LoginChallenge | null> => {
   const url = 'https://api.heirloom.io/auth/sessions/challenges';
   try {
-    const response = await axios.post<LoginChallenge>(url, {}, {
+    const response = await axios.get<LoginChallenge>(url, {
       headers: {
         'X-Heirloom-API-Key': apiKey,
         'X-Heirloom-API-Version': '1',
+        'X-Heirloom-Lock-ID': lockId,
         'Content-Type': 'application/json'
       }
     });
@@ -48,7 +49,7 @@ interface DecodedJWT {
   exp: number;
 }
 
-function decodeJWT(token): DecodedJWT {
+function decodeJWT(token: string): DecodedJWT {
   const base64Url = token.split('.')[1]; // Get the payload part
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Convert base64url to base64
   const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
@@ -73,8 +74,8 @@ export class HeirloomSdk {
    * Fetches a new login challenge from the Heirloom API.
    * @returns {Promise<LoginChallenge | null>} A promise that resolves to the fetched LoginChallenge or null if an error occurs.
    */
-  async challenges() {
-    const challengeResult = await fetchChallenge(this.apiKey);
+  async challenges(lockId: string) {
+    const challengeResult = await fetchChallenge(this.apiKey, lockId);
     return challengeResult;
   }
 
@@ -90,13 +91,14 @@ export class HeirloomSdk {
    * @returns {Promise<Socket>} Returns a promise that resolves to the WebSocket instance used for the connection.
    */
   async quickLogin(
+    lockId: string,
     onQrCodeReady: (url: string, raw: LoginChallenge) => void,
     onLoggedIn: (did: string, data?: DecodedJWT, raw?: { authToken: string }) => void,
     onSocketError: (error: any) => void,
     socketInstance?: (instance: Socket) => void
   ) {
     try {
-      const data = await this.challenges();
+      const data = await this.challenges(lockId);
       if (!data)
         throw new HeirloomSdkException("No data received from challenges.");
       onQrCodeReady(data.loginChallengeUrl, data);
@@ -105,14 +107,14 @@ export class HeirloomSdk {
       const jwtChallenge = data.loginChallenge;
       const apiBaseUrl = 'wss://api.heirloom.io';
       const socket = io(apiBaseUrl, {
-        query: { apiKey, jwtChallenge },
+        query: { apiKey, lockId, jwtChallenge },
       });
-  
+
       if (socketInstance) {
         socketInstance(socket);
       }
 
-      const topic = `tokens:${apiKey}:${jwtChallenge}`;
+      const topic = `tokens:${apiKey}:${lockId}:${jwtChallenge}`;
 
       socket.on('connect', () => {
         // Intentional blank

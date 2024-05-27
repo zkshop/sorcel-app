@@ -2,7 +2,7 @@ import { Spinner, Box, Modal, Text, ModalOverlay, ModalContent, ModalHeader, Mod
 import React, { createContext } from "react";
 import { QRCodeSVG } from 'qrcode.react';
 import { HeirloomSdk } from "./HeirloomSdk";
-import { sorcelApp as sorcelAppApi } from "@/api/sorcel-app/sorcel-app";
+import { sorcelApp as sorcelAppApi } from "../../../../apps/shop/src/api/sorcel-app/sorcel-app";
 
 interface state {
   modalOpen: boolean,
@@ -29,23 +29,25 @@ export interface HeirloomDidProviderProps { children: React.ReactNode };
 
 export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
   const [state, setState] = React.useState<state>(stateInitialState);
-  const [apiKey, setApiKey] = React.useState<string | null>(null);
+  const [apiKey, setApiKey] = React.useState<string | null>("66oz3AkVYsraX1MPTr1dxb589g18ZMd6b3aS6RV9t312");
+  const lockId = "714L1G";
 
-  React.useEffect(() => {
-    const fetchApiKey = async () => {
-      const sorcelApp = new sorcelAppApi();
-      console.log("!settings", sorcelApp.getInstance().defaults);
-      const heirloomData = await sorcelApp.getHeirloom(window.__3SHOP_APP_ID__);
-      console.log("!heirloom data", heirloomData);
-      if (heirloomData.data.data['heirloomApiKey']) {
-        setApiKey(heirloomData.data.data['heirloomApiKey']);
-      } else {
-        // TODO: handle error
-      }
-    };
+  // React.useEffect(() => {
+  //   const fetchApiKey = async () => {
+  //     const sorcelApp = new sorcelAppApi();
+  //     console.log("!settings", sorcelApp.getInstance().defaults);
+  //     //@ts-ignore
+  //     const heirloomData = await sorcelApp.getHeirloom(window.__3SHOP_APP_ID__);
+  //     console.log("!heirloom data", heirloomData);
+  //     if (heirloomData.data.data['heirloomApiKey']) {
+  //       setApiKey(heirloomData.data.data['heirloomApiKey']);
+  //     } else {
+  //       // TODO: handle error
+  //     }
+  //   };
 
-    fetchApiKey();
-  }, []);
+  //   fetchApiKey();
+  // }, []);
 
   const sdk = apiKey ? new HeirloomSdk(apiKey) : null;
 
@@ -57,7 +59,7 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
   }, []);
 
   const handleQuickLogin = async () => {
-    await sdk?.quickLogin((url) => setStateByKey('qrCodeUrl', url), (did) => {
+    await sdk?.quickLogin(lockId, (url) => setStateByKey('qrCodeUrl', url), (did) => {
       console.log("!did received: ", did);
     }, (err) => {
       console.log("!err", err);
