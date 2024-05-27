@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDialog, type dialog } from '@3shop/ui/Modal/Dialogs';
-import { Box, Button, FormControl, FormLabel, Input, Text } from '@3shop/ui';
+import { Box, FormControl, FormLabel, Input, Text } from '@3shop/ui';
 import { z, ZodError } from 'zod';
 import { useState } from 'react';
 import { sorcelApp } from '../../../api/sorcel-app/sorcel-app';
 
 const schema = z.object({
   name: z.string().min(1, 'Name is required'),
-  apiKey: z.string().min(1, 'API Key is required')
+  apiKey: z.string().min(1, 'API Key is required'),
+  lockId: z.string().min(1, 'Lock ID is required'),
 });
 
 type FieldErrors = {
@@ -18,13 +19,17 @@ type FieldErrors = {
 const ImportContent = () => {
   const { attachSubmit, next } = useDialog();
   const [hasSubmit, setHasSubmit] = useState(false);
-  const { handleSubmit, control, register, formState: { errors } } = useForm<z.infer<typeof schema>>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<z.infer<typeof schema>>({
     defaultValues: {
       name: '',
-      apiKey: ''
+      apiKey: '',
+      lockId: '',
     },
     resolver: async (data) => {
-
       try {
         schema.parse(data);
         return { values: data, errors: {} };
@@ -38,13 +43,13 @@ const ImportContent = () => {
         }
         throw e;
       }
-    }
+    },
   });
 
   const onSubmit = async (data: z.infer<typeof schema>) => {
     try {
       const sorcelAppInstance = new sorcelApp();
-      await sorcelAppInstance.updateHeirloomLock(data.apiKey, data.name);
+      await sorcelAppInstance.updateHeirloomLock(data.apiKey, data.name, data.lockId);
       alert('Heirloom lock updated successfully');
     } catch (error) {
       console.error('Error updating heirloom lock:', error);
@@ -63,8 +68,7 @@ const ImportContent = () => {
   useEffect(() => {
     setHasSubmit(false);
     if (hasSubmit) {
-      if (Object.keys(errors).length == 0)
-        next(true);
+      if (Object.keys(errors).length == 0) next(true);
     }
   }, [errors]);
 
@@ -72,8 +76,8 @@ const ImportContent = () => {
     <Box padding="20px">
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={Boolean(errors.name)}>
-          <FormLabel>{"Name"}</FormLabel>
-          
+          <FormLabel>Name</FormLabel>
+
           <Input type="text" {...register('name')} />
           {errors.name && <Text color="red.500">{errors.name.message}</Text>}
         </FormControl>
@@ -81,6 +85,11 @@ const ImportContent = () => {
           <FormLabel>API Key</FormLabel>
           <Input type="text" {...register('apiKey')} />
           {errors.apiKey && <Text color="red.500">{errors.apiKey.message}</Text>}
+        </FormControl>
+        <FormControl isInvalid={Boolean(errors.lockId)}>
+          <FormLabel>Lock ID</FormLabel>
+          <Input type="text" {...register('lockId')} />
+          {errors.lockId && <Text color="red.500">{errors.lockId.message}</Text>}
         </FormControl>
       </form>
     </Box>
