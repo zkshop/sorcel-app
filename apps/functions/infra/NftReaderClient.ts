@@ -1,8 +1,8 @@
 import { NftFilters, createAlchemy } from '@3shop/alchemy';
 import type { NFT, BlockchainClient } from '@3shop/domains';
 
-export function NftReaderClient(): BlockchainClient {
-  const api = createAlchemy('ETHEREUM');
+export function NftReaderClient(network?: 'ETHEREUM' | 'POLYGON'): BlockchainClient {
+  const api = createAlchemy(network || 'ETHEREUM');
   return {
     getWalletNfts: async (walletAddress, contractAddresses) => {
       const result = await api.nft.getNftsForOwner(walletAddress, {

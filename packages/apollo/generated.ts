@@ -89,8 +89,12 @@ export type App = {
   background_color?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
+  enableHeirloom?: Maybe<Scalars['Boolean']>;
   font?: Maybe<Scalars['String']>;
   font_color?: Maybe<Scalars['String']>;
+  heirloomApiKey?: Maybe<Scalars['String']>;
+  heirloomLockId?: Maybe<Scalars['String']>;
+  heirloomLockName?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   imgUrl?: Maybe<Scalars['String']>;
   moneyAccountId?: Maybe<Scalars['String']>;
@@ -150,8 +154,12 @@ export type App_Bool_Exp = {
   background_color?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   deliveryTaxesTableName?: InputMaybe<String_Comparison_Exp>;
+  enableHeirloom?: InputMaybe<Boolean_Comparison_Exp>;
   font?: InputMaybe<String_Comparison_Exp>;
   font_color?: InputMaybe<String_Comparison_Exp>;
+  heirloomApiKey?: InputMaybe<String_Comparison_Exp>;
+  heirloomLockId?: InputMaybe<String_Comparison_Exp>;
+  heirloomLockName?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   imgUrl?: InputMaybe<String_Comparison_Exp>;
   moneyAccountId?: InputMaybe<String_Comparison_Exp>;
@@ -176,8 +184,12 @@ export type App_Insert_Input = {
   background_color?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
+  enableHeirloom?: InputMaybe<Scalars['Boolean']>;
   font?: InputMaybe<Scalars['String']>;
   font_color?: InputMaybe<Scalars['String']>;
+  heirloomApiKey?: InputMaybe<Scalars['String']>;
+  heirloomLockId?: InputMaybe<Scalars['String']>;
+  heirloomLockName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
   moneyAccountId?: InputMaybe<Scalars['String']>;
@@ -196,6 +208,9 @@ export type App_Max_Fields = {
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
   font?: Maybe<Scalars['String']>;
   font_color?: Maybe<Scalars['String']>;
+  heirloomApiKey?: Maybe<Scalars['String']>;
+  heirloomLockId?: Maybe<Scalars['String']>;
+  heirloomLockName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   imgUrl?: Maybe<Scalars['String']>;
   moneyAccountId?: Maybe<Scalars['String']>;
@@ -211,6 +226,9 @@ export type App_Min_Fields = {
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
   font?: Maybe<Scalars['String']>;
   font_color?: Maybe<Scalars['String']>;
+  heirloomApiKey?: Maybe<Scalars['String']>;
+  heirloomLockId?: Maybe<Scalars['String']>;
+  heirloomLockName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   imgUrl?: Maybe<Scalars['String']>;
   moneyAccountId?: Maybe<Scalars['String']>;
@@ -247,8 +265,12 @@ export type App_Order_By = {
   background_color?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   deliveryTaxesTableName?: InputMaybe<Order_By>;
+  enableHeirloom?: InputMaybe<Order_By>;
   font?: InputMaybe<Order_By>;
   font_color?: InputMaybe<Order_By>;
+  heirloomApiKey?: InputMaybe<Order_By>;
+  heirloomLockId?: InputMaybe<Order_By>;
+  heirloomLockName?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   imgUrl?: InputMaybe<Order_By>;
   moneyAccountId?: InputMaybe<Order_By>;
@@ -274,9 +296,17 @@ export enum App_Select_Column {
   /** column name */
   DeliveryTaxesTableName = 'deliveryTaxesTableName',
   /** column name */
+  EnableHeirloom = 'enableHeirloom',
+  /** column name */
   Font = 'font',
   /** column name */
   FontColor = 'font_color',
+  /** column name */
+  HeirloomApiKey = 'heirloomApiKey',
+  /** column name */
+  HeirloomLockId = 'heirloomLockId',
+  /** column name */
+  HeirloomLockName = 'heirloomLockName',
   /** column name */
   Id = 'id',
   /** column name */
@@ -299,8 +329,12 @@ export type App_Set_Input = {
   background_color?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
+  enableHeirloom?: InputMaybe<Scalars['Boolean']>;
   font?: InputMaybe<Scalars['String']>;
   font_color?: InputMaybe<Scalars['String']>;
+  heirloomApiKey?: InputMaybe<Scalars['String']>;
+  heirloomLockId?: InputMaybe<Scalars['String']>;
+  heirloomLockName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
   moneyAccountId?: InputMaybe<Scalars['String']>;
@@ -324,8 +358,12 @@ export type App_Stream_Cursor_Value_Input = {
   background_color?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
+  enableHeirloom?: InputMaybe<Scalars['Boolean']>;
   font?: InputMaybe<Scalars['String']>;
   font_color?: InputMaybe<Scalars['String']>;
+  heirloomApiKey?: InputMaybe<Scalars['String']>;
+  heirloomLockId?: InputMaybe<Scalars['String']>;
+  heirloomLockName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
   moneyAccountId?: InputMaybe<Scalars['String']>;
@@ -346,9 +384,17 @@ export enum App_Update_Column {
   /** column name */
   DeliveryTaxesTableName = 'deliveryTaxesTableName',
   /** column name */
+  EnableHeirloom = 'enableHeirloom',
+  /** column name */
   Font = 'font',
   /** column name */
   FontColor = 'font_color',
+  /** column name */
+  HeirloomApiKey = 'heirloomApiKey',
+  /** column name */
+  HeirloomLockId = 'heirloomLockId',
+  /** column name */
+  HeirloomLockName = 'heirloomLockName',
   /** column name */
   Id = 'id',
   /** column name */
@@ -7002,6 +7048,7 @@ export type GateFieldsFragment = {
   discount?: number | null;
   exclusive_access: boolean;
   unique_claim: boolean;
+  chain?: string | null;
   claims: any;
   segments: Array<{
     __typename?: 'segment';
@@ -7047,6 +7094,7 @@ export type GetProductByIdQuery = {
       discount?: number | null;
       exclusive_access: boolean;
       unique_claim: boolean;
+      chain?: string | null;
       claims: any;
       segments: Array<{
         __typename?: 'segment';
@@ -7086,6 +7134,7 @@ export type GetProductsQuery = {
       discount?: number | null;
       exclusive_access: boolean;
       unique_claim: boolean;
+      chain?: string | null;
       claims: any;
       segments: Array<{
         __typename?: 'segment';
@@ -7170,6 +7219,7 @@ export const GateFieldsFragmentDoc = gql`
     discount
     exclusive_access
     unique_claim
+    chain
     segments {
       id
       gate_id
