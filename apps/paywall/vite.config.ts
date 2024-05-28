@@ -8,6 +8,7 @@ const envVars = {
   SERVERLESS_API_KEY: undefined,
   SECRET_ALCHEMY: undefined,
   PUBLIC_FUNCTIONS_URL: undefined,
+  SORCEL_PRODUCT_ID: undefined,
 };
 
 const commonConfig = createCommonConfig({ dirname, envVars });
@@ -29,7 +30,6 @@ export default defineConfig(({ mode }) => {
             SET_APP_ID: `
               <script type="text/javascript">
                 window.__3SHOP_NETWORK__ = "${process.env.NETWORK}";
-                window.__SORCEL_PRODUCT_ID__ = "${process.env.SORCEL_PRODUCT_ID}";
               </script>
             `,
           },
