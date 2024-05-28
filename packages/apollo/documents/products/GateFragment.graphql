@@ -6,6 +6,7 @@ fragment GateFields on gate_v2 {
   discount
   exclusive_access
   unique_claim
+  chain
   segments {
     id
     gate_id
