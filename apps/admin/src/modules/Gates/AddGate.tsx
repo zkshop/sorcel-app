@@ -29,6 +29,7 @@ import { useNotification } from '../../hooks/useNotification';
 import { sorcelApp } from '../../api/sorcel-app/sorcel-app';
 import { useApi } from '../../hooks/useApi';
 import { app } from '@prisma/client';
+import { useFilterQuery } from '../../api/hooks/useFilterQuery';
 
 export type AddGateFormValues = {
   name: string;
@@ -73,7 +74,22 @@ export const AddGate = () => {
   const [heirloom, setHeirloom] = useState<Pick<app, "enableHeirloom" | "heirloomLockName">>({
     enableHeirloom: false,
     heirloomLockName: ""
-  })
+  });
+
+  const heirloomQuery = useFilterQuery({
+    select: {
+      enableHeirloom: true,
+      heirloomLockName: true
+    },
+  }, sorcelAppApi?.getAppFilter);
+
+  useEffect(() => {
+    if (heirloomQuery.loading)
+        console.log("heirloom loading");
+    else
+      console.log("!heirloom", heirloomQuery);
+  }, [heirloomQuery.loading]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -87,7 +103,7 @@ export const AddGate = () => {
           select: {
             enableHeirloom: true,
             heirloomLockName: true
-          }
+          },
         });
         setHeirloom(data.data);
         console.log("!result", data.data);
@@ -165,7 +181,7 @@ export const AddGate = () => {
 
   if (!ready)
     return <Spinner />;
-  
+
   return (
     <MainLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
