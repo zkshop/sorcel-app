@@ -1,5 +1,8 @@
 import { Base } from '../base';
 import type { app, user } from '@prisma/client';
+import { Prisma } from '@prisma/client';
+import { filter } from '../base';
+import { apiReturnValue } from '../base';
 
 export class sorcelApp extends Base {
   constructor(baseUrl?: string) {
@@ -13,6 +16,10 @@ export class sorcelApp extends Base {
 
   async getApp(user: user) {
     return await this.instance.get<app>('/getApp', { params: { email: user.email } });
+  }
+
+  async getAppFilter<dataType = app>(filter: filter<Prisma.appSelect, Prisma.appInclude>) {
+    return await this.instance.post<apiReturnValue<dataType>>('/get-app', { ...filter });
   }
 
   async updateHeirloomLock(apiKey: string, name: string, lockId: string) {

@@ -12,6 +12,7 @@ import {
   useDisclosure,
   Tooltip,
   QuestionIcon,
+  Spinner,
 } from '@3shop/ui';
 
 import { useEffect, useState } from 'react';
@@ -25,6 +26,9 @@ import segmentInputCreator from './segmentInputCreator';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES_PATH } from '../../routes/Routes';
 import { useNotification } from '../../hooks/useNotification';
+import { sorcelApp } from '../../api/sorcel-app/sorcel-app';
+import { useApi } from '../../hooks/useApi';
+import { app } from '@prisma/client';
 
 export type AddGateFormValues = {
   name: string;
@@ -65,7 +69,35 @@ export const AddGate = () => {
     },
   });
   const [sucess, failure] = useNotification();
+  const [ready, sorcelAppApi] = useApi(() => new sorcelApp());
+  const [heirloom, setHeirloom] = useState<Pick<app, "enableHeirloom" | "heirloomLockName">>({
+    enableHeirloom: false,
+    heirloomLockName: ""
+  })
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchAppFilter = async () => {
+      if (!ready || !sorcelAppApi) {
+        console.log("!not ready");
+        return;
+      }
+      try {
+        const { data } = await sorcelAppApi.getAppFilter<typeof heirloom>({
+          select: {
+            enableHeirloom: true,
+            heirloomLockName: true
+          }
+        });
+        setHeirloom(data.data);
+        console.log("!result", data.data);
+      } catch (error) {
+        console.error("Error fetching app filter:", error);
+      }
+    };
+
+    fetchAppFilter();
+  }, [ready, sorcelAppApi]);
 
   const onSubmit = async (data: AddGateFormValues) => {
     const input: Segment_Insert_Input[] = segments.map(segmentInputCreator);
@@ -79,7 +111,11 @@ export const AddGate = () => {
         exclusive_access: data.perk === 'exclusiveAccess',
         name: data.name,
         product_id: data.product_id,
-        chain: input[0].network && networkToChain.get(input[0].network),
+        chain: (() => {
+          if (heirloom.enableHeirloom)
+            return Network_Enum.Heirloom;
+          return input[0].network && networkToChain.get(input[0].network)
+        })(),
       },
     };
 
@@ -104,6 +140,32 @@ export const AddGate = () => {
     onOpen();
   };
 
+  const addGateSection = () => {
+    if (!heirloom.enableHeirloom)
+      return <Section mb={2}>
+        <Heading fontSize="xl">
+          Gating{' '}
+          <Tooltip label="Add a NFT collection or a POAP to gate the product. You can add multiple collections to gate the product, if one is matched, the product is unlocked.">
+            <QuestionIcon boxSize={4} />
+          </Tooltip>
+          <Button
+            float="right"
+            isDisabled={false}
+            isLoading={false}
+            type="button"
+            onClick={handleClickAddModal}
+          >
+            Add collection
+          </Button>
+        </Heading>
+
+        <Table data={segments} renderRow={SegmentTableItem} />
+      </Section>
+  }
+
+  if (!ready)
+    return <Spinner />;
+  
   return (
     <MainLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -111,25 +173,7 @@ export const AddGate = () => {
         <BackButton href="/app" />
         <GeneralFields register={register} errors={errors} />
         <PerkFields control={control} showDiscountInput={showDiscountInput} register={register} />
-        <Section mb={2}>
-          <Heading fontSize="xl">
-            Gating{' '}
-            <Tooltip label="Add a NFT collection or a POAP to gate the product. You can add multiple collections to gate the product, if one is matched, the product is unlocked.">
-              <QuestionIcon boxSize={4} />
-            </Tooltip>
-            <Button
-              float="right"
-              isDisabled={false}
-              isLoading={false}
-              type="button"
-              onClick={handleClickAddModal}
-            >
-              Add collection
-            </Button>
-          </Heading>
-
-          <Table data={segments} renderRow={SegmentTableItem} />
-        </Section>
+        {addGateSection()}
         <Section>
           <Heading fontSize="xl">Assign a Product</Heading>
 

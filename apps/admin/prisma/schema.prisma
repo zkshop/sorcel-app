@@ -11,7 +11,7 @@ datasource db {
 model app {
   id                     String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   imgUrl                 String?
-  name                   String
+  name                   String                  @unique
   deliveryTaxesTableName String?
   moneyAccountId         String?
   plan                   String?                 @default("FREE")
@@ -21,6 +21,10 @@ model app {
   show_brand             Boolean?                @default(false)
   created_at             DateTime?               @default(now()) @db.Timestamptz(6)
   show_connect_email     Boolean?                @default(false)
+  auth                   String?                 @default("EMAIL")
+  enableHeirloom         Boolean?                @default(false)
+  heirloomApiKey         String?
+  heirloomLockName       String?
   plan_app_planToplan    plan?                   @relation("app_planToplan", fields: [plan], references: [value], onDelete: NoAction, onUpdate: NoAction)
   delivery_zone          delivery_zone[]
   gate_v2                gate_v2[]
@@ -32,7 +36,7 @@ model app {
 }
 
 model chain_type {
-  value String @id
+  value String @id @default("EVM")
 }
 
 model choice {
@@ -59,21 +63,21 @@ model gate {
   id              String  @id(map: "Gate_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   product_id      String  @db.Uuid
   name            String?
-  product         product @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  product         product @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model gate_v2 {
-  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id               String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name             String
-  product_id       String   @db.Uuid
+  product_id       String  @db.Uuid
   discount         Int?
-  exclusive_access Boolean  @default(false)
-  app_id           String?  @db.Uuid
-  claims           String[] @default([]) @db.Uuid
-  unique_claim     Boolean  @default(false)
+  exclusive_access Boolean @default(false)
+  app_id           String? @db.Uuid
+  claims           Json    @default(dbgenerated("jsonb_build_array()"))
+  unique_claim     Boolean @default(false)
   chain            String?
-  app              app?     @relation(fields: [app_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  product          product  @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  app              app?    @relation(fields: [app_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  product          product @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model network {
@@ -168,6 +172,11 @@ model wallet_connection_log {
   address String
   date    DateTime @default(now()) @db.Timestamptz(6)
   app     app      @relation(fields: [app_id], references: [id], onUpdate: Restrict, map: "wallet_connection_logs_app_id_fkey")
+}
+
+model auth_type {
+  value      String  @id
+  exact_name String?
 }
 
 enum order_status {
