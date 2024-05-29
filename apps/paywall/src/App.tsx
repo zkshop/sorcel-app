@@ -13,6 +13,7 @@ function removeLocalStorageItem(key: string) {
 }
 
 async function fetchGrants(address: string) {
+  console.log('!product_id', envVars.SORCEL_PRODUCT_ID);
   const res = await httpServerless.get(`api/is-granted`, {
     params: {
       productId: envVars.SORCEL_PRODUCT_ID,
