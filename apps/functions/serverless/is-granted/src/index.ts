@@ -60,6 +60,8 @@ const handler: HttpFunction = async (req, res) => {
     }
   })();
 
+  console.log('!nfts', nfts);
+
   if (!response.product) return res.status(INTERNAL_SERVER_ERROR).send('Product not found');
 
   const matchedGates = gateVerifier(response.product.gate, nfts);
