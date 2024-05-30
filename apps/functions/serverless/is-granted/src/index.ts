@@ -36,11 +36,8 @@ const handler: HttpFunction = async (req, res) => {
     ),
   ) as string[];
 
-  console.log('!networks', networks);
-  console.log('!contractAdressesToFilter', contractAdressesToFilter);
   const nfts = await (async () => {
     const chain = response.product?.gate[0].chain;
-    console.log('!chain', chain);
 
     switch (chain) {
       case 'EVM': {
@@ -52,8 +49,7 @@ const handler: HttpFunction = async (req, res) => {
           if (networks[i] == 'POLYGON') polygonAdresses.push(contractAdressesToFilter[i]);
           else ethAdresses.push(contractAdressesToFilter[i]);
         }
-        console.log('!polygonAdresses', polygonAdresses);
-        console.log('!ethAdresses', ethAdresses);
+
         return [
           ...(await NftServices.ETHEREUM.getWalletNfts(address, ethAdresses)),
           ...(await NftServices.POLYGON.getWalletNfts(address, polygonAdresses)),
@@ -63,8 +59,6 @@ const handler: HttpFunction = async (req, res) => {
         return [];
     }
   })();
-
-  console.log('!nfts', nfts);
 
   if (!response.product) return res.status(INTERNAL_SERVER_ERROR).send('Product not found');
 
