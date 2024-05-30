@@ -6629,6 +6629,7 @@ export type GetGates_V2Query = {
     id: any;
     exclusive_access: boolean;
     discount?: number | null;
+    chain?: string | null;
     product: { __typename?: 'product'; id: any; image: string; name: string };
   }>;
 };
@@ -7962,6 +7963,7 @@ export const GetGates_V2Document = gql`
       id
       exclusive_access
       discount
+      chain
       product {
         id
         image

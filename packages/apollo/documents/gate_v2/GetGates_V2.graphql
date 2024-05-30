@@ -4,6 +4,7 @@ query GetGates_V2 {
     id
     exclusive_access
     discount
+    chain
     product {
       id
       image

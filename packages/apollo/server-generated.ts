@@ -6788,7 +6788,7 @@ export type GetGatesV2ByProductIdQuery = { __typename?: 'query_root', gate_v2: A
 export type GetGates_V2QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetGates_V2Query = { __typename?: 'query_root', gates: Array<{ __typename?: 'gate_v2', name: string, id: any, exclusive_access: boolean, discount?: number | null, product: { __typename?: 'product', id: any, image: string, name: string } }> };
+export type GetGates_V2Query = { __typename?: 'query_root', gates: Array<{ __typename?: 'gate_v2', name: string, id: any, exclusive_access: boolean, discount?: number | null, chain?: string | null, product: { __typename?: 'product', id: any, image: string, name: string } }> };
 
 export type GetGates_V2_ByAppIdQueryVariables = Exact<{
   app_id?: InputMaybe<Scalars['uuid']>;
@@ -7227,6 +7227,7 @@ export const GetGates_V2Document = gql`
     id
     exclusive_access
     discount
+    chain
     product {
       id
       image
