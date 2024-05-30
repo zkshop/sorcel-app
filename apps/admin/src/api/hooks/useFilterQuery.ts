@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useCallback } from "react";
 import { Base } from "../base";
 
 export type useFilterQueryResult<T> = {
@@ -8,13 +9,15 @@ export type useFilterQueryResult<T> = {
 }
 
 
-export const useFilterQuery = <T, K>( filter: K, query?: (filter: K) => T,ready?: boolean): useFilterQueryResult<T> => {
+export const useFilterQuery = <T, K>(filter: K, query?: (filter: K) => T,ready?: boolean): useFilterQueryResult<T> => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(undefined);
   const [data, setData] = useState<T | undefined>(undefined);
 
-  async function runQuery() {
+  const runQuery = useCallback(async () => {
     try {
+      // if (!query || !ready)
+      //     return ;
       const queryResult = await query!(filter);
       setData(queryResult);
     } catch(e) {
@@ -22,7 +25,7 @@ export const useFilterQuery = <T, K>( filter: K, query?: (filter: K) => T,ready?
     } finally {
       setLoading(false);
     }
-  };
+  }, [ready, query]);
 
   useEffect(() => {
     if (!query || (ready != undefined && ready == false))
