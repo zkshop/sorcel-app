@@ -40,6 +40,7 @@ const handler: HttpFunction = async (req, res) => {
   console.log('!contractAdressesToFilter', contractAdressesToFilter);
   const nfts = await (async () => {
     const chain = response.product?.gate[0].chain;
+    console.log('!chain', chain);
 
     switch (chain) {
       case 'EVM': {
