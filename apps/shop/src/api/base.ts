@@ -1,11 +1,14 @@
 import type { AxiosInstance } from 'axios';
 import axios from 'axios';
 
+export type filter<T, K> = { select: T } | { filter: K };
+export type apiReturnValue<T> = { sucess: boolean; data: T };
+
 export class Base {
   instance: AxiosInstance;
   static token: string | undefined;
   static backendBaseUrl: string = (() => {
-    if (process.env.BACKEND_BASEURL && process.env.BACKEND_BASEURL.length > 0)
+    if (process.env.BACKEND_BASEURL && process.env.BACKEND_BASEURL)
       return process.env.BACKEND_BASEURL;
     return `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`;
   })();

@@ -1,27 +1,40 @@
 import { Spinner, Box, Modal, Text, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, VStack, HStack, Button } from "@3shop/ui";
 import React, { createContext } from "react";
 import { QRCodeSVG } from 'qrcode.react';
-import { HeirloomSdk } from "./HeirloomSdk";
+import { DecodedJWT, HeirloomSdk } from "./HeirloomSdk";
 import { sorcelApp as sorcelAppApi } from "../../../../apps/shop/src/api/sorcel-app/sorcel-app";
+import { app } from "@prisma/client";
+
+export type heirloomApp = Pick<app, 'heirloomApiKey' | 'heirloomLockId' | 'heirloomLockName'> | undefined;
 
 interface state {
   modalOpen: boolean,
   expired: boolean,
-  qrCodeUrl: string | undefined
+  qrCodeUrl: string | undefined,
+  response: {
+    did: string,
+    data: DecodedJWT | undefined,
+    raw: { authToken: string } | undefined
+  } | undefined,
+  heirloomApp: heirloomApp
 }
 
 const stateInitialState: state = {
   modalOpen: false,
   expired: false,
-  qrCodeUrl: undefined
+  qrCodeUrl: undefined,
+  response: undefined,
+  heirloomApp: undefined
 }
 
 export interface HeirloomDidContextType {
   modal: {
     open: () => Promise<void>,
     close: () => void,
-    isOpen: boolean
-  }
+    isOpen: state['modalOpen']
+  },
+  response: state['response'],
+  heirloomApp: state['heirloomApp']
 }
 
 export const HeirloomDidContext = createContext<HeirloomDidContextType | undefined>(undefined);
@@ -29,27 +42,7 @@ export interface HeirloomDidProviderProps { children: React.ReactNode };
 
 export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
   const [state, setState] = React.useState<state>(stateInitialState);
-  const [apiKey, setApiKey] = React.useState<string | null>("66oz3AkVYsraX1MPTr1dxb589g18ZMd6b3aS6RV9t312");
-  const lockId = "714L1G";
-
-  // React.useEffect(() => {
-  //   const fetchApiKey = async () => {
-  //     const sorcelApp = new sorcelAppApi();
-  //     console.log("!settings", sorcelApp.getInstance().defaults);
-  //     //@ts-ignore
-  //     const heirloomData = await sorcelApp.getHeirloom(window.__3SHOP_APP_ID__);
-  //     console.log("!heirloom data", heirloomData);
-  //     if (heirloomData.data.data['heirloomApiKey']) {
-  //       setApiKey(heirloomData.data.data['heirloomApiKey']);
-  //     } else {
-  //       // TODO: handle error
-  //     }
-  //   };
-
-  //   fetchApiKey();
-  // }, []);
-
-  const sdk = apiKey ? new HeirloomSdk(apiKey) : null;
+  const [heirloom, setHeirloom] = React.useState<heirloomApp>(undefined);
 
   const setStateByKey = React.useCallback(<K extends keyof state>(key: K, value: state[K]) => {
     setState((prevState) => ({
@@ -58,13 +51,38 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
     }));
   }, []);
 
-  const handleQuickLogin = async () => {
-    await sdk?.quickLogin(lockId, (url) => setStateByKey('qrCodeUrl', url), (did) => {
+  async function handleQuickLogin() {
+    const sdk = new HeirloomSdk(heirloom?.heirloomApiKey!);
+    await sdk.quickLogin(heirloom?.heirloomLockId!, (url) => setStateByKey('qrCodeUrl', url), (did, data, raw) => {
+      setStateByKey('response', {
+        did,
+        data,
+        raw
+      })
       console.log("!did received: ", did);
     }, (err) => {
-      console.log("!err", err);
-    })
+      console.error("!err", err);
+    });
   }
+
+  React.useEffect(() => {
+    const fetchApiKey = async () => {
+      const sorcelApp = new sorcelAppApi();
+      console.log("!settings", sorcelApp.getInstance().defaults);
+      try {
+        //@ts-ignore
+        const { data } = await sorcelApp.getHeirloom(window.__3SHOP_APP_ID__);
+        setStateByKey('heirloomApp', data.data);
+        setHeirloom(data.data);
+      } catch (e) {
+        // TODO: handle error
+        console.error(e);
+      }
+      // console.log("!heirloom data", heirloomData);
+    };
+
+    fetchApiKey();
+  }, []);
 
   const handlers = {
     close: () => {
@@ -86,6 +104,7 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
       </Box>
     );
   }
+
   const TimerBar = ({ seconds, onTimeout }: { seconds: number; onTimeout: () => void }) => {
     const [remainingTime, setRemainingTime] = React.useState(seconds);
 
@@ -151,10 +170,10 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
             </VStack>
           ) : (
             <RenderQrCode>
-              <TimerBar seconds={30} onTimeout={() => {
+              <TimerBar seconds={5} onTimeout={() => {
                 setStateByKey('expired', true);
                 setStateByKey('qrCodeUrl', stateInitialState.qrCodeUrl);
-                (async () => await handleQuickLogin())()
+                (async () => await handleQuickLogin())();
               }} />
             </RenderQrCode>
           )}
@@ -170,7 +189,9 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
         open: handlers.open,
         close: handlers.close,
         isOpen: ((): boolean => state.modalOpen)()
-      }
+      },
+      heirloomApp: state.heirloomApp,
+      response: state.response
     }}>
       {children}
     </HeirloomDidContext.Provider>

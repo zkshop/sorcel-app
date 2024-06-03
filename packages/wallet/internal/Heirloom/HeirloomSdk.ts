@@ -41,7 +41,7 @@ const fetchChallenge = async (apiKey: string, lockId: string): Promise<LoginChal
   }
 }
 
-interface DecodedJWT {
+export interface DecodedJWT {
   issuer: string;
   audience: string;
   subject: string;

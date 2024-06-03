@@ -25,6 +25,7 @@ model app {
   enableHeirloom         Boolean?                @default(false)
   heirloomApiKey         String?
   heirloomLockName       String?
+  heirloomLockId         String?
   plan_app_planToplan    plan?                   @relation("app_planToplan", fields: [plan], references: [value], onDelete: NoAction, onUpdate: NoAction)
   delivery_zone          delivery_zone[]
   gate_v2                gate_v2[]
