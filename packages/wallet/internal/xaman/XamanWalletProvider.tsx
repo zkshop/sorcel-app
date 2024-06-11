@@ -5,6 +5,7 @@ import { HStack, Modal, ModalCloseButton, ModalContent, ModalHeader, ModalOverla
 import { createContext } from 'react';
 import { httpServerless } from '../../../http-serverless';
 import { logo } from './logo';
+import axios from 'axios';
 
 type auth = {
   address: string | undefined,
@@ -12,9 +13,14 @@ type auth = {
   isDisconnected: boolean
 };
 
+interface paymentRequest {
+  amount: string,
+  destination: string
+}
+
 export interface XamanContextType {
   modal: {
-    open: () => void;
+    open: (payment?: paymentRequest) => void;
     close: () => void;
     isOpen: boolean;
   },
@@ -29,7 +35,8 @@ interface state {
   apiResponse: XummPostPayloadResponse | undefined,
   currentStep: "none" | "scanned" | "signed" | "expired",
   xummPayload: any | undefined,
-  auth: Omit<auth, "isConnected" | "isDisconnected">
+  auth: Omit<auth, "isConnected" | "isDisconnected">,
+  payment: paymentRequest | undefined
 }
 
 const stepToDescription = new Map<state['currentStep'], string>(
@@ -45,7 +52,8 @@ const stateInitialState: state = {
   xummPayload: undefined,
   auth: {
     address: undefined,
-  }
+  },
+  payment: undefined
 }
 
 export interface XamanWalletProviderProps { children: React.ReactNode };
@@ -86,7 +94,13 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
       return;
     (async () => {
       try {
-        const { data } = await httpServerless.post<XummPostPayloadResponse>("api/shop/xaman/signin");
+        console.log("Sending payment request:", state.payment);
+        const request = state.payment
+          ? axios.post<XummPostPayloadResponse>("http://localhost:3001/sorcel-app/api/xumm/payment", state.payment )
+          : httpServerless.post<XummPostPayloadResponse>("api/shop/xaman/signin");
+
+        const { data } = await request;
+        console.log("!data", data);
         if (state.deepLink)
           window.location.href = `${data.next.always}/deeplink`;
         useSocketService(WebSocket, data.refs.websocket_status, (eventData) => {
@@ -120,7 +134,8 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
         console.error(e);
       }
     })();
-  }, [state.modalOpen, state.deepLink]);
+
+  }, [state.modalOpen, state.deepLink, state.payment]);
 
   useEffect(() => {
     (async () => {
@@ -231,14 +246,19 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
     {renderModal}
     <XamanWalletContext.Provider value={{
       modal: {
-        open: () => {
+        open: (request) => {
+          if (request)
+            setStateByKey('payment', request);
           if (isMobile() && !state.auth.address)
             setStateByKey('deepLink', true)
           else
             setStateByKey('modalOpen', true)
         },
-        close: () => setStateByKey('modalOpen', false),
-        isOpen: ((): boolean => state.modalOpen)()
+        close: () => {
+          setStateByKey('modalOpen', false);
+          setStateByKey('payment', stateInitialState['payment']);
+        },
+        isOpen: ((): boolean => state.modalOpen)(),
       },
       auth: {
         address: state.auth.address,

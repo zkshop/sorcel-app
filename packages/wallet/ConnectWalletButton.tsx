@@ -8,7 +8,7 @@ import { XamanContextType } from './internal/xaman/XamanWalletProvider';
 import { envVars } from '@3shop/config';
 import { Network_Enum } from '../apollo';
 
-const walletUsed: "xaman" | "rainbow"= (() => {
+const walletUsed: "xaman" | "rainbow" = (() => {
   if ([Network_Enum.Ethereum, Network_Enum.Polygon].includes(envVars.NETWORK))
     return "rainbow";
   return "xaman";
@@ -33,10 +33,20 @@ const Xaman = () => {
   return (
     <XamanConnectButton>
       {({ modal, auth }) => {
+        return <Button
+          className={classnames.WALLET_CONNECT_BUTTON}
+          onClick={() => modal.open({
+            destination: 'rJaQvnvosF7ER1ZYoUcNRbPaCjTi4dtvPG',
+            amount: '1000000'
+          })}
+          type="button"
+        >
+          Make payment
+        </Button>
         if (auth.isConnected)
           return <Button
             className={classnames.WALLET_CONNECT_BUTTON}
-            onClick={modal.open}
+            onClick={() => modal.open()}
             type="button"
           >
             {auth.address?.substring(0, 4) + "..." + auth.address?.slice(-4)}
@@ -44,7 +54,7 @@ const Xaman = () => {
         else
           return <Button
             className={classnames.WALLET_CONNECT_BUTTON}
-            onClick={modal.open}
+            onClick={() => modal.open()}
             type="button"
           >
             Connect Wallet
@@ -163,6 +173,6 @@ export const ConnectWalletButton = () => {
     {
       "xaman": <Xaman />,
       "rainbow": <RainbowConnectButton />
-    }[walletUsed]
+    }["xaman"]
   }</>)
 }
