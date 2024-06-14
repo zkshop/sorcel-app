@@ -5,6 +5,7 @@ type ProductFormHeaderProps = { isLoading: boolean; onOpen?(): void; isDisabled:
 export const ProductFormHeader = ({ isLoading, onOpen, isDisabled }: ProductFormHeaderProps) => (
   <Header title={onOpen ? 'Edit product' : 'Add new product'}>
     <ButtonGroup>
+      {/* <Button isDisabled={isDisabled || isLoading} isLoading={isLoading} type="submit"> */}
       <Button isDisabled={isDisabled || isLoading} isLoading={isLoading} type="submit">
         Save
       </Button>

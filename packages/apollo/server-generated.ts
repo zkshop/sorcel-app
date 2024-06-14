@@ -3263,6 +3263,7 @@ export enum Network_Constraint {
 
 export enum Network_Enum {
   Ethereum = 'ETHEREUM',
+  Heirloom = 'HEIRLOOM',
   Polygon = 'POLYGON',
   Xrpledger = 'XRPLEDGER'
 }
@@ -4021,6 +4022,7 @@ export type Product = {
   /** An object relationship */
   app: App;
   app_id: Scalars['uuid'];
+  crypto_price?: Maybe<Scalars['String']>;
   description: Scalars['String'];
   /** An array relationship */
   gate: Array<Gate_V2>;
@@ -4097,6 +4099,7 @@ export type Product_Bool_Exp = {
   _or?: InputMaybe<Array<Product_Bool_Exp>>;
   app?: InputMaybe<App_Bool_Exp>;
   app_id?: InputMaybe<Uuid_Comparison_Exp>;
+  crypto_price?: InputMaybe<String_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   gate?: InputMaybe<Gate_V2_Bool_Exp>;
   gate_aggregate?: InputMaybe<Gate_V2_Aggregate_Bool_Exp>;
@@ -4123,6 +4126,7 @@ export type Product_Inc_Input = {
 export type Product_Insert_Input = {
   app?: InputMaybe<App_Obj_Rel_Insert_Input>;
   app_id?: InputMaybe<Scalars['uuid']>;
+  crypto_price?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   gate?: InputMaybe<Gate_V2_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -4137,6 +4141,7 @@ export type Product_Insert_Input = {
 export type Product_Max_Fields = {
   __typename?: 'product_max_fields';
   app_id?: Maybe<Scalars['uuid']>;
+  crypto_price?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   image?: Maybe<Scalars['String']>;
@@ -4149,6 +4154,7 @@ export type Product_Max_Fields = {
 export type Product_Min_Fields = {
   __typename?: 'product_min_fields';
   app_id?: Maybe<Scalars['uuid']>;
+  crypto_price?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   image?: Maybe<Scalars['String']>;
@@ -4184,6 +4190,7 @@ export type Product_On_Conflict = {
 export type Product_Order_By = {
   app?: InputMaybe<App_Order_By>;
   app_id?: InputMaybe<Order_By>;
+  crypto_price?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   gate_aggregate?: InputMaybe<Gate_V2_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
@@ -4204,6 +4211,8 @@ export enum Product_Select_Column {
   /** column name */
   AppId = 'app_id',
   /** column name */
+  CryptoPrice = 'crypto_price',
+  /** column name */
   Description = 'description',
   /** column name */
   Id = 'id',
@@ -4222,6 +4231,7 @@ export enum Product_Select_Column {
 /** input type for updating data in table "product" */
 export type Product_Set_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
+  crypto_price?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['String']>;
@@ -4260,6 +4270,7 @@ export type Product_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Product_Stream_Cursor_Value_Input = {
   app_id?: InputMaybe<Scalars['uuid']>;
+  crypto_price?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['String']>;
@@ -4415,6 +4426,8 @@ export type Product_Type_Updates = {
 export enum Product_Update_Column {
   /** column name */
   AppId = 'app_id',
+  /** column name */
+  CryptoPrice = 'crypto_price',
   /** column name */
   Description = 'description',
   /** column name */
@@ -7001,7 +7014,7 @@ export type GetProductByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetProductByIdQuery = { __typename?: 'query_root', product?: { __typename?: 'product', app_id: any, id: any, image: string, name: string, description: string, price: number, type: Product_Type_Enum, webhookUrl?: string | null, app: { __typename?: 'app', id: any, deliveryTaxesTableName?: string | null, imgUrl?: string | null, name: string, moneyAccountId?: string | null }, gate: Array<{ __typename?: 'gate_v2', app_id?: any | null, product_id: any, id: any, name: string, discount?: number | null, exclusive_access: boolean, unique_claim: boolean, chain?: string | null, claims: any, segments: Array<{ __typename?: 'segment', id: any, gate_id?: any | null, network?: Network_Enum | null, nft_contract_address?: string | null, poap_ids: any, type: Segment_Type_Enum }> }> } | null };
+export type GetProductByIdQuery = { __typename?: 'query_root', product?: { __typename?: 'product', app_id: any, id: any, image: string, name: string, description: string, price: number, crypto_price?: string | null, type: Product_Type_Enum, webhookUrl?: string | null, app: { __typename?: 'app', id: any, deliveryTaxesTableName?: string | null, imgUrl?: string | null, name: string, moneyAccountId?: string | null }, gate: Array<{ __typename?: 'gate_v2', app_id?: any | null, product_id: any, id: any, name: string, discount?: number | null, exclusive_access: boolean, unique_claim: boolean, chain?: string | null, claims: any, segments: Array<{ __typename?: 'segment', id: any, gate_id?: any | null, network?: Network_Enum | null, nft_contract_address?: string | null, poap_ids: any, type: Segment_Type_Enum }> }> } | null };
 
 export type GetProductsQueryVariables = Exact<{
   appId: Scalars['uuid'];
@@ -7561,6 +7574,7 @@ export const GetProductByIdDocument = gql`
     name
     description
     price
+    crypto_price
     type
     webhookUrl
     app {

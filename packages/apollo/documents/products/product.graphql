@@ -6,6 +6,7 @@ query GetProductById($id: uuid!) {
     name
     description
     price
+    crypto_price
     type
     webhookUrl
     app {

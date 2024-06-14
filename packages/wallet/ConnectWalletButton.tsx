@@ -33,16 +33,16 @@ const Xaman = () => {
   return (
     <XamanConnectButton>
       {({ modal, auth }) => {
-        return <Button
-          className={classnames.WALLET_CONNECT_BUTTON}
-          onClick={() => modal.open({
-            destination: 'rJaQvnvosF7ER1ZYoUcNRbPaCjTi4dtvPG',
-            amount: '1000000'
-          })}
-          type="button"
-        >
-          Make payment
-        </Button>
+        // return <Button
+        //   className={classnames.WALLET_CONNECT_BUTTON}
+        //   onClick={() => modal.open({
+        //     destination: 'rJaQvnvosF7ER1ZYoUcNRbPaCjTi4dtvPG',
+        //     amount: '1000000'
+        //   })}
+        //   type="button"
+        // >
+        //   Make payment
+        // </Button>
         if (auth.isConnected)
           return <Button
             className={classnames.WALLET_CONNECT_BUTTON}
@@ -173,6 +173,6 @@ export const ConnectWalletButton = () => {
     {
       "xaman": <Xaman />,
       "rainbow": <RainbowConnectButton />
-    }["xaman"]
+    }[walletUsed]
   }</>)
 }
