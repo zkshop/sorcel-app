@@ -32,6 +32,7 @@ const envVars = {
   YEARLY_PRO_PLAN_CHECKOUT_LINK: undefined,
   LINK_API_URL: 'https://www.walletlink.org',
   SDK_VERSION: 'unknown',
+  SORCEL_DEV_BACKEND_PORT: process.env.SORCEL_DEV_BACKEND_PORT || '',
 };
 
 const dirname = __dirname;
@@ -41,10 +42,7 @@ const commonConfig = createCommonConfig({ dirname, envVars });
 export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
   process.env['APP_ID'] = "220bc83c-57b7-4f11-af96-0978d50a944b";
-  console.log(JSON.stringify({
-    chain: "xrp",
-    value: "10000"
-  }))
+  process.env['NETWORK'] = "XRPLEDGER";
 
   return {
     ...commonConfig,

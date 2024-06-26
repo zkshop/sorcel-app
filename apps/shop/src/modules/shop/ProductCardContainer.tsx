@@ -120,11 +120,16 @@ export function ProductCardContainer({ connectionStatus, auth, product }: Props)
   const gates = product.gate.slice() || [];
   const sortedGates = gates.sort(sortGates);
 
-  const { isLocked, validatedNfts } = useValidation(
-    gates.filter((gate) => gate != undefined) as Gate_V2[],
-    userNFTs,
-    userPoapIds,
-  );
+  // const { isLocked, validatedNfts } = useValidation(
+  //   gates.filter((gate) => gate != undefined) as Gate_V2[],
+  //   userNFTs,
+  //   userPoapIds,
+  // );
+  const {isLocked, validatedNfts} = {
+    isLocked: false,
+    validatedNfts: [{
+    }]
+  }
 
   const formatedProduct = formatProductData({
     product,

@@ -11,6 +11,11 @@ type CartItemProps = {
   imageUrl: string;
 };
 
+export interface cryptoPrice {
+  currency: string,
+  value: string
+}
+
 export const CartItem = (props: CartItemProps) => {
   const { name, description, imageUrl, currency, price } = props;
 

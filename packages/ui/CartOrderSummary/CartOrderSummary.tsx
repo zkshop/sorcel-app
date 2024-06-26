@@ -4,11 +4,13 @@ import { ArrowRightIcon } from '../Icons';
 
 import { formatPrice } from '../PriceTag/PriceTag';
 import { Text } from '../Text/Text';
+import { cryptoPrice } from '../CartItem/CartItem';
 
 type CartOrderSummaryProps = {
   amount: number;
   fees?: number;
   isDisabled: boolean;
+  cryptoPrice?: cryptoPrice
 };
 
 type OrderSummaryItemProps = {
@@ -30,7 +32,7 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
   );
 };
 
-export const CartOrderSummary = ({ amount, isDisabled, fees = 0 }: CartOrderSummaryProps) => (
+export const CartOrderSummary = ({ cryptoPrice, amount, isDisabled, fees = 0 }: CartOrderSummaryProps) => (
   <Stack
     spacing="8"
     rounded="lg"
@@ -66,7 +68,7 @@ export const CartOrderSummary = ({ amount, isDisabled, fees = 0 }: CartOrderSumm
       isDisabled={isDisabled}
       type="submit"
     >
-      {amount ? 'Checkout' : 'Get for free'}
+      {(amount || cryptoPrice) ? 'Checkout' : 'Get for free'}
     </Button>
   </Stack>
 );

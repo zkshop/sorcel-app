@@ -6,6 +6,7 @@ import { createContext } from 'react';
 import { httpServerless } from '../../../http-serverless';
 import { logo } from './logo';
 import axios from 'axios';
+import { Base } from '../../../../apps/admin/src/api/base';
 
 type auth = {
   address: string | undefined,
@@ -14,6 +15,7 @@ type auth = {
 };
 
 interface paymentRequest {
+  id?: string
   amount: string,
   destination: string
 }
@@ -25,6 +27,7 @@ export interface XamanContextType {
     isOpen: boolean;
   },
   auth: auth;
+  paid: paymentRequest[]
 }
 
 export const XamanWalletContext = createContext<XamanContextType | undefined>(undefined);
@@ -36,7 +39,8 @@ interface state {
   currentStep: "none" | "scanned" | "signed" | "expired",
   xummPayload: any | undefined,
   auth: Omit<auth, "isConnected" | "isDisconnected">,
-  payment: paymentRequest | undefined
+  payment: paymentRequest | undefined,
+  paid: paymentRequest[]
 }
 
 const stepToDescription = new Map<state['currentStep'], string>(
@@ -51,9 +55,10 @@ const stateInitialState: state = {
   currentStep: "none",
   xummPayload: undefined,
   auth: {
-    address: undefined,
+    address: "rMjFHVDLawmuFfXhJNXYcq1WD1wVSC45HU",
   },
-  payment: undefined
+  payment: undefined,
+  paid: []
 }
 
 export interface XamanWalletProviderProps { children: React.ReactNode };
@@ -90,13 +95,15 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
   }, []);
 
   useEffect(() => {
-    if ((!state.modalOpen && !state.deepLink) || state.auth.address !== undefined)
+    if ((!state.modalOpen && !state.deepLink) || (state.auth.address !== undefined && !state.payment))
       return;
     (async () => {
       try {
-        console.log("Sending payment request:", state.payment);
+        // console.log("Sending payment request:", state.payment);
+        console.log("!base backend url", Base.backendBaseUrl);
+        console.log("payment", state.payment);
         const request = state.payment
-          ? axios.post<XummPostPayloadResponse>("http://localhost:3001/sorcel-app/api/xumm/payment", state.payment )
+          ? axios.post<XummPostPayloadResponse>(`${Base.backendBaseUrl}/api/xumm/payment`, { ...state.payment, account: state.auth.address })
           : httpServerless.post<XummPostPayloadResponse>("api/shop/xaman/signin");
 
         const { data } = await request;
@@ -143,17 +150,22 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
         return;
       try {
         const response = await httpServerless.post<XummGetPayloadResponse>("api/shop/xaman/payload", { payload_uuid: state.xummPayload['payload_uuidv4'] });
+        console.log("!response xaman", response);
         const address = response.data.response.signer;
-        if (!address) {
-          toast({
-            status: 'error',
-            title: 'We failed to authenticate you. Please try again',
-          });
-          handlers.disconnect();
-        }
-        else {
-          setStateByKey('auth', { ...state.auth, address });
-          setStateByKey('modalOpen', false);
+        if (state.payment) {
+          setStateByKey('paid', [...state.paid, state.payment]);
+        } else {
+          if (!address) {
+            toast({
+              status: 'error',
+              title: 'We failed to authenticate you. Please try again',
+            });
+            handlers.disconnect();
+          }
+          else {
+            setStateByKey('auth', { ...state.auth, address });
+            setStateByKey('modalOpen', false);
+          }
         }
       } catch (e) {
         console.error(e);
@@ -205,7 +217,7 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
       <ModalOverlay />
       <ModalContent padding="6">
         {
-          state.auth.address !== undefined ? (
+          state.auth.address !== undefined && !state.payment ? (
             <>
               <ModalCloseButton />
               <VStack>
@@ -265,6 +277,7 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
         isConnected: ((): boolean => state.auth.address !== undefined)(),
         isDisconnected: ((): boolean => state.auth.address === undefined)(),
       },
+      paid: state.paid,
     }}>
       {children}
     </XamanWalletContext.Provider>

@@ -102,6 +102,7 @@ export type App = {
   plan?: Maybe<Plan_Enum>;
   show_brand?: Maybe<Scalars['Boolean']>;
   show_connect_email?: Maybe<Scalars['Boolean']>;
+  xrpWallet?: Maybe<Scalars['String']>;
 };
 
 
@@ -170,6 +171,7 @@ export type App_Bool_Exp = {
   plan?: InputMaybe<Plan_Enum_Comparison_Exp>;
   show_brand?: InputMaybe<Boolean_Comparison_Exp>;
   show_connect_email?: InputMaybe<Boolean_Comparison_Exp>;
+  xrpWallet?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "app" */
@@ -200,6 +202,7 @@ export type App_Insert_Input = {
   plan?: InputMaybe<Plan_Enum>;
   show_brand?: InputMaybe<Scalars['Boolean']>;
   show_connect_email?: InputMaybe<Scalars['Boolean']>;
+  xrpWallet?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
@@ -218,6 +221,7 @@ export type App_Max_Fields = {
   imgUrl?: Maybe<Scalars['String']>;
   moneyAccountId?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  xrpWallet?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
@@ -236,6 +240,7 @@ export type App_Min_Fields = {
   imgUrl?: Maybe<Scalars['String']>;
   moneyAccountId?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  xrpWallet?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "app" */
@@ -281,6 +286,7 @@ export type App_Order_By = {
   plan?: InputMaybe<Order_By>;
   show_brand?: InputMaybe<Order_By>;
   show_connect_email?: InputMaybe<Order_By>;
+  xrpWallet?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: app */
@@ -323,7 +329,9 @@ export enum App_Select_Column {
   /** column name */
   ShowBrand = 'show_brand',
   /** column name */
-  ShowConnectEmail = 'show_connect_email'
+  ShowConnectEmail = 'show_connect_email',
+  /** column name */
+  XrpWallet = 'xrpWallet'
 }
 
 /** input type for updating data in table "app" */
@@ -345,6 +353,7 @@ export type App_Set_Input = {
   plan?: InputMaybe<Plan_Enum>;
   show_brand?: InputMaybe<Scalars['Boolean']>;
   show_connect_email?: InputMaybe<Scalars['Boolean']>;
+  xrpWallet?: InputMaybe<Scalars['String']>;
 };
 
 /** Streaming cursor of the table "app" */
@@ -374,6 +383,7 @@ export type App_Stream_Cursor_Value_Input = {
   plan?: InputMaybe<Plan_Enum>;
   show_brand?: InputMaybe<Scalars['Boolean']>;
   show_connect_email?: InputMaybe<Scalars['Boolean']>;
+  xrpWallet?: InputMaybe<Scalars['String']>;
 };
 
 /** update columns of table "app" */
@@ -411,7 +421,9 @@ export enum App_Update_Column {
   /** column name */
   ShowBrand = 'show_brand',
   /** column name */
-  ShowConnectEmail = 'show_connect_email'
+  ShowConnectEmail = 'show_connect_email',
+  /** column name */
+  XrpWallet = 'xrpWallet'
 }
 
 export type App_Updates = {
@@ -6700,7 +6712,7 @@ export type GetAppQueryVariables = Exact<{
 }>;
 
 
-export type GetAppQuery = { __typename?: 'query_root', app?: { __typename?: 'app', id: any, name: string, imgUrl?: string | null, deliveryTaxesTableName?: string | null, show_brand?: boolean | null, show_connect_email?: boolean | null } | null };
+export type GetAppQuery = { __typename?: 'query_root', app?: { __typename?: 'app', id: any, name: string, imgUrl?: string | null, deliveryTaxesTableName?: string | null, xrpWallet?: string | null, show_brand?: boolean | null, show_connect_email?: boolean | null } | null };
 
 export type GetPlanQueryVariables = Exact<{
   appId: Scalars['uuid'];
@@ -7081,6 +7093,7 @@ export const GetAppDocument = gql`
     name
     imgUrl
     deliveryTaxesTableName
+    xrpWallet
     show_brand
     show_connect_email
   }

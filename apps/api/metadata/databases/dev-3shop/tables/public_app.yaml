@@ -24,6 +24,7 @@ select_permissions:
         - plan
         - show_brand
         - show_connect_email
+        - xrpWallet
       filter: {}
   - role: customer
     permission:

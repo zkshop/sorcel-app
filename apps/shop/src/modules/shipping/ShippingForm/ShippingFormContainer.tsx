@@ -1,4 +1,4 @@
-import { Heading, SimpleGrid, Stack, VStack, CartItem, CartOrderSummary, Section } from '@3shop/ui';
+import { Heading, SimpleGrid, Stack, VStack, CartItem, CartOrderSummary, Section, cryptoPrice } from '@3shop/ui';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { ShippingForm } from './ShippingForm';
@@ -25,9 +25,11 @@ type ShippingFormContainerProps = {
 
 export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) => {
   const { address } = useAccount();
+  const cryptoPrice: cryptoPrice = product?.crypto_price ? JSON.parse(product.crypto_price) : null;
   const email = useAppSelector((state) => state.user.auth.email);
   if (!product) return null;
-  const { id, price, name, image, gate } = product;
+  const { id, price, name, image, gate, crypto_price } = product;
+  // console.log("!crypto price", crypto_price);
 
   const discount = get(gate, '[0].discount', 0);
 
@@ -81,7 +83,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
       }),
     );
 
-    if (amount === 0) {
+    if (amount === 0 && !cryptoPrice) {
       try {
         await createOrder({
           variables: {
@@ -141,7 +143,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
               </Stack>
             </Section>
 
-            <CartOrderSummary fees={fees} isDisabled={!isValid} amount={amount} />
+            <CartOrderSummary fees={fees} isDisabled={!isValid} cryptoPrice={cryptoPrice} amount={amount} />
           </VStack>
         </SimpleGrid>
       </form>
