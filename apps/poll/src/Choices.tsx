@@ -85,7 +85,7 @@ export const Choices = () => {
           <MobileTitleLayer>{data.poll.title}</MobileTitleLayer>
         </Box>
         <Box marginTop={8} flex={1} display="flex" justifyContent="center" alignItems="center">
-          {isLocked ? (
+          {!isLocked ? (
             <Heading color="white" textAlign="center" fontSize="x-large">
               Connect your wallet with Human Divergence NFT to vote
             </Heading>
