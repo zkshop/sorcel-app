@@ -39,6 +39,7 @@ export const Choices = () => {
 
   if (loading) return <Spinner />;
   if (!data || !data.poll) return <>Error</>;
+  else console.log('Poll:', data.poll);
 
   const alreadyVoted = haveAlreadyVote(data.poll.voters, address);
 

@@ -28,6 +28,8 @@ export const PollList = () => {
   if (loading) return <Spinner />;
   if (!data) return <>Error</>;
 
+  console.log('Poll List:', data.polls); // Log the poll list to the console
+
   return (
     <PollListContainer columnGap={2} rowGap={24}>
       {data.polls.map((poll) => (

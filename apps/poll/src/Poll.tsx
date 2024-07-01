@@ -17,7 +17,9 @@ export const Poll = ({ title, image, completed }: PollType) => (
     <Box position="relative">
       {completed && (
         <TitleLayer>
-          <Text fontWeight="bold">Completed</Text>
+          <Text fontWeight="bold" color="white">
+            Completed
+          </Text>
         </TitleLayer>
       )}
       <PollImage completed={completed} src={image} />
