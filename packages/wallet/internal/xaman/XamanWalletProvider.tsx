@@ -7,6 +7,7 @@ import { httpServerless } from '../../../http-serverless';
 import { logo } from './logo';
 import axios from 'axios';
 import { Base } from '../../../../apps/admin/src/api/base';
+import * as xrpl from 'xrpl';
 
 type auth = {
   address: string | undefined,
@@ -55,7 +56,7 @@ const stateInitialState: state = {
   currentStep: "none",
   xummPayload: undefined,
   auth: {
-    address: "rMjFHVDLawmuFfXhJNXYcq1WD1wVSC45HU",
+    address: undefined,
   },
   payment: undefined,
   paid: []
@@ -100,14 +101,11 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
     (async () => {
       try {
         // console.log("Sending payment request:", state.payment);
-        console.log("!base backend url", Base.backendBaseUrl);
-        console.log("payment", state.payment);
         const request = state.payment
           ? axios.post<XummPostPayloadResponse>(`${Base.backendBaseUrl}/api/xumm/payment`, { ...state.payment, account: state.auth.address })
           : httpServerless.post<XummPostPayloadResponse>("api/shop/xaman/signin");
 
         const { data } = await request;
-        console.log("!data", data);
         if (state.deepLink)
           window.location.href = `${data.next.always}/deeplink`;
         useSocketService(WebSocket, data.refs.websocket_status, (eventData) => {
@@ -152,7 +150,7 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
         const response = await httpServerless.post<XummGetPayloadResponse>("api/shop/xaman/payload", { payload_uuid: state.xummPayload['payload_uuidv4'] });
         console.log("!response xaman", response);
         const address = response.data.response.signer;
-        if (state.payment) {
+        if (state.payment && response.data.response.dispatched_result == "tesSUCCESS") {
           setStateByKey('paid', [...state.paid, state.payment]);
         } else {
           if (!address) {
@@ -260,7 +258,7 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
       modal: {
         open: (request) => {
           if (request)
-            setStateByKey('payment', request);
+            setStateByKey('payment', {...request, amount: xrpl.xrpToDrops(request.amount)});
           if (isMobile() && !state.auth.address)
             setStateByKey('deepLink', true)
           else

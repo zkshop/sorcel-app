@@ -46,6 +46,7 @@ select_permissions:
     permission:
       columns:
         - app_id
+        - crypto_price
         - description
         - id
         - image

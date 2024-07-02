@@ -38,6 +38,7 @@ query getAdminApp {
     show_brand
     show_connect_email
     plan
+    xrpWallet
   }
 }
 
@@ -47,6 +48,15 @@ mutation UpdateApp($appId: uuid!, $newName: String!, $newImgUrl: String) {
       id
       imgUrl
       name
+    }
+  }
+}
+
+mutation updateXrpWallet($appId: uuid!, $xrpWallet: String!) {
+  update_app(where: { id: { _eq: $appId } }, _set: { xrpWallet: $xrpWallet }) {
+    returning {
+      id
+      xrpWallet
     }
   }
 }

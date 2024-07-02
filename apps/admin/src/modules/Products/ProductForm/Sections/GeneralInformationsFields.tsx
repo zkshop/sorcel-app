@@ -10,14 +10,13 @@ import {
   Switch,
   HStack,
   Text,
+  Select,
 } from '@3shop/ui';
 import { useFormContext } from 'react-hook-form';
 
-import { PRODUCTS_FIELDS } from '../../constants';
+import { PRODUCTS_FIELDS, currencies } from '../../constants';
 import type { AddProductFormValues } from '../types';
 import { useGetAdminAppQuery } from '@3shop/apollo';
-import { Link } from 'react-router-dom';
-import { ROUTES_PATH } from '../../../../routes/Routes';
 
 export const GeneralInformationsFields = () => {
   const { data, error } = useGetAdminAppQuery();
@@ -31,7 +30,6 @@ export const GeneralInformationsFields = () => {
     return <div>Error</div>;
   }
 
-  const priceValue = watch('price');
   const isModalValue = watch('isModal');
 
   return (
@@ -78,19 +76,23 @@ export const GeneralInformationsFields = () => {
               {...register('price')}
             />
           </NumberInput>
-          {priceValue && priceValue !== '0' && !data.app[0].moneyAccountId && (
-            <Text color="red.500">
-              {'You must be connected to '}
-              <Link
-                to={`${ROUTES_PATH.PROTECTED.PAYMENTS}`}
-                style={{ textDecoration: 'underline' }}
-              >
-                Stripe
-              </Link>
-              {' to have a non free product.'}
-            </Text>
-          )}
           <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
+        </FormControl>
+      )}
+
+      {/* Currency */}
+      {!isModalValue && (
+        <FormControl isInvalid={Boolean(errors.currency)}>
+          <FormLabel mb={1}>{PRODUCTS_FIELDS.currency.label}</FormLabel>
+
+          <Select placeholder="Select currency" defaultValue="euro" {...register('currency')}>
+            {currencies.map((currency) => (
+              <option key={currency} value={currency}>
+                {currency}
+              </option>
+            ))}
+          </Select>
+          <FormErrorMessage>{errors.currency?.message}</FormErrorMessage>
         </FormControl>
       )}
 

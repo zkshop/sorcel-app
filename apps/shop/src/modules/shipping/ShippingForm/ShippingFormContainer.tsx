@@ -1,4 +1,5 @@
-import { Heading, SimpleGrid, Stack, VStack, CartItem, CartOrderSummary, Section, cryptoPrice } from '@3shop/ui';
+import type { cryptoPrice } from '@3shop/ui';
+import { Heading, SimpleGrid, Stack, VStack, CartItem, CartOrderSummary, Section } from '@3shop/ui';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { ShippingForm } from './ShippingForm';
@@ -28,8 +29,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
   const cryptoPrice: cryptoPrice = product?.crypto_price ? JSON.parse(product.crypto_price) : null;
   const email = useAppSelector((state) => state.user.auth.email);
   if (!product) return null;
-  const { id, price, name, image, gate, crypto_price } = product;
-  // console.log("!crypto price", crypto_price);
+  const { id, price, name, image, gate } = product;
 
   const discount = get(gate, '[0].discount', 0);
 
@@ -119,6 +119,13 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
 
     navigate(`/checkout/${id}`);
   };
+  const priceNode = () => {
+    if (product.crypto_price) {
+      const parsed: { value: string; currency: string } = JSON.parse(product.crypto_price);
+      return <>{`${parsed.value}${parsed.currency}`}</>;
+    }
+    return undefined;
+  };
 
   return (
     <FormProvider {...methods}>
@@ -134,6 +141,7 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
             <Section>
               <Stack spacing="6">
                 <CartItem
+                  priceNode={priceNode()}
                   currency="EUR"
                   price={amount}
                   name={name}
@@ -143,7 +151,12 @@ export const ShippingFormContainer = ({ product }: ShippingFormContainerProps) =
               </Stack>
             </Section>
 
-            <CartOrderSummary fees={fees} isDisabled={!isValid} cryptoPrice={cryptoPrice} amount={amount} />
+            <CartOrderSummary
+              fees={fees}
+              isDisabled={!isValid}
+              crypto_price={product.crypto_price}
+              amount={amount}
+            />
           </VStack>
         </SimpleGrid>
       </form>

@@ -120,16 +120,11 @@ export function ProductCardContainer({ connectionStatus, auth, product }: Props)
   const gates = product.gate.slice() || [];
   const sortedGates = gates.sort(sortGates);
 
-  // const { isLocked, validatedNfts } = useValidation(
-  //   gates.filter((gate) => gate != undefined) as Gate_V2[],
-  //   userNFTs,
-  //   userPoapIds,
-  // );
-  const {isLocked, validatedNfts} = {
-    isLocked: false,
-    validatedNfts: [{
-    }]
-  }
+  const { isLocked, validatedNfts } = useValidation(
+    gates.filter((gate) => gate != undefined) as Gate_V2[],
+    userNFTs,
+    userPoapIds,
+  );
 
   const formatedProduct = formatProductData({
     product,
@@ -146,7 +141,12 @@ export function ProductCardContainer({ connectionStatus, auth, product }: Props)
       justifyContent="center"
     >
       <ValidationResultContext.Provider value={validatedNfts}>
-        <ProductCard {...formatedProduct} connectionStatus={connectionStatus} auth={auth} />
+        <ProductCard
+          crypto_price={product.crypto_price}
+          {...formatedProduct}
+          connectionStatus={connectionStatus}
+          auth={auth}
+        />
       </ValidationResultContext.Provider>
     </GridItem>
   );

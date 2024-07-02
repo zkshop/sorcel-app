@@ -6731,7 +6731,7 @@ export type GetAppThemeQuery = { __typename?: 'query_root', app?: { __typename?:
 export type GetAdminAppQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAdminAppQuery = { __typename?: 'query_root', app: Array<{ __typename?: 'app', id: any, name: string, imgUrl?: string | null, moneyAccountId?: string | null, background_color?: string | null, font?: string | null, font_color?: string | null, show_brand?: boolean | null, show_connect_email?: boolean | null, plan?: Plan_Enum | null }> };
+export type GetAdminAppQuery = { __typename?: 'query_root', app: Array<{ __typename?: 'app', id: any, name: string, imgUrl?: string | null, moneyAccountId?: string | null, background_color?: string | null, font?: string | null, font_color?: string | null, show_brand?: boolean | null, show_connect_email?: boolean | null, plan?: Plan_Enum | null, xrpWallet?: string | null }> };
 
 export type UpdateAppMutationVariables = Exact<{
   appId: Scalars['uuid'];
@@ -6741,6 +6741,14 @@ export type UpdateAppMutationVariables = Exact<{
 
 
 export type UpdateAppMutation = { __typename?: 'mutation_root', update_app?: { __typename?: 'app_mutation_response', returning: Array<{ __typename?: 'app', id: any, imgUrl?: string | null, name: string }> } | null };
+
+export type UpdateXrpWalletMutationVariables = Exact<{
+  appId: Scalars['uuid'];
+  xrpWallet: Scalars['String'];
+}>;
+
+
+export type UpdateXrpWalletMutation = { __typename?: 'mutation_root', update_app?: { __typename?: 'app_mutation_response', returning: Array<{ __typename?: 'app', id: any, xrpWallet?: string | null }> } | null };
 
 export type UpdateCustomizationFieldsMutationVariables = Exact<{
   id: Scalars['uuid'];
@@ -7033,7 +7041,7 @@ export type GetProductsQueryVariables = Exact<{
 }>;
 
 
-export type GetProductsQuery = { __typename?: 'query_root', products: Array<{ __typename?: 'product', app_id: any, id: any, image: string, name: string, description: string, price: number, type: Product_Type_Enum, webhookUrl?: string | null, gate: Array<{ __typename?: 'gate_v2', app_id?: any | null, product_id: any, id: any, name: string, discount?: number | null, exclusive_access: boolean, unique_claim: boolean, chain?: string | null, claims: any, segments: Array<{ __typename?: 'segment', id: any, gate_id?: any | null, network?: Network_Enum | null, nft_contract_address?: string | null, poap_ids: any, type: Segment_Type_Enum }> }> }> };
+export type GetProductsQuery = { __typename?: 'query_root', products: Array<{ __typename?: 'product', app_id: any, id: any, image: string, name: string, description: string, price: number, crypto_price?: string | null, type: Product_Type_Enum, webhookUrl?: string | null, gate: Array<{ __typename?: 'gate_v2', app_id?: any | null, product_id: any, id: any, name: string, discount?: number | null, exclusive_access: boolean, unique_claim: boolean, chain?: string | null, claims: any, segments: Array<{ __typename?: 'segment', id: any, gate_id?: any | null, network?: Network_Enum | null, nft_contract_address?: string | null, poap_ids: any, type: Segment_Type_Enum }> }> }> };
 
 export type GetAdminProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -7130,6 +7138,7 @@ export const GetAdminAppDocument = gql`
     show_brand
     show_connect_email
     plan
+    xrpWallet
   }
 }
     `;
@@ -7143,6 +7152,16 @@ export const UpdateAppDocument = gql`
       id
       imgUrl
       name
+    }
+  }
+}
+    `;
+export const UpdateXrpWalletDocument = gql`
+    mutation updateXrpWallet($appId: uuid!, $xrpWallet: String!) {
+  update_app(where: {id: {_eq: $appId}}, _set: {xrpWallet: $xrpWallet}) {
+    returning {
+      id
+      xrpWallet
     }
   }
 }
@@ -7612,6 +7631,7 @@ export const GetProductsDocument = gql`
     name
     description
     price
+    crypto_price
     type
     webhookUrl
     gate {
@@ -7691,6 +7711,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     UpdateApp(variables: UpdateAppMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateAppMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpdateAppMutation>(UpdateAppDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateApp', 'mutation', variables);
+    },
+    updateXrpWallet(variables: UpdateXrpWalletMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateXrpWalletMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateXrpWalletMutation>(UpdateXrpWalletDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateXrpWallet', 'mutation', variables);
     },
     updateCustomizationFields(variables: UpdateCustomizationFieldsMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateCustomizationFieldsMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpdateCustomizationFieldsMutation>(UpdateCustomizationFieldsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateCustomizationFields', 'mutation', variables);

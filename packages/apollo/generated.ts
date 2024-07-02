@@ -6482,6 +6482,7 @@ export type GetAdminAppQuery = {
     show_brand?: boolean | null;
     show_connect_email?: boolean | null;
     plan?: Plan_Enum | null;
+    xrpWallet?: string | null;
   }>;
 };
 
@@ -6496,6 +6497,19 @@ export type UpdateAppMutation = {
   update_app?: {
     __typename?: 'app_mutation_response';
     returning: Array<{ __typename?: 'app'; id: any; imgUrl?: string | null; name: string }>;
+  } | null;
+};
+
+export type UpdateXrpWalletMutationVariables = Exact<{
+  appId: Scalars['uuid'];
+  xrpWallet: Scalars['String'];
+}>;
+
+export type UpdateXrpWalletMutation = {
+  __typename?: 'mutation_root';
+  update_app?: {
+    __typename?: 'app_mutation_response';
+    returning: Array<{ __typename?: 'app'; id: any; xrpWallet?: string | null }>;
   } | null;
 };
 
@@ -7150,6 +7164,7 @@ export type GetProductsQuery = {
     name: string;
     description: string;
     price: number;
+    crypto_price?: string | null;
     type: Product_Type_Enum;
     webhookUrl?: string | null;
     gate: Array<{
@@ -7404,6 +7419,7 @@ export const GetAdminAppDocument = gql`
       show_brand
       show_connect_email
       plan
+      xrpWallet
     }
   }
 `;
@@ -7493,6 +7509,57 @@ export type UpdateAppMutationResult = Apollo.MutationResult<UpdateAppMutation>;
 export type UpdateAppMutationOptions = Apollo.BaseMutationOptions<
   UpdateAppMutation,
   UpdateAppMutationVariables
+>;
+export const UpdateXrpWalletDocument = gql`
+  mutation updateXrpWallet($appId: uuid!, $xrpWallet: String!) {
+    update_app(where: { id: { _eq: $appId } }, _set: { xrpWallet: $xrpWallet }) {
+      returning {
+        id
+        xrpWallet
+      }
+    }
+  }
+`;
+export type UpdateXrpWalletMutationFn = Apollo.MutationFunction<
+  UpdateXrpWalletMutation,
+  UpdateXrpWalletMutationVariables
+>;
+
+/**
+ * __useUpdateXrpWalletMutation__
+ *
+ * To run a mutation, you first call `useUpdateXrpWalletMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateXrpWalletMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateXrpWalletMutation, { data, loading, error }] = useUpdateXrpWalletMutation({
+ *   variables: {
+ *      appId: // value for 'appId'
+ *      xrpWallet: // value for 'xrpWallet'
+ *   },
+ * });
+ */
+export function useUpdateXrpWalletMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateXrpWalletMutation,
+    UpdateXrpWalletMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<UpdateXrpWalletMutation, UpdateXrpWalletMutationVariables>(
+    UpdateXrpWalletDocument,
+    options,
+  );
+}
+export type UpdateXrpWalletMutationHookResult = ReturnType<typeof useUpdateXrpWalletMutation>;
+export type UpdateXrpWalletMutationResult = Apollo.MutationResult<UpdateXrpWalletMutation>;
+export type UpdateXrpWalletMutationOptions = Apollo.BaseMutationOptions<
+  UpdateXrpWalletMutation,
+  UpdateXrpWalletMutationVariables
 >;
 export const UpdateCustomizationFieldsDocument = gql`
   mutation updateCustomizationFields(
@@ -9530,6 +9597,7 @@ export const GetProductsDocument = gql`
       name
       description
       price
+      crypto_price
       type
       webhookUrl
       gate {

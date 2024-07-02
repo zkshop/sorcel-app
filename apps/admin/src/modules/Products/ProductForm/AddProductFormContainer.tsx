@@ -48,6 +48,26 @@ export const AddProductFormContainer = () => {
 
   const onSubmit = async (data: AddProductFormValues) => {
     try {
+      console.log('!submit data', data);
+      const price = (() => {
+        if (data.isModal || data.currency != 'euro') return 0;
+        return Number(data.price);
+      })();
+      const crypto_price = (() => {
+        if (data.currency == 'euro') return null;
+        return JSON.stringify({
+          currency: data.currency,
+          value: String(data.price),
+        });
+      })();
+      if (crypto_price && !adminData?.app[0].xrpWallet) {
+        toast({
+          status: 'error',
+          title: 'Xrp wallet not linked',
+          description: 'To use Xrp currency, please link your wallet under the payment section',
+        });
+        return;
+      }
       setStorageActionLoading(true);
 
       const uploadUrl = await storage.uploadPicture(data.image, 'products');
@@ -56,7 +76,8 @@ export const AddProductFormContainer = () => {
       await product?.create({
         ...data,
         image: uploadUrl,
-        price: data.isModal ? 0 : Number(data.price),
+        price,
+        crypto_price,
         isModal: data.isModal,
       });
       toast(getAddProductSuccessMessage(data.name));
@@ -72,10 +93,7 @@ export const AddProductFormContainer = () => {
   return (
     <FormProvider {...methods}>
       <ProductForm
-        isDisabled={
-          !isValid ||
-          (!adminData?.app[0].moneyAccountId && Number(methods.getValues('price')) !== 0)
-        }
+        isDisabled={!isValid}
         isLoading={storageActionLoading || !ready}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}

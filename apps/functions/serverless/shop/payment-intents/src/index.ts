@@ -27,6 +27,7 @@ const handler: HttpFunction = async (req, res) => {
       clientSecret: paymentIntent.client_secret,
     });
   } catch (error) {
+    console.error(error);
     return res.status(INTERNAL_SERVER_ERROR).json({ message: error });
   }
 };

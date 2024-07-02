@@ -4,13 +4,12 @@ import { ArrowRightIcon } from '../Icons';
 
 import { formatPrice } from '../PriceTag/PriceTag';
 import { Text } from '../Text/Text';
-import { cryptoPrice } from '../CartItem/CartItem';
 
 type CartOrderSummaryProps = {
   amount: number;
   fees?: number;
   isDisabled: boolean;
-  cryptoPrice?: cryptoPrice
+  crypto_price: string | null | undefined;
 };
 
 type OrderSummaryItemProps = {
@@ -32,43 +31,56 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
   );
 };
 
-export const CartOrderSummary = ({ cryptoPrice, amount, isDisabled, fees = 0 }: CartOrderSummaryProps) => (
-  <Stack
-    spacing="8"
-    rounded="lg"
-    width="full"
-    sx={{
-      p: 8,
-      border: '1px solid lightgrey',
-    }}
-  >
-    <Heading size="md">Order Summary</Heading>
-
-    <Stack spacing="6">
-      <OrderSummaryItem label="Shipping fees" value={fees.toString() + '€'}>
-        <Link href="#" textDecor="underline">
-          Calculate shipping
-        </Link>
-      </OrderSummaryItem>
-      <Flex justify="space-between">
-        <Text fontSize="lg" fontWeight="semibold">
-          Total
-        </Text>
-        <Text fontSize="xl" fontWeight="extrabold">
-          {formatPrice(amount)}
-        </Text>
-      </Flex>
-    </Stack>
-
-    <Button
-      colorScheme="blue"
-      size="lg"
-      fontSize="md"
-      rightIcon={<ArrowRightIcon />}
-      isDisabled={isDisabled}
-      type="submit"
+export const CartOrderSummary = ({
+  crypto_price,
+  amount,
+  isDisabled,
+  fees = 0,
+}: CartOrderSummaryProps) => {
+  console.log('!crypto_price', crypto_price);
+  const getPriceString = () => {
+    if (!crypto_price) return formatPrice(amount);
+    const parsed: { value: string; currency: string } = JSON.parse(crypto_price);
+    return `${parsed.value}${parsed.currency}`;
+  };
+  return (
+    <Stack
+      spacing="8"
+      rounded="lg"
+      width="full"
+      sx={{
+        p: 8,
+        border: '1px solid lightgrey',
+      }}
     >
-      {(amount || cryptoPrice) ? 'Checkout' : 'Get for free'}
-    </Button>
-  </Stack>
-);
+      <Heading size="md">Order Summary</Heading>
+
+      <Stack spacing="6">
+        <OrderSummaryItem label="Shipping fees" value={fees.toString() + '€'}>
+          <Link href="#" textDecor="underline">
+            Calculate shipping
+          </Link>
+        </OrderSummaryItem>
+        <Flex justify="space-between">
+          <Text fontSize="lg" fontWeight="semibold">
+            Total
+          </Text>
+          <Text fontSize="xl" fontWeight="extrabold">
+            {getPriceString()}
+          </Text>
+        </Flex>
+      </Stack>
+
+      <Button
+        colorScheme="blue"
+        size="lg"
+        fontSize="md"
+        rightIcon={<ArrowRightIcon />}
+        isDisabled={isDisabled}
+        type="submit"
+      >
+        {amount || crypto_price ? 'Checkout' : 'Get for free'}
+      </Button>
+    </Stack>
+  );
+};

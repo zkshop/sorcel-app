@@ -1,5 +1,6 @@
 export type AddProductFormValues = {
   price: string;
+  currency: string;
   description: string;
   image: File;
   name: string;

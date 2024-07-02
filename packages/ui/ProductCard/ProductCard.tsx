@@ -20,6 +20,7 @@ export type ProductCardProps = {
   name: string;
   image: string;
   price: number;
+  crypto_price: string | null | undefined;
   discount?: number;
   priceReduced?: number;
   collectionName?: string;
@@ -52,6 +53,7 @@ export const ProductCard = ({
   description,
   gate,
   auth,
+  crypto_price,
 }: ProductCardProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const {
@@ -79,7 +81,18 @@ export const ProductCard = ({
           to,
         };
   const isDiscount = !!discount;
-
+  type priceType = { value: string; currency: '€' | 'xrp' };
+  const crypto_priceParsed: priceType | undefined = crypto_price
+    ? JSON.parse(crypto_price)
+    : undefined;
+  const getPrice = (): priceType => {
+    if (!crypto_priceParsed)
+      return {
+        value: String(price),
+        currency: '€',
+      };
+    return crypto_priceParsed;
+  };
   return (
     <StyledProductCard
       className={classnames.PRODUCT_CARD.CONTAINER}
@@ -120,7 +133,11 @@ export const ProductCard = ({
             textDecoration={discount ? 'line-through' : 'none'}
             marginRight={discount ? '2px' : 'none'}
           >
-            {price ? `${price}€` : <span style={{ color: 'red' }}>FREE</span>}
+            {getPrice().value ? (
+              `${getPrice().value}${getPrice().currency}`
+            ) : (
+              <span style={{ color: 'red' }}>FREE</span>
+            )}
           </Text>
 
           {isDiscount && (

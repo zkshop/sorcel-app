@@ -1,13 +1,14 @@
 import type { GetProductByIdQuery } from '@3shop/apollo';
 import { usePushClaimsMutation } from '@3shop/apollo';
 import { useCreateOrderMutation } from '@3shop/apollo';
-import { VStack, Heading, Spinner, cryptoPrice } from '@3shop/ui';
+import type { cryptoPrice } from '@3shop/ui';
+import { VStack, Heading, Spinner } from '@3shop/ui';
 import { Elements } from '@stripe/react-stripe-js';
 import { getStripeObject, getPaymentIntent } from '@/clients/stripe';
 import { useState, useEffect } from 'react';
 import { CheckoutForm, CryptoCheckoutForm } from './CheckoutForm/CheckoutForm';
 import { useAppSelector } from '@3shop/store';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { envVars } from '../../envVars';
 import { sendOrderConfirmation } from '@3shop/email';
 
@@ -26,10 +27,10 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
   const [createOrder] = useCreateOrderMutation();
   const [pushClaims] = usePushClaimsMutation();
   const cryptoPrice: cryptoPrice = product.crypto_price ? JSON.parse(product.crypto_price) : null;
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (cryptoPrice)
-      return;
+    if (cryptoPrice) return;
     async function updateClientSecret() {
       if (!order) return;
       setIsPaymentIntentLoading(true);
@@ -42,7 +43,7 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
   }, [order, product.app.moneyAccountId, product.id]);
 
   async function handlePaymentSuccess() {
-    console.log("#br1");
+    console.log('#br1');
     if (!order || !product) return;
     const { gateId, claims, ...rest } = order;
 
@@ -71,18 +72,27 @@ export const CheckoutFormContainer = ({ product }: CheckoutFormContainerProps) =
         },
       });
     }
+    navigate('/success');
   }
 
   if (!order) return <Navigate to="/" />;
 
   const renderCheckoutForm = () => {
     if (cryptoPrice)
-      return <CryptoCheckoutForm handlePaymentSuccess={handlePaymentSuccess} product={product} cryptoPrice={cryptoPrice} />
+      return (
+        <CryptoCheckoutForm
+          handlePaymentSuccess={handlePaymentSuccess}
+          product={product}
+          cryptoPrice={cryptoPrice}
+        />
+      );
     if (clientSecret)
-      return <Elements options={{ appearance: { theme: 'stripe' }, clientSecret }} stripe={stripe}>
-        <CheckoutForm handlePaymentSuccess={handlePaymentSuccess} price={order.amount} />
-      </Elements>
-  }
+      return (
+        <Elements options={{ appearance: { theme: 'stripe' }, clientSecret }} stripe={stripe}>
+          <CheckoutForm handlePaymentSuccess={handlePaymentSuccess} price={order.amount} />
+        </Elements>
+      );
+  };
   return (
     <VStack justifyContent="center">
       <Heading as="h2" py={4}>

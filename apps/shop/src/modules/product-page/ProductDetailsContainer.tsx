@@ -43,6 +43,7 @@ export const ProductDetailsContainer = ({ product }: ProductDetailsContainerProp
 
   return (
     <ProductDetails
+      crypto_price={product.crypto_price}
       id={id}
       name={name}
       image={image}

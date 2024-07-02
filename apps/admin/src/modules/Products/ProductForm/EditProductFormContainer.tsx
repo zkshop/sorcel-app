@@ -11,11 +11,7 @@ import type {
   GetProductByIdQuery,
 } from '@3shop/apollo';
 import { GetAdminProductsDocument, Product_Type_Enum } from '@3shop/apollo';
-import {
-  useDeleteProductMutation,
-  useEditProductMutation,
-  useGetAdminAppQuery,
-} from '@3shop/apollo';
+import { useDeleteProductMutation, useEditProductMutation } from '@3shop/apollo';
 import {
   ERROR_MESSAGE,
   getDeleteProductSuccessMessage,
@@ -59,8 +55,6 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
 
   const toast = useToast();
   const { isOpen, onClose, onOpen } = useDisclosure();
-
-  const { data: adminData } = useGetAdminAppQuery();
 
   const [deleteProduct, { loading: isDeleteLoading }] = useDeleteProductMutation({
     update(cache, { data }) {
@@ -139,11 +133,7 @@ export const EditProductFormContainer = ({ product }: EditProductFormContainerPr
   return (
     <FormProvider {...methods}>
       <ProductForm
-        isDisabled={
-          !isValid ||
-          !isDirty ||
-          (!adminData?.app[0].moneyAccountId && Number(methods.getValues('price')) !== 0)
-        }
+        isDisabled={!isValid || !isDirty}
         onOpen={onOpen}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}

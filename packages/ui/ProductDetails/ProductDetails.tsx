@@ -20,7 +20,7 @@ type ProductDetailsProps = {
   collectionName?: string;
   poapImgList?: { id: string; url: string }[];
   isLocked?: boolean;
-
+  crypto_price: string | undefined | null;
   walletAddress?: string;
 };
 
@@ -39,6 +39,7 @@ export const ProductDetails = ({
   collectionName,
   isLocked = false,
   price,
+  crypto_price,
   poapImgList,
 }: ProductDetailsProps) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -55,6 +56,19 @@ export const ProductDetails = ({
     shippingLink,
     onClick: handleClick,
   });
+
+  type priceType = { value: string; currency: '€' | 'xrp' };
+  const crypto_priceParsed: priceType | undefined = crypto_price
+    ? JSON.parse(crypto_price)
+    : undefined;
+  const getPrice = (): priceType => {
+    if (!crypto_priceParsed)
+      return {
+        value: String(price),
+        currency: '€',
+      };
+    return crypto_priceParsed;
+  };
 
   return (
     <Box className={classnames.PRODUCT_DETAILS.CONTAINER} w="full" position="relative">
@@ -127,7 +141,11 @@ export const ProductDetails = ({
                   textDecoration={discount ? 'line-through' : 'none'}
                   marginRight={discount ? '2px' : 'none'}
                 >
-                  {priceReduced ? `${price} €` : <span style={{ color: 'red' }}>FREE</span>}
+                  {priceReduced || crypto_price ? (
+                    `${getPrice().value}${getPrice().currency}`
+                  ) : (
+                    <span style={{ color: 'red' }}>FREE</span>
+                  )}
                 </Text>
                 {discount ? (
                   <Text

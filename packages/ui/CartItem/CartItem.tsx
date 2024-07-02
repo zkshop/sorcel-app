@@ -7,17 +7,18 @@ type CartItemProps = {
   name: string;
   description: string;
   price: number;
+  priceNode?: JSX.Element | undefined;
   currency: string;
   imageUrl: string;
 };
 
 export interface cryptoPrice {
-  currency: string,
-  value: string
+  currency: string;
+  value: string;
 }
 
 export const CartItem = (props: CartItemProps) => {
-  const { name, description, imageUrl, currency, price } = props;
+  const { name, description, imageUrl, currency, price, priceNode } = props;
 
   return (
     <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" align="center">
@@ -25,7 +26,7 @@ export const CartItem = (props: CartItemProps) => {
 
       {/* Desktop */}
       <Flex width="full" justify="space-between" display={{ base: 'none', md: 'flex' }} flex={1}>
-        <PriceTag price={price} currency={currency} />
+        {(priceNode && priceNode) || <PriceTag price={price} currency={currency} />}
       </Flex>
 
       {/* Mobile */}
@@ -36,7 +37,7 @@ export const CartItem = (props: CartItemProps) => {
         justify="space-between"
         display={{ base: 'flex', md: 'none' }}
       >
-        <PriceTag price={price} currency={currency} />
+        {(priceNode && priceNode) || <PriceTag price={price} currency={currency} />}
       </Flex>
     </Flex>
   );
