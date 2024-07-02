@@ -131,6 +131,8 @@ export const Payments = () => {
           Connect your account
         </Button>
       )}
+      <Heading as="h2">Xrp wallet</Heading>
+      <XrpAccount />
     </>
   );
 };
