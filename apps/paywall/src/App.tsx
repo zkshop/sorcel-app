@@ -38,6 +38,7 @@ export function dispatchCustomEvent(event: string) {
 
 const App = () => {
   const { isConnected, isDisconnected, address } = useAccount();
+  console.log('!product_id', envVars.SORCEL_PRODUCT_ID);
   useEffect(() => {
     async function getGrants() {
       if (!address) return;
