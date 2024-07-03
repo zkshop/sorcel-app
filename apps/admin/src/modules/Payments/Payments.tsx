@@ -39,7 +39,7 @@ const XrpAccount = () => {
   } = methods;
 
   const handleWalletChange = async (data: WalletFormData) => {
-    if (!data.xrpWallet || data.xrpWallet.length != 'rJaQvnvosF7ER1ZYoUcNRbPaCjTi4dtvPG'.length) {
+    if (!data.xrpWallet || !(data.xrpWallet.length >= 33 && data.xrpWallet.length <= 35)) {
       setError('xrpWallet', {
         type: 'manual',
         message: 'XRP Wallet address is invalid',

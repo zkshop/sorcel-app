@@ -1,6 +1,6 @@
 import { useGetAdminAppQuery } from '@3shop/apollo';
 import { Spinner, Box, Select, Button, Code, CopyIcon, Text, VStack } from '@3shop/ui';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useClipboard } from '@chakra-ui/react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { irBlack } from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -33,6 +33,11 @@ export const IntegrationCode = () => {
   const { data, loading, error } = useGetAdminAppQuery();
   const [network, setNetwork] = useState<Network>('POLYGON');
   const { settings } = userSettingsSelector();
+  const sampleCode = useMemo(() => {
+    if (loading) return '';
+    if (!data) return '';
+    return `<script>var global = global || window;window.__3SHOP_APP_ID__="${data.app[0].id}";window.__3SHOP_NETWORK__="${network}";</script><script type="module" defer src="https://cdn.3shop.co/app/index.js"></script><link rel="stylesheet" href="https://cdn.3shop.co/app/index.css">`;
+  }, [data, loading, network]);
 
   useEffect(() => {
     if (!settings || !settings.network) return;
@@ -51,8 +56,6 @@ export const IntegrationCode = () => {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setNetwork(event.target.value as Network);
   };
-
-  const sampleCode = `<script>var global = global || window;window.__3SHOP_APP_ID__="${data.app[0].id}";window.__3SHOP_NETWORK__="${network}";</script><script type="module" defer src="https://cdn.3shop.co/app/index.js"></script><link rel="stylesheet" href="https://cdn.3shop.co/app/index.css">`;
 
   return (
     <VStack alignItems="flex-start">
