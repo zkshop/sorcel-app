@@ -5,8 +5,8 @@ export class Base {
   instance: AxiosInstance;
   static token: string | undefined;
   static backendBaseUrl: string = (() => {
-    if (process.env.BACKEND_BASEURL && process.env.BACKEND_BASEURL)
-      return process.env.BACKEND_BASEURL;
+    console.log('!BACKEND_BASEURL', process.env.BACKEND_BASEURL);
+    if (process.env.BACKEND_BASEURL) return process.env.BACKEND_BASEURL;
     return `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`;
   })();
 
