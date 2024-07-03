@@ -84,6 +84,13 @@ const isMobile = () => {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 };
 
+const getBackendBaseUrl = () => {
+  if (process.env.BACKEND_BASEURL)
+    return (process.env.BACKEND_BASEURL)
+  if (process.env.SORCEL_DEV_BACKEND_PORT)
+    return `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`;
+}
+
 export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
   const [state, setState] = React.useState<state>(stateInitialState);
   const toast = useToast();
@@ -100,9 +107,11 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
       return;
     (async () => {
       try {
+        const backendBaseUrl = getBackendBaseUrl();
+        console.log("!BACKEND_URL: ", backendBaseUrl);
         // console.log("Sending payment request:", state.payment);
         const request = state.payment
-          ? axios.post<XummPostPayloadResponse>(`${Base.backendBaseUrl}/api/xumm/payment`, { ...state.payment, account: state.auth.address })
+          ? axios.post<XummPostPayloadResponse>(`${backendBaseUrl}/api/xumm/payment`, { ...state.payment, account: state.auth.address })
           : httpServerless.post<XummPostPayloadResponse>("api/shop/xaman/signin");
 
         const { data } = await request;
