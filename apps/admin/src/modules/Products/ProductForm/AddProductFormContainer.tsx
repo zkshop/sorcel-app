@@ -48,7 +48,6 @@ export const AddProductFormContainer = () => {
 
   const onSubmit = async (data: AddProductFormValues) => {
     try {
-      console.log('!submit data', data);
       const price = (() => {
         if (data.isModal || data.currency != 'euro') return 0;
         return Number(data.price);
@@ -73,13 +72,18 @@ export const AddProductFormContainer = () => {
       const uploadUrl = await storage.uploadPicture(data.image, 'products');
 
       setStorageActionLoading(false);
-      await product?.create({
-        ...data,
+      const { currency, ...rest } = data;
+      currency;
+      const createPayload = {
+        ...rest,
         image: uploadUrl,
         price,
         crypto_price,
         isModal: data.isModal,
-      });
+      };
+      console.log('!createPayload', createPayload);
+      console.log('!cryptoPrice', crypto_price);
+      await product?.create(createPayload);
       toast(getAddProductSuccessMessage(data.name));
 
       navigate(ROUTES_PATH.PROTECTED.PRODUCT);
