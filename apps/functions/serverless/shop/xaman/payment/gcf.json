@@ -1,0 +1,60 @@
+{
+  "params": {
+    "useDefaultConfig": true
+  },
+  "gcf": {},
+  "openapi": {
+    "post": {
+      "summary": "Create an app",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "body",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the app"
+              },
+              "email": {
+                "type": "string",
+                "description": "Email of the admin user"
+              }
+            },
+            "required": ["name", "email"]
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful operation",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "appId": {
+                "type": "string",
+                "description": "ID of the created app"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the created app"
+              },
+              "email": {
+                "type": "string",
+                "description": "Email of the created admin user"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Missing name or email"
+        },
+        "500": {
+          "description": "Error creating app or user"
+        }
+      }
+    }
+  }
+}
