@@ -5,7 +5,7 @@ import axios from 'axios';
 import { z } from 'zod';
 
 const xummPaymentSchema = z.object({
-  account: z.string(),
+  // account: z.string(),
   amount: z.string(),
   destination: z.string(),
 });
@@ -19,11 +19,11 @@ const handler: HttpFunction = async (req, res) => {
       .json({ error: 'Invalid request body', details: parseResult.error.errors });
   }
 
-  const { account, amount, destination } = parseResult.data;
+  const { amount, destination } = parseResult.data;
   const paymentPayload = {
     txjson: {
       TransactionType: 'Payment',
-      Account: account,
+      // Account: account,
       Destination: destination,
       Amount: amount,
     },
