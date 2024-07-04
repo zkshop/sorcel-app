@@ -111,7 +111,7 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
         console.log("!BACKEND_URL: ", backendBaseUrl);
         // console.log("Sending payment request:", state.payment);
         const request = state.payment
-          ? axios.post<XummPostPayloadResponse>(`${backendBaseUrl}/api/xumm/payment`, { ...state.payment, account: state.auth.address })
+          ? httpServerless.post<XummPostPayloadResponse>(`api/shop/xaman/payment`, { ...state.payment, account: state.auth.address })
           : httpServerless.post<XummPostPayloadResponse>("api/shop/xaman/signin");
 
         const { data } = await request;
