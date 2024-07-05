@@ -1,16 +1,17 @@
 import { useGetAdminAppQuery } from '@3shop/apollo';
 import { Spinner, Box, Select, Button, Code, CopyIcon, Text, VStack } from '@3shop/ui';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useClipboard } from '@chakra-ui/react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { irBlack } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { Network_standard } from '../../hooks/useUserSettings';
 import { useEffect } from 'react';
 import { userSettingsSelector } from '@3shop/admin-store';
-// import { dialog } from '@3shop/ui/Modal/Dialogs';
-// import { confirmDialog } from '../Dialog/heirloom/confirm';
-// import { copyCorsDialog } from '../Dialog/heirloom/configuration';
-// import { importDialog } from '../Dialog/heirloom/import';
+import type { dialog } from '@3shop/ui/Modal/Dialogs';
+import { Dialogs } from '@3shop/ui/Modal/Dialogs';
+import { confirmDialog } from '../Dialog/heirloom/confirm';
+import { copyCorsDialog } from '../Dialog/heirloom/configuration';
+import { importDialog } from '../Dialog/heirloom/import';
 
 type Network = 'POLYGON' | 'ETHEREUM' | 'XRPLEDGER' | 'HEIRLOOM';
 
@@ -39,11 +40,10 @@ export const IntegrationCode = () => {
   const { settings } = userSettingsSelector();
   const [showHeirloom, setShowHeirloom] = useState(false);
   showHeirloom;
-  // const heirloomDialogs = useMemo<dialog[]>(() => {
-  //   if (!showHeirloom)
-  //     return [];
-  //   return [confirmDialog, copyCorsDialog, importDialog];
-  // }, [showHeirloom]);
+  const heirloomDialogs = useMemo<dialog[]>(() => {
+    if (!showHeirloom) return [];
+    return [confirmDialog, copyCorsDialog, importDialog];
+  }, [showHeirloom]);
 
   useEffect(() => {
     if (!settings || !settings.network) return;
@@ -72,34 +72,38 @@ export const IntegrationCode = () => {
   };
 
   return (
-    <VStack alignItems="flex-start">
-      <Text textAlign="left" variant="H700" paddingY={2}>
-        Integration code
-      </Text>
-      <Box px={4}>
-        <ol>
-          <li>Find the &lt;head&gt; tag inside your html</li>
-          <li>
-            <Box display="flex" flexDirection="row">
-              Copy the following code inside the &lt;head&gt;. Choose the network you want to use:
-              &nbsp;&nbsp;
-              <Select maxW="200px" value={network} onChange={handleChange}>
-                <option value="POLYGON">Polygon</option>
-                <option value="ETHEREUM">Ethereum</option>
-                <option value="XRPLEDGER">XRP Ledger</option>
-              </Select>
-            </Box>
-            <br />
-            <RenderCodeBlock />
-          </li>
-          <li>
-            Insert anywhere you want inside your &lt;body&gt; tag this div, this is where the token
-            gating module will appear.
-            <br />
-            <CodeBlock language="html" code='<div id="3shop-app"></div>' />
-          </li>
-        </ol>
-      </Box>
-    </VStack>
+    <>
+      <Dialogs lastModalNextText="Get started">{heirloomDialogs}</Dialogs>
+      <VStack alignItems="flex-start">
+        <Text textAlign="left" variant="H700" paddingY={2}>
+          Integration code
+        </Text>
+        <Box px={4}>
+          <ol>
+            <li>Find the &lt;head&gt; tag inside your html</li>
+            <li>
+              <Box display="flex" flexDirection="row">
+                Copy the following code inside the &lt;head&gt;. Choose the network you want to use:
+                &nbsp;&nbsp;
+                <Select maxW="200px" value={network} onChange={handleChange}>
+                  <option value="POLYGON">Polygon</option>
+                  <option value="ETHEREUM">Ethereum</option>
+                  <option value="XRPLEDGER">XRP Ledger</option>
+                  <option value="HEIRLOOM">Heirloom</option>
+                </Select>
+              </Box>
+              <br />
+              <RenderCodeBlock />
+            </li>
+            <li>
+              Insert anywhere you want inside your &lt;body&gt; tag this div, this is where the
+              token gating module will appear.
+              <br />
+              <CodeBlock language="html" code='<div id="3shop-app"></div>' />
+            </li>
+          </ol>
+        </Box>
+      </VStack>
+    </>
   );
 };
