@@ -21,6 +21,7 @@ const Content = () => {
       const currentSettings = get();
       if (currentSettings) set({ ...currentSettings, network: networkValue });
       else set({ network: networkValue });
+      return true;
     });
     setNetwork(networkValue);
   };

@@ -1,5 +1,10 @@
 import type { GetGates_V2Query } from '@3shop/apollo';
-import { GetGates_V2Document, useDeleteGateV2Mutation, useGetGates_V2Query } from '@3shop/apollo';
+import {
+  GetGates_V2Document,
+  Network_Enum,
+  useDeleteGateV2Mutation,
+  useGetGates_V2Query,
+} from '@3shop/apollo';
 import type { Nullable } from '@3shop/types';
 
 import { Link } from 'react-router-dom';
@@ -16,9 +21,12 @@ import {
   Text,
   useToast,
 } from '@3shop/ui';
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { GateListItem } from './GateListItem';
 import { ROUTES_PATH } from '../../routes/Routes';
+import { useApi } from '../../hooks/useApi';
+import { sorcelApp } from '../../api/sorcel-app/sorcel-app';
+import type { app } from '@prisma/client';
 
 const GATES_ATTRIBUTES = ['name', 'perk', 'product', ''];
 
@@ -49,6 +57,41 @@ export const Gates = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedGate, setSelectedGate] = useState<Nullable<{ id: string; name: string }>>(null);
   const toast = useToast();
+  const [ready, sorcelAppApi] = useApi(() => new sorcelApp());
+  const [heirloom, setHeirloom] = useState<
+    Pick<app, 'enableHeirloom' | 'heirloomLockName'> | undefined
+  >(undefined);
+  const filteredData = useMemo<GetGates_V2Query | undefined>(() => {
+    if (!(!loading && heirloom)) return data;
+    return {
+      ...data,
+      gates:
+        data?.gates.filter((elem) =>
+          heirloom.enableHeirloom ? elem.chain == Network_Enum.Heirloom : false,
+        ) || [],
+    };
+  }, [loading, heirloom, data]);
+
+  useEffect(() => {
+    const fetchHeirloom = async () => {
+      if (!ready || !sorcelAppApi) {
+        return;
+      }
+      try {
+        const { data } = await sorcelAppApi.getAppFilter<typeof heirloom>({
+          select: {
+            enableHeirloom: true,
+            heirloomLockName: true,
+          },
+        });
+        setHeirloom(data.data);
+      } catch (error) {
+        console.error('Error fetching heirloom data:', error);
+      }
+    };
+
+    fetchHeirloom();
+  }, [ready, sorcelAppApi]);
 
   const handleOpenDeleteGateModal = async (gate: { id: string; name: string }) => {
     setSelectedGate(gate);
@@ -78,9 +121,9 @@ export const Gates = () => {
     }
   };
 
-  if (loading) return <Spinner />;
+  if (loading || !heirloom) return <Spinner />;
 
-  if (!data) return <>Error</>;
+  if (!filteredData) return <>Error</>;
 
   return (
     <Box>
@@ -95,7 +138,7 @@ export const Gates = () => {
 
       <Box mt={4}>
         <Table
-          data={data.gates}
+          data={filteredData.gates}
           heads={GATES_ATTRIBUTES}
           renderRow={({
             id,
@@ -105,6 +148,7 @@ export const Gates = () => {
             product: { id: productId, image: productImage, name: productName },
           }) => (
             <GateListItem
+              key={id}
               id={id}
               exclusive_access={exclusive_access}
               name={name}

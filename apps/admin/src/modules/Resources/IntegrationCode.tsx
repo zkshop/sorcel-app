@@ -7,8 +7,12 @@ import { irBlack } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { Network_standard } from '../../hooks/useUserSettings';
 import { useEffect } from 'react';
 import { userSettingsSelector } from '@3shop/admin-store';
+// import { dialog } from '@3shop/ui/Modal/Dialogs';
+// import { confirmDialog } from '../Dialog/heirloom/confirm';
+// import { copyCorsDialog } from '../Dialog/heirloom/configuration';
+// import { importDialog } from '../Dialog/heirloom/import';
 
-type Network = 'POLYGON' | 'ETHEREUM' | 'XRPLEDGER';
+type Network = 'POLYGON' | 'ETHEREUM' | 'XRPLEDGER' | 'HEIRLOOM';
 
 const defaultNetwork = 'POLYGON';
 
@@ -33,6 +37,13 @@ export const IntegrationCode = () => {
   const { data, loading, error } = useGetAdminAppQuery();
   const [network, setNetwork] = useState<Network>('POLYGON');
   const { settings } = userSettingsSelector();
+  const [showHeirloom, setShowHeirloom] = useState(false);
+  showHeirloom;
+  // const heirloomDialogs = useMemo<dialog[]>(() => {
+  //   if (!showHeirloom)
+  //     return [];
+  //   return [confirmDialog, copyCorsDialog, importDialog];
+  // }, [showHeirloom]);
 
   useEffect(() => {
     if (!settings || !settings.network) return;
@@ -49,7 +60,10 @@ export const IntegrationCode = () => {
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setNetwork(event.target.value as Network);
+    const network = event.target.value as Network;
+    if (network == 'HEIRLOOM') {
+      setShowHeirloom(true);
+    } else setNetwork(network);
   };
 
   const RenderCodeBlock = () => {
