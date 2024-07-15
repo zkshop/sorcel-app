@@ -9,9 +9,11 @@ import { envVars } from '@3shop/config';
 import { Network_Enum } from '../apollo';
 import { HeirloomDidContextType, HeirloomDidContext } from './internal/Heirloom/HeirloomDidProvider';
 
-const walletUsed: "xaman" | "rainbow" = (() => {
+const walletUsed: "xaman" | "rainbow" | "heirloom" = (() => {
   if ([Network_Enum.Ethereum, Network_Enum.Polygon].includes(envVars.NETWORK))
     return "rainbow";
+  if (envVars.NETWORK == Network_Enum.Heirloom)
+    return "heirloom";
   return "xaman";
 })();
 
