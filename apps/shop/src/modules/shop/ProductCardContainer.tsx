@@ -4,7 +4,7 @@ import { GridItem, ProductCard } from '@3shop/ui';
 import type { GateFieldsFragment, Gate_V2, GetProductsQuery } from '@3shop/apollo';
 import { Segment_Type_Enum } from '@3shop/apollo';
 import { useAppSelector } from '@3shop/store';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import type { BaseValidator } from './gating/validators/base';
 import type { IValidator } from './gating/validator.type';
 import { NFTOwnership } from './gating/validators/nft/ownership';
@@ -13,6 +13,7 @@ import type { validationResult } from './gating/validationResultContext';
 import { ValidationResultContext } from './gating/validationResultContext';
 import { POAPOwnership } from './gating/validators/poap/ownership';
 import type { userConnectionStatus } from '@3shop/types';
+import { HeirloomDidContext } from '@3shop/wallet/internal/Heirloom/HeirloomDidProvider';
 
 type Props = {
   isWalletConnected: boolean;
@@ -119,6 +120,12 @@ export function ProductCardContainer({ connectionStatus, auth, product }: Props)
   const poapImageList = useAppSelector((state) => state.poapImageList);
   const gates = product.gate.slice() || [];
   const sortedGates = gates.sort(sortGates);
+  const heirloom = useContext(HeirloomDidContext);
+
+  useEffect(() => {
+    console.log('!productCard');
+    console.log(gates);
+  }, []);
 
   const { isLocked, validatedNfts } = useValidation(
     gates.filter((gate) => gate != undefined) as Gate_V2[],
@@ -130,7 +137,10 @@ export function ProductCardContainer({ connectionStatus, auth, product }: Props)
     product,
     productGates: sortedGates,
     userPoapIds,
-    isLocked,
+    isLocked: (() => {
+      if (heirloom && heirloom.response?.did) return true;
+      return isLocked;
+    })(),
     poapImageList,
   });
 

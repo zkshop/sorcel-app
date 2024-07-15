@@ -1,12 +1,13 @@
 import React from 'react';
+import { useEffect, useState, useContext, createContext } from 'react';
 import { XamanWalletContext } from './internal/xaman/XamanWalletProvider';
-import { useContext } from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Button } from '@3shop/ui';
+import { Box, Button, Text, HStack, Modal, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Spinner, VStack } from '@3shop/ui';
 import { classnames } from '@3shop/config';
 import { XamanContextType } from './internal/xaman/XamanWalletProvider';
 import { envVars } from '@3shop/config';
 import { Network_Enum } from '../apollo';
+import { HeirloomDidContextType, HeirloomDidContext } from './internal/Heirloom/HeirloomDidProvider';
 
 const walletUsed: "xaman" | "rainbow" = (() => {
   if ([Network_Enum.Ethereum, Network_Enum.Polygon].includes(envVars.NETWORK))
@@ -167,12 +168,52 @@ export const RainbowConnectButton = () => {
   )
 };
 
+export const HeirloomConnectButton = ({ children }: { children: (args: { modal: HeirloomDidContextType['modal'] }) => React.ReactNode }) => {
+  const context = useContext(HeirloomDidContext);
+
+  if (!context) {
+    console.error('HeirloomConnectButton must be used within a HeirloomDidProvider');
+    return null;
+  }
+
+  const { modal } = context;
+
+  const renderChildren = children({ modal });
+
+  return <>{renderChildren}</>;
+};
+
+export const Heirloom = () => {
+  return (
+    <HeirloomConnectButton>
+      {({ modal }) => {
+        if (modal.isOpen)
+          return <Button
+            className={classnames.WALLET_CONNECT_BUTTON}
+            onClick={modal.open}
+            type="button"
+          >
+            Disconnect Wallet
+          </Button>
+        else
+          return <Button
+            className={classnames.WALLET_CONNECT_BUTTON}
+            onClick={modal.open}
+            type="button"
+          >
+            Connect Wallet
+          </Button>
+      }}
+    </HeirloomConnectButton>
+  );
+}
 
 export const ConnectWalletButton = () => {
   return (<>{
     {
       "xaman": <Xaman />,
-      "rainbow": <RainbowConnectButton />
-    }[walletUsed]
+      "rainbow": <RainbowConnectButton />,
+      "heirloom": <Heirloom />
+    }["heirloom"]
   }</>)
 }

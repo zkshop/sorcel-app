@@ -38,7 +38,8 @@
     "YEARLY_PRO_PLAN_CHECKOUT_LINK",
     "BACKEND_BASEURL",
     "SORCEL_DEV_BACKEND_PORT",
-    "PORT"
+    "PORT",
+    "HEIRLOOM_CORS"
   ],
   "pipeline": {
     "build": {

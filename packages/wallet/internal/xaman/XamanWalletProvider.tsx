@@ -64,7 +64,7 @@ const stateInitialState: state = {
 
 export interface XamanWalletProviderProps { children: React.ReactNode };
 
-const useSocketService = <T extends new (url: string) => Partial<WebSocket>>(websocketClient: T, websocket_status: string, onEvent: (event: any) => void) => {
+export const useSocketService = <T extends new (url: string) => Partial<WebSocket>>(websocketClient: T, websocket_status: string, onEvent: (event: any) => void) => {
   //TODO: handle error and close
   const socket = new websocketClient(websocket_status);
   socket.onmessage = (message) => {

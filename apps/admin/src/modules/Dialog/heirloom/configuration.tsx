@@ -27,7 +27,7 @@ const CopyCorsContent = () => {
         form.
       </Text>
       <Box display="flex" alignItems="center" marginBottom="20px">
-        <Input value="http://test.com" isReadOnly />
+        <Input value={process.env.HEIRLOOM_CORS} isReadOnly />
         <Button onClick={onCopy} marginLeft="10px">
           {hasCopied ? 'Copied !' : <CopyIcon />}
         </Button>
