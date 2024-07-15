@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc && node -r dotenv/config ../../node_modules/.bin/vite build",
+    "build": "npx prisma generate && tsc && node -r dotenv/config ../../node_modules/.bin/vite build",
     "build:ci": "tsc && node -r dotenv/config ../../node_modules/.bin/vite build",
     "dev": "node -r dotenv/config ../../node_modules/.bin/vite",
     "lint": "eslint \"**/*.ts*\" --fix",
