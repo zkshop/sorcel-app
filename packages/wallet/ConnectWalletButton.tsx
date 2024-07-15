@@ -214,6 +214,6 @@ export const ConnectWalletButton = () => {
       "xaman": <Xaman />,
       "rainbow": <RainbowConnectButton />,
       "heirloom": <Heirloom />
-    }["heirloom"]
+    }[walletUsed]
   }</>)
 }
