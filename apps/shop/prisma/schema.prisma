@@ -21,7 +21,6 @@ model app {
   show_brand             Boolean?                @default(false)
   created_at             DateTime?               @default(now()) @db.Timestamptz(6)
   show_connect_email     Boolean?                @default(false)
-  auth                   String?                 @default("EMAIL")
   enableHeirloom         Boolean?                @default(false)
   heirloomApiKey         String?
   heirloomLockName       String?
@@ -175,11 +174,6 @@ model wallet_connection_log {
   address String
   date    DateTime @default(now()) @db.Timestamptz(6)
   app     app      @relation(fields: [app_id], references: [id], onUpdate: Restrict, map: "wallet_connection_logs_app_id_fkey")
-}
-
-model auth_type {
-  value      String  @id
-  exact_name String?
 }
 
 enum order_status {
