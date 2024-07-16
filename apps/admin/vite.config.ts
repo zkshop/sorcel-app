@@ -35,7 +35,7 @@ const ENV_VARIABLES = {
   BACKEND_BASEURL: '',
   PORT: '',
   SORCEL_DEV_BACKEND_PORT: process.env.SORCEL_DEV_BACKEND_PORT || '',
-  HEIRLOOM_CORS: undefined,
+  HEIRLOOM_CORS: null,
 };
 
 const dirname = __dirname;
