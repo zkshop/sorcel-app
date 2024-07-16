@@ -1,7 +1,8 @@
 mutation CreatePoll(
   $title: String!
   $image: String!
-  $gate: String!
+  $issuer: String!
+  $taxon: String!
   $description: String = ""
   $data: [choice_insert_input!] = {}
 ) {
@@ -9,7 +10,8 @@ mutation CreatePoll(
     objects: {
       title: $title
       image: $image
-      gate: $gate
+      issuer: $issuer
+      taxon: $taxon
       description: $description
       choices: { data: $data }
     }

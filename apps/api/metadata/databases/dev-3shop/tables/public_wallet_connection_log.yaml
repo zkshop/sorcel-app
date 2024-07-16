@@ -6,18 +6,17 @@ insert_permissions:
     permission:
       check: {}
       columns:
-        - id
-        - app_id
         - address
+        - app_id
         - date
 select_permissions:
   - role: customer
     permission:
       columns:
-        - address
-        - app_id
-        - date
         - id
+        - address
+        - date
+        - app_id
       filter:
         app_id:
           _eq: X-Hasura-User-Id
