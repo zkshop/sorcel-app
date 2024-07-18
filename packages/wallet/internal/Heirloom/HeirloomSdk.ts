@@ -75,7 +75,6 @@ export class HeirloomSdk {
    * @returns {Promise<LoginChallenge | null>} A promise that resolves to the fetched LoginChallenge or null if an error occurs.
    */
   async challenges(lockId: string) {
-    console.log("!!!api key", this.apiKey);
     const challengeResult = await fetchChallenge(this.apiKey, lockId);
     return challengeResult;
   }

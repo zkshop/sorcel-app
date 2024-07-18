@@ -51,6 +51,11 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
     }));
   }, []);
 
+  React.useEffect(() => {
+    //@ts-ignore
+    alert(`app_id: ${window.__3SHOP_APP_ID__}`);
+  }, []);
+
   const handleQuickLogin = React.useCallback(() => {
     console.log("!API KEY", heirloom);
     const sdk = new HeirloomSdk(heirloom?.heirloomApiKey!);
@@ -67,16 +72,13 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
       });
     })();
   }, [heirloom]);
-
+  //@ts-ignore
   React.useEffect(() => {
     const fetchApiKey = async () => {
       const sorcelApp = new sorcelAppApi();
-      // console.log("!settings", sorcelApp.getInstance().defaults);
       try {
         //@ts-ignore
         const { data } = await sorcelApp.getHeirloom(window.__3SHOP_APP_ID__);
-        //@ts-ignore
-        console.log("!HeirloomData", data, window.__3SHOP_APP_ID__);
         //ts-ignore
         setStateByKey('heirloomApp', data.data);
         setHeirloom(data.data);
