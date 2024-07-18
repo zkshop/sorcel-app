@@ -51,13 +51,7 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
     }));
   }, []);
 
-  React.useEffect(() => {
-    //@ts-ignore
-    alert(`app_id: ${window.__3SHOP_APP_ID__}`);
-  }, []);
-
   const handleQuickLogin = React.useCallback(() => {
-    console.log("!API KEY", heirloom);
     const sdk = new HeirloomSdk(heirloom?.heirloomApiKey!);
     (async () => {
       await sdk.quickLogin(heirloom?.heirloomLockId!, (url) => setStateByKey('qrCodeUrl', url), (did, data, raw) => {
@@ -66,9 +60,9 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
           data,
           raw
         })
-        console.log("!did received: ", did);
+        console.log("did received: ", did);
       }, (err) => {
-        console.error("!err", err);
+        console.error("err", err);
       });
     })();
   }, [heirloom]);
