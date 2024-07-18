@@ -51,20 +51,22 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
     }));
   }, []);
 
-  async function handleQuickLogin() {
+  const handleQuickLogin = React.useCallback(() => {
     console.log("!API KEY", heirloom);
     const sdk = new HeirloomSdk(heirloom?.heirloomApiKey!);
-    await sdk.quickLogin(heirloom?.heirloomLockId!, (url) => setStateByKey('qrCodeUrl', url), (did, data, raw) => {
-      setStateByKey('response', {
-        did,
-        data,
-        raw
-      })
-      console.log("!did received: ", did);
-    }, (err) => {
-      console.error("!err", err);
-    });
-  }
+    (async () => {
+      await sdk.quickLogin(heirloom?.heirloomLockId!, (url) => setStateByKey('qrCodeUrl', url), (did, data, raw) => {
+        setStateByKey('response', {
+          did,
+          data,
+          raw
+        })
+        console.log("!did received: ", did);
+      }, (err) => {
+        console.error("!err", err);
+      });
+    })();
+  }, [heirloom]);
 
   React.useEffect(() => {
     const fetchApiKey = async () => {
@@ -73,11 +75,12 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
       try {
         //@ts-ignore
         const { data } = await sorcelApp.getHeirloom(window.__3SHOP_APP_ID__);
+        console.log("!ApiKey", data);
         setStateByKey('heirloomApp', data.data);
         setHeirloom(data.data);
       } catch (e) {
         // TODO: handle error
-        console.error("HeirloomApp error",e);
+        console.error("HeirloomApp error", e);
       }
     };
     fetchApiKey();
