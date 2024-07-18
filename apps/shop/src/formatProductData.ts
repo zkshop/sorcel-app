@@ -79,7 +79,7 @@ export const formatProductData = ({
   }));
 
   const alreadyClaimed = hasAlreadyClaimed(productGates, address, email);
-
+  alert('updated');
   const formatedProductData = {
     ...product,
     discount: discountToApply,
