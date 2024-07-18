@@ -75,9 +75,9 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
       try {
         //@ts-ignore
         const { data } = await sorcelApp.getHeirloom(window.__3SHOP_APP_ID__);
-        console.log("!ApiKey", data);
+        //@ts-ignore
+        console.log("!HeirloomData", data, window.__3SHOP_APP_ID__);
         //ts-ignore
-        console.log("!appId", (window as any)['__3SHOP_APP_ID__']);
         setStateByKey('heirloomApp', data.data);
         setHeirloom(data.data);
       } catch (e) {
