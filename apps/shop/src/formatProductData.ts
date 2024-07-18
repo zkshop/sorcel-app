@@ -92,6 +92,7 @@ export const formatProductData = ({
       id: gate.id,
       claims: gate.claims,
       contractAddress: (() => {
+        if (!gate.segments) return '';
         if (
           gate.segments[0]['nft_contract_address'] != undefined &&
           gate.segments[0]['nft_contract_address'] != null
