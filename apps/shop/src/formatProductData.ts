@@ -1,6 +1,6 @@
 import { getPoapImageFromPoapList } from '@3shop/poap';
 import type { GateFieldsFragment, GetProductsQuery } from '@3shop/apollo';
-import { Network_Enum, Segment_Type_Enum } from '@3shop/apollo';
+import { Segment_Type_Enum } from '@3shop/apollo';
 import type { FormatedProductData } from '@3shop/types';
 import { applyDiscount } from '@3shop/pure/applyDiscount';
 import { useAccount } from '@3shop/wallet';
@@ -79,7 +79,7 @@ export const formatProductData = ({
   }));
 
   const alreadyClaimed = hasAlreadyClaimed(productGates, address, email);
-  alert('updated');
+
   const formatedProductData = {
     ...product,
     discount: discountToApply,
@@ -91,16 +91,8 @@ export const formatProductData = ({
     gate: productGates.map((gate) => ({
       id: gate.id,
       claims: gate.claims,
-      contractAddress: (() => {
-        if (!gate.segments || gate.segments.length == 0) return '';
-        if (
-          gate.segments[0]['nft_contract_address'] != undefined &&
-          gate.segments[0]['nft_contract_address'] != null
-        )
-          return gate.segments[0].nft_contract_address;
-        return '';
-      })(),
-      network: Network_Enum.Heirloom, //gate.segments[0].network,
+      contractAddress: gate.segments[0].nft_contract_address || '',
+      network: gate.segments[0].network,
     })),
   };
 

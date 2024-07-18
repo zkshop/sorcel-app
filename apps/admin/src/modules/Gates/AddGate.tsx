@@ -20,7 +20,12 @@ import { useForm } from 'react-hook-form';
 import { useAppSelector } from '@3shop/admin-store';
 import { SegmentTableItem } from './SegmentTableItem';
 import type { GetGatesQuery, Segment_Insert_Input } from '@3shop/apollo';
-import { GetGates_V2Document, Network_Enum, useCreateGateV2Mutation } from '@3shop/apollo';
+import {
+  GetGates_V2Document,
+  Network_Enum,
+  Segment_Type_Enum,
+  useCreateGateV2Mutation,
+} from '@3shop/apollo';
 import { ProductSelectField } from './ProductSelectField';
 import segmentInputCreator from './segmentInputCreator';
 import { useNavigate } from 'react-router-dom';
@@ -102,7 +107,20 @@ export const AddGate = () => {
     const createGatePayload: Parameters<typeof createGate>[0] = {
       variables: {
         segments: {
-          data: input,
+          data: (() => {
+            let result: Segment_Insert_Input[] = input;
+            if (heirloom.enableHeirloom)
+              result = [
+                ...result,
+                {
+                  type: Segment_Type_Enum.Nft,
+                  network: Network_Enum.Heirloom,
+                  nft_contract_address: '',
+                  // poapIds: undefined
+                },
+              ];
+            return result;
+          })(),
         },
         unique_claim: data.uniqueClaim,
         discount: data.discount,
