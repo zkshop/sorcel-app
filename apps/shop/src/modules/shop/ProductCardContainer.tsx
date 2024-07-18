@@ -138,7 +138,7 @@ export function ProductCardContainer({ connectionStatus, auth, product }: Props)
     productGates: sortedGates,
     userPoapIds,
     isLocked: (() => {
-      if (heirloom && heirloom.response?.did) return true;
+      if (heirloom && heirloom.response?.did) return false;
       return isLocked;
     })(),
     poapImageList,

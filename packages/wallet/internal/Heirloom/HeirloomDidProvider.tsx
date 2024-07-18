@@ -1,4 +1,4 @@
-import { Spinner, Box, Modal, Text, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, VStack, HStack, Button } from "@3shop/ui";
+import { Spinner, Box, Modal, Text, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, VStack, HStack, Button, useToast } from "@3shop/ui";
 import React, { createContext } from "react";
 import { QRCodeSVG } from 'qrcode.react';
 import { DecodedJWT, HeirloomSdk } from "./HeirloomSdk";
@@ -43,6 +43,7 @@ export interface HeirloomDidProviderProps { children: React.ReactNode };
 export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
   const [state, setState] = React.useState<state>(stateInitialState);
   const [heirloom, setHeirloom] = React.useState<heirloomApp>(undefined);
+  const toast = useToast();
 
   const setStateByKey = React.useCallback(<K extends keyof state>(key: K, value: state[K]) => {
     setState((prevState) => ({
@@ -60,6 +61,12 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
           data,
           raw
         })
+        setStateByKey('modalOpen', false);
+        toast({
+          status: 'success',
+          title: 'You have the right access',
+          description: `access using Heirloom granted`,
+        });
         console.log("did received: ", did);
       }, (err) => {
         console.error("err", err);
