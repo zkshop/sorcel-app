@@ -69,6 +69,11 @@ export const HeirloomDidProvider = ({ children }: HeirloomDidProviderProps) => {
         });
         console.log("did received: ", did);
       }, (err) => {
+        toast({
+          status: 'error',
+          title: 'You do not have the right access',
+          description: `access using Heirloom rejected`,
+        });
         console.error("err", err);
       });
     })();
