@@ -6731,7 +6731,7 @@ export type GetAppThemeQuery = { __typename?: 'query_root', app?: { __typename?:
 export type GetAdminAppQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAdminAppQuery = { __typename?: 'query_root', app: Array<{ __typename?: 'app', id: any, name: string, imgUrl?: string | null, moneyAccountId?: string | null, background_color?: string | null, font?: string | null, font_color?: string | null, show_brand?: boolean | null, show_connect_email?: boolean | null, plan?: Plan_Enum | null, xrpWallet?: string | null }> };
+export type GetAdminAppQuery = { __typename?: 'query_root', app: Array<{ __typename?: 'app', id: any, name: string, imgUrl?: string | null, moneyAccountId?: string | null, background_color?: string | null, enableHeirloom?: boolean | null, font?: string | null, font_color?: string | null, show_brand?: boolean | null, show_connect_email?: boolean | null, plan?: Plan_Enum | null, xrpWallet?: string | null }> };
 
 export type UpdateAppMutationVariables = Exact<{
   appId: Scalars['uuid'];
@@ -7133,6 +7133,7 @@ export const GetAdminAppDocument = gql`
     imgUrl
     moneyAccountId
     background_color
+    enableHeirloom
     font
     font_color
     show_brand

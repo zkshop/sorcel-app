@@ -31,8 +31,12 @@ select_permissions:
       columns:
         - background_color
         - deliveryTaxesTableName
+        - enableHeirloom
         - font
         - font_color
+        - heirloomApiKey
+        - heirloomLockId
+        - heirloomLockName
         - id
         - imgUrl
         - moneyAccountId

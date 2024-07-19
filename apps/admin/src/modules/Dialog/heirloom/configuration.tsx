@@ -21,7 +21,9 @@ const CopyCorsContent = () => {
   return (
     <Box padding="20px">
       <Text marginBottom="10px">
-        When creating your lock, please enter your website url into the CORS field of your form.
+        When creating your lock at{' '}
+        <a href="https://creator.heirloom.io/locks">https://creator.heirloom.io/locks</a>, please
+        enter your website url into the CORS field of your form.
       </Text>
       <Box display="flex" alignItems="center" marginBottom="20px">
         <Checkbox checked={isChecked} onChange={handleCheckboxChange} />

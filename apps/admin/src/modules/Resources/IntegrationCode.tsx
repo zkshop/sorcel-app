@@ -1,5 +1,5 @@
 import { useGetAdminAppQuery } from '@3shop/apollo';
-import { Spinner, Box, Select, Button, Code, CopyIcon, Text, VStack } from '@3shop/ui';
+import { Spinner, Box, Select, Button, Code, CopyIcon, Text, VStack, useToast } from '@3shop/ui';
 import { useMemo, useState } from 'react';
 import { useClipboard } from '@chakra-ui/react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -12,6 +12,8 @@ import { Dialogs } from '@3shop/ui/Modal/Dialogs';
 import { confirmDialog } from '../Dialog/heirloom/confirm';
 import { copyCorsDialog } from '../Dialog/heirloom/configuration';
 import { importDialog } from '../Dialog/heirloom/import';
+import { sorcelApp } from '../../api/sorcel-app/sorcel-app';
+import { useApi } from '../../hooks/useApi';
 
 type Network = 'POLYGON' | 'ETHEREUM' | 'XRPLEDGER' | 'HEIRLOOM';
 
@@ -39,6 +41,9 @@ export const IntegrationCode = () => {
   const [network, setNetwork] = useState<Network>('POLYGON');
   const { settings } = userSettingsSelector();
   const [showHeirloom, setShowHeirloom] = useState(false);
+  const [ready, sorceAppInstance] = useApi(() => new sorcelApp());
+  const toast = useToast();
+
   showHeirloom;
   const heirloomDialogs = useMemo<dialog[]>(() => {
     if (!showHeirloom) return [];
@@ -51,7 +56,7 @@ export const IntegrationCode = () => {
     else setNetwork('XRPLEDGER');
   }, [settings]);
 
-  if (loading) {
+  if (loading || !ready) {
     return <Spinner />;
   }
 
@@ -63,7 +68,27 @@ export const IntegrationCode = () => {
     const network = event.target.value as Network;
     if (network == 'HEIRLOOM') {
       setShowHeirloom(true);
-    } else setNetwork(network);
+    } else {
+      if (data.app[0].enableHeirloom == true) {
+        (async () => {
+          await sorceAppInstance
+            ?.toggleHeirloom(false)
+            .then(() => {
+              setNetwork(network);
+            })
+            .catch((e) => {
+              console.error(e);
+              toast({
+                status: 'error',
+                title: 'An error occured when switching nwteork',
+                description: 'Please try again later or contact us.',
+              });
+            });
+        })();
+      } else {
+        setNetwork(network);
+      }
+    }
   };
 
   const RenderCodeBlock = () => {

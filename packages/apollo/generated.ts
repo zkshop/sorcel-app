@@ -6477,6 +6477,7 @@ export type GetAdminAppQuery = {
     imgUrl?: string | null;
     moneyAccountId?: string | null;
     background_color?: string | null;
+    enableHeirloom?: boolean | null;
     font?: string | null;
     font_color?: string | null;
     show_brand?: boolean | null;
@@ -7415,6 +7416,7 @@ export const GetAdminAppDocument = gql`
       imgUrl
       moneyAccountId
       background_color
+      enableHeirloom
       font
       font_color
       show_brand

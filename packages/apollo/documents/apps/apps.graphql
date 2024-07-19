@@ -33,6 +33,7 @@ query getAdminApp {
     imgUrl
     moneyAccountId
     background_color
+    enableHeirloom
     font
     font_color
     show_brand
