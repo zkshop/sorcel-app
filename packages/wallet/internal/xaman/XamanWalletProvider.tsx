@@ -111,9 +111,9 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
         console.log("!BACKEND_URL: ", backendBaseUrl);
         // console.log("Sending payment request:", state.payment);
         const backendUrl = ((): string => {
-          if (!Base.backendBaseUrl)
+          if (process.env.SORCEL_DEV_BACKEND_PORT)
             return `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`;
-          return Base.backendBaseUrl;
+          return "https://backend-production-2de1.up.railway.app";
         })();
         console.log("!++backendUrl", backendBaseUrl);
         const request = state.payment
