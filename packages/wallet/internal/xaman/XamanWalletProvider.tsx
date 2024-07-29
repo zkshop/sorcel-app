@@ -111,8 +111,8 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
         console.log("!BACKEND_URL: ", backendBaseUrl);
         // console.log("Sending payment request:", state.payment);
         const request = state.payment
-          ? httpServerless.post<XummPostPayloadResponse>(`api/shop/xaman/payment`, { ...state.payment })
-          : httpServerless.post<XummPostPayloadResponse>("api/shop/xaman/signin");
+        ? httpServerless.post<XummPostPayloadResponse>(`api/shop/xaman/payment`, { ...state.payment })
+        : await axios.post<XummPostPayloadResponse>(`${Base.backendBaseUrl || `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`}/api/xumm/signin`);
 
         const { data } = await request;
         if (state.deepLink)
