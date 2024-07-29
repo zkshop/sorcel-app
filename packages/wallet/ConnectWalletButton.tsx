@@ -195,7 +195,7 @@ export const Heirloom = () => {
             onClick={modal.open}
             type="button"
           >
-            Disconnect Wallet
+            Disconnect your DID
           </Button>
         else
           return <Button
@@ -203,7 +203,7 @@ export const Heirloom = () => {
             onClick={modal.open}
             type="button"
           >
-            Connect Wallet
+            Connect your DID
           </Button>
       }}
     </HeirloomConnectButton>
