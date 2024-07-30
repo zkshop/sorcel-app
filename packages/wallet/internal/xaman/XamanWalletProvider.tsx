@@ -85,13 +85,11 @@ const isMobile = () => {
 };
 
 const getBackendBaseUrl = () => {
-  console.log("!env", JSON.stringify(process.env, null, 2));
-  // console.log("!env1", process.env.BACKEND_BASEURL);
-// console.log("!env2", process.env.SORCEL_DEV_BACKEND_PORT);
   if (process.env.BACKEND_BASEURL)
     return (process.env.BACKEND_BASEURL)
   if (process.env.SORCEL_DEV_BACKEND_PORT)
-    return `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`
+    return `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`;
+  return "https://backend-production-2de1.up.railway.app";
 }
 
 export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
