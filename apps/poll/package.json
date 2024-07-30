@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "npx prisma generate && tsc && node -r dotenv/config ../../node_modules/.bin/vite build",
+    "build": "npx prisma generate && tsc && echo \"+++++KEY: $DOTENV_KEY\" && node -r dotenv/config ../../node_modules/.bin/vite build",
     "build:ci": "npx prisma generate && tsc && node -r dotenv/config ../../node_modules/.bin/vite build",
     "dev": "node -r dotenv/config ../../node_modules/.bin/vite",
     "preview": "vite preview"
