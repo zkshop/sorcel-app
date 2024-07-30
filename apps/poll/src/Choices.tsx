@@ -7,9 +7,9 @@ import { useAccount } from '@3shop/wallet';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ChoiceItem } from './ChoiceItem';
-import { useAppSelector } from './store/store';
+// import { useAppSelector } from './store/store';
 import type { ChoiceType } from './utils';
-import { isHolder } from './utils';
+// import { isHolder } from './utils';
 import { haveAlreadyVote } from './utils/haveAlreadyVote';
 import { ChoicesImage } from './ChoicesImage';
 import { updateCacheAfterVote } from './cache';
@@ -28,14 +28,15 @@ const MobileTitleLayer = styled(Text)`
 
 export const Choices = () => {
   const { id } = useParams() as { id: string };
-  const nfts = useAppSelector((state) => state.nfts);
+  // const nfts = useAppSelector((state) => state.nfts);
   const { address } = useAccount();
   const { loading, data } = useGetPollByIdQuery({ variables: { id } });
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [choice, setChoice] = useState<Nullable<ChoiceType>>(null);
   const [vote, { loading: voteLoading, error: voteError }] = useVoteMutation();
   const toast = useToast();
-  const isLocked = Boolean(data?.poll?.gate && !isHolder(nfts, data.poll.gate));
+  // change the isHolder to work with bithomp and change data?.poll?.gate to data?.poll?.issuer and data?.poll?.taxon
+  const isLocked = false; // Boolean(data?.poll?.gate && !isHolder(nfts, data.poll.gate));
 
   if (loading) return <Spinner />;
   if (!data || !data.poll) return <>Error</>;
@@ -85,7 +86,7 @@ export const Choices = () => {
         </Box>
         <Box marginTop={8} flex={1} display="flex" justifyContent="center" alignItems="center">
           {isLocked ? (
-            <Heading color="white" textAlign="center" fontSize="x-large">
+            <Heading color="grey" textAlign="center" fontSize="x-large">
               Connect your wallet with Human Divergence NFT to vote
             </Heading>
           ) : (
