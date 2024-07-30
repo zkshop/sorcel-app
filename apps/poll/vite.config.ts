@@ -32,6 +32,7 @@ const commonConfig = createCommonConfig({ dirname, envVars });
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
+  console.log('!vite env', JSON.stringify(process.env, null, 2));
 
   return {
     ...commonConfig,
