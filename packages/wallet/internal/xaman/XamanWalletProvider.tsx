@@ -89,6 +89,7 @@ const getBackendBaseUrl = () => {
     return (process.env.BACKEND_BASEURL)
   if (process.env.SORCEL_DEV_BACKEND_PORT)
     return `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`;
+  return "https://backend-production-2de1.up.railway.app";
 }
 
 export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
