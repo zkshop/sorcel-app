@@ -14,7 +14,8 @@ export type AddPollFormValues = {
   poll: string;
   image: File | string;
   choices: { value: string }[];
-  gate: string;
+  issuer: string;
+  taxon: string;
 };
 
 const ADD_POLL_SCHEMA = FormValidation.object().shape({
@@ -27,6 +28,8 @@ const ADD_POLL_SCHEMA = FormValidation.object().shape({
       }),
     )
     .min(2, 'At least 2 choices are required'),
+  issuer: FormValidation.string().required('Issuer is required'),
+  taxon: FormValidation.string().required('Taxon is required'),
 });
 
 const storage = StorageService(ImageStorageClient());
@@ -69,7 +72,8 @@ export const AddPollContainer = () => {
       );
       await createPoll({
         variables: {
-          gate: data.gate,
+          issuer: data.issuer,
+          taxon: data.taxon,
           image: imageUrl,
           title: data.poll,
           data: data.choices,

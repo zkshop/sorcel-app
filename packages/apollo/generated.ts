@@ -81,20 +81,12 @@ export type String_Comparison_Exp = {
 /** app table */
 export type App = {
   __typename?: 'app';
-  /** An array relationship */
-  app_wallet_connection_logs: Array<Wallet_Connection_Log>;
-  /** An aggregate relationship */
-  app_wallet_connection_logs_aggregate: Wallet_Connection_Log_Aggregate;
   auth?: Maybe<Scalars['String']>;
   background_color?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
-  enableHeirloom?: Maybe<Scalars['Boolean']>;
   font?: Maybe<Scalars['String']>;
   font_color?: Maybe<Scalars['String']>;
-  heirloomApiKey?: Maybe<Scalars['String']>;
-  heirloomLockId?: Maybe<Scalars['String']>;
-  heirloomLockName?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   imgUrl?: Maybe<Scalars['String']>;
   moneyAccountId?: Maybe<Scalars['String']>;
@@ -103,24 +95,6 @@ export type App = {
   show_brand?: Maybe<Scalars['Boolean']>;
   show_connect_email?: Maybe<Scalars['Boolean']>;
   xrpWallet?: Maybe<Scalars['String']>;
-};
-
-/** app table */
-export type AppApp_Wallet_Connection_LogsArgs = {
-  distinct_on?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Wallet_Connection_Log_Order_By>>;
-  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
-};
-
-/** app table */
-export type AppApp_Wallet_Connection_Logs_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Wallet_Connection_Log_Order_By>>;
-  where?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
 };
 
 /** aggregated selection of "app" */
@@ -149,18 +123,12 @@ export type App_Bool_Exp = {
   _and?: InputMaybe<Array<App_Bool_Exp>>;
   _not?: InputMaybe<App_Bool_Exp>;
   _or?: InputMaybe<Array<App_Bool_Exp>>;
-  app_wallet_connection_logs?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
-  app_wallet_connection_logs_aggregate?: InputMaybe<Wallet_Connection_Log_Aggregate_Bool_Exp>;
   auth?: InputMaybe<String_Comparison_Exp>;
   background_color?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   deliveryTaxesTableName?: InputMaybe<String_Comparison_Exp>;
-  enableHeirloom?: InputMaybe<Boolean_Comparison_Exp>;
   font?: InputMaybe<String_Comparison_Exp>;
   font_color?: InputMaybe<String_Comparison_Exp>;
-  heirloomApiKey?: InputMaybe<String_Comparison_Exp>;
-  heirloomLockId?: InputMaybe<String_Comparison_Exp>;
-  heirloomLockName?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   imgUrl?: InputMaybe<String_Comparison_Exp>;
   moneyAccountId?: InputMaybe<String_Comparison_Exp>;
@@ -181,17 +149,12 @@ export enum App_Constraint {
 
 /** input type for inserting data into table "app" */
 export type App_Insert_Input = {
-  app_wallet_connection_logs?: InputMaybe<Wallet_Connection_Log_Arr_Rel_Insert_Input>;
   auth?: InputMaybe<Scalars['String']>;
   background_color?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
-  enableHeirloom?: InputMaybe<Scalars['Boolean']>;
   font?: InputMaybe<Scalars['String']>;
   font_color?: InputMaybe<Scalars['String']>;
-  heirloomApiKey?: InputMaybe<Scalars['String']>;
-  heirloomLockId?: InputMaybe<Scalars['String']>;
-  heirloomLockName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
   moneyAccountId?: InputMaybe<Scalars['String']>;
@@ -211,9 +174,6 @@ export type App_Max_Fields = {
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
   font?: Maybe<Scalars['String']>;
   font_color?: Maybe<Scalars['String']>;
-  heirloomApiKey?: Maybe<Scalars['String']>;
-  heirloomLockId?: Maybe<Scalars['String']>;
-  heirloomLockName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   imgUrl?: Maybe<Scalars['String']>;
   moneyAccountId?: Maybe<Scalars['String']>;
@@ -230,9 +190,6 @@ export type App_Min_Fields = {
   deliveryTaxesTableName?: Maybe<Scalars['String']>;
   font?: Maybe<Scalars['String']>;
   font_color?: Maybe<Scalars['String']>;
-  heirloomApiKey?: Maybe<Scalars['String']>;
-  heirloomLockId?: Maybe<Scalars['String']>;
-  heirloomLockName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   imgUrl?: Maybe<Scalars['String']>;
   moneyAccountId?: Maybe<Scalars['String']>;
@@ -265,17 +222,12 @@ export type App_On_Conflict = {
 
 /** Ordering options when selecting data from "app". */
 export type App_Order_By = {
-  app_wallet_connection_logs_aggregate?: InputMaybe<Wallet_Connection_Log_Aggregate_Order_By>;
   auth?: InputMaybe<Order_By>;
   background_color?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   deliveryTaxesTableName?: InputMaybe<Order_By>;
-  enableHeirloom?: InputMaybe<Order_By>;
   font?: InputMaybe<Order_By>;
   font_color?: InputMaybe<Order_By>;
-  heirloomApiKey?: InputMaybe<Order_By>;
-  heirloomLockId?: InputMaybe<Order_By>;
-  heirloomLockName?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   imgUrl?: InputMaybe<Order_By>;
   moneyAccountId?: InputMaybe<Order_By>;
@@ -302,17 +254,9 @@ export enum App_Select_Column {
   /** column name */
   DeliveryTaxesTableName = 'deliveryTaxesTableName',
   /** column name */
-  EnableHeirloom = 'enableHeirloom',
-  /** column name */
   Font = 'font',
   /** column name */
   FontColor = 'font_color',
-  /** column name */
-  HeirloomApiKey = 'heirloomApiKey',
-  /** column name */
-  HeirloomLockId = 'heirloomLockId',
-  /** column name */
-  HeirloomLockName = 'heirloomLockName',
   /** column name */
   Id = 'id',
   /** column name */
@@ -337,12 +281,8 @@ export type App_Set_Input = {
   background_color?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
-  enableHeirloom?: InputMaybe<Scalars['Boolean']>;
   font?: InputMaybe<Scalars['String']>;
   font_color?: InputMaybe<Scalars['String']>;
-  heirloomApiKey?: InputMaybe<Scalars['String']>;
-  heirloomLockId?: InputMaybe<Scalars['String']>;
-  heirloomLockName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
   moneyAccountId?: InputMaybe<Scalars['String']>;
@@ -367,12 +307,8 @@ export type App_Stream_Cursor_Value_Input = {
   background_color?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deliveryTaxesTableName?: InputMaybe<Scalars['String']>;
-  enableHeirloom?: InputMaybe<Scalars['Boolean']>;
   font?: InputMaybe<Scalars['String']>;
   font_color?: InputMaybe<Scalars['String']>;
-  heirloomApiKey?: InputMaybe<Scalars['String']>;
-  heirloomLockId?: InputMaybe<Scalars['String']>;
-  heirloomLockName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imgUrl?: InputMaybe<Scalars['String']>;
   moneyAccountId?: InputMaybe<Scalars['String']>;
@@ -394,17 +330,9 @@ export enum App_Update_Column {
   /** column name */
   DeliveryTaxesTableName = 'deliveryTaxesTableName',
   /** column name */
-  EnableHeirloom = 'enableHeirloom',
-  /** column name */
   Font = 'font',
   /** column name */
   FontColor = 'font_color',
-  /** column name */
-  HeirloomApiKey = 'heirloomApiKey',
-  /** column name */
-  HeirloomLockId = 'heirloomLockId',
-  /** column name */
-  HeirloomLockName = 'heirloomLockName',
   /** column name */
   Id = 'id',
   /** column name */
@@ -428,139 +356,6 @@ export type App_Updates = {
   _set?: InputMaybe<App_Set_Input>;
   /** filter the rows which have to be updated */
   where: App_Bool_Exp;
-};
-
-/** columns and relationships of "auth_type" */
-export type Auth_Type = {
-  __typename?: 'auth_type';
-  exact_name?: Maybe<Scalars['String']>;
-  value: Scalars['String'];
-};
-
-/** aggregated selection of "auth_type" */
-export type Auth_Type_Aggregate = {
-  __typename?: 'auth_type_aggregate';
-  aggregate?: Maybe<Auth_Type_Aggregate_Fields>;
-  nodes: Array<Auth_Type>;
-};
-
-/** aggregate fields of "auth_type" */
-export type Auth_Type_Aggregate_Fields = {
-  __typename?: 'auth_type_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Auth_Type_Max_Fields>;
-  min?: Maybe<Auth_Type_Min_Fields>;
-};
-
-/** aggregate fields of "auth_type" */
-export type Auth_Type_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Auth_Type_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** Boolean expression to filter rows from the table "auth_type". All fields are combined with a logical 'AND'. */
-export type Auth_Type_Bool_Exp = {
-  _and?: InputMaybe<Array<Auth_Type_Bool_Exp>>;
-  _not?: InputMaybe<Auth_Type_Bool_Exp>;
-  _or?: InputMaybe<Array<Auth_Type_Bool_Exp>>;
-  exact_name?: InputMaybe<String_Comparison_Exp>;
-  value?: InputMaybe<String_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "auth_type" */
-export enum Auth_Type_Constraint {
-  /** unique or primary key constraint on columns "value" */
-  AuthTypePkey = 'auth_type_pkey',
-}
-
-/** input type for inserting data into table "auth_type" */
-export type Auth_Type_Insert_Input = {
-  exact_name?: InputMaybe<Scalars['String']>;
-  value?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type Auth_Type_Max_Fields = {
-  __typename?: 'auth_type_max_fields';
-  exact_name?: Maybe<Scalars['String']>;
-  value?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Auth_Type_Min_Fields = {
-  __typename?: 'auth_type_min_fields';
-  exact_name?: Maybe<Scalars['String']>;
-  value?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "auth_type" */
-export type Auth_Type_Mutation_Response = {
-  __typename?: 'auth_type_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Auth_Type>;
-};
-
-/** on_conflict condition type for table "auth_type" */
-export type Auth_Type_On_Conflict = {
-  constraint: Auth_Type_Constraint;
-  update_columns?: Array<Auth_Type_Update_Column>;
-  where?: InputMaybe<Auth_Type_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "auth_type". */
-export type Auth_Type_Order_By = {
-  exact_name?: InputMaybe<Order_By>;
-  value?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: auth_type */
-export type Auth_Type_Pk_Columns_Input = {
-  value: Scalars['String'];
-};
-
-/** select columns of table "auth_type" */
-export enum Auth_Type_Select_Column {
-  /** column name */
-  ExactName = 'exact_name',
-  /** column name */
-  Value = 'value',
-}
-
-/** input type for updating data in table "auth_type" */
-export type Auth_Type_Set_Input = {
-  exact_name?: InputMaybe<Scalars['String']>;
-  value?: InputMaybe<Scalars['String']>;
-};
-
-/** Streaming cursor of the table "auth_type" */
-export type Auth_Type_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Auth_Type_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Auth_Type_Stream_Cursor_Value_Input = {
-  exact_name?: InputMaybe<Scalars['String']>;
-  value?: InputMaybe<Scalars['String']>;
-};
-
-/** update columns of table "auth_type" */
-export enum Auth_Type_Update_Column {
-  /** column name */
-  ExactName = 'exact_name',
-  /** column name */
-  Value = 'value',
-}
-
-export type Auth_Type_Updates = {
-  /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Auth_Type_Set_Input>;
-  /** filter the rows which have to be updated */
-  where: Auth_Type_Bool_Exp;
 };
 
 /** columns and relationships of "chain_type" */
@@ -2077,10 +1872,6 @@ export type Mutation_Root = {
   delete_app?: Maybe<App_Mutation_Response>;
   /** delete single row from the table: "app" */
   delete_app_by_pk?: Maybe<App>;
-  /** delete data from the table: "auth_type" */
-  delete_auth_type?: Maybe<Auth_Type_Mutation_Response>;
-  /** delete single row from the table: "auth_type" */
-  delete_auth_type_by_pk?: Maybe<Auth_Type>;
   /** delete data from the table: "chain_type" */
   delete_chain_type?: Maybe<Chain_Type_Mutation_Response>;
   /** delete single row from the table: "chain_type" */
@@ -2149,10 +1940,6 @@ export type Mutation_Root = {
   insert_app?: Maybe<App_Mutation_Response>;
   /** insert a single row into the table: "app" */
   insert_app_one?: Maybe<App>;
-  /** insert data into the table: "auth_type" */
-  insert_auth_type?: Maybe<Auth_Type_Mutation_Response>;
-  /** insert a single row into the table: "auth_type" */
-  insert_auth_type_one?: Maybe<Auth_Type>;
   /** insert data into the table: "chain_type" */
   insert_chain_type?: Maybe<Chain_Type_Mutation_Response>;
   /** insert a single row into the table: "chain_type" */
@@ -2223,12 +2010,6 @@ export type Mutation_Root = {
   update_app_by_pk?: Maybe<App>;
   /** update multiples rows of table: "app" */
   update_app_many?: Maybe<Array<Maybe<App_Mutation_Response>>>;
-  /** update data of the table: "auth_type" */
-  update_auth_type?: Maybe<Auth_Type_Mutation_Response>;
-  /** update single row of the table: "auth_type" */
-  update_auth_type_by_pk?: Maybe<Auth_Type>;
-  /** update multiples rows of table: "auth_type" */
-  update_auth_type_many?: Maybe<Array<Maybe<Auth_Type_Mutation_Response>>>;
   /** update data of the table: "chain_type" */
   update_chain_type?: Maybe<Chain_Type_Mutation_Response>;
   /** update single row of the table: "chain_type" */
@@ -2335,16 +2116,6 @@ export type Mutation_RootDelete_AppArgs = {
 /** mutation root */
 export type Mutation_RootDelete_App_By_PkArgs = {
   id: Scalars['uuid'];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Auth_TypeArgs = {
-  where: Auth_Type_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Auth_Type_By_PkArgs = {
-  value: Scalars['String'];
 };
 
 /** mutation root */
@@ -2517,18 +2288,6 @@ export type Mutation_RootInsert_AppArgs = {
 export type Mutation_RootInsert_App_OneArgs = {
   object: App_Insert_Input;
   on_conflict?: InputMaybe<App_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Auth_TypeArgs = {
-  objects: Array<Auth_Type_Insert_Input>;
-  on_conflict?: InputMaybe<Auth_Type_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Auth_Type_OneArgs = {
-  object: Auth_Type_Insert_Input;
-  on_conflict?: InputMaybe<Auth_Type_On_Conflict>;
 };
 
 /** mutation root */
@@ -2738,23 +2497,6 @@ export type Mutation_RootUpdate_App_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_App_ManyArgs = {
   updates: Array<App_Updates>;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Auth_TypeArgs = {
-  _set?: InputMaybe<Auth_Type_Set_Input>;
-  where: Auth_Type_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Auth_Type_By_PkArgs = {
-  _set?: InputMaybe<Auth_Type_Set_Input>;
-  pk_columns: Auth_Type_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Auth_Type_ManyArgs = {
-  updates: Array<Auth_Type_Updates>;
 };
 
 /** mutation root */
@@ -3134,7 +2876,6 @@ export enum Network_Constraint {
 
 export enum Network_Enum {
   Ethereum = 'ETHEREUM',
-  Heirloom = 'HEIRLOOM',
   Polygon = 'POLYGON',
   Xrpledger = 'XRPLEDGER',
 }
@@ -3616,6 +3357,8 @@ export type Poll = {
   gate?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   image?: Maybe<Scalars['String']>;
+  issuer?: Maybe<Scalars['String']>;
+  taxon?: Maybe<Scalars['String']>;
   title: Scalars['String'];
   voters: Scalars['jsonb'];
 };
@@ -3683,6 +3426,8 @@ export type Poll_Bool_Exp = {
   gate?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<String_Comparison_Exp>;
+  issuer?: InputMaybe<String_Comparison_Exp>;
+  taxon?: InputMaybe<String_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
   voters?: InputMaybe<Jsonb_Comparison_Exp>;
 };
@@ -3718,6 +3463,8 @@ export type Poll_Insert_Input = {
   gate?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['String']>;
+  issuer?: InputMaybe<Scalars['String']>;
+  taxon?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   voters?: InputMaybe<Scalars['jsonb']>;
 };
@@ -3731,6 +3478,8 @@ export type Poll_Max_Fields = {
   gate?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   image?: Maybe<Scalars['String']>;
+  issuer?: Maybe<Scalars['String']>;
+  taxon?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -3743,6 +3492,8 @@ export type Poll_Min_Fields = {
   gate?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   image?: Maybe<Scalars['String']>;
+  issuer?: Maybe<Scalars['String']>;
+  taxon?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -3772,6 +3523,8 @@ export type Poll_Order_By = {
   gate?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
+  issuer?: InputMaybe<Order_By>;
+  taxon?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   voters?: InputMaybe<Order_By>;
 };
@@ -3803,6 +3556,10 @@ export enum Poll_Select_Column {
   /** column name */
   Image = 'image',
   /** column name */
+  Issuer = 'issuer',
+  /** column name */
+  Taxon = 'taxon',
+  /** column name */
   Title = 'title',
   /** column name */
   Voters = 'voters',
@@ -3817,6 +3574,8 @@ export type Poll_Set_Input = {
   gate?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['String']>;
+  issuer?: InputMaybe<Scalars['String']>;
+  taxon?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   voters?: InputMaybe<Scalars['jsonb']>;
 };
@@ -3838,6 +3597,8 @@ export type Poll_Stream_Cursor_Value_Input = {
   gate?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['String']>;
+  issuer?: InputMaybe<Scalars['String']>;
+  taxon?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   voters?: InputMaybe<Scalars['jsonb']>;
 };
@@ -3858,6 +3619,10 @@ export enum Poll_Update_Column {
   Id = 'id',
   /** column name */
   Image = 'image',
+  /** column name */
+  Issuer = 'issuer',
+  /** column name */
+  Taxon = 'taxon',
   /** column name */
   Title = 'title',
   /** column name */
@@ -4340,12 +4105,6 @@ export type Query_Root = {
   app_aggregate: App_Aggregate;
   /** fetch data from the table: "app" using primary key columns */
   app_by_pk?: Maybe<App>;
-  /** fetch data from the table: "auth_type" */
-  auth_type: Array<Auth_Type>;
-  /** fetch aggregated fields from the table: "auth_type" */
-  auth_type_aggregate: Auth_Type_Aggregate;
-  /** fetch data from the table: "auth_type" using primary key columns */
-  auth_type_by_pk?: Maybe<Auth_Type>;
   /** fetch data from the table: "chain_type" */
   chain_type: Array<Chain_Type>;
   /** fetch aggregated fields from the table: "chain_type" */
@@ -4462,26 +4221,6 @@ export type Query_RootApp_AggregateArgs = {
 
 export type Query_RootApp_By_PkArgs = {
   id: Scalars['uuid'];
-};
-
-export type Query_RootAuth_TypeArgs = {
-  distinct_on?: InputMaybe<Array<Auth_Type_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Auth_Type_Order_By>>;
-  where?: InputMaybe<Auth_Type_Bool_Exp>;
-};
-
-export type Query_RootAuth_Type_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Auth_Type_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Auth_Type_Order_By>>;
-  where?: InputMaybe<Auth_Type_Bool_Exp>;
-};
-
-export type Query_RootAuth_Type_By_PkArgs = {
-  value: Scalars['String'];
 };
 
 export type Query_RootChain_TypeArgs = {
@@ -5203,14 +4942,6 @@ export type Subscription_Root = {
   app_by_pk?: Maybe<App>;
   /** fetch data from the table in a streaming manner: "app" */
   app_stream: Array<App>;
-  /** fetch data from the table: "auth_type" */
-  auth_type: Array<Auth_Type>;
-  /** fetch aggregated fields from the table: "auth_type" */
-  auth_type_aggregate: Auth_Type_Aggregate;
-  /** fetch data from the table: "auth_type" using primary key columns */
-  auth_type_by_pk?: Maybe<Auth_Type>;
-  /** fetch data from the table in a streaming manner: "auth_type" */
-  auth_type_stream: Array<Auth_Type>;
   /** fetch data from the table: "chain_type" */
   chain_type: Array<Chain_Type>;
   /** fetch aggregated fields from the table: "chain_type" */
@@ -5365,32 +5096,6 @@ export type Subscription_RootApp_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<App_Stream_Cursor_Input>>;
   where?: InputMaybe<App_Bool_Exp>;
-};
-
-export type Subscription_RootAuth_TypeArgs = {
-  distinct_on?: InputMaybe<Array<Auth_Type_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Auth_Type_Order_By>>;
-  where?: InputMaybe<Auth_Type_Bool_Exp>;
-};
-
-export type Subscription_RootAuth_Type_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Auth_Type_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Auth_Type_Order_By>>;
-  where?: InputMaybe<Auth_Type_Bool_Exp>;
-};
-
-export type Subscription_RootAuth_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-export type Subscription_RootAuth_Type_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Auth_Type_Stream_Cursor_Input>>;
-  where?: InputMaybe<Auth_Type_Bool_Exp>;
 };
 
 export type Subscription_RootChain_TypeArgs = {
@@ -6131,17 +5836,6 @@ export type Wallet_Connection_Log_Aggregate = {
   nodes: Array<Wallet_Connection_Log>;
 };
 
-export type Wallet_Connection_Log_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Wallet_Connection_Log_Aggregate_Bool_Exp_Count>;
-};
-
-export type Wallet_Connection_Log_Aggregate_Bool_Exp_Count = {
-  arguments?: InputMaybe<Array<Wallet_Connection_Log_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-  filter?: InputMaybe<Wallet_Connection_Log_Bool_Exp>;
-  predicate: Int_Comparison_Exp;
-};
-
 /** aggregate fields of "wallet_connection_log" */
 export type Wallet_Connection_Log_Aggregate_Fields = {
   __typename?: 'wallet_connection_log_aggregate_fields';
@@ -6164,37 +5858,10 @@ export type Wallet_Connection_Log_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "wallet_connection_log" */
-export type Wallet_Connection_Log_Aggregate_Order_By = {
-  avg?: InputMaybe<Wallet_Connection_Log_Avg_Order_By>;
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Wallet_Connection_Log_Max_Order_By>;
-  min?: InputMaybe<Wallet_Connection_Log_Min_Order_By>;
-  stddev?: InputMaybe<Wallet_Connection_Log_Stddev_Order_By>;
-  stddev_pop?: InputMaybe<Wallet_Connection_Log_Stddev_Pop_Order_By>;
-  stddev_samp?: InputMaybe<Wallet_Connection_Log_Stddev_Samp_Order_By>;
-  sum?: InputMaybe<Wallet_Connection_Log_Sum_Order_By>;
-  var_pop?: InputMaybe<Wallet_Connection_Log_Var_Pop_Order_By>;
-  var_samp?: InputMaybe<Wallet_Connection_Log_Var_Samp_Order_By>;
-  variance?: InputMaybe<Wallet_Connection_Log_Variance_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "wallet_connection_log" */
-export type Wallet_Connection_Log_Arr_Rel_Insert_Input = {
-  data: Array<Wallet_Connection_Log_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Wallet_Connection_Log_On_Conflict>;
-};
-
 /** aggregate avg on columns */
 export type Wallet_Connection_Log_Avg_Fields = {
   __typename?: 'wallet_connection_log_avg_fields';
   id?: Maybe<Scalars['Float']>;
-};
-
-/** order by avg() on columns of table "wallet_connection_log" */
-export type Wallet_Connection_Log_Avg_Order_By = {
-  id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "wallet_connection_log". All fields are combined with a logical 'AND'. */
@@ -6236,14 +5903,6 @@ export type Wallet_Connection_Log_Max_Fields = {
   id?: Maybe<Scalars['Int']>;
 };
 
-/** order by max() on columns of table "wallet_connection_log" */
-export type Wallet_Connection_Log_Max_Order_By = {
-  address?: InputMaybe<Order_By>;
-  app_id?: InputMaybe<Order_By>;
-  date?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-};
-
 /** aggregate min on columns */
 export type Wallet_Connection_Log_Min_Fields = {
   __typename?: 'wallet_connection_log_min_fields';
@@ -6251,14 +5910,6 @@ export type Wallet_Connection_Log_Min_Fields = {
   app_id?: Maybe<Scalars['uuid']>;
   date?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
-};
-
-/** order by min() on columns of table "wallet_connection_log" */
-export type Wallet_Connection_Log_Min_Order_By = {
-  address?: InputMaybe<Order_By>;
-  app_id?: InputMaybe<Order_By>;
-  date?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "wallet_connection_log" */
@@ -6316,31 +5967,16 @@ export type Wallet_Connection_Log_Stddev_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev() on columns of table "wallet_connection_log" */
-export type Wallet_Connection_Log_Stddev_Order_By = {
-  id?: InputMaybe<Order_By>;
-};
-
 /** aggregate stddev_pop on columns */
 export type Wallet_Connection_Log_Stddev_Pop_Fields = {
   __typename?: 'wallet_connection_log_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev_pop() on columns of table "wallet_connection_log" */
-export type Wallet_Connection_Log_Stddev_Pop_Order_By = {
-  id?: InputMaybe<Order_By>;
-};
-
 /** aggregate stddev_samp on columns */
 export type Wallet_Connection_Log_Stddev_Samp_Fields = {
   __typename?: 'wallet_connection_log_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_samp() on columns of table "wallet_connection_log" */
-export type Wallet_Connection_Log_Stddev_Samp_Order_By = {
-  id?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "wallet_connection_log" */
@@ -6363,11 +5999,6 @@ export type Wallet_Connection_Log_Stream_Cursor_Value_Input = {
 export type Wallet_Connection_Log_Sum_Fields = {
   __typename?: 'wallet_connection_log_sum_fields';
   id?: Maybe<Scalars['Int']>;
-};
-
-/** order by sum() on columns of table "wallet_connection_log" */
-export type Wallet_Connection_Log_Sum_Order_By = {
-  id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "wallet_connection_log" */
@@ -6397,31 +6028,16 @@ export type Wallet_Connection_Log_Var_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
-/** order by var_pop() on columns of table "wallet_connection_log" */
-export type Wallet_Connection_Log_Var_Pop_Order_By = {
-  id?: InputMaybe<Order_By>;
-};
-
 /** aggregate var_samp on columns */
 export type Wallet_Connection_Log_Var_Samp_Fields = {
   __typename?: 'wallet_connection_log_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
 };
 
-/** order by var_samp() on columns of table "wallet_connection_log" */
-export type Wallet_Connection_Log_Var_Samp_Order_By = {
-  id?: InputMaybe<Order_By>;
-};
-
 /** aggregate variance on columns */
 export type Wallet_Connection_Log_Variance_Fields = {
   __typename?: 'wallet_connection_log_variance_fields';
   id?: Maybe<Scalars['Float']>;
-};
-
-/** order by variance() on columns of table "wallet_connection_log" */
-export type Wallet_Connection_Log_Variance_Order_By = {
-  id?: InputMaybe<Order_By>;
 };
 
 export type GetAppQueryVariables = Exact<{
@@ -6868,7 +6484,8 @@ export type GetOrdersQuery = {
 export type CreatePollMutationVariables = Exact<{
   title: Scalars['String'];
   image: Scalars['String'];
-  gate: Scalars['String'];
+  issuer: Scalars['String'];
+  taxon: Scalars['String'];
   description?: InputMaybe<Scalars['String']>;
   data?: InputMaybe<Array<Choice_Insert_Input> | Choice_Insert_Input>;
 }>;
@@ -6890,7 +6507,8 @@ export type DeletePollMutation = {
 export type UpdatePollMutationVariables = Exact<{
   id: Scalars['uuid'];
   description?: InputMaybe<Scalars['String']>;
-  gate?: InputMaybe<Scalars['String']>;
+  issuer?: InputMaybe<Scalars['String']>;
+  taxon?: InputMaybe<Scalars['String']>;
   image?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   choice_to_delete?: InputMaybe<Array<Scalars['uuid']> | Scalars['uuid']>;
@@ -6904,7 +6522,8 @@ export type UpdatePollMutation = {
     id: any;
     app_id?: any | null;
     description: string;
-    gate?: string | null;
+    issuer?: string | null;
+    taxon?: string | null;
     choices: Array<{ __typename?: 'choice'; count: number; id: any; poll_id: any; value: string }>;
   } | null;
   delete_choice?: { __typename?: 'choice_mutation_response'; affected_rows: number } | null;
@@ -6920,7 +6539,8 @@ export type GetPollByIdQuery = {
   poll?: {
     __typename?: 'poll';
     app_id?: any | null;
-    gate?: string | null;
+    issuer?: string | null;
+    taxon?: string | null;
     id: any;
     title: string;
     voters: any;
@@ -8735,7 +8355,8 @@ export const CreatePollDocument = gql`
   mutation CreatePoll(
     $title: String!
     $image: String!
-    $gate: String!
+    $issuer: String!
+    $taxon: String!
     $description: String = ""
     $data: [choice_insert_input!] = {}
   ) {
@@ -8743,7 +8364,8 @@ export const CreatePollDocument = gql`
       objects: {
         title: $title
         image: $image
-        gate: $gate
+        issuer: $issuer
+        taxon: $taxon
         description: $description
         choices: { data: $data }
       }
@@ -8772,7 +8394,8 @@ export type CreatePollMutationFn = Apollo.MutationFunction<
  *   variables: {
  *      title: // value for 'title'
  *      image: // value for 'image'
- *      gate: // value for 'gate'
+ *      issuer: // value for 'issuer'
+ *      taxon: // value for 'taxon'
  *      description: // value for 'description'
  *      data: // value for 'data'
  *   },
@@ -8841,7 +8464,8 @@ export const UpdatePollDocument = gql`
   mutation updatePoll(
     $id: uuid!
     $description: String
-    $gate: String
+    $issuer: String
+    $taxon: String
     $image: String
     $title: String
     $choice_to_delete: [uuid!] = {}
@@ -8849,12 +8473,19 @@ export const UpdatePollDocument = gql`
   ) {
     update_poll_by_pk(
       pk_columns: { id: $id }
-      _set: { description: $description, gate: $gate, image: $image, title: $title }
+      _set: {
+        description: $description
+        issuer: $issuer
+        taxon: $taxon
+        image: $image
+        title: $title
+      }
     ) {
       id
       app_id
       description
-      gate
+      issuer
+      taxon
       choices {
         count
         id
@@ -8890,7 +8521,8 @@ export type UpdatePollMutationFn = Apollo.MutationFunction<
  *   variables: {
  *      id: // value for 'id'
  *      description: // value for 'description'
- *      gate: // value for 'gate'
+ *      issuer: // value for 'issuer'
+ *      taxon: // value for 'taxon'
  *      image: // value for 'image'
  *      title: // value for 'title'
  *      choice_to_delete: // value for 'choice_to_delete'
@@ -8923,7 +8555,8 @@ export const GetPollByIdDocument = gql`
         value
         count
       }
-      gate
+      issuer
+      taxon
       id
       title
       voters
