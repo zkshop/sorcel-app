@@ -163,7 +163,7 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
       if (!state.xummPayload)
         return;
       try {
-        const response = await axios.post<XummGetPayloadResponse>(`${getBackendBaseUrl() || `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`}/api/shop/xumm/payload`, { payload_uuid: state.xummPayload['payload_uuidv4'] });
+        const response = await axios.post<XummGetPayloadResponse>(`${getBackendBaseUrl() || `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`}/api/xumm/payload`, { payload_uuid: state.xummPayload['payload_uuidv4'] });
         console.log("!response xaman", response);
         const address = response.data.response.signer;
         if (state.payment && response.data.response.dispatched_result == "tesSUCCESS") {
