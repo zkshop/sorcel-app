@@ -42,6 +42,7 @@ export const IntegrationCode = () => {
   const { settings } = userSettingsSelector();
   const [showHeirloom, setShowHeirloom] = useState(false);
   const [ready, sorceAppInstance] = useApi(() => new sorcelApp());
+
   const toast = useToast();
 
   showHeirloom;
@@ -67,6 +68,7 @@ export const IntegrationCode = () => {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const network = event.target.value as Network;
     if (network == 'HEIRLOOM') {
+      setNetwork(network);
       setShowHeirloom(true);
     } else {
       if (data.app[0].enableHeirloom == true) {
@@ -80,7 +82,7 @@ export const IntegrationCode = () => {
               console.error(e);
               toast({
                 status: 'error',
-                title: 'An error occured when switching nwteork',
+                title: 'An error occured when switching network',
                 description: 'Please try again later or contact us.',
               });
             });

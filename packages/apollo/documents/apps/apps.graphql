@@ -34,6 +34,7 @@ query getAdminApp {
     moneyAccountId
     background_color
     enableHeirloom
+    heirloomLockName
     font
     font_color
     show_brand
