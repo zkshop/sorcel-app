@@ -16,7 +16,8 @@ export type EditPollFormValues = {
   poll: string;
   image: File | string;
   choices: { value: string }[];
-  gate: string;
+  issuer: string;
+  taxon: string;
 };
 
 const storage = StorageService(ImageStorageClient());
@@ -33,7 +34,8 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
     formState: { errors, touchedFields },
   } = useForm<EditPollFormValues>({
     defaultValues: {
-      gate: poll?.gate || '',
+      issuer: poll?.issuer || '',
+      taxon: poll?.taxon || '',
       image: poll?.image || '',
       choices: poll?.choices.map(({ value }) => ({ value })) || [],
       poll: poll?.title,
@@ -95,7 +97,8 @@ export const EditPollFormContainer = ({ poll }: EditPollFormContainerProps) => {
         variables: {
           choice_to_delete: choicesIdsToDelete,
           choice_to_insert: choicesToInsert,
-          gate: data.gate,
+          issuer: data.issuer,
+          taxon: data.taxon,
           id: poll.id,
           image,
           title: data.poll,

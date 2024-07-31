@@ -7,7 +7,8 @@ query getPollById($id: uuid!) {
             value
             count
         }
-        gate
+        issuer
+        taxon
         id
         title
         voters
@@ -15,4 +16,4 @@ query getPollById($id: uuid!) {
         image
         completed
     }
-} 
+}

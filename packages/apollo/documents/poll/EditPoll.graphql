@@ -1,7 +1,8 @@
 mutation updatePoll(
   $id: uuid!
   $description: String
-  $gate: String
+  $issuer: String
+  $taxon: String
   $image: String
   $title: String
   $choice_to_delete: [uuid!] = {}
@@ -9,12 +10,13 @@ mutation updatePoll(
 ) {
   update_poll_by_pk(
     pk_columns: { id: $id }
-    _set: { description: $description, gate: $gate, image: $image, title: $title }
+    _set: { description: $description, issuer: $issuer, taxon: $taxon, image: $image, title: $title }
   ) {
     id
     app_id
     description
-    gate
+    issuer
+    taxon
     choices {
       count
       id

@@ -1,5 +1,4 @@
 - "!include public_app.yaml"
-- "!include public_auth_type.yaml"
 - "!include public_chain_type.yaml"
 - "!include public_choice.yaml"
 - "!include public_delivery_zone.yaml"

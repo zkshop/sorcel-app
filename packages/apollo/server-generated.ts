@@ -3759,6 +3759,8 @@ export type Poll = {
   gate?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   image?: Maybe<Scalars['String']>;
+  issuer?: Maybe<Scalars['String']>;
+  taxon?: Maybe<Scalars['String']>;
   title: Scalars['String'];
   voters: Scalars['jsonb'];
 };
@@ -3830,6 +3832,8 @@ export type Poll_Bool_Exp = {
   gate?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<String_Comparison_Exp>;
+  issuer?: InputMaybe<String_Comparison_Exp>;
+  taxon?: InputMaybe<String_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
   voters?: InputMaybe<Jsonb_Comparison_Exp>;
 };
@@ -3865,6 +3869,8 @@ export type Poll_Insert_Input = {
   gate?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['String']>;
+  issuer?: InputMaybe<Scalars['String']>;
+  taxon?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   voters?: InputMaybe<Scalars['jsonb']>;
 };
@@ -3878,6 +3884,8 @@ export type Poll_Max_Fields = {
   gate?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   image?: Maybe<Scalars['String']>;
+  issuer?: Maybe<Scalars['String']>;
+  taxon?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -3890,6 +3898,8 @@ export type Poll_Min_Fields = {
   gate?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   image?: Maybe<Scalars['String']>;
+  issuer?: Maybe<Scalars['String']>;
+  taxon?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -3919,6 +3929,8 @@ export type Poll_Order_By = {
   gate?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
+  issuer?: InputMaybe<Order_By>;
+  taxon?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   voters?: InputMaybe<Order_By>;
 };
@@ -3950,6 +3962,10 @@ export enum Poll_Select_Column {
   /** column name */
   Image = 'image',
   /** column name */
+  Issuer = 'issuer',
+  /** column name */
+  Taxon = 'taxon',
+  /** column name */
   Title = 'title',
   /** column name */
   Voters = 'voters'
@@ -3964,6 +3980,8 @@ export type Poll_Set_Input = {
   gate?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['String']>;
+  issuer?: InputMaybe<Scalars['String']>;
+  taxon?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   voters?: InputMaybe<Scalars['jsonb']>;
 };
@@ -3985,6 +4003,8 @@ export type Poll_Stream_Cursor_Value_Input = {
   gate?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   image?: InputMaybe<Scalars['String']>;
+  issuer?: InputMaybe<Scalars['String']>;
+  taxon?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   voters?: InputMaybe<Scalars['jsonb']>;
 };
@@ -4005,6 +4025,10 @@ export enum Poll_Update_Column {
   Id = 'id',
   /** column name */
   Image = 'image',
+  /** column name */
+  Issuer = 'issuer',
+  /** column name */
+  Taxon = 'taxon',
   /** column name */
   Title = 'title',
   /** column name */
@@ -6731,7 +6755,7 @@ export type GetAppThemeQuery = { __typename?: 'query_root', app?: { __typename?:
 export type GetAdminAppQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAdminAppQuery = { __typename?: 'query_root', app: Array<{ __typename?: 'app', id: any, name: string, imgUrl?: string | null, moneyAccountId?: string | null, background_color?: string | null, enableHeirloom?: boolean | null, font?: string | null, font_color?: string | null, show_brand?: boolean | null, show_connect_email?: boolean | null, plan?: Plan_Enum | null, xrpWallet?: string | null }> };
+export type GetAdminAppQuery = { __typename?: 'query_root', app: Array<{ __typename?: 'app', id: any, name: string, imgUrl?: string | null, moneyAccountId?: string | null, background_color?: string | null, enableHeirloom?: boolean | null, heirloomLockName?: string | null, font?: string | null, font_color?: string | null, show_brand?: boolean | null, show_connect_email?: boolean | null, plan?: Plan_Enum | null, xrpWallet?: string | null }> };
 
 export type UpdateAppMutationVariables = Exact<{
   appId: Scalars['uuid'];
@@ -6912,7 +6936,8 @@ export type GetOrdersQuery = { __typename?: 'query_root', orders: Array<{ __type
 export type CreatePollMutationVariables = Exact<{
   title: Scalars['String'];
   image: Scalars['String'];
-  gate: Scalars['String'];
+  issuer: Scalars['String'];
+  taxon: Scalars['String'];
   description?: InputMaybe<Scalars['String']>;
   data?: InputMaybe<Array<Choice_Insert_Input> | Choice_Insert_Input>;
 }>;
@@ -6930,7 +6955,8 @@ export type DeletePollMutation = { __typename?: 'mutation_root', delete_poll_by_
 export type UpdatePollMutationVariables = Exact<{
   id: Scalars['uuid'];
   description?: InputMaybe<Scalars['String']>;
-  gate?: InputMaybe<Scalars['String']>;
+  issuer?: InputMaybe<Scalars['String']>;
+  taxon?: InputMaybe<Scalars['String']>;
   image?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   choice_to_delete?: InputMaybe<Array<Scalars['uuid']> | Scalars['uuid']>;
@@ -6938,14 +6964,14 @@ export type UpdatePollMutationVariables = Exact<{
 }>;
 
 
-export type UpdatePollMutation = { __typename?: 'mutation_root', update_poll_by_pk?: { __typename?: 'poll', id: any, app_id?: any | null, description: string, gate?: string | null, choices: Array<{ __typename?: 'choice', count: number, id: any, poll_id: any, value: string }> } | null, delete_choice?: { __typename?: 'choice_mutation_response', affected_rows: number } | null, insert_choice?: { __typename?: 'choice_mutation_response', affected_rows: number } | null };
+export type UpdatePollMutation = { __typename?: 'mutation_root', update_poll_by_pk?: { __typename?: 'poll', id: any, app_id?: any | null, description: string, issuer?: string | null, taxon?: string | null, choices: Array<{ __typename?: 'choice', count: number, id: any, poll_id: any, value: string }> } | null, delete_choice?: { __typename?: 'choice_mutation_response', affected_rows: number } | null, insert_choice?: { __typename?: 'choice_mutation_response', affected_rows: number } | null };
 
 export type GetPollByIdQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
 
-export type GetPollByIdQuery = { __typename?: 'query_root', poll?: { __typename?: 'poll', app_id?: any | null, gate?: string | null, id: any, title: string, voters: any, description: string, image?: string | null, completed: boolean, choices: Array<{ __typename?: 'choice', id: any, poll_id: any, value: string, count: number }> } | null };
+export type GetPollByIdQuery = { __typename?: 'query_root', poll?: { __typename?: 'poll', app_id?: any | null, issuer?: string | null, taxon?: string | null, id: any, title: string, voters: any, description: string, image?: string | null, completed: boolean, choices: Array<{ __typename?: 'choice', id: any, poll_id: any, value: string, count: number }> } | null };
 
 export type GetPollsQueryVariables = Exact<{
   app_id: Scalars['uuid'];
@@ -7134,6 +7160,7 @@ export const GetAdminAppDocument = gql`
     moneyAccountId
     background_color
     enableHeirloom
+    heirloomLockName
     font
     font_color
     show_brand
@@ -7427,9 +7454,9 @@ export const GetOrdersDocument = gql`
 }
     `;
 export const CreatePollDocument = gql`
-    mutation CreatePoll($title: String!, $image: String!, $gate: String!, $description: String = "", $data: [choice_insert_input!] = {}) {
+    mutation CreatePoll($title: String!, $image: String!, $issuer: String!, $taxon: String!, $description: String = "", $data: [choice_insert_input!] = {}) {
   insert_poll(
-    objects: {title: $title, image: $image, gate: $gate, description: $description, choices: {data: $data}}
+    objects: {title: $title, image: $image, issuer: $issuer, taxon: $taxon, description: $description, choices: {data: $data}}
   ) {
     affected_rows
   }
@@ -7443,15 +7470,16 @@ export const DeletePollDocument = gql`
 }
     `;
 export const UpdatePollDocument = gql`
-    mutation updatePoll($id: uuid!, $description: String, $gate: String, $image: String, $title: String, $choice_to_delete: [uuid!] = {}, $choice_to_insert: [choice_insert_input!] = {}) {
+    mutation updatePoll($id: uuid!, $description: String, $issuer: String, $taxon: String, $image: String, $title: String, $choice_to_delete: [uuid!] = {}, $choice_to_insert: [choice_insert_input!] = {}) {
   update_poll_by_pk(
     pk_columns: {id: $id}
-    _set: {description: $description, gate: $gate, image: $image, title: $title}
+    _set: {description: $description, issuer: $issuer, taxon: $taxon, image: $image, title: $title}
   ) {
     id
     app_id
     description
-    gate
+    issuer
+    taxon
     choices {
       count
       id
@@ -7477,7 +7505,8 @@ export const GetPollByIdDocument = gql`
       value
       count
     }
-    gate
+    issuer
+    taxon
     id
     title
     voters

@@ -1,14 +1,6 @@
 table:
   name: app
   schema: public
-array_relationships:
-  - name: app_wallet_connection_logs
-    using:
-      foreign_key_constraint_on:
-        column: app_id
-        table:
-          name: wallet_connection_log
-          schema: public
 select_permissions:
   - role: anonymous
     permission:
@@ -24,7 +16,6 @@ select_permissions:
         - plan
         - show_brand
         - show_connect_email
-        - xrpWallet
       filter: {}
   - role: customer
     permission:
@@ -44,7 +35,6 @@ select_permissions:
         - plan
         - show_brand
         - show_connect_email
-        - xrpWallet
       filter:
         _and:
           - id:
@@ -62,7 +52,6 @@ update_permissions:
         - name
         - show_brand
         - show_connect_email
-        - xrpWallet
       filter:
         _and:
           - id:

@@ -62,11 +62,18 @@ export const PollForm = ({
           <FormErrorMessage>{errors[POLL_FIELDS.poll.name]?.message}</FormErrorMessage>
         </FormControl>
 
-        {/* Gate */}
-        <FormControl isInvalid={Boolean(errors[POLL_FIELDS.gate.name])}>
-          <FormLabel mb={1}>{POLL_FIELDS.gate.label}</FormLabel>
-          <Input {...register(POLL_FIELDS.gate.name)} />
-          <FormErrorMessage>{errors[POLL_FIELDS.gate.name]?.message}</FormErrorMessage>
+        {/* Issuer */}
+        <FormControl isInvalid={Boolean(errors[POLL_FIELDS.issuer.name])}>
+          <FormLabel mb={1}>{POLL_FIELDS.issuer.label}</FormLabel>
+          <Input {...register(POLL_FIELDS.issuer.name)} />
+          <FormErrorMessage>{errors[POLL_FIELDS.issuer.name]?.message}</FormErrorMessage>
+        </FormControl>
+
+        {/* Taxon */}
+        <FormControl isInvalid={Boolean(errors[POLL_FIELDS.taxon.name])}>
+          <FormLabel mb={1}>{POLL_FIELDS.taxon.label}</FormLabel>
+          <Input {...register(POLL_FIELDS.taxon.name)} />
+          <FormErrorMessage>{errors[POLL_FIELDS.taxon.name]?.message}</FormErrorMessage>
         </FormControl>
 
         {/* Image */}

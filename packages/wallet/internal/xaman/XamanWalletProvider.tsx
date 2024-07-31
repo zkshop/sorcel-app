@@ -6,7 +6,6 @@ import { createContext } from 'react';
 import { httpServerless } from '../../../http-serverless';
 import { logo } from './logo';
 import axios from 'axios';
-import { Base } from '../../../../apps/admin/src/api/base';
 import * as xrpl from 'xrpl';
 
 type auth = {
@@ -89,6 +88,7 @@ const getBackendBaseUrl = () => {
     return (process.env.BACKEND_BASEURL)
   if (process.env.SORCEL_DEV_BACKEND_PORT)
     return `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`;
+  return "https://backend-production-2de1.up.railway.app";
 }
 
 export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
@@ -162,7 +162,7 @@ export const XamanWalletProvider = ({ children }: XamanWalletProviderProps) => {
       if (!state.xummPayload)
         return;
       try {
-        const response = await axios.post<XummGetPayloadResponse>(`${getBackendBaseUrl() || `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`}/api/shop/xumm/payload`, { payload_uuid: state.xummPayload['payload_uuidv4'] });
+        const response = await axios.post<XummGetPayloadResponse>(`${getBackendBaseUrl() || `http://localhost:${process.env.SORCEL_DEV_BACKEND_PORT}`}/api/xumm/payload`, { payload_uuid: state.xummPayload['payload_uuidv4'] });
         console.log("!response xaman", response);
         const address = response.data.response.signer;
         if (state.payment && response.data.response.dispatched_result == "tesSUCCESS") {
