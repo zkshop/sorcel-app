@@ -38,6 +38,7 @@ export const Choices = () => {
   const [currentAddress, setCurrentAddress] = useState<Nullable<string>>(address ?? null);
 
   useEffect(() => {
+    console.log('Address from useAccount:', address);
     setCurrentAddress(address ?? null);
   }, [address]);
 
@@ -48,7 +49,6 @@ export const Choices = () => {
   if (!data || !data.poll) return <>Error</>;
 
   const alreadyVoted = haveAlreadyVote(data.poll.voters, currentAddress ?? undefined);
-
   const handleClickOnChoice = (choice: ChoiceType) => {
     setChoice(choice);
     onOpen();
@@ -56,7 +56,7 @@ export const Choices = () => {
 
   const handleVote = async (choiceId: string) => {
     console.log('alreadyVoted: ', alreadyVoted);
-    console.log('address: ', currentAddress);
+    console.log('currentAddress: ', currentAddress);
     if (alreadyVoted) {
       toast({
         title: 'You have already voted',
