@@ -49,6 +49,7 @@ export const Choices = () => {
   };
 
   const handleVote = async (choiceId: string) => {
+    console.log('alreadyVoted: ', alreadyVoted);
     if (alreadyVoted) {
       toast({
         title: 'You have already voted',
