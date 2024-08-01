@@ -15,6 +15,8 @@ import { ChoicesImage } from './ChoicesImage';
 import { updateCacheAfterVote } from './cache';
 import { TitleLayer } from './TitleLayer';
 
+import axios from 'axios';
+
 const MobileTitleLayer = styled(Text)`
   display: none;
 
@@ -41,8 +43,52 @@ export const Choices = () => {
   if (loading) return <Spinner />;
   if (!data || !data.poll) return <>Error</>;
 
-  console.log('data?.poll?.issuer: ', data.poll.issuer);
-  console.log('data?.poll?.taxon: ', data.poll.taxon);
+  const identifiers = {
+    issuer: data?.poll?.issuer,
+    nftokenTaxon: data?.poll?.taxon,
+  };
+
+  console.log('identifiers: ', identifiers);
+  console.log('import.meta.env.VITE_BITHOMP_TOKEN: ', import.meta.env.VITE_BITHOMP_TOKEN);
+
+  const XRPNftReaderClient = () => ({
+    getWalletNfts: async (
+      walletAddress: string,
+      identifiers: { issuer: string; nftokenTaxon: string },
+    ) => {
+      const params = {
+        owner: walletAddress,
+        list: 'nfts',
+        issuer: identifiers.issuer,
+        taxon: identifiers.nftokenTaxon,
+      };
+      const nfts = await axios
+        .get(`https://bithomp.com/api/v2/nfts`, {
+          params,
+          headers: {
+            'x-bithomp-token': import.meta.env.VITE_BITHOMP_TOKEN,
+          },
+        })
+        .then(({ data }) => data.nfts);
+      return nfts;
+    },
+  });
+
+  const handleNftSearchOwner = async () => {
+    if (address == null) {
+      return false;
+    }
+    const client = XRPNftReaderClient();
+    if (!identifiers.issuer || !identifiers.nftokenTaxon) {
+      return false;
+    }
+    const nfts = await client.getWalletNfts(address, {
+      issuer: identifiers.issuer,
+      nftokenTaxon: identifiers.nftokenTaxon,
+    });
+    if (nfts.length <= 0) return false;
+    else return true;
+  };
 
   const alreadyVoted = haveAlreadyVote(data.poll.voters, address);
 
@@ -52,6 +98,15 @@ export const Choices = () => {
   };
 
   const handleVote = async (choiceId: string) => {
+    if (!handleNftSearchOwner()) {
+      toast({
+        title: "You don't have the required NFT to vote",
+        status: 'warning',
+        duration: 2000,
+      });
+      return;
+    }
+
     if (!address) {
       toast({
         title: 'Connect your wallet to vote',
