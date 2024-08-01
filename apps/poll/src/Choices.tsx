@@ -67,7 +67,7 @@ export const Choices = () => {
         .get(`https://bithomp.com/api/v2/nfts`, {
           params,
           headers: {
-            'x-bithomp-token': import.meta.env.VITE_BITHOMP_TOKEN,
+            'x-bithomp-token': envVars.SECRET_BITHOMP,
           },
         })
         .then(({ data }) => data.nfts);

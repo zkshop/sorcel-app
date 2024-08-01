@@ -25,6 +25,7 @@ const envVars = {
   SECRET_SUPABASE: null,
   SECRET_CENTER: null,
   POSTHOG_KEY: null,
+  SECRET_BITHOMP: null,
 };
 
 const commonConfig = createCommonConfig({ dirname, envVars });
