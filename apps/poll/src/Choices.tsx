@@ -41,6 +41,9 @@ export const Choices = () => {
   if (loading) return <Spinner />;
   if (!data || !data.poll) return <>Error</>;
 
+  console.log('data?.poll?.issuer: ', data.poll.issuer);
+  console.log('data?.poll?.taxon: ', data.poll.taxon);
+
   const alreadyVoted = haveAlreadyVote(data.poll.voters, address);
 
   const handleClickOnChoice = (choice: ChoiceType) => {
@@ -49,9 +52,6 @@ export const Choices = () => {
   };
 
   const handleVote = async (choiceId: string) => {
-    console.log('alreadyVoted: ', alreadyVoted);
-    console.log('address: ', address);
-
     if (!address) {
       toast({
         title: 'Connect your wallet to vote',
