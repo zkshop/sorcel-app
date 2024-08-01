@@ -4,6 +4,8 @@ import { Network_Enum } from '../apollo';
 import { envVars } from '@3shop/config';
 
 const xaman = envVars['NETWORK'] === Network_Enum.Xrpledger;
+console.log('envVars: ', envVars['NETWORK']);
+console.log('Network_Enum: ', Network_Enum);
 export const useAccount = (...args: Parameters<typeof useRainbowAccount>) => {
   console.log('xaman: ', xaman);
   if (xaman)
