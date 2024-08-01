@@ -50,7 +50,7 @@ export const Choices = () => {
   };
 
   console.log('identifiers: ', identifiers);
-  console.log('envVars: ', envVars);
+  console.log('envVars: ', envVars.SECRET_BITHOMP);
 
   const XRPNftReaderClient = () => ({
     getWalletNfts: async (
