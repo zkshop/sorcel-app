@@ -5,9 +5,9 @@ import { envVars } from '@3shop/config';
 
 const xaman = envVars['NETWORK'] === Network_Enum.Xrpledger;
 export const useAccount = (...args: Parameters<typeof useRainbowAccount>) => {
+  console.log('xaman: ', xaman);
   if (xaman)
   { 
-    console.log('xaman: ', xaman);
     console.log('useXamanAccount: ', useXamanAccount());
     return useXamanAccount();
   }
