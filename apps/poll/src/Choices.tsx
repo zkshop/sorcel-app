@@ -16,6 +16,7 @@ import { updateCacheAfterVote } from './cache';
 import { TitleLayer } from './TitleLayer';
 
 import axios from 'axios';
+import { envVars } from '@3shop/config';
 
 const MobileTitleLayer = styled(Text)`
   display: none;
@@ -49,7 +50,7 @@ export const Choices = () => {
   };
 
   console.log('identifiers: ', identifiers);
-  console.log('import.meta.env.VITE_BITHOMP_TOKEN: ', import.meta.env.VITE_BITHOMP_TOKEN);
+  console.log('envVars: ', envVars);
 
   const XRPNftReaderClient = () => ({
     getWalletNfts: async (
