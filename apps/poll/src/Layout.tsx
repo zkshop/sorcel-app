@@ -1,9 +1,6 @@
-import { Button, Grid, GridItem, Image } from '@3shop/ui';
+import { Button, Grid, GridItem } from '@3shop/ui';
 import { ConnectWalletButton } from '@3shop/wallet';
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-
-const ICON_URL =
-  'https://kqjytgxbtetzewipikax.supabase.co/storage/v1/object/public/humandivergence/icon.png';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 const BackButton = () => {
   const navigate = useNavigate();
@@ -34,9 +31,6 @@ function Layout() {
         rowSpan={1}
         paddingX={15}
       >
-        <Link to="/">
-          <Image maxWidth={120} src={ICON_URL} />
-        </Link>
         <ConnectWalletButton />
       </GridItem>
       <GridItem rowSpan={9} padding={15}>
