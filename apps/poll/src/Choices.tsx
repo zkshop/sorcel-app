@@ -3,7 +3,7 @@ import { useGetPollByIdQuery, useVoteMutation } from '@3shop/apollo';
 import type { Nullable } from '@3shop/types';
 import { Box, Flex, Spinner, useDisclosure, Heading, useToast, Text, styled } from '@3shop/ui';
 
-import { useAccount } from '@3shop/wallet';
+import { useAccount } from '@3shop/wallet/internal/xaman/XamanWalletProvider';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ChoiceItem } from './ChoiceItem';
