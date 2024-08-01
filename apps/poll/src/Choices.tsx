@@ -49,6 +49,15 @@ export const Choices = () => {
   };
 
   const handleVote = async (choiceId: string) => {
+    if (alreadyVoted) {
+      toast({
+        title: 'You have already voted',
+        status: 'warning',
+        duration: 2000,
+      });
+      return;
+    }
+
     await vote({
       variables: { choiceId, pollId: id, voters: [address] },
       update: updateCacheAfterVote,
@@ -56,7 +65,7 @@ export const Choices = () => {
 
     if (voteError) {
       toast({
-        title: 'An Error occured',
+        title: 'An Error occurred',
         status: 'error',
         duration: 2000,
         description: 'Try again later or contact us to report the issue',
