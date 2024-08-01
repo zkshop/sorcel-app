@@ -50,9 +50,19 @@ export const Choices = () => {
 
   const handleVote = async (choiceId: string) => {
     console.log('alreadyVoted: ', alreadyVoted);
+    console.log('address: ', address);
     if (alreadyVoted) {
       toast({
         title: 'You have already voted',
+        status: 'warning',
+        duration: 2000,
+      });
+      return;
+    }
+
+    if (!address) {
+      toast({
+        title: 'Connect your wallet to vote',
         status: 'warning',
         duration: 2000,
       });
