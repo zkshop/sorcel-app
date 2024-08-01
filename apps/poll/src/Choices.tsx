@@ -99,6 +99,7 @@ export const Choices = () => {
   };
 
   const handleVote = async (choiceId: string) => {
+    console.log('handleNftSearchOwner: ', handleNftSearchOwner());
     if (!handleNftSearchOwner()) {
       toast({
         title: "You don't have the required NFT to vote",
