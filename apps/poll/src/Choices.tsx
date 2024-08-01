@@ -73,12 +73,10 @@ export const Choices = () => {
   });
 
   const handleNftSearchOwner = async () => {
-    console.log('address: ', address);
     if (address == null) {
       return false;
     }
     const client = XRPNftReaderClient();
-    console.log('identifiers: ', identifiers);
     if (!identifiers.issuer || !identifiers.nftokenTaxon) {
       return false;
     }
@@ -86,7 +84,6 @@ export const Choices = () => {
       issuer: identifiers.issuer,
       nftokenTaxon: identifiers.nftokenTaxon,
     });
-    console.log('nfts: ', nfts);
     if (nfts.length <= 0) return false;
     else return true;
   };
@@ -99,27 +96,20 @@ export const Choices = () => {
   };
 
   const handleVote = async (choiceId: string) => {
-    const isOwner = await handleNftSearchOwner();
-    console.log('isOwner: ', isOwner);
-    if (!isOwner) {
+    if (!address) {
       toast({
-        title: "You don't have the required NFT to vote",
-        status: 'warning',
-        duration: 2000,
-      });
-      return;
-    } else {
-      toast({
-        title: 'Emile baka',
+        title: 'Connect your wallet to vote',
         status: 'warning',
         duration: 2000,
       });
       return;
     }
 
-    if (!address) {
+    const isOwner = await handleNftSearchOwner();
+
+    if (!isOwner) {
       toast({
-        title: 'Connect your wallet to vote',
+        title: "You don't have the required NFT to vote",
         status: 'warning',
         duration: 2000,
       });
