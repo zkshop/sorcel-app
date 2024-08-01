@@ -4,7 +4,7 @@ import type { Nullable } from '@3shop/types';
 import { Box, Flex, Spinner, useDisclosure, Heading, useToast, Text, styled } from '@3shop/ui';
 
 import { useAccount } from '@3shop/wallet';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ChoiceItem } from './ChoiceItem';
 // import { useAppSelector } from './store/store';
@@ -35,13 +35,19 @@ export const Choices = () => {
   const [choice, setChoice] = useState<Nullable<ChoiceType>>(null);
   const [vote, { loading: voteLoading, error: voteError }] = useVoteMutation();
   const toast = useToast();
+  const [currentAddress, setCurrentAddress] = useState<Nullable<string>>(address ?? null);
+
+  useEffect(() => {
+    setCurrentAddress(address ?? null);
+  }, [address]);
+
   // change the isHolder to work with bithomp and change data?.poll?.gate to data?.poll?.issuer and data?.poll?.taxon
   const isLocked = false; // Boolean(data?.poll?.gate && !isHolder(nfts, data.poll.gate));
 
   if (loading) return <Spinner />;
   if (!data || !data.poll) return <>Error</>;
 
-  const alreadyVoted = haveAlreadyVote(data.poll.voters, address);
+  const alreadyVoted = haveAlreadyVote(data.poll.voters, currentAddress ?? undefined);
 
   const handleClickOnChoice = (choice: ChoiceType) => {
     setChoice(choice);
@@ -50,7 +56,7 @@ export const Choices = () => {
 
   const handleVote = async (choiceId: string) => {
     console.log('alreadyVoted: ', alreadyVoted);
-    console.log('address: ', address);
+    console.log('address: ', currentAddress);
     if (alreadyVoted) {
       toast({
         title: 'You have already voted',
@@ -60,7 +66,7 @@ export const Choices = () => {
       return;
     }
 
-    if (!address) {
+    if (!currentAddress) {
       toast({
         title: 'Connect your wallet to vote',
         status: 'warning',
@@ -70,7 +76,7 @@ export const Choices = () => {
     }
 
     await vote({
-      variables: { choiceId, pollId: id, voters: [address] },
+      variables: { choiceId, pollId: id, voters: [currentAddress] },
       update: updateCacheAfterVote,
     });
 
