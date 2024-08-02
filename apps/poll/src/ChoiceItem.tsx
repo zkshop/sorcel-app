@@ -22,7 +22,9 @@ export const ChoiceItem = ({
 }: ChoiceItemType) => (
   <ChoiceCard>
     <Flex p={15} alignItems="center" justifyContent="center" flexDirection="column">
-      <Text textAlign="center">{title}</Text>
+      <Text textAlign="center" color="white">
+        {title}
+      </Text>
       <Box mt={2}>
         {alreadyVoted || completed ? (
           <Stat textAlign="center">
@@ -32,6 +34,7 @@ export const ChoiceItem = ({
         ) : (
           <VoteButton
             display="flex"
+            textAlign="center"
             onClick={() => handleClickOnChoice({ count: votes, value: title, id })}
             justifyContent="space-between"
           >

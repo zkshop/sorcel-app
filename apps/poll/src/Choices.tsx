@@ -154,7 +154,7 @@ export const Choices = () => {
         <Box marginTop={8} flex={1} display="flex" justifyContent="center" alignItems="center">
           {isLocked ? (
             <Heading color="grey" textAlign="center" fontSize="x-large">
-              Connect your wallet with Human Divergence NFT to vote
+              Connect your wallet
             </Heading>
           ) : (
             <Flex gap={2} justifyContent="center" flexWrap="wrap" w="100%">

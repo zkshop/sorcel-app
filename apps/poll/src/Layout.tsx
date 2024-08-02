@@ -26,7 +26,7 @@ function Layout() {
       <GridItem
         display="flex"
         alignItems="center"
-        justifyContent="space-between"
+        justifyContent="flex-end"
         overflow="hidden"
         rowSpan={1}
         paddingX={15}
