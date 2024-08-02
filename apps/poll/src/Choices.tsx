@@ -143,13 +143,13 @@ export const Choices = () => {
     <>
       <Box height="100%">
         <Box m="auto" position="relative">
-          <TitleLayer>
-            <Text color="white" fontWeight="bold" textAlign="center">
-              {data.poll.title}
-            </Text>
-          </TitleLayer>
           <ChoicesImage isLocked={isLocked} src={data.poll.image || undefined} />
         </Box>
+        <TitleLayer>
+          <Text color="white" fontWeight="bold" textAlign="center">
+            {data.poll.title}
+          </Text>
+        </TitleLayer>
         <MobileTitleLayer>{data.poll.title}</MobileTitleLayer>
         <Box marginTop={8} flex={1} display="flex" justifyContent="center" alignItems="center">
           {isLocked ? (
