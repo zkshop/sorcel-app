@@ -25,7 +25,7 @@ export const Poll = ({ title, image, completed }: PollType) => (
       <PollImage completed={completed} src={image} />
     </Box>
     <Flex paddingY={2} gap={2} direction="column" justifyContent="center" alignItems="center">
-      <Text textAlign="center" noOfLines={1} fontFamily="Inter" fontWeight="800">
+      <Text textAlign="center" noOfLines={1} fontFamily="Inter" fontWeight="800" color="white">
         {title}
       </Text>
       <VoteButton>Vote</VoteButton>
