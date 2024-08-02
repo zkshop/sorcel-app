@@ -36,7 +36,7 @@ export const ChoiceItem = ({
             display="flex"
             textAlign="center"
             onClick={() => handleClickOnChoice({ count: votes, value: title, id })}
-            justifyContent="space-between"
+            justifyContent="center"
           >
             Vote
           </VoteButton>
