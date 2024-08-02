@@ -26,9 +26,6 @@ const MobileTitleLayer = styled(Text)`
     display: block;
     text-align: center;
     font-weight: bold;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
   }
 `;
 
@@ -144,7 +141,7 @@ export const Choices = () => {
 
   return (
     <>
-      <Box height="100%" position="relative">
+      <Box height="100%">
         <Box m="auto" position="relative">
           <TitleLayer>
             <Text color="white" fontWeight="bold" textAlign="center">
@@ -152,8 +149,8 @@ export const Choices = () => {
             </Text>
           </TitleLayer>
           <ChoicesImage isLocked={isLocked} src={data.poll.image || undefined} />
-          <MobileTitleLayer>{data.poll.title}</MobileTitleLayer>
         </Box>
+        <MobileTitleLayer>{data.poll.title}</MobileTitleLayer>
         <Box marginTop={8} flex={1} display="flex" justifyContent="center" alignItems="center">
           {isLocked ? (
             <Heading color="grey" textAlign="center" fontSize="x-large">
