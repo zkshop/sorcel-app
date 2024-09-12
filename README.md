@@ -23,28 +23,6 @@ yarn init:env
 
 # Deploy
 
-## APP_ID
-
-```json
-{
-  "3shop-dev": "00000000-a85b-469d-884e-b049a2a51e3e",
-  "grandsagne": "2b1a5788-cc27-4530-a346-a5aa674bb523",
-  "p00ls": "00ff2163-7b91-4b53-8043-9f4613ed1886",
-  "tbw": "d91635d8-1e59-4e73-969c-462768a74b16",
-  "wunderpoapstudio": "b2b579e0-8681-485b-9b5c-332f74edae6b"
-}
-```
-
-## Vercel project id
-
-```json
-{
-  "3shop": "prj_mcuAxslJxpq6oXTwv49J63blOy9g",
-  "admin": "prj_F4PB82emJ8EMgXtGV3ua9aVxL2MM",
-  "wunderpoapstudio": "prj_frLibJKOyIreaukQpotZjuH11eoN"
-}
-```
-
 ## Integration
 
 ```html
