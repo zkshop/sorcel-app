@@ -9,13 +9,17 @@ import { envVars } from '@3shop/config';
 import { Network_Enum } from '../apollo';
 import { HeirloomDidContextType, HeirloomDidContext } from './internal/Heirloom/HeirloomDidProvider';
 
-const walletUsed: "xaman" | "rainbow" | "heirloom" = (() => {
-  if ([Network_Enum.Ethereum, Network_Enum.Polygon].includes(envVars.NETWORK))
-    return "rainbow";
-  if (envVars.NETWORK == Network_Enum.Heirloom)
-    return "heirloom";
-  return "xaman";
-})();
+// Force XRPL wallet for all connections
+const walletUsed: "xaman" | "rainbow" | "heirloom" = "xaman";
+
+// Original logic (commented for reference):
+// const walletUsed: "xaman" | "rainbow" | "heirloom" = (() => {
+//   if ([Network_Enum.Ethereum, Network_Enum.Polygon].includes(envVars.NETWORK))
+//     return "rainbow";
+//   if (envVars.NETWORK == Network_Enum.Heirloom)
+//     return "heirloom";
+//   return "xaman";
+// })();
 
 export const XamanConnectButton = ({ children }: { children: (args: { modal: XamanContextType['modal'], auth: XamanContextType['auth'] }) => React.ReactNode }) => {
   const context = useContext(XamanWalletContext);
