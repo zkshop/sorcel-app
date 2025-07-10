@@ -10,11 +10,11 @@ import { Network_Enum } from '../apollo';
 import { HeirloomDidContextType, HeirloomDidContext } from './internal/Heirloom/HeirloomDidProvider';
 
 const walletUsed: "xaman" | "rainbow" | "heirloom" = (() => {
-  if ([Network_Enum.Ethereum, Network_Enum.Polygon].includes(envVars.NETWORK))
-    return "rainbow";
-  if (envVars.NETWORK == Network_Enum.Heirloom)
-    return "heirloom";
-  return "xaman";
+  // if ([Network_Enum.Ethereum, Network_Enum.Polygon].includes(envVars.NETWORK))
+  //   return "rainbow";
+  // if (envVars.NETWORK == Network_Enum.Heirloom)
+  //   return "heirloom";
+  return "xaman" as any;
 })();
 
 export const XamanConnectButton = ({ children }: { children: (args: { modal: XamanContextType['modal'], auth: XamanContextType['auth'] }) => React.ReactNode }) => {
