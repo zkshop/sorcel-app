@@ -211,6 +211,7 @@ export const Heirloom = () => {
 }
 
 export const ConnectWalletButton = () => {
+  console.log("walletUsed", walletUsed);
   return (<>{
     {
       "xaman": <Xaman />,

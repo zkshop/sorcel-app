@@ -5,8 +5,8 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 const dirname = __dirname;
 
 const envVars = {
-  SERVERLESS_API_KEY: undefined,
-  SECRET_ALCHEMY: undefined,
+  SERVERLESS_API_KEY: '',
+  SECRET_ALCHEMY: '',
   PUBLIC_FUNCTIONS_URL: undefined,
   SORCEL_PRODUCT_ID: undefined,
 };
