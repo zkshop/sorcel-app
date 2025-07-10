@@ -31,7 +31,7 @@ jobs:
         env:
           DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
       - name: Archive staging artifacts
-        uses: actions/upload-artifact@v3
+        uses: awalsh128/cache-apt-pkgs-action@v1.4.3
         with:
           name: dist-staging
           path: apps/shop/dist
@@ -59,7 +59,7 @@ jobs:
         env:
           DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
       - name: Archive prod artifacts
-        uses: actions/upload-artifact@v3
+        uses: awalsh128/cache-apt-pkgs-action@v1.4.3
         with:
           name: dist-prod
           path: apps/shop/dist
@@ -73,7 +73,7 @@ jobs:
       name: staging
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: awalsh128/cache-apt-pkgs-action@v1.4.3
         with:
           name: dist-staging
       - run: ls -la
@@ -95,7 +95,7 @@ jobs:
       name: production
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: awalsh128/cache-apt-pkgs-action@v1.4.3
         with:
           name: dist-prod
       - run: ls -la
